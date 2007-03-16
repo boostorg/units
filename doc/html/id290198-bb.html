@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Class template quantity&lt;unit&lt; dimensionless_type, System &gt;, Y&gt;</title>
+<link rel="stylesheet" href="boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="Chapter 1. Boost.Units 0.7.0">
+<link rel="up" href="boost_units/Reference.html#header.boost.units.quantity.hpp" title="Header &lt;boost/units/quantity.hpp&gt;">
+<link rel="prev" href="boost/units/quantity.html" title="Class template quantity">
+<link rel="next" href="boost/units/dimensionless_quantity.html" title="Struct template dimensionless_quantity">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../boost.png"></td>
+<td align="center"><a href="../../index.htm">Home</a></td>
+<td align="center"><a href="libraries.html">Libraries</a></td>
+<td align="center"><a href="../../people/people.htm">People</a></td>
+<td align="center"><a href="../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="boost/units/quantity.html"><img src="images/prev.png" alt="Prev"></a><a accesskey="u" href="boost_units/Reference.html#header.boost.units.quantity.hpp"><img src="images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="images/home.png" alt="Home"></a><a accesskey="n" href="boost/units/dimensionless_quantity.html"><img src="images/next.png" alt="Next"></a>
+</div>
+<div class="refentry" lang="en">
+<a name="id290198-bb"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class template quantity&lt;unit&lt; dimensionless_type, System &gt;, Y&gt;</span></h2>
+<p>boost::units::quantity&lt;unit&lt; dimensionless_type, System &gt;, Y&gt;</p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; 
+<span class="bold"><strong>class</strong></span> quantity&lt;unit&lt; dimensionless_type, System &gt;, Y&gt; {
+<span class="bold"><strong>public</strong></span>:
+  <span class="emphasis"><em>// types</em></span>
+  <span class="bold"><strong>typedef</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, System &gt;, Y &gt; this_type;     
+  <span class="bold"><strong>typedef</strong></span> Y                                                 value_type;    
+  <span class="bold"><strong>typedef</strong></span> System                                            system_type;   
+  <span class="bold"><strong>typedef</strong></span> <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>                                dimension_type;
+  <span class="bold"><strong>typedef</strong></span> <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; dimension_type, system_type &gt;               unit_type;     
+
+  <span class="emphasis"><em>// <a href="id290198-bb.html#id290198-bbconstruct-copy-destruct">construct/copy/destruct</a></em></span>
+  quantity&amp; <a href="id290198-bb.html#id290594-bb"><span class="bold"><strong>operator</strong></span>=</a>(<span class="bold"><strong>const</strong></span> this_type &amp;);
+  <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> YY&gt; 
+    quantity&amp; <a href="id290198-bb.html#id290607-bb"><span class="bold"><strong>operator</strong></span>=</a>(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; dimension_type, system_type &gt;, YY &gt; &amp;);
+  <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System2&gt; 
+    quantity&amp; <a href="id290198-bb.html#id290644-bb"><span class="bold"><strong>operator</strong></span>=</a>(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, System2 &gt;, Y &gt; &amp;);
+
+  <span class="emphasis"><em>// <a href="id290198-bb.html#id290300-bb">public member functions</a></em></span>
+  <span class="type"></span> <a href="id290198-bb.html#id290305-bb">quantity</a>() ;
+  <span class="type"></span> <a href="id290198-bb.html#id290313-bb">quantity</a>(value_type) ;
+  <span class="type"></span> <a href="id290198-bb.html#id290337-bb">quantity</a>(<span class="bold"><strong>const</strong></span> this_type &amp;) ;
+  <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> YY&gt; 
+    <span class="type"></span> <a href="id290198-bb.html#id290358-bb">quantity</a>(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; dimension_type, system_type &gt;, YY &gt; &amp;) ;
+  <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System2&gt; 
+    <span class="type"></span> <a href="id290198-bb.html#id290401-bb">quantity</a>(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, System2 &gt;, Y &gt; &amp;) ;
+  <a href="id290198-bb.html#id290444-bb"><span class="bold"><strong>operator</strong></span> value_type</a>() <span class="bold"><strong>const</strong></span>;
+  <span class="type">value_type &amp;</span> <a href="id290198-bb.html#id290462-bb">value</a>() ;
+  <span class="type">value_type</span> <a href="id290198-bb.html#id290475-bb">value</a>() <span class="bold"><strong>const</strong></span>;
+  <span class="type">this_type &amp;</span> <a href="id290198-bb.html#id290489-bb"><span class="bold"><strong>operator</strong></span>+=</a>(<span class="bold"><strong>const</strong></span> this_type &amp;) ;
+  <span class="type">this_type &amp;</span> <a href="id290198-bb.html#id290517-bb"><span class="bold"><strong>operator</strong></span>-=</a>(<span class="bold"><strong>const</strong></span> this_type &amp;) ;
+  <span class="type">this_type &amp;</span> <a href="id290198-bb.html#id290546-bb"><span class="bold"><strong>operator</strong></span> *=</a>(<span class="bold"><strong>const</strong></span> value_type &amp;) ;
+  <span class="type">this_type &amp;</span> <a href="id290198-bb.html#id290570-bb"><span class="bold"><strong>operator</strong></span>/=</a>(<span class="bold"><strong>const</strong></span> value_type &amp;) ;
+
+  <span class="emphasis"><em>// <a href="id290198-bb.html#id290680-bb">public static functions</a></em></span>
+  <span class="type"><span class="bold"><strong>static</strong></span> this_type</span> <a href="id290198-bb.html#id290685-bb">from_value</a>(<span class="bold"><strong>const</strong></span> value_type &amp;) ;
+};</pre></div>
+<div class="refsect1" lang="en">
+<a name="id569082"></a><h2>Description</h2>
+<p>Specialization for dimensionless quantities. Implicit conversions between unit systems are allowed because all dimensionless quantities are equivalent. Implicit construction and assignment from and conversion to <code class="computeroutput">value_type</code> is also allowed. </p>
+<div class="refsect2" lang="en">
+<a name="id569099"></a><h3>
+<a name="id290198-bbconstruct-copy-destruct"></a><code class="computeroutput">quantity</code> construct/copy/destruct</h3>
+<div class="orderedlist"><ol type="1">
+<li><pre class="literallayout">quantity&amp; <a name="id290594-bb"></a><span class="bold"><strong>operator</strong></span>=(<span class="bold"><strong>const</strong></span> this_type &amp; source);</pre></li>
+<li><pre class="literallayout"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> YY&gt; 
+  quantity&amp; <a name="id290607-bb"></a><span class="bold"><strong>operator</strong></span>=(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; dimension_type, system_type &gt;, YY &gt; &amp; source);</pre></li>
+<li><pre class="literallayout"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System2&gt; 
+  quantity&amp; <a name="id290644-bb"></a><span class="bold"><strong>operator</strong></span>=(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, System2 &gt;, Y &gt; &amp; source);</pre></li>
+</ol></div>
+</div>
+<div class="refsect2" lang="en">
+<a name="id569275"></a><h3>
+<a name="id290300-bb"></a><code class="computeroutput">quantity</code> public member functions</h3>
+<div class="orderedlist"><ol type="1">
+<li><pre class="literallayout"><span class="type"></span> <a name="id290305-bb"></a>quantity() ;</pre></li>
+<li>
+<pre class="literallayout"><span class="type"></span> <a name="id290313-bb"></a>quantity(value_type val) ;</pre>
+<code class="computeroutput">value_type</code>
+</li>
+<li><pre class="literallayout"><span class="type"></span> <a name="id290337-bb"></a>quantity(<span class="bold"><strong>const</strong></span> this_type &amp; source) ;</pre></li>
+<li><pre class="literallayout"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> YY&gt; 
+  <span class="type"></span> <a name="id290358-bb"></a>quantity(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; dimension_type, system_type &gt;, YY &gt; &amp; source) ;</pre></li>
+<li><pre class="literallayout"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System2&gt; 
+  <span class="type"></span> <a name="id290401-bb"></a>quantity(<span class="bold"><strong>const</strong></span> <a href="boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, System2 &gt;, Y &gt; &amp; source) ;</pre></li>
+<li>
+<pre class="literallayout"><a name="id290444-bb"></a><span class="bold"><strong>operator</strong></span> value_type() <span class="bold"><strong>const</strong></span>;</pre>
+<code class="computeroutput">value_type</code>
+</li>
+<li><pre class="literallayout"><span class="type">value_type &amp;</span> <a name="id290462-bb"></a>value() ;</pre></li>
+<li><pre class="literallayout"><span class="type">value_type</span> <a name="id290475-bb"></a>value() <span class="bold"><strong>const</strong></span>;</pre></li>
+<li><pre class="literallayout"><span class="type">this_type &amp;</span> <a name="id290489-bb"></a><span class="bold"><strong>operator</strong></span>+=(<span class="bold"><strong>const</strong></span> this_type &amp; source) ;</pre></li>
+<li><pre class="literallayout"><span class="type">this_type &amp;</span> <a name="id290517-bb"></a><span class="bold"><strong>operator</strong></span>-=(<span class="bold"><strong>const</strong></span> this_type &amp; source) ;</pre></li>
+<li><pre class="literallayout"><span class="type">this_type &amp;</span> <a name="id290546-bb"></a><span class="bold"><strong>operator</strong></span> *=(<span class="bold"><strong>const</strong></span> value_type &amp; val) ;</pre></li>
+<li><pre class="literallayout"><span class="type">this_type &amp;</span> <a name="id290570-bb"></a><span class="bold"><strong>operator</strong></span>/=(<span class="bold"><strong>const</strong></span> value_type &amp; val) ;</pre></li>
+</ol></div>
+</div>
+<div class="refsect2" lang="en">
+<a name="id569686"></a><h3>
+<a name="id290680-bb"></a><code class="computeroutput">quantity</code> public static functions</h3>
+<div class="orderedlist"><ol type="1"><li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>static</strong></span> this_type</span> <a name="id290685-bb"></a>from_value(<span class="bold"><strong>const</strong></span> value_type &amp; val) ;</pre>
+<code class="computeroutput">value_type</code>
+</li></ol></div>
+</div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="boost/units/quantity.html"><img src="images/prev.png" alt="Prev"></a><a accesskey="u" href="boost_units/Reference.html#header.boost.units.quantity.hpp"><img src="images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="images/home.png" alt="Home"></a><a accesskey="n" href="boost/units/dimensionless_quantity.html"><img src="images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

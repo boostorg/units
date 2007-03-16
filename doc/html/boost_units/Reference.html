@@ -1,0 +1,816 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Reference</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="up" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="prev" href="Utilities/Metaprogramming_Predicates.html" title="Metaprogramming Predicates">
+<link rel="next" href="../id287610-bb.html" title="Function template pow">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Utilities/Metaprogramming_Predicates.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="../id287610-bb.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="boost_units.Reference"></a><a href="Reference.html" title="Reference"> Reference</a></h2></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="Reference.html#units_reference">Units Reference</a></span></dt>
+<dt><span class="section"><a href="../si_reference.html">SI Reference</a></span></dt>
+<dt><span class="section"><a href="../cgs_reference.html">CGS Reference</a></span></dt>
+<dt><span class="section"><a href="../trig_reference.html">Trig Reference</a></span></dt>
+<dt><span class="section"><a href="../abstract_system_reference.html">Abstract System Reference</a></span></dt>
+<dt><span class="section"><a href="../temperature_system_reference.html">Temperature System Reference</a></span></dt>
+</dl></div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="units_reference"></a>Units Reference</h3></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="Reference.html#header.boost.units.cmath.hpp">Header &lt;boost/units/cmath.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.conversion.hpp">Header &lt;boost/units/conversion.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.dim.hpp">Header &lt;boost/units/dim.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.dimension.hpp">Header &lt;boost/units/dimension.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.io.hpp">Header &lt;boost/units/io.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.operators.hpp">Header &lt;boost/units/operators.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.quantity.hpp">Header &lt;boost/units/quantity.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.static_constant.hpp">Header &lt;boost/units/static_constant.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.static_rational.hpp">Header &lt;boost/units/static_rational.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.sys.hpp">Header &lt;boost/units/sys.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.system.hpp">Header &lt;boost/units/system.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.systems.physical_units.hpp">Header &lt;boost/units/systems/physical_units.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="Reference.html#header.boost.units.unit.hpp">Header &lt;boost/units/unit.hpp&gt;</a></span></dt>
+</dl></div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.cmath.hpp"></a>Header &lt;<a href="../../../boost/units/cmath.hpp" target="_top">boost/units/cmath.hpp</a>&gt;</h4></div></div></div>
+<p>Overloads of functions in &lt;cmath&gt; for quantities. </p>
+<p>Only functions for which a dimensionally-correct result type can be determined are overloaded. All functions work with dimensionless quantities. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isfinite"></a>isfinite(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isinf"></a>isinf(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isnan"></a>isnan(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isnormal"></a>isnormal(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isgreater"></a>isgreater(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                     <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isgreaterequal"></a>isgreaterequal(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                          <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isless"></a>isless(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                  <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.islessequal"></a>islessequal(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                       <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.islessgreater"></a>islessgreater(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                         <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.isunordered"></a>isunordered(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                       <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.abs"></a>abs(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.ceil"></a>ceil(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.copysign"></a>copysign(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.fabs"></a>fabs(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.floor"></a>floor(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.fdim"></a>fdim(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> Unit3, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">add_typeof_helper&lt; <span class="bold"><strong>typename</strong></span> multiply_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, Y &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &gt;::type, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit3, Y &gt; &gt;::type</span> 
+      <a name="boost.units.fma"></a>fma(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &amp; q2, 
+          <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit3, Y &gt; &amp; q3);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.fmax"></a>fmax(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.fmin"></a>fmin(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>int</strong></span></span> <a name="boost.units.fpclassify"></a>fpclassify(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">root_typeof_helper&lt; <span class="bold"><strong>typename</strong></span> add_typeof_helper&lt; <span class="bold"><strong>typename</strong></span> power_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;, <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; 2 &gt; &gt;::type, <span class="bold"><strong>typename</strong></span> power_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;, <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; 2 &gt; &gt;::type &gt;::type, <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; 2 &gt; &gt;::type</span> 
+      <a name="boost.units.hypot"></a>hypot(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, <span class="bold"><strong>long</strong></span> <span class="bold"><strong>long</strong></span> &gt;</span> <a name="boost.units.llrint"></a>llrint(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, <span class="bold"><strong>long</strong></span> <span class="bold"><strong>long</strong></span> &gt;</span> <a name="boost.units.llround"></a>llround(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.nearbyint"></a>nearbyint(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.nextafter"></a>nextafter(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.nexttoward"></a>nexttoward(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, 
+                 <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.rint"></a>rint(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.round"></a>round(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="boost.units.signbit"></a>signbit(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.trunc"></a>trunc(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.fmod"></a>fmod(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> 
+      <a name="boost.units.modf"></a>modf(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q1, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; * q2);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y, <span class="bold"><strong>typename</strong></span> Int&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.frexp"></a>frexp(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q, Int * ex);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt;</span> 
+      <a href="../id287610-bb.html" title="Function template pow">pow</a>(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt; &amp;, 
+          <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt; &amp;);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt;</span> 
+      <a name="boost.units.exp"></a>exp(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y, <span class="bold"><strong>typename</strong></span> Int&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;</span> <a name="boost.units.ldexp"></a>ldexp(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q, <span class="bold"><strong>const</strong></span> Int &amp; ex);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt;</span> 
+      <a name="boost.units.log"></a>log(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt;</span> 
+      <a name="boost.units.log10"></a>log10(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>, homogeneous_system&lt; S &gt; &gt;, Y &gt; &amp; q);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">root_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt;, <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; 2 &gt; &gt;::type</span> 
+      <a name="boost.units.sqrt"></a>sqrt(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; q);
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.conversion.hpp"></a>Header &lt;<a href="../../../boost/units/conversion.hpp" target="_top">boost/units/conversion.hpp</a>&gt;</h4></div></div></div>
+<p>Quantity conversion classes. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>class</strong></span> <a href="../id287987-bb.html" title="Class template conversion_helper&lt;quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;">conversion_helper</a>&lt;quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>class</strong></span> <a href="../id288140-bb.html" title="Class template conversion_helper&lt;quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;">conversion_helper</a>&lt;quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>class</strong></span> <a href="../id288291-bb.html" title="Class template conversion_helper&lt;quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;">conversion_helper</a>&lt;quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>class</strong></span> <a href="../id288444-bb.html" title="Class template conversion_helper&lt;quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;">conversion_helper</a>&lt;quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, Y &gt;, quantity&lt; unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;, Y &gt;&gt;;
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.dim.hpp"></a>Header &lt;<a href="../../../boost/units/dim.hpp" target="_top">boost/units/dim.hpp</a>&gt;</h4></div></div></div>
+<p>Handling of fundamental dimension/exponent pairs. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/ordinal.html" title="Struct template ordinal">ordinal</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_dim.html" title="Struct template is_dim">is_dim</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V&gt; <span class="bold"><strong>struct</strong></span> <a href="../id288662-bb.html" title="Struct template is_dim&lt;dim&lt; T, V &gt;&gt;">is_dim</a>&lt;dim&lt; T, V &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V&gt; <span class="bold"><strong>struct</strong></span> <a href="../id288689-bb.html" title="Struct template static_negate&lt;dim&lt; T, V &gt;&gt;">static_negate</a>&lt;dim&lt; T, V &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V1, <span class="bold"><strong>typename</strong></span> V2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id288749-bb.html" title="Struct template static_add&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;">static_add</a>&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V1, <span class="bold"><strong>typename</strong></span> V2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id288822-bb.html" title="Struct template static_subtract&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;">static_subtract</a>&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id288895-bb.html" title="Struct template static_multiply&lt;dim&lt; T, V &gt;, X&gt;">static_multiply</a>&lt;dim&lt; T, V &gt;, X&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id288992-bb.html" title="Struct template static_multiply&lt;X, dim&lt; T, V &gt;&gt;">static_multiply</a>&lt;X, dim&lt; T, V &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id289088-bb.html" title="Struct template static_divide&lt;dim&lt; T, V &gt;, X&gt;">static_divide</a>&lt;dim&lt; T, V &gt;, X&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id289181-bb.html" title="Struct template static_divide&lt;X, dim&lt; T, V &gt;&gt;">static_divide</a>&lt;X, dim&lt; T, V &gt;&gt;;
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.dimension.hpp"></a>Header &lt;<a href="../../../boost/units/dimension.hpp" target="_top">boost/units/dimension.hpp</a>&gt;</h4></div></div></div>
+<p>Core metaprogramming utilities for compile-time dimensional analysis. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/dimensionless_type.html" title="Struct dimensionless_type">dimensionless_type</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Seq&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/make_dimension_list.html" title="Struct template make_dimension_list">make_dimension_list</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Seq&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_dimension_list.html" title="Struct template is_dimension_list">is_dimension_list</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Item, <span class="bold"><strong>typename</strong></span> Next&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id289393-bb.html" title="Struct template is_dimension_list&lt;dimension_list&lt; Item, Next &gt;&gt;">is_dimension_list</a>&lt;dimension_list&lt; Item, Next &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;&gt; <span class="bold"><strong>struct</strong></span> <a href="../id289420-bb.html" title="Struct is_dimension_list&lt;dimensionless_type&gt;">is_dimension_list</a>&lt;dimensionless_type&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_negate.html" title="Struct template static_negate">static_negate</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL1, <span class="bold"><strong>typename</strong></span> DL2&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_add.html" title="Struct template static_add">static_add</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL1, <span class="bold"><strong>typename</strong></span> DL2&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_subtract.html" title="Struct template static_subtract">static_subtract</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL1, <span class="bold"><strong>typename</strong></span> DL2&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_multiply.html" title="Struct template static_multiply">static_multiply</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL1, <span class="bold"><strong>typename</strong></span> DL2&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_divide.html" title="Struct template static_divide">static_divide</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL, <span class="bold"><strong>typename</strong></span> Ex&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_power.html" title="Struct template static_power">static_power</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id289651-bb.html" title="Struct template static_power&lt;DL, static_rational&lt; N, D &gt;&gt;">static_power</a>&lt;DL, static_rational&lt; N, D &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL, <span class="bold"><strong>typename</strong></span> Rt&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_root.html" title="Struct template static_root">static_root</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DL, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id289745-bb.html" title="Struct template static_root&lt;DL, static_rational&lt; N, D &gt;&gt;">static_root</a>&lt;DL, static_rational&lt; N, D &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DT&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> DT1 = dimensionless_type, <span class="bold"><strong>int</strong></span> E1 = , 
+             <span class="bold"><strong>typename</strong></span> DT2 = dimensionless_type, <span class="bold"><strong>int</strong></span> E2 = , 
+             <span class="bold"><strong>typename</strong></span> DT3 = dimensionless_type, <span class="bold"><strong>int</strong></span> E3 = , 
+             <span class="bold"><strong>typename</strong></span> DT4 = dimensionless_type, <span class="bold"><strong>int</strong></span> E4 = , 
+             <span class="bold"><strong>typename</strong></span> DT5 = dimensionless_type, <span class="bold"><strong>int</strong></span> E5 = , 
+             <span class="bold"><strong>typename</strong></span> DT6 = dimensionless_type, <span class="bold"><strong>int</strong></span> E6 = , 
+             <span class="bold"><strong>typename</strong></span> DT7 = dimensionless_type, <span class="bold"><strong>int</strong></span> E7 = , 
+             <span class="bold"><strong>typename</strong></span> DT8 = dimensionless_type, <span class="bold"><strong>int</strong></span> E8 = &gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>;
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.io.hpp"></a>Header &lt;<a href="../../../boost/units/io.hpp" target="_top">boost/units/io.hpp</a>&gt;</h4></div></div></div>
+<p>Code for input/output. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> serialization {
+
+    <span class="emphasis"><em>// Boost Serialization library support for units. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Archive, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim&gt; 
+      <span class="type"><span class="bold"><strong>void</strong></span></span> <a name="id290086-bb"></a>serialize(Archive &amp; ar, <a href="../boost/units/unit.html" title="Class template unit">boost::units::unit</a>&lt; Dim, System &gt; &amp;, 
+                     <span class="bold"><strong>const</strong></span> <span class="bold"><strong>unsigned</strong></span> <span class="bold"><strong>int</strong></span> version);
+
+    <span class="emphasis"><em>// Boost Serialization library support for quantities. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Archive, <span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>void</strong></span></span> <a name="id290144-bb"></a>serialize(Archive &amp; ar, <a href="../boost/units/quantity.html" title="Class template quantity">boost::units::quantity</a>&lt; Unit, Y &gt; &amp; q, 
+                     <span class="bold"><strong>const</strong></span> <span class="bold"><strong>unsigned</strong></span> <span class="bold"><strong>int</strong></span> version);
+  }
+  <span class="bold"><strong>namespace</strong></span> units {
+
+    <span class="emphasis"><em>// Write integral-valued <code class="computeroutput">static_rational</code> to <code class="computeroutput">std::basic_ostream</code>. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Char, <span class="bold"><strong>typename</strong></span> Traits, integer_type N&gt; 
+      <span class="type">std::basic_ostream&lt; Char, Traits &gt; &amp;</span> 
+      <a name="id290206-bb"></a><span class="bold"><strong>operator</strong></span>&lt;&lt;(std::basic_ostream&lt; Char, Traits &gt; &amp; os, 
+                 <span class="bold"><strong>const</strong></span> <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; N &gt; &amp; val);
+
+    <span class="emphasis"><em>// Write <code class="computeroutput">static_rational</code> to <code class="computeroutput">std::basic_ostream</code>. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Char, <span class="bold"><strong>typename</strong></span> Traits, integer_type N, integer_type D&gt; 
+      <span class="type">std::basic_ostream&lt; Char, Traits &gt; &amp;</span> 
+      <a name="id290271-bb"></a><span class="bold"><strong>operator</strong></span>&lt;&lt;(std::basic_ostream&lt; Char, Traits &gt; &amp; os, 
+                 <span class="bold"><strong>const</strong></span> <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; N, D &gt; &amp; val);
+
+    <span class="emphasis"><em>// Write <code class="computeroutput">unit</code> to <code class="computeroutput">std::basic_ostream</code>. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Char, <span class="bold"><strong>typename</strong></span> Traits, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim&gt; 
+      <span class="type">std::basic_ostream&lt; Char, Traits &gt; &amp;</span> 
+      <a name="id290345-bb"></a><span class="bold"><strong>operator</strong></span>&lt;&lt;(std::basic_ostream&lt; Char, Traits &gt; &amp; os, 
+                 <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp; u);
+
+    <span class="emphasis"><em>// Write <code class="computeroutput">quantity</code> to <code class="computeroutput">std::basic_ostream</code>. </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Char, <span class="bold"><strong>typename</strong></span> Traits, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">std::basic_ostream&lt; Char, Traits &gt; &amp;</span> 
+      <a name="id290412-bb"></a><span class="bold"><strong>operator</strong></span>&lt;&lt;(std::basic_ostream&lt; Char, Traits &gt; &amp; os, 
+                 <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt; &amp; val);
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.operators.hpp"></a>Header &lt;<a href="../../../boost/units/operators.hpp" target="_top">boost/units/operators.hpp</a>&gt;</h4></div></div></div>
+<p>Compile time operators and typeof helper classes. </p>
+<p>These operators declare the compile-time operators needed to support dimensional analysis algebra. Specializations must be defined for all desired operand types. Typeof helper classes define result type for heterogeneous operators on value types. These must be defined through specialization for powers and roots. </p>
+<pre class="synopsis">
+
+<a href="../BOOST_UNITS_HAS_TYPEOF.html" title="Macro BOOST_UNITS_HAS_TYPEOF">BOOST_UNITS_HAS_TYPEOF</a></pre>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>namespace</strong></span> typeof_ {
+      <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="type">T</span> <a name="boost.units.typeof_.make"></a>make();
+    }
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.quantity.hpp"></a>Header &lt;<a href="../../../boost/units/quantity.hpp" target="_top">boost/units/quantity.hpp</a>&gt;</h4></div></div></div>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; <span class="bold"><strong>class</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>class</strong></span> <a href="../id291109-bb.html" title="Class template quantity&lt;unit&lt; dimensionless_type, System &gt;, Y&gt;">quantity</a>&lt;unit&lt; dimensionless_type, System &gt;, Y&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/dimensionless_quantity.html" title="Struct template dimensionless_quantity">dimensionless_quantity</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_quantity.html" title="Struct template is_quantity">is_quantity</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; <span class="bold"><strong>struct</strong></span> <a href="../id291684-bb.html" title="Struct template is_quantity&lt;quantity&lt; Unit, Y &gt;&gt;">is_quantity</a>&lt;quantity&lt; Unit, Y &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> System&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_quantity_of_system.html" title="Struct template is_quantity_of_system">is_quantity_of_system</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id291734-bb.html" title="Struct template is_quantity_of_system&lt;quantity&lt; unit&lt; Dim, System &gt;, Y &gt;, System&gt;">is_quantity_of_system</a>&lt;quantity&lt; unit&lt; Dim, System &gt;, Y &gt;, System&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> Dim&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_quantity_of_dimension.html" title="Struct template is_quantity_of_dimension">is_quantity_of_dimension</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id291797-bb.html" title="Struct template is_quantity_of_dimension&lt;quantity&lt; unit&lt; Dim, System &gt;, Y &gt;, Dim&gt;">is_quantity_of_dimension</a>&lt;quantity&lt; unit&lt; Dim, System &gt;, Y &gt;, Dim&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id291837-bb.html" title="Struct template is_dimensionless&lt;quantity&lt; unit&lt; dimensionless_type, System &gt;, Y &gt;&gt;">is_dimensionless</a>&lt;quantity&lt; unit&lt; dimensionless_type, System &gt;, Y &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_dimensionless_quantity.html" title="Struct template is_dimensionless_quantity">is_dimensionless_quantity</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id291895-bb.html" title="Struct template get_dimension&lt;quantity&lt; Unit, Y &gt;&gt;">get_dimension</a>&lt;quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; <span class="bold"><strong>struct</strong></span> <a href="../id291932-bb.html" title="Struct template get_system&lt;quantity&lt; Unit, Y &gt;&gt;">get_system</a>&lt;quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id291970-bb.html" title="Struct template quantity_cast_helper&lt;quantity&lt; Unit, X &gt;, Y&gt;">quantity_cast_helper</a>&lt;quantity&lt; Unit, X &gt;, Y&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292044-bb.html" title="Struct template quantity_cast_helper&lt;X, quantity&lt; Unit, Y &gt;&gt;">quantity_cast_helper</a>&lt;X, quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> Unit2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292123-bb.html" title="Struct template quantity_cast_helper&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit2, X &gt;&gt;">quantity_cast_helper</a>&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit2, X &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292216-bb.html" title="Struct template unary_plus_typeof_helper&lt;quantity&lt; Unit, Y &gt;&gt;">unary_plus_typeof_helper</a>&lt;quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292288-bb.html" title="Struct template unary_minus_typeof_helper&lt;quantity&lt; Unit, Y &gt;&gt;">unary_minus_typeof_helper</a>&lt;quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292360-bb.html" title="Struct template add_typeof_helper&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;">add_typeof_helper</a>&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292450-bb.html" title="Struct template subtract_typeof_helper&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;">subtract_typeof_helper</a>&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292540-bb.html" title="Struct template multiply_typeof_helper&lt;X, unit&lt; Dim, System &gt;&gt;">multiply_typeof_helper</a>&lt;X, unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292613-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim, System &gt;, X&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, X&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292685-bb.html" title="Struct template multiply_typeof_helper&lt;X, quantity&lt; Unit, Y &gt;&gt;">multiply_typeof_helper</a>&lt;X, quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292758-bb.html" title="Struct template multiply_typeof_helper&lt;quantity&lt; Unit, X &gt;, Y&gt;">multiply_typeof_helper</a>&lt;quantity&lt; Unit, X &gt;, Y&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292831-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit, X &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit, X &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id292918-bb.html" title="Struct template multiply_typeof_helper&lt;quantity&lt; Unit, X &gt;, unit&lt; Dim, System &gt;&gt;">multiply_typeof_helper</a>&lt;quantity&lt; Unit, X &gt;, unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293004-bb.html" title="Struct template multiply_typeof_helper&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;">multiply_typeof_helper</a>&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293094-bb.html" title="Struct template divide_typeof_helper&lt;X, unit&lt; Dim, System &gt;&gt;">divide_typeof_helper</a>&lt;X, unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293177-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim, System &gt;, X&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, X&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293257-bb.html" title="Struct template divide_typeof_helper&lt;X, quantity&lt; Unit, Y &gt;&gt;">divide_typeof_helper</a>&lt;X, quantity&lt; Unit, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293343-bb.html" title="Struct template divide_typeof_helper&lt;quantity&lt; Unit, X &gt;, Y&gt;">divide_typeof_helper</a>&lt;quantity&lt; Unit, X &gt;, Y&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293416-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit, X &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, quantity&lt; Unit, X &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293510-bb.html" title="Struct template divide_typeof_helper&lt;quantity&lt; Unit, X &gt;, unit&lt; Dim, System &gt;&gt;">divide_typeof_helper</a>&lt;quantity&lt; Unit, X &gt;, unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293597-bb.html" title="Struct template divide_typeof_helper&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;">divide_typeof_helper</a>&lt;quantity&lt; Unit1, X &gt;, quantity&lt; Unit2, Y &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293687-bb.html" title="Struct template power_typeof_helper&lt;quantity&lt; Unit, Y &gt;, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;quantity&lt; Unit, Y &gt;, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id293822-bb.html" title="Struct template root_typeof_helper&lt;quantity&lt; Unit, Y &gt;, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;quantity&lt; Unit, Y &gt;, static_rational&lt; N, D &gt;&gt;;
+
+    <span class="emphasis"><em>// swap quantities </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>void</strong></span></span> <a name="boost.units.swap"></a>swap(<a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; rhs, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; lhs);
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">quantity_cast_helper&lt; X, Y &gt;::type</span> <a href="../boost/units/quantity_cast.html" title="Function template quantity_cast">quantity_cast</a>(<span class="bold"><strong>const</strong></span> Y &amp;);
+
+    <span class="emphasis"><em>// runtime unit times scalar </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt;::type</span> 
+      <a name="id294067-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;, <span class="bold"><strong>const</strong></span> Y &amp; rhs);
+
+    <span class="emphasis"><em>// runtime unit divided by scalar </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt;::type</span> 
+      <a name="id294123-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;, <span class="bold"><strong>const</strong></span> Y &amp; rhs);
+
+    <span class="emphasis"><em>// runtime scalar times unit </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; Y, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &gt;::type</span> 
+      <a name="id294180-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> Y &amp; lhs, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime scalar divided by unit </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; Y, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &gt;::type</span> 
+      <a name="id294237-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> Y &amp; lhs, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime quantity times scalar </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, X &gt;, Y &gt;::type</span> 
+      <a name="id294293-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, X &gt; &amp; lhs, <span class="bold"><strong>const</strong></span> Y &amp; rhs);
+
+    <span class="emphasis"><em>// runtime scalar times quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; X, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt; &gt;::type</span> 
+      <a name="id294366-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> X &amp; lhs, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime quantity divided by scalar </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, X &gt;, Y &gt;::type</span> 
+      <a name="id294438-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, X &gt; &amp; lhs, <span class="bold"><strong>const</strong></span> Y &amp; rhs);
+
+    <span class="emphasis"><em>// runtime scalar divided by quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; X, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt; &gt;::type</span> 
+      <a name="id294510-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> X &amp; lhs, <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime unit times quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &gt;::type</span> 
+      <a name="id294582-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime unit divided by quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &gt;::type</span> 
+      <a name="id294670-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime quantity times unit </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, Y &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id294758-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, Y &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime quantity divided by unit </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, Y &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id294846-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, Y &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime unary plus quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">unary_plus_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &gt;::type</span> 
+      <a name="id294933-bb"></a><span class="bold"><strong>operator</strong></span>+(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; val);
+
+    <span class="emphasis"><em>// runtime unary minus quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">unary_minus_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &gt;::type</span> 
+      <a name="id294977-bb"></a><span class="bold"><strong>operator</strong></span>-(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit, Y &gt; &amp; val);
+
+    <span class="emphasis"><em>// runtime quantity plus quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">add_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, X &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &gt;::type</span> 
+      <a name="id295020-bb"></a><span class="bold"><strong>operator</strong></span>+(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, X &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime quantity minus quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Unit1, <span class="bold"><strong>typename</strong></span> Unit2, <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">subtract_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, X &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &gt;::type</span> 
+      <a name="id295092-bb"></a><span class="bold"><strong>operator</strong></span>-(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit1, X &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; Unit2, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime quantity times quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, X &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &gt;::type</span> 
+      <a name="id295165-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, X &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime quantity divided by quantity </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, 
+             <span class="bold"><strong>typename</strong></span> X, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, X &gt;, <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &gt;::type</span> 
+      <a name="id295268-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, X &gt; &amp; lhs, 
+                <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt;, Y &gt; &amp; rhs);
+
+    <span class="emphasis"><em>// runtime operator== </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295371-bb"></a><span class="bold"><strong>operator</strong></span>==(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+
+    <span class="emphasis"><em>// runtime operator!= </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295449-bb"></a><span class="bold"><strong>operator</strong></span>!=(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+
+    <span class="emphasis"><em>// runtime operator&lt; </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295526-bb"></a><span class="bold"><strong>operator</strong></span>&lt;(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                     <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+
+    <span class="emphasis"><em>// runtime operator&lt;= </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295604-bb"></a><span class="bold"><strong>operator</strong></span>&lt;=(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+
+    <span class="emphasis"><em>// runtime operator&gt; </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295681-bb"></a><span class="bold"><strong>operator</strong></span>&gt;(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                     <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+
+    <span class="emphasis"><em>// runtime operator&gt;= </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> X, 
+             <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id295758-bb"></a><span class="bold"><strong>operator</strong></span>&gt;=(<span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System &gt;, X &gt; &amp; val1, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/quantity.html" title="Class template quantity">quantity</a>&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System &gt;, Y &gt; &amp; val2);
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.static_constant.hpp"></a>Header &lt;<a href="../../../boost/units/static_constant.hpp" target="_top">boost/units/static_constant.hpp</a>&gt;</h4></div></div></div>
+<pre class="synopsis">
+
+<a href="../BOOST_UNITS_STATIC_CONSTANT.html" title="Macro BOOST_UNITS_STATIC_CONSTANT">BOOST_UNITS_STATIC_CONSTANT</a>(name, type)</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.static_rational.hpp"></a>Header &lt;<a href="../../../boost/units/static_rational.hpp" target="_top">boost/units/static_rational.hpp</a>&gt;</h4></div></div></div>
+<p>Compile-time rational numbers and operators. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;integer_type Value&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/static_abs.html" title="Struct template static_abs">static_abs</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N, integer_type D = &gt; <span class="bold"><strong>class</strong></span> <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N, integer_type D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296142-bb.html" title="Struct template static_negate&lt;static_rational&lt; N, D &gt;&gt;">static_negate</a>&lt;static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N1, integer_type D1, integer_type N2, 
+             integer_type D2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296197-bb.html" title="Struct template static_add&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;">static_add</a>&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N1, integer_type D1, integer_type N2, 
+             integer_type D2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296276-bb.html" title="Struct template static_subtract&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;">static_subtract</a>&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N1, integer_type D1, integer_type N2, 
+             integer_type D2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296356-bb.html" title="Struct template static_multiply&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;">static_multiply</a>&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;integer_type N1, integer_type D1, integer_type N2, 
+             integer_type D2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296436-bb.html" title="Struct template static_divide&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;">static_divide</a>&lt;static_rational&lt; N1, D1 &gt;, static_rational&lt; N2, D2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296515-bb.html" title="Struct template power_typeof_helper&lt;int, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;<span class="bold"><strong>int</strong></span>, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296593-bb.html" title="Struct template power_typeof_helper&lt;float, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;<span class="bold"><strong>float</strong></span>, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296671-bb.html" title="Struct template power_typeof_helper&lt;double, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;double, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296749-bb.html" title="Struct template root_typeof_helper&lt;int, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;<span class="bold"><strong>int</strong></span>, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296827-bb.html" title="Struct template root_typeof_helper&lt;float, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;<span class="bold"><strong>float</strong></span>, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296905-bb.html" title="Struct template root_typeof_helper&lt;double, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;double, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id296982-bb.html" title="Struct template power_typeof_helper&lt;std::complex&lt; float &gt;, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;std::complex&lt; <span class="bold"><strong>float</strong></span> &gt;, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297061-bb.html" title="Struct template power_typeof_helper&lt;std::complex&lt; double &gt;, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;std::complex&lt; double &gt;, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297140-bb.html" title="Struct template root_typeof_helper&lt;std::complex&lt; float &gt;, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;std::complex&lt; <span class="bold"><strong>float</strong></span> &gt;, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297219-bb.html" title="Struct template root_typeof_helper&lt;std::complex&lt; double &gt;, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;std::complex&lt; double &gt;, static_rational&lt; N, D &gt;&gt;;
+
+    <span class="bold"><strong>typedef</strong></span> <span class="bold"><strong>long</strong></span> integer_type;
+
+    <span class="emphasis"><em>// get decimal value of <code class="computeroutput">static_rational</code></em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, integer_type N, integer_type D&gt; 
+      <span class="type">divide_typeof_helper&lt; T, T &gt;::type</span> 
+      <a name="boost.units.value"></a>value(<span class="bold"><strong>const</strong></span> <a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a>&lt; N, D &gt; &amp; r);
+
+    <span class="emphasis"><em>// raise a value to an integer power </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Rat, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">power_typeof_helper&lt; Y, Rat &gt;::type</span> <a name="id297360-bb"></a>pow(<span class="bold"><strong>const</strong></span> Y &amp; x);
+
+    <span class="emphasis"><em>// take the integer root of a value </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Rat, <span class="bold"><strong>typename</strong></span> Y&gt; 
+      <span class="type">root_typeof_helper&lt; Y, Rat &gt;::type</span> <a name="boost.units.root"></a>root(<span class="bold"><strong>const</strong></span> Y &amp; x);
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.sys.hpp"></a>Header &lt;<a href="../../../boost/units/sys.hpp" target="_top">boost/units/sys.hpp</a>&gt;</h4></div></div></div>
+<p>Class encapsulating a system tag/dimension tag pair. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_sys.html" title="Struct template is_sys">is_sys</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> ST, <span class="bold"><strong>typename</strong></span> DT&gt; <span class="bold"><strong>struct</strong></span> <a href="../id297466-bb.html" title="Struct template is_sys&lt;sys&lt; ST, DT &gt;&gt;">is_sys</a>&lt;sys&lt; ST, DT &gt;&gt;;
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.system.hpp"></a>Header &lt;<a href="../../../boost/units/system.hpp" target="_top">boost/units/system.hpp</a>&gt;</h4></div></div></div>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; <span class="bold"><strong>struct</strong></span> <a href="../id297506-bb.html" title="Struct template is_system&lt;homogeneous_system&lt; S &gt;&gt;">is_system</a>&lt;homogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; <span class="bold"><strong>struct</strong></span> <a href="../id297542-bb.html" title="Struct template is_system&lt;heterogeneous_system&lt; S &gt;&gt;">is_system</a>&lt;heterogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; <span class="bold"><strong>struct</strong></span> <a href="../id297578-bb.html" title="Struct template is_homogeneous_system&lt;homogeneous_system&lt; S &gt;&gt;">is_homogeneous_system</a>&lt;homogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297614-bb.html" title="Struct template is_homogeneous_system&lt;heterogeneous_system&lt; S &gt;&gt;">is_homogeneous_system</a>&lt;heterogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297650-bb.html" title="Struct template is_heterogeneous_system&lt;homogeneous_system&lt; S &gt;&gt;">is_heterogeneous_system</a>&lt;homogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297686-bb.html" title="Struct template is_heterogeneous_system&lt;heterogeneous_system&lt; S &gt;&gt;">is_heterogeneous_system</a>&lt;heterogeneous_system&lt; S &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> E1, <span class="bold"><strong>typename</strong></span> E2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297722-bb.html" title="Struct template static_add&lt;heterogeneous_system_element&lt; S1, E1 &gt;, heterogeneous_system_element&lt; S1, E2 &gt;&gt;">static_add</a>&lt;heterogeneous_system_element&lt; S1, E1 &gt;, heterogeneous_system_element&lt; S1, E2 &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> E1&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id297775-bb.html" title="Struct template static_negate&lt;heterogeneous_system_element&lt; S1, E1 &gt;&gt;">static_negate</a>&lt;heterogeneous_system_element&lt; S1, E1 &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>typename</strong></span> Dimensions&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../boost/units/heterogeneous_system_view.html" title="Struct template heterogeneous_system_view">heterogeneous_system_view</a>;
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.systems.physical_units.hpp"></a>Header &lt;<a href="../../../boost/units/systems/physical_units.hpp" target="_top">boost/units/systems/physical_units.hpp</a>&gt;</h4></div></div></div>
+<p>Various definitions to simplify systems of physical units. </p>
+<p>This file includes the seven SI-defined fundamental dimensions as well as composite dimensions for a number of commonly encountered physical unit types. Angles and solid angles are technically dimensionless. However, incorrect use of degrees and radians is a common source of errors, so we treat them on the same footing as the seven physical dimensions. </p>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/current_tag.html" title="Struct current_tag">current_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/temperature_tag.html" title="Struct temperature_tag">temperature_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/amount_tag.html" title="Struct amount_tag">amount_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/intensity_tag.html" title="Struct intensity_tag">intensity_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/angle_tag.html" title="Struct angle_tag">angle_tag</a>;
+    <span class="bold"><strong>struct</strong></span> <a href="../boost/units/solid_angle_tag.html" title="Struct solid_angle_tag">solid_angle_tag</a>;
+
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a> &gt;::type length_type;  <span class="emphasis"><em>// fundamental dimension of length (L) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a> &gt;::type mass_type;  <span class="emphasis"><em>// fundamental dimension of mass (M) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a> &gt;::type time_type;  <span class="emphasis"><em>// fundamental dimension of time (T) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/current_tag.html" title="Struct current_tag">current_tag</a> &gt;::type current_type;  <span class="emphasis"><em>// fundamental dimension of electric current (C) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/temperature_tag.html" title="Struct temperature_tag">temperature_tag</a> &gt;::type temperature_type;  <span class="emphasis"><em>// fundamental dimension of temperature (K) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/amount_tag.html" title="Struct amount_tag">amount_tag</a> &gt;::type amount_type;  <span class="emphasis"><em>// fundamental dimension of amount of substance (A) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/intensity_tag.html" title="Struct intensity_tag">intensity_tag</a> &gt;::type intensity_type;  <span class="emphasis"><em>// fundamental dimension of luminous intensity (I, deprecated by SI) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/angle_tag.html" title="Struct angle_tag">angle_tag</a> &gt;::type angle_type;  <span class="emphasis"><em>// fundamental dimension of planar angle (QP) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/fundamental_dimension.html" title="Struct template fundamental_dimension">fundamental_dimension</a>&lt; <a href="../boost/units/solid_angle_tag.html" title="Struct solid_angle_tag">solid_angle_tag</a> &gt;::type solid_angle_type;  <span class="emphasis"><em>// fundamental dimension of solid angle (QS) </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-2 &gt;::type acceleration_type;  <span class="emphasis"><em>// composite dimension for acceleration : L T^-2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 2 &gt;::type area_type;  <span class="emphasis"><em>// composite dimension for area : L^2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 2, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-2 &gt;::type energy_type;  <span class="emphasis"><em>// composite dimension for energy : L^2 M T^-2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 1, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-2 &gt;::type force_type;  <span class="emphasis"><em>// composite dimension for force : L M T^-2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-1 &gt;::type frequency_type;  <span class="emphasis"><em>// composite dimension for frequency : T^-1 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>,-3, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1 &gt;::type mass_density_type;  <span class="emphasis"><em>// composite dimension for mass density : L^-3 M </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 1, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-1 &gt;::type momentum_type;  <span class="emphasis"><em>// composite dimension for linear momentum : L M T^-1 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 2, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-3 &gt;::type power_type;  <span class="emphasis"><em>// composite dimension for power : L^2 M T^-3 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>,-1, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-2 &gt;::type pressure_type;  <span class="emphasis"><em>// composite dimension for pressure : L^-1 M T^-2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>,-1, <a href="../boost/units/mass_tag.html" title="Struct mass_tag">mass_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-2 &gt;::type stress_type;  <span class="emphasis"><em>// composite dimension for stress : L^-1 M T^-2 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 1, <a href="../boost/units/time_tag.html" title="Struct time_tag">time_tag</a>,-1 &gt;::type velocity_type;  <span class="emphasis"><em>// composite dimension for velocity : L T^-1 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>, 3 &gt;::type volume_type;  <span class="emphasis"><em>// composite dimension for volume : l^3 </em></span>
+    <span class="bold"><strong>typedef</strong></span> <a href="../boost/units/composite_dimension.html" title="Struct template composite_dimension">composite_dimension</a>&lt; <a href="../boost/units/length_tag.html" title="Struct length_tag">length_tag</a>,-1 &gt;::type wavenumber_type;  <span class="emphasis"><em>// composite dimension for wavenumber : L^-1 </em></span>
+  }
+}</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="header.boost.units.unit.hpp"></a>Header &lt;<a href="../../../boost/units/unit.hpp" target="_top">boost/units/unit.hpp</a>&gt;</h4></div></div></div>
+<pre class="synopsis"><span class="bold"><strong>namespace</strong></span> boost {
+  <span class="bold"><strong>namespace</strong></span> units {
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; <span class="bold"><strong>class</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/dimensionless_unit.html" title="Struct template dimensionless_unit">dimensionless_unit</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_unit.html" title="Struct template is_unit">is_unit</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; <span class="bold"><strong>struct</strong></span> <a href="../id298657-bb.html" title="Struct template is_unit&lt;unit&lt; Dim, System &gt;&gt;">is_unit</a>&lt;unit&lt; Dim, System &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> System&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_unit_of_system.html" title="Struct template is_unit_of_system">is_unit_of_system</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298707-bb.html" title="Struct template is_unit_of_system&lt;unit&lt; Dim, System &gt;, System&gt;">is_unit_of_system</a>&lt;unit&lt; Dim, System &gt;, System&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> Dim&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_unit_of_dimension.html" title="Struct template is_unit_of_dimension">is_unit_of_dimension</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298761-bb.html" title="Struct template is_unit_of_dimension&lt;unit&lt; Dim, System &gt;, Dim&gt;">is_unit_of_dimension</a>&lt;unit&lt; Dim, System &gt;, Dim&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_dimensionless.html" title="Struct template is_dimensionless">is_dimensionless</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298808-bb.html" title="Struct template is_dimensionless&lt;unit&lt; dimensionless_type, System &gt;&gt;">is_dimensionless</a>&lt;unit&lt; dimensionless_type, System &gt;&gt;;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_dimensionless_unit.html" title="Struct template is_dimensionless_unit">is_dimensionless_unit</a>;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2&gt; <span class="bold"><strong>struct</strong></span> <a href="../boost/units/is_implicitly_convertible.html" title="Struct template is_implicitly_convertible">is_implicitly_convertible</a>;
+
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298876-bb.html" title="Struct template is_implicitly_convertible&lt;unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;&gt;">is_implicitly_convertible</a>&lt;unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298936-bb.html" title="Struct template is_implicitly_convertible&lt;unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;&gt;">is_implicitly_convertible</a>&lt;unit&lt; Dim1, homogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id298995-bb.html" title="Struct template is_implicitly_convertible&lt;unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;&gt;">is_implicitly_convertible</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, homogeneous_system&lt; S2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> S1, <span class="bold"><strong>typename</strong></span> S2, <span class="bold"><strong>typename</strong></span> Dim1&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299055-bb.html" title="Struct template is_implicitly_convertible&lt;unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;&gt;">is_implicitly_convertible</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; S1 &gt; &gt;, unit&lt; Dim1, heterogeneous_system&lt; S2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299115-bb.html" title="Struct template get_dimension&lt;unit&lt; Dim, System &gt;&gt;">get_dimension</a>&lt;unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299153-bb.html" title="Struct template get_system&lt;unit&lt; Dim, System &gt;&gt;">get_system</a>&lt;unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299190-bb.html" title="Struct template unary_plus_typeof_helper&lt;unit&lt; Dim, System &gt;&gt;">unary_plus_typeof_helper</a>&lt;unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299241-bb.html" title="Struct template unary_minus_typeof_helper&lt;unit&lt; Dim, System &gt;&gt;">unary_minus_typeof_helper</a>&lt;unit&lt; Dim, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299292-bb.html" title="Struct template add_typeof_helper&lt;unit&lt; Dim1, System &gt;, unit&lt; Dim2, System &gt;&gt;">add_typeof_helper</a>&lt;unit&lt; Dim1, System &gt;, unit&lt; Dim2, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299376-bb.html" title="Struct template subtract_typeof_helper&lt;unit&lt; Dim1, System &gt;, unit&lt; Dim2, System &gt;&gt;">subtract_typeof_helper</a>&lt;unit&lt; Dim1, System &gt;, unit&lt; Dim2, System &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299460-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System &gt; &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299524-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299583-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299642-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299701-bb.html" title="Struct template multiply_typeof_helper&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;">multiply_typeof_helper</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299761-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System &gt; &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299825-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299884-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, homogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id299943-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim1, homogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id300002-bb.html" title="Struct template divide_typeof_helper&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;">divide_typeof_helper</a>&lt;unit&lt; Dim1, heterogeneous_system&lt; System1 &gt; &gt;, unit&lt; Dim2, heterogeneous_system&lt; System2 &gt; &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id300061-bb.html" title="Struct template power_typeof_helper&lt;unit&lt; Dim, System &gt;, static_rational&lt; N, D &gt;&gt;">power_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, static_rational&lt; N, D &gt;&gt;;
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System, <span class="bold"><strong>long</strong></span> N, <span class="bold"><strong>long</strong></span> D&gt; 
+      <span class="bold"><strong>struct</strong></span> <a href="../id300175-bb.html" title="Struct template root_typeof_helper&lt;unit&lt; Dim, System &gt;, static_rational&lt; N, D &gt;&gt;">root_typeof_helper</a>&lt;unit&lt; Dim, System &gt;, static_rational&lt; N, D &gt;&gt;;
+
+    <span class="emphasis"><em>// unit runtime unary plus </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="type">unary_plus_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &gt;::type</span> 
+      <a name="id300288-bb"></a><span class="bold"><strong>operator</strong></span>+(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;);
+
+    <span class="emphasis"><em>// unit runtime unary minus </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim, <span class="bold"><strong>typename</strong></span> System&gt; 
+      <span class="type">unary_minus_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &gt;::type</span> 
+      <a name="id300332-bb"></a><span class="bold"><strong>operator</strong></span>-(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim, System &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime add two units </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type">add_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id300375-bb"></a><span class="bold"><strong>operator</strong></span>+(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime subtract two units </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type">subtract_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id300447-bb"></a><span class="bold"><strong>operator</strong></span>-(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime multiply two units </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type">multiply_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id300519-bb"></a><span class="bold"><strong>operator</strong></span>*(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// runtime divide two units </em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type">divide_typeof_helper&lt; <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt;, <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &gt;::type</span> 
+      <a name="id300591-bb"></a><span class="bold"><strong>operator</strong></span>/(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// unit runtime <code class="computeroutput">operator==</code></em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id300664-bb"></a><span class="bold"><strong>operator</strong></span>==(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+
+    <span class="emphasis"><em>// unit runtime <code class="computeroutput">operator!=</code></em></span>
+    <span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> Dim1, <span class="bold"><strong>typename</strong></span> Dim2, <span class="bold"><strong>typename</strong></span> System1, <span class="bold"><strong>typename</strong></span> System2&gt; 
+      <span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id300730-bb"></a><span class="bold"><strong>operator</strong></span>!=(<span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim1, System1 &gt; &amp;, 
+                      <span class="bold"><strong>const</strong></span> <a href="../boost/units/unit.html" title="Class template unit">unit</a>&lt; Dim2, System2 &gt; &amp;);
+  }
+}</pre>
+</div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Utilities/Metaprogramming_Predicates.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="../id287610-bb.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

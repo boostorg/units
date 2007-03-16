@@ -1,0 +1,151 @@
+// mcs::units - A C++ library for zero-overhead dimensional analysis and 
+// unit/quantity manipulation and conversion
+//
+// Copyright (C) 2003-2007 Matthias Christian Schabel
+// Copyright (C) 2007 Steven Watanabe
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// http://www.boost.org/LICENSE_1_0.txt)
+
+#ifndef BOOST_UNITS_PHYSICAL_UNITS_HPP
+#define BOOST_UNITS_PHYSICAL_UNITS_HPP
+
+#include <boost/units/system.hpp>
+#include <boost/units/unit.hpp>
+
+/// \file 
+/// \brief Various definitions to simplify systems of physical units.
+///
+/// \detailed This file includes the seven SI-defined fundamental dimensions as
+/// well as composite dimensions for a number of commonly encountered
+/// physical unit types. Angles and solid angles are technically dimensionless. 
+/// However, incorrect use of degrees and radians is a common source of errors, 
+/// so we treat them on the same footing as the seven physical dimensions.
+
+namespace boost {
+
+namespace units { 
+
+/// tag representing length
+struct length_tag      : public ordinal<1> { };
+
+/// tag representing mass
+struct mass_tag        : public ordinal<2> { };
+
+/// tag representing time
+struct time_tag        : public ordinal<3> { };
+
+/// tag representing electrical current
+struct current_tag     : public ordinal<4> { };
+
+/// tag representing temperature
+struct temperature_tag : public ordinal<5> { };
+
+/// tag representing amount of substance
+struct amount_tag      : public ordinal<6> { };
+
+/// tag representing luminous intensity - demoted from status as a fundamental SI unit in 1979
+struct intensity_tag   : public ordinal<7> { };
+
+/// tag representing plane angle
+struct angle_tag       : public ordinal<8> { };
+
+/// tag representing solid angle
+struct solid_angle_tag : public ordinal<9> { };
+
+}
+
+}
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::length_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::mass_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::time_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::current_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::temperature_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::amount_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::intensity_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::solid_angle_tag)
+
+#endif
+
+namespace boost {
+
+namespace units {
+
+/// fundamental dimension of length (L)
+typedef fundamental_dimension<length_tag>::type                                         length_type;
+
+/// fundamental dimension of mass (M)
+typedef fundamental_dimension<mass_tag>::type                                           mass_type;
+
+/// fundamental dimension of time (T)
+typedef fundamental_dimension<time_tag>::type                                           time_type;
+
+/// fundamental dimension of electric current (C)
+typedef fundamental_dimension<current_tag>::type                                        current_type;
+
+/// fundamental dimension of temperature (K)
+typedef fundamental_dimension<temperature_tag>::type                                    temperature_type;
+
+/// fundamental dimension of amount of substance (A)
+typedef fundamental_dimension<amount_tag>::type                                         amount_type;
+
+/// fundamental dimension of luminous intensity (I, deprecated by SI)
+typedef fundamental_dimension<intensity_tag>::type                                      intensity_type;
+
+/// fundamental dimension of planar angle (QP)
+typedef fundamental_dimension<angle_tag>::type                                          angle_type;
+
+/// fundamental dimension of solid angle (QS)
+typedef fundamental_dimension<solid_angle_tag>::type                                    solid_angle_type;
+    
+/// composite dimension for acceleration : L T^-2
+typedef composite_dimension<length_tag,1,time_tag,-2>::type                             acceleration_type;  
+
+/// composite dimension for area : L^2
+typedef composite_dimension<length_tag,2>::type                                         area_type; 
+
+/// composite dimension for energy : L^2 M T^-2
+typedef composite_dimension<length_tag,2,mass_tag,1,time_tag,-2>::type                  energy_type;                
+
+/// composite dimension for force : L M T^-2
+typedef composite_dimension<length_tag,1,mass_tag,1,time_tag,-2>::type                  force_type;                    
+
+/// composite dimension for frequency : T^-1
+typedef composite_dimension<time_tag,-1>::type                                          frequency_type;                
+
+/// composite dimension for mass density : L^-3 M
+typedef composite_dimension<length_tag,-3,mass_tag,1>::type                             mass_density_type;            
+
+/// composite dimension for linear momentum : L M T^-1
+typedef composite_dimension<length_tag,1,mass_tag,1,time_tag,-1>::type                  momentum_type;                
+
+/// composite dimension for power : L^2 M T^-3
+typedef composite_dimension<length_tag,2,mass_tag,1,time_tag,-3>::type                  power_type;                    
+
+/// composite dimension for pressure : L^-1 M T^-2
+typedef composite_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                 pressure_type;                
+
+/// composite dimension for stress : L^-1 M T^-2
+typedef composite_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                 stress_type;                
+
+/// composite dimension for velocity : L T^-1
+typedef composite_dimension<length_tag,1,time_tag,-1>::type                             velocity_type;                
+
+/// composite dimension for volume : l^3
+typedef composite_dimension<length_tag,3>::type                                         volume_type;
+
+/// composite dimension for wavenumber : L^-1
+typedef composite_dimension<length_tag,-1>::type                                        wavenumber_type;                 
+
+} // namespace units
+
+} // namespace boost
+
+#endif // BOOST_UNITS_PHYSICAL_UNITS_HPP
