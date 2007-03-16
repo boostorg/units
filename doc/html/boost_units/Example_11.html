@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Example 11</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.0">
+<link rel="up" href="Examples.html" title="Examples">
+<link rel="prev" href="Example_10.html" title="Example 10">
+<link rel="next" href="Example_12.html" title="Example 12">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_10.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_12.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_units.Example_11"></a> Example 11</h3></div></div></div>
+<p>
+        (<a href="../../examples/unit_example_11.cpp" target="_top">unit_example_11.cpp</a>)
+      </p>
+<p>
+        This example demonstrates overloaded <code class="computeroutput"><span class="identifier">cmath</span></code>
+        functions from <code class="computeroutput"><a href="Reference.html#header.boost.units.cmath.hpp" title="Header &lt;boost/units/cmath.hpp&gt;">boost/units/cmath.hpp</a></code>.
+        The support for C99 standard functions in &lt;cmath&gt; is variable between
+        compilers, so some functions may not be provided.
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="identifier">q0</span> <span class="special">=</span> <span class="identifier">inf</span> <span class="identifier">m</span>
+<span class="identifier">q1</span> <span class="special">=</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">q2</span> <span class="special">=</span> <span class="special">-</span><span class="number">2.5</span> <span class="identifier">m</span>
+<span class="identifier">q3</span> <span class="special">=</span> <span class="number">20</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>
+
+<span class="identifier">isfinite</span><span class="special">(</span><span class="identifier">q0</span><span class="special">)</span>          <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">isinf</span><span class="special">(</span><span class="identifier">q0</span><span class="special">)</span>             <span class="special">:</span> <span class="keyword">true</span>
+<span class="identifier">isnan</span><span class="special">(</span><span class="identifier">q0</span><span class="special">)</span>             <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">isnormal</span><span class="special">(</span><span class="identifier">q0</span><span class="special">)</span>          <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">isgreater</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>      <span class="special">:</span> <span class="keyword">true</span>
+<span class="identifier">isgreaterequal</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span> <span class="special">:</span> <span class="keyword">true</span>
+<span class="identifier">isless</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>         <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">islessequal</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>    <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">islessgreater</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>  <span class="special">:</span> <span class="keyword">true</span>
+<span class="identifier">isunordered</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>    <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">abs</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>               <span class="special">:</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">ceil</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>              <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">copysign</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>       <span class="special">:</span> <span class="special">-</span><span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">fabs</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>              <span class="special">:</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">floor</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>             <span class="special">:</span> <span class="number">1</span> <span class="identifier">m</span>
+<span class="identifier">fdim</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>           <span class="special">:</span> <span class="number">4</span> <span class="identifier">m</span>
+<span class="identifier">fmax</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>           <span class="special">:</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">fmin</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>           <span class="special">:</span> <span class="special">-</span><span class="number">2.5</span> <span class="identifier">m</span>
+<span class="identifier">fma</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">,</span><span class="identifier">q3</span><span class="special">)</span>         <span class="special">:</span> <span class="number">16.25</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>
+<span class="identifier">fpclassify</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>        <span class="special">:</span> <span class="number">4</span>
+<span class="identifier">hypot</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>          <span class="special">:</span> <span class="number">2.91548</span> <span class="identifier">m</span>
+<span class="identifier">llrint</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>            <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">llround</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>           <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">nearbyint</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>         <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">nextafter</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>      <span class="special">:</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">nexttoward</span><span class="special">(</span><span class="identifier">q1</span><span class="special">,</span><span class="identifier">q2</span><span class="special">)</span>     <span class="special">:</span> <span class="number">1.5</span> <span class="identifier">m</span>
+<span class="identifier">rint</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>              <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">round</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>             <span class="special">:</span> <span class="number">2</span> <span class="identifier">m</span>
+<span class="identifier">signbit</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>           <span class="special">:</span> <span class="keyword">false</span>
+<span class="identifier">trunc</span><span class="special">(</span><span class="identifier">q1</span><span class="special">)</span>             <span class="special">:</span> <span class="number">1</span> <span class="identifier">m</span>
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_10.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_12.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

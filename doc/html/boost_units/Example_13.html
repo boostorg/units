@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Example 13</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.0">
+<link rel="up" href="Examples.html" title="Examples">
+<link rel="prev" href="Example_12.html" title="Example 12">
+<link rel="next" href="Example_14.html" title="Example 14">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_12.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_14.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_units.Example_13"></a> Example 13</h3></div></div></div>
+<p>
+        (<a href="../../example/unit_example_13.cpp" target="_top">unit_example_13.cpp</a>)
+      </p>
+<p>
+        This example demonstrates Boost.Serialization support, provided for units
+        and quantities, with
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="keyword">const</span> <span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">CGS</span><span class="special">::</span><span class="identifier">volume</span><span class="special">&gt;</span>    <span class="identifier">vc</span><span class="special">(</span><span class="number">1.35</span><span class="special">*</span><span class="identifier">pow</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;(</span><span class="identifier">CGS</span><span class="special">::</span><span class="identifier">centimeter</span><span class="special">));</span>
+                    
+<span class="identifier">sstream1</span> <span class="special">&lt;&lt;</span> <span class="string">"volume (cm^3) = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">vc</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span>
+          <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">archive</span><span class="special">::</span><span class="identifier">text_oarchive</span>   <span class="identifier">oa</span><span class="special">(</span><span class="identifier">sstream1</span><span class="special">);</span>
+
+<span class="identifier">oa</span> <span class="special">&lt;&lt;</span> <span class="identifier">vc</span><span class="special">;</span>
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+<p>
+        giving
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="identifier">volume</span> <span class="special">(</span><span class="identifier">cm</span><span class="special">^</span><span class="number">3</span><span class="special">)</span> <span class="special">=</span> <span class="number">1.35</span> <span class="identifier">cm</span><span class="special">^</span><span class="number">3</span>
+
+<span class="number">22</span> <span class="identifier">serialization</span><span class="special">::</span><span class="identifier">archive</span> <span class="number">4</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1.3500000000000001</span>
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_12.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_14.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Example 7</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.0">
+<link rel="up" href="Examples.html" title="Examples">
+<link rel="prev" href="Example_6.html" title="Example 6">
+<link rel="next" href="Example_8.html" title="Example 8">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_6.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_8.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_units.Example_7"></a> Example 7</h3></div></div></div>
+<p>
+        (<a href="../../examples/unit_example7.cpp" target="_top">unit_example_7.cpp</a>)
+      </p>
+<p>
+        This example integrates Boost.Units into an N-dimensional array class, again
+        demonstrating the ability to propagate quantities seamlessly through calculations.
+        It is worthwhile noting that the <code class="computeroutput"><span class="identifier">Array</span></code>
+        class itself has no knowledge of quantities, other than carefully implementing
+        the various operators necessary. Because the associated array code is extensive,
+        the array headers are not included (a similar example using built in C++
+        arrays is also found in the source code to this example). This code
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="keyword">typedef</span> <span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">dimensionless</span><span class="special">&gt;</span>     <span class="identifier">dimensionless_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">length</span><span class="special">&gt;</span>            <span class="identifier">length_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">area</span><span class="special">&gt;</span>              <span class="identifier">area_type</span><span class="special">;</span>
+
+<span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>   <span class="identifier">xdim</span> <span class="special">=</span> <span class="number">3</span><span class="special">,</span>
+                    <span class="identifier">ydim</span> <span class="special">=</span> <span class="number">3</span><span class="special">;</span>
+                    
+<span class="identifier">Array</span><span class="special">&lt;</span><span class="identifier">length_type</span><span class="special">,</span><span class="number">2</span><span class="special">&gt;</span>    <span class="identifier">data1</span><span class="special">(</span><span class="identifier">Index</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;(</span><span class="identifier">xdim</span><span class="special">,</span><span class="identifier">ydim</span><span class="special">)),</span>
+                        <span class="identifier">data2</span><span class="special">(</span><span class="identifier">Index</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;(</span><span class="identifier">xdim</span><span class="special">,</span><span class="identifier">ydim</span><span class="special">));</span>
+
+<span class="keyword">for</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">i</span><span class="special">=</span><span class="number">0</span><span class="special">;</span><span class="identifier">i</span><span class="special">&lt;</span><span class="identifier">xdim</span><span class="special">;++</span><span class="identifier">i</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="keyword">for</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">j</span><span class="special">=</span><span class="number">0</span><span class="special">;</span><span class="identifier">j</span><span class="special">&lt;</span><span class="identifier">ydim</span><span class="special">;++</span><span class="identifier">j</span><span class="special">)</span>
+    <span class="special">{</span>
+        <span class="identifier">data1</span><span class="special">(</span><span class="identifier">i</span><span class="special">,</span><span class="identifier">j</span><span class="special">)</span> <span class="special">=</span> <span class="identifier">length_type</span><span class="special">((</span><span class="number">10.0f</span><span class="special">*</span><span class="identifier">i</span><span class="special">+</span><span class="identifier">j</span><span class="special">)*</span><span class="identifier">meters</span><span class="special">);</span>
+        <span class="identifier">data2</span><span class="special">(</span><span class="identifier">i</span><span class="special">,</span><span class="identifier">j</span><span class="special">)</span> <span class="special">=</span> <span class="identifier">length_type</span><span class="special">((</span><span class="identifier">i</span><span class="special">+</span><span class="number">0.10f</span><span class="special">*</span><span class="identifier">j</span><span class="special">)*</span><span class="identifier">meters</span><span class="special">);</span>
+    <span class="special">}</span>
+<span class="special">}</span>
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="identifier">mcs</span><span class="special">::</span><span class="identifier">Array</span><span class="special">&lt;</span><span class="identifier">length_type</span><span class="special">,</span><span class="number">2</span><span class="special">&gt;</span>           <span class="identifier">data3</span><span class="special">(</span><span class="identifier">data1</span><span class="special">+</span><span class="identifier">data2</span><span class="special">),</span>
+                                    <span class="identifier">data4</span><span class="special">(</span><span class="identifier">data1</span><span class="special">-</span><span class="identifier">data2</span><span class="special">);</span>
+<span class="identifier">mcs</span><span class="special">::</span><span class="identifier">Array</span><span class="special">&lt;</span><span class="identifier">area_type</span><span class="special">,</span><span class="number">2</span><span class="special">&gt;</span>             <span class="identifier">data5</span><span class="special">(</span><span class="identifier">data1</span><span class="special">*</span><span class="identifier">data2</span><span class="special">);</span>
+<span class="identifier">mcs</span><span class="special">::</span><span class="identifier">Array</span><span class="special">&lt;</span><span class="identifier">dimensionless_type</span><span class="special">,</span><span class="number">2</span><span class="special">&gt;</span>    <span class="identifier">data6</span><span class="special">(</span><span class="identifier">data1</span><span class="special">/</span><span class="identifier">data2</span><span class="special">);</span>
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+<p>
+        gives the following:
+      </p>
+<p>
+        </p>
+<p>
+          
+</p>
+<pre class="programlisting">
+<span class="identifier">Using</span> <span class="identifier">mcs</span><span class="special">::</span><span class="identifier">array</span><span class="special">...</span>
+
+<span class="identifier">data1</span> <span class="special">:</span> 
+
+    <span class="number">0</span> <span class="identifier">m</span>     <span class="number">1</span> <span class="identifier">m</span>     <span class="number">2</span> <span class="identifier">m</span> 
+   <span class="number">10</span> <span class="identifier">m</span>    <span class="number">11</span> <span class="identifier">m</span>    <span class="number">12</span> <span class="identifier">m</span> 
+   <span class="number">20</span> <span class="identifier">m</span>    <span class="number">21</span> <span class="identifier">m</span>    <span class="number">22</span> <span class="identifier">m</span> 
+
+<span class="identifier">data2</span> <span class="special">:</span> 
+
+    <span class="number">0</span> <span class="identifier">m</span>   <span class="number">0.1</span> <span class="identifier">m</span>   <span class="number">0.2</span> <span class="identifier">m</span> 
+    <span class="number">1</span> <span class="identifier">m</span>   <span class="number">1.1</span> <span class="identifier">m</span>   <span class="number">1.2</span> <span class="identifier">m</span> 
+    <span class="number">2</span> <span class="identifier">m</span>   <span class="number">2.1</span> <span class="identifier">m</span>   <span class="number">2.2</span> <span class="identifier">m</span> 
+
+<span class="identifier">data3</span> <span class="special">:</span> 
+
+    <span class="number">0</span> <span class="identifier">m</span>   <span class="number">1.1</span> <span class="identifier">m</span>   <span class="number">2.2</span> <span class="identifier">m</span> 
+   <span class="number">11</span> <span class="identifier">m</span>  <span class="number">12.1</span> <span class="identifier">m</span>  <span class="number">13.2</span> <span class="identifier">m</span> 
+   <span class="number">22</span> <span class="identifier">m</span>  <span class="number">23.1</span> <span class="identifier">m</span>  <span class="number">24.2</span> <span class="identifier">m</span> 
+
+<span class="identifier">data4</span> <span class="special">:</span> 
+
+    <span class="number">0</span> <span class="identifier">m</span>   <span class="number">0.9</span> <span class="identifier">m</span>   <span class="number">1.8</span> <span class="identifier">m</span> 
+    <span class="number">9</span> <span class="identifier">m</span>   <span class="number">9.9</span> <span class="identifier">m</span>  <span class="number">10.8</span> <span class="identifier">m</span> 
+   <span class="number">18</span> <span class="identifier">m</span>  <span class="number">18.9</span> <span class="identifier">m</span>  <span class="number">19.8</span> <span class="identifier">m</span> 
+
+<span class="identifier">data5</span> <span class="special">:</span> 
+
+    <span class="number">0</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>     <span class="number">0.1</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>     <span class="number">0.4</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>   
+   <span class="number">10</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>    <span class="number">12.1</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>    <span class="number">14.4</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>   
+   <span class="number">40</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>    <span class="number">44.1</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>    <span class="number">48.4</span> <span class="identifier">m</span><span class="special">^</span><span class="number">2</span>   
+
+<span class="identifier">data6</span> <span class="special">:</span> 
+
+  <span class="identifier">nan</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>     
+   <span class="number">10</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>     
+   <span class="number">10</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>        <span class="number">10</span> <span class="identifier">dimensionless</span>     
+</pre>
+<p>
+        </p>
+<p>
+        </p>
+<p>
+          </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+        </p>
+<p>
+      </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Example_6.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="Examples.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Example_8.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

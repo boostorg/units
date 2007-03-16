@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Struct template static_subtract&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;</title>
+<link rel="stylesheet" href="boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="Chapter 1. Boost.Units 0.7.0">
+<link rel="up" href="boost_units/Reference.html#header.boost.units.dim.hpp" title="Header &lt;boost/units/dim.hpp&gt;">
+<link rel="prev" href="id287379-bb.html" title="Struct template static_add&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;">
+<link rel="next" href="id287525-bb.html" title="Struct template static_multiply&lt;dim&lt; T, V &gt;, X&gt;">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../boost.png"></td>
+<td align="center"><a href="../../index.htm">Home</a></td>
+<td align="center"><a href="libraries.html">Libraries</a></td>
+<td align="center"><a href="../../people/people.htm">People</a></td>
+<td align="center"><a href="../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="id287379-bb.html"><img src="images/prev.png" alt="Prev"></a><a accesskey="u" href="boost_units/Reference.html#header.boost.units.dim.hpp"><img src="images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="images/home.png" alt="Home"></a><a accesskey="n" href="id287525-bb.html"><img src="images/next.png" alt="Next"></a>
+</div>
+<div class="refentry" lang="en">
+<a name="id287452-bb"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Struct template static_subtract&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt;</span></h2>
+<p>boost::units::static_subtract&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt; &#8212; Subtract two dims. </p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="bold"><strong>template</strong></span>&lt;<span class="bold"><strong>typename</strong></span> T, <span class="bold"><strong>typename</strong></span> V1, <span class="bold"><strong>typename</strong></span> V2&gt; 
+<span class="bold"><strong>struct</strong></span> static_subtract&lt;dim&lt; T, V1 &gt;, dim&lt; T, V2 &gt;&gt; {
+  <span class="emphasis"><em>// types</em></span>
+  <span class="bold"><strong>typedef</strong></span> dim&lt; T, <span class="bold"><strong>typename</strong></span> <a href="boost/units/static_subtract.html" title="Struct template static_subtract">static_subtract</a>&lt; V1, V2 &gt;::type &gt; type;
+};</pre></div>
+<div class="refsect1" lang="en">
+<a name="id558792"></a><h2>Description</h2>
+<p><code class="computeroutput">static_subtract</code> operations on dim are only defined between dims having identical <code class="computeroutput">tag_type</code>. Operation delegates to <code class="computeroutput">value_type</code>. </p>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="id287379-bb.html"><img src="images/prev.png" alt="Prev"></a><a accesskey="u" href="boost_units/Reference.html#header.boost.units.dim.hpp"><img src="images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="images/home.png" alt="Home"></a><a accesskey="n" href="id287525-bb.html"><img src="images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
