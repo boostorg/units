@@ -1,0 +1,42 @@
+# Jamfile.v2
+#
+# Copyright (c) 2007
+# Steven Watanabe
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accomanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt
+
+UNIT_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. ;
+
+import testing ;
+
+{
+  test-suite units
+   :
+    [ compile test_predicates.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ run test_dimensionless_quantity.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ run test_implicit_conversion.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ run test_quantity.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ run test_unit.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ run test_conversion.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_implicit_conversion.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_construct.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_assign.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_add.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_add_assign.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_subtract_assign.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_scalar_add.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_scalar_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_unit_add.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_quantity_unit_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_scalar_quantity_add.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_scalar_quantity_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_unit_quantity_add.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_unit_quantity_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_adl_detail.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_heterogeneous_unit.cpp : $(UNIT_REQUIREMENTS) : ]
+   ;
+
+}
