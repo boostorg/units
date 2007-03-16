@@ -1,0 +1,256 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dimensional Analysis</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="up" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="prev" href="Quick_Start.html" title="Quick Start">
+<link rel="next" href="Units.html" title="Units">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Quick_Start.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Units.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="boost_units.Dimensional_Analysis"></a><a href="Dimensional_Analysis.html" title="Dimensional Analysis"> Dimensional Analysis</a></h2></div></div></div>
+<p>
+      The concept of <a href="http://en.wikipedia.org/wiki/Dimensional_analysis" target="_top">dimensional
+      analysis</a> is normally presented early on in introductory physics and
+      engineering classes as a means of determining the correctness of an equation
+      or computation by propagating the physical measurement <a href="http://en.wikipedia.org/wiki/Units_of_measurement" target="_top">units</a>
+      of various quantities through the equation along with their numerical values.
+      There are a number of standard unit systems in common use, the most prominent
+      of which is the <a href="http://en.wikipedia.org/wiki/SI_units" target="_top">Systeme
+      International</a> (also known as SI or MKS, for meter-kilogram-second,
+      three of the fundamental dimensions on which the system is based), which is
+      the international standard unit system and is widely utilized in science and
+      engineering. Other common systems include the <a href="http://en.wikipedia.org/wiki/Cgs_units" target="_top">CGS</a>
+      (centimeter-gram-second) system and the <a href="http://en.wikipedia.org/wiki/English_units" target="_top">English</a>
+      system still in use in some problem domains in the United States and elsewhere.
+      In physics, there also exist a number of other systems that are in common use
+      in specialized subdisciplines. These are collectively referred to as <a href="http://en.wikipedia.org/wiki/Natural_units" target="_top">natural units</a>. When
+      quantities representing different physical quantities are combined, dimensional
+      analysis provides the means of assessing the consistency of the resulting calculation.
+      For example, the sum of two lengths is also a length, while the product of
+      two lengths is an area, and the sum of a length and an area is undefined. Similarly,
+      the arguments to many functions (such as exp, log, etc...) must be dimensionless
+      quantities, as can be easily seen by examining their series expansions. This
+      requirement can also be enforced in code involving dimensioned quantities where
+      appropriate.
+    </p>
+<p>
+      In the following, we view dimensional analysis as an abstraction in which an
+      arbitrary set of <a href="http://en.wikipedia.org/wiki/Fundamental_units" target="_top">units</a>
+      obey the rules of a specific algebra. We will refer to a pair of a fundamental
+      unit and a rational exponent as a <span class="bold"><strong>fundamental dimension</strong></span>,
+      and a list composed of an arbitrary number of fundamental dimensions as a
+      <span class="bold"><strong>composite dimension</strong></span> or, simply, <span class="bold"><strong>dimension</strong></span>. In particular, given a set of <span class="inlinemediaobject"><img src="../form_0.png" alt="form_0"></span> fundamental dimensions denoted by <span class="inlinemediaobject"><img src="../form_1.png" alt="form_1"></span> and a set of <span class="inlinemediaobject"><img src="../form_0.png" alt="form_0"></span> rational exponents <span class="inlinemediaobject"><img src="../form_2.png" alt="form_2"></span>, any possible (composite) dimension can be written as
+      <span class="inlinemediaobject"><img src="../form_3.png" alt="form_3"></span>.
+    </p>
+<p>
+      Composite dimensions obey the algebraic rules for dimensional analysis. In
+      particular, for any scalar value, <span class="inlinemediaobject"><img src="../form_4.png" alt="form_4"></span>, and composite dimensions <span class="inlinemediaobject"><img src="../form_5.png" alt="form_5"></span> and <span class="inlinemediaobject"><img src="../form_6.png" alt="form_6"></span>, where <span class="inlinemediaobject"><img src="../form_7.png" alt="form_7"></span>, we have:
+    </p>
+<p>
+      <span class="inlinemediaobject"><img src="../form_8.png" alt="form_8"></span>
+    </p>
+<p>
+      Users of a dimensional analysis library should be able to specify an arbitrary
+      list of fundamental dimensions to produce a composite dimension. This potentially
+      includes both repeated tags and dimensionless tags. For example, it should
+      be possible to express energy as <span class="inlinemediaobject"><img src="../form_9.png" alt="form_9"></span>, <span class="inlinemediaobject"><img src="../form_10.png" alt="form_10"></span>, <span class="inlinemediaobject"><img src="../form_11.png" alt="form_11"></span>, or any other permutation of mass, length, and time having
+      aggregate exponents of 1, 2, and -2, respectively. In addition, in some cases,
+      multiple fundamental dimensions representing the same dimension measured in
+      different unit systems may appear. In order to be able to perform computations
+      on arbitrary sets of dimensions, all composite dimensions must be reducible
+      to an unambiguous final composite dimension, which we will refer to as a <span class="bold"><strong>reduced dimension</strong></span>, for which
+    </p>
+<div class="orderedlist"><ol type="1">
+<li>
+        fundamental dimensions are consistently ordered
+      </li>
+<li>
+        dimensions with zero exponent are elided. Note that reduced dimensions are
+        never composed of more than <span class="inlinemediaobject"><img src="../form_0.png" alt="form_0"></span> dimension tags, one for each distinct fundamental dimension,
+        but may have fewer.
+      </li>
+</ol></div>
+<p>
+      In our implementation, fundamental dimensions are associated with arbitrary
+      tag types. As we will ultimately represent composite dimensions as typelists,
+      we must provide some mechanism for sorting dimension tags in order to make
+      it possible to convert an arbitrary composite dimension into a reduced dimension.
+      A template class is provided for this purpose for convenience (found in <code class="computeroutput">boost/units/dimension_tag.hpp</code>),
+      or the tags themselves can provide an appropriate <code class="computeroutput"><span class="keyword">typedef</span></code>
+      for <code class="computeroutput"><span class="identifier">value</span></code>:
+    </p>
+<pre class="programlisting">
+<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">N</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">ordinal</span> <span class="special">{</span> <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">int_</span><span class="special">&lt;</span><span class="identifier">N</span><span class="special">&gt;</span> <span class="identifier">value</span><span class="special">;</span> <span class="special">};</span>
+</pre>
+<p>
+      With this, we can define the fundamental types for length, mass, and time as
+      (noting the the specific ordering is not important, only the uniqueness of
+      the ordinal values) :
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">struct</span> <span class="identifier">length_tag</span> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">ordinal</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;</span> <span class="special">{</span> <span class="special">};</span> 
+<span class="keyword">struct</span> <span class="identifier">mass_tag</span> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">ordinal</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;</span> <span class="special">{</span> <span class="special">};</span>
+<span class="keyword">struct</span> <span class="identifier">time_tag</span> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">ordinal</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;</span> <span class="special">{</span> <span class="special">};</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      It is important to note that the choice of order is completely arbitrary as
+      long as each tag has a unique enumerable value. To define the fundamental dimensions
+      themselves, we simply create MPL-conformant typelists having unit exponents
+      by using the <span class="underline"><code class="computeroutput">dim</code></span>
+      class to encapsulate the fundamental dimension tag with a <span class="underline"><code class="computeroutput"><a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a></code></span>
+      exponent. The <span class="underline"><code class="computeroutput"><a href="../boost/units/make_dimension_list.html" title="Struct template make_dimension_list">make_dimension_list</a></code></span>
+      class acts as a wrapper to ensure that the resulting type is in the form of
+      a reduced dimension:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">typedef</span> <span class="identifier">make_dimension_list</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">length_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">type</span>   <span class="identifier">length_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">make_dimension_list</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">mass_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">type</span>     <span class="identifier">mass_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">make_dimension_list</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">time_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">type</span>     <span class="identifier">time_type</span><span class="special">;</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      To facilitate definition of fundamental dimensions, a convenience class is
+      provided:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">typedef</span> <span class="identifier">fundamental_dimension</span><span class="special">&lt;</span><span class="identifier">length_tag</span><span class="special">&gt;::</span><span class="identifier">type</span> <span class="identifier">length_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">fundamental_dimension</span><span class="special">&lt;</span><span class="identifier">mass_tag</span><span class="special">&gt;::</span><span class="identifier">type</span>   <span class="identifier">mass_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">fundamental_dimension</span><span class="special">&lt;</span><span class="identifier">time_tag</span><span class="special">&gt;::</span><span class="identifier">type</span>   <span class="identifier">time_type</span><span class="special">;</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      so that the above code is identical to the full typelist definition.
+    </p>
+<p>
+      We require that fundamental dimensions be represented by orthonormal basis
+      vectors in the space of dimensions; this requirement is not strictly necessary,
+      as any set of basis vectors that span the vector space of dimensions can be
+      used as fundamental units. However, while it is conceptually interesting, allowing
+      for non-orthonormal basis vectors adds a tremendous amount of additional complexity
+      (essentially it would require an implementation of basic compile-time linear
+      algebra) with little clear benefit for practical applications.
+    </p>
+<p>
+      Naturally, we also define composite dimensions via a typelist:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">typedef</span> <span class="identifier">make_dimension_list</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">length_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">type</span>   <span class="identifier">area_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">make_dimension_list</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">mass_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;</span> <span class="special">&gt;,</span>
+                                               <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">length_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;</span> <span class="special">&gt;,</span>
+                                               <span class="identifier">dim</span><span class="special">&lt;</span> <span class="identifier">time_tag</span><span class="special">,</span><span class="identifier">static_rational</span><span class="special">&lt;-</span><span class="number">2</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">type</span>    <span class="identifier">energy_type</span><span class="special">;</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      A convenience class for composite dimensions with integer powers is also provided:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">typedef</span> <span class="identifier">composite_dimension</span><span class="special">&lt;</span><span class="identifier">length_tag</span><span class="special">,</span><span class="number">2</span><span class="special">&gt;::</span><span class="identifier">type</span> <span class="identifier">area_type</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">composite_dimension</span><span class="special">&lt;</span><span class="identifier">mass_tag</span><span class="special">,</span><span class="number">1</span><span class="special">,</span>
+                            <span class="identifier">length_tag</span><span class="special">,</span><span class="number">2</span><span class="special">,</span>
+                            <span class="identifier">time_tag</span><span class="special">,-</span><span class="number">2</span><span class="special">&gt;::</span><span class="identifier">type</span>  <span class="identifier">energy_type</span><span class="special">;</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Quick_Start.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Units.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

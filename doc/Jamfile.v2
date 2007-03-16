@@ -1,0 +1,108 @@
+# Units documentation Jamfile
+#
+# Copyright (c) 2007
+# Steven Watanabe
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt
+
+using quickbook ;
+
+using doxygen ;
+
+rule run_doxygen ( target : files * : name )
+{
+
+doxygen $(target)
+  :
+    $(files)
+  :
+        <doxygen:param>EXTRACT_ALL=YES
+        <doxygen:param>"PREDEFINED=\"BOOST_UNITS_STATIC_CONSTANT(a,b)=static const b a\" \\
+                                   \"BOOST_UNITS_AUTO_STATIC_CONSTANT(a,b)=static const auto a = b\" \\
+                                   \"BOOST_UNITS_TYPEOF(a)=typeof(a)\" \\
+                                   \"BOOST_PREVENT_MACRO_SUBSTITUTION=\" \\
+                                   \"BOOST_UNITS_HAS_TYPEOF=1\" \\
+                                   \"BOOST_UNITS_DOXYGEN=1\""
+        <doxygen:param>HIDE_UNDOC_MEMBERS=NO
+        <doxygen:param>EXTRACT_PRIVATE=NO
+        <doxygen:param>ENABLE_PREPROCESSING=YES
+        <doxygen:param>MACRO_EXPANSION=YES
+        <doxygen:param>EXPAND_ONLY_PREDEF=YES
+        <doxygen:param>SEARCH_INCLUDES=NO
+        <reftitle>$(name)
+  ;
+
+}
+
+run_doxygen units_reference
+  :
+    ../../../boost/units/systems/physical_units.hpp
+    [ glob ../../../boost/units/*.hpp ]
+  :
+    "Units Reference"
+  ;
+
+run_doxygen si_reference
+  :
+    ../../../boost/units/systems/si.hpp
+    [ glob ../../../boost/units/systems/si/*.hpp ]
+    [ glob ../../../boost/units/systems/si/codata/*.hpp ]
+  :
+    "SI Reference"
+  ;
+
+run_doxygen cgs_reference
+  :
+    ../../../boost/units/systems/cgs.hpp
+    [ glob ../../../boost/units/systems/cgs/*.hpp ]
+  :
+    "CGS Reference"
+  ;
+
+run_doxygen trig_reference
+  :
+    ../../../boost/units/systems/trig.hpp
+  :
+    "Trig Reference"
+  ;
+
+run_doxygen abstract_reference
+  :
+    ../../../boost/units/systems/abstract.hpp
+  :
+    "Abstract System Reference"
+  ;
+
+run_doxygen temperature_reference
+  :
+    ../../../boost/units/systems/other/temperature_fahrenheit.hpp
+  :
+    "Temperature System Reference"
+  ;
+
+xml units
+  :
+    units.qbk
+  :
+  ;
+
+boostbook standalone
+  :
+    units
+  :
+    <dependency>.//units_reference
+    <dependency>.//si_reference
+    <dependency>.//cgs_reference
+    <dependency>.//trig_reference
+    <dependency>.//abstract_reference
+    <dependency>.//temperature_reference
+    <xsl:param>toc.max.depth=1
+    <xsl:param>toc.section.depth=8
+    <xsl:param>chunk.section.depth=8
+    <xsl:param>fop1.extensions=1
+    <xsl:param>fop.extensions=0
+    <xsl:param>tex.math.in.alt="latex"
+    <xsl:param>passivetex.extensions="1"
+  ;

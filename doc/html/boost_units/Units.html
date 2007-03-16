@@ -1,0 +1,213 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Units</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="up" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="prev" href="Dimensional_Analysis.html" title="Dimensional Analysis">
+<link rel="next" href="Quantities.html" title="Quantities">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Dimensional_Analysis.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Quantities.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="boost_units.Units"></a><a href="Units.html" title="Units"> Units</a></h2></div></div></div>
+<p>
+      We define a <span class="bold"><strong>unit</strong></span> as a composite dimension
+      expressed in some <span class="bold"><strong>unit system</strong></span>, where the latter
+      is a self-consistent set of reference measures corresponding to the fundamental
+      dimensions comprising the unit system. For example, length is an abstract concept
+      that can be made concrete by associating it with a unit system. Thus, the meter
+      is a unit of length in the SI system. Units are, like composite dimensions,
+      purely compile-time variables with no associated value. Units obey the same
+      algebra as dimensions do; the presence of the unit system serves to ensure
+      that units having identical reduced dimension in different systems (like feet
+      and meters) cannot be inadvertently mixed in computations.
+    </p>
+<p>
+      There are three distinct types of unit system that can be envisioned:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+<span class="bold"><strong>Homogeneous systems</strong></span> : Systems in which each
+        fundamental dimension is measured in the same unit system (all SI, for example).
+      </li>
+<li>
+<span class="bold"><strong>Mixed systems</strong></span> : Systems in which each fundamental
+        dimension is measured in one unit system, but the systems for different fundamental
+        systems may come from different unit systems. For example, centimeter-kilogram-second
+        units in which lengths are measured in the CGS system and masses and times
+        are measured in the SI system. These systems can be treated in the same way
+        as homogeneous systems for the most part.
+      </li>
+<li>
+<span class="bold"><strong>Heterogeneous systems</strong></span> : Mixed systems in
+        which each fundamental dimension may be represented by two or more fundamental
+        units. For example, an empirical equation for radar beam height (in feet)
+        is H = (r/C)^2 where r is the radar range in nautical miles. In order for
+        this equation to be dimensionally correct, the constant, C, must be expressed
+        in nautical miles per foot^(1/2), which mixes two distinct fundamental length
+        dimensions in a single unit.
+      </li>
+</ul></div>
+<p>
+      Units are implemented by the <span class="underline"><code class="computeroutput"><a href="../boost/units/unit.html" title="Class template unit">unit</a></code></span>
+      template class defined in <code class="computeroutput"><a href="Reference.html#header.boost.units.unit.hpp" title="Header &lt;boost/units/unit.hpp&gt;">boost/units/unit.hpp</a></code>
+      :
+    </p>
+<pre class="programlisting">
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Dim</span><span class="special">,</span><span class="keyword">class</span> <span class="identifier">System</span><span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">unit</span><span class="special">;</span>
+</pre>
+<p>
+      In addition to supporting the compile-time dimensional analysis operations,
+      the +, -, *, and / runtime operators are provided for <span class="underline"><code class="computeroutput"><a href="../boost/units/unit.html" title="Class template unit">unit</a></code></span> variables. Because the
+      dimension associated with powers and roots must be computed at compile-time,
+      it is not possible to provide overloads for <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">pow</span></code> that
+      function correctly for <span class="underline"><code class="computeroutput"><a href="../boost/units/unit.html" title="Class template unit">unit</a></code></span>s.
+      These operations are supported through free functions <span class="underline"><code class="computeroutput"><a href="../id287610-bb.html" title="Function template pow">pow</a></code></span> and <span class="underline"><code class="computeroutput"><a href="Reference.html#boost.units.root">root</a></code></span> that are templated
+      on integer and <span class="underline"><code class="computeroutput"><a href="../boost/units/static_rational.html" title="Class template static_rational">static_rational</a></code></span>
+      values and can take as an argument any type for which the utility classes
+      <span class="underline"><code class="computeroutput">power_typeof_helper</code></span>
+      and <span class="underline"><code class="computeroutput">root_typeof_helper</code></span>
+      have been defined.
+    </p>
+<p>
+      As an example, in the following we will implement a subset of the SI unit system
+      based on the fundamental dimensions given above, demonstrating all steps necessary
+      for a completely functional system. First, we simply define a unit system class
+      that includes type definitions for commonly used units:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="comment">/// placeholder class defining test unit system
+</span><span class="keyword">struct</span> <span class="identifier">system_tag</span> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">ordinal</span><span class="special">&lt;</span><span class="number">101</span><span class="special">&gt;</span> <span class="special">{</span> <span class="special">};</span>
+
+<span class="keyword">typedef</span> <span class="identifier">homogeneous_system</span><span class="special">&lt;</span><span class="identifier">system_tag</span><span class="special">&gt;</span>  <span class="identifier">system</span><span class="special">;</span>
+
+<span class="comment">/// unit typedefs
+</span><span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">dimensionless_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>     <span class="identifier">dimensionless</span><span class="special">;</span>
+
+<span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">length_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>            <span class="identifier">length</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">mass_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>              <span class="identifier">mass</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">time_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>              <span class="identifier">time</span><span class="special">;</span>
+
+<span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">area_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>              <span class="identifier">area</span><span class="special">;</span>
+<span class="keyword">typedef</span> <span class="identifier">unit</span><span class="special">&lt;</span><span class="identifier">energy_type</span><span class="special">,</span><span class="identifier">system</span><span class="special">&gt;</span>            <span class="identifier">energy</span><span class="special">;</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      If the units in a given system are to be used as a part of a heterogeneous
+      unit system, the system tag must have a unique (among system tags) enumerable
+      value. We reuse the <span class="underline"><code class="computeroutput"><a href="../boost/units/ordinal.html" title="Struct template ordinal">ordinal</a></code></span>
+      template for this application here. System ordinal values up to 100 are reserved
+      for library use; user-defined systems should use ordinal values greater than
+      100. The macro <span class="underline"><code class="computeroutput"><a href="../BOOST_UNITS_STATIC_CONSTANT.html" title="Macro BOOST_UNITS_STATIC_CONSTANT">BOOST_UNITS_STATIC_CONSTANT</a></code></span>
+      is provided in <code class="computeroutput"><a href="Reference.html#header.boost.units.static_constant.hpp" title="Header &lt;boost/units/static_constant.hpp&gt;">boost/units/static_constant.hpp</a></code>
+      to facilitate ODR- and thread-safe constant definition in header files. We
+      then define some constants for the supported units to simplify variable definitions:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="comment">/// unit constants 
+</span><span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">meter</span><span class="special">,</span><span class="identifier">length</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">meters</span><span class="special">,</span><span class="identifier">length</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">kilogram</span><span class="special">,</span><span class="identifier">mass</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">kilograms</span><span class="special">,</span><span class="identifier">mass</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">second</span><span class="special">,</span><span class="identifier">time</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">seconds</span><span class="special">,</span><span class="identifier">time</span><span class="special">);</span>
+
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">square_meter</span><span class="special">,</span><span class="identifier">area</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">square_meters</span><span class="special">,</span><span class="identifier">area</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">joule</span><span class="special">,</span><span class="identifier">energy</span><span class="special">);</span>
+<span class="identifier">BOOST_UNITS_STATIC_CONSTANT</span><span class="special">(</span><span class="identifier">joules</span><span class="special">,</span><span class="identifier">energy</span><span class="special">);</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      We also specialize the <span class="underline"><code class="computeroutput">unit_info</code></span>
+      class for each fundamental dimension tag to provide information needed for
+      I/O:
+    </p>
+<p>
+      </p>
+<p>
+        
+</p>
+<pre class="programlisting">
+<span class="keyword">template</span><span class="special">&lt;&gt;</span> <span class="keyword">struct</span> <span class="identifier">unit_info</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">::</span><span class="identifier">system_tag</span><span class="special">,</span><span class="identifier">length_tag</span><span class="special">&gt;</span>
+<span class="special">{</span>
+    <span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">name</span><span class="special">()</span>               <span class="special">{</span> <span class="keyword">return</span> <span class="string">"meter"</span><span class="special">;</span> <span class="special">}</span>
+    <span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">symbol</span><span class="special">()</span>             <span class="special">{</span> <span class="keyword">return</span> <span class="string">"m"</span><span class="special">;</span> <span class="special">}</span>
+<span class="special">};</span>
+</pre>
+<p>
+      </p>
+<p>
+      </p>
+<p>
+        </p>
+<div class="calloutlist"><table border="0" summary="Callout list"></table></div>
+<p>
+      </p>
+<p>
+    </p>
+<p>
+      and similarly for <code class="computeroutput"><span class="identifier">mass_tag</span></code>
+      and <code class="computeroutput"><span class="identifier">time_tag</span></code>. A future version
+      of the library will provide a more flexible system allowing for internationalization
+      through a facet/locale-type mechanism. The <code class="computeroutput"><span class="identifier">name</span><span class="special">()</span></code> and <code class="computeroutput"><span class="identifier">symbol</span><span class="special">()</span></code> methods of <span class="underline"><code class="computeroutput">unit_info</code></span> provide full
+      and short names for the base unit. With these definitions, we have the rudimentary
+      beginnings of our unit system, which can be used to determine reduced dimensions
+      for arbitrary unit calculations.
+    </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Dimensional_Analysis.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="Quantities.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
