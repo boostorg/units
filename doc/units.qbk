@@ -23,6 +23,7 @@
 [def __unit [classref boost::units::unit unit]]
 [def __unit_info [classref boost::units::unit_info unit_info]]
 [def __quantity [classref boost::units::quantity quantity]]
+[def __conversion_helper [classref boost::units::conversion_helper conversion_helper]]
 
 [def __unary_plus_typeof_helper [classref boost::units::unary_plus_typeof_helper unary_plus_typeof_helper]]
 [def __unary_minus_typeof_helper [classref boost::units::unary_minus_typeof_helper unary_minus_typeof_helper]]
@@ -553,7 +554,7 @@ addition, subtraction, multiplication, division, equal-to, not-equal-to, less-th
 greater-than, and greater-or-equal-to. Support for rational powers and roots can be added by overloading
 the [___power_typeof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
 class that models a numerical measurement with an associated measurement error and the appropriate algebra and
-demonstrate it's use as a quantity value type; the full code is found in [@../examples/measurement.hpp measurement.hpp]:
+demonstrates its use as a quantity value type; the full code is found in [@../examples/measurement.hpp measurement.hpp]:
 
 [import ../example/measurement.hpp]
 
@@ -925,7 +926,39 @@ only available for compilers that support `typeof`.
 
 ([@../example/unit_example_20.cpp unit_example_20.cpp])
 
-Absolute and relative temperatures in Fahrenheit and conversions to Kelvin.
+[import ../example/unit_example_20.cpp]
+
+This example shows a method for implementing absolute temperatures and relative temperature differences in Fahrenheit 
+and converting between these and the Kelvin temperature scale. This issue touches on some surprisingly deep mathematical
+concepts (see [@http://en.wikipedia.org/wiki/Affine_space Wikipedia] for a basic review), but for our purposes here, we
+will simply observe that it is important to be able to differentiate between an absolute temperature measurement and a 
+measurement of temperature difference. This is accomplished by defining two wrapper classes :
+
+[unit_example_20_class_snippet_1]
+
+that implement the correct algebra for points and vectors in 1D. We then define a unit system for Fahrenheit temperature and 
+associated classes :
+
+[unit_example_20_class_snippet_2]
+
+Finally, we manually define __conversion_helper for converting absolute temperatures and temperature differences in Fahrenheit
+to Kelvin and specify that these conversions may be done implicitly to demonstrate fine-grained control over implicit unit
+conversions :
+
+[unit_example_20_class_snippet_3]
+
+Note that the absolute conversion includes both scale and offset, while relative conversion only includes scale. With this, we 
+can define Fahrenheit temperatures :
+
+[unit_example_20_snippet_1]
+
+and convert them to SI :
+
+[unit_example_20_snippet_2]
+
+resulting in the expected values :
+
+[unit_example_20_output]
 
 [endsect]
 
@@ -1109,14 +1142,14 @@ the design and implementation of this library.
 
 [section:ReleaseNotes Release Notes]
 
-0.7.1 (February 14, 2007) :
+0.7.1 (March 14, 2007) :
 
 * Boost.Typeof emulation support
 * attempting to rebind a heterogeneous_system to a different set of dimensions now fails.
 * cmath.hpp now works with como-win32
 * minor changes to the tests and examples to make msvc 7.1 happy
 
- 0.7.0 (March 13, 2007) :
+0.7.0 (March 13, 2007) :
 
 * heterogeneous and mixed system functionality added
 * added fine-grained implicit unit conversion on a per fundamental dimension basis
