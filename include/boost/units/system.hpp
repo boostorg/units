@@ -17,7 +17,6 @@
 #include <boost/mpl/size.hpp>
 
 #include <boost/units/operators.hpp>
-#include <boost/units/sys.hpp>
 #include <boost/units/detail/system_impl.hpp>
 
 namespace boost {
