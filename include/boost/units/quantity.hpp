@@ -375,7 +375,10 @@ struct quantity_cast_helper< quantity<Unit1,Y>,quantity<Unit2,X> >
 {
     typedef quantity<Unit1,Y>    type;
     
-    type operator()(quantity<Unit2,X>& source)                { return type(source); }
+    type operator()(quantity<Unit2,X>& source)
+    {
+        return conversion_helper<quantity<Unit2,X>,quantity<Unit1,Y> >::convert(source);
+    }
 };
 
 /// specialization for casting from one unit system to another
@@ -384,7 +387,10 @@ struct quantity_cast_helper< quantity<Unit1,Y>,const quantity<Unit2,X> >
 {
     typedef quantity<Unit1,Y>    type;
     
-    type operator()(const quantity<Unit2,X>& source)                { return type(source); }
+    type operator()(const quantity<Unit2,X>& source)
+    {
+        return conversion_helper<quantity<Unit2,X>,quantity<Unit1,Y> >::convert(source);
+    }
 };
 
 /// specialization for casting to the value type
