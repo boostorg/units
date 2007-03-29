@@ -47,45 +47,45 @@ struct base_unit_converter<time_tag,CGS::system_tag,SI::system_tag> :
     public trivial_conversion
 { };
 
-template<>
-struct base_unit_converter<current_tag,CGS::system_tag,SI::system_tag>
-#ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
-    : public implicitly_convertible
-#endif
-{
-    typedef double type;
-    static type value() { return(10); }
-};
-
-template<>
-struct base_unit_converter<temperature_tag,CGS::system_tag,SI::system_tag> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
-    
-template<>
-struct base_unit_converter<amount_tag,CGS::system_tag,SI::system_tag> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
-    
-template<>
-struct base_unit_converter<intensity_tag,CGS::system_tag,SI::system_tag> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
-
-template<>
-struct base_unit_converter<angle_tag,CGS::system_tag,SI::system_tag> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
-    
-template<>
-struct base_unit_converter<solid_angle_tag,CGS::system_tag,SI::system_tag> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
+//template<>
+//struct base_unit_converter<current_tag,CGS::system_tag,SI::system_tag>
+//#ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
+//    : public implicitly_convertible
+//#endif
+//{
+//    typedef double type;
+//    static type value() { return(10); }
+//};
+//
+//template<>
+//struct base_unit_converter<temperature_tag,CGS::system_tag,SI::system_tag> :
+//    public implicitly_convertible,
+//    public trivial_conversion
+//{ };
+//    
+//template<>
+//struct base_unit_converter<amount_tag,CGS::system_tag,SI::system_tag> :
+//    public implicitly_convertible,
+//    public trivial_conversion
+//{ };
+//    
+//template<>
+//struct base_unit_converter<intensity_tag,CGS::system_tag,SI::system_tag> :
+//    public implicitly_convertible,
+//    public trivial_conversion
+//{ };
+//
+//template<>
+//struct base_unit_converter<angle_tag,CGS::system_tag,SI::system_tag> :
+//    public implicitly_convertible,
+//    public trivial_conversion
+//{ };
+//    
+//template<>
+//struct base_unit_converter<solid_angle_tag,CGS::system_tag,SI::system_tag> :
+//    public implicitly_convertible,
+//    public trivial_conversion
+//{ };
         
 } // namespace units
 

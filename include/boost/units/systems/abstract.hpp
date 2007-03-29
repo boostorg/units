@@ -54,7 +54,7 @@ typedef unit<time_type,system>              time;           ///< abstract unit o
 typedef unit<current_type,system>           current;        ///< abstract unit of current
 typedef unit<temperature_type,system>       temperature;    ///< abstract unit of temperature
 typedef unit<amount_type,system>            amount;         ///< abstract unit of amount
-typedef unit<intensity_type,system>         intensity;      ///< abstract unit of intensity
+//typedef unit<intensity_type,system>         intensity;      ///< abstract unit of intensity
 typedef unit<angle_type,system>             angle;          ///< abstract unit of angle
 typedef unit<solid_angle_type,system>       solid_angle;    ///< abstract unit of solid angle
 

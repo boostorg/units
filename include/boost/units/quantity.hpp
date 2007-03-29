@@ -54,7 +54,7 @@ class quantity
         
         this_type& operator=(const this_type& source) 
         { 
-              
+
              val_ = source.val_; 
              
              return *this; 
@@ -171,7 +171,6 @@ class quantity<unit<dimensionless_type,System>,Y>
         
         this_type& operator=(const this_type& source) 
         { 
-            
             val_ = source.val_; 
                 
             return *this; 

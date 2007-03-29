@@ -17,7 +17,7 @@
 /// \file 
 /// \brief Various definitions to simplify systems of physical units.
 ///
-/// \detailed This file includes the seven SI-defined fundamental dimensions as
+/// \detailed This file includes the six SI-defined fundamental dimensions as
 /// well as composite dimensions for a number of commonly encountered
 /// physical unit types. Angles and solid angles are technically dimensionless. 
 /// However, incorrect use of degrees and radians is a common source of errors, 
@@ -28,22 +28,22 @@ namespace boost {
 namespace units { 
 
 /// tag representing length
-struct length_tag      : public ordinal<-9> { };
+struct length_tag      : public ordinal<-8> { };
 
 /// tag representing mass
-struct mass_tag        : public ordinal<-8> { };
+struct mass_tag        : public ordinal<-7> { };
 
 /// tag representing time
-struct time_tag        : public ordinal<-7> { };
+struct time_tag        : public ordinal<-6> { };
 
 /// tag representing electrical current
-struct current_tag     : public ordinal<-6> { };
+struct current_tag     : public ordinal<-5> { };
 
 /// tag representing temperature
-struct temperature_tag : public ordinal<-5> { };
+struct temperature_tag : public ordinal<-4> { };
 
 /// tag representing amount of substance
-struct amount_tag      : public ordinal<-4> { };
+struct amount_tag      : public ordinal<-3> { };
 
 /// tag representing luminous intensity - demoted from status as a fundamental SI unit in 1979
 struct intensity_tag   : public ordinal<-3> { };

@@ -56,6 +56,10 @@ typedef homogeneous_system<degree_system_tag>   degree_system;      ///< degree 
 typedef homogeneous_system<gradian_system_tag>  gradian_system;     ///< gradian unit system
 typedef homogeneous_system<radian_system_tag>   radian_system;      ///< radian unit system
 
+typedef unit<dimensionless_type,degree_system>  dimensionless_degree;
+typedef unit<dimensionless_type,gradian_system> dimensionless_gradian;
+typedef unit<dimensionless_type,radian_system>  dimensionless_radian;
+
 typedef unit<angle_type,degree_system>  degree;     ///< degree unit constant
 typedef unit<angle_type,gradian_system> gradian;    ///< gradian unit constant
 typedef unit<angle_type,radian_system>  radian;     ///< radian unit constant
