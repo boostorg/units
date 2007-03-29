@@ -409,7 +409,7 @@ modf(const quantity<Unit, Y>& q1, quantity<Unit, Y>* q2)
 
     typedef quantity<Unit,Y> quantity_type;
 
-    return quantity_type::from_value(modf(q1.value(), quantity_reinterpret_cast<Y*>(q2)));
+    return quantity_type::from_value(modf(q1.value(), &quantity_cast<Y&>(*q2)));
 }
 
 template<class Unit, class Y, class Int>
