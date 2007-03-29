@@ -143,6 +143,7 @@ w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/trig.hpp>
 #include <boost/units/systems/si/codata/physico-chemical_constants.hpp>
 
 #include "measurement.hpp"
@@ -151,6 +152,7 @@ namespace boost {
 
 namespace units {
 
+/*
 //[unit_example_4_function_snippet_1
 /// sin takes a quantity and returns a dimensionless quantity
 template<class System,class Y>
@@ -172,6 +174,7 @@ asin(const quantity<unit<dimensionless_type,System>,Y>& val)
     return quantity_type::from_value(std::asin(val.value()));
 }
 //]
+*/
 
 //[unit_example_4_function_snippet_3
 /// the physical definition of work - computed for an arbitrary unit system 
@@ -370,9 +373,9 @@ int main()
     
     //[unit_example_4_snippet_6
     /// test trig stuff
-    quantity<angle>             theta = 0.375*radians;
-    quantity<dimensionless>     sin_theta = sin(theta);
-    quantity<angle>             thetap = asin(sin_theta);
+    quantity<angle::radian>                 theta = 0.375*radians;
+    quantity<angle::dimensionless_radian>   sin_theta = sin(theta);
+    quantity<angle::radian>                 thetap = asin(sin_theta);
     //]
     
     sstream1  << "theta            = " << theta << std::endl
@@ -496,9 +499,9 @@ int main()
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF
     sstream2 << std::endl;
-    sstream2 << "theta            = 0.375 rd" << std::endl;
+    sstream2 << "theta            = 0.375 rad" << std::endl;
     sstream2 << "sin(theta)       = 0.366273 dimensionless" << std::endl;
-    sstream2 << "asin(sin(theta)) = 0.375 rd" << std::endl;
+    sstream2 << "asin(sin(theta)) = 0.375 rad" << std::endl;
     sstream2 << std::endl;
     sstream2 << "V   = (12.5,0) m^2 kg s^(-3) A^(-1)" << std::endl;
     sstream2 << "I   = (3,4) A" << std::endl;

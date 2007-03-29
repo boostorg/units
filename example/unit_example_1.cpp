@@ -41,7 +41,6 @@ V_type       = l_item<long_<2L>, dim<length_tag, static_rational<1L, 1L> >, l_it
 
 #include <boost/mpl/assert.hpp>
 
-#include <boost/units/sys.hpp>
 #include <boost/units/detail/utility.hpp>
 
 #include "test_system.hpp"

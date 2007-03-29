@@ -134,8 +134,8 @@ int main()
 
 	quantity<CGS::force>    F0 = 20 * CGS::dyne;
 
-	quantity<SI::force>     F1 = quantity_cast<SI::force>(F0);
-	quantity<SI::force>     F2 = quantity_cast<SI::force>(20 * CGS::dyne);
+	quantity<SI::force>     F1 = quantity<SI::force>(F0);
+	quantity<SI::force>     F2 = quantity<SI::force>(20 * CGS::dyne);
 
 	quantity<SI::force>     F3(F0);
 //	quantity<SI::force>     F4 = F0;
@@ -152,6 +152,29 @@ int main()
     quantity_reinterpret_cast<double&>(F1) = 1.5;
     
     std::cout << F1 << std::endl;
+    
+    quantity<SI::length,double>     q(1.5*SI::meters);
+    quantity<SI::length,int>		r(2*SI::meters);
+    quantity<CGS::length,double>    s(2.5*CGS::centimeters);
+    quantity<CGS::length,int>		t(3*CGS::centimeters);
+
+    std::cout << q << std::endl
+              << r << std::endl
+              << s << std::endl
+              << t << std::endl
+              << std::endl;
+              
+    q = quantity<SI::length,double>(r); 
+    
+    std::cout << q << std::endl;
+    
+    q = quantity<SI::length,double>(s);
+    
+    std::cout << q << std::endl;
+    
+    q = quantity<SI::length,double>(t);
+    
+    std::cout << q << std::endl;
     
     return 0;
 }
