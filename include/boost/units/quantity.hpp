@@ -26,13 +26,7 @@ namespace units {
 
 template<class Q1,class Q2> class conversion_helper;
 template<class Unit,class Y = double> class quantity;
-
-template<class T, class Quantity>
-T quantity_reinterpret_cast(const Quantity& q);
-
-template<class T, class Quantity>
-T quantity_reinterpret_cast(Quantity& q);
-
+ 
 /// class declaration
 //template<class System,class Dim,class Y>
 //class quantity<unit<Dim,System>,Y>
@@ -42,9 +36,6 @@ T quantity_reinterpret_cast(Quantity& q);
 template<class Unit,class Y>
 class quantity
 {
-        friend const Y& quantity_reinterpret_cast(const quantity& q);
-        friend Y& quantity_reinterpret_cast<>(quantity& q);
-        friend const Y& quantity_reinterpret_cast<>(quantity& q);
     public:
         typedef quantity<Unit,Y>                        this_type;
         typedef typename get_dimension<Unit>::type      Dim;
@@ -170,9 +161,6 @@ class quantity
 template<class System,class Y>
 class quantity<unit<dimensionless_type,System>,Y>
 {
-        friend const Y& quantity_reinterpret_cast(const quantity& q);
-        friend Y& quantity_reinterpret_cast<>(quantity& q);
-        friend const Y& quantity_reinterpret_cast<>(quantity& q);
     public:
         typedef quantity<unit<dimensionless_type,System>,Y>    this_type;
                                    
@@ -273,17 +261,16 @@ namespace boost {
 namespace units {
 
 /// extract a reference to the value type
-template<class T, class Quantity>
-T quantity_reinterpret_cast(const Quantity& q)
+template<class X, class Unit,class Y>
+X quantity_reinterpret_cast(const quantity<Unit,Y>& q)
 {
-    return(q.val_);
+    return reinterpret_cast<X>(const_cast<Y&>(q.value()));
 }
 
-/// extract a (mutable) reference to the value type
-template<class T, class Quantity>
-T quantity_reinterpret_cast(Quantity& q)
+template<class X, class Unit,class Y>
+X quantity_reinterpret_cast(quantity<Unit,Y>& q)
 {
-    return(q.val_);
+    return reinterpret_cast<X>(const_cast<Y&>(q.value()));
 }
 
 /// swap quantities
