@@ -89,19 +89,20 @@ BOOST_UNITS_STATIC_CONSTANT(meters_per_second,velocity);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);
 
-template<> struct unit_info<system_tag,length_tag>
+template<> struct base_unit_info<length_tag,system_tag>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
+//]
 
-template<> struct unit_info<system_tag,mass_tag>
+template<> struct base_unit_info<mass_tag,system_tag>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct unit_info<system_tag,time_tag>
+template<> struct base_unit_info<time_tag,system_tag>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

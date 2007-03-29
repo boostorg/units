@@ -95,20 +95,20 @@ BOOST_UNITS_STATIC_CONSTANT(joules,energy);
 } // namespace test
 
 //[test_system_snippet_8
-template<> struct unit_info<test::system_tag,length_tag>
+template<> struct base_unit_info<length_tag,test::system_tag>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct unit_info<test::system_tag,mass_tag>
+template<> struct base_unit_info<mass_tag,test::system_tag>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct unit_info<test::system_tag,time_tag>
+template<> struct base_unit_info<time_tag,test::system_tag>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }
