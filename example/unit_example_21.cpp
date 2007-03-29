@@ -82,13 +82,13 @@ class conversion_helper< quantity<unit<volume_type,us>,Y>,
 template<>
 struct is_implicitly_convertible<unit<volume_type,imperial>,
                                  unit<volume_type,us> > :
-    public mpl_::true_
+    public mpl::true_
 { };
 
 template<>
 struct is_implicitly_convertible<unit<volume_type,us>,
                                  unit<volume_type,imperial> > :
-    public mpl_::true_
+    public mpl::true_
 { };
 
 } // namespace units
