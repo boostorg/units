@@ -71,6 +71,7 @@ std::atan(tan(thetar)) = 0.523599
 #include <boost/units/systems/trig.hpp>
 
 #include <boost/units/systems/conversions/convert_degrees_to_radians.hpp>
+#include <boost/units/systems/conversions/convert_gradians_to_radians.hpp>
 
 int main(void)
 {
@@ -84,10 +85,6 @@ int main(void)
     quantity<angle::radian>     thetar((3.1415926/6.0)*radians);
     //]
 
-    cos(thetad);
-    
-    //quantity<angle::dimensionless_degree>   cos_thetad(cos(thetad));
-    /*
     /// test cos 
     {
     quantity<angle::dimensionless_degree>   cos_thetad(cos(thetad));
@@ -144,7 +141,7 @@ int main(void)
               << "std::atan(tan(thetar)) = " << std::atan(tan_thetar) << std::endl
               << std::endl;
     }
-    */
+    
     sstream2 << "thetad                 = 30 deg" << std::endl;
     sstream2 << "thetag                 = 33.3333 grad" << std::endl;
     sstream2 << "thetar                 = 0.523599 rad" << std::endl;
