@@ -87,11 +87,11 @@ int main()
     //]
     
     //[unit_example_5_snippet_3
-    quantity<SI::length,int>    L4 = quantity_cast<int>(L1);
+    quantity<SI::length,int>    L4 = quantity_cast<quantity<SI::length,int> >(L1);
     //]
     
     //[unit_example_5_snippet_4
-    quantity<CGS::length>       L5 = quantity_cast<CGS::length>(L1);
+    quantity<CGS::length>       L5 = quantity_cast<quantity<CGS::length> >(L1);
     //]
     
     sstream1  << "L1 = " << L1 << std::endl
