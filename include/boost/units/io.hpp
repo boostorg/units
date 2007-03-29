@@ -36,7 +36,7 @@ inline void serialize(Archive& ar,boost::units::unit<Dim,System>&,const unsigned
 template<class Archive,class Unit,class Y>
 inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsigned int version)
 {
-    ar & quantity_reinterpret_cast<Y&>(q);
+    ar & units::quantity_reinterpret_cast<Y&>(q);
 }
         
 } // namespace serialization
