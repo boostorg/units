@@ -102,13 +102,13 @@ class quantity
 
 #else
 
-        /// without SFINAE we can't distinguish between explicit and implicit conversions
+        /// without SFINAE we can't distinguish between explicit and implicit conversions so 
+        /// the conversion is always explicit
         template<class System2,class Dim2,class YY> 
-        quantity(const quantity<unit<Dim2,System2>,YY>& source)
+        explicit quantity(const quantity<unit<Dim2,System2>,YY>& source)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
             BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
-            BOOST_STATIC_ASSERT((is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::value == true));
         }
 
 #endif
