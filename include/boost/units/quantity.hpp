@@ -349,12 +349,21 @@ struct quantity_cast_helper< quantity<Unit,X>,Y >
 {
     typedef quantity<Unit,X>    type;
     
-    type operator()(const Y& source)                                { return type::from_value(source); }
+    type operator()(Y& source)                                { return type::from_value(source); }
 };
 
 /// specialization for casting from one value_type to another
 template<class Unit,class X,class Y>
-struct quantity_cast_helper< X,quantity<Unit,Y> >
+struct quantity_cast_helper< quantity<Unit,X>,quantity<Unit,Y> >
+{
+    typedef quantity<Unit,X>    type;
+    
+    type operator()(quantity<Unit,Y>& source)                 { return type::from_value(source.value()); }
+};
+
+/// specialization for casting from one value_type to another
+template<class Unit,class X,class Y>
+struct quantity_cast_helper< quantity<Unit,X>,const quantity<Unit,Y> >
 {
     typedef quantity<Unit,X>    type;
     
@@ -362,12 +371,39 @@ struct quantity_cast_helper< X,quantity<Unit,Y> >
 };
 
 /// specialization for casting from one unit system to another
-template<class X,class System,class Dim,class Unit2>
-struct quantity_cast_helper< unit<Dim,System>,quantity<Unit2,X> >
+template<class Y,class X,class Unit1,class Unit2>
+struct quantity_cast_helper< quantity<Unit1,Y>,quantity<Unit2,X> >
 {
-    typedef quantity<unit<Dim,System>,X>    type;
+    typedef quantity<Unit1,Y>    type;
+    
+    type operator()(quantity<Unit2,X>& source)                { return type(source); }
+};
+
+/// specialization for casting from one unit system to another
+template<class Y,class X,class Unit1,class Unit2>
+struct quantity_cast_helper< quantity<Unit1,Y>,const quantity<Unit2,X> >
+{
+    typedef quantity<Unit1,Y>    type;
     
     type operator()(const quantity<Unit2,X>& source)                { return type(source); }
+};
+
+/// specialization for casting to the value type
+template<class Y,class X,class Unit2>
+struct quantity_cast_helper<Y,quantity<Unit2,X> >
+{
+    typedef Y type;
+    
+    type operator()(quantity<Unit2,X>& source)                { return const_cast<X&>(source.value()); }
+};
+
+/// specialization for casting to the value type
+template<class Y,class X,class Unit2>
+struct quantity_cast_helper<Y,const quantity<Unit2,X> >
+{
+    typedef Y type;
+    
+    type operator()(const quantity<Unit2,X>& source)                { return source.value(); }
 };
 
 /// quantity_cast supporting three types of casting:
@@ -375,15 +411,24 @@ struct quantity_cast_helper< unit<Dim,System>,quantity<Unit2,X> >
 /// 1) Casting from a @c value_type to a @c quantity :
 /// @verbatim quantity<Unit,X> q = quantity_cast< quantity<Unit,X> >(const X&); @endverbatim
 /// 2) Casting from one @c value_type to another @c value_type :
-/// @verbatim quantity<Unit,X> q = quantity_cast<X>(const quantity<Unit,Y>&); @endverbatim
+/// @verbatim quantity<Unit,X> q = quantity_cast<quantity<Unit,X> >(const quantity<Unit,Y>&); @endverbatim
 /// 3) Casting from one unit system to another :
-/// @verbatim quantity<unit,X> q = quantity_cast< unit<Dim,System1> >(const quantity<unit<Dim,System2> >,X>&); @endverbatim
+/// @verbatim quantity<unit,X> q = quantity_cast< quantity<unit<Dim,System1>,X> >(const quantity<unit<Dim,System2> >,Y>&); @endverbatim
 template<class X,class Y>
 inline 
 typename quantity_cast_helper<X,Y>::type
-quantity_cast(const Y& source)
+quantity_cast(Y& source)
 {
     quantity_cast_helper<X,Y>   qch;
+    
+    return qch(source);
+}
+template<class X,class Y>
+inline 
+typename quantity_cast_helper<X,const Y>::type
+quantity_cast(const Y& source)
+{
+    quantity_cast_helper<X,const Y>   qch;
     
     return qch(source);
 }
