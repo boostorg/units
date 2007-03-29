@@ -14,7 +14,10 @@
 #include <cmath>
 
 #include <boost/type_traits/is_base_and_derived.hpp>
+#include <boost/type_traits/is_same.hpp>
 
+#include <boost/mpl/eval_if.hpp>
+#include <boost/mpl/if.hpp>
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/next.hpp>
@@ -89,14 +92,34 @@ struct trivial_conversion
     static one value() { return one(); }
 };
 
-template<class Tag,class System1,class System2> struct base_unit_converter;
+struct identity_conversion : trivial_conversion, implicitly_convertible {};
 
-/// base unit conversion from system to itself is a no-op
-template<class Tag,class System1>
-struct base_unit_converter<Tag, System1, System1> :
-    public implicitly_convertible,
-    public trivial_conversion
-{ };
+struct define_reverse_automatically {};
+
+struct undefined_conversion {};
+
+template<class Converter>
+struct reverse_conversion
+    : mpl::if_<is_base_and_derived<implicitly_convertible, Converter>, implicitly_convertible, undefined_conversion>::type {
+    typedef typename Converter::type type;
+    static type value() {
+        return(one()/Converter::value());
+    }
+};
+
+template<class Dimension, class Tag1, class Tag2>
+struct base_unit_converter :
+    mpl::eval_if<is_same<Tag1, Tag2>,
+        mpl::identity<identity_conversion>,
+        mpl::if_<
+            is_base_and_derived<
+                define_reverse_automatically,
+                base_unit_converter<Dimension,Tag2,Tag1>
+            >,
+            reverse_conversion<base_unit_converter<Dimension,Tag2,Tag1> >,
+            undefined_conversion
+        >
+    >::type {};
 
 template<class Tag,class System1,class System2>
 struct base_unit_is_implicitly_convertible :

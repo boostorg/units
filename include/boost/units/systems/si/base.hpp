@@ -26,7 +26,7 @@ namespace units {
 namespace SI {
 
 /// placeholder class defining SI unit system
-struct system_tag : public ordinal<1> { };
+struct system_tag : public ordinal<-5> { };
 
 }
 
@@ -56,63 +56,63 @@ typedef unit<dimensionless_type,system>         dimensionless;
 } // namespace SI
                                                     
 template<> 
-struct unit_info<SI::system_tag,length_tag> 
+struct base_unit_info<length_tag,SI::system_tag> 
 { 
     static std::string name()       { return "meter"; }
     static std::string symbol()     { return "m"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,mass_tag> 
+struct base_unit_info<mass_tag,SI::system_tag> 
 { 
     static std::string name()       { return "kilogram"; }
     static std::string symbol()     { return "kg"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,time_tag> 
+struct base_unit_info<time_tag,SI::system_tag> 
 { 
     static std::string name()       { return "second"; }
     static std::string symbol()     { return "s"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,current_tag> 
+struct base_unit_info<current_tag,SI::system_tag> 
 { 
     static std::string name()       { return "ampere"; }
     static std::string symbol()     { return "A"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,temperature_tag> 
+struct base_unit_info<temperature_tag,SI::system_tag> 
 { 
     static std::string name()       { return "kelvin"; }
     static std::string symbol()     { return "K"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,amount_tag> 
+struct base_unit_info<amount_tag,SI::system_tag> 
 { 
     static std::string name()       { return "mole"; }
     static std::string symbol()     { return "mol"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,intensity_tag> 
+struct base_unit_info<intensity_tag,SI::system_tag> 
 { 
     static std::string name()       { return "candela"; }
     static std::string symbol()     { return "cd"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,angle_tag> 
+struct base_unit_info<angle_tag,SI::system_tag> 
 { 
     static std::string name()       { return "radian"; }
     static std::string symbol()     { return "rd"; }
 };
     
 template<> 
-struct unit_info<SI::system_tag,solid_angle_tag> 
+struct base_unit_info<solid_angle_tag,SI::system_tag> 
 { 
     static std::string name()       { return "steradian"; }
     static std::string symbol()     { return "sr"; }
@@ -121,5 +121,7 @@ struct unit_info<SI::system_tag,solid_angle_tag>
 } // namespace units
 
 } // namespace boost
+
+#include <boost/units/systems/conversions/conversion_headers.hpp>
 
 #endif // BOOST_UNITS_SI_BASE_HPP

@@ -44,6 +44,4 @@
 #include <boost/units/systems/cgs/volume.hpp>
 #include <boost/units/systems/cgs/wavenumber.hpp>
 
-#include <boost/units/systems/conversions/conversion_headers.hpp>
-
 #endif // BOOST_UNITS_CGS_HPP

@@ -27,6 +27,12 @@ namespace units {
 template<class Q1,class Q2> class conversion_helper;
 template<class Unit,class Y = double> class quantity;
 
+template<class T, class Quantity>
+T quantity_reinterpret_cast(const Quantity& q);
+
+template<class T, class Quantity>
+T quantity_reinterpret_cast(Quantity& q);
+
 /// class declaration
 //template<class System,class Dim,class Y>
 //class quantity<unit<Dim,System>,Y>
@@ -36,6 +42,9 @@ template<class Unit,class Y = double> class quantity;
 template<class Unit,class Y>
 class quantity
 {
+        friend const Y& quantity_reinterpret_cast(const quantity& q);
+        friend Y& quantity_reinterpret_cast<>(quantity& q);
+        friend const Y& quantity_reinterpret_cast<>(quantity& q);
     public:
         typedef quantity<Unit,Y>                        this_type;
         typedef typename get_dimension<Unit>::type      Dim;
@@ -54,7 +63,6 @@ class quantity
         
         this_type& operator=(const this_type& source) 
         { 
-             if (this == &source) return *this;
               
              val_ = source.val_; 
              
@@ -129,7 +137,6 @@ class quantity
             return *this;
         }
 
-        value_type& value()                                 { return val_; }                        ///< mutating accessor to value
         const value_type& value() const                     { return val_; }                        ///< constant accessor to value
         
         // need to check that add_typeof_helper<value_type,value_type>==value_type
@@ -137,6 +144,11 @@ class quantity
 
         // need to check that subtract_typeof_helper<value_type,value_type>==value_type
         this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
+
+        this_type& operator++()     { ++val_; return *this; }
+        this_type& operator++(int)  { this_type temp(*this); ++*this; return temp; }
+        this_type operator--()      { --val_; return *this; }
+        this_type operator--(int)   { this_type temp(*this); --*this; return temp; }
 
         this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
         this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          ///< can divide quantity by scalar
@@ -158,6 +170,9 @@ class quantity
 template<class System,class Y>
 class quantity<unit<dimensionless_type,System>,Y>
 {
+        friend const Y& quantity_reinterpret_cast(const quantity& q);
+        friend Y& quantity_reinterpret_cast<>(quantity& q);
+        friend const Y& quantity_reinterpret_cast<>(quantity& q);
     public:
         typedef quantity<unit<dimensionless_type,System>,Y>    this_type;
                                    
@@ -173,7 +188,6 @@ class quantity<unit<dimensionless_type,System>,Y>
         
         this_type& operator=(const this_type& source) 
         { 
-            if (this == &source) return *this;
             
             val_ = source.val_; 
                 
@@ -224,6 +238,11 @@ class quantity<unit<dimensionless_type,System>,Y>
         this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  ///< can add quantity of same type
         this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
         // consider adding *=,/= for dimensionless_type
+
+        this_type& operator++()     { ++val_; return *this; }
+        this_type& operator++(int)  { this_type temp(*this); ++*this; return temp; }
+        this_type operator--()      { --val_; return *this; }
+        this_type operator--(int)   { this_type temp(*this); --*this; return temp; }
         
         // can multiply or divide by value_type
         this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
@@ -253,12 +272,26 @@ namespace boost {
 
 namespace units {
 
+/// extract a reference to the value type
+template<class T, class Quantity>
+T quantity_reinterpret_cast(const Quantity& q)
+{
+    return(q.val_);
+}
+
+/// extract a (mutable) reference to the value type
+template<class T, class Quantity>
+T quantity_reinterpret_cast(Quantity& q)
+{
+    return(q.val_);
+}
+
 /// swap quantities
 template<class Unit,class Y>
-inline void swap(quantity<Unit,Y>& rhs, quantity<Unit,Y>& lhs)
+inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
 {
     using std::swap;
-    swap(rhs.value(),lhs.value());
+    swap(quantity_reinterpret_cast<Y&>(lhs),quantity_reinterpret_cast<Y&>(rhs));
 }
 
 /// utility class to simplify construction of dimensionless quantities

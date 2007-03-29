@@ -22,7 +22,7 @@ namespace boost {
 
 namespace units { 
 
-template<class System,class Tag> struct unit_info;
+template<class Tag, class System> struct base_unit_info;
 
 namespace detail {
 
@@ -72,7 +72,7 @@ struct unit_output_helper
         typedef typename detail::get_value<D>::type                                 value_type;
         typedef typename detail::get_system_tag_of_dim<System,dim_tag_type>::type   system_tag_type;
         
-        typedef unit_info<system_tag_type,dim_tag_type>      m_type;
+        typedef base_unit_info<dim_tag_type,system_tag_type>      m_type;
 
         detail::print_string(os, m_type::symbol());
         
@@ -98,7 +98,7 @@ struct unit_output_helper<1>
         typedef typename detail::get_value<D>::type                                 value_type;
         typedef typename detail::get_system_tag_of_dim<System,dim_tag_type>::type   system_tag_type;
         
-        typedef unit_info<system_tag_type,dim_tag_type>      m_type;
+        typedef base_unit_info<dim_tag_type,system_tag_type>      m_type;
 
         detail::print_string(os, m_type::symbol());
         

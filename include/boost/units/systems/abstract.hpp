@@ -24,7 +24,7 @@ namespace units {
 namespace abstract {
 
 /// abstract unit system for pure dimensional analysis
-struct system_tag : public ordinal<0>   { };
+struct system_tag : public ordinal<-6>   { };
 
 }
 
@@ -61,63 +61,63 @@ typedef unit<solid_angle_type,system>       solid_angle;    ///< abstract unit o
 } // namespace abstract
 
 template<> 
-struct unit_info<abstract::system_tag,length_tag> 
+struct base_unit_info<length_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Length]"; }
     static std::string symbol()     { return "[L]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,mass_tag> 
+struct base_unit_info<mass_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Mass]"; }
     static std::string symbol()     { return "[M]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,time_tag> 
+struct base_unit_info<time_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Time]"; }
     static std::string symbol()     { return "[T]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,current_tag> 
+struct base_unit_info<current_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Current]"; }
     static std::string symbol()     { return "[C]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,temperature_tag> 
+struct base_unit_info<temperature_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Temperature]"; }
     static std::string symbol()     { return "[K]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,amount_tag> 
+struct base_unit_info<amount_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Amount]"; }
     static std::string symbol()     { return "[A]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,intensity_tag> 
+struct base_unit_info<intensity_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Intensity]"; }
     static std::string symbol()     { return "[I]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,angle_tag> 
+struct base_unit_info<angle_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Planar Angle]"; }
     static std::string symbol()     { return "[QP]"; }
 };
 
 template<> 
-struct unit_info<abstract::system_tag,solid_angle_tag> 
+struct base_unit_info<solid_angle_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Solid Angle]"; }
     static std::string symbol()     { return "[QS]"; }

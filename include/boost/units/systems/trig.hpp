@@ -26,9 +26,9 @@ namespace units {
 
 namespace angle {
 
-struct degree_system_tag : public ordinal<3> { };   ///< unit system tag for angles in degrees
-struct gradian_system_tag : public ordinal<4> { };  ///< unit system tag for angles in gradians
-struct radian_system_tag : public ordinal<5> { };   ///< unit system tag for angles in radians
+struct degree_system_tag : public ordinal<-3> { };   ///< unit system tag for angles in degrees
+struct gradian_system_tag : public ordinal<-2> { };  ///< unit system tag for angles in gradians
+struct radian_system_tag : public ordinal<-1> { };   ///< unit system tag for angles in radians
 
 }
 
@@ -70,21 +70,21 @@ BOOST_UNITS_STATIC_CONSTANT(radian,angle::radian);
 BOOST_UNITS_STATIC_CONSTANT(radians,angle::radian);
 
 template<> 
-struct unit_info<angle::degree_system_tag,angle_tag> 
+struct base_unit_info<angle_tag,angle::degree_system_tag> 
 { 
     static std::string name()       { return "degree"; }
     static std::string symbol()     { return "deg"; }
 };
     
 template<> 
-struct unit_info<angle::gradian_system_tag,angle_tag> 
+struct base_unit_info<angle_tag,angle::gradian_system_tag> 
 { 
     static std::string name()       { return "gradian"; }
     static std::string symbol()     { return "grad"; }
 };
     
 template<> 
-struct unit_info<angle::radian_system_tag,angle_tag> 
+struct base_unit_info<angle_tag,angle::radian_system_tag> 
 { 
     static std::string name()       { return "radian"; }
     static std::string symbol()     { return "rad"; }

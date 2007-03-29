@@ -36,7 +36,7 @@ inline void serialize(Archive& ar,boost::units::unit<Dim,System>&,const unsigned
 template<class Archive,class Unit,class Y>
 inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsigned int version)
 {
-    ar & q.value();
+    ar & quantity_reinterpret_cast<Y&>(q);
 }
         
 } // namespace serialization
@@ -74,8 +74,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 {
     const unit<Dim,System> u;
     
-    os << val.value() << ' ';
-    detail::output_impl(os, u);
+    os << val.value() << ' ' << u;
     
     return os;
 }

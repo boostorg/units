@@ -26,7 +26,7 @@ namespace units {
 namespace CGS {
 
 /// placeholder class defining CGS unit system
-struct system_tag : public ordinal<2> { };
+struct system_tag : public ordinal<-4> { };
 
 }
 
@@ -56,63 +56,63 @@ typedef unit<system,dimensionless_type>         dimensionless;
 } // namespace CGS
                                                     
 template<> 
-struct unit_info<CGS::system_tag,length_tag> 
+struct base_unit_info<length_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "centimeter"; }
     static std::string symbol()     { return "cm"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,mass_tag> 
+struct base_unit_info<mass_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "gram"; }
     static std::string symbol()     { return "g"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,time_tag> 
+struct base_unit_info<time_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "second"; }
     static std::string symbol()     { return "s"; }
 };
 
 template<> 
-struct unit_info<CGS::system_tag,current_tag> 
+struct base_unit_info<current_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "biot"; }
     static std::string symbol()     { return "Bi"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,temperature_tag> 
+struct base_unit_info<temperature_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "kelvin"; }
     static std::string symbol()     { return "K"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,amount_tag> 
+struct base_unit_info<amount_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "mole"; }
     static std::string symbol()     { return "mol"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,intensity_tag> 
+struct base_unit_info<intensity_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "candela"; }
     static std::string symbol()     { return "cd"; }
 };
 
 template<> 
-struct unit_info<CGS::system_tag,angle_tag> 
+struct base_unit_info<angle_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "radian"; }
     static std::string symbol()     { return "rd"; }
 };
     
 template<> 
-struct unit_info<CGS::system_tag,solid_angle_tag> 
+struct base_unit_info<solid_angle_tag,CGS::system_tag> 
 { 
     static std::string name()       { return "steradian"; }
     static std::string symbol()     { return "sr"; }
@@ -121,5 +121,7 @@ struct unit_info<CGS::system_tag,solid_angle_tag>
 } // namespace units
 
 } // namespace boost
+
+#include <boost/units/systems/conversions/conversion_headers.hpp>
 
 #endif // BOOST_UNITS_CGS_BASE_HPP

@@ -28,31 +28,31 @@ namespace boost {
 namespace units { 
 
 /// tag representing length
-struct length_tag      : public ordinal<1> { };
+struct length_tag      : public ordinal<-9> { };
 
 /// tag representing mass
-struct mass_tag        : public ordinal<2> { };
+struct mass_tag        : public ordinal<-8> { };
 
 /// tag representing time
-struct time_tag        : public ordinal<3> { };
+struct time_tag        : public ordinal<-7> { };
 
 /// tag representing electrical current
-struct current_tag     : public ordinal<4> { };
+struct current_tag     : public ordinal<-6> { };
 
 /// tag representing temperature
-struct temperature_tag : public ordinal<5> { };
+struct temperature_tag : public ordinal<-5> { };
 
 /// tag representing amount of substance
-struct amount_tag      : public ordinal<6> { };
+struct amount_tag      : public ordinal<-4> { };
 
 /// tag representing luminous intensity - demoted from status as a fundamental SI unit in 1979
-struct intensity_tag   : public ordinal<7> { };
+struct intensity_tag   : public ordinal<-3> { };
 
 /// tag representing plane angle
-struct angle_tag       : public ordinal<8> { };
+struct angle_tag       : public ordinal<-2> { };
 
 /// tag representing solid angle
-struct solid_angle_tag : public ordinal<9> { };
+struct solid_angle_tag : public ordinal<-1> { };
 
 }
 

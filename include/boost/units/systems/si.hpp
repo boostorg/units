@@ -63,6 +63,4 @@
 #include <boost/units/systems/si/luminous_flux.hpp>
 #include <boost/units/systems/si/wavenumber.hpp>
 
-#include <boost/units/systems/conversions/conversion_headers.hpp>
-
 #endif // BOOST_UNITS_SI_HPP

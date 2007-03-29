@@ -31,9 +31,10 @@ template<class Q1,class Q2> class conversion_helper;
 template<class S1,
          class S2,
          class Dim1,
-         class Y>
-class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
-                         quantity<unit<Dim1,homogeneous_system<S2> >,Y> >
+         class Y1,
+         class Y2>
+class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y1>,
+                         quantity<unit<Dim1,homogeneous_system<S2> >,Y2> >
 {
     public:
         typedef homogeneous_system<S1>              system1_type;
@@ -42,8 +43,8 @@ class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
         typedef unit<Dim1,system1_type>             unit1_type;
         typedef unit<Dim1,system2_type>             unit2_type;
         
-        typedef quantity<unit1_type,Y>              from_quantity_type;
-        typedef quantity<unit2_type,Y>              to_quantity_type;
+        typedef quantity<unit1_type,Y1>              from_quantity_type;
+        typedef quantity<unit2_type,Y2>              to_quantity_type;
         
         static
         to_quantity_type
@@ -59,9 +60,10 @@ class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
 template<class S1,
          class S2,
          class Dim1,
-         class Y>
-class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
-                         quantity<unit<Dim1,heterogeneous_system<S2> >,Y> >
+         class Y1,
+         class Y2>
+class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y1>,
+                         quantity<unit<Dim1,heterogeneous_system<S2> >,Y2> >
 {
     public:
         typedef homogeneous_system<S1>              system1_type;
@@ -70,8 +72,8 @@ class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
         typedef unit<Dim1,system1_type>             unit1_type;
         typedef unit<Dim1,system2_type>             unit2_type;
         
-        typedef quantity<unit1_type,Y>              from_quantity_type;
-        typedef quantity<unit2_type,Y>              to_quantity_type;
+        typedef quantity<unit1_type,Y1>              from_quantity_type;
+        typedef quantity<unit2_type,Y2>              to_quantity_type;
         
         static
         to_quantity_type
@@ -88,9 +90,10 @@ class conversion_helper< quantity<unit<Dim1,homogeneous_system<S1> >,Y>,
 template<class S1,
          class S2,
          class Dim1,
-         class Y>
-class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y>,
-                         quantity<unit<Dim1,homogeneous_system<S2> >,Y> >
+         class Y1,
+         class Y2>
+class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y1>,
+                         quantity<unit<Dim1,homogeneous_system<S2> >,Y2> >
 {
     public:
         typedef heterogeneous_system<S1>    system1_type;
@@ -99,8 +102,8 @@ class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y>,
         typedef unit<Dim1,system1_type>     unit1_type;
         typedef unit<Dim1,system2_type>     unit2_type;
         
-        typedef quantity<unit1_type,Y>      from_quantity_type;
-        typedef quantity<unit2_type,Y>      to_quantity_type;
+        typedef quantity<unit1_type,Y1>      from_quantity_type;
+        typedef quantity<unit2_type,Y2>      to_quantity_type;
         
         static
         to_quantity_type
@@ -117,9 +120,10 @@ class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y>,
 template<class S1,
          class S2,
          class Dim1,
-         class Y>
- class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y>,
-                          quantity<unit<Dim1,heterogeneous_system<S2> >,Y> >
+         class Y1,
+         class Y2>
+ class conversion_helper< quantity<unit<Dim1,heterogeneous_system<S1> >,Y1>,
+                          quantity<unit<Dim1,heterogeneous_system<S2> >,Y2> >
  {
     public:
         typedef heterogeneous_system<S1>    system1_type;
@@ -128,8 +132,8 @@ template<class S1,
         typedef unit<Dim1,system1_type>     unit1_type;
         typedef unit<Dim1,system2_type>     unit2_type;
         
-        typedef quantity<unit1_type,Y>      from_quantity_type;
-        typedef quantity<unit2_type,Y>      to_quantity_type;
+        typedef quantity<unit1_type,Y1>      from_quantity_type;
+        typedef quantity<unit2_type,Y2>      to_quantity_type;
 
         static
         to_quantity_type
