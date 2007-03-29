@@ -94,32 +94,36 @@ struct trivial_conversion
 
 struct identity_conversion : trivial_conversion, implicitly_convertible {};
 
-struct define_reverse_automatically {};
+struct trivial_inverse_conversion { };
 
-struct undefined_conversion {};
+struct undefined_conversion { };
 
 template<class Converter>
-struct reverse_conversion
-    : mpl::if_<is_base_and_derived<implicitly_convertible, Converter>, implicitly_convertible, undefined_conversion>::type {
+struct reverse_conversion :
+    public mpl::if_<is_base_and_derived<implicitly_convertible, Converter>, implicitly_convertible, undefined_conversion>::type 
+{
     typedef typename Converter::type type;
-    static type value() {
+    
+    static type value() 
+    {
         return(one()/Converter::value());
     }
 };
 
 template<class Dimension, class Tag1, class Tag2>
 struct base_unit_converter :
-    mpl::eval_if<is_same<Tag1, Tag2>,
+    public mpl::eval_if<is_same<Tag1, Tag2>,
         mpl::identity<identity_conversion>,
         mpl::if_<
             is_base_and_derived<
-                define_reverse_automatically,
+                trivial_inverse_conversion,
                 base_unit_converter<Dimension,Tag2,Tag1>
             >,
             reverse_conversion<base_unit_converter<Dimension,Tag2,Tag1> >,
             undefined_conversion
         >
-    >::type {};
+    >::type 
+{ };
 
 template<class Tag,class System1,class System2>
 struct base_unit_is_implicitly_convertible :
