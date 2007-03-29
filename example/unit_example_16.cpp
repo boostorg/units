@@ -64,25 +64,19 @@ static const length mile,miles;
 
 // IO helper class
 template<> 
-struct unit_info<nautical::system_tag,length_tag> 
+struct base_unit_info<length_tag,nautical::system_tag> 
 { 
     static std::string name()       { return "nautical mile"; }
     static std::string symbol()     { return "nmi"; }
 };
 
-// helpers for conversions between nautical length and SI length
+// helper for conversions between nautical length and SI length
 template<>
-struct base_unit_converter<length_tag,nautical::system_tag,SI::system_tag>
+struct base_unit_converter<length_tag,nautical::system_tag,SI::system_tag> :
+    public trivial_inverse_conversion
 {
     typedef double type;
     static type value() { return 1.852e3; }
-};
-
-template<>
-struct base_unit_converter<length_tag,SI::system_tag,nautical::system_tag>
-{
-    typedef double type;
-    static type value() { return 1.0/1.852e3; }
 };
 //]
 
@@ -103,7 +97,7 @@ static const length foot,feet;
 
 // IO helper class
 template<> 
-struct unit_info<imperial::system_tag,length_tag> 
+struct base_unit_info<length_tag,imperial::system_tag> 
 { 
     static std::string name()       { return "foot"; }
     static std::string symbol()     { return "ft"; }
