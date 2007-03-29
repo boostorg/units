@@ -61,11 +61,11 @@ int test_main(int,char *[])
     BOOST_CHECK(E9.value() == E_);
     
     // value assignment
-    E9.value() = 1.5;
+    bu::quantity_cast<double&>(E9) = 1.5;
     BOOST_CHECK(E9.value() == 1.5);
     
     // value assignment with implicit value_type conversion
-    E9.value() = 2;
+    bu::quantity_cast<double&>(E9) = 2;
     BOOST_CHECK(E9.value() == double(2));
     
     // operator+=(this_type)
