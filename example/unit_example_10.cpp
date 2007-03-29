@@ -65,7 +65,12 @@ std::atan(tan(thetar)) = 0.523599
 #include <boost/units/quantity.hpp>
 #include <boost/units/conversion.hpp>
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/angles/degrees.hpp>
+#include <boost/units/systems/angles/gradians.hpp>
+#include <boost/units/systems/angles/radians.hpp>
 #include <boost/units/systems/trig.hpp>
+
+#include <boost/units/systems/conversions/convert_degrees_to_radians.hpp>
 
 int main(void)
 {
@@ -78,12 +83,16 @@ int main(void)
     quantity<angle::gradian>    thetag((200.0/6.0)*gradians);
     quantity<angle::radian>     thetar((3.1415926/6.0)*radians);
     //]
+
+    cos(thetad);
     
+    //quantity<angle::dimensionless_degree>   cos_thetad(cos(thetad));
+    /*
     /// test cos 
     {
-    quantity< unit<dimensionless_type,angle::degree_system> >   cos_thetad(cos(thetad));
-    quantity< unit<dimensionless_type,angle::gradian_system> >  cos_thetag(cos(thetag));
-    quantity< unit<dimensionless_type,angle::radian_system> >   cos_thetar(cos(thetar));
+    quantity<angle::dimensionless_degree>   cos_thetad(cos(thetad));
+    quantity<angle::dimensionless_gradian>  cos_thetag(cos(thetag));
+    quantity<angle::dimensionless_radian>   cos_thetar(cos(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -100,9 +109,9 @@ int main(void)
     
     /// test sin 
     {
-    quantity< unit<dimensionless_type,angle::degree_system> >   sin_thetad(sin(thetad));
-    quantity< unit<dimensionless_type,angle::gradian_system> >  sin_thetag(sin(thetag));
-    quantity< unit<dimensionless_type,angle::radian_system> >   sin_thetar(sin(thetar));
+    quantity<angle::dimensionless_degree>   sin_thetad(sin(thetad));
+    quantity<angle::dimensionless_gradian>  sin_thetag(sin(thetag));
+    quantity<angle::dimensionless_radian>   sin_thetar(sin(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -119,9 +128,9 @@ int main(void)
     
     /// test tan 
     {
-    quantity< unit<dimensionless_type,angle::degree_system> >   tan_thetad(tan(thetad));
-    quantity< unit<dimensionless_type,angle::gradian_system> >  tan_thetag(tan(thetag));
-    quantity< unit<dimensionless_type,angle::radian_system> >   tan_thetar(tan(thetar));
+    quantity<angle::dimensionless_degree>   tan_thetad(tan(thetad));
+    quantity<angle::dimensionless_gradian>  tan_thetag(tan(thetag));
+    quantity<angle::dimensionless_radian>   tan_thetar(tan(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -135,7 +144,7 @@ int main(void)
               << "std::atan(tan(thetar)) = " << std::atan(tan_thetar) << std::endl
               << std::endl;
     }
-    
+    */
     sstream2 << "thetad                 = 30 deg" << std::endl;
     sstream2 << "thetag                 = 33.3333 grad" << std::endl;
     sstream2 << "thetar                 = 0.523599 rad" << std::endl;
