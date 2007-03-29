@@ -76,47 +76,47 @@ struct base_unit_info<time_tag,CGS::system_tag>
     static std::string symbol()     { return "s"; }
 };
 
-template<> 
-struct base_unit_info<current_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "biot"; }
-    static std::string symbol()     { return "Bi"; }
-};
-    
-template<> 
-struct base_unit_info<temperature_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "kelvin"; }
-    static std::string symbol()     { return "K"; }
-};
-    
-template<> 
-struct base_unit_info<amount_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "mole"; }
-    static std::string symbol()     { return "mol"; }
-};
-    
-template<> 
-struct base_unit_info<intensity_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "candela"; }
-    static std::string symbol()     { return "cd"; }
-};
-
-template<> 
-struct base_unit_info<angle_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "radian"; }
-    static std::string symbol()     { return "rd"; }
-};
-    
-template<> 
-struct base_unit_info<solid_angle_tag,CGS::system_tag> 
-{ 
-    static std::string name()       { return "steradian"; }
-    static std::string symbol()     { return "sr"; }
-};
+//template<> 
+//struct base_unit_info<current_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "biot"; }
+//    static std::string symbol()     { return "Bi"; }
+//};
+//    
+//template<> 
+//struct base_unit_info<temperature_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "kelvin"; }
+//    static std::string symbol()     { return "K"; }
+//};
+//    
+//template<> 
+//struct base_unit_info<amount_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "mole"; }
+//    static std::string symbol()     { return "mol"; }
+//};
+//    
+//template<> 
+//struct base_unit_info<intensity_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "candela"; }
+//    static std::string symbol()     { return "cd"; }
+//};
+//
+//template<> 
+//struct base_unit_info<angle_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "radian"; }
+//    static std::string symbol()     { return "rd"; }
+//};
+//    
+//template<> 
+//struct base_unit_info<solid_angle_tag,CGS::system_tag> 
+//{ 
+//    static std::string name()       { return "steradian"; }
+//    static std::string symbol()     { return "sr"; }
+//};
 
 } // namespace units
 
