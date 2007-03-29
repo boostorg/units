@@ -213,7 +213,6 @@ class quantity<unit<dimensionless_type,System>,Y>
         /// implicit conversion to @c value_type is allowed
         operator value_type() const                         { return val_; }
         
-        value_type& value()                                 { return val_; }                        ///< mutating accessor to value
         value_type value() const                            { return val_; }                        ///< constant accessor to value
         
         // can add or subtract same quantity type
