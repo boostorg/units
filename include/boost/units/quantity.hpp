@@ -136,11 +136,6 @@ class quantity
         // need to check that subtract_typeof_helper<value_type,value_type>==value_type
         this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
 
-        this_type& operator++()     { ++val_; return *this; }
-        this_type& operator++(int)  { this_type temp(*this); ++*this; return temp; }
-        this_type operator--()      { --val_; return *this; }
-        this_type operator--(int)   { this_type temp(*this); --*this; return temp; }
-
         this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
         this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          ///< can divide quantity by scalar
     
@@ -226,11 +221,6 @@ class quantity<unit<dimensionless_type,System>,Y>
         this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  ///< can add quantity of same type
         this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
         // consider adding *=,/= for dimensionless_type
-
-        this_type& operator++()     { ++val_; return *this; }
-        this_type& operator++(int)  { this_type temp(*this); ++*this; return temp; }
-        this_type operator--()      { --val_; return *this; }
-        this_type operator--(int)   { this_type temp(*this); --*this; return temp; }
         
         // can multiply or divide by value_type
         this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
@@ -264,13 +254,13 @@ namespace units {
 template<class X, class Unit,class Y>
 X quantity_reinterpret_cast(const quantity<Unit,Y>& q)
 {
-    return reinterpret_cast<X>(const_cast<Y&>(q.value()));
+    return q.value();
 }
 
 template<class X, class Unit,class Y>
 X quantity_reinterpret_cast(quantity<Unit,Y>& q)
 {
-    return reinterpret_cast<X>(const_cast<Y&>(q.value()));
+    return const_cast<Y&>(q.value());
 }
 
 /// swap quantities
