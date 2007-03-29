@@ -24,9 +24,9 @@ namespace boost {
 
 namespace units { 
 
-namespace angle {
+namespace degree_ns {
 
-struct degree_system_tag : public ordinal<-3> { };   ///< unit system tag for angles in degrees
+struct system_tag : public ordinal<-3> { };   ///< unit system tag for angles in degrees
 
 }
 
@@ -38,7 +38,7 @@ struct degree_system_tag : public ordinal<-3> { };   ///< unit system tag for an
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::degree_system_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::degree_ns::system_tag)
 
 #endif
 
@@ -46,21 +46,24 @@ namespace boost {
 
 namespace units {
 
+namespace degree_ns {
+
+typedef homogeneous_system<system_tag>      system;         ///< degree unit system
+
+} // namespace degree_ns
+
 namespace angle {
 
-typedef homogeneous_system<degree_system_tag>       degree_system;      ///< degree unit system
-
-typedef unit<dimensionless_type,degree_system>      dimensionless_degree;
-
-typedef unit<angle_type,degree_system>              degree;     ///< angle degree unit constant
+typedef unit<dimensionless_type,degree_ns::system>      dimensionless_degree;
+typedef unit<angle_type,degree_ns::system>              degree;         ///< angle degree unit constant
 
 } // namespace angle
 
 BOOST_UNITS_STATIC_CONSTANT(degree,angle::degree);
-BOOST_UNITS_STATIC_CONSTANT(degrees,angle::degrees);
+BOOST_UNITS_STATIC_CONSTANT(degrees,angle::degree);
 
 template<> 
-struct base_unit_info<angle_tag,angle::degree_system_tag> 
+struct base_unit_info<angle_tag,degree_ns::system_tag> 
 { 
     static std::string name()       { return "degree"; }
     static std::string symbol()     { return "deg"; }

@@ -11,10 +11,6 @@
 #ifndef BOOST_UNITS_CONVERT_GRADIANS_TO_RADIANS_HPP
 #define BOOST_UNITS_CONVERT_GRADIANS_TO_RADIANS_HPP
 
-#include <boost/units/systems/angles/convert_radians_to_gradians.hpp>
-        
-} // namespace units
-
-} // namespace boost
+#include <boost/units/systems/conversions/convert_radians_to_gradians.hpp>
 
 #endif // BOOST_UNITS_CONVERT_GRADIANS_TO_RADIANS_HPP

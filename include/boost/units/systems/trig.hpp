@@ -13,134 +13,12 @@
 
 #include <cmath>
 
-#include <boost/units/conversion.hpp>
-#include <boost/units/io.hpp>
 #include <boost/units/quantity.hpp>
-#include <boost/units/static_constant.hpp>
-#include <boost/units/system.hpp>
-#include <boost/units/systems/physical_units.hpp>
+#include <boost/units/systems/angles/radians.hpp>
 
 namespace boost {
 
 namespace units { 
-
-namespace angle {
-
-struct degree_system_tag : public ordinal<-3> { };   ///< unit system tag for angles in degrees
-struct gradian_system_tag : public ordinal<-2> { };  ///< unit system tag for angles in gradians
-struct radian_system_tag : public ordinal<-1> { };   ///< unit system tag for angles in radians
-
-}
-
-}
-
-}
-
-#if BOOST_UNITS_HAS_BOOST_TYPEOF
-
-#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::degree_system_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::gradian_system_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::radian_system_tag)
-
-#endif
-
-namespace boost {
-
-namespace units {
-
-namespace angle {
-
-typedef homogeneous_system<degree_system_tag>   degree_system;      ///< degree unit system
-typedef homogeneous_system<gradian_system_tag>  gradian_system;     ///< gradian unit system
-typedef homogeneous_system<radian_system_tag>   radian_system;      ///< radian unit system
-
-typedef unit<dimensionless_type,degree_system>  dimensionless_degree;
-typedef unit<dimensionless_type,gradian_system> dimensionless_gradian;
-typedef unit<dimensionless_type,radian_system>  dimensionless_radian;
-
-typedef unit<angle_type,degree_system>  degree;     ///< degree unit constant
-typedef unit<angle_type,gradian_system> gradian;    ///< gradian unit constant
-typedef unit<angle_type,radian_system>  radian;     ///< radian unit constant
-
-} // namespace angle
-
-BOOST_UNITS_STATIC_CONSTANT(degree,angle::degree);
-BOOST_UNITS_STATIC_CONSTANT(degrees,angle::degree);
-BOOST_UNITS_STATIC_CONSTANT(gradian,angle::gradian);
-BOOST_UNITS_STATIC_CONSTANT(gradians,angle::gradian);
-BOOST_UNITS_STATIC_CONSTANT(radian,angle::radian);
-BOOST_UNITS_STATIC_CONSTANT(radians,angle::radian);
-
-template<> 
-struct base_unit_info<angle_tag,angle::degree_system_tag> 
-{ 
-    static std::string name()       { return "degree"; }
-    static std::string symbol()     { return "deg"; }
-};
-    
-template<> 
-struct base_unit_info<angle_tag,angle::gradian_system_tag> 
-{ 
-    static std::string name()       { return "gradian"; }
-    static std::string symbol()     { return "grad"; }
-};
-    
-template<> 
-struct base_unit_info<angle_tag,angle::radian_system_tag> 
-{ 
-    static std::string name()       { return "radian"; }
-    static std::string symbol()     { return "rad"; }
-};
-
-/// convert degrees to radians
-template<>
-struct base_unit_converter<angle_tag,angle::degree_system_tag,angle::radian_system_tag>
-{
-    typedef double type;
-    static type value() { return 3.1415926535897932385/180.0; }
-};
-
-/// convert radians to degrees
-template<>
-struct base_unit_converter<angle_tag,angle::radian_system_tag,angle::degree_system_tag>
-{
-    typedef double type;
-    static type value() { return 180.0/3.1415926535897932385; }
-};
-
-/// convert degrees to gradians
-template<>
-struct base_unit_converter<angle_tag,angle::degree_system_tag,angle::gradian_system_tag>
-{
-    typedef double type;
-    static type value() { return 180.0/200.0; }
-};
-
-/// convert gradians to degrees
-template<>
-struct base_unit_converter<angle_tag,angle::gradian_system_tag,angle::degree_system_tag>
-{
-    typedef double type;
-    static type value() { return 200.0/180.0; }
-};
-
-/// convert radians to gradians
-template<>
-struct base_unit_converter<angle_tag,angle::radian_system_tag,angle::gradian_system_tag>
-{
-    typedef double type;
-    static type value() { return 200.0/3.1415926535897932385; }
-};
-
-/// convert gradians to radians
-template<>
-struct base_unit_converter<angle_tag,angle::gradian_system_tag,angle::radian_system_tag>
-{
-    typedef double type;
-    static type value() { return 3.1415926535897932385/200.0; }
-};
 
 /// cos of theta in radians
 template<class Y>
@@ -249,7 +127,5 @@ atan2(const Y& y,const Y& x)
 } // namespace units
 
 } // namespace boost
-
-#include <boost/units/systems/conversions/conversion_headers.hpp>
 
 #endif // BOOST_UNITS_TRIG_HPP

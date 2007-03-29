@@ -22,10 +22,11 @@ namespace units {
 // conversions from radians to degrees
 
 template<>
-struct base_unit_converter<angle_tag,angle::radian_system_tag,angle::degree_system_tag>
+struct base_unit_converter<angle_tag,radian_ns::system_tag,degree_ns::system_tag> :
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
-    : public implicitly_convertible, trivial_inverse_conversion
+    public implicitly_convertible, 
 #endif
+    public trivial_inverse_conversion
 {
     typedef double type;
     static type value() { return 180.0/3.1415926535897932385; }
