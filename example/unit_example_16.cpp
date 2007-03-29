@@ -73,7 +73,7 @@ struct base_unit_info<length_tag,nautical::system_tag>
 // helper for conversions between nautical length and SI length
 template<>
 struct base_unit_converter<length_tag,nautical::system_tag,SI::system_tag> :
-    public trivial_inverse_conversion
+    public trivial_conversion, define_reverse_automatically
 {
     typedef double type;
     static type value() { return 1.852e3; }
