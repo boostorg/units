@@ -307,8 +307,11 @@ std::ostream& operator<<(std::ostream& os,const measurement<Y>& val)
     os << val.value();
     
     if (val.uncertainty() > Y(0))
-        os << "(+/-" << val.uncertainty() << ")";
-    
+        //os << "(+/-" << val.uncertainty() << ")";
+        os << " (rel. unc. = " << val.uncertainty()/val.value() << ")";
+    else
+        os << " (exact)";
+        
     return os;
 }
 

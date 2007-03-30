@@ -11,14 +11,15 @@
 #ifndef BOOST_UNITS_CODATA_ATOMIC_AND_NUCLEAR_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_ATOMIC_AND_NUCLEAR_CONSTANTS_HPP
 
-#include <boost/units/systems/si.hpp>
-
 #if BOOST_UNITS_HAS_TYPEOF
 
+#include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
+#include <boost/units/systems/si.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental atomic and nuclear constants: NIST SP 961
+/// CODATA recommended values of fundamental atomic and nuclear constants
+/// CODATA 2006 values as of 2007/03/30
 
 namespace boost {
 
@@ -31,179 +32,178 @@ namespace constants {
 namespace CODATA {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
-typedef dimensionless_quantity<SI::system,double>::type    dimensionless_constant;
 
 // ATOMIC AND NUCLEAR
 /// fine structure constant
-BOOST_UNITS_STATIC_CONSTANT(alpha,dimensionless_constant) = 7.297352568e-3;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(alpha,(measurement<double>(7.2973525376e-3,5.0e-12)*dimensionless()));
 /// Rydberg constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R_infinity,(10973731.568525/meter));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R_infinity,(measurement<double>(10973731.568527,7.3e-5)/meter));
 /// Bohr radius
-BOOST_UNITS_AUTO_STATIC_CONSTANT(a_0,(0.5291772108e-10*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(a_0,(measurement<double>(0.52917720859e-10,3.6e-20)*meters));
 /// Hartree energy
-BOOST_UNITS_AUTO_STATIC_CONSTANT(E_h,(4.35974417e-18*joules));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(E_h,(measurement<double>(4.35974394e-18,2.2e-25)*joules));
 
 /// electron mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e,(9.1093826e-31*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e,(measurement<double>(9.10938215e-31,4.5e-38)*kilograms));
 /// electron-muon mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_mu,dimensionless_constant) = 4.83633167e-3;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_mu,(measurement<double>(4.83633171e-3,1.2e-10)*dimensionless()));
 /// electron-tau mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_tau,dimensionless_constant) = 2.87564e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_tau,(measurement<double>(2.87564e-4,4.7e-8)*dimensionless()));
 /// electron-proton mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_p,dimensionless_constant) = 5.4461702173e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_p,(measurement<double>(5.4461702177e-4,2.4e-13)*dimensionless()));
 /// electron-neutron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_n,dimensionless_constant) = 5.4386734481e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_n,(measurement<double>(5.4386734459e-4,3.3e-13)*dimensionless()));
 /// electron-deuteron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_d,dimensionless_constant) = 2.7244371095e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_d,(measurement<double>(2.7244371093e-4,1.2e-13)*dimensionless()));
 /// electron-alpha particle mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_e_over_m_alpha,dimensionless_constant) = 1.37093355575e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_e_over_m_alpha,(measurement<double>(1.37093355570e-4,5.8e-14)*dimensionless()));
 /// electron charge to mass ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_m_e,(1.75882012e11*coulombs/kilogram));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_m_e,(measurement<double>(1.758820150e11,4.4e3)*coulombs/kilogram));
 /// electron molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_e,(5.4857990945e-7*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_e,(measurement<double>(5.4857990943e-7,2.3e-16)*kilograms/mole));
 /// Compton wavelength
-BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C,(2.426310238e-12*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C,(measurement<double>(2.4263102175e-12,3.3e-21)*meters));
 /// classical electron radius
-BOOST_UNITS_AUTO_STATIC_CONSTANT(r_e,(2.817940325e-15*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(r_e,(measurement<double>(2.8179402894e-15,5.8e-24)*meters));
 /// Thompson cross section
-BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_e,(0.665245873e-28*square_meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_e,(measurement<double>(0.6652458558e-28,2.7e-37)*square_meters));
 /// electron magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e,(-928.476412e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e,(measurement<double>(-928.476377e-26,2.3e-31)*joules/tesla));
 /// electron magnetic moment anomaly
-BOOST_UNITS_STATIC_CONSTANT(a_e,dimensionless_constant) = 1.1596521859e-3;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(a_e,(measurement<double>(1.15965218111e-3,7.4e-13)*dimensionless()));
 /// electron g-factor
-BOOST_UNITS_STATIC_CONSTANT(g_e,dimensionless_constant) = -2.0023193043718;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(g_e,(measurement<double>(-2.0023193043622,1.5e-12)*dimensionless()));
 /// electron-muon magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_mu,dimensionless_constant) = 206.7669894;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_mu,(measurement<double>(206.7669877,5.2e-6)*dimensionless()));
 /// electron-proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_p,dimensionless_constant) = -658.2106862;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_p,(measurement<double>(-658.2106848,5.4e-6)*dimensionless()));
 /// electron-shielded proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_p_prime,dimensionless_constant) = -658.2275956;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_p_prime,(measurement<double>(-658.2275971,7.2e-6)*dimensionless()));
 /// electron-neutron magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_n,dimensionless_constant) = 960.92050;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_n,(measurement<double>(960.92050,2.3e-4)*dimensionless()));
 /// electron-deuteron magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_d,dimensionless_constant) = -2143.923493;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_d,(measurement<double>(-2143.923498,1.8e-5)*dimensionless()));
 /// electron-shielded helion magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_e_over_mu_h_prime,dimensionless_constant) = 864.058255;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_h_prime,(measurement<double>(864.058257,1.0e-5)*dimensionless()));
 /// electron gyromagnetic ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_e,(1.76085974/second/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_e,(measurement<double>(1.760859770e11,4.4e3)/second/tesla));
 
 /// muon mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu,(1.88353140e-28*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu,(measurement<double>(1.88353130e-28,1.1e-35)*kilograms));
 /// muon-electron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_mu_over_m_e,dimensionless_constant) = 206.7682838;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu_over_m_e,(measurement<double>(206.7682823,5.2e-6)*dimensionless()));
 /// muon-tau mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_mu_over_m_tau,dimensionless_constant) = 5.94592e-2;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu_over_m_tau,(measurement<double>(5.94592e-2,9.7e-6)*dimensionless()));
 /// muon-proton mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_mu_over_m_p,dimensionless_constant) = 0.1126095269;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu_over_m_p,(measurement<double>(0.1126095261,2.9e-9)*dimensionless()));
 /// muon-neutron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_mu_over_m_n,dimensionless_constant) = 0.1124545175;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_mu_over_m_n,(measurement<double>(0.1124545167,2.9e-9)*dimensionless()));
 /// muon molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_mu,(0.1134289264e-3*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_mu,(measurement<double>(0.1134289256e-3,2.9e-12)*kilograms/mole));
 /// muon Compton wavelength
-BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_mu,(11.73444105e-15*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_mu,(measurement<double>(11.73444104e-15,3.0e-22)*meters));
 /// muon magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_m,(-4.49044799e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_m,(measurement<double>(-4.49044786e-26,1.6e-33)*joules/tesla));
 /// muon magnetic moment anomaly
-BOOST_UNITS_STATIC_CONSTANT(a_mu,dimensionless_constant) = 1.16591981e-3;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(a_mu,(measurement<double>(1.16592069e-3,6.0e-10)*dimensionless()));
 /// muon g-factor
-BOOST_UNITS_STATIC_CONSTANT(g_mu,dimensionless_constant) = -2.0023318396;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(g_mu,(measurement<double>(-2.0023318414,1.2e-9)*dimensionless()));
 /// muon-proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_mu_over_mu_p,dimensionless_constant) = -3.183345118;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu_over_mu_p,(measurement<double>(-3.183345118)*dimensionless()));
 
 /// tau mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau,(3.16777e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau,(measurement<double>(3.16777e-27,5.2e-31)*kilograms));
 /// tau-electron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_tau_over_m_e,dimensionless_constant) = 3477.48;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau_over_m_e,(measurement<double>(3477.48,5.7e-1)*dimensionless()));
 /// tau-muon mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_tau_over_m_mu,dimensionless_constant) = 16.8183;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau_over_m_mu,(measurement<double>(16.8183,2.7e-3)*dimensionless()));
 /// tau-proton mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_tau_over_m_p,dimensionless_constant) = 1.89390;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau_over_m_p,(measurement<double>(1.89390,3.1e-4)*dimensionless()));
 /// tau-neutron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_tau_over_m_n,dimensionless_constant) = 1.89129;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau_over_m_n,(measurement<double>(1.89129,3.1e-4)*dimensionless()));
 /// tau molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_tau,(1.907698e-3*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_tau,(measurement<double>(1.90768e-3,3.1e-7)*kilograms/mole));
 /// tau Compton wavelength
-BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_tau,(0.69772e-15*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_tau,(measurement<double>(0.69772e-15,1.1e-19)*meters));
 
 /// proton mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p,(1.67262171e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p,(measurement<double>(1.672621637e-27,8.3e-35)*kilograms));
 /// proton-electron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_p_over_m_e,dimensionless_constant) = 1836.15267261;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p_over_m_e,(measurement<double>(1836.15267247,8.0e-7)*dimensionless()));
 /// proton-muon mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_p_over_m_mu,dimensionless_constant) = 8.88024333;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p_over_m_mu,(measurement<double>(8.88024339,2.3e-7)*dimensionless()));
 /// proton-tau mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_p_over_m_tau,dimensionless_constant) = 0.528012;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p_over_m_tau,(measurement<double>(0.528012,8.6e-5)*dimensionless()));
 /// proton-neutron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_p_over_m_n,dimensionless_constant) = 0.99862347872;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p_over_m_n,(measurement<double>(0.99862347824,4.6e-10)*dimensionless()));
 /// proton charge to mass ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_m_p,(9.57883376e7*coulombs/kilogram));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_m_p,(measurement<double>(9.57883392e7,2.4e0)*coulombs/kilogram));
 /// proton molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_p,(1.00727646688e-3*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_p,(measurement<double>(1.00727646677e-3,1.0e-13)*kilograms/mole));
 /// proton rms charge radius
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R_p,(0.8750e-15*meters)) = 0.8750e-15*meters;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R_p,(measurement<double>(0.8768e-15,6.9e-18)*meters));
 /// proton magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p,(1.41060671e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p,(measurement<double>(1.410606662e-26,3.7e-34)*joules/tesla));
 /// proton g-factor
-BOOST_UNITS_STATIC_CONSTANT(g_p,dimensionless_constant) = 5.585694701;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(g_p,(measurement<double>(5.585694713,4.6e-8)*dimensionless()));
 /// proton-neutron magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_p_over_mu_n,dimensionless_constant) = -1.45989805;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_over_mu_n,(measurement<double>(-1.45989806,3.4e-7)*dimensionless()));
 /// shielded proton magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_prime,(1.41057047e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_prime,(measurement<double>(1.41057041e-26,3.8e-34)*joules/tesla));
 /// proton gyromagnetic ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_p,(2.67522205e8/second/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_p,(measurement<double>(2.675222099e8,7.0e0)/second/tesla));
 /// shielded proton gyromagnetic ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_p_prime,(2.67515333e8/second/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_p_prime,(measurement<double>(2.675153362e8,7.3e0)/second/tesla));
 
 /// neutron mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n,(1.67492728e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n,(measurement<double>(1.674927211e-27,8.4e-35)*kilograms));
 /// neutron-electron mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_n_over_m_e,dimensionless_constant) = 1838.6836598;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n_over_m_e,(measurement<double>(1838.6836605,1.1e-6)*dimensionless()));
 /// neutron-muon mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_n_over_m_mu,dimensionless_constant) = 8.89248402;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n_over_m_mu,(measurement<double>(8.89248409,2.3e-7)*dimensionless()));
 /// neutron-tau mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_n_over_m_tau,dimensionless_constant) = 0.528740;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n_over_m_tau,(measurement<double>(0.528740,8.6e-5)*dimensionless()));
 /// neutron-proton mass ratio
-BOOST_UNITS_STATIC_CONSTANT(m_n_over_m_p,dimensionless_constant) = 1.00137841870;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_n_over_m_p,(measurement<double>(1.00137841918,4.6e-10)*dimensionless()));
 /// neutron Compton wavelength
-BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_n,(1.3195909067e-15*meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_n,(measurement<double>(1.3195908951e-15,2.0e-24)*meters));
 /// neutron molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_n,(1.00866491560e-3*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_n,(measurement<double>(1.00866491597e-3,4.3e-13)*kilograms/mole));
 /// neutron magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_n,(-0.96623645e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_n,(measurement<double>(-0.96623641e-26,2.3e-33)*joules/tesla));
 /// neutron g-factor
-BOOST_UNITS_STATIC_CONSTANT(g_n,dimensionless_constant) = -3.82608546;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(g_n,(measurement<double>(-3.82608545,9.0e-7)*dimensionless()));
 /// neutron-proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_n_over_mu_p,dimensionless_constant) = -0.68497934;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_n_over_mu_p,(measurement<double>(-0.68497934,1.6e-7)*dimensionless()));
 /// neutron-shielded proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_n_over_mu_p_prime,dimensionless_constant) = -0.68499694;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_n_over_mu_p_prime,(measurement<double>(-0.68499694,1.6e-7)*dimensionless()));
 /// neutron gyromagnetic ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_n,(1.83247183e8/second/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_n,(measurement<double>(1.83247185e8,4.3e1)/second/tesla));
 
 /// deuteron mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d,(3.34358335e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d,(measurement<double>(3.34358320e-27,1.7e-34)*kilograms));
 /// deuteron-electron mass ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d_over_m_e,(1.0*kilograms/kilograms)) = 3670.4829652;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d_over_m_e,(measurement<double>(3670.4829654,1.6e-6)*kilograms/kilograms));
 /// deuteron-proton mass ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d_over_m_p,(1.0*kilograms/kilograms)) = 1.99900750082;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_d_over_m_p,(measurement<double>(1.99900750108,2.2e-10)*kilograms/kilograms));
 /// deuteron molar mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(M_d,(2.01355321270e-3*kilograms/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(M_d,(measurement<double>(2.013553212724e-3,7.8e-14)*kilograms/mole));
 /// deuteron rms charge radius
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R_d,(2.1394e-15*meters)) = 2.1394e-15*meters;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R_d,(measurement<double>(2.1402e-15,2.8e-18)*meters));
 /// deuteron magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_d,(0.43307073482e-26*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_d,(measurement<double>(0.433073465e-26,1.1e-34)*joules/tesla));
 /// deuteron-electron magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_d_over_mu_e,dimensionless_constant) = -4.664345584e-4;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_d_over_mu_e,(measurement<double>(-4.664345537e-4,3.9e-12)*dimensionless()));
 /// deuteron-proton magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_d_over_mu_p,dimensionless_constant) = 0.3070122084;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_d_over_mu_p,(measurement<double>(0.3070122070,2.4e-9)*dimensionless()));
 /// deuteron-neutron magnetic moment ratio
-BOOST_UNITS_STATIC_CONSTANT(mu_d_over_mu_n,dimensionless_constant) = -0.44820652;
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_d_over_mu_n,(measurement<double>(-0.44820652,1.1e-7)*dimensionless()));
 
 /// helion mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_h,(5.00641214e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_h,(measurement<double>(5.00641192e-27,2.5e-34)*kilograms));
 
 /// alpha particle mass
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_alpha,(6.6446565e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_alpha,(measurement<double>(6.64465620e-27,3.3e-34)*kilograms));
 
 } // namespace CODATA
 

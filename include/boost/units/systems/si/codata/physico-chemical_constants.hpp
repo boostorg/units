@@ -11,15 +11,15 @@
 #ifndef BOOST_UNITS_CODATA_PHYSICO_CHEMICAL_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_PHYSICO_CHEMICAL_CONSTANTS_HPP
 
-#include <boost/units/systems/si.hpp>
-
 #if BOOST_UNITS_HAS_TYPEOF
 
 #include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
+#include <boost/units/systems/si.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental physico-chemical constants: NIST SP 961
+/// CODATA recommended values of fundamental physico-chemical constants
+/// CODATA 2006 values as of 2007/03/30
 
 namespace boost {
 
@@ -33,25 +33,25 @@ namespace CODATA {
 
 // PHYSICO-CHEMICAL
 /// Avogadro constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(N_A,(6.0221415e23/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(N_A,(measurement<double>(6.02214179e23,3.0e16)/mole));
 /// atomic mass constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_u,(1.66053886e-27*kilograms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(m_u,(measurement<double>(1.660538782e-27,8.3e-35)*kilograms));
 /// Faraday constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(F,(96485.3383*coulombs/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(F,(measurement<double>(96485.3399,2.4e-3)*coulombs/mole));
 /// molar gas constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(measurement<double>(8.314472)*joules/kelvin/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(measurement<double>(8.314472,1.5e-5)*joules/kelvin/mole));
 /// Boltzmann constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(k_B,(1.3806505e-23*joules/kelvin));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(k_B,(measurement<double>(1.3806504e-23,2.4e-29)*joules/kelvin));
 /// molar volume of ideal gas
-BOOST_UNITS_AUTO_STATIC_CONSTANT(V_m,(22.413996e-3*cubic_meters/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(V_m,(measurement<double>(22.413996e-3,3.9e-8)*cubic_meters/mole));
 /// Stefan-Boltzmann constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_SB,(5.670400e-8*watts/square_meter/pow<4>(kelvin)));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_SB,(measurement<double>(5.670400e-8,4.0e-13)*watts/square_meter/pow<4>(kelvin)));
 /// first radiation constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1,(3.74177138e-16*watt*square_meters));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1,(measurement<double>(3.74177118e-16,1.9e-23)*watt*square_meters));
 /// second radiation constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(c_2,(1.4387752e-2*meter*kelvin));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(c_2,(measurement<double>(1.4387752e-2,2.5e-8)*meter*kelvin));
 /// Wien displacement law constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(b,(2.8977685e-3*meter*kelvin));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(b,(measurement<double>(2.8977685e-3,5.1e-9)*meter*kelvin));
 
 } // namespace CODATA
 
