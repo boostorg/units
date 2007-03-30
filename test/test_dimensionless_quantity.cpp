@@ -63,21 +63,21 @@ int test_main(int,char *[])
     bu::quantity<bu::dimensionless>                 E9(E2); 
     BOOST_CHECK(E9.value() == E_);
     
-    // value assignment
-    E9.value() = 1.5*bu::dimensionless();
-    BOOST_CHECK(E9.value() == 1.5);
-    
-    // value assignment with implicit conversion
-    E9.value() = 1.5;
-    BOOST_CHECK(E9.value() == 1.5);
-    
-    // value assignment with implicit value_type conversion
-    E9.value() = 2*bu::dimensionless();
-    BOOST_CHECK(E9.value() == double(2));
-
-    // value assignment with implicit value_type conversion
-    E9.value() = 2;
-    BOOST_CHECK(E9.value() == double(2));
+//    // value assignment
+//    E9.value() = 1.5*bu::dimensionless();
+//    BOOST_CHECK(E9.value() == 1.5);
+//    
+//    // value assignment with implicit conversion
+//    E9.value() = 1.5;
+//    BOOST_CHECK(E9.value() == 1.5);
+//    
+//    // value assignment with implicit value_type conversion
+//    E9.value() = 2*bu::dimensionless();
+//    BOOST_CHECK(E9.value() == double(2));
+//
+//    // value assignment with implicit value_type conversion
+//    E9.value() = 2;
+//    BOOST_CHECK(E9.value() == double(2));
     
     // operator+=(this_type)
     E9 = 2.0;
