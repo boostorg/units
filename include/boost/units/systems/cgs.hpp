@@ -23,16 +23,9 @@
 #include <boost/units/systems/cgs/length.hpp>
 #include <boost/units/systems/cgs/mass.hpp>
 #include <boost/units/systems/cgs/time.hpp>
-//#include <boost/units/systems/cgs/current.hpp>
-//#include <boost/units/systems/cgs/temperature.hpp>
-//#include <boost/units/systems/cgs/amount.hpp>
-//#include <boost/units/systems/cgs/intensity.hpp>
-//#include <boost/units/systems/cgs/angle.hpp>
-//#include <boost/units/systems/cgs/solid_angle.hpp>
 
 #include <boost/units/systems/cgs/acceleration.hpp>
 #include <boost/units/systems/cgs/area.hpp>
-//#include <boost/units/systems/cgs/catalytic_activity.hpp>
 #include <boost/units/systems/cgs/energy.hpp>
 #include <boost/units/systems/cgs/force.hpp>
 #include <boost/units/systems/cgs/frequency.hpp>
