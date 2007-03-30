@@ -13,6 +13,7 @@
 
 #include <string>
 
+#include <boost/units/absolute.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/system.hpp>
@@ -21,55 +22,6 @@
 namespace boost {
 
 namespace units {
-
-template<class Y = double>
-class absolute
-{
-    public:
-        typedef absolute<Y>     this_type;
-        typedef Y               value_type;
-        
-        absolute() : val_() { }
-        absolute(const value_type& val) : val_(val) { }
-        absolute(const this_type& source) : val_(source.val_) { }
-   
-        value_type& value()                 { return val_; }
-        const value_type& value() const     { return val_; }
-        
-        const this_type& operator+=(const Y& val);
-        const this_type& operator-=(const Y& val);
-        
-    private:
-        Y   val_;
-};
-
-template<class Y>
-absolute<Y> operator+(const absolute<Y>& aval,const Y& rval)
-{
-    return absolute<Y>(aval.value()+rval.value());
-}
-
-template<class Y>
-absolute<Y> operator-(const absolute<Y>& aval,const Y& rval)
-{
-    return absolute<Y>(aval.value()-rval.value());
-}
-
-template<class Y>
-Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
-{
-    return Y(aval1.value()-aval2.value());
-}
-
-template<class Y>
-std::ostream& operator<<(std::ostream& os,const absolute<Y>& aval)
-{
-    using namespace std;
-    
-    os << aval.value();
-    
-    return os;
-}
 
 namespace fahrenheit {
 

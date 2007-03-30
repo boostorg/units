@@ -34,17 +34,17 @@ const type name##_instance_t<b>::instance                   \
 
 #define BOOST_UNITS_AUTO_STATIC_CONSTANT(name, value)               \
 BOOST_TYPEOF_NESTED_TYPEDEF(name##_nested_t, value)                 \
-BOOST_UNITS_STATIC_CONSTANT(name, name##_nested_t::type) =  value   \
+BOOST_UNITS_STATIC_CONSTANT(name, name##_nested_t::type)(value)     \
 
 #elif BOOST_UNITS_HAS_MWERKS_TYPEOF
 
 #define BOOST_UNITS_AUTO_STATIC_CONSTANT(name, value)               \
-BOOST_UNITS_STATIC_CONSTANT(name, __typeof__(value)) =  value       \
+BOOST_UNITS_STATIC_CONSTANT(name, __typeof__(value))(value)         \
 
 #elif BOOST_UNITS_HAS_GNU_TYPEOF
 
 #define BOOST_UNITS_AUTO_STATIC_CONSTANT(name, value)               \
-BOOST_UNITS_STATIC_CONSTANT(name, typeof(value)) =  value           \
+BOOST_UNITS_STATIC_CONSTANT(name, typeof(value))(value)             \
 
 #endif
 

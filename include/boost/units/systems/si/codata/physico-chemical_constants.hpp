@@ -15,6 +15,7 @@
 
 #if BOOST_UNITS_HAS_TYPEOF
 
+#include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
 
 /// \file
@@ -38,7 +39,7 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(m_u,(1.66053886e-27*kilograms));
 /// Faraday constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(F,(96485.3383*coulombs/mole));
 /// molar gas constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(8.314472*joules/kelvin/mole));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(measurement<double>(8.314472)*joules/kelvin/mole));
 /// Boltzmann constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(k_B,(1.3806505e-23*joules/kelvin));
 /// molar volume of ideal gas
