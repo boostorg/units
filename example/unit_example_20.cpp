@@ -32,13 +32,12 @@ Output:
 @endverbatim
 **/
 
-#define MCS_USE_BOOST_REGEX_DEMANGLING
-
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 
+#include <boost/units/absolute.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
@@ -46,7 +45,7 @@ Output:
 #include <boost/units/detail/utility.hpp>
 
 using namespace boost::units;
-
+/*
 template<class Y = double>
 class absolute
 {
@@ -128,7 +127,7 @@ std::ostream& operator<<(std::ostream& os,const relative<Y>& v)
     
     return os;
 }
-
+*/
 namespace boost {
 
 namespace units {
@@ -182,15 +181,15 @@ class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,abso
 };
 
 template<class Y>
-class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,relative<Y> >,
-                         quantity<unit<temperature_type,SI::system>,relative<Y> > >
+class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,Y>,
+                         quantity<unit<temperature_type,SI::system>,Y> >
 {
     public:
         typedef unit<temperature_type,fahrenheit::system>   unit1_type;
         typedef unit<temperature_type,SI::system>           unit2_type;
         
-        typedef quantity<unit1_type,relative<Y> >           from_quantity_type;
-        typedef quantity<unit2_type,relative<Y> >           to_quantity_type;
+        typedef quantity<unit1_type,Y>                      from_quantity_type;
+        typedef quantity<unit2_type,Y>                      to_quantity_type;
 
         static
         to_quantity_type
@@ -198,7 +197,7 @@ class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,rela
         {
             const typename from_quantity_type::value_type&   in(source.value());
             
-            return to_quantity_type::from_value(in.value()*(5.0/9.0));
+            return to_quantity_type::from_value(in*(5.0/9.0));
         }
 };
 
@@ -211,17 +210,17 @@ int main()
     std::stringstream sstream1, sstream2;
     
     quantity<fahrenheit::temperature,absolute<> >   T1p(absolute<>(32)*fahrenheit::degrees);
-    quantity<fahrenheit::temperature,relative<> >   T1v(relative<>(32)*fahrenheit::degrees);
+    quantity<fahrenheit::temperature>               T1v(32*fahrenheit::degrees);
     
     quantity<SI::temperature,absolute<> >           T2p(T1p);
     quantity<SI::temperature,absolute<> >           T3p = T1p;
-    quantity<SI::temperature,relative<> >           T2v(T1v);
-    quantity<SI::temperature,relative<> >           T3v = T1v;
+    quantity<SI::temperature>                       T2v(T1v);
+    quantity<SI::temperature>                       T3v = T1v;
     
     typedef conversion_helper<quantity<fahrenheit::temperature,absolute<> >,
                               quantity<SI::temperature,absolute<> > >           absolute_conv_type;
-    typedef conversion_helper<quantity<fahrenheit::temperature,relative<> >,
-                              quantity<SI::temperature,relative<> > >           relative_conv_type;
+    typedef conversion_helper<quantity<fahrenheit::temperature,double>,
+                              quantity<SI::temperature,double> >                relative_conv_type;
     
     sstream1  << T1p << std::endl
               << absolute_conv_type::convert(T1p) << std::endl
@@ -233,14 +232,14 @@ int main()
               << T3v << std::endl
               << std::endl;
     
-    sstream2  << "{ 32 } F" << std::endl
-              << "{ 273.16 } K" << std::endl
-              << "{ 273.16 } K" << std::endl
-              << "{ 273.16 } K" << std::endl
-              << "[ 32 ] F" << std::endl
-              << "[ 17.7778 ] K" << std::endl
-              << "[ 17.7778 ] K" << std::endl
-              << "[ 17.7778 ] K" << std::endl
+    sstream2  << "32 absolute F" << std::endl
+              << "273.16 absolute K" << std::endl
+              << "273.16 absolute K" << std::endl
+              << "273.16 absolute K" << std::endl
+              << "32 F" << std::endl
+              << "17.7778 K" << std::endl
+              << "17.7778 K" << std::endl
+              << "17.7778 K" << std::endl
               << std::endl;
     
     std::string str1(sstream1.str());

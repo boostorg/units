@@ -141,12 +141,11 @@ w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 #include <algorithm>
 #include <sstream>
 
+#include <boost/units/measurement.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/trig.hpp>
 #include <boost/units/systems/si/codata/physico-chemical_constants.hpp>
-
-#include "measurement.hpp"
 
 namespace boost {
 
@@ -409,8 +408,7 @@ int main()
               << std::endl;
     
     /// check quantities using user-defined type encapsulating error propagation
-    using namespace mcs;
-    
+
     //[unit_example_4_snippet_8
     quantity<length,measurement<double> >   u(measurement<double>(1.0,0.0)*meters),
                                             w(measurement<double>(4.52,0.02)*meters),
@@ -494,7 +492,7 @@ int main()
     sstream2 << "T = 310 K" << std::endl;
     sstream2 << "n = " << 2.05835e-17 << " mol" << std::endl;
     #if BOOST_UNITS_HAS_TYPEOF
-    sstream2 << "R = 8.31447 m^2 kg s^(-2) K^(-1) mol^(-1)" << std::endl;
+    sstream2 << "R = 8.31447(+/-1.5e-05) m^2 kg s^(-2) K^(-1) mol^(-1)" << std::endl;
     #else
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF

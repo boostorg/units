@@ -184,7 +184,7 @@ m_alpha     :   6.64466e-27 kg
 int main()
 {   
     using namespace boost::units::SI::constants::CODATA;
-    
+        
     std::cout << "CODATA physical constants:" << std::endl;
     
     std::cout << std::endl << "Universal constants: " << std::endl << std::endl
