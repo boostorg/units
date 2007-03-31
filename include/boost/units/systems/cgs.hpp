@@ -20,6 +20,7 @@
 
 #include <boost/units/systems/cgs/base.hpp>
 
+#include <boost/units/systems/cgs/dimensionless.hpp>
 #include <boost/units/systems/cgs/length.hpp>
 #include <boost/units/systems/cgs/mass.hpp>
 #include <boost/units/systems/cgs/time.hpp>

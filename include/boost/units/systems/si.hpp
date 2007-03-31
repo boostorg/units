@@ -20,6 +20,7 @@
 
 #include <boost/units/systems/si/base.hpp>
 
+#include <boost/units/systems/si/dimensionless.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/mass.hpp>
 #include <boost/units/systems/si/time.hpp>

@@ -73,4 +73,6 @@ struct base_unit_info<angle_tag,degree_ns::system_tag>
 
 } // namespace boost
 
+#include <boost/units/systems/conversions/conversion_headers.hpp>
+
 #endif // BOOST_UNITS_DEGREES_HPP

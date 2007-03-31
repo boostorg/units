@@ -96,27 +96,6 @@ struct base_unit_info<amount_tag,SI::system_tag>
     static std::string name()       { return "mole"; }
     static std::string symbol()     { return "mol"; }
 };
-    
-//template<> 
-//struct base_unit_info<intensity_tag,SI::system_tag> 
-//{ 
-//    static std::string name()       { return "candela"; }
-//    static std::string symbol()     { return "cd"; }
-//};
-    
-//template<> 
-//struct base_unit_info<angle_tag,SI::system_tag> 
-//{ 
-//    static std::string name()       { return "radian"; }
-//    static std::string symbol()     { return "rd"; }
-//};
-//    
-//template<> 
-//struct base_unit_info<solid_angle_tag,SI::system_tag> 
-//{ 
-//    static std::string name()       { return "steradian"; }
-//    static std::string symbol()     { return "sr"; }
-//};
 
 } // namespace units
 

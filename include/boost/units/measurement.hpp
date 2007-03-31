@@ -305,20 +305,24 @@ template<class Y>
 inline
 std::ostream& operator<<(std::ostream& os,const measurement<Y>& val)
 {
-    os << std::setprecision(13) 
-       << std::setw(21) 
-       << std::scientific
-       << val.value();
+    os << val.value();
     
     if (val.uncertainty() > Y(0))
-        //os << "(+/-" << val.uncertainty() << ")";
-        os << " (rel. unc. = " 
-           << std::setprecision(1) 
-           << std::setw(7) 
-           << std::scientific
-           << std::abs(val.uncertainty()/val.value()) << ")";
-    else
-        os << " (exact)";
+        os << "(+/-" << val.uncertainty() << ")";
+
+//    os << std::setprecision(13) 
+//       << std::setw(21) 
+//       << std::scientific
+//       << val.value();
+//    
+//    if (val.uncertainty() > Y(0))
+//        os << " (rel. unc. = " 
+//           << std::setprecision(1) 
+//           << std::setw(7) 
+//           << std::scientific
+//           << std::abs(val.uncertainty()/val.value()) << ")";
+//    else
+//        os << " (exact)";
         
     return os;
 }

@@ -73,4 +73,6 @@ struct base_unit_info<angle_tag,radian_ns::system_tag>
 
 } // namespace boost
 
+#include <boost/units/systems/conversions/conversion_headers.hpp>
+
 #endif // BOOST_UNITS_RADIANS_HPP
