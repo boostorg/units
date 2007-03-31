@@ -103,13 +103,13 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(M_mu,(measurement<double>(0.1134289256e-3,2.9e-
 /// muon Compton wavelength
 BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_mu,(measurement<double>(11.73444104e-15,3.0e-22)*meters));
 /// muon magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_m,(measurement<double>(-4.49044786e-26,1.6e-33)*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu,(measurement<double>(-4.49044786e-26,1.6e-33)*joules/tesla));
 /// muon magnetic moment anomaly
 BOOST_UNITS_AUTO_STATIC_CONSTANT(a_mu,(measurement<double>(1.16592069e-3,6.0e-10)*dimensionless()));
 /// muon g-factor
 BOOST_UNITS_AUTO_STATIC_CONSTANT(g_mu,(measurement<double>(-2.0023318414,1.2e-9)*dimensionless()));
 /// muon-proton magnetic moment ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu_over_mu_p,(measurement<double>(-3.183345118)*dimensionless()));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu_over_mu_p,(measurement<double>(-3.183345137,8.5e-8)*dimensionless()));
 
 /// tau mass
 BOOST_UNITS_AUTO_STATIC_CONSTANT(m_tau,(measurement<double>(3.16777e-27,5.2e-31)*kilograms));
@@ -149,7 +149,7 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(g_p,(measurement<double>(5.585694713,4.6e-8)*di
 /// proton-neutron magnetic moment ratio
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_over_mu_n,(measurement<double>(-1.45989806,3.4e-7)*dimensionless()));
 /// shielded proton magnetic moment
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_prime,(measurement<double>(1.41057041e-26,3.8e-34)*joules/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_prime,(measurement<double>(1.410570419e-26,3.8e-34)*joules/tesla));
 /// proton gyromagnetic ratio
 BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_p,(measurement<double>(2.675222099e8,7.0e0)/second/tesla));
 /// shielded proton gyromagnetic ratio

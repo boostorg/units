@@ -45,7 +45,7 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(G_0,(measurement<double>(7.7480917004e-5,5.3e-1
 /// Josephson constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(K_J,(measurement<double>(483597.891e9,1.2e7)*hertz/volt));
 /// von Klitzing constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R_K,(measurement<double>(25812.807557,1.8e-5)*ohms));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(R_K,(measurement<double>(25812.807557,1.77e-5)*ohms));
 /// Bohr magneton
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_B,(measurement<double>(927.400915e-26,2.3e-31)*joules/tesla));
 /// nuclear magneton
