@@ -255,7 +255,7 @@ int main()
               << "m_mu/m_n    :\t" << m_mu_over_m_n << std::endl
               << "M_mu        :\t" << M_mu << std::endl
               << "lambda_C_mu :\t" << lambda_C_mu << std::endl
-              << "mu_m        :\t" << mu_m << std::endl
+              << "mu_mu       :\t" << mu_mu << std::endl
               << "a_mu        :\t" << a_mu << std::endl
               << "g_mu        :\t" << g_mu << std::endl
               << "mu_mu/mu_p  :\t" << mu_mu_over_mu_p << std::endl
