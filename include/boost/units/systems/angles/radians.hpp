@@ -24,21 +24,70 @@ namespace boost {
 
 namespace units { 
 
-namespace radian_ns {
+//namespace radian_ns {
+//
+//struct system_tag : public ordinal<-1> { };   ///< unit system tag for angles in radians
+//
+//}
+//
+//}
+//
+//}
+//
+//#if BOOST_UNITS_HAS_BOOST_TYPEOF
+//
+//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+//
+//BOOST_TYPEOF_REGISTER_TYPE(boost::units::radian_ns::system_tag)
+//
+//#endif
+//
+//namespace boost {
+//
+//namespace units {
+//
+//namespace radian_ns {
+//
+//typedef homogeneous_system<system_tag>       system;                ///< radian unit system
+//
+//} // namespace radian_ns
+//
+//namespace angle {
+//
+//typedef unit<dimensionless_type,radian_ns::system>      dimensionless_radian;
+//typedef unit<angle_type,radian_ns::system>              radian;                ///< angle radian unit constant
+//
+//} // namespace angle
+//
+//BOOST_UNITS_STATIC_CONSTANT(radian,angle::radian);
+//BOOST_UNITS_STATIC_CONSTANT(radians,angle::radian);
+//
+//template<> 
+//struct base_unit_info<angle_tag,radian_ns::system_tag> 
+//{ 
+//    static std::string name()       { return "radian"; }
+//    static std::string symbol()     { return "rad"; }
+//};
+
+namespace angles {
+
+namespace radians {
 
 struct system_tag : public ordinal<-1> { };   ///< unit system tag for angles in radians
 
-}
+} // namespace radians
 
-}
+} // namespace angles
 
-}
+} // namespace units
+
+} // namespace boost
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::radian_ns::system_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::angles::radians::system_tag)
 
 #endif
 
@@ -46,24 +95,24 @@ namespace boost {
 
 namespace units {
 
-namespace radian_ns {
+namespace angles {
 
-typedef homogeneous_system<system_tag>       system;                ///< radian unit system
+namespace radians {
 
-} // namespace radian_ns
+typedef homogeneous_system<system_tag>      system;                ///< radian unit system
 
-namespace angle {
+typedef unit<dimensionless_type,system>     dimensionless;
+typedef unit<angle_type,system>             radian;                ///< angle radian unit constant
 
-typedef unit<dimensionless_type,radian_ns::system>      dimensionless_radian;
-typedef unit<angle_type,radian_ns::system>              radian;                ///< angle radian unit constant
+} // namespace radians 
 
-} // namespace angle
+} // namespace angles
 
-BOOST_UNITS_STATIC_CONSTANT(radian,angle::radian);
-BOOST_UNITS_STATIC_CONSTANT(radians,angle::radian);
+BOOST_UNITS_STATIC_CONSTANT(radian,angles::radians::radian);
+BOOST_UNITS_STATIC_CONSTANT(radians,angles::radians::radian);
 
 template<> 
-struct base_unit_info<angle_tag,radian_ns::system_tag> 
+struct base_unit_info<angle_tag,angles::radians::system_tag> 
 { 
     static std::string name()       { return "radian"; }
     static std::string symbol()     { return "rad"; }

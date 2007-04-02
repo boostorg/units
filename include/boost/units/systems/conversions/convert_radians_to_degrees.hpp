@@ -22,7 +22,7 @@ namespace units {
 // conversions from radians to degrees
 
 template<>
-struct base_unit_converter<angle_tag,radian_ns::system_tag,degree_ns::system_tag> :
+struct base_unit_converter<angle_tag,angles::radians::system_tag,angles::degrees::system_tag> :
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     public implicitly_convertible, 
 #endif

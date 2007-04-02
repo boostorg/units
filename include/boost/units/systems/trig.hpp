@@ -22,24 +22,24 @@ namespace units {
 
 /// cos of theta in radians
 template<class Y>
-typename dimensionless_quantity<angle::radian,Y>::type 
-cos(const quantity<angle::radian,Y>& theta)
+typename dimensionless_quantity<angles::radians::radian,Y>::type 
+cos(const quantity<angles::radians::radian,Y>& theta)
 {
     return std::cos(theta.value());
 }
 
 /// sin of theta in radians
 template<class Y>
-typename dimensionless_quantity<angle::radian,Y>::type 
-sin(const quantity<angle::radian,Y>& theta)
+typename dimensionless_quantity<angles::radians::radian,Y>::type 
+sin(const quantity<angles::radians::radian,Y>& theta)
 {
     return std::sin(theta.value());
 }
 
 /// tan of theta in radians
 template<class Y>
-typename dimensionless_quantity<angle::radian,Y>::type 
-tan(const quantity<angle::radian,Y>& theta)
+typename dimensionless_quantity<angles::radians::radian,Y>::type 
+tan(const quantity<angles::radians::radian,Y>& theta)
 {
     return std::tan(theta.value());
 }
@@ -49,7 +49,7 @@ template<class Unit,class Y>
 typename dimensionless_quantity<Unit,Y>::type 
 cos(const quantity<Unit,Y>& theta)
 {
-    return cos(quantity<angle::radian,Y>(theta));
+    return cos(quantity<angles::radians::radian,Y>(theta));
 }
 
 /// sin of theta in other angular units 
@@ -57,7 +57,7 @@ template<class Unit,class Y>
 typename dimensionless_quantity<Unit,Y>::type 
 sin(const quantity<Unit,Y>& theta)
 {
-    return sin(quantity<angle::radian,Y>(theta));
+    return sin(quantity<angles::radians::radian,Y>(theta));
 }
 
 /// tan of theta in other angular units 
@@ -65,15 +65,15 @@ template<class Unit,class Y>
 typename dimensionless_quantity<Unit,Y>::type 
 tan(const quantity<Unit,Y>& theta)
 {
-    return tan(quantity<angle::radian,Y>(theta));
+    return tan(quantity<angles::radians::radian,Y>(theta));
 }
 
 /// acos of @c value_type returning angle in radians
 template<class Y>
-quantity<angle::radian,Y>
+quantity<angles::radians::radian,Y>
 acos(const Y& val)
 {
-    return quantity<angle::radian,Y>(std::acos(val)*radians);
+    return quantity<angles::radians::radian,Y>(std::acos(val)*radians);
 }
 
 /// acos of dimensionless quantity returning angle in same system
@@ -86,10 +86,10 @@ acos(const quantity<unit<dimensionless_type,System>,Y>& val)
 
 /// asin of @c value_type returning angle in radians
 template<class Y>
-quantity<angle::radian,Y>
+quantity<angles::radians::radian,Y>
 asin(const Y& val)
 {
-    return quantity<angle::radian,Y>(std::asin(val)*radians);
+    return quantity<angles::radians::radian,Y>(std::asin(val)*radians);
 }
 
 /// asin of dimensionless quantity returning angle in same system
@@ -102,10 +102,10 @@ asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 
 /// atan of @c value_type returning angle in radians
 template<class Y>
-quantity<angle::radian,Y>
+quantity<angles::radians::radian,Y>
 atan(const Y& val)
 {
-    return quantity<angle::radian,Y>(std::atan(val)*radians);
+    return quantity<angles::radians::radian,Y>(std::atan(val)*radians);
 }
 
 /// atan of dimensionless quantity returning angle in same system
@@ -118,10 +118,10 @@ atan(const quantity<unit<dimensionless_type,System>,Y>& val)
 
 /// atan2 of @c value_type returning angle in radians
 template<class Y>
-quantity<angle::radian,Y>
+quantity<angles::radians::radian,Y>
 atan2(const Y& y,const Y& x)
 {
-    return quantity<angle::radian,Y>(std::atan2(y,x)*radians);
+    return quantity<angles::radians::radian,Y>(std::atan2(y,x)*radians);
 }
 
 } // namespace units

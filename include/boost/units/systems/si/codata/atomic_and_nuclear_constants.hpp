@@ -69,6 +69,10 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(r_e,(measurement<double>(2.8179402894e-15,5.8e-
 BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_e,(measurement<double>(0.6652458558e-28,2.7e-37)*square_meters));
 /// electron magnetic moment
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e,(measurement<double>(-928.476377e-26,2.3e-31)*joules/tesla));
+/// electron-Bohr magenton moment ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_B,(measurement<double>(-1.00115965218111,7.4e-13)*dimensionless()));
+/// electron-nuclear magneton moment ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_e_over_mu_N,(measurement<double>(-183.28197092,8.0e-7)*dimensionless()));
 /// electron magnetic moment anomaly
 BOOST_UNITS_AUTO_STATIC_CONSTANT(a_e,(measurement<double>(1.15965218111e-3,7.4e-13)*dimensionless()));
 /// electron g-factor
@@ -106,6 +110,10 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_mu,(measurement<double>(11.73444104e-1
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu,(measurement<double>(-4.49044786e-26,1.6e-33)*joules/tesla));
 /// muon magnetic moment anomaly
 BOOST_UNITS_AUTO_STATIC_CONSTANT(a_mu,(measurement<double>(1.16592069e-3,6.0e-10)*dimensionless()));
+/// muon-Bohr magneton ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu_over_mu_B,(measurement<double>(-4.84197049e-3,1.2e-10)*dimensionless()));
+/// muon-nuclear magneton ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_mu_over_mu_N,(measurement<double>(-8.89059705,2.3e-7)*dimensionless()));
 /// muon g-factor
 BOOST_UNITS_AUTO_STATIC_CONSTANT(g_mu,(measurement<double>(-2.0023318414,1.2e-9)*dimensionless()));
 /// muon-proton magnetic moment ratio
@@ -140,10 +148,16 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(m_p_over_m_n,(measurement<double>(0.99862347824
 BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_m_p,(measurement<double>(9.57883392e7,2.4e0)*coulombs/kilogram));
 /// proton molar mass
 BOOST_UNITS_AUTO_STATIC_CONSTANT(M_p,(measurement<double>(1.00727646677e-3,1.0e-13)*kilograms/mole));
+/// proton Compton wavelength
+BOOST_UNITS_AUTO_STATIC_CONSTANT(lambda_C_p,(measurement<double>(1.3214098446e-15,1.9e-24)*meters));
 /// proton rms charge radius
 BOOST_UNITS_AUTO_STATIC_CONSTANT(R_p,(measurement<double>(0.8768e-15,6.9e-18)*meters));
 /// proton magnetic moment
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p,(measurement<double>(1.410606662e-26,3.7e-34)*joules/tesla));
+/// proton-Bohr magneton ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_over_mu_B,(measurement<double>(1.521032209e-3,1.2e-11)*dimensionless()));
+/// proton-nuclear magneton ratio
+BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_p_over_mu_N,(measurement<double>(2.792847356,2.3e-8)*dimensionless()));
 /// proton g-factor
 BOOST_UNITS_AUTO_STATIC_CONSTANT(g_p,(measurement<double>(5.585694713,4.6e-8)*dimensionless()));
 /// proton-neutron magnetic moment ratio

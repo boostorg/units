@@ -21,8 +21,6 @@ namespace CGS {
 
 typedef unit<frequency_type,CGS::system>        frequency;
     
-BOOST_UNITS_STATIC_CONSTANT(hertz,frequency);
-
 } // namespace CGS
 
 } // namespace units
