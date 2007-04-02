@@ -17,6 +17,8 @@
 
 #include <boost/config.hpp>
 
+#include <boost/serialization/nvp.hpp>
+
 #include <boost/units/quantity.hpp>
 #include <boost/units/detail/io_impl.hpp>
 
@@ -36,7 +38,7 @@ inline void serialize(Archive& ar,boost::units::unit<Dim,System>&,const unsigned
 template<class Archive,class Unit,class Y>
 inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsigned int version)
 {
-    ar & units::quantity_cast<Y&>(q);
+    ar & boost::serialization::make_nvp("value", units::quantity_cast<Y&>(q));
 }
         
 } // namespace serialization
