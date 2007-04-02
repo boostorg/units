@@ -121,6 +121,7 @@ int main()
     return 0;
 }
 */
+/*
 #include <iostream>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
@@ -178,6 +179,118 @@ int main()
     
     return 0;
 }
+*/
+/*
+#include <iostream>
+#include <boost/units/io.hpp>
+#include <boost/units/systems/si.hpp>
+#include <boost/units/systems/cgs.hpp>
+#include <boost/units/systems/si/prefixes.hpp>
+
+using namespace boost::units;
+
+template<class System,class Y>
+typeof(quantity<unit<length_type,System>,Y>()*quantity<unit<length_type,System>,Y>())
+compute_area(const quantity<unit<length_type,System>,Y>& L)
+{
+    return L*L;
+}
+
+int main()
+{
+    std::cout << compute_area(2.0*SI::meters) << std::endl
+              << compute_area(20.0*root<2>(SI::meters)*root<2>(CGS::centimeters)) << std::endl
+              << quantity<SI::area>(compute_area(20.0*root<2>(SI::meters)*root<2>(CGS::centimeters))) << std::endl
+              << std::endl;
+    
+    return 0;
+}
+*/
+#include <iostream>
+
+#include <boost/units/io.hpp>
+#include <boost/units/absolute.hpp>
+#include <boost/units/systems/si/temperature.hpp>
+#include <boost/units/systems/temperature/celsius.hpp>
+#include <boost/units/systems/temperature/fahrenheit.hpp>
+#include <boost/units/systems/conversions/conversion_headers.hpp>
+
+using namespace boost::units;
+
+int main()
+{
+    quantity<SI::temperature>                       KTR(273.16*SI::kelvin);
+    quantity<SI::temperature,absolute<> >           KTA(absolute<>(273.16)*SI::kelvin);
+    
+    std::cout << KTR << std::endl
+              << KTA << std::endl
+              << std::endl;
+              
+    quantity<celsius::temperature>                  CTR(0.0*celsius::degrees);
+    quantity<celsius::temperature,absolute<> >      CTA(absolute<>(0.0)*celsius::degrees);
+    
+    std::cout << CTR << std::endl
+              << CTA << std::endl
+              << std::endl;
+              
+    quantity<fahrenheit::temperature>               FTR(32.0*fahrenheit::degrees);
+    quantity<fahrenheit::temperature,absolute<> >   FTA(absolute<>(32.0)*fahrenheit::degrees);
+    
+    std::cout << FTR << std::endl
+              << FTA << std::endl
+              << std::endl;
+    
+    // kelvin->celsius
+    quantity<celsius::temperature>                  CTR2(KTR);
+    quantity<celsius::temperature,absolute<> >      CTA2(KTA);
+    
+    std::cout << KTR << " = " << CTR2 << std::endl
+              << KTA << " = " << CTA2 << std::endl
+              << std::endl;
+    
+    // celsius->kelvin
+    quantity<SI::temperature>                       KTR2(CTR);
+    quantity<SI::temperature,absolute<> >           KTA2(CTA);
+    
+    std::cout << CTR << " = " << KTR2 << std::endl
+              << CTA << " = " << KTA2 << std::endl
+              << std::endl;
+    
+    // kelvin->fahrenheit
+    quantity<celsius::temperature>                  FTR2(KTR);
+    quantity<celsius::temperature,absolute<> >      FTA2(KTA);
+    
+    std::cout << KTR << " = " << FTR2 << std::endl
+              << KTA << " = " << FTA2 << std::endl
+              << std::endl;
+    
+    // fahrenheit->kelvin
+    quantity<SI::temperature>                       KTR3(FTR);
+    quantity<SI::temperature,absolute<> >           KTA3(FTA);
+    
+    std::cout << FTR << " = " << KTR3 << std::endl
+              << FTA << " = " << KTA3 << std::endl
+              << std::endl;
+    
+    // fahrenheit->celsius
+    quantity<celsius::temperature>                  CTR3(FTR);
+    quantity<celsius::temperature,absolute<> >      CTA3(FTA);
+    
+    std::cout << FTR << " = " << CTR3 << std::endl
+              << FTA << " = " << CTA3 << std::endl
+              << std::endl;
+    
+    // celsius->fahrenheit
+    quantity<fahrenheit::temperature>               FTR3(CTR);
+    quantity<fahrenheit::temperature,absolute<> >   FTA3(CTA);
+    
+    std::cout << CTR << " = " << FTR3 << std::endl
+              << CTA << " = " << FTA3 << std::endl
+              << std::endl;
+                                      
+    return 0;
+}
+
 
 
 

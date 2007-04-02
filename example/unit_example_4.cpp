@@ -43,7 +43,7 @@ U1*U1 : m^2 kg^2 s^(-4)
 U1/U1 : dimensionless
 U1*U2 : m^3 kg^2 s^(-4)
 U1/U2 : m^(-1)
-U1^X  :  m^2 kg^2 s^(-4)
+U1^X  : m^2 kg^2 s^(-4)
 X1vU1 : m^(1/2) kg^(1/2) s^(-1)
 U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)
 X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)
@@ -262,7 +262,7 @@ int main()
               //<< "U1-U2 : " << u1-u2 << std::endl     // illegal
               << "U1*U2 : " << u1*u2 << std::endl
               << "U1/U2 : " << u1/u2 << std::endl
-              << "U1^X  :  " << pow<2>(u1) << std::endl
+              << "U1^X  : " << pow<2>(u1) << std::endl
               << "X1vU1 : " << root<2>(u1) << std::endl
               << "U1^X2 : " << pow<static_rational<4,3> >(u1) << std::endl
               << "X2vU1 : " << root<static_rational<4,3> >(u1) << std::endl
@@ -443,7 +443,7 @@ int main()
     sstream2 << "U1/U1 : dimensionless" << std::endl;
     sstream2 << "U1*U2 : m^3 kg^2 s^(-4)" << std::endl;
     sstream2 << "U1/U2 : m^(-1)" << std::endl;
-    sstream2 << "U1^X  :  m^2 kg^2 s^(-4)" << std::endl;
+    sstream2 << "U1^X  : m^2 kg^2 s^(-4)" << std::endl;
     sstream2 << "X1vU1 : m^(1/2) kg^(1/2) s^(-1)" << std::endl;
     sstream2 << "U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)" << std::endl;
     sstream2 << "X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)" << std::endl;

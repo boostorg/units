@@ -80,16 +80,16 @@ int main(void)
     std::stringstream sstream1, sstream2;
     
     //[unit_example_10_snippet_1
-    quantity<angle::degree>     thetad((180.0/6.0)*degrees);
-    quantity<angle::gradian>    thetag((200.0/6.0)*gradians);
-    quantity<angle::radian>     thetar((3.1415926/6.0)*radians);
+    quantity<angles::degrees::degree>       thetad((180.0/6.0)*degrees);
+    quantity<angles::gradians::gradian>     thetag((200.0/6.0)*gradians);
+    quantity<angles::radians::radian>       thetar((3.1415926/6.0)*radians);
     //]
 
     /// test cos 
     {
-    quantity<angle::dimensionless_degree>   cos_thetad(cos(thetad));
-    quantity<angle::dimensionless_gradian>  cos_thetag(cos(thetag));
-    quantity<angle::dimensionless_radian>   cos_thetar(cos(thetar));
+    quantity<angles::degrees::dimensionless>    cos_thetad(cos(thetad));
+    quantity<angles::gradians::dimensionless>    cos_thetag(cos(thetag));
+    quantity<angles::radians::dimensionless>     cos_thetar(cos(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -106,9 +106,9 @@ int main(void)
     
     /// test sin 
     {
-    quantity<angle::dimensionless_degree>   sin_thetad(sin(thetad));
-    quantity<angle::dimensionless_gradian>  sin_thetag(sin(thetag));
-    quantity<angle::dimensionless_radian>   sin_thetar(sin(thetar));
+    quantity<angles::degrees::dimensionless>   sin_thetad(sin(thetad));
+    quantity<angles::gradians::dimensionless>  sin_thetag(sin(thetag));
+    quantity<angles::radians::dimensionless>   sin_thetar(sin(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -125,9 +125,9 @@ int main(void)
     
     /// test tan 
     {
-    quantity<angle::dimensionless_degree>   tan_thetad(tan(thetad));
-    quantity<angle::dimensionless_gradian>  tan_thetag(tan(thetag));
-    quantity<angle::dimensionless_radian>   tan_thetar(tan(thetar));
+    quantity<angles::degrees::dimensionless>   tan_thetad(tan(thetad));
+    quantity<angles::gradians::dimensionless>  tan_thetag(tan(thetag));
+    quantity<angles::radians::dimensionless>   tan_thetar(tan(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
