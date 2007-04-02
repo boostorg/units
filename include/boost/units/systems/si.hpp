@@ -38,6 +38,7 @@
 #include <boost/units/systems/si/power.hpp>
 #include <boost/units/systems/si/pressure.hpp>
 #include <boost/units/systems/si/velocity.hpp>
+#include <boost/units/systems/si/viscosity.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
 #include <boost/units/systems/si/capacitance.hpp>

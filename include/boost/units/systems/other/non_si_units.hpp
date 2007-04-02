@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_NON_SI_CONSTANTS_HPP
 #define BOOST_UNITS_NON_SI_CONSTANTS_HPP
 
+// SI conversion factors for various non-SI units
+
 #include <boost/units/systems/si.hpp>
 
 namespace boost {
@@ -60,14 +62,14 @@ BOOST_UNITS_STATIC_CONSTANT(tonne,mass) = 1.0e3*kilograms;
 BOOST_UNITS_STATIC_CONSTANT(tonnes,mass) = 1.0e3*kilograms;
 
 // units of time
-BOOST_UNITS_STATIC_CONSTANT(day,time) = 86400*seconds;
-BOOST_UNITS_STATIC_CONSTANT(days,time) = 86400*seconds;
+BOOST_UNITS_STATIC_CONSTANT(day,time) = 86400.0*seconds;
+BOOST_UNITS_STATIC_CONSTANT(days,time) = 86400.0*seconds;
 
-BOOST_UNITS_STATIC_CONSTANT(hour,time) = 3600*seconds;
-BOOST_UNITS_STATIC_CONSTANT(hours,time) = 3600*seconds;
+BOOST_UNITS_STATIC_CONSTANT(hour,time) = 3600.0*seconds;
+BOOST_UNITS_STATIC_CONSTANT(hours,time) = 3600.0*seconds;
 
-BOOST_UNITS_STATIC_CONSTANT(minute,time) = 60*seconds;
-BOOST_UNITS_STATIC_CONSTANT(minutes,time) = 60*seconds;
+BOOST_UNITS_STATIC_CONSTANT(minute,time) = 60.0*seconds;
+BOOST_UNITS_STATIC_CONSTANT(minutes,time) = 60.0*seconds;
 
 // units of planar angle
 //BOOST_UNITS_STATIC_CONSTANT(arc_degree,angle) = (pi/180)*radians;
@@ -102,6 +104,9 @@ namespace nautical {
 BOOST_UNITS_STATIC_CONSTANT(fathom,length) = 1.852*meters;
 BOOST_UNITS_STATIC_CONSTANT(fathoms,length) = 1.852*meters;
 
+BOOST_UNITS_STATIC_CONSTANT(knot,velocity) = (1852.0/3600.0)*meters_per_second;
+BOOST_UNITS_STATIC_CONSTANT(knots,velocity) = (1852.0/3600.0)*meters_per_second;
+
 BOOST_UNITS_STATIC_CONSTANT(league,length) = 5556.0*meters;
 BOOST_UNITS_STATIC_CONSTANT(leagues,length) = 5556.0*meters;
 
@@ -111,7 +116,7 @@ BOOST_UNITS_STATIC_CONSTANT(miles,length) = 1852.0*meters;
 } // namespace nautical
 
 // US customary units 
-namespace us_customary { 
+namespace us { 
 
 // conversions from http://ts.nist.gov/WeightsAndMeasures/Publications/appxc.cfm#2
 
@@ -233,10 +238,15 @@ BOOST_UNITS_STATIC_CONSTANT(apothecaries_pounds,mass) = 3.732417216e-1*kilograms
 BOOST_UNITS_STATIC_CONSTANT(troy_pound,mass) = 3.732417216e-1*kilograms;
 BOOST_UNITS_STATIC_CONSTANT(troy_pounds,mass) = 3.732417216e-1*kilograms;
 
-} // namespace us_customary
+// units of velocity
+BOOST_UNITS_STATIC_CONSTANT(miles_per_hour,velocity) = (1609.344/3600.0)*meters_per_second;
+
+} // namespace us
 
 // US survey units
-namespace us_survey {
+namespace us {
+
+namespace survey {
 
 // conversions from http://ts.nist.gov/WeightsAndMeasures/Publications/appxc.cfm#2
 
@@ -272,7 +282,9 @@ BOOST_UNITS_STATIC_CONSTANT(acres,area) = 4046.873*square_meters;
 BOOST_UNITS_STATIC_CONSTANT(square_mile,area) = 2589998.0*square_meters;
 BOOST_UNITS_STATIC_CONSTANT(square_miles,area) = 2589998.0*square_meters;
 
-} // namespace us_survey
+} // namespace survey
+
+} // namespace us
 
 /*
 namespace english {

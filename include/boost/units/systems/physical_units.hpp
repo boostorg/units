@@ -138,6 +138,9 @@ typedef composite_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type         
 /// composite dimension for velocity : L T^-1
 typedef composite_dimension<length_tag,1,time_tag,-1>::type                             velocity_type;                
 
+/// composite dimension for viscosity : M L^-1 T^-1
+typedef composite_dimension<mass_tag,1,length_tag,-1,time_tag,-1>::type                 viscosity_type;
+
 /// composite dimension for volume : l^3
 typedef composite_dimension<length_tag,3>::type                                         volume_type;
 

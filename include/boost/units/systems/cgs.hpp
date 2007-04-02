@@ -35,6 +35,7 @@
 #include <boost/units/systems/cgs/power.hpp>
 #include <boost/units/systems/cgs/pressure.hpp>
 #include <boost/units/systems/cgs/velocity.hpp>
+#include <boost/units/systems/cgs/viscosity.hpp>
 #include <boost/units/systems/cgs/volume.hpp>
 #include <boost/units/systems/cgs/wavenumber.hpp>
 
