@@ -219,23 +219,32 @@ using namespace boost::units;
 
 int main()
 {
-    quantity<SI::temperature>                       KTR(273.16*SI::kelvin);
-    quantity<SI::temperature,absolute<> >           KTA(absolute<>(273.16)*SI::kelvin);
+//    quantity<SI::temperature>                       KTR(273.16*SI::kelvin);
+//    quantity<SI::temperature,absolute<> >           KTA(absolute<>(273.16)*SI::kelvin);
+//              
+//    quantity<celsius::temperature>                  CTR(0.0*celsius::degrees);
+//    quantity<celsius::temperature,absolute<> >      CTA(absolute<>(0.0)*celsius::degrees);
+//    
+//    quantity<fahrenheit::temperature>               FTR(32.0*fahrenheit::degrees);
+//    quantity<fahrenheit::temperature,absolute<> >   FTA(absolute<>(32.0)*fahrenheit::degrees);
+
+    quantity<SI::temperature>                       KTR(373.16*SI::kelvin);
+    quantity<SI::temperature,absolute<> >           KTA(absolute<>(373.16)*SI::kelvin);
+              
+    quantity<celsius::temperature>                  CTR(100.0*celsius::degrees);
+    quantity<celsius::temperature,absolute<> >      CTA(absolute<>(100.0)*celsius::degrees);
+    
+    quantity<fahrenheit::temperature>               FTR(212.0*fahrenheit::degrees);
+    quantity<fahrenheit::temperature,absolute<> >   FTA(absolute<>(212.0)*fahrenheit::degrees);
     
     std::cout << KTR << std::endl
               << KTA << std::endl
               << std::endl;
-              
-    quantity<celsius::temperature>                  CTR(0.0*celsius::degrees);
-    quantity<celsius::temperature,absolute<> >      CTA(absolute<>(0.0)*celsius::degrees);
     
     std::cout << CTR << std::endl
               << CTA << std::endl
               << std::endl;
               
-    quantity<fahrenheit::temperature>               FTR(32.0*fahrenheit::degrees);
-    quantity<fahrenheit::temperature,absolute<> >   FTA(absolute<>(32.0)*fahrenheit::degrees);
-    
     std::cout << FTR << std::endl
               << FTA << std::endl
               << std::endl;
