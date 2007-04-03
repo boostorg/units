@@ -21,9 +21,9 @@ Output:
 @verbatim
 
 { 32 } F
-{ 273.16 } K
-{ 273.16 } K
-{ 273.16 } K
+{ 273.15 } K
+{ 273.15 } K
+{ 273.15 } K
 [ 32 ] F
 [ 17.7778 ] K
 [ 17.7778 ] K
@@ -94,7 +94,7 @@ class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,abso
         {
             const typename from_quantity_type::value_type&   in(source.value());
             
-            return to_quantity_type::from_value((in.value()-32)*(5.0/9.0) + 273.16);
+            return to_quantity_type::from_value((in.value()-32)*(5.0/9.0) + 273.15);
         }
 };
 
@@ -151,9 +151,9 @@ int main()
               << std::endl;
     
     sstream2  << "32 absolute F" << std::endl
-              << "273.16 absolute K" << std::endl
-              << "273.16 absolute K" << std::endl
-              << "273.16 absolute K" << std::endl
+              << "273.15 absolute K" << std::endl
+              << "273.15 absolute K" << std::endl
+              << "273.15 absolute K" << std::endl
               << "32 F" << std::endl
               << "17.7778 K" << std::endl
               << "17.7778 K" << std::endl

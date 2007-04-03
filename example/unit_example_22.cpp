@@ -267,8 +267,8 @@ using namespace boost::units;
 
 int main()
 {
-//    quantity<SI::temperature>                       KTR(273.16*SI::kelvin);
-//    quantity<SI::temperature,absolute<> >           KTA(absolute<>(273.16)*SI::kelvin);
+//    quantity<SI::temperature>                       KTR(273.15*SI::kelvin);
+//    quantity<SI::temperature,absolute<> >           KTA(absolute<>(273.15)*SI::kelvin);
 //              
 //    quantity<celsius::temperature>                  CTR(0.0*celsius::degrees);
 //    quantity<celsius::temperature,absolute<> >      CTA(absolute<>(0.0)*celsius::degrees);
@@ -276,8 +276,8 @@ int main()
 //    quantity<fahrenheit::temperature>               FTR(32.0*fahrenheit::degrees);
 //    quantity<fahrenheit::temperature,absolute<> >   FTA(absolute<>(32.0)*fahrenheit::degrees);
 
-    quantity<SI::temperature>                       KTR(373.16*SI::kelvin);
-    quantity<SI::temperature,absolute<> >           KTA(absolute<>(373.16)*SI::kelvin);
+    quantity<SI::temperature>                       KTR(373.15*SI::kelvin);
+    quantity<SI::temperature,absolute<> >           KTA(absolute<>(373.15)*SI::kelvin);
               
     quantity<celsius::temperature>                  CTR(100.0*celsius::degrees);
     quantity<celsius::temperature,absolute<> >      CTA(absolute<>(100.0)*celsius::degrees);

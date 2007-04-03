@@ -270,11 +270,12 @@ int main()
               << "F           :\t" << F << std::endl
               << "R           :\t" << R << std::endl
               << "k_B         :\t" << k_B << std::endl
-              << "V_m         :\t" << V_m << std::endl
               << "sigma_SB    :\t" << sigma_SB << std::endl
               << "c_1         :\t" << c_1 << std::endl
+              << "c_1L        :\t" << c_1L << std::endl
               << "c_2         :\t" << c_2 << std::endl
               << "b           :\t" << b << std::endl
+              << "b'          :\t" << b_prime << std::endl
               << std::endl << "Atomic and nuclear constants: " << std::endl << std::endl
               << "alpha       :\t" << alpha << std::endl
               << "R_infinity  :\t" << R_infinity << std::endl
@@ -314,6 +315,8 @@ int main()
               << "M_mu        :\t" << M_mu << std::endl
               << "lambda_C_mu :\t" << lambda_C_mu << std::endl
               << "mu_mu       :\t" << mu_mu << std::endl
+              << "mu_mu/mu_B  :\t" << mu_mu_over_mu_B << std::endl
+              << "mu_mu/mu_N  :\t" << mu_mu_over_mu_N << std::endl
               << "a_mu        :\t" << a_mu << std::endl
               << "g_mu        :\t" << g_mu << std::endl
               << "mu_mu/mu_p  :\t" << mu_mu_over_mu_p << std::endl
@@ -333,11 +336,17 @@ int main()
               << "m_p/m_n     :\t" << m_p_over_m_n << std::endl
               << "e/m_p       :\t" << e_over_m_p << std::endl
               << "M_p         :\t" << M_p << std::endl
+              << "lambda_C_p  :\t" << lambda_C_p << std::endl
               << "R_p         :\t" << R_p << std::endl
               << "mu_p        :\t" << mu_p << std::endl
+              << "mu_p/mu_B   :\t" << mu_p_over_mu_B << std::endl
+              << "mu_p/mu_N   :\t" << mu_p_over_mu_N << std::endl
               << "g_p         :\t" << g_p << std::endl
               << "mu_p/mu_n   :\t" << mu_p_over_mu_n << std::endl
               << "mu_p'       :\t" << mu_p_prime << std::endl
+              << "mu_p'/mu_B  :\t" << mu_p_prime_over_mu_B << std::endl
+              << "mu_p'/mu_N  :\t" << mu_p_prime_over_mu_N << std::endl
+              << "sigma_p'    :\t" << sigma_p_prime << std::endl
               << "gamma_p     :\t" << gamma_p << std::endl
               << "gamma_p'    :\t" << gamma_p_prime << std::endl
               << std::endl << "    neutron: " << std::endl << std::endl
@@ -346,10 +355,11 @@ int main()
               << "m_n/m_mu    :\t" << m_n_over_m_mu << std::endl
               << "m_n/m_tau   :\t" << m_n_over_m_tau << std::endl
               << "m_n/m_p     :\t" << m_n_over_m_p << std::endl
-              << "lambda_C_n  :\t" << lambda_C_n << std::endl
               << "M_n         :\t" << M_n << std::endl
+              << "lambda_C_n  :\t" << lambda_C_n << std::endl
               << "mu_n        :\t" << mu_n << std::endl
               << "g_n         :\t" << g_n << std::endl
+              << "mu_n/mu_e   :\t" << mu_n_over_mu_e << std::endl
               << "mu_n/mu_p   :\t" << mu_n_over_mu_p << std::endl
               << "mu_n/mu_p'  :\t" << mu_n_over_mu_p_prime << std::endl
               << "gamma_n     :\t" << gamma_n << std::endl
@@ -360,13 +370,40 @@ int main()
               << "M_d         :\t" << M_d << std::endl
               << "R_d         :\t" << R_d << std::endl
               << "mu_d        :\t" << mu_d << std::endl
+              << "mu_d/mu_B   :\t" << mu_d_over_mu_B << std::endl
+              << "mu_d/mu_N   :\t" << mu_d_over_mu_N << std::endl
+              << "g_d         :\t" << g_d << std::endl
               << "mu_d/mu_e   :\t" << mu_d_over_mu_e << std::endl
               << "mu_d/mu_p   :\t" << mu_d_over_mu_p << std::endl
               << "mu_d/mu_n   :\t" << mu_d_over_mu_n << std::endl
+              << std::endl << "    triton: " << std::endl << std::endl
+              << "m_t         :\t" << m_t << std::endl
+              << "m_t/m_e     :\t" << m_t_over_m_e << std::endl
+              << "m_t/m_p     :\t" << m_t_over_m_p << std::endl
+              << "M_t         :\t" << M_t << std::endl
+              << "mu_t        :\t" << mu_t << std::endl
+              << "mu_t/mu_B   :\t" << mu_t_over_mu_B << std::endl
+              << "mu_t/mu_N   :\t" << mu_t_over_mu_N << std::endl
+              << "g_t         :\t" << g_t << std::endl
+              << "mu_t/mu_e   :\t" << mu_t_over_mu_e << std::endl
+              << "mu_t/mu_p   :\t" << mu_t_over_mu_p << std::endl
+              << "mu_t/mu_n   :\t" << mu_t_over_mu_n << std::endl
               << std::endl << "    helion: " << std::endl << std::endl 
               << "m_h         :\t" << m_h << std::endl
+              << "m_h/m_e     :\t" << m_h_over_m_e << std::endl
+              << "m_h/m_p     :\t" << m_h_over_m_p << std::endl
+              << "M_h         :\t" << M_h << std::endl
+              << "mu_h'       :\t" << mu_h_prime << std::endl
+              << "mu_h'/mu_B  :\t" << mu_h_prime_over_mu_B << std::endl
+              << "mu_h'/mu_N  :\t" << mu_h_prime_over_mu_N << std::endl
+              << "mu_h'/mu_p  :\t" << mu_h_prime_over_mu_p << std::endl
+              << "mu_h'/mu_p' :\t" << mu_h_prime_over_mu_p_prime << std::endl
+              << "gamma_h'    :\t" << gamma_h_prime << std::endl
               << std::endl << "    alpha particle: " << std::endl << std::endl 
               << "m_alpha     :\t" << m_alpha << std::endl
+              << "m_alpha/m_e :\t" << m_alpha_over_m_e << std::endl
+              << "m_alpha/m_p :\t" << m_alpha_over_m_p << std::endl
+              << "M_alpha     :\t" << M_alpha << std::endl
               << std::endl;
 
     return 0;

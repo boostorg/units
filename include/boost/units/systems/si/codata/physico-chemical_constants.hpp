@@ -42,16 +42,18 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(F,(measurement<double>(96485.3399,2.4e-3)*coulo
 BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(measurement<double>(8.314472,1.5e-5)*joules/kelvin/mole));
 /// Boltzmann constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(k_B,(measurement<double>(1.3806504e-23,2.4e-29)*joules/kelvin));
-/// molar volume of ideal gas
-BOOST_UNITS_AUTO_STATIC_CONSTANT(V_m,(measurement<double>(22.413996e-3,3.9e-8)*cubic_meters/mole));
 /// Stefan-Boltzmann constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_SB,(measurement<double>(5.670400e-8,4.0e-13)*watts/square_meter/pow<4>(kelvin)));
 /// first radiation constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1,(measurement<double>(3.74177118e-16,1.9e-23)*watt*square_meters));
+/// first radiation constant for spectral radiance
+BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1L,(measurement<double>(1.191042759e-16,5.9e-24)*watt*square_meters/steradian));
 /// second radiation constant
 BOOST_UNITS_AUTO_STATIC_CONSTANT(c_2,(measurement<double>(1.4387752e-2,2.5e-8)*meter*kelvin));
-/// Wien displacement law constant
+/// Wien displacement law constant : lambda_max T
 BOOST_UNITS_AUTO_STATIC_CONSTANT(b,(measurement<double>(2.8977685e-3,5.1e-9)*meter*kelvin));
+/// Wien displacement law constant : nu_max/T
+BOOST_UNITS_AUTO_STATIC_CONSTANT(b_prime,(measurement<double>(5.878933e10,1.0e15)*hertz/kelvin));
 
 } // namespace CODATA
 

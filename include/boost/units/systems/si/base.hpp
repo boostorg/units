@@ -104,6 +104,20 @@ struct base_unit_info<luminous_intensity_tag,SI::system_tag>
     static std::string symbol()     { return "cd"; }
 };
 
+template<> 
+struct base_unit_info<plane_angle_tag,SI::system_tag> 
+{ 
+    static std::string name()       { return "radian"; }
+    static std::string symbol()     { return "rad"; }
+};
+
+template<> 
+struct base_unit_info<solid_angle_tag,SI::system_tag> 
+{ 
+    static std::string name()       { return "steradian"; }
+    static std::string symbol()     { return "sr"; }
+};
+
 } // namespace units
 
 } // namespace boost
