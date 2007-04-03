@@ -22,8 +22,8 @@ Output:
 //[unit_example_5_output_1
 L1 = 2 m
 L2 = 2 m
-L3 = 2 m
-L4 = 2 m
+L3 = 5 m
+L4 = 4 m
 L5 = 200 cm
 //]
 
@@ -78,21 +78,30 @@ int main()
     {
     // implicit value_type conversions
     //[unit_example_5_snippet_1
-    quantity<SI::length>        L1 = quantity<SI::length,int>(int(2.5)*SI::meter);
-    quantity<SI::length,int>    L2 = quantity<SI::length,double>(2.5*SI::meter);
+    quantity<SI::length>        L1 = quantity<SI::length,int>(int(2.5)*SI::meters);
+    quantity<SI::length,int>    L2 = quantity<SI::length,double>(2.5*SI::meters);
     //]
     
     //[unit_example_5_snippet_2
-    quantity<SI::length,int>    L3 = quantity_cast< quantity<SI::length,int> >(2.5);
+    //deprecated
+    //quantity<SI::length,int>    L3 = quantity_cast< quantity<SI::length,int> >(2.5);
     //]
     
     //[unit_example_5_snippet_3
-    quantity<SI::length,int>    L4 = quantity_cast<quantity<SI::length,int> >(L1);
+    //deprecated
+    //quantity<SI::length,int>    L4 = quantity_cast<quantity<SI::length,int> >(L1);
     //]
     
     //[unit_example_5_snippet_4
-    quantity<CGS::length>       L5 = quantity_cast<quantity<CGS::length> >(L1);
+    //deprecated
+    //quantity<CGS::length>       L5 = quantity_cast<quantity<CGS::length> >(L1);
     //]
+    
+    quantity<SI::length,int>    L3(4*SI::meters),
+                                L4(5*SI::meters);
+    quantity<CGS::length>       L5(L1);
+    
+    swap(L3,L4);
     
     sstream1  << "L1 = " << L1 << std::endl
               << "L2 = " << L2 << std::endl
@@ -166,8 +175,8 @@ int main()
     
     sstream2  << "L1 = 2 m" << std::endl;
     sstream2  << "L2 = 2 m" << std::endl;
-    sstream2  << "L3 = 2 m" << std::endl;
-    sstream2  << "L4 = 2 m" << std::endl;
+    sstream2  << "L3 = 5 m" << std::endl;
+    sstream2  << "L4 = 4 m" << std::endl;
     sstream2  << "L5 = 200 cm" << std::endl;
     sstream2  << std::endl;
     sstream2  << "volume (m^3)  = 1 m^3" << std::endl;

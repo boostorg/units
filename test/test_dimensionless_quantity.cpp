@@ -109,9 +109,7 @@ int test_main(int,char *[])
     
     const double    V2 = E9;
     BOOST_CHECK(V2 == E9.value());
-    
-    // quantity_cast
-        
+            
     // unit * scalar
     BOOST_CHECK(bu::dimensionless()*2.0 == bu::quantity<bu::dimensionless>::from_value(2.0));
     

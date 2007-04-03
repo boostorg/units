@@ -121,7 +121,7 @@ int main()
     return 0;
 }
 */
-/*
+
 #include <iostream>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
@@ -150,7 +150,7 @@ int main()
               << F5 << std::endl
               << std::endl;
     
-    quantity_reinterpret_cast<double&>(F1) = 1.5;
+    quantity_cast<double&>(F1) = 1.5;
     
     std::cout << F1 << std::endl;
     
@@ -179,7 +179,7 @@ int main()
     
     return 0;
 }
-*/
+
 /*
 //// main.cpp
 ////
@@ -227,7 +227,7 @@ int main()
     return(0);
 }
 */
-
+/*
 #include <iostream>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
@@ -252,7 +252,7 @@ int main()
     
     return 0;
 }
-
+*/
 /*
 #include <iostream>
 
@@ -314,8 +314,8 @@ int main()
               << std::endl;
     
     // kelvin->fahrenheit
-    quantity<celsius::temperature>                  FTR2(KTR);
-    quantity<celsius::temperature,absolute<> >      FTA2(KTA);
+    quantity<fahrenheit::temperature>               FTR2(KTR);
+    quantity<fahrenheit::temperature,absolute<> >   FTA2(KTA);
     
     std::cout << KTR << " = " << FTR2 << std::endl
               << KTA << " = " << FTA2 << std::endl

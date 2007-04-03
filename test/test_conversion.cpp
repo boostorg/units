@@ -76,10 +76,13 @@ int test_main(int,char *[])
     bu::quantity<bu::CGS::force> F0 = 20 * bu::CGS::dyne;
     BOOST_CHECK((std::abs(F0.value() - 20.0) < .0001));
 
-    bu::quantity<bu::SI::force> F1 = bu::quantity_cast<bu::quantity<bu::SI::force> >(F0);
-    BOOST_CHECK((std::abs(F1.value() - 2.0e-4) < .000000001));
-	bu::quantity<bu::SI::force> F2 = bu::quantity_cast<bu::quantity<bu::SI::force> >(20 * bu::CGS::dyne);
-    BOOST_CHECK((std::abs(F2.value() - 2.0e-4) < .000000001));
+    //deprecated
+    //bu::quantity<bu::SI::force> F1 = bu::quantity_cast<bu::quantity<bu::SI::force> >(F0);
+    //BOOST_CHECK((std::abs(F1.value() - 2.0e-4) < .000000001));
+    
+    //deprecated
+	//bu::quantity<bu::SI::force> F2 = bu::quantity_cast<bu::quantity<bu::SI::force> >(20 * bu::CGS::dyne);
+    //BOOST_CHECK((std::abs(F2.value() - 2.0e-4) < .000000001));
 
 	bu::quantity<bu::SI::force> F3(F0);
     BOOST_CHECK((std::abs(F3.value() - 2.0e-4) < .000000001));
@@ -87,6 +90,7 @@ int test_main(int,char *[])
 
 	bu::quantity<bu::SI::force> F5(20 * bu::CGS::dyne);
     BOOST_CHECK((std::abs(F5.value() - 2.0e-4) < .000000001));
+    
 	//quantity<SI::force> F6 = 20 * CGS::dyne;
 
     return(0);
