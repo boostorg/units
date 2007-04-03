@@ -181,6 +181,53 @@ int main()
 }
 */
 /*
+//// main.cpp
+////
+//// Copyright (c) 2007
+//// Steven Watanabe
+////
+//// Disributed under the Boost Software License, Version 1.0. (See
+//// accompanying file LICENSE_1_0.txt or copy at
+//// http://www.boost.org/LICENSE_1_0.txt)
+
+#define BOOST_NO_SFINAE
+
+#include <boost/units/quantity.hpp>
+#include <boost/units/systems/si.hpp>
+
+#include <iostream>
+
+using namespace boost::units;
+
+namespace boost { namespace units {
+
+template<int N>
+struct f {
+    typedef typename composite_dimension<length_tag, (1<<N) >::type dim1;
+    typedef typename composite_dimension<mass_tag, (1<<N) >::type dim2;
+    template<class T>
+    static void apply(const T& t) {
+        f<N - 1>::apply(t * unit<dim1, SI::system>());
+        f<N - 1>::apply(t * unit<dim2, SI::system>());
+    }
+};
+template<>
+struct f<0> {
+    template<class T>
+    static void apply(const T&) {
+    }
+};
+
+} }
+
+int main()
+{
+    f<7>::apply(1.0 * SI::meters);
+    f<7>::apply(1.0 * SI::kilograms);
+    return(0);
+}
+*/
+
 #include <iostream>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
@@ -205,7 +252,8 @@ int main()
     
     return 0;
 }
-*/
+
+/*
 #include <iostream>
 
 #include <boost/units/io.hpp>
@@ -299,7 +347,7 @@ int main()
                                       
     return 0;
 }
-
+*/
 
 
 

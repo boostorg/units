@@ -88,8 +88,8 @@ int main(void)
     /// test cos 
     {
     quantity<angles::degrees::dimensionless>    cos_thetad(cos(thetad));
-    quantity<angles::gradians::dimensionless>    cos_thetag(cos(thetag));
-    quantity<angles::radians::dimensionless>     cos_thetar(cos(thetar));
+    quantity<angles::gradians::dimensionless>   cos_thetag(cos(thetag));
+    quantity<angles::radians::dimensionless>    cos_thetar(cos(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
@@ -106,9 +106,9 @@ int main(void)
     
     /// test sin 
     {
-    quantity<angles::degrees::dimensionless>   sin_thetad(sin(thetad));
-    quantity<angles::gradians::dimensionless>  sin_thetag(sin(thetag));
-    quantity<angles::radians::dimensionless>   sin_thetar(sin(thetar));
+    quantity<angles::degrees::dimensionless>    sin_thetad(sin(thetad));
+    quantity<angles::gradians::dimensionless>   sin_thetag(sin(thetag));
+    quantity<angles::radians::dimensionless>    sin_thetar(sin(thetar));
     
     sstream1  << "thetad                 = " << thetad << std::endl
               << "thetag                 = " << thetag << std::endl
