@@ -51,7 +51,7 @@ class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,abso
         {
             const typename from_quantity_type::value_type&   in(source.value());
             
-            return to_quantity_type::from_value((in.value()-32.0)*(5.0/9.0) + 273.16);
+            return to_quantity_type::from_value((in.value()-32.0)*(5.0/9.0) + 273.15);
         }
 };
 

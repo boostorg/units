@@ -40,7 +40,7 @@ class conversion_helper< quantity<unit<temperature_type,SI::system>,absolute<Y> 
         {
             const typename from_quantity_type::value_type&   in(source.value());
             
-            return to_quantity_type::from_value(in.value() - 273.16);
+            return to_quantity_type::from_value(in.value() - 273.15);
         }
 };
 

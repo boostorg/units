@@ -17,7 +17,7 @@
 /// \file 
 /// \brief Various definitions to simplify systems of physical units.
 ///
-/// \detailed This file includes the six SI-defined fundamental dimensions as
+/// \detailed This file includes the seven SI-defined fundamental dimensions as
 /// well as composite dimensions for a number of commonly encountered
 /// physical unit types. Angles and solid angles are technically dimensionless. 
 /// However, incorrect use of degrees and radians is a common source of errors, 
