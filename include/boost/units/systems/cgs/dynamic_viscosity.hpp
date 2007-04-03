@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_CGS_VISCOSITY_HPP
-#define BOOST_UNITS_CGS_VISCOSITY_HPP
+#ifndef BOOST_UNITS_CGS_DYNAMIC_VISCOSITY_HPP
+#define BOOST_UNITS_CGS_DYNAMIC_VISCOSITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
 
@@ -19,9 +19,9 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<viscosity_type,CGS::system>     viscosity;
+typedef unit<dynamic_viscosity_type,CGS::system>     dynamic_viscosity;
     
-BOOST_UNITS_STATIC_CONSTANT(poise,viscosity);    
+BOOST_UNITS_STATIC_CONSTANT(poise,dynamic_viscosity);    
 
 } // namespace CGS
 
@@ -29,4 +29,4 @@ BOOST_UNITS_STATIC_CONSTANT(poise,viscosity);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_CGS_VISCOSITY_HPP
+#endif // BOOST_UNITS_CGS_DYNAMIC_VISCOSITY_HPP

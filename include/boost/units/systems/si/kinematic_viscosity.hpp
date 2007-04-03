@@ -8,10 +8,10 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_SI_VISCOSITY_HPP
-#define BOOST_UNITS_SI_VISCOSITY_HPP
+#ifndef BOOST_UNITS_SI_KINEMATIC_VISCOSITY_HPP
+#define BOOST_UNITS_SI_KINEMATIC_VISCOSITY_HPP
 
-#include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/si/base.hpp>
 
 namespace boost {
 
@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<viscosity_type,SI::system>     viscosity;
+typedef unit<kinematic_viscosity_type,SI::system>     kinematic_viscosity;
     
 } // namespace SI
 
@@ -27,4 +27,4 @@ typedef unit<viscosity_type,SI::system>     viscosity;
 
 } // namespace boost
 
-#endif // BOOST_UNITS_SI_VISCOSITY_HPP
+#endif // BOOST_UNITS_SI_KINEMATIC_VISCOSITY_HPP
