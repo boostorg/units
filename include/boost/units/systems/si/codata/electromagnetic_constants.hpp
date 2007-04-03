@@ -15,7 +15,17 @@
 
 #include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/si.hpp>
+//#include <boost/units/systems/si.hpp>
+
+#include <boost/units/systems/si/conductance.hpp>
+#include <boost/units/systems/si/current.hpp>
+#include <boost/units/systems/si/electric_charge.hpp>
+#include <boost/units/systems/si/electric_potential.hpp>
+#include <boost/units/systems/si/energy.hpp>
+#include <boost/units/systems/si/frequency.hpp>
+#include <boost/units/systems/si/magnetic_flux.hpp>
+#include <boost/units/systems/si/magnetic_flux_density.hpp>
+#include <boost/units/systems/si/resistance.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental electromagnetic constants

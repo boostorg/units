@@ -15,7 +15,16 @@
 
 #include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/si.hpp>
+//#include <boost/units/systems/si.hpp>
+
+#include <boost/units/systems/si/amount.hpp>
+#include <boost/units/systems/si/area.hpp>
+#include <boost/units/systems/si/electric_charge.hpp>
+#include <boost/units/systems/si/energy.hpp>
+#include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/mass.hpp>
+#include <boost/units/systems/si/magnetic_flux_density.hpp>
+#include <boost/units/systems/si/time.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental atomic and nuclear constants
@@ -269,7 +278,7 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_h_prime_over_mu_p,(measurement<double>(-0.76
 /// shielded helion-shielded proton magnetic moment ratio
 BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_h_prime_over_mu_p_prime,(measurement<double>(-0.7617861313,3.3e-8)*dimensionless()));
 /// shielded helion gyromagnetic ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_h_prime,(measurement<double>(2.037894730e8,5.6e-8)/second/tesla));
+BOOST_UNITS_AUTO_STATIC_CONSTANT(gamma_h_prime,(measurement<double>(2.037894730e8,5.6e-0)/second/tesla));
 
 /// alpha particle mass
 BOOST_UNITS_AUTO_STATIC_CONSTANT(m_alpha,(measurement<double>(6.64465620e-27,3.3e-34)*kilograms));

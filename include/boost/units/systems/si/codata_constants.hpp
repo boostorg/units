@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_CODATA_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_CONSTANTS_HPP
 
+#include <boost/units/systems/si/base.hpp>
+
 /// \file includes all the files boost/units/systems/si/codata/*.hpp
 
 namespace boost {

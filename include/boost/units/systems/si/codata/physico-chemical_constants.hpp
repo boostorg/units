@@ -15,7 +15,17 @@
 
 #include <boost/units/measurement.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/si.hpp>
+//#include <boost/units/systems/si.hpp>
+
+#include <boost/units/systems/si/amount.hpp>
+#include <boost/units/systems/si/area.hpp>
+#include <boost/units/systems/si/electric_charge.hpp>
+#include <boost/units/systems/si/energy.hpp>
+#include <boost/units/systems/si/frequency.hpp>
+#include <boost/units/systems/si/mass.hpp>
+#include <boost/units/systems/si/power.hpp>
+#include <boost/units/systems/si/solid_angle.hpp>
+#include <boost/units/systems/si/temperature.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental physico-chemical constants
