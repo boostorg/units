@@ -21,6 +21,11 @@ namespace SI {
 
 typedef unit<acceleration_type,SI::system>  acceleration;
 
+BOOST_UNITS_STATIC_CONSTANT(meter_per_second_squared,acceleration);
+BOOST_UNITS_STATIC_CONSTANT(meters_per_second_squared,acceleration);
+BOOST_UNITS_STATIC_CONSTANT(metre_per_second_squared,acceleration);
+BOOST_UNITS_STATIC_CONSTANT(metres_per_second_squared,acceleration);
+
 } // namespace SI
 
 } // namespace units

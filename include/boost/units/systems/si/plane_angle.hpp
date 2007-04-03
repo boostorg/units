@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_SI_MASS_DENSITY_HPP
-#define BOOST_UNITS_SI_MASS_DENSITY_HPP
+#ifndef BOOST_UNITS_SI_PLANE_ANGLE_HPP
+#define BOOST_UNITS_SI_PLANE_ANGLE_HPP
 
 #include <boost/units/systems/si/base.hpp>
 
@@ -19,12 +19,10 @@ namespace units {
 
 namespace SI {
 
-typedef unit<mass_density_type,SI::system>  mass_density;
-
-BOOST_UNITS_STATIC_CONSTANT(kilogram_per_cubic_meter,mass_density);
-BOOST_UNITS_STATIC_CONSTANT(kilograms_per_cubic_meter,mass_density);
-BOOST_UNITS_STATIC_CONSTANT(kilogramme_per_cubic_metre,mass_density);
-BOOST_UNITS_STATIC_CONSTANT(kilogrammes_per_cubic_metre,mass_density);
+typedef unit<plane_angle_type,SI::system>      plane_angle;
+    
+BOOST_UNITS_STATIC_CONSTANT(radian,plane_angle); 
+BOOST_UNITS_STATIC_CONSTANT(radians,plane_angle);    
 
 } // namespace SI
 
@@ -32,4 +30,4 @@ BOOST_UNITS_STATIC_CONSTANT(kilogrammes_per_cubic_metre,mass_density);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_SI_MASS_DENSITY_HPP
+#endif // BOOST_UNITS_SI_PLANE_ANGLE_HPP

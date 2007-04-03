@@ -96,6 +96,13 @@ struct base_unit_info<amount_tag,SI::system_tag>
     static std::string name()       { return "mole"; }
     static std::string symbol()     { return "mol"; }
 };
+    
+template<> 
+struct base_unit_info<luminous_intensity_tag,SI::system_tag> 
+{ 
+    static std::string name()       { return "candela"; }
+    static std::string symbol()     { return "cd"; }
+};
 
 } // namespace units
 
