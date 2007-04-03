@@ -48,15 +48,15 @@ namespace abstract {
 
 typedef homogeneous_system<system_tag>          system;
 
-typedef unit<length_type,system>                length;         ///< abstract unit of length
-typedef unit<mass_type,system>                  mass;           ///< abstract unit of mass
-typedef unit<time_type,system>                  time;           ///< abstract unit of time
-typedef unit<current_type,system>               current;        ///< abstract unit of current
-typedef unit<temperature_type,system>           temperature;    ///< abstract unit of temperature
-typedef unit<amount_type,system>                amount;         ///< abstract unit of amount
-typedef unit<luminous_intensity_type,system>    luminous_intensity;      ///< abstract unit of intensity
-typedef unit<plane_angle_type,system>                 angle;          ///< abstract unit of angle
-typedef unit<solid_angle_type,system>           solid_angle;    ///< abstract unit of solid angle
+typedef unit<length_type,system>                length;                 ///< abstract unit of length
+typedef unit<mass_type,system>                  mass;                   ///< abstract unit of mass
+typedef unit<time_type,system>                  time;                   ///< abstract unit of time
+typedef unit<current_type,system>               current;                ///< abstract unit of current
+typedef unit<temperature_type,system>           temperature;            ///< abstract unit of temperature
+typedef unit<amount_type,system>                amount;                 ///< abstract unit of amount
+typedef unit<luminous_intensity_type,system>    luminous_intensity;     ///< abstract unit of luminous intensity
+typedef unit<plane_angle_type,system>           plane_angle;            ///< abstract unit of plane angle
+typedef unit<solid_angle_type,system>           solid_angle;            ///< abstract unit of solid angle
 
 } // namespace abstract
 
