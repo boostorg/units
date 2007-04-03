@@ -76,7 +76,6 @@ class quantity
         template<class System2,class Dim2,class YY> 
         explicit
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-//                 typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
                  typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
@@ -86,7 +85,6 @@ class quantity
         /// implicit conversion between different unit systems is allowed if each fundamental dimension is implicitly convertible
         template<class System2,class Dim2,class YY> 
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-//                 typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
                  typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
@@ -174,14 +172,14 @@ class quantity<unit<dimensionless_type,System>,Y>
         quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
             val_(source.value())
         { 
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
         
         /// implicit assignment between value types is allowed if allowed for value types themselves
         template<class YY>
         this_type& operator=(const quantity<unit<dimension_type,system_type>,YY>& source)
         {
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
 
             *this = this_type(source);
             
@@ -225,9 +223,9 @@ class quantity<unit<dimensionless_type,System>,Y>
         value_type    val_;
 };
 
-}
+} // namespace units
 
-}
+} // namespace boost
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 

@@ -18,15 +18,20 @@
 #include <boost/version.hpp>
 #include <boost/type_traits/is_same.hpp>
 
-// uncomment this to test without Boost Typeof
-//#undef BOOST_VERSION
-//#define BOOST_VERSION 103300
-
 #if (BOOST_VERSION >= 103400)
+    #define BOOST_UNITS_HAS_BOOST_TYPEOF    1
+#else
+    #define BOOST_UNITS_HAS_BOOST_TYPEOF    0
+#endif
+
+// uncomment this to test without Boost Typeof
+//#undef BOOST_UNITS_HAS_BOOST_TYPEOF
+//#define BOOST_UNITS_HAS_BOOST_TYPEOF      0   
+
+#if (BOOST_UNITS_HAS_BOOST_TYPEOF)
     #include <boost/typeof/typeof.hpp>   
     #include <boost/typeof/std/complex.hpp>   
     #define BOOST_UNITS_HAS_TYPEOF          1
-    #define BOOST_UNITS_HAS_BOOST_TYPEOF    1
 #else    
     #if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
         #define BOOST_UNITS_HAS_TYPEOF          1
@@ -86,7 +91,7 @@ template<class T> T make();
 
 } // namespace typeof_
 
-#if BOOST_UNITS_HAS_BOOST_TYPEOF
+#if (BOOST_UNITS_HAS_TYPEOF && BOOST_UNITS_HAS_BOOST_TYPEOF)
 
 template<typename X> struct unary_plus_typeof_helper            
 {
@@ -124,7 +129,7 @@ template<typename X,typename Y> struct divide_typeof_helper
     typedef typename nested::type type;
 };
 
-#elif BOOST_UNITS_HAS_MWERKS_TYPEOF
+#elif (BOOST_UNITS_HAS_TYPEOF && BOOST_UNITS_HAS_MWERKS_TYPEOF)
 
 template<typename X> struct unary_plus_typeof_helper            { typedef __typeof__((+typeof_::make<X>())) type; };
 template<typename X> struct unary_minus_typeof_helper           { typedef __typeof__((-typeof_::make<X>())) type; };
@@ -134,7 +139,7 @@ template<typename X,typename Y> struct subtract_typeof_helper   { typedef __type
 template<typename X,typename Y> struct multiply_typeof_helper   { typedef __typeof__((typeof_::make<X>()*typeof_::make<Y>())) type; };
 template<typename X,typename Y> struct divide_typeof_helper     { typedef __typeof__((typeof_::make<X>()/typeof_::make<Y>())) type; };
 
-#elif BOOST_UNITS_HAS_GNU_TYPEOF
+#elif (BOOST_UNITS_HAS_TYPEOF && BOOST_UNITS_HAS_GNU_TYPEOF)
 
 template<typename X> struct unary_plus_typeof_helper            { typedef typeof((+typeof_::make<X>())) type; };
 template<typename X> struct unary_minus_typeof_helper           { typedef typeof((-typeof_::make<X>())) type; };
