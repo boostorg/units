@@ -75,7 +75,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
 }
 
 /// Write @c unit to @c std::basic_ostream.  Prints the symbol of
-/// each fundamental unit followed by it's exponent e.g.
+/// each fundamental unit followed by its exponent e.g.
 /// joules = m^2 kg s^(-2). If this is not what you want feel free
 /// to overload it for your own units.
 template<class Char, class Traits, class System,class Dim>
