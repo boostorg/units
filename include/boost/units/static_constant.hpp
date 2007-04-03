@@ -30,6 +30,8 @@ const type name##_instance_t<b>::instance                   \
 
 /// A convenience macro for static constants with auto 
 /// type deduction. 
+#if BOOST_UNITS_HAS_TYPEOF
+
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
 #define BOOST_UNITS_AUTO_STATIC_CONSTANT(name, value)               \
@@ -46,6 +48,8 @@ BOOST_UNITS_STATIC_CONSTANT(name, __typeof__(value))(value)         \
 #define BOOST_UNITS_AUTO_STATIC_CONSTANT(name, value)               \
 BOOST_UNITS_STATIC_CONSTANT(name, typeof(value))(value)             \
 
-#endif
+#endif // BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#endif // BOOST_UNITS_HAS_TYPEOF
 
 #endif // BOOST_UNITS_STATIC_CONSTANT_HPP

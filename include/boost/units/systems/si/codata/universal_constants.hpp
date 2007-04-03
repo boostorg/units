@@ -19,7 +19,7 @@
 
 /// \file
 /// CODATA recommended values of fundamental universal constants
-/// CODATA 2006 values as of 2007/03/30
+/// using CODATA 2006 values as of 2007/03/30
 
 namespace boost {
 
