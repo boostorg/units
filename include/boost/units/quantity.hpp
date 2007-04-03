@@ -239,99 +239,28 @@ namespace boost {
 
 namespace units {
 
-/// extract a reference to the value type
-template<class X, class Unit,class Y>
-X quantity_reinterpret_cast(const quantity<Unit,Y>& q)
-{
-    return q.value();
-}
-
-template<class X, class Unit,class Y>
-X quantity_reinterpret_cast(quantity<Unit,Y>& q)
-{
-    return const_cast<Y&>(q.value());
-}
-
 /// helper class for quantity_cast
 template<class X,class Y> struct quantity_cast_helper;
 
-/// specialization for construction of quantity from raw value_type
-template<class Unit,class X,class Y>
-struct quantity_cast_helper< quantity<Unit,X>,Y >
-{
-    typedef quantity<Unit,X>    type;
-    
-    type operator()(Y& source)                                { return type::from_value(source); }
-};
-
-/// specialization for casting from one value_type to another
-template<class Unit,class X,class Y>
-struct quantity_cast_helper< quantity<Unit,X>,quantity<Unit,Y> >
-{
-    typedef quantity<Unit,X>    type;
-    
-    type operator()(quantity<Unit,Y>& source)                 { return type::from_value(source.value()); }
-};
-
-/// specialization for casting from one value_type to another
-template<class Unit,class X,class Y>
-struct quantity_cast_helper< quantity<Unit,X>,const quantity<Unit,Y> >
-{
-    typedef quantity<Unit,X>    type;
-    
-    type operator()(const quantity<Unit,Y>& source)                 { return type::from_value(source.value()); }
-};
-
-/// specialization for casting from one unit system to another
-template<class Y,class X,class Unit1,class Unit2>
-struct quantity_cast_helper< quantity<Unit1,Y>,quantity<Unit2,X> >
-{
-    typedef quantity<Unit1,Y>    type;
-    
-    type operator()(quantity<Unit2,X>& source)
-    {
-        return conversion_helper<quantity<Unit2,X>,quantity<Unit1,Y> >::convert(source);
-    }
-};
-
-/// specialization for casting from one unit system to another
-template<class Y,class X,class Unit1,class Unit2>
-struct quantity_cast_helper< quantity<Unit1,Y>,const quantity<Unit2,X> >
-{
-    typedef quantity<Unit1,Y>    type;
-    
-    type operator()(const quantity<Unit2,X>& source)
-    {
-        return conversion_helper<quantity<Unit2,X>,quantity<Unit1,Y> >::convert(source);
-    }
-};
-
 /// specialization for casting to the value type
-template<class Y,class X,class Unit2>
-struct quantity_cast_helper<Y,quantity<Unit2,X> >
+template<class Y,class X,class Unit>
+struct quantity_cast_helper<Y,quantity<Unit,X> >
 {
     typedef Y type;
     
-    type operator()(quantity<Unit2,X>& source)                { return const_cast<X&>(source.value()); }
+    type operator()(quantity<Unit,X>& source)           { return const_cast<X&>(source.value()); }
 };
 
 /// specialization for casting to the value type
-template<class Y,class X,class Unit2>
-struct quantity_cast_helper<Y,const quantity<Unit2,X> >
+template<class Y,class X,class Unit>
+struct quantity_cast_helper<Y,const quantity<Unit,X> >
 {
     typedef Y type;
     
-    type operator()(const quantity<Unit2,X>& source)                { return source.value(); }
+    type operator()(const quantity<Unit,X>& source)     { return source.value(); }
 };
 
-/// quantity_cast supporting three types of casting:
-///
-/// 1) Casting from a @c value_type to a @c quantity :
-/// @verbatim quantity<Unit,X> q = quantity_cast< quantity<Unit,X> >(const X&); @endverbatim
-/// 2) Casting from one @c value_type to another @c value_type :
-/// @verbatim quantity<Unit,X> q = quantity_cast<quantity<Unit,X> >(const quantity<Unit,Y>&); @endverbatim
-/// 3) Casting from one unit system to another :
-/// @verbatim quantity<unit,X> q = quantity_cast< quantity<unit<Dim,System1>,X> >(const quantity<unit<Dim,System2> >,Y>&); @endverbatim
+/// quantity_cast provides mutating access to underlying quantity value_type
 template<class X,class Y>
 inline 
 typename quantity_cast_helper<X,Y>::type
@@ -357,7 +286,7 @@ template<class Unit,class Y>
 inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
 {
     using std::swap;
-    swap(quantity_reinterpret_cast<Y&>(lhs),quantity_reinterpret_cast<Y&>(rhs));
+    swap(quantity_cast<Y&>(lhs),quantity_cast<Y&>(rhs));
 }
 
 /// utility class to simplify construction of dimensionless quantities

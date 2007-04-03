@@ -115,6 +115,9 @@ typedef composite_dimension<length_tag,1,time_tag,-2>::type                     
 /// composite dimension for activity : T^-1
 typedef composite_dimension<time_tag,-1>::type                                                  activity_type; 
 
+/// composite dimension for angular velocity : T^-1 QP
+typedef composite_dimension<time_tag,-1,plane_angle_tag,1>::type                                angular_velocity_type; 
+
 /// composite dimension for area : L^2
 typedef composite_dimension<length_tag,2>::type                                                 area_type; 
 
