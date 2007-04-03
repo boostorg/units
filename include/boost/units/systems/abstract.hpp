@@ -84,29 +84,29 @@ struct base_unit_info<time_tag,abstract::system_tag>
 template<> 
 struct base_unit_info<current_tag,abstract::system_tag> 
 { 
-    static std::string name()       { return "[Current]"; }
-    static std::string symbol()     { return "[C]"; }
+    static std::string name()       { return "[Electric Current]"; }
+    static std::string symbol()     { return "[I]"; }
 };
 
 template<> 
 struct base_unit_info<temperature_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Temperature]"; }
-    static std::string symbol()     { return "[K]"; }
+    static std::string symbol()     { return "[Theta]"; }
 };
 
 template<> 
 struct base_unit_info<amount_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Amount]"; }
-    static std::string symbol()     { return "[A]"; }
+    static std::string symbol()     { return "[N]"; }
 };
 
 template<> 
 struct base_unit_info<luminous_intensity_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Luminous Intensity]"; }
-    static std::string symbol()     { return "[I]"; }
+    static std::string symbol()     { return "[J]"; }
 };
 
 template<> 
