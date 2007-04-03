@@ -27,6 +27,7 @@
 #include <boost/units/systems/si/current.hpp>
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/systems/si/amount.hpp>
+#include <boost/units/systems/si/luminous_intensity.hpp>
 
 #include <boost/units/systems/si/acceleration.hpp>
 #include <boost/units/systems/si/area.hpp>
@@ -38,8 +39,10 @@
 #include <boost/units/systems/si/power.hpp>
 #include <boost/units/systems/si/pressure.hpp>
 #include <boost/units/systems/si/velocity.hpp>
-#include <boost/units/systems/si/viscosity.hpp>
 #include <boost/units/systems/si/volume.hpp>
+
+#include <boost/units/systems/si/dynamic_viscosity.hpp>
+#include <boost/units/systems/si/kinematic_viscosity.hpp>
 
 #include <boost/units/systems/si/capacitance.hpp>
 #include <boost/units/systems/si/conductance.hpp>

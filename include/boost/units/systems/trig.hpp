@@ -78,10 +78,10 @@ acos(const Y& val)
 
 /// acos of dimensionless quantity returning angle in same system
 template<class Y,class System>
-quantity<unit<angle_type,System>,Y>
+quantity<unit<plane_angle_type,System>,Y>
 acos(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<angle_type,System>,Y>(std::acos(val)*radians);
+    return quantity<unit<plane_angle_type,System>,Y>(std::acos(val)*radians);
 }
 
 /// asin of @c value_type returning angle in radians
@@ -94,10 +94,10 @@ asin(const Y& val)
 
 /// asin of dimensionless quantity returning angle in same system
 template<class Y,class System>
-quantity<unit<angle_type,System>,Y>
+quantity<unit<plane_angle_type,System>,Y>
 asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<angle_type,System>,Y>(std::asin(val)*radians);
+    return quantity<unit<plane_angle_type,System>,Y>(std::asin(val)*radians);
 }
 
 /// atan of @c value_type returning angle in radians
@@ -110,10 +110,10 @@ atan(const Y& val)
 
 /// atan of dimensionless quantity returning angle in same system
 template<class Y,class System>
-quantity<unit<angle_type,System>,Y>
+quantity<unit<plane_angle_type,System>,Y>
 atan(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<angle_type,System>,Y>(std::atan(val)*radians);
+    return quantity<unit<plane_angle_type,System>,Y>(std::atan(val)*radians);
 }
 
 /// atan2 of @c value_type returning angle in radians

@@ -46,17 +46,17 @@ namespace units {
 
 namespace abstract {
 
-typedef homogeneous_system<system_tag>      system;
+typedef homogeneous_system<system_tag>          system;
 
-typedef unit<length_type,system>            length;         ///< abstract unit of length
-typedef unit<mass_type,system>              mass;           ///< abstract unit of mass
-typedef unit<time_type,system>              time;           ///< abstract unit of time
-typedef unit<current_type,system>           current;        ///< abstract unit of current
-typedef unit<temperature_type,system>       temperature;    ///< abstract unit of temperature
-typedef unit<amount_type,system>            amount;         ///< abstract unit of amount
-//typedef unit<intensity_type,system>         intensity;      ///< abstract unit of intensity
-typedef unit<angle_type,system>             angle;          ///< abstract unit of angle
-typedef unit<solid_angle_type,system>       solid_angle;    ///< abstract unit of solid angle
+typedef unit<length_type,system>                length;         ///< abstract unit of length
+typedef unit<mass_type,system>                  mass;           ///< abstract unit of mass
+typedef unit<time_type,system>                  time;           ///< abstract unit of time
+typedef unit<current_type,system>               current;        ///< abstract unit of current
+typedef unit<temperature_type,system>           temperature;    ///< abstract unit of temperature
+typedef unit<amount_type,system>                amount;         ///< abstract unit of amount
+typedef unit<luminous_intensity_type,system>    luminous_intensity;      ///< abstract unit of intensity
+typedef unit<plane_angle_type,system>                 angle;          ///< abstract unit of angle
+typedef unit<solid_angle_type,system>           solid_angle;    ///< abstract unit of solid angle
 
 } // namespace abstract
 
@@ -103,14 +103,14 @@ struct base_unit_info<amount_tag,abstract::system_tag>
 };
 
 template<> 
-struct base_unit_info<intensity_tag,abstract::system_tag> 
+struct base_unit_info<luminous_intensity_tag,abstract::system_tag> 
 { 
-    static std::string name()       { return "[Intensity]"; }
+    static std::string name()       { return "[Luminous Intensity]"; }
     static std::string symbol()     { return "[I]"; }
 };
 
 template<> 
-struct base_unit_info<angle_tag,abstract::system_tag> 
+struct base_unit_info<plane_angle_tag,abstract::system_tag> 
 { 
     static std::string name()       { return "[Planar Angle]"; }
     static std::string symbol()     { return "[QP]"; }
