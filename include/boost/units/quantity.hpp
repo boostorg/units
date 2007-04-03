@@ -25,28 +25,20 @@ namespace boost {
 namespace units {
 
 template<class Q1,class Q2> class conversion_helper;
-template<class Unit,class Y = double> class quantity;
  
 /// class declaration
-//template<class System,class Dim,class Y>
-//class quantity<unit<Dim,System>,Y>
-//{
-//    public:
-//        typedef quantity<unit<Dim,System>,Y>            this_type;
-template<class Unit,class Y>
+template<class Unit,class Y = double>
 class quantity
 {
     public:
         typedef quantity<Unit,Y>                        this_type;
-        typedef typename get_dimension<Unit>::type      Dim;
-        typedef typename get_system<Unit>::type         System;
-
-        BOOST_STATIC_ASSERT((detail::check_system<System, Dim>::value == true));
         
         typedef Y                                       value_type;
-        typedef System                                  system_type;
-        typedef Dim                                     dimension_type;
+        typedef typename get_system<Unit>::type         system_type;
+        typedef typename get_dimension<Unit>::type      dimension_type;
         typedef unit<dimension_type,system_type>        unit_type;
+
+        BOOST_STATIC_ASSERT((detail::check_system<system_type,dimension_type>::value == true));
          
         quantity() : val_() { }
         quantity(const this_type& source) : val_(source.val_) { }
@@ -54,7 +46,6 @@ class quantity
         
         this_type& operator=(const this_type& source) 
         { 
-
              val_ = source.val_; 
              
              return *this; 
@@ -85,19 +76,21 @@ class quantity
         template<class System2,class Dim2,class YY> 
         explicit
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-                 typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
+//                 typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
+                 typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
         /// implicit conversion between different unit systems is allowed if each fundamental dimension is implicitly convertible
         template<class System2,class Dim2,class YY> 
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-                 typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
+//                 typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit<Dim,System> >::type>::type* = 0)
+                 typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
 #else
@@ -108,7 +101,7 @@ class quantity
         explicit quantity(const quantity<unit<Dim2,System2>,YY>& source)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
 #endif
@@ -117,7 +110,7 @@ class quantity
         template<class System2,class Dim2,class YY>
         this_type& operator=(const quantity<unit<Dim2,System2>,YY>& source)
         {
-            typedef unit<Dim,System>                unit1_type;
+            typedef unit_type                       unit1_type;
             typedef unit<Dim2,System2>              unit2_type;
             
             BOOST_STATIC_ASSERT((is_implicitly_convertible<unit2_type,unit1_type>::value == true));
@@ -157,12 +150,12 @@ template<class System,class Y>
 class quantity<unit<dimensionless_type,System>,Y>
 {
     public:
-        typedef quantity<unit<dimensionless_type,System>,Y>    this_type;
+        typedef quantity<unit<dimensionless_type,System>,Y>     this_type;
                                    
-        typedef Y                                   value_type;
-        typedef System                              system_type;
-        typedef dimensionless_type                  dimension_type;
-        typedef unit<dimension_type,system_type>    unit_type;
+        typedef Y                                               value_type;
+        typedef System                                          system_type;
+        typedef dimensionless_type                              dimension_type;
+        typedef unit<dimension_type,system_type>                unit_type;
          
         quantity() : val_() { }
         quantity(value_type val) : val_(val) { }                    ///< construction from raw @c value_type is allowed

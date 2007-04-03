@@ -154,6 +154,9 @@ typedef composite_dimension<length_tag,2,mass_tag,1,time_tag,-3>::type          
 /// composite dimension for pressure : L^-1 M T^-2
 typedef composite_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                         pressure_type;                
 
+/// composite dimension for specific volume : L^3 M^-1
+typedef composite_dimension<length_tag,3,mass_tag,-1>::type                                     specific_volume_type;            
+
 /// composite dimension for stress : L^-1 M T^-2
 typedef composite_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                         stress_type;     
 
