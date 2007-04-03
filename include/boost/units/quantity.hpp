@@ -261,83 +261,6 @@ X quantity_reinterpret_cast(quantity<Unit,Y>& q)
     return const_cast<Y&>(q.value());
 }
 
-/// swap quantities
-template<class Unit,class Y>
-inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
-{
-    using std::swap;
-    swap(quantity_reinterpret_cast<Y&>(lhs),quantity_reinterpret_cast<Y&>(rhs));
-}
-
-/// utility class to simplify construction of dimensionless quantities
-template<class System,class Y>
-struct dimensionless_quantity
-{
-    typedef quantity<typename dimensionless_unit<System>::type,Y>   type;
-};
-
-/// check that a type is a quantity
-template<typename T>
-struct is_quantity :
-    public mpl::false_
-{ };
-
-template<class Unit,
-         class Y>
-struct is_quantity< quantity<Unit,Y> > : 
-    public mpl::true_
-{ };
-
-/// check that a type is a quantity in a specified system
-template<class T,class System>
-struct is_quantity_of_system :
-    public mpl::false_
-{ };
-
-template<class Dim,
-         class System,
-         class Y>
-struct is_quantity_of_system< quantity< unit<Dim,System>,Y>,System > :
-    public mpl::true_
-{ };
-
-/// check that a type is a quantity of the specified dimension
-template<class T,class Dim>
-struct is_quantity_of_dimension :
-    public mpl::false_
-{ };
-
-template<class Dim,class System,class Y>
-struct is_quantity_of_dimension< quantity< unit<Dim,System>,Y>,Dim > :
-    public mpl::true_
-{ };
-
-/// check that a type is dimensionless
-template<class System,class Y>
-struct is_dimensionless< quantity<unit<dimensionless_type,System>,Y> > :
-    public mpl::true_
-{ };
-
-/// check that a type is a dimensionless quantity
-template<class T>
-struct is_dimensionless_quantity :
-    public is_quantity_of_dimension<T,dimensionless_type>
-{ };
-
-/// get dimension
-template<class Unit,class Y>
-struct get_dimension< quantity<Unit,Y> >
-{
-    typedef typename get_dimension<Unit>::type  type;
-};
-
-/// get system
-template<class Unit,class Y>
-struct get_system< quantity<Unit,Y> >
-{
-    typedef typename get_system<Unit>::type     type;
-};
-
 /// helper class for quantity_cast
 template<class X,class Y> struct quantity_cast_helper;
 
@@ -427,6 +350,7 @@ quantity_cast(Y& source)
     
     return qch(source);
 }
+
 template<class X,class Y>
 inline 
 typename quantity_cast_helper<X,const Y>::type
@@ -436,6 +360,83 @@ quantity_cast(const Y& source)
     
     return qch(source);
 }
+
+/// swap quantities
+template<class Unit,class Y>
+inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
+{
+    using std::swap;
+    swap(quantity_reinterpret_cast<Y&>(lhs),quantity_reinterpret_cast<Y&>(rhs));
+}
+
+/// utility class to simplify construction of dimensionless quantities
+template<class System,class Y>
+struct dimensionless_quantity
+{
+    typedef quantity<typename dimensionless_unit<System>::type,Y>   type;
+};
+
+/// check that a type is a quantity
+template<typename T>
+struct is_quantity :
+    public mpl::false_
+{ };
+
+template<class Unit,
+         class Y>
+struct is_quantity< quantity<Unit,Y> > : 
+    public mpl::true_
+{ };
+
+/// check that a type is a quantity in a specified system
+template<class T,class System>
+struct is_quantity_of_system :
+    public mpl::false_
+{ };
+
+template<class Dim,
+         class System,
+         class Y>
+struct is_quantity_of_system< quantity< unit<Dim,System>,Y>,System > :
+    public mpl::true_
+{ };
+
+/// check that a type is a quantity of the specified dimension
+template<class T,class Dim>
+struct is_quantity_of_dimension :
+    public mpl::false_
+{ };
+
+template<class Dim,class System,class Y>
+struct is_quantity_of_dimension< quantity< unit<Dim,System>,Y>,Dim > :
+    public mpl::true_
+{ };
+
+/// check that a type is dimensionless
+template<class System,class Y>
+struct is_dimensionless< quantity<unit<dimensionless_type,System>,Y> > :
+    public mpl::true_
+{ };
+
+/// check that a type is a dimensionless quantity
+template<class T>
+struct is_dimensionless_quantity :
+    public is_quantity_of_dimension<T,dimensionless_type>
+{ };
+
+/// get dimension
+template<class Unit,class Y>
+struct get_dimension< quantity<Unit,Y> >
+{
+    typedef typename get_dimension<Unit>::type  type;
+};
+
+/// get system
+template<class Unit,class Y>
+struct get_system< quantity<Unit,Y> >
+{
+    typedef typename get_system<Unit>::type     type;
+};
 
 /// specialize unary plus typeof helper
 template<class Unit,class Y>
