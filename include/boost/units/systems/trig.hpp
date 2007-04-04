@@ -22,7 +22,7 @@ namespace units {
 
 /// cos of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::plane_angle,Y>::type 
+typename dimensionless_quantity<SI::system,Y>::type 
 cos(const quantity<SI::plane_angle,Y>& theta)
 {
     return std::cos(theta.value());
@@ -30,7 +30,7 @@ cos(const quantity<SI::plane_angle,Y>& theta)
 
 /// sin of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::plane_angle,Y>::type 
+typename dimensionless_quantity<SI::system,Y>::type 
 sin(const quantity<SI::plane_angle,Y>& theta)
 {
     return std::sin(theta.value());
@@ -38,32 +38,32 @@ sin(const quantity<SI::plane_angle,Y>& theta)
 
 /// tan of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::plane_angle,Y>::type 
+typename dimensionless_quantity<SI::system,Y>::type 
 tan(const quantity<SI::plane_angle,Y>& theta)
 {
     return std::tan(theta.value());
 }
 
 /// cos of theta in other angular units 
-template<class Unit,class Y>
-typename dimensionless_quantity<Unit,Y>::type 
-cos(const quantity<Unit,Y>& theta)
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+cos(const quantity<unit<plane_angle_type,System>,Y>& theta)
 {
     return cos(quantity<SI::plane_angle,Y>(theta));
 }
 
 /// sin of theta in other angular units 
-template<class Unit,class Y>
-typename dimensionless_quantity<Unit,Y>::type 
-sin(const quantity<Unit,Y>& theta)
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+sin(const quantity<unit<plane_angle_type,System>,Y>& theta)
 {
     return sin(quantity<SI::plane_angle,Y>(theta));
 }
 
 /// tan of theta in other angular units 
-template<class Unit,class Y>
-typename dimensionless_quantity<Unit,Y>::type 
-tan(const quantity<Unit,Y>& theta)
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+tan(const quantity<unit<plane_angle_type,System>,Y>& theta)
 {
     return tan(quantity<SI::plane_angle,Y>(theta));
 }
