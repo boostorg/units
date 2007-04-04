@@ -30,12 +30,12 @@ Output:
 
 namespace bu = boost::units;
 
-typedef base_dimension<0> dimension_tag;
+typedef bu::base_dimension<0> dimension_tag;
 
 struct system1 : bu::ordinal<100> {};
 struct system2 : bu::ordinal<101> {};
 
-typedef bu::dimension_tag::type dimension;
+typedef dimension_tag::type dimension;
 
 int main(int,char *[])
 {
