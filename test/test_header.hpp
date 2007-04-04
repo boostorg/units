@@ -36,24 +36,24 @@ namespace boost {
 
 namespace units {
 
-struct length_tag : public ordinal<1> { }; 
-struct mass_tag : public ordinal<2> { };
-struct time_tag : public ordinal<3> { };
+typedef base_dimension<1>   length_tag;
+typedef base_dimension<2>   mass_tag;
+typedef base_dimension<3>   time_tag;
 
-typedef fundamental_dimension<length_tag>::type length_type;
-typedef fundamental_dimension<mass_tag>::type   mass_type;
-typedef fundamental_dimension<time_tag>::type   time_type;
+typedef length_tag::type    length_type;
+typedef mass_tag::type      mass_type;
+typedef time_tag::type      time_type;
 
-typedef composite_dimension<length_tag,2>::type area_type;
-typedef composite_dimension<mass_tag,1,
+typedef derived_dimension<length_tag,2>::type area_type;
+typedef derived_dimension<mass_tag,1,
                             length_tag,2,
                             time_tag,-2>::type  energy_type;
-typedef composite_dimension<mass_tag,-1,
+typedef derived_dimension<mass_tag,-1,
                             length_tag,-2,
                             time_tag,2>::type   inverse_energy_type;
-typedef composite_dimension<length_tag,1,
+typedef derived_dimension<length_tag,1,
                             time_tag,-1>::type  velocity_type;
-typedef composite_dimension<length_tag,3>::type volume_type;
+typedef derived_dimension<length_tag,3>::type volume_type;
 
 /// placeholder class defining test unit system
 struct system_tag : public ordinal<101> { };

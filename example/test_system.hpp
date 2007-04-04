@@ -23,9 +23,9 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-struct length_tag : public ordinal<1> { }; 
-struct mass_tag : public ordinal<2> { };
-struct time_tag : public ordinal<3> { };
+typedef base_dimension<1>   length_tag;
+typedef base_dimension<2>   mass_tag;
+typedef base_dimension<3>   time_tag;
 //]
 
 #if 0
@@ -37,9 +37,9 @@ typedef make_dimension_list< boost::mpl::list< dim< time_tag,static_rational<1> 
 #endif
 
 //[test_system_snippet_3
-typedef fundamental_dimension<length_tag>::type length_type;
-typedef fundamental_dimension<mass_tag>::type   mass_type;
-typedef fundamental_dimension<time_tag>::type   time_type;
+typedef length_tag::type    length_type;
+typedef mass_tag::type      mass_type;
+typedef time_tag::type      time_type;
 //]
 
 #if 0
@@ -52,10 +52,10 @@ typedef make_dimension_list< boost::mpl::list< dim< mass_tag,static_rational<1> 
 #endif
 
 //[test_system_snippet_5
-typedef composite_dimension<length_tag,2>::type area_type;
-typedef composite_dimension<mass_tag,1,
-                            length_tag,2,
-                            time_tag,-2>::type  energy_type;
+typedef derived_dimension<length_tag,2>::type area_type;
+typedef derived_dimension<mass_tag,1,
+                          length_tag,2,
+                          time_tag,-2>::type  energy_type;
 //]
 
 namespace test {

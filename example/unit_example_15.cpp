@@ -35,11 +35,11 @@ namespace units {
 
 namespace wo {
 
-struct world_space_tag : public ordinal<101> { }; 
-struct object_space_tag : public ordinal<102> { };
+typedef base_dimension<101> world_space_tag; 
+typedef base_dimension<102> object_space_tag;
 
-typedef fundamental_dimension<world_space_tag>::type    world_space_type;
-typedef fundamental_dimension<object_space_tag>::type   object_space_type;
+typedef world_space_tag::type    world_space_type;
+typedef object_space_tag::type   object_space_type;
 
 /// placeholder class defining test unit system
 struct system { };

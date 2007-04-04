@@ -203,8 +203,8 @@ namespace boost { namespace units {
 
 template<int N>
 struct f {
-    typedef typename composite_dimension<length_tag, (1<<N) >::type dim1;
-    typedef typename composite_dimension<mass_tag, (1<<N) >::type dim2;
+    typedef typename derived_dimension<length_tag, (1<<N) >::type dim1;
+    typedef typename derived_dimension<mass_tag, (1<<N) >::type dim2;
     template<class T>
     static void apply(const T& t) {
         f<N - 1>::apply(t * unit<dim1, SI::system>());
@@ -348,6 +348,7 @@ int main()
     return 0;
 }
 */
+
 #include <iostream>
 
 #include <boost/units/io.hpp>
@@ -388,5 +389,29 @@ int main()
               
     return 0;
 }
+
+/*
+#define MCS_USE_BOOST_REGEX_DEMANGLING
+
+#include <iostream>
+
+#include <boost/units/io.hpp>
+#include <boost/units/quantity.hpp>
+#include <boost/units/experimental/make_system.hpp>
+#include <boost/units/experimental/fundamental_units.hpp>
+#include <boost/units/detail/utility.hpp>
+
+int main()
+{
+    using namespace boost;
+    using namespace boost::units;
+    
+    typedef make_system<mpl::list<meter_tag,gram_tag,second_tag> >::type   system1_type;
+    
+    std::cout << simplify_typename(system1_type()) << std::endl;
+    
+    return 0;
+}
+*/
 
 

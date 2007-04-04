@@ -56,8 +56,6 @@ struct system_tag : public ordinal<110> { };
 
 typedef homogeneous_system<system_tag>  system;
 
-typedef fundamental_dimension<temperature_tag>::type    temperature_type;
-
 typedef unit<temperature_type,system>                   temperature;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);

@@ -372,9 +372,9 @@ int main()
     
     //[unit_example_4_snippet_6
     /// test trig stuff
-    quantity<angles::radians::radian>           theta = 0.375*boost::units::radians;
-    quantity<angles::radians::dimensionless>    sin_theta = sin(theta);
-    quantity<angles::radians::radian>           thetap = asin(sin_theta);
+    quantity<plane_angle>           theta = 0.375*radians;
+    quantity<dimensionless>         sin_theta = sin(theta);
+    quantity<plane_angle>           thetap = asin(sin_theta);
     //]
     
     sstream1  << "theta            = " << theta << std::endl

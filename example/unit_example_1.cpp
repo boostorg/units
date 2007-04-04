@@ -62,10 +62,10 @@ int main(void)
         dim<mass_tag, static_rational<1L, 1L> > >::type,
         dim<length_tag, static_rational<2L, 1L> > >::type>));
                               
-    std::cout << "length_type  = " << simplify_mpl_typename(length_type()) << std::endl
-              << "mass_type    = " << simplify_mpl_typename(mass_type()) << std::endl
-              << "time_type    = " << simplify_mpl_typename(time_type()) << std::endl
-              << "energy_type  = " << simplify_mpl_typename(energy_type()) << std::endl;
+    std::cout << "length_type  = " << simplify_typename(length_type()) << std::endl
+              << "mass_type    = " << simplify_typename(mass_type()) << std::endl
+              << "time_type    = " << simplify_typename(time_type()) << std::endl
+              << "energy_type  = " << simplify_typename(energy_type()) << std::endl;
     
     //[unit_example_1_snippet_1
     typedef static_multiply<length_type,mass_type>::type                                       LM_type;
@@ -94,9 +94,9 @@ int main(void)
         dim<time_tag, static_rational<-1L, 1L> > >::type,
         dim<length_tag, static_rational<1L, 1L> > >::type>));
     
-    std::cout << "LM_type      = " << simplify_mpl_typename(LM_type()) << std::endl
-              << "L_T_type     = " << simplify_mpl_typename(L_T_type()) << std::endl
-              << "V_type       = " << simplify_mpl_typename(V_type()) << std::endl;
+    std::cout << "LM_type      = " << simplify_typename(LM_type()) << std::endl
+              << "L_T_type     = " << simplify_typename(L_T_type()) << std::endl
+              << "V_type       = " << simplify_typename(V_type()) << std::endl;
               
     return 0;
 }
