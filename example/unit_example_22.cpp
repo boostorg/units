@@ -121,7 +121,7 @@ int main()
     return 0;
 }
 */
-
+/*
 #include <iostream>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
@@ -179,7 +179,7 @@ int main()
     
     return 0;
 }
-
+*/
 /*
 //// main.cpp
 ////
@@ -348,6 +348,45 @@ int main()
     return 0;
 }
 */
+#include <iostream>
 
+#include <boost/units/io.hpp>
+#include <boost/units/systems/si/energy.hpp>
+#include <boost/units/systems/si/power.hpp>
+
+namespace boost { 
+
+namespace units {
+
+template<class Char, class Traits>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
+                                             const SI::energy& u)
+{
+    os << "J";
+    return os;
+}
+
+template<class Char, class Traits>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
+                                             const SI::power& u)
+{
+    os << "W";
+    return os;
+}
+
+} 
+
+}
+
+int main()
+{
+    using namespace boost::units;
+    
+    std::cout << quantity<SI::energy>(1.0*SI::joules) << std::endl
+              << quantity<SI::power>(2.0*SI::watts) << std::endl
+              << std::endl;
+              
+    return 0;
+}
 
 
