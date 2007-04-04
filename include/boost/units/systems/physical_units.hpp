@@ -27,32 +27,66 @@ namespace boost {
 
 namespace units { 
 
+template<long N> 
+struct base_dimension :
+    public mpl::int_<N>
+{
+    typedef mpl::int_<N>    value;
+};
+
 /// tag representing length
-struct length_tag : public ordinal<-9> { };
+typedef base_dimension<-9>  length_tag;
 
 /// tag representing mass
-struct mass_tag : public ordinal<-8> { };
+typedef base_dimension<-8>  mass_tag;
 
 /// tag representing time
-struct time_tag : public ordinal<-7> { };
+typedef base_dimension<-7>  time_tag;
 
 /// tag representing electrical current
-struct current_tag : public ordinal<-6> { };
+typedef base_dimension<-6>  current_tag;
 
 /// tag representing temperature
-struct temperature_tag : public ordinal<-5> { };
+typedef base_dimension<-5>  temperature_tag;
 
 /// tag representing amount of substance
-struct amount_tag : public ordinal<-4> { };
+typedef base_dimension<-4>  amount_tag;
 
-/// tag representing luminous intensity - demoted from status as a fundamental SI unit in 1979
-struct luminous_intensity_tag : public ordinal<-3> { };
+/// tag representing luminous intensity
+typedef base_dimension<-3>  luminous_intensity_tag;
 
 /// tag representing plane angle
-struct plane_angle_tag : public ordinal<-2> { };
+typedef base_dimension<-2>  plane_angle_tag;
 
 /// tag representing solid angle
-struct solid_angle_tag : public ordinal<-1> { };
+typedef base_dimension<-1>  solid_angle_tag;
+
+///// tag representing length
+////struct length_tag : public ordinal<-9> { };
+//
+///// tag representing mass
+//struct mass_tag : public ordinal<-8> { };
+//
+///// tag representing time
+//struct time_tag : public ordinal<-7> { };
+//
+///// tag representing electrical current
+//struct current_tag : public ordinal<-6> { };
+//
+///// tag representing temperature
+//struct temperature_tag : public ordinal<-5> { };
+//
+///// tag representing amount of substance
+//struct amount_tag : public ordinal<-4> { };
+//
+///// tag representing luminous intensity - demoted from status as a fundamental SI unit in 1979
+//struct luminous_intensity_tag : public ordinal<-3> { };
+//
+///// tag representing plane angle
+//struct plane_angle_tag : public ordinal<-2> { };
+//
+///// tag representing solid angle
+//struct solid_angle_tag : public ordinal<-1> { };
 
 }
 
