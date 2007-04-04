@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// resistivity : L^3 M T^-3 C^-2
-typedef composite_dimension<length_tag,3,mass_tag,1,time_tag,-3,current_tag,-2>::type   resistivity_type;              
+typedef derived_dimension<length_tag,3,mass_tag,1,time_tag,-3,current_tag,-2>::type   resistivity_type;              
 
 typedef unit<SI::resistivity_type,SI::system>                                           resistivity;
 

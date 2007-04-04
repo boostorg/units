@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// catalytic activity : T^-1 A^1
-typedef composite_dimension<time_tag,-1,amount_tag,1>::type                             catalytic_activity_type;    
+typedef derived_dimension<time_tag,-1,amount_tag,1>::type                             catalytic_activity_type;    
 
 typedef unit<SI::catalytic_activity_type,SI::system>                                    catalytic_activity;
 

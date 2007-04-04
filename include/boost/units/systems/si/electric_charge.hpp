@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// electric charge : T^1 C^1
-typedef composite_dimension<time_tag,1,current_tag,1>::type     electric_charge_type;        
+typedef derived_dimension<time_tag,1,current_tag,1>::type     electric_charge_type;        
 
 typedef unit<SI::electric_charge_type,SI::system>               electric_charge;
     

@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// permittivity : L^-3 M^-1 T^4 C^2
-typedef composite_dimension<length_tag,-3,mass_tag,-1,time_tag,4,current_tag,2>::type   permittivity_type;                
+typedef derived_dimension<length_tag,-3,mass_tag,-1,time_tag,4,current_tag,2>::type   permittivity_type;                
 
 typedef unit<SI::permittivity_type,SI::system>                                          permittivity;
 

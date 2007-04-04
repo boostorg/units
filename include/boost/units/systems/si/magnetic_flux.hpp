@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// magnetic flux : L^2 M T^-2 C^-1
-typedef composite_dimension<length_tag,2,mass_tag,1,time_tag,-2,current_tag,-1>::type   magnetic_flux_type;            
+typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-2,current_tag,-1>::type   magnetic_flux_type;            
 
 typedef unit<SI::magnetic_flux_type,SI::system>                                         magnetic_flux;
     

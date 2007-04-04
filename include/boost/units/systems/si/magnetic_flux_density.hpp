@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// magnetic flux density : M T^-2 C^-1
-typedef composite_dimension<mass_tag,1,time_tag,-2,current_tag,-1>::type    magnetic_flux_density_type;        
+typedef derived_dimension<mass_tag,1,time_tag,-2,current_tag,-1>::type    magnetic_flux_density_type;        
 
 typedef unit<SI::magnetic_flux_density_type,SI::system>                     magnetic_flux_density;
     

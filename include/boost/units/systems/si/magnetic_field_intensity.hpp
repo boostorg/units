@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// magnetic field intensity : L^-1 C
-typedef composite_dimension<length_tag,-1,current_tag,1>::type                          magnetic_field_intensity_type;
+typedef derived_dimension<length_tag,-1,current_tag,1>::type                          magnetic_field_intensity_type;
 
 typedef unit<SI::magnetic_field_intensity_type,SI::system>                              magnetic_field_intensity;
                                             

@@ -12,8 +12,8 @@
 #define BOOST_UNITS_CONVERT_RADIANS_TO_GRADIANS_HPP
 
 #include <boost/units/conversion.hpp>
-#include <boost/units/systems/angles/gradians.hpp>
-#include <boost/units/systems/angles/radians.hpp>
+#include <boost/units/systems/angle/gradians.hpp>
+#include <boost/units/systems/si/plane_angle.hpp>
 
 namespace boost {
 
@@ -22,7 +22,7 @@ namespace units {
 // conversions from radians to gradians
 
 template<>
-struct base_unit_converter<plane_angle_tag,angles::radians::system_tag,angles::gradians::system_tag> :
+struct base_unit_converter<plane_angle_tag,SI::system_tag,gradian::system_tag> :
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     public implicitly_convertible, 
 #endif

@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// electric potential : L^2 M T^-3 C^-1
-typedef composite_dimension<length_tag,2,mass_tag,1,time_tag,-3,current_tag,-1>::type   electric_potential_type;        
+typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-3,current_tag,-1>::type   electric_potential_type;        
 
 typedef unit<SI::electric_potential_type,SI::system>                                    electric_potential;
     
