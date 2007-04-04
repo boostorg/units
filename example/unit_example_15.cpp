@@ -28,6 +28,7 @@ Output:
 #include <boost/array.hpp>
 
 #include <boost/units/quantity.hpp>
+#include <boost/units/systems/si/length.hpp>
 
 namespace boost {
 
@@ -105,6 +106,31 @@ int main(void)
     // compile-time error if either of these is uncommented
     world_space_vector  wsv4(osv1);
     object_space_vector osv4(wsv1);
+#endif
+    }
+
+    {
+    // two-tier quantity for providing reference frame and underlying unit safety
+    typedef boost::array<quantity<SI::length>,3>    vector_type;
+    
+    typedef quantity<world_space_unit,vector_type>  world_space_vector_type;
+    typedef quantity<object_space_unit,vector_type> object_space_vector_type;
+    
+    vector_type vec1 = { 0*SI::meter, 0*SI::meter, 0*SI::meter },
+                vec2 = { 1*SI::meter, 1*SI::meter, 1*SI::meter };
+    
+    world_space_vector_type     wsv1 = vec1*world_space,
+                                wsv2 = vec2*world_space;
+    object_space_vector_type    osv1 = vec1*object_space,
+                                osv2 = vec2*object_space;
+    
+    world_space_vector_type  wsv3(wsv1);
+    object_space_vector_type osv3(osv1);
+    
+#if defined(BOOST_UNITS_EXAMPLE_15_FAIL) && BOOST_UNITS_EXAMPLE_15_FAIL == 3
+    // compile-time error if either of these is uncommented because conversion is not defined
+    world_space_vector_type  wsv4(osv2);
+    object_space_vector_type osv4(wsv2);
 #endif
     }
     
