@@ -67,7 +67,7 @@ demangle(const char* name)
 } // namespace detail
 
 template<class L>
-std::string simplify_mpl_typename(const L& source)
+std::string simplify_typename(const L& source)
 {
     const std::string   demangled = detail::demangle(typeid(source).name());
     
@@ -85,7 +85,9 @@ std::string simplify_mpl_typename(const L& source)
 } // namespace units
 
 } // namespace boost
+
 #else // MCS_USE_DEMANGLING
+
 namespace boost {
 
 namespace units {
@@ -102,7 +104,7 @@ demangle(const char* name)
 } // namespace detail
 
 template<class L>
-std::string simplify_mpl_typename(const L& source)
+std::string simplify_typename(const L& source)
 {
     return std::string(typeid(source).name());
 }

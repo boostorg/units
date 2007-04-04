@@ -27,13 +27,6 @@ namespace boost {
 
 namespace units { 
 
-//template<long N> 
-//struct base_dimension :
-//    public mpl::int_<N>
-//{
-//    typedef mpl::int_<N>    value;
-//};
-
 /// tag representing length
 typedef base_dimension<-9>  length_tag;
 

@@ -161,10 +161,21 @@ struct static_root< DL,static_rational<N,D> >
 };
 
 /// A utility class for defining fundamental dimensions.
-template<class DT>
-struct fundamental_dimension
+//template<class DT>
+//struct fundamental_dimension
+//{
+//    typedef typename make_dimension_list< boost::mpl::list< dim< DT,static_rational<1> > > >::type    type;
+//};
+
+/// replacement for fundamental_dimension
+template<long N>
+struct base_dimension : 
+    public mpl::int_<N>
 {
-    typedef typename make_dimension_list< boost::mpl::list< dim< DT,static_rational<1> > > >::type    type;
+    typedef base_dimension<N>   this_type;
+    typedef mpl::int_<N>        value;
+    
+    typedef typename make_dimension_list< boost::mpl::list< dim< this_type,static_rational<1> > > >::type    type;
 };
 
 /// A utility class for defining composite dimensions with integer powers.
@@ -176,7 +187,7 @@ template<class DT1 = dimensionless_type,int E1 = 0,
          class DT6 = dimensionless_type,int E6 = 0,
          class DT7 = dimensionless_type,int E7 = 0,
          class DT8 = dimensionless_type,int E8 = 0>
-struct composite_dimension
+struct derived_dimension
 {
     typedef typename 
     make_dimension_list< boost::mpl::list< dim< DT1,static_rational<E1> >,
