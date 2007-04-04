@@ -16,6 +16,8 @@
 
 #include <boost/math/common_factor.hpp>
 
+#include <boost/mpl/arithmetic.hpp>
+
 #include <boost/units/operators.hpp>
 
 /// \file 
@@ -24,6 +26,12 @@
 namespace boost {
 
 namespace units { 
+
+namespace detail {
+
+struct static_rational_tag {};
+
+}
 
 typedef long   integer_type;
 
@@ -66,6 +74,7 @@ class static_rational
             static_cast<integer_type>(boost::math::static_gcd<nabs,dabs>::value);
         
     public:   
+        typedef detail::static_rational_tag tag;
         static const integer_type   Numerator = N/den,
                                     Denominator = D/den;
         
@@ -322,6 +331,57 @@ root(const Y& x)
 }
 
 } // namespace units
+
+namespace mpl {
+
+template<>
+struct plus_impl<boost::units::detail::static_rational_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply {
+        typedef typename boost::units::static_add<T0, T1>::type type;
+    };
+};
+
+template<>
+struct minus_impl<boost::units::detail::static_rational_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply {
+        typedef typename boost::units::static_subtract<T0, T1>::type type;
+    };
+};
+
+template<>
+struct times_impl<boost::units::detail::static_rational_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply {
+        typedef typename boost::units::static_multiply<T0, T1>::type type;
+    };
+};
+
+template<>
+struct divides_impl<boost::units::detail::static_rational_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply {
+        typedef typename boost::units::static_divide<T0, T1>::type type;
+    };
+};
+
+template<>
+struct negate_impl<boost::units::detail::static_rational_tag>
+{
+    template<class T0>
+    struct apply {
+        typedef typename boost::units::static_negate<T0>::type type;
+    };
+};
+
+
+
+}
 
 } // namespace boost
 
