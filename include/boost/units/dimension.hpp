@@ -13,6 +13,7 @@
 
 #include <boost/static_assert.hpp>
 
+#include <boost/mpl/arithmetic.hpp>
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/begin_end.hpp>
 #include <boost/mpl/bool_fwd.hpp>
@@ -201,6 +202,60 @@ struct derived_dimension
 };
 
 } // namespace units
+
+namespace mpl {
+
+template<>
+struct plus_impl<boost::units::detail::dimension_list_tag,boost::units::detail::dimension_list_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef typename boost::units::static_add<T0, T1>::type type;
+    };
+};
+
+template<>
+struct minus_impl<boost::units::detail::dimension_list_tag,boost::units::detail::dimension_list_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef typename boost::units::static_subtract<T0, T1>::type type;
+    };
+};
+
+template<>
+struct times_impl<boost::units::detail::dimension_list_tag,boost::units::detail::dimension_list_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef typename boost::units::static_multiply<T0, T1>::type type;
+    };
+};
+
+template<>
+struct divides_impl<boost::units::detail::dimension_list_tag,boost::units::detail::dimension_list_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef typename boost::units::static_divide<T0, T1>::type type;
+    };
+};
+
+template<>
+struct negate_impl<boost::units::detail::dimension_list_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef typename boost::units::static_negate<T0>::type type;
+    };
+};
+
+} // namespace mpl
 
 } // namespace boost
 
