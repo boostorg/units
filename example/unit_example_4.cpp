@@ -372,7 +372,7 @@ int main()
     
     //[unit_example_4_snippet_6
     /// test trig stuff
-    quantity<angles::radians::radian>           theta = 0.375*radians;
+    quantity<angles::radians::radian>           theta = 0.375*boost::units::radians;
     quantity<angles::radians::dimensionless>    sin_theta = sin(theta);
     quantity<angles::radians::radian>           thetap = asin(sin_theta);
     //]
@@ -497,9 +497,9 @@ int main()
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF
     sstream2 << std::endl;
-    sstream2 << "theta            = 0.375 rad" << std::endl;
-    sstream2 << "sin(theta)       = 0.366273 dimensionless" << std::endl;
-    sstream2 << "asin(sin(theta)) = 0.375 rad" << std::endl;
+    sstream2 << "theta            = " << 0.375 << " rad" << std::endl;
+    sstream2 << "sin(theta)       = " << 0.366273 << " dimensionless" << std::endl;
+    sstream2 << "asin(sin(theta)) = " << 0.375 << " rad" << std::endl;
     sstream2 << std::endl;
     sstream2 << "V   = (12.5,0) m^2 kg s^(-3) A^(-1)" << std::endl;
     sstream2 << "I   = (3,4) A" << std::endl;
