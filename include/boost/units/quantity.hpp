@@ -144,10 +144,11 @@ class quantity
 /// unit systems are allowed because all dimensionless quantities are equivalent.
 /// Implicit construction and assignment from and conversion to @c value_type is
 /// also allowed.
-template<class System,class Y>
-class quantity<unit<dimensionless_type,System>,Y>
+template<class SystemTag,class Y>
+class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
 {
     public:
+        typedef homogeneous_system<SystemTag> System;
         typedef quantity<unit<dimensionless_type,System>,Y>     this_type;
                                    
         typedef Y                                               value_type;
