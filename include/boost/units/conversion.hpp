@@ -144,10 +144,10 @@ template<class S1,
         }
 };
 
-template<class FromUnit,class ToUnit,class Y>
-inline 
+template<class Y,class FromUnit,class ToUnit>
+inline
 Y
-conversion_factor()
+conversion_factor(const FromUnit&,const ToUnit&)
 {
     return quantity<ToUnit,Y>(Y(1)*FromUnit()).value();
 };
