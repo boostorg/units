@@ -30,7 +30,7 @@ namespace detail {
 template<class Y> 
 inline bool isfinite(const Y& val)
 {
-    return _finite(val);
+    return _finite(val) != 0;
 }
 
 template<class Y> 
@@ -42,7 +42,7 @@ inline bool isinf(const Y& val)
 template<class Y> 
 inline bool isnan(const Y& val)
 {
-    return _isnan(val);
+    return _isnan(val) != 0;
 }
 
 template<class Y> 
