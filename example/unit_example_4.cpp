@@ -141,11 +141,12 @@ w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 #include <algorithm>
 #include <sstream>
 
-#include <boost/units/measurement.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/trig.hpp>
 #include <boost/units/systems/si/codata/physico-chemical_constants.hpp>
+
+#include "measurement.hpp"
 
 namespace boost {
 

@@ -419,6 +419,10 @@ int main()
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si/force.hpp>
 #include <boost/units/systems/cgs/force.hpp>
+#include <boost/units/systems/si/mass.hpp>
+#include <boost/units/systems/cgs/mass.hpp>
+#include <boost/units/systems/si/momentum.hpp>
+#include <boost/units/systems/cgs/momentum.hpp>
 
 int main()
 {
@@ -426,7 +430,11 @@ int main()
     using namespace boost::units;
     
     std::cout << quantity<SI::dimensionless>(1.0*CGS::dyne/SI::newton) << std::endl;
-    std::cout << conversion_factor<CGS::dyne,SI::newton,double>() << std::endl;
+    std::cout << exp(quantity<SI::dimensionless>(1.0*(SI::newtons*CGS::dynes)/(SI::newtons*CGS::dynes))) << std::endl;
+    std::cout << conversion_factor<double>(CGS::dyne,SI::newton) << std::endl;
+    std::cout << conversion_factor<double>(SI::newton/SI::kilogram,CGS::dyne/CGS::gram) << std::endl;
+    std::cout << conversion_factor<double>(CGS::momentum(),SI::momentum()) << std::endl;
+    std::cout << conversion_factor<double>(SI::momentum()/SI::mass(),CGS::momentum()/CGS::mass()) << std::endl;
     
     return 0;
 }
