@@ -426,6 +426,7 @@ int main()
     using namespace boost::units;
     
     std::cout << quantity<SI::dimensionless>(1.0*CGS::dyne/SI::newton) << std::endl;
+    std::cout << conversion_factor<CGS::dyne,SI::newton,double>() << std::endl;
     
     return 0;
 }

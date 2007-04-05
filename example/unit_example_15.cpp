@@ -46,10 +46,10 @@ typedef object_space_tag::type   object_space_type;
 struct system { };
 
 /// unit typedefs
-typedef unit<system,dimensionless_type>     dimensionless;
+typedef unit<dimensionless_type,system>     dimensionless;
 
-typedef unit<system,world_space_type>       world_space_unit;
-typedef unit<system,object_space_type>      object_space_unit;
+typedef unit<world_space_type,system>       world_space_unit;
+typedef unit<object_space_type,system>      object_space_unit;
 
 static const world_space_unit   world_space;
 static const object_space_unit  object_space;
