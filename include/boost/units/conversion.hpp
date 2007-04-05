@@ -144,6 +144,14 @@ template<class S1,
         }
 };
 
+template<class FromUnit,class ToUnit,class Y>
+inline 
+Y
+conversion_factor()
+{
+    return quantity<ToUnit,Y>(Y(1)*FromUnit()).value();
+};
+
 } // namespace units
 
 } // namespace boost

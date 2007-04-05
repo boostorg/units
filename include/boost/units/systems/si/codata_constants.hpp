@@ -25,7 +25,7 @@ namespace constants {
 
 namespace CODATA {
 
-typedef dimensionless_quantity<SI::system,double>::type    dimensionless_constant;
+//typedef dimensionless_quantity<SI::system,double>::type    dimensionless_constant;
 
 } // namespace CODATA
 

@@ -141,6 +141,9 @@ typedef derived_dimension<length_tag,-2,luminous_intensity_tag,1,solid_angle_tag
 /// composite dimension for kinematic viscosity : L^2 T^-1
 typedef derived_dimension<length_tag,2,time_tag,-1>::type                                     kinematic_viscosity_type;
 
+/// composite dimension for luminance : L^-2 I
+typedef derived_dimension<length_tag,-2,luminous_intensity_tag,1>::type                       luminance_type;
+
 /// composite dimension for luminous flux : I QS
 typedef derived_dimension<luminous_intensity_tag,1,solid_angle_tag,1>::type                   luminous_flux_type;
 
