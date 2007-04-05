@@ -348,7 +348,7 @@ int main()
     return 0;
 }
 */
-
+/*
 #include <iostream>
 
 #include <boost/units/io.hpp>
@@ -389,7 +389,7 @@ int main()
               
     return 0;
 }
-
+*/
 /*
 #define MCS_USE_BOOST_REGEX_DEMANGLING
 
@@ -413,5 +413,21 @@ int main()
     return 0;
 }
 */
+#include <iostream>
+
+#include <boost/units/io.hpp>
+#include <boost/units/quantity.hpp>
+#include <boost/units/systems/si/force.hpp>
+#include <boost/units/systems/cgs/force.hpp>
+
+int main()
+{
+    using namespace boost;
+    using namespace boost::units;
+    
+    std::cout << quantity<SI::dimensionless>(1.0*CGS::dyne/SI::newton) << std::endl;
+    
+    return 0;
+}
 
 
