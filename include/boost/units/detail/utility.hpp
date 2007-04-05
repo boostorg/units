@@ -67,9 +67,9 @@ demangle(const char* name)
 } // namespace detail
 
 template<class L>
-std::string simplify_typename(const L& source)
+std::string simplify_typename(const L& /*source*/)
 {
-    const std::string   demangled = detail::demangle(typeid(source).name());
+    const std::string   demangled = detail::demangle(typeid(L).name());
     
     #ifdef MCS_USE_BOOST_REGEX_DEMANGLING
     boost::regex    ns_regex("boost::units::detail::|boost::units::");

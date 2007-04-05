@@ -31,12 +31,12 @@ namespace serialization {
 
 /// Boost Serialization library support for units.
 template<class Archive,class System,class Dim>
-inline void serialize(Archive& ar,boost::units::unit<Dim,System>&,const unsigned int version)
+inline void serialize(Archive& ar,boost::units::unit<Dim,System>&,const unsigned int /*version*/)
 { }
 
 /// Boost Serialization library support for quantities.
 template<class Archive,class Unit,class Y>
-inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsigned int version)
+inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsigned int /*version*/)
 {
     ar & boost::serialization::make_nvp("value", units::quantity_cast<Y&>(q));
 }
@@ -68,9 +68,9 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
 
 /// Write @c static_rational to @c std::basic_ostream.
 template<class Char, class Traits, integer_type N, integer_type D>
-inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N, D>& val)
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N, D>&)
 {
-    os << '(' << val.numerator() << '/' << val.denominator() << ')';
+    os << '(' << N << '/' << D << ')';
     return os;
 }
 
