@@ -361,7 +361,7 @@ namespace units {
 
 template<class Char, class Traits>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
-                                             const SI::energy& u)
+                                             const SI::energy&)
 {
     os << "J";
     return os;
@@ -369,7 +369,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 
 template<class Char, class Traits>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
-                                             const SI::power& u)
+                                             const SI::power&)
 {
     os << "W";
     return os;
