@@ -112,6 +112,7 @@ data6 :
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <limits>
 
 #include <boost/mpl/list.hpp>
 

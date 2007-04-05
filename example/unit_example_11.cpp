@@ -63,6 +63,7 @@ trunc(q1)             : 1 m
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <limits>
 
 #include <boost/units/cmath.hpp>
 #include <boost/units/io.hpp>
