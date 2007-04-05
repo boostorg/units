@@ -14,7 +14,7 @@
 #include <cmath>
 #include <complex>
 
-#include <boost/math/common_factor.hpp>
+#include <boost/math/common_factor_ct.hpp>
 
 #include <boost/mpl/arithmetic.hpp>
 
