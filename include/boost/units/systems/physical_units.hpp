@@ -111,6 +111,9 @@ typedef derived_dimension<length_tag,2,time_tag,-2>::type                       
 /// composite dimension for acceleration : L T^-2
 typedef derived_dimension<length_tag,1,time_tag,-2>::type                                     acceleration_type;  
 
+/// composite dimension for action : L^2 M T^-1
+typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-1>::type                          action_type;
+
 /// composite dimension for activity : T^-1
 typedef derived_dimension<time_tag,-1>::type                                                  activity_type; 
 
