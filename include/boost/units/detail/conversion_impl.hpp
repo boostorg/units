@@ -167,6 +167,16 @@ struct static_int_power_impl<N, false>
 };
 
 template<>
+struct static_int_power_impl<1, false>
+{
+    template<class Y, class R>
+    static Y apply(const Y& y, const R& r)
+    {
+        return(y * r);
+    }
+};
+
+template<>
 struct static_int_power_impl<0, true>
 {
     template<class Y, class R>
