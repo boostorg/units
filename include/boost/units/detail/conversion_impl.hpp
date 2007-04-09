@@ -493,7 +493,7 @@ struct sort_heterogeneous_system_by_dimension_tag
 
 //one->many
 template<int N>
-struct quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl
+struct fundamental_dimension_convert_homo_to_hetero_impl
 {
     template<class Begin, class Tag, class system1_type>
     struct apply
@@ -506,7 +506,7 @@ struct quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl
 
         typedef base_unit_converter<Tag, system1_type, system2_type>                                    converter;
         
-        typedef typename quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl<N - 1>::template 
+        typedef typename fundamental_dimension_convert_homo_to_hetero_impl<N - 1>::template 
             apply<next, Tag, system1_type>                                                             next_iteration;
         
         typedef typename multiply_typeof_helper<typename converter::type, 
@@ -520,7 +520,7 @@ struct quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl
 };
 
 template<>
-struct quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl<0>
+struct fundamental_dimension_convert_homo_to_hetero_impl<0>
 {
     template<class Begin, class Tag, class system1_type>
     struct apply
@@ -535,7 +535,7 @@ struct quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl<0>
 
 //many->one
 template<int N>
-struct quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl
+struct fundamental_dimension_convert_hetero_to_homo_impl
 {
     template<class Begin, class Tag, class system2_type>
     struct apply
@@ -548,7 +548,7 @@ struct quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl
 
         typedef base_unit_converter<Tag, system1_type, system2_type> converter;
         
-        typedef typename quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl<N - 1>::template 
+        typedef typename fundamental_dimension_convert_hetero_to_homo_impl<N - 1>::template 
             apply<next, Tag, system2_type>                                                             next_iteration;
         
         typedef typename multiply_typeof_helper<typename converter::type, 
@@ -565,7 +565,7 @@ struct quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl
 };
 
 template<>
-struct quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl<0>
+struct fundamental_dimension_convert_hetero_to_homo_impl<0>
 {
     template<class Begin, class Tag, class system2_type>
     struct apply
@@ -587,7 +587,7 @@ struct quantity_conversion_hetero_to_hetero_impl_func<1, N2>
     template<class Dim1, class Dim2>
     struct apply
     {
-        typedef typename quantity_conversion_hetero_to_hetero_homo_to_hetero_impl_impl<N2>::template apply<
+        typedef typename fundamental_dimension_convert_homo_to_hetero_impl<N2>::template apply<
             typename mpl::begin<typename Dim2::value_type>::type,
             typename Dim1::tag_type,
             typename mpl::front<typename Dim1::value_type>::type::tag_type
@@ -600,7 +600,7 @@ struct quantity_conversion_hetero_to_hetero_impl_func<N1, 1>
     template<class Dim1, class Dim2>
     struct apply
     {
-        typedef typename quantity_conversion_hetero_to_hetero_hetero_to_homo_impl_impl<N1>::template apply<
+        typedef typename fundamental_dimension_convert_hetero_to_homo_impl<N1>::template apply<
             typename mpl::begin<typename Dim1::value_type>::type,
             typename Dim1::tag_type,
             typename mpl::front<typename Dim2::value_type>::type::tag_type
@@ -625,12 +625,17 @@ struct quantity_conversion_hetero_to_hetero_impl_func<1, 1>
     };
 };
 
-template<int N>
-struct quantity_conversion_hetero_to_hetero_impl
-{
-    template<class Begin1, class Begin2>
-    struct apply
-    {
+template<int N1, int N2>
+struct quantity_conversion_hetero_to_hetero_impl;
+
+template<bool less, bool greater>
+struct quantity_conversion_hetero_to_hetero_impl_compare_test;
+
+// both systems contain this dimension
+template<>
+struct quantity_conversion_hetero_to_hetero_impl_compare_test<false, false> {
+    template<class Begin1, class Begin2, int N1, int N2>
+    struct apply {
         typedef homogeneous_system<typename detail::get_tag<typename mpl::deref<Begin1>::type>::type> dim_type;
 
         typedef typename detail::get_value<typename mpl::deref<Begin1>::type>::type                   value_type1;
@@ -644,7 +649,7 @@ struct quantity_conversion_hetero_to_hetero_impl
             mpl::size<value_type2>::value
         >::template apply<typename mpl::deref<Begin1>::type,typename mpl::deref<Begin2>::type>::type converter;
 
-        typedef typename quantity_conversion_hetero_to_hetero_impl<N - 1>::template apply<next1, next2> next_iteration;
+        typedef typename quantity_conversion_hetero_to_hetero_impl<N2 - 1, N2 - 1>::template apply<next1, next2> next_iteration;
         
         typedef typename multiply_typeof_helper<typename converter::type, 
                                                 typename next_iteration::type>::type                    type;
@@ -659,8 +664,112 @@ struct quantity_conversion_hetero_to_hetero_impl
     };
 };
 
+// only the source contains the current fundamental dimension
 template<>
-struct quantity_conversion_hetero_to_hetero_impl<0>
+struct quantity_conversion_hetero_to_hetero_impl_compare_test<true, false> {
+    template<class Begin1, class Begin2, int N1, int N2>
+    struct apply {
+        typedef typename detail::get_tag<typename mpl::deref<Begin1>::type>::type dim_type;
+
+        typedef typename detail::get_value<typename mpl::deref<Begin1>::type>::type                   value_type1;
+
+        // we are going to arbitrarily decide to convert everything to the
+        // system with the lowest ordinal
+        typedef typename get_tag<typename mpl::front<value_type1>::type>::type result_system_type;
+
+        typedef typename mpl::next<Begin1>::type next1;
+        typedef Begin2 next2;
+        
+        typedef typename fundamental_dimension_convert_hetero_to_homo_impl<
+            mpl::size<value_type1>::value
+        >::template apply<typename mpl::begin<value_type1>::type,dim_type,result_system_type> converter;
+
+        typedef typename quantity_conversion_hetero_to_hetero_impl<N1 - 1, N2>::template apply<next1, next2> next_iteration;
+        
+        typedef typename multiply_typeof_helper<typename converter::type, 
+                                                typename next_iteration::type>::type                    type;
+
+        static type value()
+        {
+            return(
+                converter::value() *
+                next_iteration::value()
+            );
+        }
+    };
+};
+
+// only the destination contains the current fundamental dimension
+template<>
+struct quantity_conversion_hetero_to_hetero_impl_compare_test<false, true> {
+    template<class Begin1, class Begin2, int N1, int N2>
+    struct apply {
+        typedef typename detail::get_tag<typename mpl::deref<Begin2>::type>::type dim_type;
+
+        typedef typename detail::get_value<typename mpl::deref<Begin2>::type>::type  value_type2;
+
+        // we are going to arbitrarily decide to convert everything to the
+        // system with the lowest ordinal
+        typedef typename get_tag<typename mpl::front<value_type2>::type>::type source_system_type;
+
+        typedef Begin1 next1;
+        typedef typename mpl::next<Begin2>::type next2;
+        
+        typedef typename fundamental_dimension_convert_homo_to_hetero_impl<
+            mpl::size<value_type2>::value
+        >::template apply<typename mpl::begin<value_type2>::type,dim_type,source_system_type> converter;
+
+        typedef typename quantity_conversion_hetero_to_hetero_impl<N1, N2 - 1>::template apply<next1, next2> next_iteration;
+        
+        typedef typename multiply_typeof_helper<typename converter::type, 
+                                                typename next_iteration::type>::type                    type;
+
+        static type value()
+        {
+            return(
+                converter::value() *
+                next_iteration::value()
+            );
+        }
+    };
+};
+
+template<int N1, int N2>
+struct quantity_conversion_hetero_to_hetero_impl
+{
+    template<class Begin1, class Begin2>
+    struct apply :
+        quantity_conversion_hetero_to_hetero_impl_compare_test<
+            less<typename mpl::deref<Begin1>::type, typename mpl::deref<Begin2>::type>::value,
+            less<typename mpl::deref<Begin2>::type, typename mpl::deref<Begin1>::type>::value
+        >::template apply<Begin1, Begin2, N1, N2>
+    {};
+};
+
+template<int N2>
+struct quantity_conversion_hetero_to_hetero_impl<0, N2>
+{
+    template<class Begin1, class Begin2>
+    struct apply :
+        quantity_conversion_hetero_to_hetero_impl_compare_test<
+            false, true
+        >::template apply<Begin1, Begin2, 0, N2>
+    {};
+};
+
+template<int N1>
+struct quantity_conversion_hetero_to_hetero_impl<N1, 0>
+{
+    template<class Begin1, class Begin2>
+    struct apply :
+        quantity_conversion_hetero_to_hetero_impl_compare_test<
+            true, false
+        >::template apply<Begin1, Begin2, N1, 0>
+    {};
+};
+
+template<>
+struct quantity_conversion_hetero_to_hetero_impl<0, 0>
 {
     template<class Begin1, class Begin2>
     struct apply
@@ -678,7 +787,13 @@ struct quantity_conversion_hetero_to_hetero
 {
     typedef typename sort_heterogeneous_system_by_dimension_tag<System1>::type S1;
     typedef typename sort_heterogeneous_system_by_dimension_tag<System2>::type S2;
-    typedef typename quantity_conversion_hetero_to_hetero_impl<mpl::size<S1>::value>::template apply<typename mpl::begin<S1>::type, typename mpl::begin<S2>::type> converter;
+    typedef typename quantity_conversion_hetero_to_hetero_impl<
+        mpl::size<S1>::value,
+        mpl::size<S2>::value
+    >::template apply<
+        typename mpl::begin<S1>::type,
+        typename mpl::begin<S2>::type
+    > converter;
     typedef typename converter::type type;
     static type value() 
     {
