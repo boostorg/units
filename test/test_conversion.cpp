@@ -93,6 +93,11 @@ int test_main(int,char *[])
     
 	//quantity<SI::force> F6 = 20 * CGS::dyne;
 
+
+
+    bu::quantity<bu::SI::dimensionless> dimensionless_test(1.0*bu::CGS::dyne/bu::SI::newton);
+    BOOST_CHECK(dimensionless_test == 1e-5);
+
     return(0);
 }
 
