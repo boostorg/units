@@ -851,106 +851,178 @@ operator/(const quantity<unit<Dim1,System1>,X>& lhs,
 }
 
 /// runtime operator==
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator==(const quantity<unit<Dim1,System>,X>& val1,
-           const quantity<unit<Dim2,System>,Y>& val2)
+operator==(const quantity<Unit,X>& val1,
+           const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() == val2.value();
 }
 
 /// runtime operator!=
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator!=(const quantity<unit<Dim1,System>,X>& val1,
-           const quantity<unit<Dim2,System>,Y>& val2)
+operator!=(const quantity<Unit,X>& val1,
+           const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() != val2.value();
 }
 
 /// runtime operator<
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator<(const quantity<unit<Dim1,System>,X>& val1,
-          const quantity<unit<Dim2,System>,Y>& val2)
+operator<(const quantity<Unit,X>& val1,
+          const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() < val2.value();
 }
 
 /// runtime operator<=
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator<=(const quantity<unit<Dim1,System>,X>& val1,
-           const quantity<unit<Dim2,System>,Y>& val2)
+operator<=(const quantity<Unit,X>& val1,
+           const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() <= val2.value();
 }
 
 /// runtime operator>
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator>(const quantity<unit<Dim1,System>,X>& val1,
-          const quantity<unit<Dim2,System>,Y>& val2)
+operator>(const quantity<Unit,X>& val1,
+          const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() > val2.value();
 }
 
 /// runtime operator>=
-template<class System,
-         class Dim1,
-         class Dim2,
+template<class Unit,
          class X,
          class Y>
 inline
 bool 
-operator>=(const quantity<unit<Dim1,System>,X>& val1,
-           const quantity<unit<Dim2,System>,Y>& val2)
+operator>=(const quantity<Unit,X>& val1,
+           const quantity<Unit,Y>& val2)
 {
-    // ensure dimension lists are commensurate
-    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
-
     return val1.value() >= val2.value();
 }
+
+///// runtime operator==
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator==(const quantity<unit<Dim1,System>,X>& val1,
+//           const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() == val2.value();
+//}
+//
+///// runtime operator!=
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator!=(const quantity<unit<Dim1,System>,X>& val1,
+//           const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() != val2.value();
+//}
+//
+///// runtime operator<
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator<(const quantity<unit<Dim1,System>,X>& val1,
+//          const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() < val2.value();
+//}
+//
+///// runtime operator<=
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator<=(const quantity<unit<Dim1,System>,X>& val1,
+//           const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() <= val2.value();
+//}
+//
+///// runtime operator>
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator>(const quantity<unit<Dim1,System>,X>& val1,
+//          const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() > val2.value();
+//}
+//
+///// runtime operator>=
+//template<class System,
+//         class Dim1,
+//         class Dim2,
+//         class X,
+//         class Y>
+//inline
+//bool 
+//operator>=(const quantity<unit<Dim1,System>,X>& val1,
+//           const quantity<unit<Dim2,System>,Y>& val2)
+//{
+//    // ensure dimension lists are commensurate
+//    BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
+//
+//    return val1.value() >= val2.value();
+//}
 
 } // namespace units
 
