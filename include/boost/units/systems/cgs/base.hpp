@@ -56,21 +56,21 @@ typedef unit<system,dimensionless_type>         dimensionless;
 } // namespace CGS
                                                     
 template<> 
-struct base_unit_info<length_tag,CGS::system_tag> 
+struct base_unit_info<length_dim,CGS::system_tag> 
 { 
     static std::string name()       { return "centimeter"; }
     static std::string symbol()     { return "cm"; }
 };
     
 template<> 
-struct base_unit_info<mass_tag,CGS::system_tag> 
+struct base_unit_info<mass_dim,CGS::system_tag> 
 { 
     static std::string name()       { return "gram"; }
     static std::string symbol()     { return "g"; }
 };
     
 template<> 
-struct base_unit_info<time_tag,CGS::system_tag> 
+struct base_unit_info<time_dim,CGS::system_tag> 
 { 
     static std::string name()       { return "second"; }
     static std::string symbol()     { return "s"; }

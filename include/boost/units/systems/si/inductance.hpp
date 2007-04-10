@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// inductance : L^2 M T^-2 C^-2
-typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-2,current_tag,-2>::type   inductance_type;                
+typedef derived_dimension<length_dim,2,mass_dim,1,time_dim,-2,current_dim,-2>::type   inductance_type;                
 
 typedef unit<SI::inductance_type,SI::system>                                            inductance;
     

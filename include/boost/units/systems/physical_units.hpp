@@ -11,14 +11,15 @@
 #ifndef BOOST_UNITS_PHYSICAL_UNITS_HPP
 #define BOOST_UNITS_PHYSICAL_UNITS_HPP
 
+#include <boost/units/static_constant.hpp>
 #include <boost/units/system.hpp>
 #include <boost/units/unit.hpp>
 
 /// \file 
 /// \brief Various definitions to simplify systems of physical units.
 ///
-/// \detailed This file includes the seven SI-defined fundamental dimensions as
-/// well as composite dimensions for a number of commonly encountered
+/// \detailed This file includes the seven SI-defined base dimensions as
+/// well as derived dimensions for a number of commonly encountered
 /// physical unit types. Angles and solid angles are technically dimensionless. 
 /// However, incorrect use of degrees and radians is a common source of errors, 
 /// so we treat them on the same footing as the seven physical dimensions.
@@ -28,31 +29,31 @@ namespace boost {
 namespace units { 
 
 /// tag representing length
-typedef base_dimension<-9>  length_tag;
+typedef base_dimension<-9>          length_dim;
 
 /// tag representing mass
-typedef base_dimension<-8>  mass_tag;
+typedef base_dimension<-8>          mass_dim;
 
 /// tag representing time
-typedef base_dimension<-7>  time_tag;
+typedef base_dimension<-7>          time_dim;
 
 /// tag representing electrical current
-typedef base_dimension<-6>  current_tag;
+typedef base_dimension<-6>          current_dim;
 
 /// tag representing temperature
-typedef base_dimension<-5>  temperature_tag;
+typedef base_dimension<-5>          temperature_dim;
 
 /// tag representing amount of substance
-typedef base_dimension<-4>  amount_tag;
+typedef base_dimension<-4>          amount_dim;
 
 /// tag representing luminous intensity
-typedef base_dimension<-3>  luminous_intensity_tag;
+typedef base_dimension<-3>          luminous_intensity_dim;
 
 /// tag representing plane angle
-typedef base_dimension<-2>  plane_angle_tag;
+typedef base_dimension<-2>          plane_angle_dim;
 
 /// tag representing solid angle
-typedef base_dimension<-1>  solid_angle_tag;
+typedef base_dimension<-1>          solid_angle_dim;
 
 }
 
@@ -62,15 +63,15 @@ typedef base_dimension<-1>  solid_angle_tag;
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::length_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::mass_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::time_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::current_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::temperature_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::amount_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::luminous_intensity_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::plane_angle_tag)
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::solid_angle_tag)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::length_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::mass_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::time_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::current_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::temperature_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::amount_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::luminous_intensity_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::plane_angle_dim)
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::solid_angle_dim)
 
 #endif
 
@@ -78,107 +79,107 @@ namespace boost {
 
 namespace units {
 
-/// fundamental dimension of length (L)
-typedef length_tag::type                length_type;
+/// base dimension of length (L)
+typedef length_dim::type                                                                    length_type;
 
-/// fundamental dimension of mass (M)
-typedef mass_tag::type                  mass_type;
+/// base dimension of mass (M)
+typedef mass_dim::type                                                                      mass_type;
 
-/// fundamental dimension of time (T)
-typedef time_tag::type                  time_type;
+/// base dimension of time (T)
+typedef time_dim::type                                                                      time_type;
 
-/// fundamental dimension of electric current (I)
-typedef current_tag::type               current_type;
+/// base dimension of electric current (I)
+typedef current_dim::type                                                                   current_type;
 
-/// fundamental dimension of temperature (Theta)
-typedef temperature_tag::type           temperature_type;
+/// base dimension of temperature (Theta)
+typedef temperature_dim::type                                                               temperature_type;
 
-/// fundamental dimension of amount of substance (N)
-typedef amount_tag::type                amount_type;
+/// base dimension of amount of substance (N)
+typedef amount_dim::type                                                                    amount_type;
 
-/// fundamental dimension of luminous intensity (J)
-typedef luminous_intensity_tag::type    luminous_intensity_type;
+/// base dimension of luminous intensity (J)
+typedef luminous_intensity_dim::type                                                        luminous_intensity_type;
 
-/// fundamental dimension of planar angle (QP)
-typedef plane_angle_tag::type           plane_angle_type;
+/// base dimension of planar angle (QP)
+typedef plane_angle_dim::type                                                               plane_angle_type;
 
-/// fundamental dimension of solid angle (QS)
-typedef solid_angle_tag::type           solid_angle_type;
+/// base dimension of solid angle (QS)
+typedef solid_angle_dim::type                                                               solid_angle_type;
     
-/// composite dimension for absorbed dose : L^2 T^-2
-typedef derived_dimension<length_tag,2,time_tag,-2>::type                                     absorbed_dose_type;  
+/// derived dimension for absorbed dose : L^2 T^-2
+typedef derived_dimension<length_dim,2,time_dim,-2>::type                                   absorbed_dose_type;  
 
-/// composite dimension for acceleration : L T^-2
-typedef derived_dimension<length_tag,1,time_tag,-2>::type                                     acceleration_type;  
+/// derived dimension for acceleration : L T^-2
+typedef derived_dimension<length_dim,1,time_dim,-2>::type                                   acceleration_type;  
 
-/// composite dimension for action : L^2 M T^-1
-typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-1>::type                          action_type;
+/// derived dimension for action : L^2 M T^-1
+typedef derived_dimension<length_dim,2,mass_dim,1,time_dim,-1>::type                        action_type;
 
-/// composite dimension for activity : T^-1
-typedef derived_dimension<time_tag,-1>::type                                                  activity_type; 
+/// derived dimension for activity : T^-1
+typedef derived_dimension<time_dim,-1>::type                                                activity_type; 
 
-/// composite dimension for angular velocity : T^-1 QP
-typedef derived_dimension<time_tag,-1,plane_angle_tag,1>::type                                angular_velocity_type; 
+/// derived dimension for angular velocity : T^-1 QP
+typedef derived_dimension<time_dim,-1,plane_angle_dim,1>::type                              angular_velocity_type; 
 
-/// composite dimension for area : L^2
-typedef derived_dimension<length_tag,2>::type                                                 area_type; 
+/// derived dimension for area : L^2
+typedef derived_dimension<length_dim,2>::type                                               area_type; 
 
-/// composite dimension for dose equivalent : L^2 T^-2
-typedef derived_dimension<length_tag,2,time_tag,-2>::type                                     dose_equivalent_type;  
+/// derived dimension for dose equivalent : L^2 T^-2
+typedef derived_dimension<length_dim,2,time_dim,-2>::type                                   dose_equivalent_type;  
 
-/// composite dimension for dynamic viscosity : M L^-1 T^-1
-typedef derived_dimension<mass_tag,1,length_tag,-1,time_tag,-1>::type                         dynamic_viscosity_type;
+/// derived dimension for dynamic viscosity : M L^-1 T^-1
+typedef derived_dimension<mass_dim,1,length_dim,-1,time_dim,-1>::type                       dynamic_viscosity_type;
 
-/// composite dimension for energy : L^2 M T^-2
-typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-2>::type                          energy_type;                
+/// derived dimension for energy : L^2 M T^-2
+typedef derived_dimension<length_dim,2,mass_dim,1,time_dim,-2>::type                        energy_type;                
 
-/// composite dimension for force : L M T^-2
-typedef derived_dimension<length_tag,1,mass_tag,1,time_tag,-2>::type                          force_type;                    
+/// derived dimension for force : L M T^-2
+typedef derived_dimension<length_dim,1,mass_dim,1,time_dim,-2>::type                        force_type;                    
 
-/// composite dimension for frequency : T^-1
-typedef derived_dimension<time_tag,-1>::type                                                  frequency_type;                
+/// derived dimension for frequency : T^-1
+typedef derived_dimension<time_dim,-1>::type                                                frequency_type;                
 
-/// composite dimension for illuminance : L^-2 I QS
-typedef derived_dimension<length_tag,-2,luminous_intensity_tag,1,solid_angle_tag,1>::type     illuminance_type;
+/// derived dimension for illuminance : L^-2 I QS
+typedef derived_dimension<length_dim,-2,luminous_intensity_dim,1,solid_angle_dim,1>::type   illuminance_type;
 
-/// composite dimension for kinematic viscosity : L^2 T^-1
-typedef derived_dimension<length_tag,2,time_tag,-1>::type                                     kinematic_viscosity_type;
+/// derived dimension for kinematic viscosity : L^2 T^-1
+typedef derived_dimension<length_dim,2,time_dim,-1>::type                                   kinematic_viscosity_type;
 
-/// composite dimension for luminance : L^-2 I
-typedef derived_dimension<length_tag,-2,luminous_intensity_tag,1>::type                       luminance_type;
+/// derived dimension for luminance : L^-2 I
+typedef derived_dimension<length_dim,-2,luminous_intensity_dim,1>::type                     luminance_type;
 
-/// composite dimension for luminous flux : I QS
-typedef derived_dimension<luminous_intensity_tag,1,solid_angle_tag,1>::type                   luminous_flux_type;
+/// derived dimension for luminous flux : I QS
+typedef derived_dimension<luminous_intensity_dim,1,solid_angle_dim,1>::type                 luminous_flux_type;
 
-/// composite dimension for mass density : L^-3 M
-typedef derived_dimension<length_tag,-3,mass_tag,1>::type                                     mass_density_type;            
+/// derived dimension for mass density : L^-3 M
+typedef derived_dimension<length_dim,-3,mass_dim,1>::type                                   mass_density_type;            
 
-/// composite dimension for linear momentum : L M T^-1
-typedef derived_dimension<length_tag,1,mass_tag,1,time_tag,-1>::type                          momentum_type;                
+/// derived dimension for linear momentum : L M T^-1
+typedef derived_dimension<length_dim,1,mass_dim,1,time_dim,-1>::type                        momentum_type;                
 
-/// composite dimension for power : L^2 M T^-3
-typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-3>::type                          power_type;                    
+/// derived dimension for power : L^2 M T^-3
+typedef derived_dimension<length_dim,2,mass_dim,1,time_dim,-3>::type                        power_type;                    
 
-/// composite dimension for pressure : L^-1 M T^-2
-typedef derived_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                         pressure_type;                
+/// derived dimension for pressure : L^-1 M T^-2
+typedef derived_dimension<length_dim,-1,mass_dim,1,time_dim,-2>::type                       pressure_type;                
 
-/// composite dimension for specific volume : L^3 M^-1
-typedef derived_dimension<length_tag,3,mass_tag,-1>::type                                     specific_volume_type;            
+/// derived dimension for specific volume : L^3 M^-1
+typedef derived_dimension<length_dim,3,mass_dim,-1>::type                                   specific_volume_type;            
 
-/// composite dimension for stress : L^-1 M T^-2
-typedef derived_dimension<length_tag,-1,mass_tag,1,time_tag,-2>::type                         stress_type;     
+/// derived dimension for stress : L^-1 M T^-2
+typedef derived_dimension<length_dim,-1,mass_dim,1,time_dim,-2>::type                       stress_type;     
 
-/// composite dimension for surface density : L^-2 M
-typedef derived_dimension<length_tag,-2,mass_tag,1>::type                                     surface_density_type;
+/// derived dimension for surface density : L^-2 M
+typedef derived_dimension<length_dim,-2,mass_dim,1>::type                                   surface_density_type;
 
-/// composite dimension for velocity : L T^-1
-typedef derived_dimension<length_tag,1,time_tag,-1>::type                                     velocity_type;                
+/// derived dimension for velocity : L T^-1
+typedef derived_dimension<length_dim,1,time_dim,-1>::type                                   velocity_type;                
 
-/// composite dimension for volume : l^3
-typedef derived_dimension<length_tag,3>::type                                                 volume_type;
+/// derived dimension for volume : l^3
+typedef derived_dimension<length_dim,3>::type                                               volume_type;
 
-/// composite dimension for wavenumber : L^-1
-typedef derived_dimension<length_tag,-1>::type                                                wavenumber_type;                 
+/// derived dimension for wavenumber : L^-1
+typedef derived_dimension<length_dim,-1>::type                                              wavenumber_type;                 
 
 } // namespace units
 

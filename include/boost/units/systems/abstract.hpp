@@ -61,63 +61,63 @@ typedef unit<solid_angle_type,system>           solid_angle;            ///< abs
 } // namespace abstract
 
 template<> 
-struct base_unit_info<length_tag,abstract::system_tag> 
+struct base_unit_info<length_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Length]"; }
     static std::string symbol()     { return "[L]"; }
 };
 
 template<> 
-struct base_unit_info<mass_tag,abstract::system_tag> 
+struct base_unit_info<mass_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Mass]"; }
     static std::string symbol()     { return "[M]"; }
 };
 
 template<> 
-struct base_unit_info<time_tag,abstract::system_tag> 
+struct base_unit_info<time_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Time]"; }
     static std::string symbol()     { return "[T]"; }
 };
 
 template<> 
-struct base_unit_info<current_tag,abstract::system_tag> 
+struct base_unit_info<current_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Electric Current]"; }
     static std::string symbol()     { return "[I]"; }
 };
 
 template<> 
-struct base_unit_info<temperature_tag,abstract::system_tag> 
+struct base_unit_info<temperature_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Temperature]"; }
     static std::string symbol()     { return "[Theta]"; }
 };
 
 template<> 
-struct base_unit_info<amount_tag,abstract::system_tag> 
+struct base_unit_info<amount_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Amount]"; }
     static std::string symbol()     { return "[N]"; }
 };
 
 template<> 
-struct base_unit_info<luminous_intensity_tag,abstract::system_tag> 
+struct base_unit_info<luminous_intensity_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Luminous Intensity]"; }
     static std::string symbol()     { return "[J]"; }
 };
 
 template<> 
-struct base_unit_info<plane_angle_tag,abstract::system_tag> 
+struct base_unit_info<plane_angle_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Planar Angle]"; }
     static std::string symbol()     { return "[QP]"; }
 };
 
 template<> 
-struct base_unit_info<solid_angle_tag,abstract::system_tag> 
+struct base_unit_info<solid_angle_dim,abstract::system_tag> 
 { 
     static std::string name()       { return "[Solid Angle]"; }
     static std::string symbol()     { return "[QS]"; }

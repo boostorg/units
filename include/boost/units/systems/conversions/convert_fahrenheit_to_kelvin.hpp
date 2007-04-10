@@ -22,7 +22,7 @@ namespace units {
 // convert temperature differences in Fahrenheit to Kelvin
 
 template<>
-struct base_unit_converter<temperature_tag,fahrenheit::system_tag,SI::system_tag> :
+struct base_unit_converter<temperature_dim,fahrenheit::system_tag,SI::system_tag> :
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     public implicitly_convertible, 
 #endif

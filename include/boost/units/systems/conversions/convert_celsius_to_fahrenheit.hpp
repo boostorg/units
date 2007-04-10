@@ -22,7 +22,7 @@ namespace units {
 // convert temperature differences in Celsius to Fahrenheit
 
 template<>
-struct base_unit_converter<temperature_tag,celsius::system_tag,fahrenheit::system_tag> :
+struct base_unit_converter<temperature_dim,celsius::system_tag,fahrenheit::system_tag> :
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     public implicitly_convertible, 
 #endif

@@ -59,7 +59,7 @@ BOOST_UNITS_STATIC_CONSTANT(gradians,plane_angle);
 } // namespace gradian
 
 template<> 
-struct base_unit_info<plane_angle_tag,gradian::system_tag> 
+struct base_unit_info<plane_angle_dim,gradian::system_tag> 
 { 
     static std::string name()       { return "gradian"; }
     static std::string symbol()     { return "grad"; }

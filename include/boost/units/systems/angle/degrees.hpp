@@ -59,7 +59,7 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,plane_angle);
 } // namespace degree
 
 template<> 
-struct base_unit_info<plane_angle_tag,degree::system_tag> 
+struct base_unit_info<plane_angle_dim,degree::system_tag> 
 { 
     static std::string name()       { return "degree"; }
     static std::string symbol()     { return "deg"; }

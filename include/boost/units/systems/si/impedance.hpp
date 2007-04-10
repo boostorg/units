@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// impedance : L^2 M T^-3 C^-2  
-typedef derived_dimension<length_tag,2,mass_tag,1,time_tag,-3,current_tag,-2>::type   impedance_type;              
+typedef derived_dimension<length_dim,2,mass_dim,1,time_dim,-3,current_dim,-2>::type   impedance_type;              
 
 typedef unit<SI::impedance_type,SI::system>                                             impedance;
                                             

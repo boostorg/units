@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// permeability : L M T^-2 C^-2
-typedef derived_dimension<length_tag,1,mass_tag,1,time_tag,-2,current_tag,-2>::type   permeability_type;
+typedef derived_dimension<length_dim,1,mass_dim,1,time_dim,-2,current_dim,-2>::type   permeability_type;
 
 typedef unit<SI::permeability_type,SI::system>                                          permeability;
 

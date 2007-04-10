@@ -22,7 +22,7 @@ namespace units {
 // conversions from CGS to SI units
 
 template<>
-struct base_unit_converter<length_tag,CGS::system_tag,SI::system_tag>
+struct base_unit_converter<length_dim,CGS::system_tag,SI::system_tag>
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     : public implicitly_convertible
 #endif
@@ -32,7 +32,7 @@ struct base_unit_converter<length_tag,CGS::system_tag,SI::system_tag>
 };
 
 template<>
-struct base_unit_converter<mass_tag,CGS::system_tag,SI::system_tag>
+struct base_unit_converter<mass_dim,CGS::system_tag,SI::system_tag>
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     : public implicitly_convertible
 #endif
@@ -42,7 +42,7 @@ struct base_unit_converter<mass_tag,CGS::system_tag,SI::system_tag>
 };
 
 template<>
-struct base_unit_converter<time_tag,CGS::system_tag,SI::system_tag> :
+struct base_unit_converter<time_dim,CGS::system_tag,SI::system_tag> :
     public implicitly_convertible,
     public trivial_conversion
 { };

@@ -36,7 +36,7 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // namespace celsius
 
-template<> struct base_unit_info<temperature_tag,celsius::system_tag>
+template<> struct base_unit_info<temperature_dim,celsius::system_tag>
 {
     static std::string name()               { return "Celsius"; }
     static std::string symbol()             { return "C"; }

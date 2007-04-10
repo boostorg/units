@@ -56,63 +56,63 @@ typedef unit<dimensionless_type,system>         dimensionless;
 } // namespace SI
                                                     
 template<> 
-struct base_unit_info<length_tag,SI::system_tag> 
+struct base_unit_info<length_dim,SI::system_tag> 
 { 
     static std::string name()       { return "meter"; }
     static std::string symbol()     { return "m"; }
 };
     
 template<> 
-struct base_unit_info<mass_tag,SI::system_tag> 
+struct base_unit_info<mass_dim,SI::system_tag> 
 { 
     static std::string name()       { return "kilogram"; }
     static std::string symbol()     { return "kg"; }
 };
     
 template<> 
-struct base_unit_info<time_tag,SI::system_tag> 
+struct base_unit_info<time_dim,SI::system_tag> 
 { 
     static std::string name()       { return "second"; }
     static std::string symbol()     { return "s"; }
 };
     
 template<> 
-struct base_unit_info<current_tag,SI::system_tag> 
+struct base_unit_info<current_dim,SI::system_tag> 
 { 
     static std::string name()       { return "ampere"; }
     static std::string symbol()     { return "A"; }
 };
     
 template<> 
-struct base_unit_info<temperature_tag,SI::system_tag> 
+struct base_unit_info<temperature_dim,SI::system_tag> 
 { 
     static std::string name()       { return "kelvin"; }
     static std::string symbol()     { return "K"; }
 };
     
 template<> 
-struct base_unit_info<amount_tag,SI::system_tag> 
+struct base_unit_info<amount_dim,SI::system_tag> 
 { 
     static std::string name()       { return "mole"; }
     static std::string symbol()     { return "mol"; }
 };
     
 template<> 
-struct base_unit_info<luminous_intensity_tag,SI::system_tag> 
+struct base_unit_info<luminous_intensity_dim,SI::system_tag> 
 { 
     static std::string name()       { return "candela"; }
     static std::string symbol()     { return "cd"; }
 };
 
 template<> 
-struct base_unit_info<plane_angle_tag,SI::system_tag> 
+struct base_unit_info<plane_angle_dim,SI::system_tag> 
 { 
     static std::string name()       { return "radian"; }
     static std::string symbol()     { return "rad"; }
 };
 
 template<> 
-struct base_unit_info<solid_angle_tag,SI::system_tag> 
+struct base_unit_info<solid_angle_dim,SI::system_tag> 
 { 
     static std::string name()       { return "steradian"; }
     static std::string symbol()     { return "sr"; }
