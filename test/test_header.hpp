@@ -36,24 +36,24 @@ namespace boost {
 
 namespace units {
 
-typedef base_dimension<1>   length_tag;
-typedef base_dimension<2>   mass_tag;
-typedef base_dimension<3>   time_tag;
+typedef base_dimension<1>   length_dim;
+typedef base_dimension<2>   mass_dim;
+typedef base_dimension<3>   time_dim;
 
-typedef length_tag::type    length_type;
-typedef mass_tag::type      mass_type;
-typedef time_tag::type      time_type;
+typedef length_dim::type    length_type;
+typedef mass_dim::type      mass_type;
+typedef time_dim::type      time_type;
 
-typedef derived_dimension<length_tag,2>::type area_type;
-typedef derived_dimension<mass_tag,1,
-                            length_tag,2,
-                            time_tag,-2>::type  energy_type;
-typedef derived_dimension<mass_tag,-1,
-                            length_tag,-2,
-                            time_tag,2>::type   inverse_energy_type;
-typedef derived_dimension<length_tag,1,
-                            time_tag,-1>::type  velocity_type;
-typedef derived_dimension<length_tag,3>::type volume_type;
+typedef derived_dimension<length_dim,2>::type area_type;
+typedef derived_dimension<mass_dim,1,
+                            length_dim,2,
+                            time_dim,-2>::type  energy_type;
+typedef derived_dimension<mass_dim,-1,
+                            length_dim,-2,
+                            time_dim,2>::type   inverse_energy_type;
+typedef derived_dimension<length_dim,1,
+                            time_dim,-1>::type  velocity_type;
+typedef derived_dimension<length_dim,3>::type volume_type;
 
 /// placeholder class defining test unit system
 struct system_tag : public ordinal<101> { };
@@ -90,20 +90,20 @@ BOOST_UNITS_STATIC_CONSTANT(meters_per_second,velocity);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);
 
-template<> struct base_unit_info<length_tag,system_tag>
+template<> struct base_unit_info<length_dim,system_tag>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct base_unit_info<mass_tag,system_tag>
+template<> struct base_unit_info<mass_dim,system_tag>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct base_unit_info<time_tag,system_tag>
+template<> struct base_unit_info<time_dim,system_tag>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

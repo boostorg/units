@@ -64,7 +64,7 @@ static const length mile,miles;
 
 // IO helper class
 template<> 
-struct base_unit_info<length_tag,nautical::system_tag> 
+struct base_unit_info<length_dim,nautical::system_tag> 
 { 
     static std::string name()       { return "nautical mile"; }
     static std::string symbol()     { return "nmi"; }
@@ -72,7 +72,7 @@ struct base_unit_info<length_tag,nautical::system_tag>
 
 // helper for conversions between nautical length and SI length
 template<>
-struct base_unit_converter<length_tag,nautical::system_tag,SI::system_tag> :
+struct base_unit_converter<length_dim,nautical::system_tag,SI::system_tag> :
     public trivial_conversion, trivial_inverse_conversion
 {
     typedef double type;
@@ -97,7 +97,7 @@ static const length foot,feet;
 
 // IO helper class
 template<> 
-struct base_unit_info<length_tag,imperial::system_tag> 
+struct base_unit_info<length_dim,imperial::system_tag> 
 { 
     static std::string name()       { return "foot"; }
     static std::string symbol()     { return "ft"; }
@@ -105,14 +105,14 @@ struct base_unit_info<length_tag,imperial::system_tag>
 
 // helpers for conversions between imperial length and SI length
 template<>
-struct base_unit_converter<length_tag,imperial::system_tag,SI::system_tag>
+struct base_unit_converter<length_dim,imperial::system_tag,SI::system_tag>
 {
     typedef double type;
     static type value() { return 1.0/3.28083989501312; }
 };
 
 template<>
-struct base_unit_converter<length_tag,SI::system_tag,imperial::system_tag>
+struct base_unit_converter<length_dim,SI::system_tag,imperial::system_tag>
 {
     typedef double type;
     static type value() { return 3.28083989501312; }

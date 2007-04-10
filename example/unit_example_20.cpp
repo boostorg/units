@@ -63,7 +63,7 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // fahrenheit
 
-template<> struct base_unit_info<temperature_tag,fahrenheit::system_tag>
+template<> struct base_unit_info<temperature_dim,fahrenheit::system_tag>
 {
     static std::string name()               { return "Fahrenheit"; }
     static std::string symbol()             { return "F"; }
@@ -189,3 +189,4 @@ int main()
         return(-1);
     }
 }
+

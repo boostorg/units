@@ -23,39 +23,39 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-typedef base_dimension<1>   length_tag;
-typedef base_dimension<2>   mass_tag;
-typedef base_dimension<3>   time_tag;
+typedef base_dimension<1>   length_dim;
+typedef base_dimension<2>   mass_dim;
+typedef base_dimension<3>   time_dim;
 //]
 
 #if 0
 //[test_system_snippet_2
-typedef make_dimension_list< boost::mpl::list< dim< length_tag,static_rational<1> > > >::type   length_type;
-typedef make_dimension_list< boost::mpl::list< dim< mass_tag,static_rational<1> > > >::type     mass_type;
-typedef make_dimension_list< boost::mpl::list< dim< time_tag,static_rational<1> > > >::type     time_type;
+typedef make_dimension_list< boost::mpl::list< dim< length_dim,static_rational<1> > > >::type   length_type;
+typedef make_dimension_list< boost::mpl::list< dim< mass_dim,static_rational<1> > > >::type     mass_type;
+typedef make_dimension_list< boost::mpl::list< dim< time_dim,static_rational<1> > > >::type     time_type;
 //]
 #endif
 
 //[test_system_snippet_3
-typedef length_tag::type    length_type;
-typedef mass_tag::type      mass_type;
-typedef time_tag::type      time_type;
+typedef length_dim::type    length_type;
+typedef mass_dim::type      mass_type;
+typedef time_dim::type      time_type;
 //]
 
 #if 0
 //[test_system_snippet_4
-typedef make_dimension_list< boost::mpl::list< dim< length_tag,static_rational<2> > > >::type   area_type;
-typedef make_dimension_list< boost::mpl::list< dim< mass_tag,static_rational<1> >,
-                                               dim< length_tag,static_rational<2> >,
-                                               dim< time_tag,static_rational<-2> > > >::type    energy_type;
+typedef make_dimension_list< boost::mpl::list< dim< length_dim,static_rational<2> > > >::type   area_type;
+typedef make_dimension_list< boost::mpl::list< dim< mass_dim,static_rational<1> >,
+                                               dim< length_dim,static_rational<2> >,
+                                               dim< time_dim,static_rational<-2> > > >::type    energy_type;
 //]
 #endif
 
 //[test_system_snippet_5
-typedef derived_dimension<length_tag,2>::type area_type;
-typedef derived_dimension<mass_tag,1,
-                          length_tag,2,
-                          time_tag,-2>::type  energy_type;
+typedef derived_dimension<length_dim,2>::type area_type;
+typedef derived_dimension<mass_dim,1,
+                          length_dim,2,
+                          time_dim,-2>::type  energy_type;
 //]
 
 namespace test {
@@ -95,20 +95,20 @@ BOOST_UNITS_STATIC_CONSTANT(joules,energy);
 } // namespace test
 
 //[test_system_snippet_8
-template<> struct base_unit_info<length_tag,test::system_tag>
+template<> struct base_unit_info<length_dim,test::system_tag>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct base_unit_info<mass_tag,test::system_tag>
+template<> struct base_unit_info<mass_dim,test::system_tag>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct base_unit_info<time_tag,test::system_tag>
+template<> struct base_unit_info<time_dim,test::system_tag>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

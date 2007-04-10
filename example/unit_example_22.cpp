@@ -203,8 +203,8 @@ namespace boost { namespace units {
 
 template<int N>
 struct f {
-    typedef typename derived_dimension<length_tag, (1<<N) >::type dim1;
-    typedef typename derived_dimension<mass_tag, (1<<N) >::type dim2;
+    typedef typename derived_dimension<length_dim, (1<<N) >::type dim1;
+    typedef typename derived_dimension<mass_dim, (1<<N) >::type dim2;
     template<class T>
     static void apply(const T& t) {
         f<N - 1>::apply(t * unit<dim1, SI::system>());
@@ -413,10 +413,13 @@ int main()
     return 0;
 }
 */
+
 #include <iostream>
 
 #include <boost/units/io.hpp>
 #include <boost/units/quantity.hpp>
+#include <boost/units/systems/cgs/acceleration.hpp>
+#include <boost/units/systems/si/acceleration.hpp>
 #include <boost/units/systems/si/force.hpp>
 #include <boost/units/systems/cgs/force.hpp>
 #include <boost/units/systems/si/mass.hpp>
@@ -424,17 +427,21 @@ int main()
 #include <boost/units/systems/si/momentum.hpp>
 #include <boost/units/systems/cgs/momentum.hpp>
 
+#include <boost/units/systems/other/non_si_units.hpp>
+
 int main()
 {
     using namespace boost;
     using namespace boost::units;
     
     std::cout << quantity<SI::dimensionless>(1.0*CGS::dyne/SI::newton) << std::endl;
+//    std::cout << exp(1.0*(SI::newtons*CGS::dynes)/(SI::newtons*CGS::dynes)) << std::endl;
     std::cout << exp(quantity<SI::dimensionless>(1.0*(SI::newtons*CGS::dynes)/(SI::newtons*CGS::dynes))) << std::endl;
     std::cout << conversion_factor<double>(CGS::dyne,SI::newton) << std::endl;
     std::cout << conversion_factor<double>(SI::newton/SI::kilogram,CGS::dyne/CGS::gram) << std::endl;
     std::cout << conversion_factor<double>(CGS::momentum(),SI::momentum()) << std::endl;
     std::cout << conversion_factor<double>(SI::momentum()/SI::mass(),CGS::momentum()/CGS::mass()) << std::endl;
+    std::cout << conversion_factor<double>(CGS::gal,SI::meter_per_second_squared) << std::endl;
     
     return 0;
 }
