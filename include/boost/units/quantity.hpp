@@ -70,7 +70,7 @@ class quantity
             return *this;
         }
 
-#ifndef BOOST_NO_SFINAE
+        #ifndef BOOST_NO_SFINAE
 
         /// explicit conversion between different unit systems is allowed if implicit conversion is disallowed
         template<class System2,class Dim2,class YY> 
@@ -91,7 +91,7 @@ class quantity
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
-#else
+        #else
 
         /// without SFINAE we can't distinguish between explicit and implicit conversions so 
         /// the conversion is always explicit
@@ -102,7 +102,7 @@ class quantity
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
-#endif
+        #endif
         
         /// implicit assignment between different unit systems is allowed if each fundamental dimension is implicitly convertible 
         template<class System2,class Dim2,class YY>
@@ -121,14 +121,17 @@ class quantity
 
         const value_type& value() const                     { return val_; }                        ///< constant accessor to value
         
-        // need to check that add_typeof_helper<value_type,value_type>==value_type
-        this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  ///< can add quantity of same type
+        ///< can add a quantity of the same type if add_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  
 
-        // need to check that subtract_typeof_helper<value_type,value_type>==value_type
-        this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
+        ///< can subtract a quantity of the same type if subtract_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  
 
-        this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
-        this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          ///< can divide quantity by scalar
+        ///< can multiply a quantity by a scalar value_type if multiply_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }
+        
+        ///< can divide a quantity by a scalar value_type if divide_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          
     
         /// Construct quantity directly from @c value_type (potentially dangerous).
         static this_type from_value(const value_type& val)  { return this_type(val); }
@@ -217,12 +220,10 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         // can add or subtract same quantity type
         this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  ///< can add quantity of same type
         this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
-        // consider adding *=,/= for dimensionless_type
         
         // can multiply or divide by value_type
         this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
         this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          ///< can divide quantity by scalar
-        // consider adding +=,-= for dimensionless_type
 
         /// Construct quantity directly from @c value_type.
         static this_type from_value(const value_type& val)  { return this_type(val); }

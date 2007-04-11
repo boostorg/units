@@ -34,10 +34,14 @@ namespace boost {
 
 namespace units {
 
-namespace wo {
+// fails due to redefinition of tag
+//BOOST_UNITS_REGISTER_BASE_DIMENSION(erroneous_tag,-1);
+BOOST_UNITS_REGISTER_BASE_DIMENSION(world_space_tag,101);
+BOOST_UNITS_REGISTER_BASE_DIMENSION(object_space_tag,102);
+//typedef base_dimension<101> world_space_tag; 
+//typedef base_dimension<102> object_space_tag;
 
-typedef base_dimension<101> world_space_tag; 
-typedef base_dimension<102> object_space_tag;
+namespace wo {
 
 typedef world_space_tag::type    world_space_type;
 typedef object_space_tag::type   object_space_type;

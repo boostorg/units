@@ -161,23 +161,22 @@ struct static_root< DL,static_rational<N,D> >
     >::type type; 
 };
 
-/// A utility class for defining fundamental dimensions.
-//template<class DT>
-//struct fundamental_dimension
-//{
-//    typedef typename make_dimension_list< boost::mpl::list< dim< DT,static_rational<1> > > >::type    type;
-//};
+/// A utility class for defining base dimensions.
+template<long N> struct base_dimension;
 
-/// replacement for fundamental_dimension
-template<long N>
-struct base_dimension : 
-    public mpl::int_<N>
-{
-    typedef base_dimension<N>   this_type;
-    typedef mpl::int_<N>        value;
-    
-    typedef typename make_dimension_list< boost::mpl::list< dim< this_type,static_rational<1> > > >::type    type;
-};
+/// each specialization must be separately instantiated in boost::units namespace to prevent duplication of tag values
+#define BOOST_UNITS_REGISTER_BASE_DIMENSION(name, N)                                                        \
+template<>                                                                                                  \
+struct base_dimension<N> :                                                                                  \
+    public mpl::int_<N>                                                                                     \
+{                                                                                                           \
+    typedef base_dimension<N>   this_type;                                                                  \
+    typedef mpl::int_<N>        value;                                                                      \
+                                                                                                            \
+    typedef make_dimension_list< mpl::list< dim< this_type,static_rational<1> > > >::type    type;          \
+};                                                                                                          \
+                                                                                                            \
+typedef base_dimension<N>   name;                                                                           \
 
 /// A utility class for defining composite dimensions with integer powers.
 template<class DT1 = dimensionless_type,int E1 = 0,

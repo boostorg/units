@@ -28,32 +28,42 @@ namespace boost {
 
 namespace units { 
 
-/// tag representing length
-typedef base_dimension<-9>          length_dim;
+BOOST_UNITS_REGISTER_BASE_DIMENSION(length_dim,-9);               ///> base dimension of length
+BOOST_UNITS_REGISTER_BASE_DIMENSION(mass_dim,-8);                 ///> base dimension of mass
+BOOST_UNITS_REGISTER_BASE_DIMENSION(time_dim,-7);                 ///> base dimension of time
+BOOST_UNITS_REGISTER_BASE_DIMENSION(current_dim,-6);              ///> base dimension of current
+BOOST_UNITS_REGISTER_BASE_DIMENSION(temperature_dim,-5);          ///> base dimension of temperature
+BOOST_UNITS_REGISTER_BASE_DIMENSION(amount_dim,-4);               ///> base dimension of amount
+BOOST_UNITS_REGISTER_BASE_DIMENSION(luminous_intensity_dim,-3);   ///> base dimension of luminous intensity
+BOOST_UNITS_REGISTER_BASE_DIMENSION(plane_angle_dim,-2);          ///> base dimension of plane angle
+BOOST_UNITS_REGISTER_BASE_DIMENSION(solid_angle_dim,-1);          ///> base dimension of solid angle
 
-/// tag representing mass
-typedef base_dimension<-8>          mass_dim;
-
-/// tag representing time
-typedef base_dimension<-7>          time_dim;
-
-/// tag representing electrical current
-typedef base_dimension<-6>          current_dim;
-
-/// tag representing temperature
-typedef base_dimension<-5>          temperature_dim;
-
-/// tag representing amount of substance
-typedef base_dimension<-4>          amount_dim;
-
-/// tag representing luminous intensity
-typedef base_dimension<-3>          luminous_intensity_dim;
-
-/// tag representing plane angle
-typedef base_dimension<-2>          plane_angle_dim;
-
-/// tag representing solid angle
-typedef base_dimension<-1>          solid_angle_dim;
+///// tag representing length
+//typedef base_dimension<-9>          length_dim;
+//
+///// tag representing mass
+//typedef base_dimension<-8>          mass_dim;
+//
+///// tag representing time
+//typedef base_dimension<-7>          time_dim;
+//
+///// tag representing electrical current
+//typedef base_dimension<-6>          current_dim;
+//
+///// tag representing temperature
+//typedef base_dimension<-5>          temperature_dim;
+//
+///// tag representing amount of substance
+//typedef base_dimension<-4>          amount_dim;
+//
+///// tag representing luminous intensity
+//typedef base_dimension<-3>          luminous_intensity_dim;
+//
+///// tag representing plane angle
+//typedef base_dimension<-2>          plane_angle_dim;
+//
+///// tag representing solid angle
+//typedef base_dimension<-1>          solid_angle_dim;
 
 }
 

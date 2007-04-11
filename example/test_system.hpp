@@ -23,9 +23,12 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-typedef base_dimension<1>   length_dim;
-typedef base_dimension<2>   mass_dim;
-typedef base_dimension<3>   time_dim;
+BOOST_UNITS_REGISTER_BASE_DIMENSION(length_dim,1);               ///> base dimension of length
+BOOST_UNITS_REGISTER_BASE_DIMENSION(mass_dim,2);                 ///> base dimension of mass
+BOOST_UNITS_REGISTER_BASE_DIMENSION(time_dim,3);                 ///> base dimension of time
+//typedef base_dimension<1>   length_dim;
+//typedef base_dimension<2>   mass_dim;
+//typedef base_dimension<3>   time_dim;
 //]
 
 #if 0

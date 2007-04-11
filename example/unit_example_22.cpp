@@ -413,7 +413,6 @@ int main()
     return 0;
 }
 */
-
 #include <iostream>
 
 #include <boost/units/io.hpp>
@@ -429,6 +428,11 @@ int main()
 
 #include <boost/units/systems/other/non_si_units.hpp>
 
+struct blah { };
+struct blahblah { };
+
+blahblah operator+(const blah&) { return blahblah(); }
+
 int main()
 {
     using namespace boost;
@@ -442,6 +446,10 @@ int main()
     std::cout << conversion_factor<double>(CGS::momentum(),SI::momentum()) << std::endl;
     std::cout << conversion_factor<double>(SI::momentum()/SI::mass(),CGS::momentum()/CGS::mass()) << std::endl;
     std::cout << conversion_factor<double>(CGS::gal,SI::meter_per_second_squared) << std::endl;
+    
+    blah    b;
+    
+    std::cout << typeid(+b).name() << std::cout;
     
     return 0;
 }
