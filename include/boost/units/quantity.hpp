@@ -217,13 +217,17 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         
         value_type value() const                            { return val_; }                        ///< constant accessor to value
         
-        // can add or subtract same quantity type
-        this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  ///< can add quantity of same type
-        this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  ///< can subtract quantity of same type
+        ///< can add a quantity of the same type if add_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  
         
-        // can multiply or divide by value_type
-        this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          ///< can multiply quantity by scalar
-        this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          ///< can divide quantity by scalar
+        ///< can subtract a quantity of the same type if subtract_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  
+        
+        ///< can multiply a quantity by a scalar value_type if multiply_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }          
+
+        ///< can divide a quantity by a scalar value_type if divide_typeof_helper<value_type,value_type>::type is convertible to value_type
+        this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          
 
         /// Construct quantity directly from @c value_type.
         static this_type from_value(const value_type& val)  { return this_type(val); }
