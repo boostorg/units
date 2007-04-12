@@ -23,6 +23,12 @@ namespace boost {
 
 namespace units {
 
+namespace detail {
+
+struct dim_tag {};
+
+}
+
 /// \brief Dimension tag/exponent pair for a single fundamental dimension.
 ///
 /// \detailed 
@@ -37,6 +43,8 @@ namespace units {
 template<typename T,typename V> 
 struct dim
 {
+    typedef dim type;
+    typedef detail::dim_tag tag;
     typedef T    tag_type;
     typedef V    value_type;
 };

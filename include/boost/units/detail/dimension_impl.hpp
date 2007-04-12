@@ -153,7 +153,7 @@ struct sort_dims_insert_impl<true>
     struct apply
     {
         typedef sort_dims_list<
-            typename static_add<T, typename Sequence::item>::type,
+            typename mpl::plus<T, typename Sequence::item>::type,
             typename Sequence::next
         > type;
     };
@@ -409,7 +409,7 @@ struct merge_dimensions_func<false, false> {
     template<typename Begin1, typename Begin2, int N1, int N2>
     struct apply
     {
-        typedef typename static_add<typename boost::mpl::deref<Begin1>::type, typename boost::mpl::deref<Begin2>::type>::type combined;
+        typedef typename mpl::plus<typename boost::mpl::deref<Begin1>::type, typename boost::mpl::deref<Begin2>::type>::type combined;
         typedef typename push_front_if<!is_empty_dim<combined>::value>::template apply<
             typename merge_dimensions_impl<N1 - 1, N2 - 1>::template apply<
                 typename boost::mpl::next<Begin1>::type,
@@ -512,7 +512,7 @@ struct static_inverse_impl
             typename static_inverse_impl<N - 1>::template apply<
                 typename boost::mpl::next<Begin>::type
             >::type,
-            typename static_negate<typename boost::mpl::deref<Begin>::type>::type
+            typename mpl::negate<typename boost::mpl::deref<Begin>::type>::type
         >::type type;
     };
 };
@@ -535,7 +535,7 @@ struct static_power_impl
     {
         typedef typename mpl::push_front<
             typename detail::static_power_impl<N - 1>::template apply<typename mpl::next<Begin>::type, Ex>::type,
-            typename static_multiply<typename mpl::deref<Begin>::type, Ex>::type
+            typename mpl::times<typename mpl::deref<Begin>::type, Ex>::type
         >::type type;
     };
 };
@@ -556,7 +556,7 @@ struct static_root_impl {
     struct apply {
         typedef typename mpl::push_front<
             typename detail::static_root_impl<N - 1>::template apply<typename mpl::next<Begin>::type, Ex>::type,
-            typename static_divide<typename mpl::deref<Begin>::type, Ex>::type
+            typename mpl::divides<typename mpl::deref<Begin>::type, Ex>::type
         >::type type;
     };
 };

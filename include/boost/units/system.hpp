@@ -80,18 +80,35 @@ struct is_heterogeneous_system< heterogeneous_system<S> >
     static const bool   value = true;
 };
 
-template<class S1, class E1, class E2>
-struct static_add<heterogeneous_system_element<S1, E1>, heterogeneous_system_element<S1, E2> >
+} // namespace units
+
+namespace mpl {
+
+template<>
+struct plus_impl<boost::units::detail::heterogeneous_system_element_tag, boost::units::detail::heterogeneous_system_element_tag>
 {
-    typedef heterogeneous_system_element<S1, typename static_multiply<E1, E2>::type> type;
+    template<class T0, class T1>
+    struct apply {
+        BOOST_STATIC_ASSERT((boost::is_same<typename T0::tag_type, typename T1::tag_type>::value == true));
+        typedef boost::units::heterogeneous_system_element<typename T0::tag_type, typename times<typename T0::value_type, typename T1::value_type>::type> type;
+    };
 };
 
-template<class S1, class E1>
-struct static_negate<heterogeneous_system_element<S1, E1> >
+template<>
+struct negate_impl<boost::units::detail::heterogeneous_system_element_tag>
 {
-    typedef typename detail::static_inverse_impl<mpl::size<E1>::value>::template apply<typename mpl::begin<E1>::type>::type inverse;
-    typedef heterogeneous_system_element<S1, inverse> type;
+    template<class T0>
+    struct apply {
+        typedef typename boost::units::detail::static_inverse_impl<
+            mpl::size<typename T0::value_type>::value
+        >::template apply<typename mpl::begin<typename T0::value_type>::type>::type inverse;
+        typedef boost::units::heterogeneous_system_element<typename T0::tag_type, inverse> type;
+    };
 };
+
+} // namespace mpl
+
+namespace units {
 
 template<class System, class Dimensions>
 struct heterogeneous_system_view

@@ -68,9 +68,9 @@ int main(void)
               << "energy_type  = " << simplify_typename(energy_type()) << std::endl;
     
     //[unit_example_1_snippet_1
-    typedef static_multiply<length_type,mass_type>::type                                       LM_type;
-    typedef static_divide<length_type,time_type>::type                                         L_T_type;
-    typedef static_root<static_divide<energy_type,mass_type>::type,static_rational<2> >::type  V_type;
+    typedef mpl::times<length_type,mass_type>::type                                       LM_type;
+    typedef mpl::divides<length_type,time_type>::type                                         L_T_type;
+    typedef static_root<mpl::divides<energy_type,mass_type>::type,static_rational<2> >::type  V_type;
     //]
     
     BOOST_MPL_ASSERT((boost::is_same<LM_type, 

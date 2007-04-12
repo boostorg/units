@@ -126,44 +126,44 @@ value(const static_rational<N,D>& r)
     return T(N)/T(D);
 }
 
-/// negate @c static_rational
-template<integer_type N,integer_type D> 
-struct static_negate< static_rational<N,D> >    
-{ 
-    typedef typename static_rational<-N,D>::type    type; 
-};
-
-/// add @c static_rational
-template<integer_type N1,integer_type D1,
-         integer_type N2,integer_type D2> 
-struct static_add< static_rational<N1,D1>,static_rational<N2,D2> >    
-{ 
-    typedef typename static_rational<N1*D2+N2*D1,D1*D2>::type    type; 
-};
-
-/// subtract @c static_rational
-template<integer_type N1,integer_type D1,
-         integer_type N2,integer_type D2> 
-struct static_subtract< static_rational<N1,D1>,static_rational<N2,D2> >
-{ 
-    typedef typename static_rational<N1*D2-N2*D1,D1*D2>::type    type; 
-};
-
-/// multiply @c static_rational
-template<integer_type N1,integer_type D1,
-         integer_type N2,integer_type D2> 
-struct static_multiply< static_rational<N1,D1>,static_rational<N2,D2> >    
-{ 
-    typedef typename static_rational<N1*N2,D1*D2>::type    type; 
-};
-
-/// divide @c static_rational
-template<integer_type N1,integer_type D1,
-         integer_type N2,integer_type D2> 
-struct static_divide< static_rational<N1,D1>,static_rational<N2,D2> >    
-{ 
-    typedef typename static_rational<N1*D2,D1*N2>::type    type; 
-};
+///// negate @c static_rational
+//template<integer_type N,integer_type D> 
+//struct static_negate< static_rational<N,D> >    
+//{ 
+//    typedef typename static_rational<-N,D>::type    type; 
+//};
+//
+///// add @c static_rational
+//template<integer_type N1,integer_type D1,
+//         integer_type N2,integer_type D2> 
+//struct static_add< static_rational<N1,D1>,static_rational<N2,D2> >    
+//{ 
+//    typedef typename static_rational<N1*D2+N2*D1,D1*D2>::type    type; 
+//};
+//
+///// subtract @c static_rational
+//template<integer_type N1,integer_type D1,
+//         integer_type N2,integer_type D2> 
+//struct static_subtract< static_rational<N1,D1>,static_rational<N2,D2> >
+//{ 
+//    typedef typename static_rational<N1*D2-N2*D1,D1*D2>::type    type; 
+//};
+//
+///// multiply @c static_rational
+//template<integer_type N1,integer_type D1,
+//         integer_type N2,integer_type D2> 
+//struct static_multiply< static_rational<N1,D1>,static_rational<N2,D2> >    
+//{ 
+//    typedef typename static_rational<N1*N2,D1*D2>::type    type; 
+//};
+//
+///// divide @c static_rational
+//template<integer_type N1,integer_type D1,
+//         integer_type N2,integer_type D2> 
+//struct static_divide< static_rational<N1,D1>,static_rational<N2,D2> >    
+//{ 
+//    typedef typename static_rational<N1*D2,D1*N2>::type    type; 
+//};
 
 /// raise @c int to a @c static_rational power
 template<long N,long D> 
@@ -348,7 +348,10 @@ struct plus_impl<boost::units::detail::static_rational_tag, boost::units::detail
 {
     template<class T0, class T1>
     struct apply {
-        typedef typename boost::units::static_add<T0, T1>::type type;
+        typedef typename boost::units::static_rational<
+            T0::Numerator*T1::Denominator+T1::Numerator*T0::Denominator,
+            T0::Denominator*T1::Denominator
+        >::type type;
     };
 };
 
@@ -357,7 +360,10 @@ struct minus_impl<boost::units::detail::static_rational_tag, boost::units::detai
 {
     template<class T0, class T1>
     struct apply {
-        typedef typename boost::units::static_subtract<T0, T1>::type type;
+        typedef typename boost::units::static_rational<
+            T0::Numerator*T1::Denominator-T1::Numerator*T0::Denominator,
+            T0::Denominator*T1::Denominator
+        >::type type;
     };
 };
 
@@ -366,7 +372,10 @@ struct times_impl<boost::units::detail::static_rational_tag, boost::units::detai
 {
     template<class T0, class T1>
     struct apply {
-        typedef typename boost::units::static_multiply<T0, T1>::type type;
+        typedef typename boost::units::static_rational<
+            T0::Numerator*T1::Numerator,
+            T0::Denominator*T1::Denominator
+        >::type type;
     };
 };
 
@@ -375,7 +384,10 @@ struct divides_impl<boost::units::detail::static_rational_tag, boost::units::det
 {
     template<class T0, class T1>
     struct apply {
-        typedef typename boost::units::static_divide<T0, T1>::type type;
+        typedef typename boost::units::static_rational<
+            T0::Numerator*T1::Denominator,
+            T0::Denominator*T1::Numerator
+        >::type type;
     };
 };
 
@@ -384,7 +396,7 @@ struct negate_impl<boost::units::detail::static_rational_tag>
 {
     template<class T0>
     struct apply {
-        typedef typename boost::units::static_negate<T0>::type type;
+        typedef typename boost::units::static_rational<-T0::Numerator,T0::Denominator>::type type;
     };
 };
 

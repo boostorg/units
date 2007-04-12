@@ -362,10 +362,14 @@ struct quantity_conversion_hetero_to_homo_impl<0>
     };
 };
 
+struct heterogeneous_system_by_dimension_dim_tag {};
+
 // the hardest case: heterogeneous->heterogeneous
 template<class Tag, class Value>
 struct heterogeneous_system_by_dimension_dim
 {
+    typedef heterogeneous_system_by_dimension_dim type;
+    typedef heterogeneous_system_by_dimension_dim_tag tag;
     typedef Tag tag_type;
     typedef Value value_type;
 };
@@ -385,26 +389,56 @@ struct is_empty_dim<heterogeneous_system_by_dimension_dim<Tag, dimensionless_typ
     boost::mpl::true_ 
 { };
 
-}
+} // namespace detail
 
-template<class T1, class V1, class V2>
-struct static_add<detail::heterogeneous_system_by_dimension_dim<T1, V1>, detail::heterogeneous_system_by_dimension_dim<T1, V2> >
+} // namespace units
+
+namespace mpl {
+
+template<>
+struct plus_impl<
+    boost::units::detail::heterogeneous_system_by_dimension_dim_tag,
+    boost::units::detail::heterogeneous_system_by_dimension_dim_tag
+>
 {
-    typedef detail::heterogeneous_system_by_dimension_dim<T1, typename detail::merge_dimensions<V1, V2>::type> type;
+    template<class T0, class T1>
+    struct apply {
+        BOOST_STATIC_ASSERT((boost::is_same<typename T0::tag_type, typename T1::tag_type>::value == true));
+        typedef boost::units::detail::heterogeneous_system_by_dimension_dim<
+            typename T0::tag_type,
+            typename boost::units::detail::merge_dimensions<
+                typename T0::value_type,
+                typename T1::value_type
+            >::type
+        > type;
+    };
 };
 
-template<class T1, class V1>
-struct static_negate<detail::heterogeneous_system_by_dimension_dim<T1, V1> >
+template<>
+struct negate_impl<boost::units::detail::heterogeneous_system_by_dimension_dim_tag>
 {
-    typedef typename detail::static_inverse_impl<mpl::size<V1>::value>::template apply<typename mpl::begin<V1>::type>::type inverse;
-    typedef detail::heterogeneous_system_by_dimension_dim<T1, inverse> type;
+    template<class T0>
+    struct apply {
+        typedef typename boost::units::detail::static_inverse_impl<mpl::size<typename T0::value_type>::value>::template apply<
+            typename mpl::begin<typename T0::value_type>::type
+        >::type inverse;
+        typedef boost::units::detail::heterogeneous_system_by_dimension_dim<typename T0::tag_type, inverse> type;
+    };
 };
+
+} // namespace mpl
+
+namespace units {
 
 namespace detail {
+
+struct heterogeneous_system_by_dimension_value_tag {};
 
 template<class SystemTag, class Value>
 struct heterogeneous_system_by_dimension_value
 {
+    typedef heterogeneous_system_by_dimension_value type;
+    typedef heterogeneous_system_by_dimension_value_tag tag;
     typedef SystemTag tag_type;
     typedef Value value_type;
 };
@@ -424,19 +458,40 @@ struct is_empty_dim<heterogeneous_system_by_dimension_value<Tag, dimensionless_t
     boost::mpl::true_ 
 { };
 
-}
+} // namespace detail
 
-template<class T1, class V1, class V2>
-struct static_add<detail::heterogeneous_system_by_dimension_value<T1, V1>, detail::heterogeneous_system_by_dimension_value<T1, V2> >
+} // namespace units
+
+namespace mpl {
+
+template<>
+struct plus_impl<
+    boost::units::detail::heterogeneous_system_by_dimension_value_tag,
+    boost::units::detail::heterogeneous_system_by_dimension_value_tag
+>
 {
-    typedef detail::heterogeneous_system_by_dimension_value<T1, typename static_add<V1, V2>::type> type;
+    template<class T0, class T1>
+    struct apply {
+        BOOST_STATIC_ASSERT((boost::is_same<typename T0::tag_type, typename T1::tag_type>::value == true));
+        typedef boost::units::detail::heterogeneous_system_by_dimension_value<
+            typename T0::tag_type,
+            typename plus<typename T0::value_type, typename T1::value_type>::type
+        > type;
+    };
 };
 
-template<class T1, class V1>
-struct static_negate<detail::heterogeneous_system_by_dimension_value<T1, V1> >
+template<>
+struct negate_impl<boost::units::detail::heterogeneous_system_by_dimension_value_tag>
 {
-    typedef detail::heterogeneous_system_by_dimension_value<T1, typename static_negate<V1>::type> type;
+    template<class T0>
+    struct apply {
+        typedef boost::units::detail::heterogeneous_system_by_dimension_value<typename T0::tag_type, typename negate<typename T0::value_type>::type> type;
+    };
 };
+
+} // namespace mpl
+
+namespace units {
 
 namespace detail {
 

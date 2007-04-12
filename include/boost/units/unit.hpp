@@ -245,7 +245,7 @@ template<class Dim1,
 struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System> >,
                                unit<Dim2,homogeneous_system<System> > >
 {
-    typedef unit<typename static_multiply<Dim1,Dim2>::type,homogeneous_system<System> >    type;
+    typedef unit<typename mpl::times<Dim1,Dim2>::type,homogeneous_system<System> >    type;
 };
 
 /// unit multiply typeof helper for two different homogeneous systems
@@ -257,7 +257,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
                                unit<Dim2,homogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_multiply<Dim1,Dim2>::type,
+        typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
             heterogeneous_system_view<System1, Dim1>,
             heterogeneous_system_view<System2, Dim2>
@@ -274,7 +274,7 @@ struct multiply_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
                                unit<Dim2,homogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_multiply<Dim1,Dim2>::type,
+        typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
             heterogeneous_system<System1>,
             heterogeneous_system_view<System2, Dim2>
@@ -291,7 +291,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
                                unit<Dim2,heterogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_multiply<Dim1,Dim2>::type,
+        typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
             heterogeneous_system_view<System1, Dim1>,
             heterogeneous_system<System2>
@@ -308,7 +308,7 @@ struct multiply_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
                                unit<Dim2,heterogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_multiply<Dim1,Dim2>::type,
+        typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
             heterogeneous_system<System1>,
             heterogeneous_system<System2>
@@ -323,7 +323,7 @@ template<class Dim1,
 struct divide_typeof_helper< unit<Dim1,homogeneous_system<System> >,
                              unit<Dim2,homogeneous_system<System> > >
 {
-    typedef unit<typename static_divide<Dim1,Dim2>::type,homogeneous_system<System> >    type;
+    typedef unit<typename mpl::divides<Dim1,Dim2>::type,homogeneous_system<System> >    type;
 };
 
 /// unit divide typeof helper for two different homogeneous systems
@@ -335,7 +335,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
                              unit<Dim2,homogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_divide<Dim1,Dim2>::type,
+        typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
             heterogeneous_system_view<System1, Dim1>,
             heterogeneous_system_view<System2, Dim2>
@@ -352,7 +352,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
                              unit<Dim2,homogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_divide<Dim1,Dim2>::type,
+        typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
             heterogeneous_system<System1>,
             heterogeneous_system_view<System2, Dim2>
@@ -369,7 +369,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
                              unit<Dim2,heterogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_divide<Dim1,Dim2>::type,
+        typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
             heterogeneous_system_view<System1, Dim1>,
             heterogeneous_system<System2>
@@ -386,7 +386,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
                              unit<Dim2,heterogeneous_system<System2> > >
 {
     typedef unit<
-        typename static_divide<Dim1,Dim2>::type,
+        typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
             heterogeneous_system<System1>,
             heterogeneous_system<System2>

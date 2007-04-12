@@ -48,9 +48,17 @@ struct heterogeneous_system_pair
     typedef Dimensions dimension_type;
 };
 
+namespace detail {
+
+struct heterogeneous_system_element_tag {};
+
+}
+
 template<class System, class Dimensions>
 struct heterogeneous_system_element
 {
+    typedef heterogeneous_system_element type;
+    typedef detail::heterogeneous_system_element_tag tag;
     typedef System      tag_type;
     typedef Dimensions  value_type;
 };
@@ -145,7 +153,7 @@ template<class S1, class S2>
 struct multiply_systems
 {
     typedef typename detail::merge_dimensions<typename S1::type, typename S2::type>::type   type1;
-    typedef typename static_multiply<typename S1::dimension, typename S2::dimension>::type dimension;
+    typedef typename mpl::times<typename S1::dimension, typename S2::dimension>::type dimension;
     typedef typename make_system<mpl::size<type1>::value == 1>::template apply<type1,dimension>::type type;
 };
 
@@ -156,7 +164,7 @@ struct divide_systems
     typedef typename detail::static_inverse_impl<mpl::size<s2>::value>::template 
         apply<typename mpl::begin<s2>::type>::type                                  inverse;
     typedef typename detail::merge_dimensions<typename S1::type, inverse>::type     type1;
-    typedef typename static_divide<typename S1::dimension, typename S2::dimension>::type dimension;
+    typedef typename mpl::divides<typename S1::dimension, typename S2::dimension>::type dimension;
     typedef typename make_system<mpl::size<type1>::value == 1>::template apply<type1, dimension>::type type;
 };
 

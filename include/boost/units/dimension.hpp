@@ -36,6 +36,7 @@ namespace units {
 /// Dimension lists in which all exponents resolve to zero reduce to @c dimensionless_type.
 struct dimensionless_type
 {
+    typedef dimensionless_type type;
     typedef detail::dimension_list_tag  tag;
     typedef mpl::long_<0>               size;
 };
@@ -72,54 +73,54 @@ struct is_dimension_list<dimensionless_type> :
     public mpl::true_
 { };
 
-// All the static_* metafunctions in this file assume
-// that their parameters are sorted dimension lists.
-// 
-// should we static assert is_dimension_list here?
-
-/// Negate dimension list.
-template<typename DL>
-struct static_negate
-{
-    typedef DL type;
-};
-
-/// Add two dimension list, only permitted if they are commensurate.
-template<typename DL1,typename DL2>
-struct static_add
-{
-    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
-    typedef DL1 type;
-};
-
-/// Subtract two dimension sequences, only permitted if they are commensurate.
-template<typename DL1,typename DL2>
-struct static_subtract
-{
-    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
-    typedef DL2 type;
-};
-
-/// Multiply two dimension sequences.
-template<typename DL1,typename DL2>
-struct static_multiply
-{
-    typedef typename detail::merge_dimensions<DL1,DL2>::type type;
-};
-
-/// Divide two dimension lists.
-template<typename DL1,typename DL2> 
-struct static_divide
-{
-    typedef typename detail::merge_dimensions<
-        DL1,
-        typename detail::static_inverse_impl<
-            mpl::size<DL2>::value
-        >::template apply<
-            typename mpl::begin<DL2>::type
-        >::type
-    >::type type;
-};
+//// All the static_* metafunctions in this file assume
+//// that their parameters are sorted dimension lists.
+//// 
+//// should we static assert is_dimension_list here?
+//
+///// Negate dimension list.
+//template<typename DL>
+//struct static_negate
+//{
+//    typedef DL type;
+//};
+//
+///// Add two dimension list, only permitted if they are commensurate.
+//template<typename DL1,typename DL2>
+//struct static_add
+//{
+//    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
+//    typedef DL1 type;
+//};
+//
+///// Subtract two dimension sequences, only permitted if they are commensurate.
+//template<typename DL1,typename DL2>
+//struct static_subtract
+//{
+//    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
+//    typedef DL2 type;
+//};
+//
+///// Multiply two dimension sequences.
+//template<typename DL1,typename DL2>
+//struct static_multiply
+//{
+//    typedef typename detail::merge_dimensions<DL1,DL2>::type type;
+//};
+//
+///// Divide two dimension lists.
+//template<typename DL1,typename DL2> 
+//struct static_divide
+//{
+//    typedef typename detail::merge_dimensions<
+//        DL1,
+//        typename detail::static_inverse_impl<
+//            mpl::size<DL2>::value
+//        >::template apply<
+//            typename mpl::begin<DL2>::type
+//        >::type
+//    >::type type;
+//};
 
 /// Raise a dimension list to a scalar power.
 template<typename DL,typename Ex> 
@@ -210,7 +211,8 @@ struct plus_impl<boost::units::detail::dimension_list_tag,boost::units::detail::
     template<class T0, class T1>
     struct apply
     {
-        typedef typename boost::units::static_add<T0, T1>::type type;
+        BOOST_STATIC_ASSERT((boost::is_same<T0,T1>::value == true));
+        typedef T0 type;
     };
 };
 
@@ -220,7 +222,8 @@ struct minus_impl<boost::units::detail::dimension_list_tag,boost::units::detail:
     template<class T0, class T1>
     struct apply
     {
-        typedef typename boost::units::static_subtract<T0, T1>::type type;
+        BOOST_STATIC_ASSERT((boost::is_same<T0,T1>::value == true));
+        typedef T0 type;
     };
 };
 
@@ -230,7 +233,7 @@ struct times_impl<boost::units::detail::dimension_list_tag,boost::units::detail:
     template<class T0, class T1>
     struct apply
     {
-        typedef typename boost::units::static_multiply<T0, T1>::type type;
+        typedef typename boost::units::detail::merge_dimensions<T0,T1>::type type;
     };
 };
 
@@ -240,17 +243,24 @@ struct divides_impl<boost::units::detail::dimension_list_tag,boost::units::detai
     template<class T0, class T1>
     struct apply
     {
-        typedef typename boost::units::static_divide<T0, T1>::type type;
+        typedef typename boost::units::detail::merge_dimensions<
+            T0,
+            typename boost::units::detail::static_inverse_impl<
+                mpl::size<T1>::value
+            >::template apply<
+                typename mpl::begin<T1>::type
+            >::type
+        >::type type;
     };
 };
 
 template<>
 struct negate_impl<boost::units::detail::dimension_list_tag>
 {
-    template<class T0, class T1>
+    template<class T0>
     struct apply
     {
-        typedef typename boost::units::static_negate<T0>::type type;
+        typedef T0 type;
     };
 };
 
