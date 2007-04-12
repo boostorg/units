@@ -86,13 +86,16 @@ inline one operator/(const one&, const one&)
 // tag class to indicate that implicit conversions are allowed
 struct implicitly_convertible { };
 
+// tag class to indicate that conversion is trivial
 struct trivial_conversion
 {
     typedef one type;
     static one value() { return one(); }
 };
 
-struct identity_conversion : trivial_conversion, implicitly_convertible {};
+struct identity_conversion : 
+    public trivial_conversion, implicitly_convertible 
+{ };
 
 struct trivial_inverse_conversion { };
 
