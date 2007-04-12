@@ -36,9 +36,9 @@ namespace boost {
 
 namespace units {
 
-typedef base_dimension<1>   length_dim;
-typedef base_dimension<2>   mass_dim;
-typedef base_dimension<3>   time_dim;
+BOOST_UNITS_REGISTER_BASE_DIMENSION(length_dim, 1);
+BOOST_UNITS_REGISTER_BASE_DIMENSION(mass_dim, 2);
+BOOST_UNITS_REGISTER_BASE_DIMENSION(time_dim, 3);
 
 typedef length_dim::type    length_type;
 typedef mass_dim::type      mass_type;

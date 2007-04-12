@@ -30,7 +30,7 @@ Output:
 
 namespace bu = boost::units;
 
-typedef bu::base_dimension<0> dimension_tag;
+BOOST_UNITS_REGISTER_BASE_DIMENSION(dimension_tag, 0);
 
 struct system1 : bu::ordinal<100> {};
 struct system2 : bu::ordinal<101> {};
