@@ -1,6 +1,6 @@
 [library Boost.Units
   [quickbook 1.3]
-  [version 0.7.1]
+  [version 0.8.0]
   [authors [Schabel, Matthias C.]]
   [authors [Watanabe, Steven]]
   [copyright 2003-2007 Matthias Christian Schabel, 2007 Steven Watanabe]
@@ -57,14 +57,16 @@
 
 [section:Introduction Introduction]
 
-The Boost.Units library is a C++ implementation of zero runtime overhead compile-time dimensional analysis in a general 
-and extensible manner, treating it as a generic metaprogramming problem. Support for units
+The Boost.Units library is a C++ implementation of dimensional analysis in a general 
+and extensible manner, treating it as a generic compile-time metaprogramming problem. With appropriate
+compiler optimization, no runtime execution cost is introduced, facilitating the use of this library to
+provide dimension checking in performance-critical code. Support for units
 and quantities (defined as a unit and associated value) for arbitrary unit system models and arbitrary  
-value types is provided, as is a general facility for unit conversions enabling fine-grained control over
-conversion. Complete SI and CGS unit system models are provided, along with systems for 
-angles measured in degrees, gradians, and radians. A small subset of the SI system including only length, mass, 
-and time is developed in the examples as a demonstration of the relative ease of adding new unit systems and 
-the extensibility of the library architecture. 
+value types is provided, as is a fine-grained general facility for unit conversions. Complete SI and CGS unit 
+systems are provided, along with systems for 
+angles measured in degrees, gradians and systems for temperatures measured in degrees Celsius or Fahrenheit. 
+The library architecture has been designed with flexibility and extensibility in mind; demonstrations of the ease
+of adding new units and new unit systems are provided in the examples.
 
 In order to enable complex compile-time dimensional analysis calculations with no runtime overhead,
 Boost.Units relies heavily on the [___boost_mpl] (MPL) and on template metaprogramming techniques, and is, as a consequence, 
@@ -82,6 +84,7 @@ The following compilers/platforms are known *not* to work :
 # Microsoft Visual C++ 6.0 on Windows XP
 # Microsoft Visual C++ 7.0 on Windows XP
 # Metrowerks CodeWarrior 8.0 on Windows XP.
+# g++ 3.3.x
 
 [endsect]
 
@@ -90,19 +93,23 @@ The following compilers/platforms are known *not* to work :
 Before discussing the basics of the library, we first define a few terms that will be used frequently
 in the following :
 
-*  *Fundamental dimension* : A fundamental dimension is a type of measurement that forms the basis
-   of a unit system. The SI unit system defines seven fundamental dimensions : length \[L\], mass \[M\], time \[T\], 
-   current \[C\], temperature \[K\], amount \[A\], and luminous intensity \[I\].
-*  *Dimension* : A dimension represents the signature of a collection of fundamental dimensions, each
-   potentially raised to a different rational power. For example, area = \[L\]^2, velocity = \[L\]/\[T\], 
-   energy = \[M\] \[L\]^2/\[T\]^2.
-*  *Unit* : Units are a specific measure of a dimension. While length is an abstract measure of
-   distance, the meter is the concrete unit of distance in the SI system. Units represent a reference 
-   measure of some dimension (fundamental or otherwise).
-*  *Quantity* : Quantities represent a concrete amount of some unit. Thus, while the meter is a unit of length in the SI system,
-   5.5 meters is a quantity of length in that system. 
+*  *Base dimension* : A base dimension is defined as a measurable entity that forms a component of the basis
+   of a unit system. The SI unit system defines seven base dimensions : length \[L\], mass \[M\], time \[T\], 
+   current \[I\], temperature \[theta\], amount \[N\], and luminous intensity \[J\].
+*  *Derived dimension* : A collection of one or more base dimensions, each
+   potentially raised to a different rational power. For example, area = \[L\]^2, velocity = \[L\]/\[T\], and
+   energy = \[M\] \[L\]^2/\[T\]^2 are all derived dimensions.
+*  *Dimension* : The general term dimension is used to refer to either a base or a derived dimension.
+*  *Base unit* : A base unit represents a specific measure of a base dimension. While length is an abstract measure of
+   distance, the meter is the concrete base unit of distance in the SI system. 
+*  *Derived unit* : Derived units represent a specific measure of a derived dimension.
+*  *Unit* : The general term unit is used to refer to either a base or a derived unit.
+*  *Base quantity* : A base quantity represents a concrete amount of a base unit. Thus, while the meter is the base 
+   unit of length in the SI system, 5.5 meters is a base quantity of length in that system. 
+*  *Derived quantity* : Derived quantities represent a concrete amount of a derived unit.
+*  *Quantity* : The general term quantity is used to refer to either a base or a derived quantity.
 
-To begin, we present a short [@../example/tutorial.cpp tutorial] that demonstrates the use of 
+To begin, we present two short tutorials. [@../example/tutorial1.cpp Tutorial1] demonstrates the use of 
 [@http://en.wikipedia.org/wiki/SI_units SI] units. After including the appropriate system headers 
 and the headers for the various SI units we will need (all SI units can be included with  
 [headerref boost/units/systems/si.hpp]) and for quantity I/O ([headerref boost/units/io.hpp]), we define 
