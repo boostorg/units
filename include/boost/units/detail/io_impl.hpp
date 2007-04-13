@@ -45,7 +45,8 @@ struct static_rational_print_impl<false>
     template<class Char, class Traits, integer_type N>
     static void apply(std::basic_ostream<Char, Traits>& os,const static_rational<N>&)
     {
-        os << '(' << N << ')';
+//        os << '(' << N << ')';
+        os << N;
     }
 };
 
