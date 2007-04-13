@@ -77,11 +77,11 @@ struct power_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
     
     static type value(const boost::math::quaternion<Y>& x)  
     { 
-        const static_rational<N,D>  rat;
+        //const static_rational<N,D>  rat;
 
-        const typename divide_typeof_helper<Y,Y>::type    m = Y(rat.numerator())/Y(rat.denominator());
+        //const typename divide_typeof_helper<Y,Y>::type    m = Y(rat.numerator())/Y(rat.denominator());
         
-        return boost::math::pow(x,m);
+        return boost::math::pow(x,static_cast<int>(N));
     }
 };
 
@@ -96,11 +96,11 @@ struct root_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
     
     static type value(const boost::math::quaternion<Y>& x)  
     { 
-        const static_rational<N,D>  rat;
+        //const static_rational<N,D>  rat;
 
-        const typename divide_typeof_helper<Y,Y>::type    m = Y(rat.denominator())/Y(rat.numerator());
+        //const typename divide_typeof_helper<Y,Y>::type    m = Y(rat.denominator())/Y(rat.numerator());
         
-        return boost::math::pow(x,m);
+        return boost::math::pow(x,static_cast<int>(D));
     }
 };
 //]
