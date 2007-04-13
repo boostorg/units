@@ -671,117 +671,109 @@ operator/(const Y& lhs,const unit<Dim,System>&)
 }
 
 /// runtime quantity times scalar
-template<class System,
-         class Dim,
+template<class Unit,
          class X,
          class Y>
 inline
-typename multiply_typeof_helper< quantity<unit<Dim,System>,X>,Y >::type
-operator*(const quantity<unit<Dim,System>,X>& lhs,const Y& rhs)
+typename multiply_typeof_helper< quantity<Unit,X>,Y >::type
+operator*(const quantity<Unit,X>& lhs,const Y& rhs)
 {
-    typedef typename multiply_typeof_helper< quantity<unit<Dim,System>,X>,Y >::type type;
+    typedef typename multiply_typeof_helper< quantity<Unit,X>,Y >::type type;
     
     return type::from_value(lhs.value()*rhs);
 }
 
 /// runtime scalar times quantity
-template<class System,
-         class Dim,
+template<class Unit,
          class X,
          class Y>
 inline
-typename multiply_typeof_helper< X,quantity<unit<Dim,System>,Y> >::type
-operator*(const X& lhs,const quantity<unit<Dim,System>,Y>& rhs)
+typename multiply_typeof_helper< X,quantity<Unit,Y> >::type
+operator*(const X& lhs,const quantity<Unit,Y>& rhs)
 {
-    typedef typename multiply_typeof_helper< X,quantity<unit<Dim,System>,Y> >::type type;
+    typedef typename multiply_typeof_helper< X,quantity<Unit,Y> >::type type;
     
     return type::from_value(lhs*rhs.value());
 }
 
 /// runtime quantity divided by scalar
-template<class System,
-         class Dim,
+template<class Unit,
          class X,
          class Y>
 inline
-typename divide_typeof_helper< quantity<unit<Dim,System>,X>,Y >::type
-operator/(const quantity<unit<Dim,System>,X>& lhs,const Y& rhs)
+typename divide_typeof_helper< quantity<Unit,X>,Y >::type
+operator/(const quantity<Unit,X>& lhs,const Y& rhs)
 {
-    typedef typename divide_typeof_helper< quantity<unit<Dim,System>,X>,Y >::type   type;
+    typedef typename divide_typeof_helper< quantity<Unit,X>,Y >::type   type;
     
     return type::from_value(lhs.value()/rhs);
 }
 
 /// runtime scalar divided by quantity
-template<class System,
-         class Dim,
+template<class Unit,
          class X,
          class Y>
 inline
-typename divide_typeof_helper< X,quantity<unit<Dim,System>,Y> >::type
-operator/(const X& lhs,const quantity<unit<Dim,System>,Y>& rhs)
+typename divide_typeof_helper< X,quantity<Unit,Y> >::type
+operator/(const X& lhs,const quantity<Unit,Y>& rhs)
 {
-    typedef typename divide_typeof_helper< X,quantity<unit<Dim,System>,Y> >::type   type;
+    typedef typename divide_typeof_helper< X,quantity<Unit,Y> >::type   type;
     
     return type::from_value(lhs/rhs.value());
 }
 
 /// runtime unit times quantity
 template<class System1,
-         class System2,
          class Dim1,
-         class Dim2,
+         class Unit2,
          class Y>
 inline
-typename multiply_typeof_helper< unit<Dim1,System1>,quantity<unit<Dim2,System2>,Y> >::type
-operator*(const unit<Dim1,System1>&,const quantity<unit<Dim2,System2>,Y>& rhs)
+typename multiply_typeof_helper< unit<Dim1,System1>,quantity<Unit2,Y> >::type
+operator*(const unit<Dim1,System1>&,const quantity<Unit2,Y>& rhs)
 {
-    typedef typename multiply_typeof_helper< unit<Dim1,System1>,quantity<unit<Dim2,System2>,Y> >::type  type;
+    typedef typename multiply_typeof_helper< unit<Dim1,System1>,quantity<Unit2,Y> >::type  type;
     
     return type::from_value(rhs.value());
 }
 
 /// runtime unit divided by quantity
 template<class System1,
-         class System2,
          class Dim1,
-         class Dim2,
+         class Unit2,
          class Y>
 inline
-typename divide_typeof_helper< unit<Dim1,System1>,quantity<unit<Dim2,System2>,Y> >::type
-operator/(const unit<Dim1,System1>&,const quantity<unit<Dim2,System2>,Y>& rhs)
+typename divide_typeof_helper< unit<Dim1,System1>,quantity<Unit2,Y> >::type
+operator/(const unit<Dim1,System1>&,const quantity<Unit2,Y>& rhs)
 {
-    typedef typename divide_typeof_helper< unit<Dim1,System1>,quantity<unit<Dim2,System2>,Y> >::type    type;
+    typedef typename divide_typeof_helper< unit<Dim1,System1>,quantity<Unit2,Y> >::type    type;
     
     return type::from_value(Y(1)/rhs.value());
 }
 
 /// runtime quantity times unit
-template<class System1,
+template<class Unit1,
          class System2,
-         class Dim1,
          class Dim2,
          class Y>
 inline
-typename multiply_typeof_helper< quantity<unit<Dim1,System1>,Y>,unit<Dim2,System2> >::type
-operator*(const quantity<unit<Dim1,System1>,Y>& lhs,const unit<Dim2,System2>&)
+typename multiply_typeof_helper< quantity<Unit1,Y>,unit<Dim2,System2> >::type
+operator*(const quantity<Unit1,Y>& lhs,const unit<Dim2,System2>&)
 {
-    typedef typename multiply_typeof_helper< quantity<unit<Dim1,System1>,Y>,unit<Dim2,System2> >::type  type;
+    typedef typename multiply_typeof_helper< quantity<Unit1,Y>,unit<Dim2,System2> >::type  type;
     
     return type::from_value(lhs.value());
 }
 
 /// runtime quantity divided by unit
-template<class System1,
+template<class Unit1,
          class System2,
-         class Dim1,
          class Dim2,
          class Y>
 inline
-typename divide_typeof_helper< quantity<unit<Dim1,System1>,Y>,unit<Dim2,System2> >::type
-operator/(const quantity<unit<Dim1,System1>,Y>& lhs,const unit<Dim2,System2>&)
+typename divide_typeof_helper< quantity<Unit1,Y>,unit<Dim2,System2> >::type
+operator/(const quantity<Unit1,Y>& lhs,const unit<Dim2,System2>&)
 {
-    typedef typename divide_typeof_helper< quantity<unit<Dim1,System1>,Y>,unit<Dim2,System2> >::type    type;
+    typedef typename divide_typeof_helper< quantity<Unit1,Y>,unit<Dim2,System2> >::type    type;
     
     return type::from_value(lhs.value());
 }
@@ -837,37 +829,33 @@ operator-(const quantity<Unit1,X>& lhs,
 }
 
 /// runtime quantity times quantity
-template<class System1,
-         class System2,
-         class Dim1,
-         class Dim2,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-typename multiply_typeof_helper< quantity<unit<Dim1,System1>,X>,quantity<unit<Dim2,System2>,Y> >::type
-operator*(const quantity<unit<Dim1,System1>,X>& lhs,
-          const quantity<unit<Dim2,System2>,Y>& rhs)
+typename multiply_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >::type
+operator*(const quantity<Unit1,X>& lhs,
+          const quantity<Unit2,Y>& rhs)
 {
-    typedef typename multiply_typeof_helper< quantity<unit<Dim1,System1>,X>,
-                                             quantity<unit<Dim2,System2>,Y> >::type type;
+    typedef typename multiply_typeof_helper< quantity<Unit1,X>,
+                                             quantity<Unit2,Y> >::type type;
     
     return type::from_value(lhs.value()*rhs.value());
 }
 
 /// runtime quantity divided by quantity
-template<class System1,
-         class System2,
-         class Dim1,
-         class Dim2,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-typename divide_typeof_helper< quantity<unit<Dim1,System1>,X>,quantity<unit<Dim2,System2>,Y> >::type
-operator/(const quantity<unit<Dim1,System1>,X>& lhs,
-          const quantity<unit<Dim2,System2>,Y>& rhs)
+typename divide_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >::type
+operator/(const quantity<Unit1,X>& lhs,
+          const quantity<Unit2,Y>& rhs)
 {
-    typedef typename divide_typeof_helper< quantity<unit<Dim1,System1>,X>,
-                                           quantity<unit<Dim2,System2>,Y> >::type   type;
+    typedef typename divide_typeof_helper< quantity<Unit1,X>,
+                                           quantity<Unit2,Y> >::type   type;
     
     return type::from_value(lhs.value()/rhs.value());
 }
