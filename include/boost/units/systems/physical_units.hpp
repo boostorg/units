@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_PHYSICAL_UNITS_HPP
 #define BOOST_UNITS_PHYSICAL_UNITS_HPP
 
+#include <boost/units/base_dimension.hpp>
+#include <boost/units/derived_dimension.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/system.hpp>
 #include <boost/units/unit.hpp>
@@ -38,9 +40,9 @@ BOOST_UNITS_REGISTER_BASE_DIMENSION(luminous_intensity_dim,-3);   ///> base dime
 BOOST_UNITS_REGISTER_BASE_DIMENSION(plane_angle_dim,-2);          ///> base dimension of plane angle
 BOOST_UNITS_REGISTER_BASE_DIMENSION(solid_angle_dim,-1);          ///> base dimension of solid angle
 
-}
+} // namespace units
 
-}
+} // namespace boost
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 

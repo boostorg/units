@@ -14,47 +14,87 @@
 #include <boost/mpl/bool_fwd.hpp>
 #include <boost/mpl/int.hpp>
 
+#include <boost/units/config.hpp>
+#include <boost/units/is_dim.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/dim_impl.hpp>
 
 /// \file 
 /// \brief Handling of fundamental dimension/exponent pairs.
 
+//namespace boost {
+//
+//namespace units {
+//
+///// Class for defining a cardinal ordering of tags to faciliate compile-time sorting.
+//template<long N> struct ordinal { typedef typename boost::mpl::int_<N> value; };
+//
+//}
+//
+//}
+//
+//#if BOOST_UNITS_HAS_BOOST_TYPEOF
+//
+//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+//
+//BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::ordinal, (long))
+//
+//#endif
+
 namespace boost {
 
 namespace units {
 
-/// Class for defining a cardinal ordering of tags to faciliate compile-time sorting.
-template<long N> struct ordinal { typedef typename boost::mpl::int_<N> value; };
+namespace detail {
+
+struct dim_tag { };
 
 }
 
-}
+/// \brief Dimension tag/exponent pair for a single fundamental dimension.
+///
+/// \detailed 
+/// The dim class represents a single dimension tag/dimension exponent pair.
+/// That is, @c dim<tag_type,value_type> is a pair where @c tag_type represents the
+/// fundamental dimension being represented and @c value_type represents the 
+/// exponent of that fundamental dimension as a @c static_rational or other type 
+/// providing the required compile-time arithmetic operations. @c tag_type must 
+/// provide an ordinal value to allow sorting of lists of dims at compile-time.
+/// This can be easily accomplished by inheriting from @c ordinal<N>. Otherwise,
+/// @c tag_type may be any type. 
+template<typename T,typename V> 
+struct dim
+{
+    typedef dim             type;
+    typedef detail::dim_tag tag;
+    typedef T               tag_type;
+    typedef V               value_type;
+};
+
+///// Check that a type is a valid @c dim.
+//template<typename T> 
+//struct is_dim :
+//    public mpl::false_
+//{ };
+//
+//template<typename T,typename V>
+//struct is_dim< dim<T,V> > :
+//    public mpl::true_
+//{ };
+
+} // namespace units
+
+} // namespace boost
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::ordinal, (long))
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dim, 2)
 
 #endif
 
 namespace boost {
-
-namespace units {
-
-/// Check that a type is a valid @c dim.
-template<typename T> 
-struct is_dim :
-    public mpl::false_
-{ };
-
-template<typename T,typename V>
-struct is_dim< dim<T,V> > :
-    public mpl::true_
-{ };
-
-} // namespace units
 
 namespace mpl {
 

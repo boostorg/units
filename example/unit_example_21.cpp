@@ -29,6 +29,7 @@ Output:
 
 #include <boost/units/io.hpp>
 #include <boost/units/conversion.hpp>
+#include <boost/units/ordinal.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/physical_units.hpp>

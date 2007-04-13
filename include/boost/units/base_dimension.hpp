@@ -14,6 +14,7 @@
 #include <boost/mpl/int.hpp>
 #include <boost/mpl/list.hpp>
 
+#include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 
@@ -41,6 +42,14 @@ typedef base_dimension<N>   name                                                
 } // namespace units
 
 } // namespace boost
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::base_dimension, 1)
+
+#endif
 
 // doesn't work with g++ for some reason
 //namespace boost {

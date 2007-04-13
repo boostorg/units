@@ -73,8 +73,10 @@ class static_rational
         static const integer_type   den = 
             static_cast<integer_type>(boost::math::static_gcd<nabs,dabs>::value);
         
-    public:   
+    public: 
+        // for mpl arithmetic support
         typedef detail::static_rational_tag tag;
+        
         static const integer_type   Numerator = N/den,
                                     Denominator = D/den;
         

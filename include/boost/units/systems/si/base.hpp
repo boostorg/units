@@ -14,6 +14,7 @@
 #include <string>
 
 #include <boost/units/io.hpp>
+#include <boost/units/ordinal.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/system.hpp>

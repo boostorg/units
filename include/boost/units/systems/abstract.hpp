@@ -14,6 +14,7 @@
 #include <string>
 
 #include <boost/units/conversion.hpp>
+#include <boost/units/ordinal.hpp>
 #include <boost/units/system.hpp>
 #include <boost/units/systems/physical_units.hpp>
 

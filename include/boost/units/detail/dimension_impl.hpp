@@ -19,63 +19,66 @@
 #include <boost/mpl/push_front.hpp>
 #include <boost/mpl/size.hpp>
 
+#include <boost/units/config.hpp>
+#include <boost/units/dimension_list.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 
 /// \file 
 /// \brief Core class and metaprogramming utilities for compile-time dimensional analysis.
 ///
 /// \detailed 
 
-namespace boost {
+//namespace boost {
+//
+//namespace units {
+//
+//struct dimensionless_type;
+//
+//}
+//
+//}
+//
+//#if BOOST_UNITS_HAS_BOOST_TYPEOF
+//
+//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+//
+//BOOST_TYPEOF_REGISTER_TYPE(boost::units::dimensionless_type)
+//
+//#endif
 
-namespace units {
-
-struct dimensionless_type;
-
-}
-
-}
-
-#if BOOST_UNITS_HAS_BOOST_TYPEOF
-
-#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-
-BOOST_TYPEOF_REGISTER_TYPE(boost::units::dimensionless_type)
-
-#endif
-
-namespace boost {
-
-namespace units {
-
-namespace detail {
-
-struct dimension_list_tag { };
-
-} // namespace detail
-
-template<class Item, class Next>
-struct dimension_list
-{
-    typedef detail::dimension_list_tag tag;
-    typedef dimension_list type;
-    typedef Item item;
-    typedef Next next;
-    typedef typename mpl::next<typename Next::size>::type size;
-};
-
-}
-
-}
-
-#if BOOST_UNITS_HAS_BOOST_TYPEOF
-
-#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dimension_list, 2)
-
-#endif
-
+//namespace boost {
+//
+//namespace units {
+//
+//namespace detail {
+//
+//struct dimension_list_tag { };
+//
+//} // namespace detail
+//
+//template<class Item, class Next>
+//struct dimension_list
+//{
+//    typedef detail::dimension_list_tag  tag;
+//    typedef dimension_list              type;
+//    typedef Item                        item;
+//    typedef Next                        next;
+//    typedef typename mpl::next<typename Next::size>::type size;
+//};
+//
+//}
+//
+//}
+//
+//#if BOOST_UNITS_HAS_BOOST_TYPEOF
+//
+//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+//
+//BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dimension_list, 2)
+//
+//#endif
+//
 namespace boost {
 
 namespace units {

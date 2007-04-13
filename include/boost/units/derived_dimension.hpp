@@ -11,10 +11,8 @@
 #ifndef BOOST_UNITS_DERIVED_DIMENSION_HPP
 #define BOOST_UNITS_DERIVED_DIMENSION_HPP
 
-//#include <boost/mpl/int.hpp>
 #include <boost/mpl/list.hpp>
 
-//#include <boost/units/dimensionless_type.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 

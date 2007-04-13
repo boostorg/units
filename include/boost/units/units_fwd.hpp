@@ -18,8 +18,11 @@ namespace units {
 template<long N> struct ordinal;
 
 template<typename T,typename V> struct dim;
-
 template<typename T> struct is_dim;
+
+struct dimensionless_type;
+template<class Item,class Next> struct dimension_list;
+template<typename Seq> struct make_dimension_list;
 
 template<class T> struct is_dimensionless;
 template<class S1,class S2> struct is_implicitly_convertible;

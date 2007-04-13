@@ -13,7 +13,8 @@
 
 #include <boost/mpl/long.hpp>
 
-#include <boost/units/detail/dimension_impl.hpp>
+#include <boost/units/config.hpp>
+#include <boost/units/dimension_list.hpp>
 
 namespace boost {
 
@@ -30,5 +31,13 @@ struct dimensionless_type
 } // namespace units
 
 } // namespace boost
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TYPE(boost::units::dimensionless_type)
+
+#endif
 
 #endif // BOOST_UNITS_DIMENSIONLESS_TYPE_HPP
