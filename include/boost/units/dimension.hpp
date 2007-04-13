@@ -119,16 +119,31 @@ template<long N> struct base_dimension;
 /// each specialization must be separately instantiated in boost::units namespace to prevent duplication of tag values
 #define BOOST_UNITS_REGISTER_BASE_DIMENSION(name, N)                                                        \
 template<>                                                                                                  \
-struct boost::units::base_dimension<N> :                                                                    \
-    public boost::mpl::int_<N>                                                                              \
+struct base_dimension<N> :                                                                                  \
+    public mpl::int_<N>                                                                                     \
 {                                                                                                           \
-    typedef boost::units::base_dimension<N>   this_type;                                                    \
-    typedef boost::mpl::int_<N>        value;                                                               \
+    typedef base_dimension<N>   this_type;                                                                  \
+    typedef mpl::int_<N>        value;                                                                      \
                                                                                                             \
-    typedef boost::units::make_dimension_list< boost::mpl::list< boost::units::dim< this_type,boost::units::static_rational<1> > > >::type type;\
+    typedef make_dimension_list< mpl::list< dim< this_type,static_rational<1> > > >::type type;             \
 };                                                                                                          \
                                                                                                             \
-typedef boost::units::base_dimension<N>   name
+typedef base_dimension<N>   name                                                                            \
+
+//// gcc doesn't like this for some reason...
+///// each specialization must be separately instantiated in boost::units namespace to prevent duplication of tag values
+//#define BOOST_UNITS_REGISTER_BASE_DIMENSION(name, N)                                                        \
+//template<>                                                                                                  \
+//struct boost::units::base_dimension<N> :                                                                    \
+//    public boost::mpl::int_<N>                                                                              \
+//{                                                                                                           \
+//    typedef boost::units::base_dimension<N>   this_type;                                                    \
+//    typedef boost::mpl::int_<N>        value;                                                               \
+//                                                                                                            \
+//    typedef boost::units::make_dimension_list< boost::mpl::list< boost::units::dim< this_type,boost::units::static_rational<1> > > >::type type;\
+//};                                                                                                          \
+//                                                                                                            \
+//typedef boost::units::base_dimension<N>   name                                                              \
 
 /// A utility class for defining composite dimensions with integer powers.
 template<class DT1 = dimensionless_type,int E1 = 0,

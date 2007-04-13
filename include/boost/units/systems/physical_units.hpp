@@ -38,33 +38,6 @@ BOOST_UNITS_REGISTER_BASE_DIMENSION(luminous_intensity_dim,-3);   ///> base dime
 BOOST_UNITS_REGISTER_BASE_DIMENSION(plane_angle_dim,-2);          ///> base dimension of plane angle
 BOOST_UNITS_REGISTER_BASE_DIMENSION(solid_angle_dim,-1);          ///> base dimension of solid angle
 
-///// tag representing length
-//typedef base_dimension<-9>          length_dim;
-//
-///// tag representing mass
-//typedef base_dimension<-8>          mass_dim;
-//
-///// tag representing time
-//typedef base_dimension<-7>          time_dim;
-//
-///// tag representing electrical current
-//typedef base_dimension<-6>          current_dim;
-//
-///// tag representing temperature
-//typedef base_dimension<-5>          temperature_dim;
-//
-///// tag representing amount of substance
-//typedef base_dimension<-4>          amount_dim;
-//
-///// tag representing luminous intensity
-//typedef base_dimension<-3>          luminous_intensity_dim;
-//
-///// tag representing plane angle
-//typedef base_dimension<-2>          plane_angle_dim;
-//
-///// tag representing solid angle
-//typedef base_dimension<-1>          solid_angle_dim;
-
 }
 
 }
