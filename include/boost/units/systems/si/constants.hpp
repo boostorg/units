@@ -67,10 +67,10 @@ inline
 std::ostream& operator<<(std::ostream& os,const value_and_uncertainty<Y>& val)
 {
     boost::io::ios_precision_saver precision_saver(os);
-    boost::io::ios_width_saver width_saver(os);
+    //boost::io::ios_width_saver width_saver(os);
     boost::io::ios_flags_saver flags_saver(os);
 
-    os << std::setw(21);
+    //os << std::setw(21);
     
     if (val.uncertainty() > Y(0))
     {
@@ -88,7 +88,7 @@ std::ostream& operator<<(std::ostream& os,const value_and_uncertainty<Y>& val)
 
         os << " (rel. unc. = " 
            << std::setprecision(1) 
-           << std::setw(7) 
+           //<< std::setw(7) 
            << std::scientific
            << relative_uncertainty << ")";
     }
