@@ -25,7 +25,7 @@ namespace units {
 
 namespace detail {
 
-struct dim_tag {};
+struct dim_tag { };
 
 }
 
@@ -43,10 +43,10 @@ struct dim_tag {};
 template<typename T,typename V> 
 struct dim
 {
-    typedef dim type;
+    typedef dim             type;
     typedef detail::dim_tag tag;
-    typedef T    tag_type;
-    typedef V    value_type;
+    typedef T               tag_type;
+    typedef V               value_type;
 };
 
 }

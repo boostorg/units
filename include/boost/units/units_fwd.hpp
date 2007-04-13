@@ -21,12 +21,12 @@ template<typename T,typename V> struct dim;
 
 template<typename T> struct is_dim;
 
-template<class Dim,class System> class unit;
-
 template<class T> struct is_dimensionless;
 template<class S1,class S2> struct is_implicitly_convertible;
 template<class T> struct get_dimension;
 template<class T> struct get_system;
+
+template<class Dim,class System> class unit;
 
 template<class SystemTag,class DimensionTag> struct unit_info;
 template<class System> struct dimensionless_unit;

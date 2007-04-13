@@ -15,6 +15,7 @@
 
 #include <boost/units/dimension.hpp>
 #include <boost/units/system.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/unit_impl.hpp>
 
 namespace boost {
@@ -27,7 +28,6 @@ namespace units {
 template<class Dim,class System>
 class unit
 {
-        BOOST_STATIC_ASSERT((detail::check_system<System, Dim>::value == true));
     public:
         typedef unit<Dim,System>    this_type;
         typedef Dim                 dimension_type; 
@@ -38,6 +38,9 @@ class unit
         //~unit() { }  
        
         this_type& operator=(const this_type&) { }
+        
+    private:
+        BOOST_STATIC_ASSERT((detail::check_system<System, Dim>::value == true));
 };
 
 }
@@ -56,69 +59,67 @@ namespace boost {
 
 namespace units {
 
-/// utility class to simplify construction of dimensionless units in a system
-template<class System>
-struct dimensionless_unit
-{
-    typedef unit<dimensionless_type,System> type;
-};
-
 /// class to specialize for IO
-template<class SystemTag,class DimensionTag> struct unit_info;
+//template<class SystemTag,class DimensionTag> struct unit_info;
+//
+///// utility class to simplify construction of dimensionless units in a system
+//template<class System>
+//struct dimensionless_unit
+//{
+//    typedef unit<dimensionless_type,System> type;
+//};
+//
+//template<class T>
+//struct is_unit : 
+//    public mpl::false_
+//{ };
+//
+///// check that a type is a unit
+//template<class Dim,class System>
+//struct is_unit< unit<Dim,System> > :
+//    public mpl::true_
+//{ };
+//
+//template<class T,class System>
+//struct is_unit_of_system :
+//    public mpl::false_
+//{ };
+//
+//template<class T,class Dim>
+//struct is_unit_of_dimension :
+//    public mpl::false_
+//{ };
+//
+///// check that a type is a unit of the specified dimension
+//template<class Dim,class System>
+//struct is_unit_of_dimension< unit<Dim,System>,Dim > :
+//    public mpl::true_
+//{ };
+//
+///// check that a type is a dimensionless unit
+//template<class T>
+//struct is_dimensionless_unit :
+//    public is_unit_of_dimension<T,dimensionless_type>
+//{ };
+//    
+///// check that a type is a unit in a specified system
+//template<class Dim,class System>
+//struct is_unit_of_system< unit<Dim,System>,System > :
+//    public mpl::true_
+//{ };
 
-template<class T>
-struct is_unit : 
-    public mpl::false_
-{ };
+//template<class T>
+//struct is_dimensionless :
+//    public mpl::false_
+//{ };
+//
+///// check if a unit is dimensionless
+//template<class System>
+//struct is_dimensionless< unit<dimensionless_type,System> > :
+//    public mpl::true_
+//{ };
 
-/// check that a type is a unit
-template<class Dim,class System>
-struct is_unit< unit<Dim,System> > :
-    public mpl::true_
-{ };
-
-template<class T,class System>
-struct is_unit_of_system :
-    public mpl::false_
-{ };
-
-/// check that a type is a unit in a specified system
-template<class Dim,class System>
-struct is_unit_of_system< unit<Dim,System>,System > :
-    public mpl::true_
-{ };
-
-template<class T,class Dim>
-struct is_unit_of_dimension :
-    public mpl::false_
-{ };
-
-/// check that a type is a unit of the specified dimension
-template<class Dim,class System>
-struct is_unit_of_dimension< unit<Dim,System>,Dim > :
-    public mpl::true_
-{ };
-
-template<class T>
-struct is_dimensionless :
-    public mpl::false_
-{ };
-
-/// check if a unit is dimensionless
-template<class System>
-struct is_dimensionless< unit<dimensionless_type,System> > :
-    public mpl::true_
-{ };
-
-/// check that a type is a dimensionless unit
-template<class T>
-struct is_dimensionless_unit :
-    public is_unit_of_dimension<T,dimensionless_type>
-{ };
-    
-template<class T> struct get_dimension;
-
-template<class S1,class S2> struct is_implicitly_convertible;
+//template<class S1,class S2> struct is_implicitly_convertible;
 
 template<class S1,class S2> 
 struct is_implicitly_convertible :
@@ -184,21 +185,23 @@ struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
     typedef heterogeneous_system<S2>        system2_type;
 };
 
-/// get the dimension of a unit
-template<class Dim,class System>
-struct get_dimension< unit<Dim,System> >
-{
-    typedef Dim type;
-};
+//template<class T> struct get_dimension;
+//
+///// get the dimension of a unit
+//template<class Dim,class System>
+//struct get_dimension< unit<Dim,System> >
+//{
+//    typedef Dim type;
+//};
 
-template<class T> struct get_system;
-
-/// get the system of a unit
-template<class Dim,class System>
-struct get_system< unit<Dim,System> >
-{
-    typedef System type;
-};
+//template<class T> struct get_system;
+//
+///// get the system of a unit
+//template<class Dim,class System>
+//struct get_system< unit<Dim,System> >
+//{
+//    typedef System type;
+//};
 
 /// unit unary plus typeof helper
 template<class Dim,class System>
