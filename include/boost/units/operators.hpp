@@ -15,38 +15,9 @@
 #include <complex>
 
 #include <boost/static_assert.hpp>
-#include <boost/version.hpp>
 #include <boost/type_traits/is_same.hpp>
 
-#if (BOOST_VERSION >= 103400)
-    #define BOOST_UNITS_HAS_BOOST_TYPEOF    1
-#else
-    #define BOOST_UNITS_HAS_BOOST_TYPEOF    0
-#endif
-
-// uncomment this to test without Boost Typeof
-//#undef BOOST_UNITS_HAS_BOOST_TYPEOF
-//#define BOOST_UNITS_HAS_BOOST_TYPEOF      0   
-
-#if (BOOST_UNITS_HAS_BOOST_TYPEOF)
-    #include <boost/typeof/typeof.hpp>   
-    #include <boost/typeof/std/complex.hpp>   
-    #define BOOST_UNITS_HAS_TYPEOF          1
-#else    
-    #if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
-        #define BOOST_UNITS_HAS_TYPEOF          1
-        #define BOOST_UNITS_HAS_GNU_TYPEOF      1
-    #elif defined(__MWERKS__)
-        #define BOOST_UNITS_HAS_TYPEOF          1
-        #define BOOST_UNITS_HAS_MWERKS_TYPEOF   1
-    #else
-        #define BOOST_UNITS_HAS_TYPEOF          0
-    #endif
-#endif
-
-// uncomment this to test without typeof support at all
-//#undef BOOST_UNITS_HAS_TYPEOF
-//#define BOOST_UNITS_HAS_TYPEOF          0
+#include <boost/units/config.hpp>
 
 /// \file 
 /// \brief Compile time operators and typeof helper classes.
@@ -59,28 +30,7 @@
 
 namespace boost {
 
-namespace units { 
-
-/// Compile time negate.
-template<typename R> struct static_negate;
-
-/// Compile time add.
-template<typename R1,typename R2> struct static_add;
-
-/// Compile time subtract.
-template<typename R1,typename R2> struct static_subtract;
-
-/// Compile time multiply.
-template<typename R1,typename R2> struct static_multiply;
-
-/// Compile time divide.
-template<typename R1,typename R2> struct static_divide;
-
-/// Compile time power.
-template<typename R1,typename R2> struct static_power;
-
-/// Compile time root.
-template<typename R1,typename R2> struct static_root;
+namespace units {
 
 #if BOOST_UNITS_HAS_TYPEOF
 
@@ -150,14 +100,6 @@ template<typename X,typename Y> struct multiply_typeof_helper   { typedef typeof
 template<typename X,typename Y> struct divide_typeof_helper     { typedef typeof((typeof_::make<X>()/typeof_::make<Y>())) type; };
 
 #endif
-
-//template<typename X> struct unary_plus_typeof_helper            { typedef typeof(+X()) type; };
-//template<typename X> struct unary_minus_typeof_helper           { typedef typeof(-X()) type; };
-//
-//template<typename X,typename Y> struct add_typeof_helper        { typedef typeof(X()+Y()) type; };
-//template<typename X,typename Y> struct subtract_typeof_helper   { typedef typeof(X()-Y()) type; };
-//template<typename X,typename Y> struct multiply_typeof_helper   { typedef typeof(X()*Y()) type; };
-//template<typename X,typename Y> struct divide_typeof_helper     { typedef typeof(X()/Y()) type; };
 
 #else // BOOST_UNITS_HAS_TYPEOF
 

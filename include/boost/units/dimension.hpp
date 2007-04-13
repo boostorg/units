@@ -73,55 +73,6 @@ struct is_dimension_list<dimensionless_type> :
     public mpl::true_
 { };
 
-//// All the static_* metafunctions in this file assume
-//// that their parameters are sorted dimension lists.
-//// 
-//// should we static assert is_dimension_list here?
-//
-///// Negate dimension list.
-//template<typename DL>
-//struct static_negate
-//{
-//    typedef DL type;
-//};
-//
-///// Add two dimension list, only permitted if they are commensurate.
-//template<typename DL1,typename DL2>
-//struct static_add
-//{
-//    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
-//    typedef DL1 type;
-//};
-//
-///// Subtract two dimension sequences, only permitted if they are commensurate.
-//template<typename DL1,typename DL2>
-//struct static_subtract
-//{
-//    BOOST_STATIC_ASSERT((is_same<DL1,DL2>::value == true));
-//    typedef DL2 type;
-//};
-//
-///// Multiply two dimension sequences.
-//template<typename DL1,typename DL2>
-//struct static_multiply
-//{
-//    typedef typename detail::merge_dimensions<DL1,DL2>::type type;
-//};
-//
-///// Divide two dimension lists.
-//template<typename DL1,typename DL2> 
-//struct static_divide
-//{
-//    typedef typename detail::merge_dimensions<
-//        DL1,
-//        typename detail::static_inverse_impl<
-//            mpl::size<DL2>::value
-//        >::template apply<
-//            typename mpl::begin<DL2>::type
-//        >::type
-//    >::type type;
-//};
-
 /// Raise a dimension list to a scalar power.
 template<typename DL,typename Ex> 
 struct static_power
