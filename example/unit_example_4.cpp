@@ -493,7 +493,7 @@ int main()
     sstream2 << "T = 310 K" << std::endl;
     sstream2 << "n = " << 2.05835e-17 << " mol" << std::endl;
     #if BOOST_UNITS_HAS_TYPEOF
-    sstream2 << "R = 8.31447(+/-1.5e-05) m^2 kg s^(-2) K^(-1) mol^(-1)" << std::endl;
+    sstream2 << "R = 8.314472 (rel. unc. = " << 1.8e-6 << ") m^2 kg s^(-2) K^(-1) mol^(-1)" << std::endl;
     #else
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF
@@ -507,11 +507,12 @@ int main()
     sstream2 << "Z   = (1.5,-2) m^2 kg s^(-3) A^(-2)" << std::endl;
     sstream2 << "I*Z = (12.5,0) m^2 kg s^(-3) A^(-1)" << std::endl;
     sstream2 << std::endl;
-    sstream2 << "x+y-w         = 0.48(+/-0.632772) m" << std::endl;
-    sstream2 << "w*x           = 9.04(+/-0.904885) m^2" << std::endl;
-    sstream2 << "x/y           = 0.666667(+/-0.149071) dimensionless" << std::endl;
-    sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^(-1)" << std::endl;
-    sstream2 << "w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless" << std::endl;
+    sstream2 << std::scientific << std::setprecision(1);
+    sstream2 << "x+y-w         = 0.48 (rel. unc. = " << 1.3 << ") m" << std::endl;
+    sstream2 << "w*x           = 9.04 (rel. unc. = " << 1.0e-1 << ") m^2" << std::endl;
+    sstream2 << "x/y           = 0.6667 (rel. unc. = " << 2.2e-1 << ") dimensionless" << std::endl;
+    sstream2 << "w*y^2/(u*x)^2 = 10.17 (rel. unc. = " << 3.5e-1 << ") m^(-1)" << std::endl;
+    sstream2 << "w/(u*x)^(1/2) = 3.1961 (rel. unc. = " << 5.0e-2 << ") dimensionless" << std::endl;
     sstream2 << std::endl;
 
     std::string str1(sstream1.str());
