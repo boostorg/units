@@ -64,6 +64,9 @@ static const object_space_unit  object_space;
 
 } // namespace boost
 
+template<class T>
+void suppress_unused_variable_warning(T&) {}
+
 int main(void)
 {
     using namespace boost::units;
@@ -82,6 +85,12 @@ int main(void)
     
     quantity<world_space_unit,vector>   wsv3(wsv1);
     quantity<object_space_unit,vector>  osv3(osv1);
+
+    suppress_unused_variable_warning(wsv2);
+    suppress_unused_variable_warning(osv2);
+
+    suppress_unused_variable_warning(wsv3);
+    suppress_unused_variable_warning(osv3);
 
 #if defined(BOOST_UNITS_EXAMPLE_15_FAIL) && BOOST_UNITS_EXAMPLE_15_FAIL == 1    
     // compile-time error if either of these is uncommented
@@ -105,6 +114,12 @@ int main(void)
     
     world_space_vector  wsv3(wsv1);
     object_space_vector osv3(osv1);
+
+    suppress_unused_variable_warning(wsv2);
+    suppress_unused_variable_warning(osv2);
+
+    suppress_unused_variable_warning(wsv3);
+    suppress_unused_variable_warning(osv3);
     
 #if defined(BOOST_UNITS_EXAMPLE_15_FAIL) && BOOST_UNITS_EXAMPLE_15_FAIL == 2
     // compile-time error if either of these is uncommented
@@ -130,6 +145,12 @@ int main(void)
     
     world_space_vector_type  wsv3(wsv1);
     object_space_vector_type osv3(osv1);
+
+    suppress_unused_variable_warning(wsv2);
+    suppress_unused_variable_warning(osv2);
+
+    suppress_unused_variable_warning(wsv3);
+    suppress_unused_variable_warning(osv3);
     
 #if defined(BOOST_UNITS_EXAMPLE_15_FAIL) && BOOST_UNITS_EXAMPLE_15_FAIL == 3
     // compile-time error if either of these is uncommented because conversion is not defined
