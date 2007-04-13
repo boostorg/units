@@ -41,7 +41,9 @@ class quantity
         BOOST_STATIC_ASSERT((detail::check_system<system_type,dimension_type>::value == true));
          
         quantity() : val_() { }
-        quantity(const this_type& source) : val_(source.val_) { }
+        quantity(const this_type& source) : val_(source.val_) {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
         //~quantity() { }
         
         this_type& operator=(const this_type& source) 
@@ -56,6 +58,7 @@ class quantity
         quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
             val_(source.value())
         { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
         }
         
@@ -79,6 +82,7 @@ class quantity
                  typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
@@ -88,6 +92,7 @@ class quantity
                  typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
@@ -99,6 +104,7 @@ class quantity
         explicit quantity(const quantity<unit<Dim2,System2>,YY>& source)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
@@ -159,9 +165,15 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         typedef dimensionless_type                              dimension_type;
         typedef unit<dimension_type,system_type>                unit_type;
          
-        quantity() : val_() { }
-        quantity(value_type val) : val_(val) { }                    ///< construction from raw @c value_type is allowed
-        quantity(const this_type& source) : val_(source.val_) { }
+        quantity() : val_() {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+        quantity(value_type val) : val_(val) {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }                    ///< construction from raw @c value_type is allowed
+        quantity(const this_type& source) : val_(source.val_) {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
         //~quantity() { }
         
         this_type& operator=(const this_type& source) 
@@ -176,6 +188,7 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
             val_(source.value())
         { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
         
@@ -194,14 +207,18 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         template<class System2, class Y2> 
         quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source) :
             val_(source.value()) 
-        { }
+        {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
 
         /// conversion between different unit systems is explicit when
         /// the units are not equivalent.
         template<class System2, class Y2> 
         explicit quantity(const quantity<unit<dimensionless_type,System2>,Y2>& source) :
             val_(conversion_helper<quantity<unit<dimensionless_type,System2>,Y2>, this_type>::convert(source).value()) 
-        { }
+        {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
 
         /// implicit assignment between different unit systems is allowed
         template<class System2>
@@ -215,7 +232,7 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         /// implicit conversion to @c value_type is allowed
         operator value_type() const                         { return val_; }
         
-        value_type value() const                            { return val_; }                        ///< constant accessor to value
+        const value_type& value() const                     { return val_; }                        ///< constant accessor to value
         
         ///< can add a quantity of the same type if add_typeof_helper<value_type,value_type>::type is convertible to value_type
         this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  
