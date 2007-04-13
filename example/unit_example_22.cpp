@@ -433,6 +433,10 @@ struct blahblah { };
 
 blahblah operator+(const blah&) { return blahblah(); }
 
+template<typename I,I N,I D> 
+class static_rational
+{ };
+
 int main()
 {
     using namespace boost;
