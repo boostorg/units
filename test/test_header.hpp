@@ -26,6 +26,9 @@ Output:
 
 #include <boost/test/minimal.hpp>
 
+#include <boost/units/ordinal.hpp>
+#include <boost/units/base_dimension.hpp>
+#include <boost/units/derived_dimension.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
@@ -36,9 +39,9 @@ namespace boost {
 
 namespace units {
 
-BOOST_UNITS_REGISTER_BASE_DIMENSION(length_dim, 1);
-BOOST_UNITS_REGISTER_BASE_DIMENSION(mass_dim, 2);
-BOOST_UNITS_REGISTER_BASE_DIMENSION(time_dim, 3);
+struct length_dim : boost::units::base_dimension<length_dim, 1> {};                        ///> base dimension of length
+struct mass_dim : boost::units::base_dimension<mass_dim,2> {};                             ///> base dimension of mass
+struct time_dim : boost::units::base_dimension<time_dim,3> {};                             ///> base dimension of time
 
 typedef length_dim::type    length_type;
 typedef mass_dim::type      mass_type;

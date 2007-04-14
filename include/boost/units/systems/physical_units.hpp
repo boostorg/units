@@ -30,15 +30,15 @@ namespace boost {
 
 namespace units { 
 
-BOOST_UNITS_REGISTER_BASE_DIMENSION(length_dim,-9);               ///> base dimension of length
-BOOST_UNITS_REGISTER_BASE_DIMENSION(mass_dim,-8);                 ///> base dimension of mass
-BOOST_UNITS_REGISTER_BASE_DIMENSION(time_dim,-7);                 ///> base dimension of time
-BOOST_UNITS_REGISTER_BASE_DIMENSION(current_dim,-6);              ///> base dimension of current
-BOOST_UNITS_REGISTER_BASE_DIMENSION(temperature_dim,-5);          ///> base dimension of temperature
-BOOST_UNITS_REGISTER_BASE_DIMENSION(amount_dim,-4);               ///> base dimension of amount
-BOOST_UNITS_REGISTER_BASE_DIMENSION(luminous_intensity_dim,-3);   ///> base dimension of luminous intensity
-BOOST_UNITS_REGISTER_BASE_DIMENSION(plane_angle_dim,-2);          ///> base dimension of plane angle
-BOOST_UNITS_REGISTER_BASE_DIMENSION(solid_angle_dim,-1);          ///> base dimension of solid angle
+struct length_dim : boost::units::base_dimension<length_dim, -9> {};                        ///> base dimension of length
+struct mass_dim : boost::units::base_dimension<mass_dim,-8> {};                             ///> base dimension of mass
+struct time_dim : boost::units::base_dimension<time_dim,-7> {};                             ///> base dimension of time
+struct current_dim : boost::units::base_dimension<current_dim,-6> {};                       ///> base dimension of current
+struct temperature_dim : boost::units::base_dimension<temperature_dim,-5> {};               ///> base dimension of temperature
+struct amount_dim : boost::units::base_dimension<amount_dim,-4> {};                         ///> base dimension of amount
+struct luminous_intensity_dim : boost::units::base_dimension<luminous_intensity_dim,-3> {}; ///> base dimension of luminous intensity
+struct plane_angle_dim : boost::units::base_dimension<plane_angle_dim,-2> {};               ///> base dimension of plane angle
+struct solid_angle_dim : boost::units::base_dimension<solid_angle_dim,-1> {};               ///> base dimension of solid angle
 
 } // namespace units
 
