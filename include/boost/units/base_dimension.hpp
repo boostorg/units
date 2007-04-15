@@ -41,10 +41,14 @@ struct ordinal_has_already_been_defined<false> { typedef void type; };
 template<long N>
 struct long_ {};
 
+template<class T, long N>
+struct base_dimension_pair {};
+
 /// Again this needs to be in the same namespace as long_
+/// we need a mangled name because it must be found by ADL
 /// INTERNAL ONLY
-template<long N>
-no boost_units_prevent_double_definition(units::long_<N>) { return(no()); }
+template<class T>
+no boost_units_prevent_double_definition(const T&) { return(no()); }
 
 /// Defines a base dimensions.  To define a dimension you need to provide
 /// the derived class and a unique integer.
@@ -54,11 +58,13 @@ no boost_units_prevent_double_definition(units::long_<N>) { return(no()); }
 template<class Derived,
          long N,
          class = typename ordinal_has_already_been_defined<
-             sizeof(boost_units_prevent_double_definition(units::long_<N>())) == sizeof(yes)
+             sizeof(boost_units_prevent_double_definition(units::long_<N>())) == sizeof(yes) &&
+             sizeof(boost_units_prevent_double_definition(units::base_dimension_pair<Derived, N>())) != sizeof(yes)
          >::type>
 struct base_dimension : mpl::long_<N> {
-    friend yes boost_units_prevent_double_definition(units::long_<N>) { return(yes()); }
-    typedef Derived this_type;
+    friend yes boost_units_prevent_double_definition(const units::long_<N>&) { return(yes()); }
+    friend yes boost_units_prevent_double_definition(const units::base_dimension_pair<Derived, N>&) { return(yes()); }
+    typedef base_dimension this_type;
     typedef mpl::long_<N> value;
     typedef dimension_list<dim<Derived,static_rational<1> >, dimensionless_type> type;
 };
