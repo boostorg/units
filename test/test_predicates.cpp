@@ -24,13 +24,22 @@ Output:
 #include <boost/mpl/assert.hpp>
 #include <boost/mpl/list/list0.hpp>
 
+#include <boost/units/base_dimension.hpp>
 #include <boost/units/dimension.hpp>
+#include <boost/units/is_dimension_list.hpp>
+#include <boost/units/is_quantity.hpp>
+#include <boost/units/is_quantity_of_dimension.hpp>
+#include <boost/units/is_quantity_of_system.hpp>
+#include <boost/units/is_unit.hpp>
+#include <boost/units/is_unit_of_dimension.hpp>
+#include <boost/units/is_unit_of_system.hpp>
+#include <boost/units/ordinal.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/unit.hpp>
 
 namespace bu = boost::units;
 
-BOOST_UNITS_REGISTER_BASE_DIMENSION(dimension_tag, 0);
+struct dimension_tag : boost::units::base_dimension<dimension_tag,0> { };
 
 struct system1 : bu::ordinal<100> {};
 struct system2 : bu::ordinal<101> {};

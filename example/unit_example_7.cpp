@@ -374,7 +374,6 @@ int main(void)
     std::stringstream sstream1, sstream2;
 
     double  zero = 0.0,
-            inf = std::numeric_limits<double>::infinity(),
             nan = 0.0/zero;
     
     sstream1 << "Using C++ array..." << std::endl << std::endl;

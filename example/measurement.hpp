@@ -17,7 +17,7 @@
 #include <iostream>
 
 #include <boost/io/ios_state.hpp>
-#include <boost/numeric/interval.hpp>
+//#include <boost/numeric/interval.hpp>
 #include <boost/units/static_rational.hpp>
 
 namespace boost {
@@ -40,7 +40,7 @@ class measurement
     public:
         typedef measurement<Y>                  this_type;
         typedef Y                               value_type;
-        typedef numeric::interval<value_type>   interval_type;
+//        typedef numeric::interval<value_type>   interval_type;
         
         measurement(const value_type& val = value_type(),
                     const value_type& err = value_type()) : 
@@ -72,7 +72,7 @@ class measurement
         value_type lower_bound() const                  { return value_-uncertainty_; }
         value_type upper_bound() const                  { return value_+uncertainty_; }
         
-        interval_type get_interval() const              { return interval_type(lower_bound(),upper_bound()); }
+//        interval_type get_interval() const              { return interval_type(lower_bound(),upper_bound()); }
         
         this_type& operator+=(const value_type& val)            
         { 
@@ -318,30 +318,32 @@ std::ostream& operator<<(std::ostream& os,const measurement<Y>& val)
 
     //os << std::setw(21);
     
-    if (val.uncertainty() > Y(0))
-    {
-        const Y relative_uncertainty = std::abs(val.uncertainty()/val.value());
+//    if (val.uncertainty() > Y(0))
+//    {
+//        const Y relative_uncertainty = std::abs(val.uncertainty()/val.value());
+//    
+//        const double  exponent = std::log10(relative_uncertainty);
+//        const long digits_of_precision = static_cast<long>(std::ceil(std::abs(exponent)))+3;
+//        
+//        // should try to replicate NIST CODATA syntax 
+//        os << std::setprecision(digits_of_precision) 
+//           //<< std::setw(digits_of_precision+8) 
+//           //<< std::scientific
+//           << val.value();
+////           << long(10*(relative_uncertainty/std::pow(Y(10),Y(exponent))));
+//
+//        os << " (rel. unc. = " 
+//           << std::setprecision(1) 
+//           //<< std::setw(7) 
+//           << std::scientific
+//           << relative_uncertainty << ")";
+//    }
+//    else
+//    {
+//        os << val.value() << " (exact)";
+//    }
     
-        const double  exponent = std::log10(relative_uncertainty);
-        const long digits_of_precision = static_cast<long>(std::ceil(std::abs(exponent)))+3;
-        
-        // should try to replicate NIST CODATA syntax 
-        os << std::setprecision(digits_of_precision) 
-           //<< std::setw(digits_of_precision+8) 
-           //<< std::scientific
-           << val.value();
-//           << long(10*(relative_uncertainty/std::pow(Y(10),Y(exponent))));
-
-        os << " (rel. unc. = " 
-           << std::setprecision(1) 
-           //<< std::setw(7) 
-           << std::scientific
-           << relative_uncertainty << ")";
-    }
-    else
-    {
-        os << val.value() << " (exact)";
-    }
+    os << val.value() << "(+/-" << val.uncertainty() << ")";
     
     return os;
 }

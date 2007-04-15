@@ -39,9 +39,9 @@ namespace boost {
 
 namespace units {
 
-struct length_dim : boost::units::base_dimension<length_dim, 1> {};                        ///> base dimension of length
-struct mass_dim : boost::units::base_dimension<mass_dim,2> {};                             ///> base dimension of mass
-struct time_dim : boost::units::base_dimension<time_dim,3> {};                             ///> base dimension of time
+struct length_dim : boost::units::base_dimension<length_dim,1> { };     ///> base dimension of length
+struct mass_dim : boost::units::base_dimension<mass_dim,2> { };         ///> base dimension of mass
+struct time_dim : boost::units::base_dimension<time_dim,3> { };         ///> base dimension of time
 
 typedef length_dim::type    length_type;
 typedef mass_dim::type      mass_type;

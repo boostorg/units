@@ -118,8 +118,8 @@ int test_main(int,char *[])
     
     BOOST_CHECK(bu::hypot(L1,L2) == 5.0*bu::meters);
     
-    BOOST_CHECK(bu::llrint(E4).value() == bu::detail::llrint(E4.value()));
-    BOOST_CHECK(bu::llround(E4).value() == bu::detail::llround(E4.value()));
+//    BOOST_CHECK(bu::llrint(E4).value() == bu::detail::llrint(E4.value()));
+//    BOOST_CHECK(bu::llround(E4).value() == bu::detail::llround(E4.value()));
     BOOST_CHECK(bu::nearbyint(E4).value() == bu::detail::nearbyint(E4.value()));
     BOOST_CHECK(bu::rint(E4).value() == bu::detail::rint(E4.value()));
 

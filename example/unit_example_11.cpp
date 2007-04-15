@@ -46,8 +46,6 @@ fmin(q1,q2)           : -2.5 m
 fma(q1,q2,q3)         : 16.25 m^2
 fpclassify(q1)        : 4
 hypot(q1,q2)          : 2.91548 m
-llrint(q1)            : 2 m
-llround(q1)           : 2 m
 nearbyint(q1)         : 2 m
 nextafter(q1,q2)      : 1.5 m
 nexttoward(q1,q2)     : 1.5 m
@@ -111,8 +109,6 @@ int main(void)
               << "fma(q1,q2,q3)         : " << fma BOOST_PREVENT_MACRO_SUBSTITUTION (q1,q2,q3) << std::endl
               << "fpclassify(q1)        : " << fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (q1) << std::endl
               << "hypot(q1,q2)          : " << hypot BOOST_PREVENT_MACRO_SUBSTITUTION (q1,q2) << std::endl
-              << "llrint(q1)            : " << llrint BOOST_PREVENT_MACRO_SUBSTITUTION (q1) << std::endl
-              << "llround(q1)           : " << llround BOOST_PREVENT_MACRO_SUBSTITUTION (q1) << std::endl
               << "nearbyint(q1)         : " << nearbyint BOOST_PREVENT_MACRO_SUBSTITUTION (q1) << std::endl
               << "nextafter(q1,q2)      : " << nextafter BOOST_PREVENT_MACRO_SUBSTITUTION (q1,q2) << std::endl
               << "nexttoward(q1,q2)     : " << nexttoward BOOST_PREVENT_MACRO_SUBSTITUTION (q1,q2) << std::endl
@@ -148,8 +144,6 @@ int main(void)
     sstream2 << "fma(q1,q2,q3)         : 16.25 m^2" << std::endl;
     sstream2 << "fpclassify(q1)        : "<< fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (q1) << std::endl;
     sstream2 << "hypot(q1,q2)          : 2.91548 m" << std::endl;
-    sstream2 << "llrint(q1)            : 2 m" << std::endl;
-    sstream2 << "llround(q1)           : 2 m" << std::endl;
     sstream2 << "nearbyint(q1)         : 2 m" << std::endl;
     sstream2 << "nextafter(q1,q2)      : 1.5 m" << std::endl;
     sstream2 << "nexttoward(q1,q2)     : 1.5 m" << std::endl;

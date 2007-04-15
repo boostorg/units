@@ -22,13 +22,13 @@ Output:
 1.5 m
 1 g
 1.5 m g
-1.5 m g^(-1)
+1.5 m g^-1
 
-1 m kg s^(-2)
-1 kg s^(-2)
+1 m kg s^-2
+1 kg s^-2
 
-1 kg s^(-2) cm
-1 m^(-1) kg s^(-2) cm
+1 kg s^-2 cm
+1 m^-1 kg s^-2 cm
 
 0.015 m^2
 
@@ -80,13 +80,13 @@ int main()
     sstream2 << "1.5 m" << std::endl
              << "1 g" << std::endl
              << "1.5 m g" << std::endl
-             << "1.5 m g^(-1)" << std::endl
+             << "1.5 m g^-1" << std::endl
              << std::endl
-             << "1 m kg s^(-2)" << std::endl
-             << "1 kg s^(-2)" << std::endl
+             << "1 m kg s^-2" << std::endl
+             << "1 kg s^-2" << std::endl
              << std::endl
-             << "1 kg s^(-2) cm" << std::endl
-             << "1 m^(-1) kg s^(-2) cm" << std::endl
+             << "1 kg s^-2 cm" << std::endl
+             << "1 m^-1 kg s^-2 cm" << std::endl
              << std::endl
              << "0.015 m^2" << std::endl
              << std::endl;
