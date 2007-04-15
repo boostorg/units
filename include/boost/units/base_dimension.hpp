@@ -39,12 +39,14 @@ struct ordinal_has_already_been_defined<false> { typedef void type; };
 
 }
 
-/// this must be in namespace boost::units so that ADL
+/// This must be in namespace boost::units so that ADL
 /// will work with friend functions defined inline.
 /// INTERNAL ONLY
 template<long N>
 struct long_ {};
 
+/// Ditto.
+/// INTERNAL ONLY
 template<class T, long N>
 struct base_dimension_pair {};
 
@@ -54,8 +56,8 @@ struct base_dimension_pair {};
 template<class T>
 detail::no boost_units_prevent_double_definition(const T&) { return(detail::no()); }
 
-/// Defines a base dimensions.  To define a dimension you need to provide
-/// the derived class and a unique integer.
+/// Defines a base dimension.  To define a dimension you need to provide
+/// the derived class (CRTP) and a unique integer.
 /// struct my_dimension : boost::units::base_dimension<my_dimension, 1> {};
 /// It is designed so that you will get an error message if you try
 /// to use the same value in multiple definitions.
@@ -66,7 +68,11 @@ template<class Derived,
              sizeof(boost_units_prevent_double_definition(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
          >::type>
 struct base_dimension : mpl::long_<N> {
+    /// Register this ordinal
+    /// INTERNAL ONLY
     friend detail::yes boost_units_prevent_double_definition(const units::long_<N>&) { return(detail::yes()); }
+    /// But make sure we can identify the current instantiation!
+    /// INTERNAL ONLY
     friend detail::yes boost_units_prevent_double_definition(const units::base_dimension_pair<Derived, N>&) { return(detail::yes()); }
     typedef base_dimension this_type;
     typedef mpl::long_<N> value;
