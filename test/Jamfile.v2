@@ -7,7 +7,7 @@
 # accomanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt
 
-UNIT_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. ;
+UNIT_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. <warnings>all ;
 
 import testing ;
 
@@ -20,6 +20,7 @@ import testing ;
     [ run test_quantity.cpp : : : $(UNIT_REQUIREMENTS) : ]
     [ run test_unit.cpp : : : $(UNIT_REQUIREMENTS) : ]
     [ run test_conversion.cpp : : : $(UNIT_REQUIREMENTS) : ]
+    [ run test_base_dimension.cpp : : : $(UNIT_REQUIREMENTS) : ]
     [ compile-fail fail_implicit_conversion.cpp : $(UNIT_REQUIREMENTS) : ]
     [ compile-fail fail_quantity_construct.cpp : $(UNIT_REQUIREMENTS) : ]
     [ compile-fail fail_quantity_assign.cpp : $(UNIT_REQUIREMENTS) : ]
