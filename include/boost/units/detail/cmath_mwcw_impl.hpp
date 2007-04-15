@@ -153,17 +153,17 @@ inline Y hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
     return std::hypot(v1,v2);
 }
 
-template<class Y>
-inline long long llrint BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::llrint(val);
-}
-
-template<class Y>
-inline long long llround BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::llround(val);
-}
+//template<class Y>
+//inline long long llrint BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
+//{
+//    return std::llrint(val);
+//}
+//
+//template<class Y>
+//inline long long llround BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
+//{
+//    return std::llround(val);
+//}
 
 template<class Y>
 inline Y nearbyint BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)

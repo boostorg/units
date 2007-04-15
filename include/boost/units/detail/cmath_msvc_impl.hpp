@@ -235,17 +235,17 @@ inline float hypot(const float& v1,const float& v2)
     return hypotf_impl::do_hypot(v1,v2,condition);
 }
 
-template<class Y>
-inline long long llrint(const Y& val)
-{
-    return static_cast<long long>(rint(val));
-}
-
-template<class Y>
-inline long long llround(const Y& val)
-{
-    return static_cast<long long>(round(val));
-}
+//template<class Y>
+//inline long long llrint(const Y& val)
+//{
+//    return static_cast<long long>(rint(val));
+//}
+//
+//template<class Y>
+//inline long long llround(const Y& val)
+//{
+//    return static_cast<long long>(round(val));
+//}
 
 template<class Y>
 inline Y nearbyint(const Y& val)

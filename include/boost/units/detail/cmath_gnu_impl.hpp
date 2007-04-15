@@ -147,17 +147,17 @@ inline Y hypot(const Y& v1,const Y& v2)
     return __builtin_hypot(v1,v2);
 }
 
-template<class Y>
-inline long long llrint(const Y& val)
-{
-    return __builtin_llrint(val);
-}
-
-template<class Y>
-inline long long llround(const Y& val)
-{
-    return __builtin_llround(val);
-}
+//template<class Y>
+//inline long long llrint(const Y& val)
+//{
+//    return __builtin_llrint(val);
+//}
+//
+//template<class Y>
+//inline long long llround(const Y& val)
+//{
+//    return __builtin_llround(val);
+//}
 
 template<class Y>
 inline Y nearbyint(const Y& val)

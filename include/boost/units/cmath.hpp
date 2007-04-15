@@ -282,29 +282,31 @@ hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantit
     return quantity_type::from_value(hypot BOOST_PREVENT_MACRO_SUBSTITUTION (q1.value(),q2.value()));
 }
 
-template<class Unit,class Y>
-inline 
-quantity<Unit,long long> 
-llrint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
-{
-    using namespace detail;
+// does ISO C++ support long long? g++ claims not
+//template<class Unit,class Y>
+//inline 
+//quantity<Unit,long long> 
+//llrint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
+//{
+//    using namespace detail;
+//
+//    typedef quantity<Unit,long long>    quantity_type;
+//    
+//    return quantity_type::from_value(llrint BOOST_PREVENT_MACRO_SUBSTITUTION (q.value()));
+//}
 
-    typedef quantity<Unit,long long>    quantity_type;
-    
-    return quantity_type::from_value(llrint BOOST_PREVENT_MACRO_SUBSTITUTION (q.value()));
-}
-
-template<class Unit,class Y>
-inline 
-quantity<Unit,long long> 
-llround BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
-{
-    using namespace detail;
-
-    typedef quantity<Unit,long long>    quantity_type;
-    
-    return quantity_type::from_value(llround BOOST_PREVENT_MACRO_SUBSTITUTION (q.value()));
-}
+// does ISO C++ support long long? g++ claims not
+//template<class Unit,class Y>
+//inline 
+//quantity<Unit,long long> 
+//llround BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
+//{
+//    using namespace detail;
+//
+//    typedef quantity<Unit,long long>    quantity_type;
+//    
+//    return quantity_type::from_value(llround BOOST_PREVENT_MACRO_SUBSTITUTION (q.value()));
+//}
 
 template<class Unit,class Y>
 inline 
