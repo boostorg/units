@@ -11,49 +11,17 @@
 #ifndef BOOST_UNITS_BASE_DIMENSION_HPP
 #define BOOST_UNITS_BASE_DIMENSION_HPP
 
-#include <boost/mpl/long.hpp>
-
 #include <boost/units/config.hpp>
-#include <boost/units/static_rational.hpp>
 #include <boost/units/dim.hpp>
 #include <boost/units/dimension_list.hpp>
+#include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
+
+#include <boost/units/detail/base_dimension_impl.hpp>
 
 namespace boost {
 
 namespace units {
-
-namespace detail {
-
-typedef char no;
-struct yes { no dummy[2]; };
-
-template<bool> struct ordinal_has_already_been_defined;
-
-template<>
-struct ordinal_has_already_been_defined<true>   { };
-
-template<>
-struct ordinal_has_already_been_defined<false>  { typedef void type; };
-
-}
-
-/// This must be in namespace boost::units so that ADL
-/// will work with friend functions defined inline.
-/// INTERNAL ONLY
-template<long N> struct long_ { };
-
-/// Again this needs to be in the same namespace as long_
-/// we need a mangled name because it must be found by ADL
-/// INTERNAL ONLY
-template<class T>
-detail::no 
-boost_units_prevent_redefinition(const T&) 
-{ return(detail::no()); }
-
-/// Ditto.
-/// INTERNAL ONLY
-template<class T, long N> struct base_dimension_pair { };
 
 /// Defines a base dimension.  To define a dimension you need to provide
 /// the derived class (CRTP) and a unique integer.
@@ -70,9 +38,9 @@ class base_dimension :
     public mpl::long_<N> 
 {
     public:
-        typedef base_dimension this_type;
-        typedef mpl::long_<N> value;
-        typedef dimension_list<dim<Derived,static_rational<1> >, dimensionless_type> type;
+        typedef base_dimension                                                          this_type;
+        typedef mpl::long_<N>                                                           value;
+        typedef dimension_list<dim<Derived,static_rational<1> >, dimensionless_type>    type;
 
     private:
         /// Register this ordinal
