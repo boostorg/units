@@ -225,7 +225,7 @@ template<class R, class Y>
 Y static_rational_power(const Y& y)
 {
     return(detail::static_rational_power_impl<R, Y>::apply(y));
-};
+}
 
 // convert between homogeneous systems
 template<int N>

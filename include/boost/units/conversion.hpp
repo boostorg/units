@@ -151,7 +151,7 @@ conversion_factor(const FromUnit&,const ToUnit&)
 {
     // dangerous if conversion is not regular...don't know how to deal with this yet
     return quantity<ToUnit,Y>(Y(1)*FromUnit()).value();
-};
+}
 
 } // namespace units
 
