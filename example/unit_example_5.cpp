@@ -32,12 +32,12 @@ volume (m^3)  = 1 m^3
 volume (cm^3) = 1e+06 cm^3
 volume (m^3)  = 1 m^3
 
-energy (joules) = 1 m^2 kg s^(-2)
-energy (ergs)   = 1e+07 cm^2 g s^(-2)
-energy (joules) = 1 m^2 kg s^(-2)
+energy (joules) = 1 m^2 kg s^-2
+energy (ergs)   = 1e+07 cm^2 g s^-2
+energy (joules) = 1 m^2 kg s^-2
 
-velocity (2 m/s)  = 2 m s^(-1)
-velocity (2 cm/s) = 0.02 m s^(-1)
+velocity (2 m/s)  = 2 m s^-1
+velocity (2 cm/s) = 0.02 m s^-1
 //]
 
 //[unit_example_5_output_3
@@ -45,11 +45,11 @@ implicit conversions enabled
 volume (m^3)  = 1 m^3
 volume (cm^3) = 1e+06 cm^3
 
-energy (joules) = 1 m^2 kg s^(-2)
-energy (ergs)   = 1e+07 cm^2 g s^(-2)
+energy (joules) = 1 m^2 kg s^-2
+energy (ergs)   = 1e+07 cm^2 g s^-2
 
-velocity (2 m/s)  = 2 m s^(-1)
-velocity (2 cm/s) = 0.02 m s^(-1)
+velocity (2 m/s)  = 2 m s^-1
+velocity (2 cm/s) = 0.02 m s^-1
 //]
 
 @endverbatim
@@ -79,7 +79,7 @@ int main()
     // implicit value_type conversions
     //[unit_example_5_snippet_1
     quantity<SI::length>        L1 = quantity<SI::length,int>(int(2.5)*SI::meters);
-    quantity<SI::length,int>    L2 = quantity<SI::length,double>(2.5*SI::meters);
+    quantity<SI::length,int>    L2(quantity<SI::length,double>(2.5*SI::meters));
     //]
     
     //[unit_example_5_snippet_2
@@ -183,12 +183,12 @@ int main()
     sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;
     sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
     sstream2  << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^(-2)" << std::endl;
-    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^(-2)" << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^(-2)" << std::endl;
+    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
+    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^-2" << std::endl;
+    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
     sstream2  << std::endl;
-    sstream2  << "velocity (2 m/s)  = 2 m s^(-1)" << std::endl;
-    sstream2  << "velocity (2 cm/s) = 0.02 m s^(-1)" << std::endl;
+    sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
+    sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;
     sstream2  << std::endl;
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     sstream2  << std::endl;
@@ -196,11 +196,11 @@ int main()
     sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
     sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;
     sstream2  << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^(-2)" << std::endl;
-    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^(-2)" << std::endl;
+    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
+    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^-2" << std::endl;
     sstream2  << std::endl;
-    sstream2  << "velocity (2 m/s)  = 2 m s^(-1)" << std::endl;
-    sstream2  << "velocity (2 cm/s) = 0.02 m s^(-1)" << std::endl;
+    sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
+    sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;
     sstream2  << std::endl;
 #endif
 

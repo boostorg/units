@@ -50,11 +50,11 @@ int test_main(int,char *[])
     BOOST_UNITS_CHECK_CLOSE(E5.value(),float(E_));
 
     // implicit operator= value_type conversion
-    const bu::quantity<bu::energy,float>    E7 = E2;
-    BOOST_UNITS_CHECK_CLOSE(E7.value(),float(E_));
+    //const bu::quantity<bu::energy,float>    E7 = E2;
+    //BOOST_UNITS_CHECK_CLOSE(E7.value(),float(E_));
     
-    const bu::quantity<bu::energy,long>     E8 = E2;
-    BOOST_CHECK(E8.value() == long(E_));
+    //const bu::quantity<bu::energy,long>     E8 = E2;
+    //BOOST_CHECK(E8.value() == long(E_));
     
     // const construction
     bu::quantity<bu::energy>                E9(E2); 

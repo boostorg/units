@@ -15,8 +15,12 @@
 
 #include <boost/config.hpp>
 #include <boost/mpl/bool_fwd.hpp>
+#include <boost/mpl/and.hpp>
+#include <boost/mpl/or.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/is_convertible.hpp>
+#include <boost/type_traits/is_arithmetic.hpp>
+#include <boost/type_traits/is_integral.hpp>
 
 #include <boost/units/dimensionless_quantity.hpp>
 #include <boost/units/get_dimension.hpp>
@@ -27,6 +31,33 @@
 namespace boost {
 
 namespace units {
+
+namespace detail {
+
+template<class Source, class Destination>
+struct is_narrowing_conversion_impl : mpl::bool_<(sizeof(Source) > sizeof(Destination))> {};
+
+template<class Source, class Destination>
+struct is_non_narrowing_conversion :
+    mpl::and_<
+        boost::is_convertible<Source, Destination>,
+        mpl::not_<
+            mpl::and_<
+                boost::is_arithmetic<Source>,
+                boost::is_arithmetic<Destination>,
+                mpl::or_<
+                    mpl::and_<
+                        is_integral<Destination>,
+                        mpl::not_<is_integral<Source> >
+                    >,
+                    is_narrowing_conversion_impl<Source, Destination>
+                >
+            >
+        >
+    >
+{};
+
+}
 
 template<class Q1,class Q2> class conversion_helper;
  
@@ -63,6 +94,28 @@ class quantity
              return *this; 
         }
 
+        #ifndef BOOST_NO_SFINAE
+
+        /// implicit conversion between value types is allowed if allowed for value types themselves
+        template<class YY>
+        quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+            typename boost::enable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
+            val_(source.value())
+        { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        /// implicit conversion between value types is not allowed if not allowed for value types themselves
+        template<class YY>
+        explicit quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+            typename boost::disable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
+            val_(static_cast<Y>(source.value()))
+        { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        #else
+
         /// implicit conversion between value types is allowed if allowed for value types themselves
         template<class YY>
         quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
@@ -71,6 +124,8 @@ class quantity
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
         }
+
+        #endif
         
         /// implicit assignment between value types is allowed if allowed for value types themselves
         template<class YY>
@@ -89,7 +144,12 @@ class quantity
         template<class System2,class Dim2,class YY> 
         explicit
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-                 typename boost::disable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
+                 typename boost::disable_if<
+                    mpl::and_<
+                        is_implicitly_convertible<unit<Dim2,System2>,unit_type>,
+                        detail::is_non_narrowing_conversion<YY, Y>
+                    >
+                 >::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -99,7 +159,12 @@ class quantity
         /// implicit conversion between different unit systems is allowed if each fundamental dimension is implicitly convertible
         template<class System2,class Dim2,class YY> 
         quantity(const quantity<unit<Dim2,System2>,YY>& source, 
-                 typename boost::enable_if<typename is_implicitly_convertible<unit<Dim2,System2>,unit_type>::type>::type* = 0)
+                 typename boost::enable_if<
+                     mpl::and_<
+                         is_implicitly_convertible<unit<Dim2,System2>,unit_type>,
+                         detail::is_non_narrowing_conversion<YY, Y>
+                     >
+                 >::type* = 0)
              : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -199,15 +264,38 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
                 
             return *this; 
         }
-        
+        #ifndef BOOST_NO_SFINAE
+
+        /// implicit conversion between value types is allowed if allowed for value types themselves
+        template<class YY>
+        quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+            typename boost::enable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
+            val_(source.value())
+        { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        /// implicit conversion between value types is not allowed if not allowed for value types themselves
+        template<class YY>
+        explicit quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+            typename boost::disable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
+            val_(static_cast<Y>(source.value()))
+        { 
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        #else
+
         /// implicit conversion between value types is allowed if allowed for value types themselves
         template<class YY>
         quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
             val_(source.value())
         { 
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
-            BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
+            BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
         }
+
+        #endif
         
         /// implicit assignment between value types is allowed if allowed for value types themselves
         template<class YY>
@@ -220,13 +308,38 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
             return *this;
         }
 
+        #ifndef BOOST_NO_SFINAE
+
+        /// implicit conversion between different unit systems is allowed
+        template<class System2, class Y2> 
+        quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
+            typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y> >::type* = 0) :
+            val_(source.value()) 
+        {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        /// implicit conversion between different unit systems is allowed
+        template<class System2, class Y2> 
+        explicit quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
+            typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y> >::type* = 0) :
+            val_(static_cast<Y>(source.value())) 
+        {
+            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+        }
+
+        #else
+
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
         quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source) :
             val_(source.value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
+            BOOST_STATIC_ASSERT((boost::is_convertible<Y2, Y>::value == true));
         }
+
+        #endif
 
         /// conversion between different unit systems is explicit when
         /// the units are not equivalent.
