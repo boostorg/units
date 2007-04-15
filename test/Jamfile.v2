@@ -38,6 +38,7 @@ import testing ;
     [ compile-fail fail_unit_quantity_subtract.cpp : $(UNIT_REQUIREMENTS) : ]
     [ compile-fail fail_adl_detail.cpp : $(UNIT_REQUIREMENTS) : ]
     [ compile-fail fail_heterogeneous_unit.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile-fail fail_base_dimension.cpp : $(UNIT_REQUIREMENTS) : ]
    ;
 
 }
