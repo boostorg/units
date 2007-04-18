@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_BASE_DIMENSION_IMPL_HPP
-#define BOOST_UNITS_BASE_DIMENSION_IMPL_HPP
+#ifndef BOOST_UNITS_PREVENT_ORDINAL_REDEFINITION_IMPL_HPP
+#define BOOST_UNITS_PREVENT_ORDINAL_REDEFINITION_IMPL_HPP
 
 #include <boost/mpl/long.hpp>
 
@@ -42,15 +42,11 @@ template<long N> struct long_ { };
 /// INTERNAL ONLY
 template<class T>
 detail::no 
-boost_units_prevent_redefinition(const T&) 
+prevent_ordinal_redefinition(const T&) 
 { return(detail::no()); }
-
-/// Ditto.
-/// INTERNAL ONLY
-template<class T, long N> struct base_dimension_pair { };
 
 } // namespace units
 
 } // namespace boost
 
-#endif // BOOST_UNITS_BASE_DIMENSION_IMPL_HPP
+#endif // BOOST_UNITS_PREVENT_ORDINAL_REDEFINITION_IMPL_HPP
