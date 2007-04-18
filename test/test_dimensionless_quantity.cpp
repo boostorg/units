@@ -53,11 +53,13 @@ int test_main(int,char *[])
     BOOST_CHECK(E6.value() == long(E_));
 
     // implicit operator= value_type conversion
-    const bu::quantity<bu::dimensionless,float>     E7 = E2;
-    BOOST_UNITS_CHECK_CLOSE(E7.value(),float(E_));
+    // narrowing conversion disallowed
+//    const bu::quantity<bu::dimensionless,float>     E7 = E2;
+//    BOOST_UNITS_CHECK_CLOSE(E7.value(),float(E_));
     
-    const bu::quantity<bu::dimensionless,long>      E8 = E2;
-    BOOST_CHECK(E8.value() == long(E_));
+    // narrowing conversion disallowed
+//    const bu::quantity<bu::dimensionless,long>      E8 = E2;
+//    BOOST_CHECK(E8.value() == long(E_));
     
     // const construction
     bu::quantity<bu::dimensionless>                 E9(E2); 
