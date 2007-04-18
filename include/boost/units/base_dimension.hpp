@@ -17,11 +17,14 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 
-#include <boost/units/detail/base_dimension_impl.hpp>
+#include <boost/units/detail/prevent_ordinal_redefinition_impl.hpp>
 
 namespace boost {
 
 namespace units {
+
+/// INTERNAL ONLY
+template<class T, long N> struct base_dimension_pair { };
 
 /// Defines a base dimension.  To define a dimension you need to provide
 /// the derived class (CRTP) and a unique integer.
@@ -31,8 +34,8 @@ namespace units {
 template<class Derived,
          long N,
          class = typename detail::ordinal_has_already_been_defined<
-             sizeof(boost_units_prevent_redefinition(units::long_<N>())) == sizeof(detail::yes) &&
-             sizeof(boost_units_prevent_redefinition(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
+             sizeof(prevent_ordinal_redefinition(units::long_<N>())) == sizeof(detail::yes) &&
+             sizeof(prevent_ordinal_redefinition(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
          >::type>
 class base_dimension : 
     public mpl::long_<N> 
@@ -46,13 +49,13 @@ class base_dimension :
         /// Register this ordinal
         /// INTERNAL ONLY
         friend detail::yes 
-        boost_units_prevent_redefinition(const units::long_<N>&) 
+        prevent_ordinal_redefinition(const units::long_<N>&) 
         { return(detail::yes()); }
         
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
         friend detail::yes 
-        boost_units_prevent_redefinition(const units::base_dimension_pair<Derived, N>&) 
+        prevent_ordinal_redefinition(const units::base_dimension_pair<Derived, N>&) 
         { return(detail::yes()); }
 };
 

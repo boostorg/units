@@ -42,36 +42,47 @@ struct nu_velocity_base_unit : boost::units::base_unit<velocity_base_dim,10> { }
 struct nu_action_base_unit : boost::units::base_unit<action_base_dim,11> { };
 struct nu_mass_base_unit : boost::units::base_unit<mass_base_dim,12> { };
 
-struct inch_base_unit : boost::units::base_unit<length_base_dim,13> { };
-struct pound_base_unit : boost::units::base_unit<mass_base_dim,14> { };
-
 struct mmHg_base_unit : boost::units::base_unit<pressure_derived_dim,13> { };
 
 namespace cgs {
 
-typedef make_system<centimeter_base_unit,gram_base_unit,second_base_unit>::type system;
+typedef make_system<centimeter_base_unit,
+                    gram_base_unit,
+                    second_base_unit>::type         system;
 
-typedef unit<length_base_dim,system>        length;
-typedef unit<mass_base_dim,system>          mass;
-typedef unit<time_base_dim,system>          time;
+typedef unit<length_base_dim,system>                length;
+typedef unit<mass_base_dim,system>                  mass;
+typedef unit<time_base_dim,system>                  time;
+
+typedef unit<velocity_derived_dim,system>           velocity;
+typedef unit<pressure_derived_dim,system>           pressure;
 
 } // namespace cgs
 
 namespace mks {
 
-typedef make_system<meter_base_unit,kilogram_base_unit,second_base_unit>::type  system;
+typedef make_system<meter_base_unit,
+                    kilogram_base_unit,
+                    second_base_unit>::type         system;
 
-typedef unit<length_base_dim,system>        length;
-typedef unit<mass_base_dim,system>          mass;
-typedef unit<time_base_dim,system>          time;
+typedef unit<length_base_dim,system>                length;
+typedef unit<mass_base_dim,system>                  mass;
+typedef unit<time_base_dim,system>                  time;
+
+typedef unit<velocity_derived_dim,system>           velocity;
+typedef unit<pressure_derived_dim,system>           pressure;
 
 } // namespace mks
 
 namespace si {
 
-typedef make_system<meter_base_unit,kilogram_base_unit,second_base_unit,
-                    ampere_base_unit,kelvin_base_unit,mole_base_unit,
-                    candela_base_unit>::type                                    system;
+typedef make_system<meter_base_unit,
+                    kilogram_base_unit,
+                    second_base_unit,
+                    ampere_base_unit,
+                    kelvin_base_unit,
+                    mole_base_unit,
+                    candela_base_unit>::type        system;
                     
 typedef unit<length_base_dim,system>                length;
 typedef unit<mass_base_dim,system>                  mass;
@@ -90,22 +101,25 @@ namespace nu {
 
 typedef make_system<nu_velocity_base_unit,
                     nu_action_base_unit,
-                    nu_mass_base_unit>::type                                    system;
+                    nu_mass_base_unit>::type        system;
 
-typedef unit<velocity_base_dim,system>      velocity;
-typedef unit<action_base_dim,system>        action;
-typedef unit<mass_base_dim,system>          mass;
+typedef unit<velocity_base_dim,system>              velocity;
+typedef unit<action_base_dim,system>                action;
+typedef unit<mass_base_dim,system>                  mass;
+
+typedef derived_dimension<velocity_base_dim,-2,
+                          action_base_dim,1,
+                          mass_base_dim,-1>::type   time_derived_dim;
+
+typedef unit<time_derived_dim,system>               time;
 
 } // namespace nu
 
 namespace my_system {
 
-typedef make_system<inch_base_unit,pound_base_unit>::type                       system;
+typedef make_system<mmHg_base_unit>::type           system;
 
-typedef unit<length_base_dim,system>        length;
-typedef unit<mass_base_dim,system>          mass;
-
-typedef unit<pressure_derived_dim,system>   pressure;
+typedef unit<pressure_derived_dim,system>           pressure;
 
 }
 
@@ -113,29 +127,48 @@ namespace boost {
 
 namespace units {
 
-template<class Unit1,class Unit2> struct unit_converter<Unit1,Unit2>;
+template<class Dim,class Sys1,class Sys2> struct base_unit_converter<Dim,Sys1,Sys2>;
 
+// implicit base unit conversion
 template<>
-struct unit_converter<cgs::length,si::length> :
+struct base_unit_converter<time_base_dim,cgs::system,si::system> :
+    public trivial_conversion,
+    public trivial_inverse_conversion
+{ 
+    typedef time_base_dim           converted_dimension_type;
+};
+
+// explicit base unit conversion
+template<>
+struct base_unit_converter<length_base_dim,cgs::system,si::system> :
     public trivial_inverse_conversion
 {
-    typedef double type;
+    typedef length_base_dim         converted_dimension_type;
+    typedef double                  type;
+
     static type value() { return(.01); }
 };
 
+// explicit derived unit conversion
 template<>
-struct unit_converter<cgs::time,si::time> :
-    public trivial_conversion,
+struct base_unit_converter<pressure_derived_dim,si::system,my_system::system> :
     public trivial_inverse_conversion
-{ };
-
-template<>
-struct unit_converter<nu::velocity,si::velocity>
 {
-    typedef nu::velocity    from_type;
-    typedef si::velocity    to_type;
+    typedef pressure_derived_dim    converted_dimension_type;
+    typedef double                  type;
     
-    typedef double  type;
+    static type value()
+    {
+        return 760.0/1.01325e5;
+    }
+};
+
+// explicit conversion between two units with different but equivalent dimensions
+template<>
+struct base_unit_converter<velocity_base_dim,nu::system,si::system>
+{
+    typedef velocity_derived_dim    converted_dimension_type;
+    typedef double                  type;
     
     static type value()
     {
@@ -147,3 +180,13 @@ struct unit_converter<nu::velocity,si::velocity>
 
 } // namespace boost
 
+int main()
+{
+    const quantity<si::pressure>    p(quantity<my_system::pressure>(1.0));
+    
+    // uses direct unit_converter
+    const quantity<si::velocity>    v(quantity<nu::velocity>(1.0));
+    const quantity<nu::velocity>    v(quantity<si::velocity>(1.0));
+    
+    return 0;
+}
