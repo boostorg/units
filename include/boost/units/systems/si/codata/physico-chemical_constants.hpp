@@ -11,8 +11,6 @@
 #ifndef BOOST_UNITS_CODATA_PHYSICO_CHEMICAL_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_PHYSICO_CHEMICAL_CONSTANTS_HPP
 
-#if BOOST_UNITS_HAS_TYPEOF
-
 #include <boost/units/static_constant.hpp>
 
 #include <boost/units/systems/si/constants.hpp>
@@ -25,6 +23,8 @@
 #include <boost/units/systems/si/power.hpp>
 #include <boost/units/systems/si/solid_angle.hpp>
 #include <boost/units/systems/si/temperature.hpp>
+
+#include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental physico-chemical constants
@@ -42,27 +42,27 @@ namespace CODATA {
 
 // PHYSICO-CHEMICAL
 /// Avogadro constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(N_A,(value_and_uncertainty<double>(6.02214179e23,3.0e16)/mole));
+BOOST_UNITS_PHYSICAL_CONSTANT(N_A,quantity<inverse_amount>,6.02214179e23/mole,3.0e16/mole);
 /// atomic mass constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(m_u,(value_and_uncertainty<double>(1.660538782e-27,8.3e-35)*kilograms));
+BOOST_UNITS_PHYSICAL_CONSTANT(m_u,quantity<mass>,1.660538782e-27*kilograms,8.3e-35*kilograms);
 /// Faraday constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(F,(value_and_uncertainty<double>(96485.3399,2.4e-3)*coulombs/mole));
+BOOST_UNITS_PHYSICAL_CONSTANT(F,quantity<electric_charge_over_amount>,96485.3399*coulombs/mole,2.4e-3*coulombs/mole);
 /// molar gas constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R,(value_and_uncertainty<double>(8.314472,1.5e-5)*joules/kelvin/mole));
+BOOST_UNITS_PHYSICAL_CONSTANT(R,quantity<energy_over_temperature_amount>,8.314472*joules/kelvin/mole,1.5e-5*joules/kelvin/mole);
 /// Boltzmann constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(k_B,(value_and_uncertainty<double>(1.3806504e-23,2.4e-29)*joules/kelvin));
+BOOST_UNITS_PHYSICAL_CONSTANT(k_B,quantity<energy_over_temperature>,1.3806504e-23*joules/kelvin,2.4e-29*joules/kelvin);
 /// Stefan-Boltzmann constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(sigma_SB,(value_and_uncertainty<double>(5.670400e-8,4.0e-13)*watts/square_meter/pow<4>(kelvin)));
+BOOST_UNITS_PHYSICAL_CONSTANT(sigma_SB,quantity<power_over_area_temperature_4>,5.670400e-8*watts/square_meter/pow<4>(kelvin),4.0e-13*watts/square_meter/pow<4>(kelvin));
 /// first radiation constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1,(value_and_uncertainty<double>(3.74177118e-16,1.9e-23)*watt*square_meters));
+BOOST_UNITS_PHYSICAL_CONSTANT(c_1,quantity<power_area>,3.74177118e-16*watt*square_meters,1.9e-23*watt*square_meters);
 /// first radiation constant for spectral radiance
-BOOST_UNITS_AUTO_STATIC_CONSTANT(c_1L,(value_and_uncertainty<double>(1.191042759e-16,5.9e-24)*watt*square_meters/steradian));
+BOOST_UNITS_PHYSICAL_CONSTANT(c_1L,quantity<power_area_over_solid_angle>,1.191042759e-16*watt*square_meters/steradian,5.9e-24*watt*square_meters/steradian);
 /// second radiation constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(c_2,(value_and_uncertainty<double>(1.4387752e-2,2.5e-8)*meter*kelvin));
+BOOST_UNITS_PHYSICAL_CONSTANT(c_2,quantity<length_temperature>,1.4387752e-2*meter*kelvin,2.5e-8*meter*kelvin);
 /// Wien displacement law constant : lambda_max T
-BOOST_UNITS_AUTO_STATIC_CONSTANT(b,(value_and_uncertainty<double>(2.8977685e-3,5.1e-9)*meter*kelvin));
+BOOST_UNITS_PHYSICAL_CONSTANT(b,quantity<length_temperature>,2.8977685e-3*meter*kelvin,5.1e-9*meter*kelvin);
 /// Wien displacement law constant : nu_max/T
-BOOST_UNITS_AUTO_STATIC_CONSTANT(b_prime,(value_and_uncertainty<double>(5.878933e10,1.0e15)*hertz/kelvin));
+BOOST_UNITS_PHYSICAL_CONSTANT(b_prime,quantity<frequency_over_temperature>,5.878933e10*hertz/kelvin,1.0e15*hertz/kelvin);
 
 } // namespace CODATA
 
@@ -73,7 +73,5 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(b_prime,(value_and_uncertainty<double>(5.878933
 } // namespace units
 
 } // namespace boost
-
-#endif // BOOST_UNITS_HAS_TYPEOF
 
 #endif // BOOST_UNITS_CODATA_PHYSICO_CHEMICAL_CONSTANTS_HPP

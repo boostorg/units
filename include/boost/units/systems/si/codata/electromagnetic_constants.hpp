@@ -11,8 +11,6 @@
 #ifndef BOOST_UNITS_CODATA_ELECTROMAGNETIC_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_ELECTROMAGNETIC_CONSTANTS_HPP
 
-#if BOOST_UNITS_HAS_TYPEOF
-
 #include <boost/units/static_constant.hpp>
 
 #include <boost/units/systems/si/constants.hpp>
@@ -25,6 +23,8 @@
 #include <boost/units/systems/si/magnetic_flux.hpp>
 #include <boost/units/systems/si/magnetic_flux_density.hpp>
 #include <boost/units/systems/si/resistance.hpp>
+
+#include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental electromagnetic constants
@@ -44,21 +44,21 @@ namespace CODATA {
 
 // ELECTROMAGNETIC
 /// elementary charge
-BOOST_UNITS_AUTO_STATIC_CONSTANT(e,(value_and_uncertainty<double>(1.602176487e-19,4.0e-27)*coulombs));
+BOOST_UNITS_PHYSICAL_CONSTANT(e,quantity<electric_charge>,1.602176487e-19*coulombs,4.0e-27*coulombs);
 /// elementary charge to Planck constant ratio
-BOOST_UNITS_AUTO_STATIC_CONSTANT(e_over_h,(value_and_uncertainty<double>(2.417989454e14,6.0e6)*amperes/joule));
+BOOST_UNITS_PHYSICAL_CONSTANT(e_over_h,quantity<current_over_energy>,2.417989454e14*amperes/joule,6.0e6*amperes/joule);
 /// magnetic flux quantum
-BOOST_UNITS_AUTO_STATIC_CONSTANT(Phi_0,(value_and_uncertainty<double>(2.067833667e-15,5.2e-23)*webers));
+BOOST_UNITS_PHYSICAL_CONSTANT(Phi_0,quantity<magnetic_flux>,2.067833667e-15*webers,5.2e-23*webers);
 /// conductance quantum
-BOOST_UNITS_AUTO_STATIC_CONSTANT(G_0,(value_and_uncertainty<double>(7.7480917004e-5,5.3e-14)*siemens));
+BOOST_UNITS_PHYSICAL_CONSTANT(G_0,quantity<conductance>,7.7480917004e-5*siemens,5.3e-14*siemens);
 /// Josephson constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(K_J,(value_and_uncertainty<double>(483597.891e9,1.2e7)*hertz/volt));
+BOOST_UNITS_PHYSICAL_CONSTANT(K_J,quantity<frequency_over_electric_potential>,483597.891e9*hertz/volt,1.2e7*hertz/volt);
 /// von Klitzing constant
-BOOST_UNITS_AUTO_STATIC_CONSTANT(R_K,(value_and_uncertainty<double>(25812.807557,1.77e-5)*ohms));
+BOOST_UNITS_PHYSICAL_CONSTANT(R_K,quantity<resistance>,25812.807557*ohms,1.77e-5*ohms);
 /// Bohr magneton
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_B,(value_and_uncertainty<double>(927.400915e-26,2.3e-31)*joules/tesla));
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_B,quantity<energy_over_magnetic_flux_density>,927.400915e-26*joules/tesla,2.3e-31*joules/tesla);
 /// nuclear magneton
-BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_N,(value_and_uncertainty<double>(5.05078324e-27,1.3e-34)*joules/tesla));
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_N,quantity<energy_over_magnetic_flux_density>,5.05078324e-27*joules/tesla,1.3e-34*joules/tesla);
 
 } // namespace CODATA
 
@@ -69,7 +69,5 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(mu_N,(value_and_uncertainty<double>(5.05078324e
 } // namespace units
 
 } // namespace boost
-
-#endif // BOOST_UNITS_HAS_TYPEOF
 
 #endif // BOOST_UNITS_CODATA_ELECTROMAGNETIC_CONSTANTS_HPP

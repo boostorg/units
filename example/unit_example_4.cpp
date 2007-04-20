@@ -23,57 +23,57 @@ Output:
 S1 :    2
 X1 :    2
 X2 :    (4/3)
-U1 :    m kg s^(-2)
-U2 :    m^2 kg s^(-2)
-Q1 :    1 m kg s^(-2)
-Q2 :    2 m^2 kg s^(-2)
+U1 :    m kg s^-2
+U2 :    m^2 kg s^-2
+Q1 :    1 m kg s^-2
+Q2 :    2 m^2 kg s^-2
 //]
 
 //[unit_example_4_output_2
-U1*S1 : 2 m kg s^(-2)
-S1*U1 : 2 m kg s^(-2)
-U1/S1 : 0.5 m kg s^(-2)
-S1/U1 : 2 m^(-1) kg^(-1) s^2
+U1*S1 : 2 m kg s^-2
+S1*U1 : 2 m kg s^-2
+U1/S1 : 0.5 m kg s^-2
+S1/U1 : 2 m^-1 kg^-1 s^2
 //]
 
 //[unit_example_4_output_3
-U1+U1 : m kg s^(-2)
-U1-U1 : m kg s^(-2)
-U1*U1 : m^2 kg^2 s^(-4)
+U1+U1 : m kg s^-2
+U1-U1 : m kg s^-2
+U1*U1 : m^2 kg^2 s^-4
 U1/U1 : dimensionless
-U1*U2 : m^3 kg^2 s^(-4)
+U1*U2 : m^3 kg^2 s^-4
 U1/U2 : m^(-1)
-U1^X  : m^2 kg^2 s^(-4)
-X1vU1 : m^(1/2) kg^(1/2) s^(-1)
+U1^X  : m^2 kg^2 s^-4
+X1vU1 : m^(1/2) kg^(1/2) s^-1
 U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)
 X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
 //[unit_example_4_output_4
-Q1*S1 : 2 m kg s^(-2)
-S1*Q1 : 2 m kg s^(-2)
-Q1/S1 : 0.5 m kg s^(-2)
-S1/Q1 : 2 m^(-1) kg^(-1) s^2
+Q1*S1 : 2 m kg s^-2
+S1*Q1 : 2 m kg s^-2
+Q1/S1 : 0.5 m kg s^-2
+S1/Q1 : 2 m^-1 kg^-1 s^2
 //]
 
 //[unit_example_4_output_5
-U1*Q1 : 1 m^2 kg^2 s^(-4)
-Q1*U1 : 1 m^2 kg^2 s^(-4)
+U1*Q1 : 1 m^2 kg^2 s^-4
+Q1*U1 : 1 m^2 kg^2 s^-4
 U1/Q1 : 1 dimensionless
 Q1/U1 : 1 dimensionless
 //]
 
 //[unit_example_4_output_6
-+Q1   : 1 m kg s^(-2)
--Q1   : -1 m kg s^(-2)
-Q1+Q1 : 2 m kg s^(-2)
-Q1-Q1 : 0 m kg s^(-2)
-Q1*Q1 : 1 m^2 kg^2 s^(-4)
++Q1   : 1 m kg s^-2
+-Q1   : -1 m kg s^-2
+Q1+Q1 : 2 m kg s^-2
+Q1-Q1 : 0 m kg s^-2
+Q1*Q1 : 1 m^2 kg^2 s^-4
 Q1/Q1 : 1 dimensionless
-Q1*Q2 : 2 m^3 kg^2 s^(-4)
-Q1/Q2 : 0.5 m^(-1)
-Q1^X1 : 1 m^2 kg^2 s^(-4)
-X1vQ1 : 1 m^(1/2) kg^(1/2) s^(-1)
+Q1*Q2 : 2 m^3 kg^2 s^-4
+Q1/Q2 : 0.5 m^-1
+Q1^X1 : 1 m^2 kg^2 s^-4
+X1vQ1 : 1 m^(1/2) kg^(1/2) s^-1
 Q1^X2 : 1 m^(4/3) kg^(4/3) s^(-8/3)
 X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)
 //]
@@ -90,22 +90,22 @@ l1 > l2     false
 dimless = 1
 
 //[unit_example_4_output_8
-v1 = 2 m s^(-1)
+v1 = 2 m s^-1
 //]
 
 //[unit_example_4_output_9
-F  = 1 m kg s^(-2)
+F  = 1 m kg s^-2
 dx = 1 m
-E  = 1 m^2 kg s^(-2)
+E  = 1 m^2 kg s^-2
 //]
 
 //[unit_example_4_output_10
 r = 5e-07 m
-P = 101325 m^(-1) kg s^(-2)
+P = 101325 m^-1 kg s^-2
 V = 5.23599e-19 m^3
 T = 310 K
 n = 2.05835e-17 mol
-R = 8.31447 m^2 kg s^(-2) K^(-1) mol^(-1)
+R = 8.31447 m^2 kg s^-2 K^-1 mol^-1
 //]
 
 //[unit_example_4_output_11
@@ -115,10 +115,10 @@ asin(sin(theta)) = 0.375 rd
 //]
 
 //[unit_example_4_output_12
-V   = (12.5,0) m^2 kg s^(-3) A^(-1)
+V   = (12.5,0) m^2 kg s^-3 A^-1
 I   = (3,4) A
-Z   = (1.5,-2) m^2 kg s^(-3) A^(-2)
-I*Z = (12.5,0) m^2 kg s^(-3) A^(-1)
+Z   = (1.5,-2) m^2 kg s^-3 A^-2
+I*Z = (12.5,0) m^2 kg s^-3 A^-1
 //]
 
 //[unit_example_4_output_13
@@ -128,7 +128,7 @@ x/y           = 0.666667(+/-0.149071) dimensionless
 //]
 
 //[unit_example_4_output_14
-w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^(-1)
+w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1
 w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 //]
 
@@ -493,7 +493,7 @@ int main()
     sstream2 << "T = 310 K" << std::endl;
     sstream2 << "n = " << 2.05835e-17 << " mol" << std::endl;
     #if BOOST_UNITS_HAS_TYPEOF
-    sstream2 << "R = 8.314472 (rel. unc. = " << 1.8e-6 << ") m^2 kg s^-2 K^-1 mol^-1" << std::endl;
+    sstream2 << "R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = " << 1.8e-6 << ")" << std::endl;
     #else
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF
@@ -508,11 +508,13 @@ int main()
     sstream2 << "I*Z = (12.5,0) m^2 kg s^-3 A^-1" << std::endl;
     sstream2 << std::endl;
     sstream2 << std::scientific << std::setprecision(1);
+
     sstream2 << "x+y-w         = 0.48(+/-0.632772) m" << std::endl;
     sstream2 << "w*x           = 9.04(+/-0.904885) m^2" << std::endl;
     sstream2 << "x/y           = 0.666667(+/-0.149071) dimensionless" << std::endl;
     sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1" << std::endl;
     sstream2 << "w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless" << std::endl;
+
     sstream2 << std::endl;
 
     std::string str1(sstream1.str());
