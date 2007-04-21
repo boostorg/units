@@ -27,6 +27,7 @@ Output:
 
 #include <boost/array.hpp>
 
+#include <boost/units/base_dimension.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si/length.hpp>
 
@@ -35,11 +36,9 @@ namespace boost {
 namespace units {
 
 // fails due to redefinition of tag
-//BOOST_UNITS_REGISTER_BASE_DIMENSION(erroneous_tag,-1);
-BOOST_UNITS_REGISTER_BASE_DIMENSION(world_space_tag,101);
-BOOST_UNITS_REGISTER_BASE_DIMENSION(object_space_tag,102);
-//typedef base_dimension<101> world_space_tag; 
-//typedef base_dimension<102> object_space_tag;
+//struct erroneous_tag : base_dimension<erroneous_tag,-1> {};
+struct world_space_tag : base_dimension<world_space_tag,101> {};
+struct object_space_tag : base_dimension<object_space_tag, 102> {};
 
 namespace wo {
 
