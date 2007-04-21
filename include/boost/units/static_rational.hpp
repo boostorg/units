@@ -71,7 +71,7 @@ class static_rational
         /// greatest common divisor of N and D
         // need cast to signed because static_gcd returns unsigned long
         static const integer_type   den = 
-            static_cast<integer_type>(boost::math::static_gcd<nabs,dabs>::value);
+            static_cast<integer_type>(boost::math::static_gcd<nabs,dabs>::value) * ((D < 0) ? -1 : 1);
         
     public: 
         // for mpl arithmetic support

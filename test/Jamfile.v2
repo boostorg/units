@@ -15,6 +15,7 @@ import testing ;
   test-suite units
    :
     [ compile test_predicates.cpp : $(UNIT_REQUIREMENTS) : ]
+    [ compile test_negative_denominator.cpp : $(UNIT_REQUIREMENTS) : ]
     [ run test_dimensionless_quantity.cpp : : : $(UNIT_REQUIREMENTS) : ]
     [ run test_implicit_conversion.cpp : : : $(UNIT_REQUIREMENTS) : ]
     [ run test_quantity.cpp : : : $(UNIT_REQUIREMENTS) : ]
