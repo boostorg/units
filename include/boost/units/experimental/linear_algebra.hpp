@@ -28,12 +28,15 @@
 #include <boost/mpl/reverse.hpp>
 #include <boost/mpl/advance.hpp>
 #include <boost/mpl/erase.hpp>
+#include <boost/mpl/front.hpp>
 
 namespace boost {
 
 namespace units {
 
 namespace detail {
+
+// typedef list<rational> equation;
 
 template<int N>
 struct eliminate_from_pair_of_equations_impl;
@@ -66,6 +69,15 @@ template<int N>
 struct solve_linear_equations_impl;
 
 struct inconsistant {};
+
+// eliminate_from_pair_of_equations takes a pair of
+// equations and eliminates the first variable.
+//
+// equation eliminate_from_pair_of_equations(equation l1, equation l2) {
+//     rational x1 = l1.front();
+//     rational x2 = l2.front();
+//     return(transform(pop_front(l1), pop_front(l2), _1 * x2 - _2 * x1));
+// }
 
 template<int N>
 struct eliminate_from_pair_of_equations_impl {
@@ -105,6 +117,32 @@ struct eliminate_from_pair_of_equations {
         typename mpl::deref<begin2>::type
     >::type type;
 };
+
+// Eliminates the first variable from a list of equations
+// returns inconsistant if all its coefficients are 0.  Otherwise
+// recursively calls solve to find the remaining variables
+//
+// list<rational> eliminate(list<equation> system) {
+//     list<equation> result;
+//     equation eliminate_against = null;
+//     for_each(equation e : system) {
+//         if(eliminate_against == null) {
+//             if(e.front() == 0) {
+//                 result = push_front(result, pop_front(e));
+//             } else {
+//                 eliminate_against = e;
+//             }
+//         } else {
+//             result = push_back(result, eliminate_from_pair_of_equations(e,eliminate_against));
+//         }
+//     }
+//     if(eliminate_against == null) {
+//         return(inconsistant);
+//     } else {
+//         list<rational> solution = solve(result);
+//         return(push_front(solution, substitute(eliminate_against,solution)));
+//     }
+// }
 
 template<int N>
 struct elimination_impl {
@@ -202,6 +240,17 @@ struct elimination_skip_leading_zeros_impl<false, false> {
     };
 };
 
+// finds the vaue of the first variable given the
+// values of all the other variables.
+//
+// rational substitute(equation e, list<rational> solutions) {
+//     rational value = e.back();
+//     for_each(rational x : solutions, rational a : pop_front(pop_back(e))) {
+//         value -= x;
+//     }
+//     return(e.front() / value);
+// }
+
 template<int N>
 struct substitute_impl {
     template<class Begin1, class Begin2>
@@ -246,6 +295,10 @@ struct solve_impl<true> {
         typedef mpl::list0<> type;
     };
 };
+
+// check_extra_equations verifies that the
+// after all the variables have been eliminated
+// the remaining equations are all 0=0.
 
 template<class T>
 struct check_extra_equations_func {
@@ -328,10 +381,29 @@ struct solve_impl<false> {
     };
 };
 
+// solve takes a list of equations and returns the solutions
+// as a vector.  Each equation is interpreted as a sequence
+// of coefficients with the last item being the value e.g.
+// list<1, 2, 3> is 1 * x0 + 2 * x1 = 3
+
 template<class T>
 struct solve {
     typedef typename solve_impl<mpl::size<T>::value == 0>::template apply<T>::type type;
 };
+
+// find_base_dimensions takes a list of
+// base_units and returns a sorted list
+// of all the base_dimensions they use.
+//
+// list<base_dimension> find_base_dimensions(list<base_unit> l) {
+//     set<base_dimension> dimensions;
+//     for_each(base_unit unit : l) {
+//         for_each(dim d : unit.dimension_type) {
+//             dimensions = insert(dimensions, d.tag_type);
+//         }
+//     }
+//     return(sort(dimensions, _1 > _2, front_inserter(list<base_dimension>())));
+// }
 
 template<int N>
 struct find_base_dimensions_impl_impl {
@@ -385,6 +457,17 @@ struct find_base_dimensions {
     >::type type;
 };
 
+// calculate_base_dimension_coefficients finds
+// the coefficients corresponding to the first
+// base_dimension in each of the dimension_lists.
+// It returns two values.  The first result
+// is a list of the coefficients.  The second
+// is a list with all the incremented iterators.
+// When we encounter a base_dimension that is
+// missing from a dimension_list, we do not
+// increment the iterator and we set the
+// coefficient to zero.
+
 template<bool>
 struct calculate_base_dimension_coefficients_func;
 
@@ -406,14 +489,33 @@ struct calculate_base_dimension_coefficients_func<false> {
     };
 };
 
+// begins_with_dimension returns true iff its first
+// parameter is a valid iterator which yields its
+// second parameter when dereferenced.
+
+template<class Iterator>
+struct begins_with_dimension {
+    template<class Dim>
+    struct apply : 
+        boost::is_same<
+            Dim,
+            typename mpl::deref<Iterator>::type::tag_type
+        > {};
+};
+
+template<>
+struct begins_with_dimension<dimensionless_type> {
+    template<class Dim>
+    struct apply : mpl::false_ {};
+};
+
 template<int N>
 struct calculate_base_dimension_coefficients_impl {
     template<class BaseUnitDimensions,class Dim,class T>
     struct apply {
         typedef typename calculate_base_dimension_coefficients_func<
-            boost::is_same<
-                Dim,
-                typename mpl::deref<typename mpl::deref<BaseUnitDimensions>::type>::type::tag_type
+            begins_with_dimension<typename mpl::deref<BaseUnitDimensions>::type>::template apply<
+                Dim
             >::value
         >::template apply<
             typename mpl::deref<BaseUnitDimensions>::type
@@ -437,7 +539,9 @@ struct calculate_base_dimension_coefficients_impl<0> {
     };
 };
 
-// returns the result in reverse order
+// solve_for_base_dimension_impl computes the
+// coefficients of each unit for all the base_dimensions.
+// the inner lists are in reverse order.
 template<int N>
 struct solve_for_base_dimension_impl {
     template<class Begin, class Units>
@@ -465,6 +569,10 @@ struct solve_for_base_dimension_impl<0> {
     };
 };
 
+// get_dimension_iterators_impl takes a list of base_units
+// and returns a list of the begin iterators of their
+// dimensions
+
 template<int N>
 struct get_dimension_iterators_impl {
     template<class Begin>
@@ -484,6 +592,13 @@ struct get_dimension_iterators_impl<0> {
     };
 };
 
+// prepare_equations takes the result of
+// solve_for_base_dimension_impl and an index.
+// it sets the equation at the index to
+// one and the others to zero.  In the process
+// it reverses the inner lists thus yielding
+// a matrix that can be passed to solve.
+
 template<int N>
 struct prepare_equations_impl {
     template<class Begin, int M>
@@ -502,6 +617,17 @@ struct prepare_equations_impl<0> {
         typedef mpl::list0<> type;
     };
 };
+
+// add_zeroes pushs N zeroes onto the
+// front of a list.
+//
+// list<rational> add_zeroes(list<rational> l, int N) {
+//     if(N == 0) {
+//         return(l);
+//     } else {
+//         return(push_front(add_zeroes(l, N-1), 0));
+//     }
+// }
 
 template<int N>
 struct add_zeroes_impl {
@@ -534,7 +660,8 @@ struct add_solutions_impl {
                     typename mpl::begin<typename mpl::deref<Begin>::type>::type,
                     typename mpl::begin<Solution>::type
                 >::type
-            >::type
+            >::type,
+            Solution
         >::type type;
     };
 };
@@ -643,14 +770,181 @@ struct solve_linear_equations {
         typename mpl::begin<dimensions>::type,
         iterators
     >::type reverse_equations;
+    static const long extra = mpl::size<reverse_equations>::value - mpl::size<T>::value;
     typedef typename solve_linear_equations_impl<mpl::size<reverse_equations>::value>::template apply<
         reverse_equations,
         0,
         typename mpl::begin<dimensions>::type,
-        mpl::size<reverse_equations>::value - mpl::size<T>::value,
+        extra,
         0,
         mpl::list0<>
     >::type type;
+};
+
+// expand_dimensions finds the exponents of
+// a set of dimensions in a dimension_list.
+
+template<int N>
+struct expand_dimensions {
+    template<class Begin, class DimensionIterator>
+    struct apply {
+        typedef typename calculate_base_dimension_coefficients_func<
+            begins_with_dimension<DimensionIterator>::template apply<typename mpl::deref<Begin>::type>::value
+        >::template apply<DimensionIterator> result;
+        typedef typename mpl::push_front<
+            typename expand_dimensions<N-1>::template apply<typename mpl::next<Begin>::type, typename result::next>::type,
+            typename result::type
+        >::type type;
+    };
+};
+
+template<>
+struct expand_dimensions<0> {
+    template<class Begin, class DimensionIterator>
+    struct apply {
+        typedef mpl::list0<> type;
+    };
+};
+
+// multiply_add_units computes M x V
+// where M is a matrix and V is a horizontal
+// vector
+//
+// list<rational> multiply_add_units(list<list<rational> >, list<rational>);
+
+template<int N>
+struct multiply_add_units_impl {
+    template<class Begin1, class Begin2 ,class X>
+    struct apply {
+        typedef typename mpl::push_front<
+            typename multiply_add_units_impl<N-1>::template apply<
+                typename mpl::next<Begin1>::type,
+                typename mpl::next<Begin2>::type,
+                X
+            >::type,
+            typename mpl::plus<
+                typename mpl::times<
+                    typename mpl::deref<Begin2>::type,
+                    X
+                >::type,
+                typename mpl::deref<Begin1>::type
+            >::type
+        >::type type;
+    };
+};
+
+template<>
+struct multiply_add_units_impl<0> {
+    template<class Begin1, class Begin2 ,class X>
+    struct apply {
+        typedef mpl::list0<> type;
+    };
+};
+
+template<int N>
+struct multiply_add_units {
+    template<class Begin1, class Begin2>
+    struct apply {
+        typedef typename multiply_add_units_impl<
+            mpl::size<typename mpl::deref<Begin2>::type>::value
+        >::template apply<
+            typename mpl::begin<
+                typename multiply_add_units<N-1>::template apply<
+                    typename mpl::next<Begin1>::type,
+                    typename mpl::next<Begin2>::type
+                >::type
+            >::type,
+            typename mpl::begin<typename mpl::deref<Begin2>::type>::type,
+            typename mpl::deref<Begin1>::type
+        >::type type;
+    };
+};
+
+template<>
+struct multiply_add_units<1> {
+    template<class Begin1, class Begin2>
+    struct apply {
+        typedef typename add_zeroes_impl<
+            mpl::size<typename mpl::deref<Begin2>::type>::value
+        >::template apply<mpl::list0<> >::type type1;
+        typedef typename multiply_add_units_impl<
+            mpl::size<typename mpl::deref<Begin2>::type>::value
+        >::template apply<
+            typename mpl::begin<
+                type1
+            >::type,
+            typename mpl::begin<typename mpl::deref<Begin2>::type>::type,
+            typename mpl::deref<Begin1>::type
+        >::type type;
+    };
+};
+
+// strip_zeroes erases the first N elements of a list if
+// they are all zero, otherwise returns inconsistant
+//
+// list strip_zeroes(list l, int N) {
+//     if(N == 0) {
+//         return(l);
+//     } else if(l.front == 0) {
+//         return(strip_zeroes(pop_front(l), N-1));
+//     } else {
+//         return(inconsistant);
+//     }
+// }
+
+template<int N>
+struct strip_zeroes_impl;
+
+template<class T>
+struct strip_zeroes_func {
+    template<class L, int N>
+    struct apply {
+        typedef inconsistant type;
+    };
+};
+
+template<>
+struct strip_zeroes_func<static_rational<0> > {
+    template<class L, int N>
+    struct apply {
+        typedef typename strip_zeroes_impl<N-1>::template apply<typename mpl::pop_front<L>::type>::type type;
+    };
+};
+
+template<int N>
+struct strip_zeroes_impl {
+    template<class T>
+    struct apply {
+        typedef typename strip_zeroes_func<typename mpl::front<T>::type>::template apply<T, N>::type type;
+    };
+};
+
+template<>
+struct strip_zeroes_impl<0> {
+    template<class T>
+    struct apply {
+        typedef T type;
+    };
+};
+
+// Given a list of base_units, computes the
+// exponents of each base unit for a given
+// dimension.
+//
+// list<rational> calculate_base_unit_exponents(list<base_unit> units, dimension_list dimensions);
+
+template<class T, class Dimensions>
+struct calculate_base_unit_exponents {
+    typedef typename solve_linear_equations<T> base_solutions;
+    typedef typename expand_dimensions<mpl::size<typename base_solutions::dimensions>::value>::template apply<
+        typename mpl::begin<typename base_solutions::dimensions>::type,
+        typename mpl::begin<Dimensions>::type
+    >::type dimensions;
+    typedef typename multiply_add_units<mpl::size<dimensions>::value>::template apply<
+        typename mpl::begin<dimensions>::type,
+        typename mpl::begin<typename base_solutions::type>::type
+    >::type units;
+    typedef typename strip_zeroes_impl<base_solutions::extra>::template apply<units>::type type;
 };
 
 } // namespace detail
