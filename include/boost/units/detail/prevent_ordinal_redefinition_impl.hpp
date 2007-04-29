@@ -33,16 +33,12 @@ struct ordinal_has_already_been_defined<false>  { typedef void type; };
 }
 
 /// This must be in namespace boost::units so that ADL
-/// will work with friend functions defined inline.
-/// INTERNAL ONLY
-template<long N> struct long_ { };
-
-/// Again this needs to be in the same namespace as long_
-/// we need a mangled name because it must be found by ADL
+/// will work.  we need a mangled name because it must
+/// be found by ADL
 /// INTERNAL ONLY
 template<class T>
 detail::no 
-prevent_ordinal_redefinition(const T&) 
+boost_units_is_registered(const T&) 
 { return(detail::no()); }
 
 } // namespace units

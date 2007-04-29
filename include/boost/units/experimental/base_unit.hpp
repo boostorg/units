@@ -23,20 +23,26 @@ namespace boost {
 
 namespace units {
 
+/// This must be in namespace boost::units so that ADL
+/// will work with friend functions defined inline.
+/// Base dimensions and base units are independent.
+/// INTERNAL ONLY
+template<long N> struct base_unit_ordinal { };
+
 /// INTERNAL ONLY
 template<class T, long N> struct base_unit_pair { };
 
-/// Defines a base dimension.  To define a dimension you need to provide
-/// the derived class (CRTP) and a unique integer.
-/// struct my_dimension : boost::units::base_dimension<my_dimension, 1> {};
+/// Defines a base dimension.  To define a unit you need to provide
+/// the derived class (CRTP), a dimension list and a unique integer.
+/// struct my_unit : boost::units::base_unit<my_dimension, length_type, 1> {};
 /// It is designed so that you will get an error message if you try
 /// to use the same value in multiple definitions.
 template<class Derived,
          class Dim,
          long N,
          class = typename detail::ordinal_has_already_been_defined<
-             sizeof(prevent_ordinal_redefinition(units::long_<N>())) == sizeof(detail::yes) &&
-             sizeof(prevent_ordinal_redefinition(units::base_unit_pair<Derived, N>())) != sizeof(detail::yes)
+             sizeof(boost_units_is_registered(units::base_unit_ordinal<N>())) == sizeof(detail::yes) &&
+             sizeof(boost_units_is_registered(units::base_unit_pair<Derived, N>())) != sizeof(detail::yes)
          >::type>
 class base_unit : 
     public mpl::long_<N> 
@@ -50,13 +56,13 @@ class base_unit :
         /// Register this ordinal
         /// INTERNAL ONLY
         friend detail::yes 
-        prevent_ordinal_redefinition(const units::long_<N>&) 
+        boost_units_is_registered(const units::base_unit_ordinal<N>&) 
         { return(detail::yes()); }
         
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
         friend detail::yes 
-        prevent_ordinal_redefinition(const units::base_unit_pair<Derived, N>&) 
+        boost_units_is_registered(const units::base_unit_pair<Derived, N>&) 
         { return(detail::yes()); }
 };
 

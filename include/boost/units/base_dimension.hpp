@@ -23,6 +23,11 @@ namespace boost {
 
 namespace units {
 
+/// This must be in namespace boost::units so that ADL
+/// will work with friend functions defined inline.
+/// INTERNAL ONLY
+template<long N> struct base_dimension_ordinal { };
+
 /// INTERNAL ONLY
 template<class T, long N> struct base_dimension_pair { };
 
@@ -34,8 +39,8 @@ template<class T, long N> struct base_dimension_pair { };
 template<class Derived,
          long N,
          class = typename detail::ordinal_has_already_been_defined<
-             sizeof(prevent_ordinal_redefinition(units::long_<N>())) == sizeof(detail::yes) &&
-             sizeof(prevent_ordinal_redefinition(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
+             sizeof(boost_units_is_registered(units::base_dimension_ordinal<N>())) == sizeof(detail::yes) &&
+             sizeof(boost_units_is_registered(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
          >::type>
 class base_dimension : 
     public mpl::long_<N> 
@@ -49,13 +54,13 @@ class base_dimension :
         /// Register this ordinal
         /// INTERNAL ONLY
         friend detail::yes 
-        prevent_ordinal_redefinition(const units::long_<N>&) 
+        boost_units_is_registered(const units::base_dimension_ordinal<N>&) 
         { return(detail::yes()); }
         
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
         friend detail::yes 
-        prevent_ordinal_redefinition(const units::base_dimension_pair<Derived, N>&) 
+        boost_units_is_registered(const units::base_dimension_pair<Derived, N>&) 
         { return(detail::yes()); }
 };
 
