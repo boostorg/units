@@ -66,7 +66,7 @@ template<int N>
 struct check_extra_equations_impl;
 
 template<int N>
-struct solve_linear_equations_impl;
+struct normalize_units_impl;
 
 struct inconsistant {};
 
@@ -246,7 +246,7 @@ struct elimination_skip_leading_zeros_impl<false, false> {
 // rational substitute(equation e, list<rational> solutions) {
 //     rational value = e.back();
 //     for_each(rational x : solutions, rational a : pop_front(pop_back(e))) {
-//         value -= x;
+//         value -= a * x;
 //     }
 //     return(e.front() / value);
 // }
@@ -468,7 +468,7 @@ struct find_base_dimensions {
 // increment the iterator and we set the
 // coefficient to zero.
 
-template<bool>
+template<bool has_dimension>
 struct calculate_base_dimension_coefficients_func;
 
 template<>
@@ -542,8 +542,9 @@ struct calculate_base_dimension_coefficients_impl<0> {
 // solve_for_base_dimension_impl computes the
 // coefficients of each unit for all the base_dimensions.
 // the inner lists are in reverse order.
+
 template<int N>
-struct solve_for_base_dimension_impl {
+struct get_equations_for_base_dimension_impl {
     template<class Begin, class Units>
     struct apply {
         typedef typename calculate_base_dimension_coefficients_impl<mpl::size<Units>::value>::template apply<
@@ -552,7 +553,7 @@ struct solve_for_base_dimension_impl {
             mpl::list0<>
         > x;
         typedef typename mpl::push_front<
-            typename solve_for_base_dimension_impl<N-1>::template apply<
+            typename get_equations_for_base_dimension_impl<N-1>::template apply<
                 typename mpl::next<Begin>::type,
                 typename x::next
             >::type,
@@ -562,7 +563,7 @@ struct solve_for_base_dimension_impl {
 };
 
 template<>
-struct solve_for_base_dimension_impl<0> {
+struct get_equations_for_base_dimension_impl<0> {
     template<class Begin, class Units>
     struct apply {
         typedef mpl::list0<> type;
@@ -594,8 +595,8 @@ struct get_dimension_iterators_impl<0> {
 
 // prepare_equations takes the result of
 // solve_for_base_dimension_impl and an index.
-// it sets the equation at the index to
-// one and the others to zero.  In the process
+// it sets the equation at the index equal to
+// one and all the others to zero.  In the process
 // it reverses the inner lists thus yielding
 // a matrix that can be passed to solve.
 
@@ -648,6 +649,14 @@ struct add_zeroes_impl<0> {
     };
 };
 
+// add_solutions takes a list of equations
+// for the extra dummy units and a list
+// of the values of all the regular units.
+// It find the coefficients of all the dummy
+// units and pushes them onto the begining
+// of the list in reverse order (since the
+// dummy equations are reversed).
+
 template<int N>
 struct add_solutions_impl {
     template<class Begin, class T, class Solution>
@@ -674,23 +683,64 @@ struct add_solutions_impl<0> {
     };
 };
 
+// normalize_units finds the units corresponding
+// to each base dimension.  The form of the result is
+// a two dimensional list.  list<list<rational> >.
+// each of the inner lists represents a single
+// base dimension.  There may be extra units added
+// to the front of the inner list if there are
+// more base dimensions than base units.  The
+// number such units is returned as a long called
+// extra.  For example list<pound, foot> will yield
+// list<list<0, 0, 1>,list<1, 0, 0>,list<1/2,-1/2,1/2> > meaning
+//
+//   length = 0 * mass + 0 * force + 1 * length
+//   mass   = 1 * mass + 0 * force + 0 * length
+//   time   = 1/2 * mass - 1/2 * force + 1/2 * length
+//
+// Why is there a dummy mass unit?  It isn't
+// possible to represent three base dimensions
+// with only two base units.  So we need some
+// kind of dummy.  Why mass?  Well, a base
+// unit of length doesn't help us since we
+// already have one.  Mass is before time
+// so we use mass.
+
+// S is the solution for this particular base dimension.
+// if the base dimension cannot be represented then
+// solve will return inconsistant hence the two specializations.
+
 template<class S>
-struct solve_linear_equations_func {
+struct normalize_units_func {
     template<class ReverseEquations, int M, class DimensionIterator, int N, int Extra, int I,class ExtraEquations>
     struct apply {
+        // first add zeroes for all the extra units that
+        // are not needed.
         typedef typename add_zeroes_impl<Extra-mpl::size<ExtraEquations>::value>::template apply<S>::type result1;
+        // then find the values for the extra units that /are/ needed.
         typedef typename add_solutions_impl<mpl::size<ExtraEquations>::value>::template apply<
             typename mpl::begin<ExtraEquations>::type,
             result1,
             S
         >::type result;
+        // recurse back to the primary loop putting
+        // push_front outside since we wish to maintain
+        // the original ordering of dimensions
         typedef typename mpl::push_front<
-            typename solve_linear_equations_impl<N-1>::template apply<
+            typename normalize_units_impl<N-1>::template apply<
+                // The coefficient are still the same
+                // and we don't need to remove any equations
                 ReverseEquations,
+                // increment the number of equations that
+                // need to be skipped when we add another
+                // dummy unit.
                 M+1,
                 typename mpl::next<DimensionIterator>::type,
                 Extra,
+                // increment the number of dimensions we've seen
                 I+1,
+                // pass the equations for the dummy
+                // units on without modification.
                 ExtraEquations
             >::type,
             result
@@ -698,12 +748,21 @@ struct solve_linear_equations_func {
     };
 };
 
+// handles the case when this base dimension
+// cannot be represented with the base units
+// and the dummies allready added.
 template<>
-struct solve_linear_equations_func<inconsistant> {
+struct normalize_units_func<inconsistant> {
     template<class ReverseEquations, int M, class DimensionIterator, int N, int Extra, int I, class ExtraEquations>
     struct apply {
+        // Find the position that needs to be erased. (Since this
+        // equation can always be adjusted by adjusting the
+        // dummy unit we are adding now, independently of
+        // other units, we don't need it anymore.)
         typedef typename typename mpl::advance_c<typename mpl::begin<ReverseEquations>::type, M>::type pos;
-        typedef typename solve_linear_equations_impl<N-1>::template apply<
+        // Continue with the main loop.
+        typedef typename normalize_units_impl<N-1>::template apply<
+            // Remove current_equation
             typename mpl::erase<
                 ReverseEquations,
                 pos
@@ -711,25 +770,33 @@ struct solve_linear_equations_func<inconsistant> {
             M,
             typename mpl::next<DimensionIterator>::type,
             Extra,
+            // Increment the number of dimensions we've seen
             I+1,
+            // Add "current_equation == 0" to the list of equations
+            // for the dummy units.  (For all base dimensions
+            // except this the current dimension must sum to
+            // zero.)
             typename mpl::push_front<
                 ExtraEquations,
+                // Remember it's backwards
                 typename mpl::reverse<
                     typename mpl::push_front<typename mpl::deref<pos>::type, static_rational<0> >::type
                 >::type
             >::type
         > next;
+        // this dimension is (0, ..., 0, 1, 0, ..., 0)
         typedef typename mpl::push_front<
             typename add_zeroes_impl<N-1>::template apply<mpl::list0<> >::type,
             static_rational<1>
         >::type result1;
         typedef typename add_zeroes_impl<I>::template apply<result1>::type result;
+        // Push the result onto the list.
         typedef typename mpl::push_front<typename next::type, result>::type type;
     };
 };
 
 template<int N>
-struct solve_linear_equations_impl {
+struct normalize_units_impl {
     template<class ReverseEquations, int M, class DimensionIterator, int Extra, int I, class ExtraEquations>
     struct apply {
         typedef typename solve<
@@ -740,7 +807,7 @@ struct solve_linear_equations_impl {
                 M
             >::type
         >::type solution;
-        typedef typename solve_linear_equations_func<solution>::template apply<
+        typedef typename normalize_units_func<solution>::template apply<
             ReverseEquations,
             M,
             DimensionIterator,
@@ -753,7 +820,7 @@ struct solve_linear_equations_impl {
 };
 
 template<>
-struct solve_linear_equations_impl<0> {
+struct normalize_units_impl<0> {
     template<class ReverseEquations, int M, class DimensionIterator, int Extra, int I, class ExtraEquations>
     struct apply {
         typedef mpl::list0<> type;
@@ -761,17 +828,17 @@ struct solve_linear_equations_impl<0> {
 };
 
 template<class T>
-struct solve_linear_equations {
+struct normalize_units {
     typedef typename find_base_dimensions<T>::type dimensions;
     typedef typename get_dimension_iterators_impl<mpl::size<T>::value>::template apply<typename mpl::begin<T>::type>::type iterators;
-    typedef typename solve_for_base_dimension_impl<
+    typedef typename get_equations_for_base_dimension_impl<
         mpl::size<dimensions>::value
     >::template apply<
         typename mpl::begin<dimensions>::type,
         iterators
     >::type reverse_equations;
     static const long extra = mpl::size<reverse_equations>::value - mpl::size<T>::value;
-    typedef typename solve_linear_equations_impl<mpl::size<reverse_equations>::value>::template apply<
+    typedef typename normalize_units_impl<mpl::size<reverse_equations>::value>::template apply<
         reverse_equations,
         0,
         typename mpl::begin<dimensions>::type,
@@ -783,6 +850,11 @@ struct solve_linear_equations {
 
 // expand_dimensions finds the exponents of
 // a set of dimensions in a dimension_list.
+// the second parameter is assumed to be
+// a superset of the base_dimensions of
+// the first parameter.
+//
+// list<rational> expand_dimensions(dimension_list, list<base_dimension>);
 
 template<int N>
 struct expand_dimensions {
@@ -932,18 +1004,43 @@ struct strip_zeroes_impl<0> {
 // dimension.
 //
 // list<rational> calculate_base_unit_exponents(list<base_unit> units, dimension_list dimensions);
+//
+// What is the purpose of all this magic with
+// base_dimensions? Can't we just solve the
+// equations for the dimension directly?  Yes,
+// we can, but remember that solving a
+// system of linear equations is O(N^3).
+// By normalizing the system we incur a
+// high one time cost O(N^4), but for all
+// solutions after the first it is O(N^2)
+// In addition, the constant factor is
+// good because everything is already set up.
+// Since we expect a few systems to be
+// used many times, the cost of creating
+// a system is probably not significant.
 
 template<class T, class Dimensions>
 struct calculate_base_unit_exponents {
-    typedef typename solve_linear_equations<T> base_solutions;
+    // find the units that correspond to each base dimension
+    typedef typename normalize_units<T> base_solutions;
+    // pad the dimension with zeroes so it can just be a
+    // list of numbers, making the multiplication easy
+    // e.g. if the arguments are list<pound, foot> and
+    // dimension_list<mass,time^-2> then this step will
+    // yield list<0,1,-2>
     typedef typename expand_dimensions<mpl::size<typename base_solutions::dimensions>::value>::template apply<
         typename mpl::begin<typename base_solutions::dimensions>::type,
         typename mpl::begin<Dimensions>::type
     >::type dimensions;
+    // take the unit corresponding to each base unit
+    // multiply each of its exponents by the exponent
+    // of the base_dimension in the result and sum.
     typedef typename multiply_add_units<mpl::size<dimensions>::value>::template apply<
         typename mpl::begin<dimensions>::type,
         typename mpl::begin<typename base_solutions::type>::type
     >::type units;
+    // Now, verify that the dummy units really
+    // cancel out and remove them.
     typedef typename strip_zeroes_impl<base_solutions::extra>::template apply<units>::type type;
 };
 
