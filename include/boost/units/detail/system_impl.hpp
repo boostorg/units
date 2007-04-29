@@ -96,7 +96,7 @@ struct get_system_tag_of_dim< homogeneous_system<S>,DT >
 template<class T1,class V1,class T2,class V2>
 struct less< heterogeneous_system_element<T1,V1>,heterogeneous_system_element<T2,V2> >
 {
-    typedef typename boost::mpl::less<typename T1::value,typename T2::value>::type  type;
+    typedef typename boost::mpl::less<T1,T2>::type  type;
     
     static const bool   value = boost::is_same<type,boost::mpl::true_>::value;
 };

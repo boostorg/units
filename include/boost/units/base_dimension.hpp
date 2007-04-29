@@ -42,7 +42,7 @@ class base_dimension :
 {
     public:
         typedef base_dimension                                                          this_type;
-        typedef mpl::long_<N>                                                           value;
+        //typedef mpl::long_<N>                                                           value;
         typedef dimension_list<dim<Derived,static_rational<1> >, dimensionless_type>    type;
 
     private:

@@ -43,7 +43,7 @@ class base_unit :
 {
     public:
         typedef base_unit           this_type;
-        typedef mpl::long_<N>       value;
+        //typedef mpl::long_<N>       value;
         typedef Dim                 dimension_type;
 
     private:

@@ -379,7 +379,7 @@ struct heterogeneous_system_by_dimension_dim
 
 template<class T1, class V1, class T2, class V2>
 struct less<heterogeneous_system_by_dimension_dim<T1, V1>, heterogeneous_system_by_dimension_dim<T2, V2> >
-    : mpl::less<typename T1::value, typename T2::value>
+    : mpl::less<T1, T2>
 { };
 
 template<class Tag, class L>
@@ -448,7 +448,7 @@ struct heterogeneous_system_by_dimension_value
 
 template<class T1, class V1, class T2, class V2>
 struct less<heterogeneous_system_by_dimension_value<T1, V1>, heterogeneous_system_by_dimension_value<T2, V2> >
-    : mpl::less<typename T1::value, typename T2::value>
+    : mpl::less<T1, T2>
 { };
 
 template<class Tag, class L>

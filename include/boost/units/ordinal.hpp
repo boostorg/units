@@ -20,7 +20,7 @@ namespace boost {
 namespace units {
 
 /// Class for defining a cardinal ordering of tags to faciliate compile-time sorting.
-template<long N> struct ordinal { typedef typename boost::mpl::long_<N> value; };
+template<long N> struct ordinal : mpl::long_<N> {};
 
 } // namespace units
 

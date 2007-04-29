@@ -73,7 +73,7 @@ template<typename T,typename V> struct less;
 template<typename T1,typename V1,typename T2,typename V2>
 struct less< dim<T1,V1>,dim<T2,V2> >
 {
-    typedef typename boost::mpl::less<typename T1::value,typename T2::value>::type  type;
+    typedef typename boost::mpl::less<T1,T2>::type  type;
     
     static const bool   value = boost::is_same<type,boost::mpl::true_>::value;
 };
