@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>FAQ</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="up" href="../index.html" title="Chapter 1. Boost.Units 0.7.1">
+<link rel="prev" href="Installation.html" title="Installation">
+<link rel="next" href="FAQ/Namespace_Boost.html" title="Why is everything in the boost namespace?">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%">
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.htm">Home</a></td>
+<td align="center"><a href="../libraries.html">Libraries</a></td>
+<td align="center"><a href="../../../people/people.htm">People</a></td>
+<td align="center"><a href="../../../more/faq.htm">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Installation.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="FAQ/Namespace_Boost.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="boost_units.FAQ"></a><a href="FAQ.html" title="FAQ"> FAQ</a></h2></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="FAQ.html#boost_units.FAQ.Distinguishing_Quantities_With_Same_Units">
+      How does one distinguish between quantities that are physically different but
+      have the same units (such as energy and torque)?</a></span></dt>
+<dt><span class="section"><a href="FAQ/Namespace_Boost.html"> Why is everything in
+      the boost namespace?</a></span></dt>
+<dt><span class="section"><a href="FAQ/Angle_Are_Units.html"> Angles are treated
+      as units</a></span></dt>
+</dl></div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_units.FAQ.Distinguishing_Quantities_With_Same_Units"></a><a href="FAQ.html#boost_units.FAQ.Distinguishing_Quantities_With_Same_Units" title="How does one distinguish between quantities that are physically different but have the same units (such as energy and torque)?">
+      How does one distinguish between quantities that are physically different but
+      have the same units (such as energy and torque)?</a></h3></div></div></div>
+<p>
+        In cases such as this, the proper way to treat this difference is to recognize
+        that the underlying value types are distinct. For the particular case of
+        energy vs. torque, energy is a true <a href="http://mathworld.wolfram.com/Scalar.html" target="_top">scalar</a>
+        quantity, while torque, despite having the same units as energy, is in fact
+        a <a href="http://mathworld.wolfram.com/Pseudovector.html" target="_top">pseudovector</a>.
+        Thus, to properly treat torque quantities, a value type representing pseudovectors
+        and encapsulating their algebra would have to be implemented. Then, one would
+        write something like this:
+      </p>
+<pre class="programlisting">
+<span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">energy</span><span class="special">,</span><span class="keyword">double</span><span class="special">&gt;</span>          <span class="identifier">E</span><span class="special">;</span>
+<span class="identifier">quantity</span><span class="special">&lt;</span><span class="identifier">energy</span><span class="special">,</span><span class="identifier">pseudovector</span><span class="special">&gt;</span>    <span class="identifier">tau</span><span class="special">;</span>
+</pre>
+<p>
+        naturally, a typedef for torque could also be added to make the intent more
+        transparent.
+      </p>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 -2007 Matthias Christian Schabel, 2007 Steven Watanabe</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="Installation.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="FAQ/Namespace_Boost.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
