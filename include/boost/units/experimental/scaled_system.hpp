@@ -68,40 +68,22 @@ struct scaled_system
     typedef Scale scale_type;
 };
 
-template<class DimensionTag, class System1, class Scale, class System2>
-struct base_unit_converter<DimensionTag, scaled_system<System1, Scale>, System2> 
-{
-    typedef base_unit_converter<DimensionTag, System1, System2> base;
-    typedef typename divide_typeof_helper<typename base::type, typename Scale::value_type>::type type;
-    static type value() {
-        return(base::value() / Scale::value());
-    }
+template<class T>
+struct unscale {
+    typedef T type;
 };
 
-template<class DimensionTag, class System1, class System2, class Scale>
-struct base_unit_converter<DimensionTag, System1, scaled_system<System2, Scale> > 
-{
-    typedef base_unit_converter<DimensionTag, System1, System2> base;
-    typedef typename multiply_typeof_helper<typename base::type, typename Scale::value_type>::type type;
-    static type value() {
-        return(base::value() * Scale::value());
-    }
+template<class S, class Scale>
+struct unscale<scaled_system<S, Scale> > {
+    typedef S type;
 };
 
-template<class DimensionTag, class System1, class Scale1, class System2, class Scale2>
-struct base_unit_converter<DimensionTag, scaled_system<System1, Scale1>, scaled_system<System2, Scale2> > 
-{
-    typedef base_unit_converter<DimensionTag, System1, System2> base;
-    typedef typename multiply_typeof_helper<
-        typename base::type,
-        typename divide_typeof_helper<
-            typename Scale2::value_type,
-            typename Scale1::value_type
-        >::type
-    >::type type;
-    static type value() {
-        return(base::value() * (Scale2::value() / Scale1::value()));
-    }
+template<class D, class S>
+struct unit;
+
+template<class D, class S>
+struct unscale<unit<D, S> > {
+    typedef unit<D, typename unscale<S>::type> type;
 };
 
 template<class DimensionTag, class System, class Scale>
