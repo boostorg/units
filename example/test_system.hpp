@@ -20,6 +20,8 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
+#include <boost/units/experimental/base_unit.hpp>
+#include <boost/units/experimental/make_system.hpp>
 
 namespace boost {
 
@@ -67,10 +69,12 @@ typedef derived_dimension<mass_dim,1,
 namespace test {
 
 //[test_system_snippet_6
-/// placeholder class defining test unit system
-struct system_tag : public ordinal<101> { };
 
-typedef homogeneous_system<system_tag>  system;
+struct length_unit : base_unit<length_unit, length_type, 1> {};
+struct mass_unit : base_unit<mass_unit, mass_type, 2> {};
+struct time_unit : base_unit<time_unit, time_type, 3> {};
+
+typedef make_system<length_unit, mass_unit, time_unit>::type system;
 
 /// unit typedefs
 typedef unit<dimensionless_type,system>     dimensionless;
@@ -101,20 +105,20 @@ BOOST_UNITS_STATIC_CONSTANT(joules,energy);
 } // namespace test
 
 //[test_system_snippet_8
-template<> struct base_unit_info<length_dim,test::system_tag>
+template<> struct base_unit_info<test::length_unit>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct base_unit_info<mass_dim,test::system_tag>
+template<> struct base_unit_info<test::mass_unit>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct base_unit_info<time_dim,test::system_tag>
+template<> struct base_unit_info<test::time_unit>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

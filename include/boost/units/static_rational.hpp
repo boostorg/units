@@ -16,6 +16,7 @@
 
 #include <boost/math/common_factor_ct.hpp>
 #include <boost/mpl/arithmetic.hpp>
+#include <boost/mpl/less.hpp>
 #include <boost/type_traits/is_same.hpp>
 
 #include <boost/units/operators.hpp>
@@ -363,6 +364,15 @@ struct negate_impl<boost::units::detail::static_rational_tag>
     };
 };
 
+template<>
+struct less_impl<boost::units::detail::static_rational_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef mpl::bool_<((mpl::minus<T0, T1>::type::Numerator) < 0)> type;
+    };
+};
 
 
 }

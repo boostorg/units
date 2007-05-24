@@ -96,8 +96,8 @@ int main(void)
     typedef boost::units::test::time    time_unit;
     
     //[unit_example_6_snippet_1
-    typedef scaled_value<double,scale<10,3> >   type1;
-    typedef scaled_value<double,scale<10,-2> >  type2;
+    typedef scaled_value<double,scale<10,static_rational<3> > >   type1;
+    typedef scaled_value<double,scale<10,static_rational<-2> > >  type2;
         
     quantity<length,type1>      L(type1(4.0)*meters);
     quantity<time_unit,type2>   T(type2(10.0)*seconds);
@@ -118,10 +118,10 @@ int main(void)
               << "(3/2)v(L/T)                       = " << root<static_rational<3,2> >(L/T) << std::endl
               << std::endl;
     
-    sstream1  << 2.0*scale<10,4>() << std::endl
-              << scale<10,4>()*2.0 << std::endl
-              << 2.0/scale<10,4>() << std::endl
-              << scale<10,4>()/2.0 << std::endl
+    sstream1  << 2.0*scale<10,static_rational<4> >() << std::endl
+              << scale<10,static_rational<4> >()*2.0 << std::endl
+              << 2.0/scale<10,static_rational<4> >() << std::endl
+              << scale<10,static_rational<4> >()/2.0 << std::endl
               << std::endl;
               
     {

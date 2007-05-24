@@ -23,6 +23,7 @@
 #include <boost/units/dimension_list.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/push_front_if.hpp>
 
 /// \file 
 /// \brief Core class and metaprogramming utilities for compile-time dimensional analysis.
@@ -381,29 +382,6 @@ struct merge_dimensions_func<false, true> {
             >::type,
             typename boost::mpl::deref<Begin2>::type
         >::type type;
-    };
-};
-
-template<bool>
-struct push_front_if;
-
-template<>
-struct push_front_if<true>
-{
-    template<typename Seq, typename T>
-    struct apply
-    {
-        typedef typename mpl::push_front<Seq, T>::type type;
-    };
-};
-
-template<>
-struct push_front_if<false>
-{
-    template<typename Seq, typename T>
-    struct apply
-    {
-        typedef Seq type;
     };
 };
 

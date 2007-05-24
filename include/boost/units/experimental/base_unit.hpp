@@ -52,6 +52,21 @@ class base_unit :
         //typedef mpl::long_<N>       value;
         typedef Dim                 dimension_type;
 
+        typedef Derived type;
+
+        typedef unit<
+            Dim,
+            heterogeneous_system<
+                heterogeneous_system_pair<
+                    dimension_list<
+                        heterogeneous_system_dim<Derived,static_rational<1> >,
+                        dimensionless_type
+                    >,
+                    Dim
+                >
+            >
+        > unit_type;
+
     private:
         /// Register this ordinal
         /// INTERNAL ONLY

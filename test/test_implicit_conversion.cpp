@@ -27,39 +27,39 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
-#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
-#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
+//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
+//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
 
 namespace bu = boost::units;
 
 int test_main(int,char *[])
 {
-    // SI->SI always true
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::current_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::temperature_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::amount_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::luminous_intensity_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::plane_angle_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::solid_angle_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //// SI->SI always true
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::current_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::temperature_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::amount_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::luminous_intensity_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::plane_angle_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::solid_angle_dim,bu::SI::system_tag,bu::SI::system_tag>::value == true));
 
-    // CGS->CGS always true
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::current_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::temperature_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::amount_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::luminous_intensity_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::plane_angle_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::solid_angle_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //// CGS->CGS always true
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::current_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::temperature_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::amount_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::luminous_intensity_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::plane_angle_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::solid_angle_dim,bu::CGS::system_tag,bu::CGS::system_tag>::value == true));
 
-    // SI->CGS
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == false));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == false));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == true));
+    //// SI->CGS
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == false));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == false));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::SI::system_tag,bu::CGS::system_tag>::value == true));
     
     BOOST_CHECK((bu::is_implicitly_convertible<bu::SI::length,bu::CGS::length>::value == false));
     BOOST_CHECK((bu::is_implicitly_convertible<bu::SI::mass,bu::CGS::mass>::value == false));
@@ -77,10 +77,10 @@ int test_main(int,char *[])
     BOOST_CHECK((bu::is_implicitly_convertible<bu::SI::velocity,bu::CGS::velocity>::value == false));
     BOOST_CHECK((bu::is_implicitly_convertible<bu::SI::wavenumber,bu::CGS::wavenumber>::value == false));
     
-    // CGS->SI
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == false));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == false));
-    BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == true));
+    //// CGS->SI
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::length_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == false));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::mass_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == false));
+    //BOOST_CHECK((bu::base_unit_is_implicitly_convertible<bu::time_dim,bu::CGS::system_tag,bu::SI::system_tag>::value == true));
               
     BOOST_CHECK((bu::is_implicitly_convertible<bu::CGS::length,bu::SI::length>::value == false));
     BOOST_CHECK((bu::is_implicitly_convertible<bu::CGS::mass,bu::SI::mass>::value == false));

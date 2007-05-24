@@ -46,7 +46,12 @@ typedef world_space_tag::type    world_space_type;
 typedef object_space_tag::type   object_space_type;
 
 /// placeholder class defining test unit system
-struct system { };
+//struct system { };
+
+struct world_space_base_unit : base_unit<world_space_base_unit, world_space_type, 103> {};
+struct object_space_base_unit : base_unit<object_space_base_unit, object_space_type, 104> {};
+
+typedef make_system<world_space_base_unit, object_space_base_unit>::type system;
 
 /// unit typedefs
 typedef unit<dimensionless_type,system>     dimensionless;

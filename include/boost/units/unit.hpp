@@ -14,9 +14,11 @@
 #include <boost/mpl/bool_fwd.hpp>
 
 #include <boost/units/dimension.hpp>
-#include <boost/units/system.hpp>
+//#include <boost/units/system.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/unit_impl.hpp>
+#include <boost/units/experimental/heterogeneous_system.hpp>
+#include <boost/units/experimental/make_system.hpp>
 
 namespace boost {
 
@@ -121,69 +123,79 @@ namespace units {
 
 //template<class S1,class S2> struct is_implicitly_convertible;
 
+#ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
+
+template<class S1, class S2>
+struct is_implicitly_convertible : mpl::true_ {};
+
+#else
+
 template<class S1,class S2> 
 struct is_implicitly_convertible :
-    public mpl::false_
+    //public mpl::false_
+    boost::is_same<typename reduce_unit<S1>::type, typename reduce_unit<S2>::type>
 { };
 
-/// Determine if two homogeneous units are implicitly convertible
-template<class S1,
-         class S2,
-         class Dim1>
-struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
-                                  unit<Dim1,homogeneous_system<S2> > > :
-    mpl::bool_<detail::implicit_conversion_homo_to_homo_impl<mpl::size<Dim1>::value>::template
-                apply<typename mpl::begin<Dim1>::type, homogeneous_system<S1>, homogeneous_system<S2> >::value>
-{        
-    typedef homogeneous_system<S1>              system1_type;
-    typedef homogeneous_system<S2>              system2_type;
-};
+#endif
 
-/// Determine if a homogeneous unit is implicitly convertible to a heterogeneous unit
-template<class S1,
-         class S2,
-         class Dim1>
-struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
-                                  unit<Dim1,heterogeneous_system<S2> > > :
-    mpl::false_
-{        
-    typedef homogeneous_system<S1>          system1_type;
-    typedef heterogeneous_system<S2>        system2_type;
-};
-
-/// Determine if a heterogeneous unit is implicitly convertible to a homogeneous unit
-template<class S1,
-         class S2,
-         class Dim1>
-struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
-                                  unit<Dim1,homogeneous_system<S2> > > :
-    mpl::false_
-{
-    typedef heterogeneous_system<S1>        system1_type;
-    typedef homogeneous_system<S2>          system2_type;
-};
-
-/// Determine if two heterogeneous units are implicitly convertible
-template<class S1,
-         class S2,
-         class Dim1>
-struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
-                                  unit<Dim1,heterogeneous_system<S2> > > :
-    //mpl::and_<
-    //    is_implicitly_convertible<
-    //        unit<Dim1,heterogeneous_system<S1> >,
-    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >
-    //    >,
-    //    is_implicitly_convertible<
-    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >,
-    //        unit<Dim1,heterogeneous_system<S2> >
-    //    >
-    //>
-    mpl::false_
-{        
-    typedef heterogeneous_system<S1>        system1_type;
-    typedef heterogeneous_system<S2>        system2_type;
-};
+///// Determine if two homogeneous units are implicitly convertible
+//template<class S1,
+//         class S2,
+//         class Dim1>
+//struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
+//                                  unit<Dim1,homogeneous_system<S2> > > :
+//    mpl::bool_<detail::implicit_conversion_homo_to_homo_impl<mpl::size<Dim1>::value>::template
+//                apply<typename mpl::begin<Dim1>::type, homogeneous_system<S1>, homogeneous_system<S2> >::value>
+//{        
+//    typedef homogeneous_system<S1>              system1_type;
+//    typedef homogeneous_system<S2>              system2_type;
+//};
+//
+///// Determine if a homogeneous unit is implicitly convertible to a heterogeneous unit
+//template<class S1,
+//         class S2,
+//         class Dim1>
+//struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
+//                                  unit<Dim1,heterogeneous_system<S2> > > :
+//    mpl::false_
+//{        
+//    typedef homogeneous_system<S1>          system1_type;
+//    typedef heterogeneous_system<S2>        system2_type;
+//};
+//
+///// Determine if a heterogeneous unit is implicitly convertible to a homogeneous unit
+//template<class S1,
+//         class S2,
+//         class Dim1>
+//struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
+//                                  unit<Dim1,homogeneous_system<S2> > > :
+//    mpl::false_
+//{
+//    typedef heterogeneous_system<S1>        system1_type;
+//    typedef homogeneous_system<S2>          system2_type;
+//};
+//
+///// Determine if two heterogeneous units are implicitly convertible
+//template<class S1,
+//         class S2,
+//         class Dim1>
+//struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
+//                                  unit<Dim1,heterogeneous_system<S2> > > :
+//    //mpl::and_<
+//    //    is_implicitly_convertible<
+//    //        unit<Dim1,heterogeneous_system<S1> >,
+//    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >
+//    //    >,
+//    //    is_implicitly_convertible<
+//    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >,
+//    //        unit<Dim1,heterogeneous_system<S2> >
+//    //    >
+//    //>
+//    mpl::false_
+//{        
+//    typedef heterogeneous_system<S1>        system1_type;
+//    typedef heterogeneous_system<S2>        system2_type;
+//};
 
 //template<class T> struct get_dimension;
 //
@@ -262,8 +274,8 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
     typedef unit<
         typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
-            heterogeneous_system_view<System1, Dim1>,
-            heterogeneous_system_view<System2, Dim2>
+            typename detail::make_heterogeneous_system<Dim1, System1>::type,
+            typename detail::make_heterogeneous_system<Dim2, System2>::type
         >::type
     > type;
 };
@@ -280,7 +292,7 @@ struct multiply_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
         typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
             heterogeneous_system<System1>,
-            heterogeneous_system_view<System2, Dim2>
+            typename detail::make_heterogeneous_system<Dim2, System2>::type
         >::type
     > type;
 };
@@ -296,7 +308,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
     typedef unit<
         typename mpl::times<Dim1,Dim2>::type,
         typename detail::multiply_systems<
-            heterogeneous_system_view<System1, Dim1>,
+            typename detail::make_heterogeneous_system<Dim1, System1>::type,
             heterogeneous_system<System2>
         >::type
     > type;
@@ -340,8 +352,8 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
     typedef unit<
         typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
-            heterogeneous_system_view<System1, Dim1>,
-            heterogeneous_system_view<System2, Dim2>
+            typename detail::make_heterogeneous_system<Dim1, System1>::type,
+            typename detail::make_heterogeneous_system<Dim2, System2>::type
         >::type
     > type;
 };
@@ -358,7 +370,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
         typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
             heterogeneous_system<System1>,
-            heterogeneous_system_view<System2, Dim2>
+            typename detail::make_heterogeneous_system<Dim2, System2>::type
         >::type
     > type;
 };
@@ -374,7 +386,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
     typedef unit<
         typename mpl::divides<Dim1,Dim2>::type,
         typename detail::divide_systems<
-            heterogeneous_system_view<System1, Dim1>,
+            typename detail::make_heterogeneous_system<Dim1, System1>::type,
             heterogeneous_system<System2>
         >::type
     > type;
@@ -401,7 +413,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 template<class Dim,class System,long N,long D> 
 struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
 { 
-    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,System>     type; 
+    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,typename static_power<System, static_rational<N,D> >::type>     type; 
     
     static type value(const unit<Dim,System>&)  
     { 
@@ -413,7 +425,7 @@ struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >
 template<class Dim,class System,long N,long D> 
 struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
 { 
-    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,System>      type; 
+    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,typename static_root<System, static_rational<N,D> >::type>      type; 
     
     static type value(const unit<Dim,System>&)  
     { 

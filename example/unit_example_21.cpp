@@ -33,52 +33,62 @@ Output:
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/physical_units.hpp>
+#include <boost/units/experimental/base_unit.hpp>
+#include <boost/units/experimental/make_system.hpp>
 
 namespace boost {
 
 namespace units {
 
-struct imperial : public ordinal<1000> { };
+//struct imperial : public ordinal<1000> { };
+
+struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_type, 1> {};
+
+typedef make_system<imperial_gallon_tag>::type imperial;
 
 typedef unit<volume_type,imperial>	imperial_gallon;
 
-struct us : public ordinal<1001> { };
+struct us_gallon_tag : base_unit<us_gallon_tag, volume_type, 2> {};
+
+//struct us : public ordinal<1001> { };
+
+typedef make_system<us_gallon_tag>::type us;
 
 typedef unit<volume_type,us>			us_gallon;
 
-/// convert imperial gallons to us gallons
-template<class Y>
-class conversion_helper< quantity<unit<volume_type,imperial>,Y>,
-                         quantity<unit<volume_type,us>,Y> >
-{
-    public:
-        typedef quantity<unit<volume_type,imperial>,Y>    from_quantity_type;
-        typedef quantity<unit<volume_type,us>,Y>          to_quantity_type;
-
-        static
-        to_quantity_type
-        convert(const from_quantity_type& source)
-        {
-            return to_quantity_type::from_value(source.value()*1.2009499255);
-        }
-};
-
-/// convert us gallons to imperial gallons
-template<class Y>
-class conversion_helper< quantity<unit<volume_type,us>,Y>,
-                         quantity<unit<volume_type,imperial>,Y> >
-{
-    public:
-        typedef quantity<unit<volume_type,us>,Y>          from_quantity_type;
-        typedef quantity<unit<volume_type,imperial>,Y>    to_quantity_type;
-
-        static
-        to_quantity_type
-        convert(const from_quantity_type& source)
-        {
-            return to_quantity_type::from_value(source.value()/1.2009499255);
-        }
-};
+///// convert imperial gallons to us gallons
+//template<class Y>
+//class conversion_helper< quantity<unit<volume_type,imperial>,Y>,
+//                         quantity<unit<volume_type,us>,Y> >
+//{
+//    public:
+//        typedef quantity<unit<volume_type,imperial>,Y>    from_quantity_type;
+//        typedef quantity<unit<volume_type,us>,Y>          to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            return to_quantity_type::from_value(source.value()*1.2009499255);
+//        }
+//};
+//
+///// convert us gallons to imperial gallons
+//template<class Y>
+//class conversion_helper< quantity<unit<volume_type,us>,Y>,
+//                         quantity<unit<volume_type,imperial>,Y> >
+//{
+//    public:
+//        typedef quantity<unit<volume_type,us>,Y>          from_quantity_type;
+//        typedef quantity<unit<volume_type,imperial>,Y>    to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            return to_quantity_type::from_value(source.value()/1.2009499255);
+//        }
+//};
 
 template<>
 struct is_implicitly_convertible<unit<volume_type,imperial>,
@@ -95,6 +105,8 @@ struct is_implicitly_convertible<unit<volume_type,us>,
 } // namespace units
 
 } // namespace boost
+
+BOOST_UNITS_DEFINE_CONVERSION(boost::units::imperial_gallon_tag, boost::units::us_gallon_tag::unit_type, double, 1.2009499255);
 
 using namespace boost::units;
 

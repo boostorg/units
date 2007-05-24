@@ -30,6 +30,8 @@
 #include <boost/mpl/erase.hpp>
 #include <boost/mpl/front.hpp>
 
+#include <boost/units/experimental/sort.hpp>
+
 namespace boost {
 
 namespace units {
@@ -444,77 +446,6 @@ struct find_base_dimensions_impl<0> {
     struct apply {
         typedef mpl::set0<> type;
     };
-};
-
-template<bool second_is_less>
-struct bubble_sort_conditional_swap;
-
-template<>
-struct bubble_sort_conditional_swap<true> {
-    template<class T0, class T1>
-    struct apply {
-        typedef T1 first;
-        typedef T0 second;
-    };
-};
-
-template<>
-struct bubble_sort_conditional_swap<false> {
-    template<class T0, class T1>
-    struct apply {
-        typedef T0 first;
-        typedef T1 second;
-    };
-};
-
-template<int N>
-struct bubble_sort_pass_impl {
-    template<class Begin, class Current>
-    struct apply {
-        typedef typename mpl::deref<Begin>::type val;
-        typedef typename bubble_sort_conditional_swap<mpl::less<val, Current>::value>::template apply<Current, val> pair;
-        typedef typename bubble_sort_pass_impl<N-1>::template apply<typename mpl::next<Begin>::type, typename pair::second> next;
-        typedef typename mpl::push_front<typename next::type, typename pair::first>::type type;
-        enum { value = next::value || mpl::less<val, Current>::value };
-    };
-};
-
-template<>
-struct bubble_sort_pass_impl<0> {
-    template<class Begin, class Current>
-    struct apply {
-        typedef typename mpl::push_front<mpl::list0<>, Current>::type type;
-        enum { value = false };
-    };
-};
-
-template<bool>
-struct bubble_sort_impl;
-
-template<>
-struct bubble_sort_impl<true> {
-    template<class T>
-    struct apply {
-        typedef typename mpl::begin<T>::type begin;
-        typedef typename bubble_sort_pass_impl<mpl::size<T>::value - 1>::template apply<
-            typename mpl::next<begin>::type,
-            typename mpl::deref<begin>::type
-        > single_pass;
-        typedef typename bubble_sort_impl<(single_pass::value)>::template apply<typename single_pass::type>::type type;
-    };
-};
-
-template<>
-struct bubble_sort_impl<false> {
-    template<class T>
-    struct apply {
-        typedef T type;
-    };
-};
-
-template<class T>
-struct bubble_sort {
-    typedef typename bubble_sort_impl<((mpl::size<T>::value) > 1)>::template apply<T>::type type;
 };
 
 template<class T>

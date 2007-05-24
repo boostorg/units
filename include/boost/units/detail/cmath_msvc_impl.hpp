@@ -327,6 +327,7 @@ inline bool signbit(const Y& val)
     case _FPCLASS_PINF: return(false);
  
     }
+    return(false);
 }
 
 template<class Y>

@@ -32,6 +32,8 @@ Output:
 #include <boost/units/static_constant.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
+#include <boost/units/experimental/base_unit.hpp>
+#include <boost/units/experimental/make_system.hpp>
 
 #define BOOST_UNITS_CHECK_CLOSE(a, b) (BOOST_CHECK((std::abs((a) - (b)) < .0000001)))
 
@@ -59,9 +61,11 @@ typedef derived_dimension<length_dim,1,
 typedef derived_dimension<length_dim,3>::type volume_type;
 
 /// placeholder class defining test unit system
-struct system_tag : public ordinal<101> { };
+struct length_unit : base_unit<length_unit, length_type, 1> {};
+struct mass_unit : base_unit<mass_unit, mass_type, 2> {};
+struct time_unit : base_unit<time_unit, time_type, 3> {};
 
-typedef homogeneous_system<system_tag>  system;
+typedef make_system<length_unit, mass_unit, time_unit>::type system;
 
 /// unit typedefs
 typedef unit<dimensionless_type,system>     dimensionless;
@@ -93,20 +97,20 @@ BOOST_UNITS_STATIC_CONSTANT(meters_per_second,velocity);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);
 
-template<> struct base_unit_info<length_dim,system_tag>
+template<> struct base_unit_info<length_unit>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct base_unit_info<mass_dim,system_tag>
+template<> struct base_unit_info<mass_unit>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct base_unit_info<time_dim,system_tag>
+template<> struct base_unit_info<time_unit>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

@@ -27,6 +27,7 @@
 #include <boost/units/get_system.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/conversion.hpp>
 
 namespace boost {
 
@@ -57,9 +58,10 @@ struct is_non_narrowing_conversion :
     >
 {};
 
-}
+template<>
+struct is_non_narrowing_conversion<long double, double> : mpl::false_ {};
 
-template<class Q1,class Q2> class conversion_helper;
+}
  
 /// class declaration
 template<class Unit,class Y = double>

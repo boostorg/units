@@ -27,8 +27,8 @@ Output:
 1 m kg s^-2
 1 kg s^-2
 
-1 kg s^-2 cm
-1 m^-1 kg s^-2 cm
+1 cm kg s^-2
+1 cm m^-1 kg s^-2
 
 0.015 m^2
 
@@ -46,8 +46,8 @@ Output:
 #include <boost/units/detail/utility.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>
-#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
-#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
+//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
+//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
 
 using namespace boost::units;
 
@@ -85,8 +85,8 @@ int main()
              << "1 m kg s^-2" << std::endl
              << "1 kg s^-2" << std::endl
              << std::endl
-             << "1 kg s^-2 cm" << std::endl
-             << "1 m^-1 kg s^-2 cm" << std::endl
+             << "1 cm kg s^-2" << std::endl
+             << "1 cm m^-1 kg s^-2" << std::endl
              << std::endl
              << "0.015 m^2" << std::endl
              << std::endl;

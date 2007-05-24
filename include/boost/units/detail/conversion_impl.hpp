@@ -24,64 +24,11 @@
 #include <boost/mpl/size.hpp>
 
 #include <boost/units/static_rational.hpp>
+#include <boost/units/experimental/one.hpp>
 
 namespace boost {
 
 namespace units {
-
-struct one { };
-
-template<class T>
-struct multiply_typeof_helper<one, T>
-{
-    typedef T type;
-};
-
-template<class T>
-struct multiply_typeof_helper<T, one>
-{
-    typedef T type;
-};
-
-template<>
-struct multiply_typeof_helper<one, one>
-{
-    typedef one type;
-};
-
-template<class T>
-inline T operator*(const one&, const T& t)
-{
-    return(t);
-}
-
-template<class T>
-inline T operator*(const T& t, const one&)
-{
-    return(t);
-}
-
-inline one operator*(const one&, const one&)
-{
-    return(one());
-}
-
-template<class T>
-inline T operator/(const T& t, const one&)
-{
-    return(t);
-}
-
-template<class T>
-inline T operator/(const one&, const T& t)
-{
-    return(1/t);
-}
-
-inline one operator/(const one&, const one&)
-{
-    return(one());
-}
 
 // tag class to indicate that implicit conversions are allowed
 struct implicitly_convertible { };

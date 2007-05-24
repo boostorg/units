@@ -70,8 +70,8 @@ std::atan(tan(thetar)) = 0.523599
 #include <boost/units/systems/si/plane_angle.hpp>
 #include <boost/units/systems/trig.hpp>
 
-#include <boost/units/systems/conversions/convert_degrees_to_radians.hpp>
-#include <boost/units/systems/conversions/convert_gradians_to_radians.hpp>
+//#include <boost/units/systems/conversions/convert_degrees_to_radians.hpp>
+//#include <boost/units/systems/conversions/convert_gradians_to_radians.hpp>
 
 int main(void)
 {

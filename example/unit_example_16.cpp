@@ -51,9 +51,17 @@ namespace units {
 namespace nautical {
 
 /// placeholder class defining nautical unit system
-struct system_tag : public ordinal<100> { };
+//struct system_tag : public ordinal<100> { };
 
-typedef homogeneous_system<system_tag>  system;
+//typedef homogeneous_system<system_tag>  system;
+
+struct length_base_unit : base_unit<length_base_unit, length_type, 1>
+{
+    static std::string name()       { return "nautical mile"; }
+    static std::string symbol()     { return "nmi"; }
+};
+
+typedef make_system<length_base_unit>::type system;
 
 /// unit typedefs
 typedef unit<length_type,system>            length;
@@ -62,31 +70,35 @@ static const length mile,miles;
 
 } // namespace nautical
 
-// IO helper class
-template<> 
-struct base_unit_info<length_dim,nautical::system_tag> 
-{ 
-    static std::string name()       { return "nautical mile"; }
-    static std::string symbol()     { return "nmi"; }
-};
-
 // helper for conversions between nautical length and SI length
-template<>
-struct base_unit_converter<length_dim,nautical::system_tag,SI::system_tag> :
-    public trivial_conversion, trivial_inverse_conversion
-{
-    typedef double type;
-    static type value() { return 1.852e3; }
-};
+
+} // namespace units
+
+} // namespace boost
+
+BOOST_UNITS_DEFINE_CONVERSION(boost::units::nautical::length_base_unit, boost::units::meter_tag::unit_type, double, 1.852e3);
+
+namespace boost {
+
+namespace units {
+
 //]
 
 //[unit_example_16_class_snippet_2
 namespace imperial {
 
-/// placeholder class defining imperial unit system
-struct system_tag : public ordinal<101> { };
+///// placeholder class defining imperial unit system
+//struct system_tag : public ordinal<101> { };
+//
+//typedef homogeneous_system<system_tag>  system;
 
-typedef homogeneous_system<system_tag>  system;
+struct length_base_unit : base_unit<length_base_unit, length_type, 2>
+{
+    static std::string name()       { return "foot"; }
+    static std::string symbol()     { return "ft"; }
+};
+
+typedef make_system<length_base_unit>::type system;
 
 /// unit typedefs
 typedef unit<length_type,system>            length;
@@ -95,28 +107,16 @@ static const length foot,feet;
 
 } // imperial
 
-// IO helper class
-template<> 
-struct base_unit_info<length_dim,imperial::system_tag> 
-{ 
-    static std::string name()       { return "foot"; }
-    static std::string symbol()     { return "ft"; }
-};
+} // namespace units
 
-// helpers for conversions between imperial length and SI length
-template<>
-struct base_unit_converter<length_dim,imperial::system_tag,SI::system_tag>
-{
-    typedef double type;
-    static type value() { return 1.0/3.28083989501312; }
-};
+} // namespace boost
 
-template<>
-struct base_unit_converter<length_dim,SI::system_tag,imperial::system_tag>
-{
-    typedef double type;
-    static type value() { return 3.28083989501312; }
-};
+BOOST_UNITS_DEFINE_CONVERSION(boost::units::imperial::length_base_unit, boost::units::meter_tag::unit_type, double, 1.0/3.28083989501312);
+
+namespace boost {
+
+namespace units {
+
 //]
 
 // radar beam height functions
@@ -149,7 +149,7 @@ radar_beam_height(const quantity<unit<length_type,System1>,T>& radar_range,
 //[unit_example_16_function_snippet_3
 quantity<imperial::length> radar_beam_height(const quantity<nautical::length>& range)
 {
-    return pow<2>(range/(1.23*nautical::miles/root<2>(imperial::feet)));
+    return quantity<imperial::length>(pow<2>(range/(1.23*nautical::miles/root<2>(imperial::feet))));
 }
 //]
 

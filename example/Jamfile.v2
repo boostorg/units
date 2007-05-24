@@ -9,6 +9,8 @@
 
 UNITS_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. <warnings>all ;
 
+ECHO $(BOOST_ROOT)/libs/serialization/build//boost_serialization ;
+
 import testing ;
 
 {
@@ -37,7 +39,7 @@ import testing ;
     [ run unit_example_17.cpp : : : $(UNITS_REQUIREMENTS) : ]
     [ run unit_example_18.cpp : : : $(UNITS_REQUIREMENTS) : ]
     [ run unit_example_19.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_20.cpp $(BOOST_ROOT)/libs/regex/build//boost_regex : : : $(UNITS_REQUIREMENTS) <define>BOOST_REGEX_NO_LIB : ]
+    [ run unit_example_20.cpp : : : $(UNITS_REQUIREMENTS) : ]
     [ run unit_example_21.cpp : : : $(UNITS_REQUIREMENTS) : ]
     [ run unit_example_22.cpp : : : $(UNITS_REQUIREMENTS) : ]
    ;

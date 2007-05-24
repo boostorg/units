@@ -24,14 +24,14 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
-#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
-#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
+//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
+//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
 
 namespace bu = boost::units;
 
 template<class System>
 bu::quantity<bu::unit<bu::energy_type, System> > f(bu::quantity<bu::unit<bu::length_type, System> > l) {
-    return(bu::quantity_cast<bu::unit<bu::energy_type, System> >(f(bu::quantity_cast<bu::SI::length>(l))));
+    return(static_cast<bu::quantity<bu::unit<bu::energy_type, System> > >(f(static_cast<bu::quantity<bu::SI::length> >(l))));
 }
 bu::quantity<bu::SI::energy> f(bu::quantity<bu::SI::length> l) {
     return(l * l * 2.0 * bu::SI::kilograms / bu::pow<2>(bu::SI::seconds));

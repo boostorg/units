@@ -52,9 +52,7 @@ namespace units {
 
 namespace fahrenheit {
 
-struct system_tag : public ordinal<110> { };
-
-typedef homogeneous_system<system_tag>  system;
+typedef make_system<fahrenheit_tag>::type  system;
 
 typedef unit<temperature_type,system>                   temperature;
 
@@ -62,12 +60,6 @@ BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // fahrenheit
-
-template<> struct base_unit_info<temperature_dim,fahrenheit::system_tag>
-{
-    static std::string name()               { return "Fahrenheit"; }
-    static std::string symbol()             { return "F"; }
-};
 
 template<>
 struct is_implicitly_convertible< unit<temperature_type,fahrenheit::system>,
