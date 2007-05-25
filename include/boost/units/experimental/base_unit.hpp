@@ -41,8 +41,8 @@ template<class Derived,
          class Dim,
          long N,
          class = typename detail::ordinal_has_already_been_defined<
-             sizeof(boost_units_is_registered(units::base_unit_ordinal<N>())) == sizeof(detail::yes) &&
-             sizeof(boost_units_is_registered(units::base_unit_pair<Derived, N>())) != sizeof(detail::yes)
+             sizeof(boost_units_unit_is_registered(units::base_unit_ordinal<N>())) == sizeof(detail::yes) &&
+             sizeof(boost_units_unit_is_registered(units::base_unit_pair<Derived, N>())) != sizeof(detail::yes)
          >::type>
 class base_unit : 
     public mpl::long_<N> 
@@ -71,13 +71,13 @@ class base_unit :
         /// Register this ordinal
         /// INTERNAL ONLY
         friend detail::yes 
-        boost_units_is_registered(const units::base_unit_ordinal<N>&) 
+        boost_units_unit_is_registered(const units::base_unit_ordinal<N>&) 
         { return(detail::yes()); }
         
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
         friend detail::yes 
-        boost_units_is_registered(const units::base_unit_pair<Derived, N>&) 
+        boost_units_unit_is_registered(const units::base_unit_pair<Derived, N>&) 
         { return(detail::yes()); }
 };
 

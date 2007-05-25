@@ -47,7 +47,7 @@ struct scale {
 
 template<long Base>
 struct scale<Base, static_rational<0> > {
-    enum { base = Base };
+    static const long base = Base;
     typedef static_rational<0> exponent;
     typedef one value_type;
     static one value() { return(one()); }
@@ -59,7 +59,7 @@ struct scale<Base, static_rational<0> > {
 template<>                                                                  \
 struct scale<base_, exponent_>                                              \
 {                                                                           \
-    enum { base = base_ };                                                  \
+    static const long base = base_;                                         \
     typedef exponent_ exponent;                                             \
     typedef double value_type;                                              \
     static value_type value() { return(val); }                              \
@@ -67,30 +67,30 @@ struct scale<base_, exponent_>                                              \
     static std::string symbol_prefix() { return(#symbol); }                 \
 }
 
-#define BOOST_UNITS_SCALE_DEF(exponent,name,symbol) \
-    BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent>,1e ## exponent, name, symbol)
+#define BOOST_UNITS_SCALE_DEF(exponent,value,name,symbol) \
+    BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent>,value, name, symbol)
 
-BOOST_UNITS_SCALE_DEF(-24, yocto, y);
-BOOST_UNITS_SCALE_DEF(-21, zepto, z);
-BOOST_UNITS_SCALE_DEF(-18, atto, a);
-BOOST_UNITS_SCALE_DEF(-15, femto, f);
-BOOST_UNITS_SCALE_DEF(-12, pico, p);
-BOOST_UNITS_SCALE_DEF(-9, nano, n);
-BOOST_UNITS_SCALE_DEF(-6, micro, u);
-BOOST_UNITS_SCALE_DEF(-3, milli, m);
-BOOST_UNITS_SCALE_DEF(-2, centi, c);
-BOOST_UNITS_SCALE_DEF(-1, deci, d);
+BOOST_UNITS_SCALE_DEF(-24, 1e-24 ,yocto, y);
+BOOST_UNITS_SCALE_DEF(-21, 1e-21, zepto, z);
+BOOST_UNITS_SCALE_DEF(-18, 1e-18, atto, a);
+BOOST_UNITS_SCALE_DEF(-15, 1e-15, femto, f);
+BOOST_UNITS_SCALE_DEF(-12, 1e-12, pico, p);
+BOOST_UNITS_SCALE_DEF(-9, 1e-9, nano, n);
+BOOST_UNITS_SCALE_DEF(-6, 1e-6, micro, u);
+BOOST_UNITS_SCALE_DEF(-3, 1e-3, milli, m);
+BOOST_UNITS_SCALE_DEF(-2, 1e-2, centi, c);
+BOOST_UNITS_SCALE_DEF(-1, 1e-1, deci, d);
 
-BOOST_UNITS_SCALE_DEF(1, deka, da);
-BOOST_UNITS_SCALE_DEF(2, hecto, h);
-BOOST_UNITS_SCALE_DEF(3, kilo, k);
-BOOST_UNITS_SCALE_DEF(6, mega, M);
-BOOST_UNITS_SCALE_DEF(9, giga, G);
-BOOST_UNITS_SCALE_DEF(12, tera, T);
-BOOST_UNITS_SCALE_DEF(15, peta, P);
-BOOST_UNITS_SCALE_DEF(18, exa, E);
-BOOST_UNITS_SCALE_DEF(21, zetta, Z);
-BOOST_UNITS_SCALE_DEF(24, yotta, Y);
+BOOST_UNITS_SCALE_DEF(1, 1e1, deka, da);
+BOOST_UNITS_SCALE_DEF(2, 1e2, hecto, h);
+BOOST_UNITS_SCALE_DEF(3, 1e3, kilo, k);
+BOOST_UNITS_SCALE_DEF(6, 1e6, mega, M);
+BOOST_UNITS_SCALE_DEF(9, 1e9, giga, G);
+BOOST_UNITS_SCALE_DEF(12, 1e12, tera, T);
+BOOST_UNITS_SCALE_DEF(15, 1e15, peta, P);
+BOOST_UNITS_SCALE_DEF(18, 1e18, exa, E);
+BOOST_UNITS_SCALE_DEF(21, 1e21, zetta, Z);
+BOOST_UNITS_SCALE_DEF(24, 1e24, yotta, Y);
 
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<10>, 1024.0, kibi, Ki);
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<20>, 1048576.0, mebi, Mi);
@@ -102,13 +102,13 @@ BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<60>, 1152921504606846976.0, 
 #undef BOOST_UNITS_SCALE_DEF
 #undef BOOST_UNITS_SCALE_SPECIALIZATION
 
-struct scaled_system_tag {};
+struct scaled_base_unit_tag {};
 
 template<class S, class Scale>
-struct scaled_system
+struct scaled_base_unit
 {
-    typedef scaled_system type;
-    typedef scaled_system_tag tag;
+    typedef scaled_base_unit type;
+    typedef scaled_base_unit_tag tag;
     typedef S system_type;
     typedef Scale scale_type;
     typedef typename S::dimension_type dimension_type;
@@ -117,7 +117,7 @@ struct scaled_system
         heterogeneous_system<
             heterogeneous_system_pair<
                 dimension_list<
-                    heterogeneous_system_dim<scaled_system,static_rational<1> >,
+                    heterogeneous_system_dim<scaled_base_unit,static_rational<1> >,
                     dimensionless_type
                 >,
                 dimension_type
@@ -142,7 +142,7 @@ struct scaled_system
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
 BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::scale, (long)(class))
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::scaled_system, (class)(class))
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::scaled_base_unit, (class)(class))
 
 #endif
 
@@ -156,7 +156,7 @@ struct unscale {
 };
 
 template<class S, class Scale>
-struct unscale<scaled_system<S, Scale> > {
+struct unscale<scaled_base_unit<S, Scale> > {
     typedef S type;
 };
 
@@ -177,7 +177,7 @@ struct get_scale_list {
 };
 
 template<class S, class Scale>
-struct get_scale_list<scaled_system<S, Scale> > {
+struct get_scale_list<scaled_base_unit<S, Scale> > {
     typedef dimension_list<scale_list_dim<Scale>, dimensionless_type> type;
 };
 
@@ -273,7 +273,7 @@ struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rati
 };
 
 template<class Tag>
-struct less_impl<boost::units::scaled_system_tag, Tag> {
+struct less_impl<boost::units::scaled_base_unit_tag, Tag> {
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<typename T0::system_type, T1>::value) ||
@@ -282,7 +282,7 @@ struct less_impl<boost::units::scaled_system_tag, Tag> {
 };
 
 template<class Tag>
-struct less_impl<Tag, boost::units::scaled_system_tag> {
+struct less_impl<Tag, boost::units::scaled_base_unit_tag> {
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<T0, typename T1::system_type>::value) ||
@@ -291,7 +291,7 @@ struct less_impl<Tag, boost::units::scaled_system_tag> {
 };
 
 template<>
-struct less_impl<boost::units::scaled_system_tag, boost::units::scaled_system_tag> {
+struct less_impl<boost::units::scaled_base_unit_tag, boost::units::scaled_base_unit_tag> {
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<typename T0::system_type, typename T1::system_type>::value) ||

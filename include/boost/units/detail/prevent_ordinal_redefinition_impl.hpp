@@ -41,6 +41,11 @@ detail::no
 boost_units_is_registered(const T&) 
 { return(detail::no()); }
 
+template<class T>
+detail::no 
+boost_units_unit_is_registered(const T&) 
+{ return(detail::no()); }
+
 } // namespace units
 
 } // namespace boost

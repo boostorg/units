@@ -152,7 +152,7 @@ struct make_system {
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::homogeneous_system, (class));
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::homogeneous_system, (class))
 
 #endif
 

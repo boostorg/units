@@ -61,9 +61,9 @@ typedef derived_dimension<length_dim,1,
 typedef derived_dimension<length_dim,3>::type volume_type;
 
 /// placeholder class defining test unit system
-struct length_unit : base_unit<length_unit, length_type, 1> {};
-struct mass_unit : base_unit<mass_unit, mass_type, 2> {};
-struct time_unit : base_unit<time_unit, time_type, 3> {};
+struct length_unit : base_unit<length_unit, length_type, 4> {};
+struct mass_unit : base_unit<mass_unit, mass_type, 5> {};
+struct time_unit : base_unit<time_unit, time_type, 6> {};
 
 typedef make_system<length_unit, mass_unit, time_unit>::type system;
 

@@ -23,7 +23,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/detail/push_front_if.hpp>
-#include <boost/units/experimental/scaled_system.hpp>
+#include <boost/units/experimental/scaled_base_unit.hpp>
 #include <boost/units/experimental/linear_algebra.hpp>
 
 namespace boost {

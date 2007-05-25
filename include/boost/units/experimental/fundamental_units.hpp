@@ -15,7 +15,7 @@
 
 #include <boost/units/systems/physical_units.hpp>
 #include <boost/units/experimental/base_unit.hpp>
-#include <boost/units/experimental/scaled_system.hpp>
+#include <boost/units/experimental/scaled_base_unit.hpp>
 
 namespace boost {
 
@@ -41,13 +41,13 @@ struct mile_tag : public base_unit<mile_tag, length_type, -16> {
     static std::string name() { return("mile"); }
     static std::string symbol() { return("mi"); }
 };
-typedef scaled_system<meter_tag, scale<10, static_rational<-2> > > centimeter_tag;
+typedef scaled_base_unit<meter_tag, scale<10, static_rational<-2> > > centimeter_tag;
 
 struct gram_tag : public base_unit<gram_tag, mass_type, -15> {
     static std::string name() { return("gram"); }
     static std::string symbol() { return("g"); }
 };
-typedef scaled_system<gram_tag, scale<10, static_rational<3> > > kilogram_tag;
+typedef scaled_base_unit<gram_tag, scale<10, static_rational<3> > > kilogram_tag;
 
 struct second_tag : public base_unit<second_tag, time_type, -14> {
     static std::string name() { return("second"); }

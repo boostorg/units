@@ -18,7 +18,7 @@
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/divides.hpp>
 
-#include <boost/units/experimental/scaled_system.hpp>
+#include <boost/units/experimental/scaled_base_unit.hpp>
 #include <boost/units/experimental/make_system.hpp>
 #include <boost/units/experimental/heterogeneous_system.hpp>
 #include <boost/units/experimental/one.hpp>
@@ -52,7 +52,7 @@ struct base_unit_converter {
     typedef typename mpl::divides<typename get_scale_list<Source>::type, typename get_scale_list<source_type>::type>::type source_factor;
     typedef typename mpl::divides<typename get_scale_list<Destination>::type, typename get_scale_list<destination_type>::type>::type destination_factor;
     typedef typename mpl::divides<source_factor, destination_factor>::type factor;
-    typedef typename eval_scale_list<factor> eval_factor;
+    typedef eval_scale_list<factor> eval_factor;
     typedef typename multiply_typeof_helper<typename converter::type, typename eval_factor::type>::type type;
     static type value() {
         return(converter::value() * eval_factor::value());
@@ -73,7 +73,7 @@ struct inverse_base_unit_converter_impl<false, false> {
         typedef typename mpl::divides<typename get_scale_list<Source>::type, typename get_scale_list<source_type>::type>::type source_factor;
         typedef typename mpl::divides<typename get_scale_list<Destination>::type, typename get_scale_list<destination_type>::type>::type destination_factor;
         typedef typename mpl::divides<source_factor, destination_factor>::type factor;
-        typedef typename eval_scale_list<factor> eval_factor;
+        typedef eval_scale_list<factor> eval_factor;
         typedef typename multiply_typeof_helper<typename converter::type, typename eval_factor::type>::type type;
         static type value() {
             return(converter::value() * eval_factor::value());

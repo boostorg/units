@@ -485,7 +485,7 @@ struct calculate_base_dimension_coefficients_func<false> {
     template<class T>
     struct apply {
         typedef static_rational<0> type;
-        typedef typename T next;
+        typedef T next;
     };
 };
 
@@ -759,7 +759,7 @@ struct normalize_units_func<inconsistant> {
         // equation can always be adjusted by adjusting the
         // dummy unit we are adding now, independently of
         // other units, we don't need it anymore.)
-        typedef typename typename mpl::advance_c<typename mpl::begin<ReverseEquations>::type, M>::type pos;
+        typedef typename mpl::advance_c<typename mpl::begin<ReverseEquations>::type, M>::type pos;
         // Continue with the main loop.
         typedef typename normalize_units_impl<N-1>::template apply<
             // Remove current_equation
@@ -1022,7 +1022,7 @@ struct strip_zeroes_impl<0> {
 template<class T, class Dimensions>
 struct calculate_base_unit_exponents {
     // find the units that correspond to each base dimension
-    typedef typename normalize_units<T> base_solutions;
+    typedef normalize_units<T> base_solutions;
     // pad the dimension with zeroes so it can just be a
     // list of numbers, making the multiplication easy
     // e.g. if the arguments are list<pound, foot> and
