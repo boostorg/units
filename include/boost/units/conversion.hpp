@@ -216,13 +216,68 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
     }
 };
 
-template<class Y,class FromUnit,class ToUnit>
+namespace detail {
+
+template<class Source, class Dest>
+struct conversion_factor_helper;
+
+template<class D, class L1, class L2>
+struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, homogeneous_system<L2> > > {
+    typedef typename reduce_unit<unit<D, homogeneous_system<L1> > >::type source_unit;
+    typedef typename source_unit::system_type::type unit_list;
+    typedef typename detail::conversion_impl<mpl::size<unit_list>::value>::template apply<
+        typename mpl::begin<unit_list>::type,
+        homogeneous_system<L2>
+    > impl;
+    typedef typename impl::type type;
+    static type value() {
+        return(impl::value());
+    }
+};
+
+template<class D, class L1, class L2>
+struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homogeneous_system<L2> > > {
+    typedef typename detail::conversion_impl<mpl::size<typename L1::type>::value>::template apply<
+        typename mpl::begin<typename L1::type>::type,
+        homogeneous_system<L2>
+    > impl;
+    typedef typename impl::type type;
+    static type convert() {
+        return(impl::value());
+    }
+};
+
+// There is no simple algorithm for doing this conversion
+// other than just defining it as the reverse of the
+// heterogeneous->homogeneous case
+template<class D, class L1, class L2>
+struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, heterogeneous_system<L2> > > {
+    typedef typename detail::conversion_impl<mpl::size<typename L2::type>::value>::template apply<
+        typename mpl::begin<typename L2::type>::type,
+        homogeneous_system<L1>
+    > impl;
+    typedef typename impl::type type;
+    static type value() {
+        return(one() / impl::value());
+    }
+};
+
+}
+
+template<class FromUnit,class ToUnit>
+inline
+typename detail::conversion_factor_helper<FromUnit, ToUnit>::type
+conversion_factor(const FromUnit&,const ToUnit&)
+{
+    return(detail::conversion_factor_helper<FromUnit, ToUnit>::value());
+}
+
+template<class Y, class FromUnit,class ToUnit>
 inline
 Y
 conversion_factor(const FromUnit&,const ToUnit&)
 {
-    // dangerous if conversion is not regular...don't know how to deal with this yet
-    return quantity<ToUnit,Y>(Y(1)*FromUnit()).value();
+    return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
 }
 
 } //namespace units

@@ -67,16 +67,13 @@ struct is_non_narrowing_conversion<long double, double> : mpl::false_ {};
 template<class Unit,class Y = double>
 class quantity
 {
+        enum { force_instantiation_of_unit = sizeof(Unit) };
     public:
         typedef quantity<Unit,Y>                        this_type;
         
         typedef Y                                       value_type;
-        typedef typename get_system<Unit>::type         system_type;
-        typedef typename get_dimension<Unit>::type      dimension_type;
-        typedef unit<dimension_type,system_type>        unit_type;
-
-        BOOST_STATIC_ASSERT((detail::check_system<system_type,dimension_type>::value == true));
-         
+        typedef Unit        unit_type;
+ 
         quantity() : val_() 
         { 
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -100,7 +97,7 @@ class quantity
 
         /// implicit conversion between value types is allowed if allowed for value types themselves
         template<class YY>
-        quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+        quantity(const quantity<Unit,YY>& source,
             typename boost::enable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
             val_(source.value())
         { 
@@ -109,7 +106,7 @@ class quantity
 
         /// implicit conversion between value types is not allowed if not allowed for value types themselves
         template<class YY>
-        explicit quantity(const quantity<unit<dimension_type,system_type>,YY>& source,
+        explicit quantity(const quantity<Unit,YY>& source,
             typename boost::disable_if<detail::is_non_narrowing_conversion<YY, Y> >::type* = 0) :
             val_(static_cast<Y>(source.value()))
         { 
@@ -120,7 +117,7 @@ class quantity
 
         /// implicit conversion between value types is allowed if allowed for value types themselves
         template<class YY>
-        quantity(const quantity<unit<dimension_type,system_type>,YY>& source) :
+        quantity(const quantity<Unit,YY>& source) :
             val_(source.value())
         { 
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -131,7 +128,7 @@ class quantity
         
         /// implicit assignment between value types is allowed if allowed for value types themselves
         template<class YY>
-        this_type& operator=(const quantity<unit<dimension_type,system_type>,YY>& source)
+        this_type& operator=(const quantity<Unit,YY>& source)
         {
             BOOST_STATIC_ASSERT((boost::is_convertible<YY, Y>::value == true));
 
@@ -143,31 +140,33 @@ class quantity
         #ifndef BOOST_NO_SFINAE
 
         /// explicit conversion between different unit systems is allowed if implicit conversion is disallowed
-        template<class System2,class Dim2,class YY> 
+        template<class Unit2,class YY> 
         explicit
-        quantity(const quantity<unit<Dim2,System2>,YY>& source, 
+        quantity(const quantity<Unit2,YY>& source, 
                  typename boost::disable_if<
                     mpl::and_<
-                        is_implicitly_convertible<unit<Dim2,System2>,unit_type>,
+                        //is_implicitly_convertible should be undefined when the
+                        //units are not convertible at all
+                        typename is_implicitly_convertible<Unit2,Unit>::type,
                         detail::is_non_narrowing_conversion<YY, Y>
                     >
                  >::type* = 0)
-             : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
+             : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
         }
 
         /// implicit conversion between different unit systems is allowed if each fundamental dimension is implicitly convertible
-        template<class System2,class Dim2,class YY> 
-        quantity(const quantity<unit<Dim2,System2>,YY>& source, 
+        template<class Unit2,class YY> 
+        quantity(const quantity<Unit2,YY>& source, 
                  typename boost::enable_if<
                      mpl::and_<
-                         is_implicitly_convertible<unit<Dim2,System2>,unit_type>,
+                         typename is_implicitly_convertible<Unit2,Unit>::type,
                          detail::is_non_narrowing_conversion<YY, Y>
                      >
                  >::type* = 0)
-             : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
+             : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
@@ -177,9 +176,9 @@ class quantity
 
         /// without SFINAE we can't distinguish between explicit and implicit conversions so 
         /// the conversion is always explicit
-        template<class System2,class Dim2,class YY> 
-        explicit quantity(const quantity<unit<Dim2,System2>,YY>& source)
-             : val_(conversion_helper<quantity<unit<Dim2,System2>,YY>,this_type>::convert(source).value())
+        template<class Unit2,class YY> 
+        explicit quantity(const quantity<Unit2,YY>& source)
+             : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
@@ -188,13 +187,11 @@ class quantity
         #endif
         
         /// implicit assignment between different unit systems is allowed if each fundamental dimension is implicitly convertible 
-        template<class System2,class Dim2,class YY>
-        this_type& operator=(const quantity<unit<Dim2,System2>,YY>& source)
+        template<class Unit2,class YY>
+        this_type& operator=(const quantity<Unit2,YY>& source)
         {
-            typedef unit_type                       unit1_type;
-            typedef unit<Dim2,System2>              unit2_type;
             
-            BOOST_STATIC_ASSERT((is_implicitly_convertible<unit2_type,unit1_type>::value == true));
+            BOOST_STATIC_ASSERT((is_implicitly_convertible<Unit2,unit_type>::value == true));
             BOOST_STATIC_ASSERT((boost::is_convertible<YY,Y>::value == true));
             
             *this = this_type(source);
@@ -454,75 +451,6 @@ inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
     using std::swap;
     swap(quantity_cast<Y&>(lhs),quantity_cast<Y&>(rhs));
 }
-//
-///// utility class to simplify construction of dimensionless quantities
-//template<class System,class Y>
-//struct dimensionless_quantity
-//{
-//    typedef quantity<typename dimensionless_unit<System>::type,Y>   type;
-//};
-//
-///// check that a type is a quantity
-//template<typename T>
-//struct is_quantity :
-//    public mpl::false_
-//{ };
-//
-//template<class Unit,
-//         class Y>
-//struct is_quantity< quantity<Unit,Y> > : 
-//    public mpl::true_
-//{ };
-//
-///// check that a type is a quantity of the specified dimension
-//template<class T,class Dim>
-//struct is_quantity_of_dimension :
-//    public mpl::false_
-//{ };
-//
-//template<class Dim,class System,class Y>
-//struct is_quantity_of_dimension< quantity< unit<Dim,System>,Y>,Dim > :
-//    public mpl::true_
-//{ };
-//
-///// check that a type is a dimensionless quantity
-//template<class T>
-//struct is_dimensionless_quantity :
-//    public is_quantity_of_dimension<T,dimensionless_type>
-//{ };
-//
-///// check that a type is a quantity in a specified system
-//template<class T,class System>
-//struct is_quantity_of_system :
-//    public mpl::false_
-//{ };
-//
-//template<class Dim,
-//         class System,
-//         class Y>
-//struct is_quantity_of_system< quantity< unit<Dim,System>,Y>,System > :
-//    public mpl::true_
-//{ };
-//
-///// check that a type is dimensionless
-//template<class System,class Y>
-//struct is_dimensionless< quantity<unit<dimensionless_type,System>,Y> > :
-//    public mpl::true_
-//{ };
-//
-///// get dimension
-//template<class Unit,class Y>
-//struct get_dimension< quantity<Unit,Y> >
-//{
-//    typedef typename get_dimension<Unit>::type  type;
-//};
-//
-///// get system
-//template<class Unit,class Y>
-//struct get_system< quantity<Unit,Y> >
-//{
-//    typedef typename get_system<Unit>::type     type;
-//};
 
 /// specialize unary plus typeof helper
 template<class Unit,class Y>

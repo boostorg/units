@@ -14,10 +14,10 @@
 #include <string>
 
 #include <boost/units/absolute.hpp>
-#include <boost/units/io.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/system.hpp>
+#include <boost/units/make_system.hpp>
 #include <boost/units/systems/physical_units.hpp>
+#include <boost/units/systems/base_units.hpp>
 
 namespace boost {
 
@@ -25,9 +25,7 @@ namespace units {
 
 namespace celsius {
 
-struct system_tag : public ordinal<111> { };
-
-typedef homogeneous_system<system_tag>  system;
+typedef make_system<celsius_tag>::type system;
 
 typedef unit<temperature_type,system>   temperature;
 
@@ -35,12 +33,6 @@ BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // namespace celsius
-
-template<> struct base_unit_info<temperature_dim,celsius::system_tag>
-{
-    static std::string name()               { return "Celsius"; }
-    static std::string symbol()             { return "C"; }
-};
         
 } // namespace units
 

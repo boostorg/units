@@ -44,6 +44,8 @@ Output:
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/detail/utility.hpp>
 
+BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::fahrenheit_tag::unit_type, boost::units::kelvin_tag::unit_type, double, 273.15 + 5.0 / 9.0 * 32.0);
+
 using namespace boost::units;
 
 namespace boost {
@@ -67,47 +69,53 @@ struct is_implicitly_convertible< unit<temperature_type,fahrenheit::system>,
     public mpl::true_
 { };
 
-template<class Y>
-class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,absolute<Y> >,
-                         quantity<unit<temperature_type,SI::system>,absolute<Y> > >
-{
-    public:
-        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-        typedef unit<temperature_type,SI::system>           unit2_type;
-        
-        typedef quantity<unit1_type,absolute<Y> >           from_quantity_type;
-        typedef quantity<unit2_type,absolute<Y> >           to_quantity_type;
+template<>
+struct is_implicitly_convertible<absolute< unit<temperature_type,fahrenheit::system> >,
+                                  absolute< unit<temperature_type,SI::system> > > : 
+    public mpl::true_
+{ };
 
-        static
-        to_quantity_type
-        convert(const from_quantity_type& source)
-        {
-            const typename from_quantity_type::value_type&   in(source.value());
-            
-            return to_quantity_type::from_value((in.value()-32)*(5.0/9.0) + 273.15);
-        }
-};
-
-template<class Y>
-class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,Y>,
-                         quantity<unit<temperature_type,SI::system>,Y> >
-{
-    public:
-        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-        typedef unit<temperature_type,SI::system>           unit2_type;
-        
-        typedef quantity<unit1_type,Y>                      from_quantity_type;
-        typedef quantity<unit2_type,Y>                      to_quantity_type;
-
-        static
-        to_quantity_type
-        convert(const from_quantity_type& source)
-        {
-            const typename from_quantity_type::value_type&   in(source.value());
-            
-            return to_quantity_type::from_value(in*(5.0/9.0));
-        }
-};
+//template<class Y>
+//class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,absolute<Y> >,
+//                         quantity<unit<temperature_type,SI::system>,absolute<Y> > >
+//{
+//    public:
+//        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
+//        typedef unit<temperature_type,SI::system>           unit2_type;
+//        
+//        typedef quantity<unit1_type,absolute<Y> >           from_quantity_type;
+//        typedef quantity<unit2_type,absolute<Y> >           to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            const typename from_quantity_type::value_type&   in(source.value());
+//            
+//            return to_quantity_type::from_value((in.value()-32)*(5.0/9.0) + 273.15);
+//        }
+//};
+//
+//template<class Y>
+//class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,Y>,
+//                         quantity<unit<temperature_type,SI::system>,Y> >
+//{
+//    public:
+//        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
+//        typedef unit<temperature_type,SI::system>           unit2_type;
+//        
+//        typedef quantity<unit1_type,Y>                      from_quantity_type;
+//        typedef quantity<unit2_type,Y>                      to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            const typename from_quantity_type::value_type&   in(source.value());
+//            
+//            return to_quantity_type::from_value(in*(5.0/9.0));
+//        }
+//};
 
 } // namespace units
 
@@ -117,16 +125,16 @@ int main()
 {
     std::stringstream sstream1, sstream2;
     
-    quantity<fahrenheit::temperature,absolute<> >   T1p(absolute<>(32)*fahrenheit::degrees);
-    quantity<fahrenheit::temperature>               T1v(32*fahrenheit::degrees);
+    quantity<absolute<fahrenheit::temperature> >   T1p(32.0*absolute<fahrenheit::temperature>());
+    quantity<fahrenheit::temperature>               T1v(32.0*fahrenheit::degrees);
     
-    quantity<SI::temperature,absolute<> >           T2p(T1p);
-    quantity<SI::temperature,absolute<> >           T3p = T1p;
+    quantity<absolute<SI::temperature> >           T2p(T1p);
+    quantity<absolute<SI::temperature> >           T3p = T1p;
     quantity<SI::temperature>                       T2v(T1v);
     quantity<SI::temperature>                       T3v = T1v;
     
-    typedef conversion_helper<quantity<fahrenheit::temperature,absolute<> >,
-                              quantity<SI::temperature,absolute<> > >           absolute_conv_type;
+    typedef conversion_helper<quantity<absolute<fahrenheit::temperature> >,
+                              quantity<absolute<SI::temperature> > >           absolute_conv_type;
     typedef conversion_helper<quantity<fahrenheit::temperature,double>,
                               quantity<SI::temperature,double> >                relative_conv_type;
     
