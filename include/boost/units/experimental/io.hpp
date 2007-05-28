@@ -115,7 +115,7 @@ struct print_impl<0> {
 
 template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>&) {
-    os << reduce_unit<unit<Dimension, System> >::type();
+    os << typename reduce_unit<unit<Dimension, System> >::type();
     return(os);
 }
 

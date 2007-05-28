@@ -175,7 +175,7 @@ std::ostream& operator<<(std::ostream& os,const scaled_value< Y,Scale>& val)
     else
     {
 //      os << val.value() << " x " << val.base() << "^" << Exp;
-        os << val.value()*scale<(Scale::base), remainder_exponent>::value() << " x " << reduced_scale::base << "^" << reduced_scale::exponent();
+        os << val.value()*scale<(Scale::base), remainder_exponent>::value() << " x " << reduced_scale::base << "^" << typename reduced_scale::exponent();
 //        os << val.value()*std::pow(Y(val.base()),Y(remainder_exponent)) << " " << getShortPrefix(reduced_scale());
     }
     
@@ -271,7 +271,7 @@ scaled_value< Y,scale<Base,typename mpl::plus<Exp1,Exp2>::type> >
 operator*(const scaled_value< Y,scale<Base,Exp1> >& lhs,
           const scaled_value< Y,scale<Base,Exp2> >& rhs)
 {
-    return scaled_value< Y,scale<Base,mpl::plus<Exp1,Exp2>::type> >(lhs.value()*rhs.value());
+    return scaled_value< Y,scale<Base,typename mpl::plus<Exp1,Exp2>::type> >(lhs.value()*rhs.value());
 }
 
 template<class Y,long Base,class Exp1,class Exp2>
@@ -323,19 +323,19 @@ typedef scale<2,static_rational<60> > scale_2_60;
 
 } // namespace _
 
-BOOST_UNITS_STATIC_CONSTANT(kibi,_::scale_2_10);
-BOOST_UNITS_STATIC_CONSTANT(mebi,_::scale_2_20);
-BOOST_UNITS_STATIC_CONSTANT(gibi,_::scale_2_30);
-BOOST_UNITS_STATIC_CONSTANT(tebi,_::scale_2_40);
-BOOST_UNITS_STATIC_CONSTANT(pebi,_::scale_2_50);
-BOOST_UNITS_STATIC_CONSTANT(exbi,_::scale_2_60);
+BOOST_UNITS_STATIC_CONSTANT(kibi,_::scale_2_10) = {};
+BOOST_UNITS_STATIC_CONSTANT(mebi,_::scale_2_20) = {};
+BOOST_UNITS_STATIC_CONSTANT(gibi,_::scale_2_30) = {};
+BOOST_UNITS_STATIC_CONSTANT(tebi,_::scale_2_40) = {};
+BOOST_UNITS_STATIC_CONSTANT(pebi,_::scale_2_50) = {};
+BOOST_UNITS_STATIC_CONSTANT(exbi,_::scale_2_60) = {};
 
-BOOST_UNITS_STATIC_CONSTANT(Ki,_::scale_2_10);
-BOOST_UNITS_STATIC_CONSTANT(Mi,_::scale_2_20);
-BOOST_UNITS_STATIC_CONSTANT(Gi,_::scale_2_30);
-BOOST_UNITS_STATIC_CONSTANT(Ti,_::scale_2_40);
-BOOST_UNITS_STATIC_CONSTANT(Pi,_::scale_2_50);
-BOOST_UNITS_STATIC_CONSTANT(Ei,_::scale_2_60);
+BOOST_UNITS_STATIC_CONSTANT(Ki,_::scale_2_10) = {};
+BOOST_UNITS_STATIC_CONSTANT(Mi,_::scale_2_20) = {};
+BOOST_UNITS_STATIC_CONSTANT(Gi,_::scale_2_30) = {};
+BOOST_UNITS_STATIC_CONSTANT(Ti,_::scale_2_40) = {};
+BOOST_UNITS_STATIC_CONSTANT(Pi,_::scale_2_50) = {};
+BOOST_UNITS_STATIC_CONSTANT(Ei,_::scale_2_60) = {};
 
 } // namespace IEEE_1541
 
@@ -366,26 +366,26 @@ typedef scale<10,static_rational<24> >    scale_10_24;
 
 } // namespace _
 
-BOOST_UNITS_STATIC_CONSTANT(yocto,_::scale_10_m24);
-BOOST_UNITS_STATIC_CONSTANT(zepto,_::scale_10_m21);
-BOOST_UNITS_STATIC_CONSTANT(atto,_::scale_10_m18);
-BOOST_UNITS_STATIC_CONSTANT(femto,_::scale_10_m15);
-BOOST_UNITS_STATIC_CONSTANT(pico,_::scale_10_m12);
-BOOST_UNITS_STATIC_CONSTANT(nano,_::scale_10_m9);
-BOOST_UNITS_STATIC_CONSTANT(micro,_::scale_10_m6);
-BOOST_UNITS_STATIC_CONSTANT(milli,_::scale_10_m3);
-BOOST_UNITS_STATIC_CONSTANT(centi,_::scale_10_m2);
-BOOST_UNITS_STATIC_CONSTANT(deci,_::scale_10_m1);
-BOOST_UNITS_STATIC_CONSTANT(deka,_::scale_10_1);
-BOOST_UNITS_STATIC_CONSTANT(hecto,_::scale_10_2);
-BOOST_UNITS_STATIC_CONSTANT(kilo,_::scale_10_3);
-BOOST_UNITS_STATIC_CONSTANT(mega,_::scale_10_6);
-BOOST_UNITS_STATIC_CONSTANT(giga,_::scale_10_9);
-BOOST_UNITS_STATIC_CONSTANT(tera,_::scale_10_12);
-BOOST_UNITS_STATIC_CONSTANT(peta,_::scale_10_15);
-BOOST_UNITS_STATIC_CONSTANT(exa,_::scale_10_18);
-BOOST_UNITS_STATIC_CONSTANT(zetta,_::scale_10_21);
-BOOST_UNITS_STATIC_CONSTANT(yotta,_::scale_10_24);
+BOOST_UNITS_STATIC_CONSTANT(yocto,_::scale_10_m24) = {};
+BOOST_UNITS_STATIC_CONSTANT(zepto,_::scale_10_m21) = {};
+BOOST_UNITS_STATIC_CONSTANT(atto,_::scale_10_m18) = {};
+BOOST_UNITS_STATIC_CONSTANT(femto,_::scale_10_m15) = {};
+BOOST_UNITS_STATIC_CONSTANT(pico,_::scale_10_m12) = {};
+BOOST_UNITS_STATIC_CONSTANT(nano,_::scale_10_m9) = {};
+BOOST_UNITS_STATIC_CONSTANT(micro,_::scale_10_m6) = {};
+BOOST_UNITS_STATIC_CONSTANT(milli,_::scale_10_m3) = {};
+BOOST_UNITS_STATIC_CONSTANT(centi,_::scale_10_m2) = {};
+BOOST_UNITS_STATIC_CONSTANT(deci,_::scale_10_m1) = {};
+BOOST_UNITS_STATIC_CONSTANT(deka,_::scale_10_1) = {};
+BOOST_UNITS_STATIC_CONSTANT(hecto,_::scale_10_2) = {};
+BOOST_UNITS_STATIC_CONSTANT(kilo,_::scale_10_3) = {};
+BOOST_UNITS_STATIC_CONSTANT(mega,_::scale_10_6) = {};
+BOOST_UNITS_STATIC_CONSTANT(giga,_::scale_10_9) = {};
+BOOST_UNITS_STATIC_CONSTANT(tera,_::scale_10_12) = {};
+BOOST_UNITS_STATIC_CONSTANT(peta,_::scale_10_15) = {};
+BOOST_UNITS_STATIC_CONSTANT(exa,_::scale_10_18) = {};
+BOOST_UNITS_STATIC_CONSTANT(zetta,_::scale_10_21) = {};
+BOOST_UNITS_STATIC_CONSTANT(yotta,_::scale_10_24) = {};
 
 } // namespace metric
 
