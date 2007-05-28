@@ -14,14 +14,14 @@
 #include <boost/mpl/list/list10.hpp>
 
 #include <boost/units/config.hpp>
-#include <boost/units/experimental/sort.hpp>
+#include <boost/units/detail/sort.hpp>
 
 #ifdef BOOST_UNITS_CHECK_HOMOGENEOUS_UNITS
 
 #include <boost/is_same.hpp>
 #include <boost/mpl/not.hpp>
 
-#include <boost/units/experimental/linear_algebra.hpp>
+#include <boost/units/detail/linear_algebra.hpp>
 
 #endif
 

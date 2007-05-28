@@ -11,21 +11,18 @@
 #ifndef BOOST_UNITS_IO_HPP
 #define BOOST_UNITS_IO_HPP
 
-#include <iosfwd>
-#include <locale>
 #include <string>
+#include <iosfwd>
 
-#include <boost/config.hpp>
-
+#include <boost/mpl/size.hpp>
+#include <boost/mpl/begin.hpp>
+#include <boost/mpl/next.hpp>
+#include <boost/mpl/deref.hpp>
 #include <boost/serialization/nvp.hpp>
 
+#include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
-//#include <boost/units/detail/io_impl.hpp>
-
-#include <boost/units/experimental/io.hpp>
-
-/// \file
-/// \brief Code for input/output.
+#include <boost/units/heterogeneous_system.hpp>
 
 namespace boost {
 
@@ -45,62 +42,116 @@ inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsign
         
 } // namespace serialization
 
-//namespace units { 
-//
-//#ifdef BOOST_UNITS_DOXYGEN
-//
-///// Template intended to be specialized for every fundamental unit.
-//template<class DimensionTag, class System>
-//struct base_unit_info {
-//    /// the full name of the unit for example "meter".
-//    static std::string name();
-//    /// The symbol of the unit for example "m".
-//    static std::string symbol();
-//};
-//
-//#endif
-//
-///// Write integral-valued @c static_rational to @c std::basic_ostream.
-//template<class Char, class Traits, integer_type N>
-//inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N>& val)
-//{
-//    detail::static_rational_print_impl<(N > 0)>::apply(os,val);
-//    return os;
-//}
-//
-///// Write @c static_rational to @c std::basic_ostream.
-//template<class Char, class Traits, integer_type N, integer_type D>
-//inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N, D>&)
-//{
-//    os << '(' << N << '/' << D << ')';
-//    return os;
-//}
-//
-///// Write @c unit to @c std::basic_ostream.  Prints the symbol of
-///// each fundamental unit followed by its exponent e.g.
-///// joules = m^2 kg s^(-2). If this is not what you want feel free
-///// to overload it for your own units.
-//template<class Char, class Traits, class System,class Dim>
-//std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const unit<Dim,System>& u)
-//{
-//    detail::output_impl(os, u);
-//    return os;
-//}
-//
-///// Write @c quantity to @c std::basic_ostream.
-//template<class Char, class Traits, class System,class Dim,class Y>
-//std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
-//                                             const quantity<unit<Dim,System>,Y>& val)
-//{
-//    const unit<Dim,System> u;
-//    
-//    os << val.value() << ' ' << u;
-//    
-//    return os;
-//}
-//
-//} // namespace units
+namespace units {
+
+/// Write integral-valued @c static_rational to @c std::basic_ostream.
+template<class Char, class Traits, integer_type N>
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N>&)
+{
+    os << N;
+    return os;
+}
+
+/// Write @c static_rational to @c std::basic_ostream.
+template<class Char, class Traits, integer_type N, integer_type D>
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N, D>&)
+{
+    os << '(' << N << '/' << D << ')';
+    return os;
+}
+
+template<class T>
+struct heterogeneous_system;
+
+template<class T>
+struct base_unit_info {
+    static std::string name() {
+        return(T::name());
+    }
+    static std::string symbol() {
+        return(T::symbol());
+    }
+};
+
+namespace detail {
+
+template<class T>
+const T& adapt_for_print(const T& t) {
+    return(t);
+}
+
+template<class Char, class Traits, class Allocator>
+const Char* adapt_for_print(const std::basic_string<Char, Traits, Allocator>& s) {
+    return(s.c_str());
+}
+
+template<class T, class Os>
+void print_base_unit(Os& os, const T&) {
+    os << (adapt_for_print)(base_unit_info<typename T::tag_type>::symbol()) << '^' << typename T::value_type();
+}
+
+template<class Unit, class Os>
+void print_base_unit(Os& os, const heterogeneous_system_dim<Unit, static_rational<1> >&) {
+    os << (adapt_for_print)(base_unit_info<Unit>::symbol());
+}
+
+template<int N>
+struct print_impl {
+    template<class Begin, class Os>
+    struct apply {
+        typedef typename print_impl<N-1>::template apply<typename mpl::next<Begin>::type, Os> next;
+        static void value(Os& os) {
+            (print_base_unit)(os, typename mpl::deref<Begin>::type());
+            os << ' ';
+            next::value(os);
+        }
+    };
+};
+
+template<>
+struct print_impl<1> {
+    template<class Begin, class Os>
+    struct apply {
+        static void value(Os& os) {
+            (print_base_unit)(os, typename mpl::deref<Begin>::type());
+        };
+    };
+};
+
+template<>
+struct print_impl<0> {
+    template<class Begin, class Os>
+    struct apply {
+        static void value(Os& os) {
+            os << "dimensionless";
+        }
+    };
+};
+
+} // namespace detail
+
+template<class Char, class Traits, class Dimension, class System>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>&) {
+    os << typename reduce_unit<unit<Dimension, System> >::type();
+    return(os);
+}
+
+template<class Char, class Traits, class Dimension, class System>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, heterogeneous_system<System> >&) {
+    detail::print_impl<mpl::size<typename System::type>::value>::template apply<
+        typename mpl::begin<typename System::type>::type,
+        std::basic_ostream<Char, Traits> >::value(os);
+    return(os);
+}
+
+template<class Char, class Traits, class Unit, class T>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q) {
+    os << q.value() << ' ' << Unit();
+    return(os);
+}
+
+} // namespace units
 
 } // namespace boost
 
-#endif // BOOST_UNITS_IO_HPP
+#endif

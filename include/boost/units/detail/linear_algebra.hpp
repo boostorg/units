@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_LINEAR_ALGEBRA_HPP
-#define BOOST_UNITS_LINEAR_ALGEBRA_HPP
+#ifndef BOOST_UNITS_DETAIL_LINEAR_ALGEBRA_HPP
+#define BOOST_UNITS_DETAIL_LINEAR_ALGEBRA_HPP
 
 #include <boost/units/static_rational.hpp>
 #include <boost/mpl/list.hpp>
@@ -30,7 +30,7 @@
 #include <boost/mpl/erase.hpp>
 #include <boost/mpl/front.hpp>
 
-#include <boost/units/experimental/sort.hpp>
+#include <boost/units/detail/sort.hpp>
 
 namespace boost {
 

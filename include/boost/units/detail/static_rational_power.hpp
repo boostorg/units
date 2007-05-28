@@ -8,13 +8,13 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_STATIC_RATIONAL_POWER_HPP
-#define BOOST_UNITS_STATIC_RATIONAL_POWER_HPP
+#ifndef BOOST_UNITS_DETAIL_STATIC_RATIONAL_POWER_HPP
+#define BOOST_UNITS_DETAIL_STATIC_RATIONAL_POWER_HPP
 
 #include <cmath>
 
 #include <boost/units/static_rational.hpp>
-#include <boost/units/experimental/one.hpp>
+#include <boost/units/detail/one.hpp>
 
 namespace boost {
 

@@ -39,7 +39,6 @@ beam height approx : 18132.1 m
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/io.hpp>
-#include <boost/units/system.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
 

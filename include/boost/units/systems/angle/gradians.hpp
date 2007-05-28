@@ -17,32 +17,9 @@
 #include <boost/units/io.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/system.hpp>
+#include <boost/units/make_system.hpp>
 #include <boost/units/systems/physical_units.hpp>
-#include <boost/units/experimental/fundamental_units.hpp>
-#include <boost/units/experimental/make_system.hpp>
-
-//namespace boost {
-//
-//namespace units { 
-//
-//namespace gradian {
-//
-//struct system_tag : public ordinal<-2> { };   ///< unit system tag for angles in gradians
-//
-//} // namespace gradian
-//
-//} // namespace units
-//
-//} // namespace boost
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TYPE(boost::units::gradian::system_tag)
-//
-//#endif
+#include <boost/units/systems/base_units.hpp>
 
 namespace boost {
 
@@ -50,7 +27,6 @@ namespace units {
 
 namespace gradian {
 
-//typedef homogeneous_system<system_tag>      system;               ///< gradian unit system
 typedef make_system<gradian_tag>::type system;
 
 typedef unit<dimensionless_type,system>     dimensionless;
@@ -61,17 +37,8 @@ BOOST_UNITS_STATIC_CONSTANT(gradians,plane_angle);
 
 } // namespace gradian
 
-//template<> 
-//struct base_unit_info<plane_angle_dim,gradian::system_tag> 
-//{ 
-//    static std::string name()       { return "gradian"; }
-//    static std::string symbol()     { return "grad"; }
-//};
-
 } // namespace units
 
 } // namespace boost
-
-//#include <boost/units/systems/conversions/conversion_headers.hpp>
 
 #endif // BOOST_UNITS_GRADIANS_HPP

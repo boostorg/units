@@ -13,9 +13,10 @@
 
 #include <string>
 
+#include <boost/units/config.hpp>
+#include <boost/units/base_unit.hpp>
+#include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/systems/physical_units.hpp>
-#include <boost/units/experimental/base_unit.hpp>
-#include <boost/units/experimental/scaled_base_unit.hpp>
 
 namespace boost {
 
@@ -116,7 +117,7 @@ BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_tag, boost::units::degree_tag
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_tag, boost::units::gradian_tag::unit_type, double, 200/3.14159265358979323846);
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::degree_tag, boost::units::gradian_tag::unit_type, double, 10/9.);
 
-#ifdef BOOST_UNITS_HAS_BOOST_TYPEOF
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 

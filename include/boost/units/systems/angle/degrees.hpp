@@ -17,32 +17,9 @@
 #include <boost/units/io.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/system.hpp>
+#include <boost/units/make_system.hpp>
 #include <boost/units/systems/physical_units.hpp>
-#include <boost/units/experimental/fundamental_units.hpp>
-#include <boost/units/experimental/make_system.hpp>
-
-//namespace boost {
-//
-//namespace units { 
-//
-//namespace degree {
-//
-//struct system_tag : public ordinal<-3> { };   ///< unit system tag for angles in degrees
-//
-//} // namespace degree
-//
-//} // namespace units
-//
-//} // namespace boost
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TYPE(boost::units::degree::system_tag)
-//
-//#endif
+#include <boost/units/systems/base_units.hpp>
 
 namespace boost {
 
@@ -50,7 +27,6 @@ namespace units {
 
 namespace degree {
 
-//typedef homogeneous_system<system_tag>      system;                ///< degree unit system
 typedef make_system<degree_tag>::type system;
 
 typedef unit<dimensionless_type,system>     dimensionless;
@@ -64,7 +40,5 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,plane_angle);
 } // namespace units
 
 } // namespace boost
-
-//#include <boost/units/systems/conversions/conversion_headers.hpp>
 
 #endif // BOOST_UNITS_DEGREE_HPP

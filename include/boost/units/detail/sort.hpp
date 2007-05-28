@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_EXPERIMENTAL_SORT_HPP_INCLUDED
-#define BOOST_UNITS_EXPERIMENTAL_SORT_HPP_INCLUDED
+#ifndef BOOST_UNITS_DETAIL_SORT_HPP
+#define BOOST_UNITS_DETAIL_SORT_HPP
 
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/begin.hpp>

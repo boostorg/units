@@ -20,8 +20,8 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
-#include <boost/units/experimental/base_unit.hpp>
-#include <boost/units/experimental/make_system.hpp>
+#include <boost/units/base_unit.hpp>
+#include <boost/units/make_system.hpp>
 
 namespace boost {
 
@@ -31,9 +31,6 @@ namespace units {
 struct length_dim : boost::units::base_dimension<length_dim, 1> {};                        ///> base dimension of length
 struct mass_dim : boost::units::base_dimension<mass_dim,2> {};                             ///> base dimension of mass
 struct time_dim : boost::units::base_dimension<time_dim,3> {};                             ///> base dimension of time
-//typedef base_dimension<1>   length_dim;
-//typedef base_dimension<2>   mass_dim;
-//typedef base_dimension<3>   time_dim;
 //]
 
 #if 0

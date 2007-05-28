@@ -11,11 +11,9 @@
 #ifndef BOOST_UNITS_PHYSICAL_UNITS_HPP
 #define BOOST_UNITS_PHYSICAL_UNITS_HPP
 
+#include <boost/units/config.hpp>
 #include <boost/units/base_dimension.hpp>
 #include <boost/units/derived_dimension.hpp>
-#include <boost/units/static_constant.hpp>
-#include <boost/units/system.hpp>
-#include <boost/units/unit.hpp>
 
 /// \file 
 /// \brief Various definitions to simplify systems of physical units.

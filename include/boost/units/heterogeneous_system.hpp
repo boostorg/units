@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_EXPERIMENTAL_HETEROGENEOUS_SYSTEM_HPP
-#define BOOST_UNITS_EXPERIMENTAL_HETEROGENEOUS_SYSTEM_HPP
+#ifndef BOOST_UNITS_HETEROGENEOUS_SYSTEM_HPP
+#define BOOST_UNITS_HETEROGENEOUS_SYSTEM_HPP
 
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/plus.hpp>
@@ -22,9 +22,9 @@
 
 #include <boost/units/static_rational.hpp>
 #include <boost/units/dimension.hpp>
+#include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/detail/push_front_if.hpp>
-#include <boost/units/experimental/scaled_base_unit.hpp>
-#include <boost/units/experimental/linear_algebra.hpp>
+#include <boost/units/detail/linear_algebra.hpp>
 
 namespace boost {
 

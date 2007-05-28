@@ -14,36 +14,11 @@
 #include <string>
 
 #include <boost/units/conversion.hpp>
-#include <boost/units/ordinal.hpp>
-#include <boost/units/system.hpp>
 #include <boost/units/systems/physical_units.hpp>
 #include <boost/units/quantity.hpp>
 
-#include <boost/units/experimental/make_system.hpp>
-#include <boost/units/experimental/base_unit.hpp>
-
-//namespace boost {
-//
-//namespace units { 
-//
-//namespace abstract {
-//
-///// abstract unit system for pure dimensional analysis
-//struct system_tag : public ordinal<-6>   { };
-//
-//}
-//
-//}
-//
-//}
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TYPE(boost::units::abstract::system_tag)
-//
-//#endif
+#include <boost/units/make_system.hpp>
+#include <boost/units/base_unit.hpp>
 
 namespace boost {
 
@@ -147,14 +122,6 @@ struct base_unit_info<abstract::solid_angle_unit_tag>
     static std::string name()       { return "[Solid Angle]"; }
     static std::string symbol()     { return "[QS]"; }
 };
-
-///// prevent conversions from abstract quantities to any other system
-//template<typename DimTag,typename SysTag>
-//struct base_unit_converter<DimTag,abstract::system_tag,SysTag> { };
-//
-///// prevent conversions from any other system to abstract quantities
-//template<typename DimTag,typename SysTag>
-//struct base_unit_converter<DimTag,SysTag,abstract::system_tag> { };
 
 } // namespace units
 

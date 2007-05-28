@@ -13,13 +13,11 @@
 
 #include <string>
 
-//#include <boost/units/io.hpp>
-//#include <boost/units/conversion.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/config.hpp>
-#include <boost/units/experimental/one.hpp>
 #include <boost/units/static_rational.hpp>
-#include <boost/units/experimental/static_rational_power.hpp>
+#include <boost/units/detail/one.hpp>
+#include <boost/units/detail/static_rational_power.hpp>
 
 namespace boost {
 

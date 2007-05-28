@@ -32,8 +32,8 @@ Output:
 #include <boost/units/static_constant.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
-#include <boost/units/experimental/base_unit.hpp>
-#include <boost/units/experimental/make_system.hpp>
+#include <boost/units/base_unit.hpp>
+#include <boost/units/make_system.hpp>
 
 #define BOOST_UNITS_CHECK_CLOSE(a, b) (BOOST_CHECK((std::abs((a) - (b)) < .0000001)))
 

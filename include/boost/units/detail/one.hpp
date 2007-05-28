@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_ONE_HPP
-#define BOOST_UNITS_ONE_HPP
+#ifndef BOOST_UNITS_DETAIL_ONE_HPP
+#define BOOST_UNITS_DETAIL_ONE_HPP
 
 #include <boost/units/operators.hpp>
 
