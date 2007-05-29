@@ -167,7 +167,7 @@ std::ostream& operator<<(std::ostream& os,const absolute<Y>& aval)
 {
     using namespace std;
     
-    os << aval.value() << " absolute";
+    os << "absolute " << aval.value();
     
     return os;
 }
