@@ -13,6 +13,8 @@
 
 #include <iosfwd>
 
+#include <boost/type_traits/is_base_and_derived.hpp>
+
 #include <boost/units/conversion.hpp>
 
 namespace boost {
@@ -41,14 +43,46 @@ class absolute
         value_type   val_;
 };
 
+namespace detail {
+
+struct undefined_affine_conversion_base {};
+
+}
+
 template<class From, class To>
-struct affine_conversion_helper {
-    //F = 9/5 C + 32
-    //5/9 F = C + 32 * 5/9
-    //C = 5/9 F - 32 * 5/9
-    typedef typename affine_conversion_helper<To, From>::type type;
-    static type value() { return(-affine_conversion_helper<To, From>::value() * conversion_factor<type>(From(), To())); }
+struct affine_conversion_helper : detail::undefined_affine_conversion_base {};
+
+namespace detail {
+
+template<bool IsDefined, bool ReverseIsDefined>
+struct affine_conversion_impl;
+
+template<bool ReverseIsDefined>
+struct affine_conversion_impl<true, ReverseIsDefined> {
+    template<class Unit1, class Unit2, class T0, class T1>
+    struct apply {
+        static T1 value(const T0& t0) {
+            return(
+                t0 * 
+                conversion_factor(Unit1(), Unit2()) +
+                affine_conversion_helper<typename reduce_unit<Unit1>::type, typename reduce_unit<Unit2>::type>::value());
+        }
+    };
 };
+
+template<>
+struct affine_conversion_impl<false, true> {
+    template<class Unit1, class Unit2, class T0, class T1>
+    struct apply {
+        static T1 value(const T0& t0) {
+            return(
+                (t0 - affine_conversion_helper<typename reduce_unit<Unit2>::type, typename reduce_unit<Unit1>::type>::value()) * 
+                conversion_factor(Unit1(), Unit2()));
+        }
+    };
+};
+
+}
 
 template<class Unit1, class T1, class Unit2, class T2>
 struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>, T2> > {
@@ -57,9 +91,18 @@ struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>
     static to_quantity_type convert(const from_quantity_type& source) {
         return(
             to_quantity_type::from_value(
-                source.value() *
-                conversion_factor(Unit1(), Unit2()) +
-                affine_conversion_helper<typename reduce_unit<Unit1>::type, typename reduce_unit<Unit2>::type>::value()));
+                detail::affine_conversion_impl<
+                    !boost::is_base_and_derived<
+                        detail::undefined_affine_conversion_base, 
+                        affine_conversion_helper<typename reduce_unit<Unit1>::type, typename reduce_unit<Unit2>::type>
+                    >::value,
+                    !boost::is_base_and_derived<
+                        detail::undefined_affine_conversion_base,
+                        affine_conversion_helper<typename reduce_unit<Unit2>::type, typename reduce_unit<Unit1>::type>
+                    >::value
+                >::template apply<Unit1, Unit2, T1, T2>::value(source.value())
+            )
+        );
     }
 };
 

@@ -122,8 +122,8 @@ BOOST_UNITS_DEFINE_CONVERSION(boost::units::kelvin_tag, boost::units::celsius_ta
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::kelvin_tag, boost::units::fahrenheit_tag::unit_type, double, 9.0/5.0);
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::celsius_tag, boost::units::fahrenheit_tag::unit_type, double, 9.0/5.0);
 
-BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::kelvin_tag::unit_type, boost::units::celsius_tag::unit_type, double, 273.15);
-BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::kelvin_tag::unit_type, boost::units::fahrenheit_tag::unit_type, double, 273.15 * 9.0 / 5.0 + 32.0);
+BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::kelvin_tag::unit_type, boost::units::celsius_tag::unit_type, double, -273.15);
+BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::kelvin_tag::unit_type, boost::units::fahrenheit_tag::unit_type, double, -273.15 * 9.0 / 5.0 + 32.0);
 BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::celsius_tag::unit_type, boost::units::fahrenheit_tag::unit_type, double, 32.0);
 
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_tag, boost::units::degree_tag::unit_type, double, 180/3.14159265358979323846);

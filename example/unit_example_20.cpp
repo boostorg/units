@@ -44,8 +44,6 @@ Output:
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/detail/utility.hpp>
 
-BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::fahrenheit_tag::unit_type, boost::units::kelvin_tag::unit_type, double, 273.15 + 5.0 / 9.0 * 32.0);
-
 using namespace boost::units;
 
 namespace boost {
@@ -74,48 +72,6 @@ struct is_implicitly_convertible<absolute< unit<temperature_type,fahrenheit::sys
                                   absolute< unit<temperature_type,SI::system> > > : 
     public mpl::true_
 { };
-
-//template<class Y>
-//class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,absolute<Y> >,
-//                         quantity<unit<temperature_type,SI::system>,absolute<Y> > >
-//{
-//    public:
-//        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-//        typedef unit<temperature_type,SI::system>           unit2_type;
-//        
-//        typedef quantity<unit1_type,absolute<Y> >           from_quantity_type;
-//        typedef quantity<unit2_type,absolute<Y> >           to_quantity_type;
-//
-//        static
-//        to_quantity_type
-//        convert(const from_quantity_type& source)
-//        {
-//            const typename from_quantity_type::value_type&   in(source.value());
-//            
-//            return to_quantity_type::from_value((in.value()-32)*(5.0/9.0) + 273.15);
-//        }
-//};
-//
-//template<class Y>
-//class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,Y>,
-//                         quantity<unit<temperature_type,SI::system>,Y> >
-//{
-//    public:
-//        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-//        typedef unit<temperature_type,SI::system>           unit2_type;
-//        
-//        typedef quantity<unit1_type,Y>                      from_quantity_type;
-//        typedef quantity<unit2_type,Y>                      to_quantity_type;
-//
-//        static
-//        to_quantity_type
-//        convert(const from_quantity_type& source)
-//        {
-//            const typename from_quantity_type::value_type&   in(source.value());
-//            
-//            return to_quantity_type::from_value(in*(5.0/9.0));
-//        }
-//};
 
 } // namespace units
 
@@ -189,4 +145,3 @@ int main()
         return(-1);
     }
 }
-
