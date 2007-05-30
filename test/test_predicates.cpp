@@ -25,6 +25,7 @@ Output:
 #include <boost/mpl/list/list0.hpp>
 
 #include <boost/units/base_dimension.hpp>
+#include <boost/units/base_unit.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/is_dimension_list.hpp>
 #include <boost/units/is_quantity.hpp>
@@ -33,7 +34,7 @@ Output:
 #include <boost/units/is_unit.hpp>
 #include <boost/units/is_unit_of_dimension.hpp>
 #include <boost/units/is_unit_of_system.hpp>
-#include <boost/units/ordinal.hpp>
+#include <boost/units/make_system.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/unit.hpp>
 
@@ -41,10 +42,13 @@ namespace bu = boost::units;
 
 struct dimension_tag : boost::units::base_dimension<dimension_tag,0> { };
 
-struct system1 : bu::ordinal<100> {};
-struct system2 : bu::ordinal<101> {};
-
 typedef dimension_tag::type dimension;
+
+struct base_unit1 : bu::base_unit<base_unit1, dimension, 100> {};
+struct base_unit2 : bu::base_unit<base_unit2, dimension, 101> {};
+
+typedef bu::make_system<base_unit1>::type system1;
+typedef bu::make_system<base_unit2>::type system2;
 
 int main(int,char *[])
 {

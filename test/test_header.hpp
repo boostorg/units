@@ -26,7 +26,6 @@ Output:
 
 #include <boost/test/minimal.hpp>
 
-#include <boost/units/ordinal.hpp>
 #include <boost/units/base_dimension.hpp>
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/static_constant.hpp>
