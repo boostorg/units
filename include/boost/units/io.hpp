@@ -63,13 +63,16 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
 template<class T>
 struct heterogeneous_system;
 
-template<class T>
+/// traits template for unit names
+template<class BaseUnit>
 struct base_unit_info {
+    /// The full name of the unit (returns BaseUnit::name() by default)
     static std::string name() {
-        return(T::name());
+        return(BaseUnit::name());
     }
+    /// The symbol for the base unit (Returns BaseUnit::symbol() by default)
     static std::string symbol() {
-        return(T::symbol());
+        return(BaseUnit::symbol());
     }
 };
 
@@ -130,12 +133,14 @@ struct print_impl<0> {
 
 } // namespace detail
 
+/// Print an @c unit as a list of base units and exponents e.g "m s^-1"
 template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>&) {
     os << typename reduce_unit<unit<Dimension, System> >::type();
     return(os);
 }
 
+/// INTERNAL ONLY
 template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, heterogeneous_system<System> >&) {
     detail::print_impl<mpl::size<typename System::type>::value>::template apply<
@@ -144,6 +149,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
     return(os);
 }
 
+/// Print a @c quantity. Prints the value followed by the unit
 template<class Char, class Traits, class Unit, class T>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q) {
     os << q.value() << ' ' << Unit();

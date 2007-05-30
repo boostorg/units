@@ -45,18 +45,26 @@ struct is_zero<static_rational<0> > : mpl::true_ {};
 
 }
 
+/// INTERNAL ONLY
 template<class L, class Dimensions>
 struct heterogeneous_system_pair {
     typedef L type;
     typedef Dimensions dimensions;
 };
 
+/// A system that can represent any possible combination
+/// of units at the expense of not preserving information
+/// about how it was created.  Do not create specializations
+/// of this template directly. Instead use reduce_unit and
+/// base_unit<...>::unit_type.
 template<class T>
 struct heterogeneous_system : T {
 };
 
+/// INTERNAL ONLY
 struct heterogeneous_system_dim_tag {};
 
+/// INTERNAL ONLY
 template<class Unit, class Exponent>
 struct heterogeneous_system_dim {
     typedef heterogeneous_system_dim_tag tag;
@@ -81,6 +89,7 @@ struct is_empty_dim<heterogeneous_system_dim<Unit1,Exponent1> > : detail::is_zer
 
 namespace mpl {
 
+/// INTERNAL ONLY
 template<>
 struct plus_impl<boost::units::heterogeneous_system_dim_tag, boost::units::heterogeneous_system_dim_tag> {
     template<class T0, class T1>
@@ -92,6 +101,7 @@ struct plus_impl<boost::units::heterogeneous_system_dim_tag, boost::units::heter
     };
 };
 
+/// INTERNAL ONLY
 template<>
 struct times_impl<boost::units::heterogeneous_system_dim_tag, boost::units::detail::static_rational_tag> {
     template<class T0, class T1>
@@ -103,6 +113,7 @@ struct times_impl<boost::units::heterogeneous_system_dim_tag, boost::units::deta
     };
 };
 
+/// INTERNAL ONLY
 template<>
 struct negate_impl<boost::units::heterogeneous_system_dim_tag> {
     template<class T>
@@ -176,6 +187,7 @@ struct divide_systems {
 
 } // namespace detail
 
+/// INTERNAL ONLY
 template<class S, long N, long D>
 struct static_power<heterogeneous_system<S>, static_rational<N,D> > {
     typedef heterogeneous_system<
@@ -186,6 +198,7 @@ struct static_power<heterogeneous_system<S>, static_rational<N,D> > {
     > type;
 };
 
+/// INTERNAL ONLY
 template<class S, long N, long D>
 struct static_root<heterogeneous_system<S>, static_rational<N,D> > {
     typedef heterogeneous_system<
@@ -196,6 +209,7 @@ struct static_root<heterogeneous_system<S>, static_rational<N,D> > {
     > type;
 };
 
+/// Returns a unique type for every unit.
 template<class Unit>
 struct reduce_unit {
     typedef unit<
@@ -209,11 +223,54 @@ struct reduce_unit {
 
 namespace detail {
 
+/// add an instantiation of dim to Sequence.
+template<bool>
+struct push_front_or_add_impl;
+
+template<>
+struct push_front_or_add_impl<true>
+{
+    template<typename Sequence, typename T>
+    struct apply
+    {
+        typedef typename mpl::plus<T, typename mpl::front<Sequence>::type>::type item;
+        typedef typename push_front_if<!is_empty_dim<item>::value>::template apply<
+            typename mpl::pop_front<Sequence>::type,
+            item
+        > type;
+    };
+};
+
+template<>
+struct push_front_or_add_impl<false>
+{
+    template<typename Sequence, typename T>
+    struct apply
+    {
+        typedef typename mpl::push_front<Sequence, T>::type type;
+    };
+};
+
+template<typename Sequence, typename T>
+struct push_front_or_add
+{
+    typedef typename push_front_or_add_impl<boost::is_same<typename T::tag_type, typename mpl::front<Sequence>::type::tag_type>::value>::template apply<
+        Sequence,
+        T
+    >::type type;
+};
+
+template<typename T>
+struct push_front_or_add<dimensionless_type, T>
+{
+    typedef typename mpl::push_front<dimensionless_type, T>::type type;
+};
+
 template<int N>
 struct unscale_heterogeneous_system_impl {
     template<class Begin>
     struct apply {
-        typedef typename mpl::push_front<
+        typedef typename push_front_or_add<
             typename unscale_heterogeneous_system_impl<N-1>::template apply<
                 typename mpl::next<Begin>::type
             >::type,
@@ -232,6 +289,10 @@ struct unscale_heterogeneous_system_impl<0> {
 
 }
 
+/// Unscale all the base units. e.g
+/// km s -> m s
+/// cm km -> m^2
+/// INTERNAL ONLY
 template<class T>
 struct unscale<heterogeneous_system<T> > {
     typedef heterogeneous_system<
@@ -246,6 +307,7 @@ struct unscale<heterogeneous_system<T> > {
     > type;
 };
 
+/// INTERNAL ONLY
 template<class Unit, class Exponent>
 struct unscale<heterogeneous_system_dim<Unit, Exponent> > {
     typedef heterogeneous_system_dim<typename unscale<Unit>::type, Exponent> type;
@@ -276,6 +338,7 @@ struct get_scale_list_of_heterogeneous_system_impl<0> {
 
 } // namespace detail
 
+/// INTERNAL ONLY
 template<class T>
 struct get_scale_list<heterogeneous_system<T> > {
     typedef typename detail::get_scale_list_of_heterogeneous_system_impl<
@@ -283,6 +346,7 @@ struct get_scale_list<heterogeneous_system<T> > {
     >::template apply<typename T::type>::type type;
 };
 
+/// INTERNAL ONLY
 template<class Unit, class Exponent>
 struct get_scale_list<heterogeneous_system_dim<Unit, Exponent> > {
     typedef typename static_power<typename get_scale_list<Unit>::type, Exponent>::type type;

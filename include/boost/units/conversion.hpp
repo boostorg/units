@@ -37,12 +37,42 @@ class quantity;
 template<class From, class To>
 struct conversion_helper;
 
+#ifdef BOOST_UNITS_DOXYGEN
+
+/// Template for defining conversions between
+/// quanties.  This template should be specialized
+/// for every quantity that allows conversions.
+/// For example, if you have a two units
+/// called pair and dozen you would write
+/// @code
+/// namespace boost {
+/// namespace units {
+/// template<class T0, class T1>
+/// struct conversion_helper<quantity<dozen, T0>, quantity<pair, T1> >
+/// {
+///     static quantity<pair, T1> convert(const quantity<dozen, T0>& source)
+///     {
+///         return(quantity<pair, T1>::from_value(6 * source.value()));
+///     }
+/// };
+/// }
+/// }
+/// @endcode
+template<class From, class To>
+struct conversion_helper {
+    static To convert(const From&);
+};
+
+#endif
+
+/// INTERNAL ONLY
 template<class Source, class Destination>
 struct select_base_unit_converter {
     typedef Source source_type;
     typedef Destination destination_type;
 };
 
+/// INTERNAL ONLY
 template<class Source, class Destination>
 struct base_unit_converter {
     typedef select_base_unit_converter<typename unscale<Source>::type, typename unscale<Destination>::type> selector;
@@ -58,6 +88,8 @@ struct base_unit_converter {
         return(converter::value() * eval_factor::value());
     }
 };
+
+namespace detail {
 
 template<bool try_inverse, bool trivial>
 struct inverse_base_unit_converter_impl;
@@ -109,6 +141,9 @@ struct use_inverse_conversion {
         (boost::is_same<typename Dest::unit_type, typename selector::destination_type>::value) };
 };
 
+}
+
+/// INTERNAL ONLY
 template<class Source, class Dest>
 struct base_unit_converter<
     Source,
@@ -121,7 +156,7 @@ struct base_unit_converter<
             >
         >
     >
-> : inverse_base_unit_converter_impl<use_inverse_conversion<Source, Dest>::value, boost::is_same<Source, Dest>::value>::template apply<Source, Dest> {
+> : detail::inverse_base_unit_converter_impl<detail::use_inverse_conversion<Source, Dest>::value, boost::is_same<Source, Dest>::value>::template apply<Source, Dest> {
 };
 
 #define BOOST_UNITS_DEFINE_CONVERSION(Source, Destination, type_, value_)\
@@ -172,10 +207,14 @@ struct conversion_impl<0> {
 
 } // namespace detail
 
+/// conversions between homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> > {
+    /// INTERNAL ONLY
     typedef quantity<unit<D, homogeneous_system<L2> >, T2> destination_type;
+    /// INTERNAL ONLY
     typedef typename reduce_unit<unit<D, homogeneous_system<L1> > >::type source_unit;
+    /// INTERNAL ONLY
     typedef typename source_unit::system_type::type unit_list;
     static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source) {
         return(destination_type::from_value(source.value() * 
@@ -187,8 +226,10 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
     }
 };
 
+/// conversions between heterogeneous systems and homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> > {
+    /// INTERNAL ONLY
     typedef quantity<unit<D, homogeneous_system<L2> >, T2> destination_type;
     static destination_type convert(const quantity<unit<D, heterogeneous_system<L1> >, T1>& source) {
         return(destination_type::from_value(source.value() * 
@@ -203,8 +244,10 @@ struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quant
 // There is no simple algorithm for doing this conversion
 // other than just defining it as the reverse of the
 // heterogeneous->homogeneous case
+/// conversions between heterogeneous systems and homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, heterogeneous_system<L2> >, T2> > {
+    /// INTERNAL ONLY
     typedef quantity<unit<D, heterogeneous_system<L2> >, T2> destination_type;
     static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source) {
         return(destination_type::from_value(source.value() /
@@ -264,6 +307,7 @@ struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, hetero
 
 }
 
+/// Find the conversion factor between two units.
 template<class FromUnit,class ToUnit>
 inline
 typename detail::conversion_factor_helper<FromUnit, ToUnit>::type
@@ -272,6 +316,8 @@ conversion_factor(const FromUnit&,const ToUnit&)
     return(detail::conversion_factor_helper<FromUnit, ToUnit>::value());
 }
 
+/// Find the conversion factor between two units with an explicit return type.
+/// e.g. conversion_factor<int>(newton, dyne) returns 100000
 template<class Y, class FromUnit,class ToUnit>
 inline
 Y
