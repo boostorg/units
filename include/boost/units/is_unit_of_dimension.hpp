@@ -29,6 +29,11 @@ struct is_unit_of_dimension< unit<Dim,System>,Dim > :
     public mpl::true_
 { };
 
+template<class Dim,class System>
+struct is_unit_of_dimension< absolute<unit<Dim,System> >,Dim > :
+    public mpl::true_
+{ };
+
 } // namespace units
 
 } // namespace boost

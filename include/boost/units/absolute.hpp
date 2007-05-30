@@ -15,13 +15,18 @@
 
 #include <boost/type_traits/is_base_and_derived.hpp>
 
+#include <boost/units/config.hpp>
 #include <boost/units/conversion.hpp>
 
 namespace boost {
 
 namespace units {
 
-template<class Y = double>
+/// A wrapper to represent absolute units.  Intended
+/// originally for temperatures, this template causes
+/// absolute<T> +/- T -> absolute<T>
+/// absolute<T> - absolute<T> -> T
+template<class Y>
 class absolute
 {
     public:
@@ -43,12 +48,29 @@ class absolute
         value_type   val_;
 };
 
+} // namespace units
+
+} // namespace boost
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::absolute, (class))
+
+#endif
+
+namespace boost {
+
+namespace units {
+
 namespace detail {
 
 struct undefined_affine_conversion_base {};
 
 }
 
+/// INTERNAL ONLY
 template<class From, class To>
 struct affine_conversion_helper : detail::undefined_affine_conversion_base {};
 
@@ -106,7 +128,15 @@ struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>
     }
 };
 
-// a macro for consistancy
+/// Defines the offset between two absolute units.
+/// Requires the value to be in the destination units e.g
+/// @code
+/// BOOST_UNITS_DEFINE_AFFINE_CONVERSION(celsius_tag, fahrenheit_tag::unit_type, double, 32.0);
+/// @endcode
+/// @c BOOST_UNITS_DEFINE_CONVERSION is also necessary to
+/// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION
+/// defining celsius->fahrenheit as above will be sufficient
+/// to get fahrenheit->celsius also.
 #define BOOST_UNITS_DEFINE_AFFINE_CONVERSION(From, To, type_, value_)\
     namespace boost {\
     namespace units {\
@@ -119,24 +149,28 @@ struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>
     }\
     void boost_units_require_semicolon()
 
+/// add a relative value to an absolute one
 template<class Y>
 absolute<Y> operator+(const absolute<Y>& aval,const Y& rval)
 {
-    return absolute<Y>(aval.value()+rval.value());
+    return absolute<Y>(aval.value()+rval);
 }
 
+/// add a relative value to an absolute one
 template<class Y>
 absolute<Y> operator+(const Y& rval,const absolute<Y>& aval)
 {
-    return absolute<Y>(aval.value()+rval.value());
+    return absolute<Y>(aval.value()+rval);
 }
 
+/// subtract a relative value from an absolute one
 template<class Y>
 absolute<Y> operator-(const absolute<Y>& aval,const Y& rval)
 {
-    return absolute<Y>(aval.value()-rval.value());
+    return absolute<Y>(aval.value()-rval);
 }
 
+/// subtracting two absolutes gives a difference (Like pointers)
 template<class Y>
 Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
 {
@@ -157,11 +191,20 @@ struct reduce_unit<absolute<unit<D, S> > > {
     typedef absolute<typename reduce_unit<unit<D, S> >::type> type;
 };
 
+/// multiplying an absolute unit by a scalar gives a quantity
+/// just like an ordinary unit
 template<class D, class S, class T>
 quantity<absolute<unit<D, S> >, T> operator*(const T& t, const absolute<unit<D, S> >&) {
     return(quantity<absolute<unit<D, S> >, T>::from_value(t));
 }
+/// multiplying an absolute unit by a scalar gives a quantity
+/// just like an ordinary unit
+template<class D, class S, class T>
+quantity<absolute<unit<D, S> >, T> operator*(const absolute<unit<D, S> >&, const T& t) {
+    return(quantity<absolute<unit<D, S> >, T>::from_value(t));
+}
 
+/// Print an absolute unit
 template<class Y>
 std::ostream& operator<<(std::ostream& os,const absolute<Y>& aval)
 {

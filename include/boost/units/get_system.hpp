@@ -24,6 +24,13 @@ struct get_system< unit<Dim,System> >
     typedef System type;
 };
 
+/// get the system of an absolute unit
+template<class Unit>
+struct get_system< absolute<Unit> >
+{
+    typedef typename get_system<Unit>::type type;
+};
+
 /// get the system of a quantity
 template<class Unit,class Y>
 struct get_system< quantity<Unit,Y> >

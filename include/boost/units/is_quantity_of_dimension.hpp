@@ -13,6 +13,7 @@
 
 #include <boost/mpl/bool.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/is_unit_of_dimension.hpp>
 
 namespace boost {
 
@@ -24,9 +25,9 @@ struct is_quantity_of_dimension :
     public mpl::false_
 { };
 
-template<class Dim,class System,class Y>
-struct is_quantity_of_dimension< quantity< unit<Dim,System>,Y>,Dim > :
-    public mpl::true_
+template<class Unit,class Y,class Dim>
+struct is_quantity_of_dimension< quantity< Unit,Y>,Dim > :
+    public is_unit_of_dimension<Unit, Dim>
 { };
 
 } // namespace units

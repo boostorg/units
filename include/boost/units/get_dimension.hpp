@@ -24,6 +24,13 @@ struct get_dimension< unit<Dim,System> >
     typedef Dim type;
 };
 
+/// get the dimension of an absolute unit
+template<class Unit>
+struct get_dimension< absolute<Unit> >
+{
+    typedef typename get_dimension<Unit>::type  type;
+};
+
 /// get the dimension of a quantity
 template<class Unit,class Y>
 struct get_dimension< quantity<Unit,Y> >

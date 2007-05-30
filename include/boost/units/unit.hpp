@@ -527,7 +527,7 @@ inline
 bool 
 operator==(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
-    return boost::is_same<Dim1,Dim2>::value && boost::is_same<System1,System2>::value;
+    return boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;
 }
 
 /// unit runtime @c operator!=
@@ -539,7 +539,7 @@ inline
 bool 
 operator!=(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
-    return !boost::is_same<Dim1,Dim2>::value || !boost::is_same<System1,System2>::value;
+    return !boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;
 }
 
 } // namespace units

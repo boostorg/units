@@ -20,6 +20,7 @@
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/deref.hpp>
 
+#include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/scaled_base_unit.hpp>
@@ -72,6 +73,25 @@ struct heterogeneous_system_dim {
     typedef Unit tag_type;
     typedef Exponent value_type;
 };
+
+} // namespace units
+
+} // namespace boost
+
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_pair, (class)(class))
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system, (class))
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_dim, (class)(class))
+
+#endif
+
+namespace boost {
+
+namespace units {
 
 namespace detail {
 

@@ -13,6 +13,7 @@
 
 #include <boost/mpl/bool.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/is_unit_of_system.hpp>
 
 namespace boost {
 
@@ -24,11 +25,9 @@ struct is_quantity_of_system :
     public mpl::false_
 { };
 
-template<class Dim,
-         class System,
-         class Y>
-struct is_quantity_of_system< quantity< unit<Dim,System>,Y>,System > :
-    public mpl::true_
+template<class Unit,class Y,class System>
+struct is_quantity_of_system< quantity< Unit,Y>,System > :
+    public is_unit_of_system<Unit, System>
 { };
 
 } // namespace units

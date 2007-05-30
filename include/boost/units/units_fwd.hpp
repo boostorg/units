@@ -15,8 +15,6 @@ namespace boost {
 
 namespace units {
 
-template<long N> struct ordinal;
-
 template<typename T,typename V> struct dim;
 template<typename T> struct is_dim;
 
@@ -30,8 +28,9 @@ template<class T> struct get_dimension;
 template<class T> struct get_system;
 
 template<class Dim,class System> class unit;
+template<class Y> class absolute;
 
-template<class SystemTag,class DimensionTag> struct unit_info;
+template<class BaseUnitTag> struct base_unit_info;
 template<class System> struct dimensionless_unit;
 template<class T> struct is_unit;
 template<class T,class Dim> struct is_unit_of_dimension;

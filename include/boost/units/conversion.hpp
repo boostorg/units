@@ -120,7 +120,7 @@ struct inverse_base_unit_converter_impl<true, false> {
         typedef base_unit_converter<Destination, typename Source::unit_type> inverse;
         typedef typename inverse::type type;
         static type value() {
-            return(1/inverse::value());
+            return(one()/inverse::value());
         }
     };
 };
@@ -159,6 +159,11 @@ struct base_unit_converter<
 > : detail::inverse_base_unit_converter_impl<detail::use_inverse_conversion<Source, Dest>::value, boost::is_same<Source, Dest>::value>::template apply<Source, Dest> {
 };
 
+/// Defines the conversion factor from a base unit to any unit
+/// with the correct dimensions.  Must appear at global scope.
+/// If the destination unit is a unit that contains only one
+/// base unit which is raised to the first power (e.g. feet->meters)
+/// the reverse need not be defined.
 #define BOOST_UNITS_DEFINE_CONVERSION(Source, Destination, type_, value_)\
 namespace boost {\
 namespace units {\
