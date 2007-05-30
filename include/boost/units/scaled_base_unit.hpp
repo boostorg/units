@@ -122,7 +122,7 @@ struct scaled_base_unit
             >
         >
     > unit_type;
-    typedef typename S::dimension_type dimension_type;
+
     static std::string symbol() {
         return(Scale::symbol_prefix() + S::symbol());
     }
