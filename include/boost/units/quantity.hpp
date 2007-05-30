@@ -202,16 +202,43 @@ class quantity
         const value_type& value() const                     { return val_; }                        ///< constant accessor to value
         
         ///< can add a quantity of the same type if add_typeof_helper<value_type,value_type>::type is convertible to value_type
-        this_type& operator+=(const this_type& source)      { val_ += source.val_; return *this; }  
+        template<class Unit2, class YY>
+        this_type& operator+=(const quantity<Unit2, YY>& source)
+        {
+            BOOST_STATIC_ASSERT((boost::is_same<typename add_typeof_helper<Unit, Unit2>::type, Unit>::value));
+            val_ += source.value();
+            return *this;
+        }  
 
         ///< can subtract a quantity of the same type if subtract_typeof_helper<value_type,value_type>::type is convertible to value_type
-        this_type& operator-=(const this_type& source)      { val_ -= source.val_; return *this; }  
+        template<class Unit2, class YY>
+        this_type& operator-=(const quantity<Unit2, YY>& source)
+        {
+            BOOST_STATIC_ASSERT((boost::is_same<typename subtract_typeof_helper<Unit, Unit2>::type, Unit>::value));
+            val_ -= source.val_;
+            return *this;
+        }  
+
+        template<class Unit2, class YY>
+        this_type& operator*=(const quantity<Unit2, YY>& source)
+        {
+            BOOST_STATIC_ASSERT((boost::is_same<typename multiply_typeof_helper<Unit, Unit2>::type, Unit>::value));
+            val_ *= source.value();
+            return *this;
+        }  
+        
+        template<class Unit2, class YY>
+        this_type& operator/=(const quantity<Unit2, YY>& source)
+        {
+            BOOST_STATIC_ASSERT((boost::is_same<typename divide_typeof_helper<Unit, Unit2>::type, Unit>::value));
+            val_ /= source.value();
+            return *this;
+        }
 
         ///< can multiply a quantity by a scalar value_type if multiply_typeof_helper<value_type,value_type>::type is convertible to value_type
-        this_type& operator*=(const value_type& val)        { val_ *= val; return *this; }
-        
+        this_type& operator*=(const value_type& source) { val_ *= source; return *this; }
         ///< can divide a quantity by a scalar value_type if divide_typeof_helper<value_type,value_type>::type is convertible to value_type
-        this_type& operator/=(const value_type& val)        { val_ /= val; return *this; }          
+        this_type& operator/=(const value_type& source) { val_ /= source; return *this; }
     
         /// Construct quantity directly from @c value_type (potentially dangerous).
         static this_type from_value(const value_type& val)  { return this_type(val); }

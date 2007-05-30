@@ -9,8 +9,6 @@
 
 UNITS_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. <warnings>all ;
 
-ECHO $(BOOST_ROOT)/libs/serialization/build//boost_serialization ;
-
 import testing ;
 
 {
