@@ -951,6 +951,7 @@ struct multiply_add_units<1> {
     };
 };
 
+
 // strip_zeroes erases the first N elements of a list if
 // they are all zero, otherwise returns inconsistant
 //
@@ -1019,29 +1020,102 @@ struct strip_zeroes_impl<0> {
 // used many times, the cost of creating
 // a system is probably not significant.
 
+template<class T>
+struct is_base_dimension_unit {
+    typedef mpl::false_ type;
+    typedef void base_dimension_type;
+};
+template<class T>
+struct is_base_dimension_unit<dimension_list<dim<T, static_rational<1> >, dimensionless_type> > {
+    typedef mpl::true_ type;
+    typedef T base_dimension_type;
+};
+
+template<int N>
+struct is_simple_system_impl {
+    template<class Begin, class Prev>
+    struct apply {
+        typedef is_base_dimension_unit<typename mpl::deref<Begin>::type::dimension_type> test;
+        typedef mpl::and_<
+            typename test::type,
+            mpl::less<Prev, typename test::base_dimension_type>,
+            typename is_simple_system_impl<N-1>::template apply<
+                typename mpl::next<Begin>::type,
+                typename test::base_dimension_type
+            >
+        > type;
+        static const bool value = (type::value);
+    };
+};
+
+template<>
+struct is_simple_system_impl<0> {
+    template<class Begin, class Prev>
+    struct apply : mpl::true_ {
+    };
+};
+
+template<class T>
+struct is_simple_system {
+    typedef typename mpl::begin<T>::type Begin;
+    typedef is_base_dimension_unit<typename mpl::deref<Begin>::type> test;
+    typedef typename mpl::and_<
+        typename test::type,
+        typename is_simple_system_impl<
+            mpl::size<T>::value - 1
+        >::template apply<
+            typename mpl::next<Begin>::type,
+            typename test::base_dimension_type
+        >
+    >::type type;
+    static const bool value = type::value;
+};
+
+template<bool>
+struct calculate_base_unit_exponents_impl;
+
+template<>
+struct calculate_base_unit_exponents_impl<true> {
+    template<class T, class Dimensions>
+    struct apply {
+        typedef typename expand_dimensions<mpl::size<T>::value>::template apply<
+            typename mpl::begin<typename find_base_dimensions<T>::type>::type,
+            typename mpl::begin<Dimensions>::type
+        >::type type;
+    };
+};
+
+template<>
+struct calculate_base_unit_exponents_impl<false> {
+    template<class T, class Dimensions>
+    struct apply {
+        // find the units that correspond to each base dimension
+        typedef normalize_units<T> base_solutions;
+        // pad the dimension with zeroes so it can just be a
+        // list of numbers, making the multiplication easy
+        // e.g. if the arguments are list<pound, foot> and
+        // dimension_list<mass,time^-2> then this step will
+        // yield list<0,1,-2>
+        typedef typename expand_dimensions<mpl::size<typename base_solutions::dimensions>::value>::template apply<
+            typename mpl::begin<typename base_solutions::dimensions>::type,
+            typename mpl::begin<Dimensions>::type
+        >::type dimensions;
+        // take the unit corresponding to each base unit
+        // multiply each of its exponents by the exponent
+        // of the base_dimension in the result and sum.
+        typedef typename multiply_add_units<mpl::size<dimensions>::value>::template apply<
+            typename mpl::begin<dimensions>::type,
+            typename mpl::begin<typename base_solutions::type>::type
+        >::type units;
+        // Now, verify that the dummy units really
+        // cancel out and remove them.
+        typedef typename strip_zeroes_impl<base_solutions::extra>::template apply<units>::type type;
+    };
+};
+
 template<class T, class Dimensions>
 struct calculate_base_unit_exponents {
-    // find the units that correspond to each base dimension
-    typedef normalize_units<T> base_solutions;
-    // pad the dimension with zeroes so it can just be a
-    // list of numbers, making the multiplication easy
-    // e.g. if the arguments are list<pound, foot> and
-    // dimension_list<mass,time^-2> then this step will
-    // yield list<0,1,-2>
-    typedef typename expand_dimensions<mpl::size<typename base_solutions::dimensions>::value>::template apply<
-        typename mpl::begin<typename base_solutions::dimensions>::type,
-        typename mpl::begin<Dimensions>::type
-    >::type dimensions;
-    // take the unit corresponding to each base unit
-    // multiply each of its exponents by the exponent
-    // of the base_dimension in the result and sum.
-    typedef typename multiply_add_units<mpl::size<dimensions>::value>::template apply<
-        typename mpl::begin<dimensions>::type,
-        typename mpl::begin<typename base_solutions::type>::type
-    >::type units;
-    // Now, verify that the dummy units really
-    // cancel out and remove them.
-    typedef typename strip_zeroes_impl<base_solutions::extra>::template apply<units>::type type;
+    typedef typename calculate_base_unit_exponents_impl<is_simple_system<T>::value>::template apply<T, Dimensions>::type type;
 };
 
 } // namespace detail

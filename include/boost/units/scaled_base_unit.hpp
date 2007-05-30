@@ -135,7 +135,7 @@ struct scaled_base_unit
 
 } // namespace boost
 
-#ifdef BOOST_UNITS_HAS_BOOST_TYPEOF
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
