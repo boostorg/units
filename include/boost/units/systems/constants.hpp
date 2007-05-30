@@ -24,24 +24,10 @@ namespace boost {
 namespace units {
 
 template<class Base>
-struct constant {
-    typedef typename Base::value_type value_type;
-    operator value_type() const    { return Base().value(); }
-    value_type value() const       { return Base().value(); }
-    value_type uncertainty() const { return Base().uncertainty(); }
-    value_type lower_bound() const { return Base().lower_bound(); }
-    value_type upper_bound() const { return Base().upper_bound(); }
-};
+struct constant : Base {};
 
 template<class Base>
-struct physical_constant {
-    typedef typename Base::value_type value_type;
-    operator value_type() const    { return Base().value(); }
-    value_type value() const       { return Base().value(); }
-    value_type uncertainty() const { return Base().uncertainty(); }
-    value_type lower_bound() const { return Base().lower_bound(); }
-    value_type upper_bound() const { return Base().upper_bound(); }
-};
+struct physical_constant : Base {};
 
 #define BOOST_UNITS_DEFINE_HELPER(name, symbol, template_name)  \
                                                                 \
@@ -139,12 +125,12 @@ struct name ## _t {                                                     \
     value_type lower_bound() const { return value_-uncertainty_; }      \
     value_type upper_bound() const { return value_+uncertainty_; }      \
 };                                                                      \
-BOOST_UNITS_STATIC_CONSTANT(name, boost::units::constant<boost::units::physical_constant<name ## _t> >) = {}
+BOOST_UNITS_STATIC_CONSTANT(name, boost::units::constant<boost::units::physical_constant<name ## _t> >)
 
 // stream output
-template<class Char, class Traits, class Y>
+template<class Y>
 inline
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const physical_constant<Y>& val)
+std::ostream& operator<<(std::ostream& os,const physical_constant<Y>& val)
 {
     boost::io::ios_precision_saver precision_saver(os);
     //boost::io::ios_width_saver width_saver(os);
@@ -181,19 +167,8 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
     return os;
 }
 
-// stream output
-template<class Char, class Traits, class Y>
-inline
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const constant<Y>&)
-{   
-    os << Y();
-    return os;
-}
-
 } // namespace units
 
 } // namespace boost
-
-#include <boost/units/systems/si/codata_constants.hpp>
 
 #endif // BOOST_UNITS_CONSTANTS_HPP
