@@ -157,7 +157,7 @@ namespace units {
 /// sin takes a quantity and returns a dimensionless quantity
 template<class System,class Y>
 quantity<unit<dimensionless_type,System>,Y>
-sin(const quantity<unit<plane_angle_dim,System>,Y>& theta)
+sin(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
     return quantity<unit<dimensionless_type,System>,Y>(std::sin(theta.value()));
 }
@@ -166,10 +166,10 @@ sin(const quantity<unit<plane_angle_dim,System>,Y>& theta)
 //[unit_example_4_function_snippet_2
 /// asin takes a dimensionless quantity and returns a quantity
 template<class System,class Y>
-quantity<unit<plane_angle_dim,System>,Y>
+quantity<unit<plane_angle_dimension,System>,Y>
 asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    typedef quantity<unit<plane_angle_dim,System>,Y>    quantity_type;
+    typedef quantity<unit<plane_angle_dimension,System>,Y>    quantity_type;
     
     return quantity_type::from_value(std::asin(val.value()));
 }
@@ -181,7 +181,7 @@ asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 template<class System,class Y>
 quantity<unit<energy_dim,System>,Y> 
 work(quantity<unit<force_dim,System>,Y> F,
-     quantity<unit<length_dim,System>,Y> dx)
+     quantity<unit<length_dimension,System>,Y> dx)
 {
     return F*dx;
 }

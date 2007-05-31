@@ -39,27 +39,61 @@ namespace boost {
 
 namespace units {
 
-struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_type, 1> {};
+struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dim, 1> { };
 
 typedef make_system<imperial_gallon_tag>::type imperial;
 
-typedef unit<volume_type,imperial>	imperial_gallon;
+typedef unit<volume_dim,imperial>	imperial_gallon;
 
-struct us_gallon_tag : base_unit<us_gallon_tag, volume_type, 2> {};
+struct us_gallon_tag : base_unit<us_gallon_tag, volume_dim, 2> { };
 
 typedef make_system<us_gallon_tag>::type us;
 
-typedef unit<volume_type,us>			us_gallon;
+typedef unit<volume_dim,us>			us_gallon;
+
+///// convert imperial gallons to us gallons
+//template<class Y>
+//class conversion_helper< quantity<unit<volume_dim,imperial>,Y>,
+//                         quantity<unit<volume_dim,us>,Y> >
+//{
+//    public:
+//        typedef quantity<unit<volume_dim,imperial>,Y>    from_quantity_type;
+//        typedef quantity<unit<volume_dim,us>,Y>          to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            return to_quantity_type::from_value(source.value()*1.2009499255);
+//        }
+//};
+//
+///// convert us gallons to imperial gallons
+//template<class Y>
+//class conversion_helper< quantity<unit<volume_dim,us>,Y>,
+//                         quantity<unit<volume_dim,imperial>,Y> >
+//{
+//    public:
+//        typedef quantity<unit<volume_dim,us>,Y>          from_quantity_type;
+//        typedef quantity<unit<volume_dim,imperial>,Y>    to_quantity_type;
+//
+//        static
+//        to_quantity_type
+//        convert(const from_quantity_type& source)
+//        {
+//            return to_quantity_type::from_value(source.value()/1.2009499255);
+//        }
+//};
 
 template<>
-struct is_implicitly_convertible<unit<volume_type,imperial>,
-                                 unit<volume_type,us> > :
+struct is_implicitly_convertible<unit<volume_dim,imperial>,
+                                 unit<volume_dim,us> > :
     public mpl::true_
 { };
 
 template<>
-struct is_implicitly_convertible<unit<volume_type,us>,
-                                 unit<volume_type,imperial> > :
+struct is_implicitly_convertible<unit<volume_dim,us>,
+                                 unit<volume_dim,imperial> > :
     public mpl::true_
 { };
 

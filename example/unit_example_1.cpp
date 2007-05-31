@@ -20,13 +20,13 @@ Output:
 @verbatim
 
 //[unit_example_1_output
-length_type  = l_item<long_<1L>, dim<length_dim, static_rational<1L, 1L> > >
-mass_type    = l_item<long_<1L>, dim<mass_dim, static_rational<1L, 1L> > >
-time_type    = l_item<long_<1L>, dim<time_dim, static_rational<1L, 1L> > >
-energy_type  = l_item<long_<3L>, dim<length_dim, static_rational<2L, 1L> >, l_item<long_<2L>, dim<mass_dim, static_rational<1L, 1L> >, l_item<long_<1L>, dim<time_dim, static_rational<-2L, 1L> > > > >
-LM_type      = l_item<long_<2L>, dim<length_dim, static_rational<1L, 1L> >, l_item<long_<1L>, dim<mass_dim, static_rational<1L, 1L> > > >
-L_T_type     = l_item<long_<2L>, dim<length_dim, static_rational<1L, 1L> >, l_item<long_<1L>, dim<time_dim, static_rational<-1L, 1L> > > >
-V_type       = l_item<long_<2L>, dim<length_dim, static_rational<1L, 1L> >, l_item<long_<1L>, dim<time_dim, static_rational<-1L, 1L> > > >
+length_dimension  = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+mass_dimension    = dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+time_dimension    = dimension_list<dim<time_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+energy_dim  = dimension_list<dim<length_base_dimension, static_rational<2l, 1l> >, dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-2l, 1l> >, dimensionless_type> > >
+LM_type      = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type> >
+L_T_type     = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
+V_type       = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
 //]
 
 @endverbatim
@@ -51,48 +51,48 @@ int main(void)
 {   
     using namespace boost::units;
 
-    BOOST_MPL_ASSERT((boost::is_same<length_type, mpl::push_front<dimensionless_type, dim<length_dim, static_rational<1L, 1L> > >::type>));
-    BOOST_MPL_ASSERT((boost::is_same<mass_type, mpl::push_front<dimensionless_type, dim<mass_dim, static_rational<1L, 1L> > >::type>));
-    BOOST_MPL_ASSERT((boost::is_same<energy_type, 
+    BOOST_MPL_ASSERT((boost::is_same<length_dimension, mpl::push_front<dimensionless_type, dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
+    BOOST_MPL_ASSERT((boost::is_same<mass_dimension, mpl::push_front<dimensionless_type, dim<mass_base_dimension, static_rational<1L, 1L> > >::type>));
+    BOOST_MPL_ASSERT((boost::is_same<energy_dim, 
         mpl::push_front<
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
-        dim<time_dim, static_rational<-2L, 1L> > >::type,
-        dim<mass_dim, static_rational<1L, 1L> > >::type,
-        dim<length_dim, static_rational<2L, 1L> > >::type>));
+        dim<time_base_dimension, static_rational<-2L, 1L> > >::type,
+        dim<mass_base_dimension, static_rational<1L, 1L> > >::type,
+        dim<length_base_dimension, static_rational<2L, 1L> > >::type>));
                               
-    std::cout << "length_type  = " << simplify_typename(length_type()) << std::endl
-              << "mass_type    = " << simplify_typename(mass_type()) << std::endl
-              << "time_type    = " << simplify_typename(time_type()) << std::endl
-              << "energy_type  = " << simplify_typename(energy_type()) << std::endl;
+    std::cout << "length_dimension  = " << simplify_typename(length_dimension()) << std::endl
+              << "mass_dimension    = " << simplify_typename(mass_dimension()) << std::endl
+              << "time_dimension    = " << simplify_typename(time_dimension()) << std::endl
+              << "energy_dim  = " << simplify_typename(energy_dim()) << std::endl;
     
     //[unit_example_1_snippet_1
-    typedef mpl::times<length_type,mass_type>::type                                       LM_type;
-    typedef mpl::divides<length_type,time_type>::type                                         L_T_type;
-    typedef static_root<mpl::divides<energy_type,mass_type>::type,static_rational<2> >::type  V_type;
+    typedef mpl::times<length_dimension,mass_dimension>::type                                             LM_type;
+    typedef mpl::divides<length_dimension,time_dimension>::type                                           L_T_type;
+    typedef static_root<mpl::divides<energy_dim,mass_dimension>::type,static_rational<2> >::type    V_type;
     //]
     
     BOOST_MPL_ASSERT((boost::is_same<LM_type, 
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
-        dim<mass_dim, static_rational<1L, 1L> > >::type,
-        dim<length_dim, static_rational<1L, 1L> > >::type>));
+        dim<mass_base_dimension, static_rational<1L, 1L> > >::type,
+        dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
 
     BOOST_MPL_ASSERT((boost::is_same<L_T_type, 
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
-        dim<time_dim, static_rational<-1L, 1L> > >::type,
-        dim<length_dim, static_rational<1L, 1L> > >::type>));
+        dim<time_base_dimension, static_rational<-1L, 1L> > >::type,
+        dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
 
     BOOST_MPL_ASSERT((boost::is_same<V_type, 
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
-        dim<time_dim, static_rational<-1L, 1L> > >::type,
-        dim<length_dim, static_rational<1L, 1L> > >::type>));
+        dim<time_base_dimension, static_rational<-1L, 1L> > >::type,
+        dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
     
     std::cout << "LM_type      = " << simplify_typename(LM_type()) << std::endl
               << "L_T_type     = " << simplify_typename(L_T_type()) << std::endl

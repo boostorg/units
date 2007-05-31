@@ -2,6 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2007 Matthias Christian Schabel
+// Copyright (C) 2007 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -27,60 +28,68 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-struct length_dim : boost::units::base_dimension<length_dim, 1> {};                        ///> base dimension of length
-struct mass_dim : boost::units::base_dimension<mass_dim,2> {};                             ///> base dimension of mass
-struct time_dim : boost::units::base_dimension<time_dim,3> {};                             ///> base dimension of time
+struct length_base_dimension : boost::units::base_dimension<length_base_dimension, 1> { };      ///> base dimension of length
+struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };           ///> base dimension of mass
+struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };           ///> base dimension of time
 //]
 
 #if 0
 //[test_system_snippet_2
-typedef make_dimension_list< boost::mpl::list< dim< length_dim,static_rational<1> > > >::type   length_type;
-typedef make_dimension_list< boost::mpl::list< dim< mass_dim,static_rational<1> > > >::type     mass_type;
-typedef make_dimension_list< boost::mpl::list< dim< time_dim,static_rational<1> > > >::type     time_type;
+typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<1> > > >::type   length_dimension;
+typedef make_dimension_list< boost::mpl::list< dim< mass_base_dimension,static_rational<1> > > >::type     mass_dimension;
+typedef make_dimension_list< boost::mpl::list< dim< time_base_dimension,static_rational<1> > > >::type     time_dimension;
 //]
 #endif
 
 //[test_system_snippet_3
-typedef length_dim::type    length_type;
-typedef mass_dim::type      mass_type;
-typedef time_dim::type      time_type;
+typedef length_base_dimension::type    length_dimension;
+typedef mass_base_dimension::type      mass_dimension;
+typedef time_base_dimension::type      time_dimension;
 //]
 
 #if 0
 //[test_system_snippet_4
-typedef make_dimension_list< boost::mpl::list< dim< length_dim,static_rational<2> > > >::type   area_type;
-typedef make_dimension_list< boost::mpl::list< dim< mass_dim,static_rational<1> >,
-                                               dim< length_dim,static_rational<2> >,
-                                               dim< time_dim,static_rational<-2> > > >::type    energy_type;
+typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<2> > > >::type   area_dim;
+typedef make_dimension_list< boost::mpl::list< dim< mass_base_dimension,static_rational<1> >,
+                                               dim< length_base_dimension,static_rational<2> >,
+                                               dim< time_base_dimension,static_rational<-2> > > >::type    energy_dim;
 //]
 #endif
 
 //[test_system_snippet_5
-typedef derived_dimension<length_dim,2>::type area_type;
-typedef derived_dimension<mass_dim,1,
-                          length_dim,2,
-                          time_dim,-2>::type  energy_type;
+typedef derived_dimension<length_base_dimension,2>::type  area_dim;
+typedef derived_dimension<mass_base_dimension,1,
+                          length_base_dimension,2,
+                          time_base_dimension,-2>::type   energy_dim;
 //]
 
 namespace test {
 
 //[test_system_snippet_6
 
-struct length_unit : base_unit<length_unit, length_type, 1> {};
-struct mass_unit : base_unit<mass_unit, mass_type, 2> {};
-struct time_unit : base_unit<time_unit, time_type, 3> {};
+struct meter_base_unit : base_unit<meter_base_unit, length_dimension, 1> { };
+struct kilogram_base_unit : base_unit<kilogram_base_unit, mass_dimension, 2> { };
+struct second_base_unit : base_unit<second_base_unit, time_dimension, 3> { };
 
-typedef make_system<length_unit, mass_unit, time_unit>::type system;
+typedef make_system<meter_base_unit>::type      m_system;
+typedef make_system<kilogram_base_unit>::type   kg_system;
+typedef make_system<second_base_unit>::type     s_system;
+
+typedef make_system<meter_base_unit,kilogram_base_unit,second_base_unit>::type mks_system;
 
 /// unit typedefs
-typedef unit<dimensionless_type,system>     dimensionless;
+typedef unit<dimensionless_type,mks_system>   dimensionless;
 
-typedef unit<length_type,system>            length;
-typedef unit<mass_type,system>              mass;
-typedef unit<time_type,system>              time;
+//typedef unit<length_dimension,m_system>          length;
+//typedef unit<mass_dimension,kg_system>           mass;
+//typedef unit<time_dimension,s_system>            time;
 
-typedef unit<area_type,system>              area;
-typedef unit<energy_type,system>            energy;
+typedef unit<length_dimension,mks_system>        length;
+typedef unit<mass_dimension,mks_system>          mass;
+typedef unit<time_dimension,mks_system>          time;
+
+typedef unit<area_dim,mks_system>          area;
+typedef unit<energy_dim,mks_system>        energy;
 //]
 
 //[test_system_snippet_7
@@ -101,20 +110,20 @@ BOOST_UNITS_STATIC_CONSTANT(joules,energy);
 } // namespace test
 
 //[test_system_snippet_8
-template<> struct base_unit_info<test::length_unit>
+template<> struct base_unit_info<test::meter_base_unit>
 {
     static std::string name()               { return "meter"; }
     static std::string symbol()             { return "m"; }
 };
 //]
 
-template<> struct base_unit_info<test::mass_unit>
+template<> struct base_unit_info<test::kilogram_base_unit>
 {
     static std::string name()               { return "kilogram"; }
     static std::string symbol()             { return "kg"; }
 };
 
-template<> struct base_unit_info<test::time_unit>
+template<> struct base_unit_info<test::second_base_unit>
 {
     static std::string name()               { return "second"; }
     static std::string symbol()             { return "s"; }

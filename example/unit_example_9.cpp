@@ -198,9 +198,9 @@ std::ostream& operator<<(std::ostream& os,const complex<Y>& val)
 
 /// specialize power typeof helper
 template<class Y,long N,long D> 
-struct power_typeof_helper<complex<Y>,static_rational<N,D> >                
+struct power_dimof_helper<complex<Y>,static_rational<N,D> >                
 { 
-    typedef complex<typename power_typeof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef complex<typename power_dimof_helper<Y,static_rational<N,D> >::type>    type; 
     
     static type value(const complex<Y>& x)  
     { 
@@ -230,10 +230,10 @@ struct root_typeof_helper<complex<Y>,static_rational<N,D> >
 
 /// specialize power typeof helper for complex<quantity<Unit,Y> >
 template<class Y,class Unit,long N,long D> 
-struct power_typeof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >                
+struct power_dimof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >                
 { 
-    typedef typename power_typeof_helper<Y,static_rational<N,D> >::type     value_type;
-    typedef typename power_typeof_helper<Unit,static_rational<N,D> >::type  unit_type;
+    typedef typename power_dimof_helper<Y,static_rational<N,D> >::type     value_type;
+    typedef typename power_dimof_helper<Unit,static_rational<N,D> >::type  unit_type;
     typedef quantity<unit_type,value_type>                                  quantity_type;
     typedef complex<quantity_type>                                          type; 
     
@@ -277,9 +277,9 @@ int main(void)
     
     {
     //[unit_example_9_snippet_1
-    typedef quantity<length,complex<double> >     length_type;
+    typedef quantity<length,complex<double> >     length_dimension;
         
-    length_type    L(complex<double>(2.0,1.0)*meters);
+    length_dimension    L(complex<double>(2.0,1.0)*meters);
     //]
     
     sstream1  << "+L      = " << +L << std::endl
@@ -297,9 +297,9 @@ int main(void)
     
     {
     //[unit_example_9_snippet_2
-    typedef complex<quantity<length> >     length_type;
+    typedef complex<quantity<length> >     length_dimension;
         
-    length_type    L(2.0*meters,1.0*meters);
+    length_dimension    L(2.0*meters,1.0*meters);
     //]
     
     sstream1  << "+L      = " << +L << std::endl

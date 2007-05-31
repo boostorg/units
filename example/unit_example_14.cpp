@@ -198,6 +198,26 @@ int main()
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
+/** 
+\file
+    
+\brief unit_example_14.cpp
+
+\detailed
+Test runtime performance.
+
+Output:
+@verbatim
+
+multiplying ublas::matrix<double>(1000, 1000) : 25.03 seconds
+multiplying ublas::matrix<quantity>(1000, 1000) : 24.49 seconds
+tiled_matrix_multiply<double>(1000, 1000) : 1.12 seconds
+tiled_matrix_multiply<quantity>(1000, 1000) : 1.16 seconds
+solving y' = 1 - x + 4 * y with double: 1.97 seconds
+solving y' = 1 - x + 4 * y with quantity: 1.84 seconds
+
+@endverbatim
+**/
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>

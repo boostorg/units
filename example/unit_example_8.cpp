@@ -68,12 +68,12 @@ namespace units {
 //[unit_example_8_class_snippet_1
 /// specialize power typeof helper
 template<class Y,long N,long D> 
-struct power_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >                
+struct power_dimof_helper<boost::math::quaternion<Y>,static_rational<N,D> >                
 { 
     // boost::math::quaternion only supports integer powers
     BOOST_STATIC_ASSERT(D==1);
     
-    typedef boost::math::quaternion<typename power_typeof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef boost::math::quaternion<typename power_dimof_helper<Y,static_rational<N,D> >::type>    type; 
     
     static type value(const boost::math::quaternion<Y>& x)  
     { 
@@ -108,10 +108,10 @@ struct root_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
 //[unit_example_8_class_snippet_2
 /// specialize power typeof helper for quaternion<quantity<Unit,Y> >
 template<class Unit,long N,long D,class Y> 
-struct power_typeof_helper<boost::math::quaternion<quantity<Unit,Y> >,static_rational<N,D> >                
+struct power_dimof_helper<boost::math::quaternion<quantity<Unit,Y> >,static_rational<N,D> >                
 { 
-    typedef typename power_typeof_helper<Y,static_rational<N,D> >::type     value_type;
-    typedef typename power_typeof_helper<Unit,static_rational<N,D> >::type  unit_type;
+    typedef typename power_dimof_helper<Y,static_rational<N,D> >::type     value_type;
+    typedef typename power_dimof_helper<Unit,static_rational<N,D> >::type  unit_type;
     typedef quantity<unit_type,value_type>                                  quantity_type;
     typedef boost::math::quaternion<quantity_type>                          type; 
     
@@ -169,9 +169,9 @@ int main(void)
     
     {
     //[unit_example_8_snippet_1
-    typedef quantity<length,quaternion<double> >     length_type;
+    typedef quantity<length,quaternion<double> >     length_dimension;
         
-    length_type    L(quaternion<double>(4.0,3.0,2.0,1.0)*meters);
+    length_dimension    L(quaternion<double>(4.0,3.0,2.0,1.0)*meters);
     //]
     
     sstream1  << "+L      = " << +L << std::endl
@@ -189,9 +189,9 @@ int main(void)
     
     {
     //[unit_example_8_snippet_2
-    typedef quaternion<quantity<length> >     length_type;
+    typedef quaternion<quantity<length> >     length_dimension;
         
-    length_type    L(4.0*meters,3.0*meters,2.0*meters,1.0*meters);
+    length_dimension    L(4.0*meters,3.0*meters,2.0*meters,1.0*meters);
     //]
     
     sstream1  << "+L      = " << +L << std::endl

@@ -284,7 +284,7 @@ operator/(const scaled_value< Y,scale<Base,Exp1> >& lhs,
 
 /// specialize power typeof helper
 template<class Y,long Base,class Exp,long N,long D> 
-struct power_typeof_helper<scaled_value<Y,scale<Base,Exp> >,static_rational<N,D> >                
+struct power_dimof_helper<scaled_value<Y,scale<Base,Exp> >,static_rational<N,D> >                
 { 
     typedef scaled_value<Y,scale<Base,typename mpl::times<Exp,static_rational<N> >::type> >    type; 
     

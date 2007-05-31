@@ -203,8 +203,8 @@ namespace boost { namespace units {
 
 template<int N>
 struct f {
-    typedef typename derived_dimension<length_dim, (1<<N) >::type dim1;
-    typedef typename derived_dimension<mass_dim, (1<<N) >::type dim2;
+    typedef typename derived_dimension<length_base_dimension, (1<<N) >::type dim1;
+    typedef typename derived_dimension<mass_base_dimension, (1<<N) >::type dim2;
     template<class T>
     static void apply(const T& t) {
         f<N - 1>::apply(t * unit<dim1, SI::system>());
@@ -237,8 +237,8 @@ int main()
 using namespace boost::units;
 
 template<class System,class Y>
-typeof(quantity<unit<length_type,System>,Y>()*quantity<unit<length_type,System>,Y>())
-compute_area(const quantity<unit<length_type,System>,Y>& L)
+typeof(quantity<unit<length_dimension,System>,Y>()*quantity<unit<length_dimension,System>,Y>())
+compute_area(const quantity<unit<length_dimension,System>,Y>& L)
 {
     return L*L;
 }

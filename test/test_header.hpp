@@ -40,44 +40,44 @@ namespace boost {
 
 namespace units {
 
-struct length_dim : boost::units::base_dimension<length_dim,1> { };     ///> base dimension of length
-struct mass_dim : boost::units::base_dimension<mass_dim,2> { };         ///> base dimension of mass
-struct time_dim : boost::units::base_dimension<time_dim,3> { };         ///> base dimension of time
+struct length_base_dimension : boost::units::base_dimension<length_base_dimension,1> { };     ///> base dimension of length
+struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };         ///> base dimension of mass
+struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };         ///> base dimension of time
 
-typedef length_dim::type    length_type;
-typedef mass_dim::type      mass_type;
-typedef time_dim::type      time_type;
+typedef length_base_dimension::type    length_dimension;
+typedef mass_base_dimension::type      mass_dimension;
+typedef time_base_dimension::type      time_dimension;
 
-typedef derived_dimension<length_dim,2>::type area_type;
-typedef derived_dimension<mass_dim,1,
-                            length_dim,2,
-                            time_dim,-2>::type  energy_type;
-typedef derived_dimension<mass_dim,-1,
-                            length_dim,-2,
-                            time_dim,2>::type   inverse_energy_type;
-typedef derived_dimension<length_dim,1,
-                            time_dim,-1>::type  velocity_type;
-typedef derived_dimension<length_dim,3>::type volume_type;
+typedef derived_dimension<length_base_dimension,2>::type area_dim;
+typedef derived_dimension<mass_base_dimension,1,
+                            length_base_dimension,2,
+                            time_base_dimension,-2>::type  energy_dim;
+typedef derived_dimension<mass_base_dimension,-1,
+                            length_base_dimension,-2,
+                            time_base_dimension,2>::type   inverse_energy_dim;
+typedef derived_dimension<length_base_dimension,1,
+                            time_base_dimension,-1>::type  velocity_dim;
+typedef derived_dimension<length_base_dimension,3>::type volume_dim;
 
 /// placeholder class defining test unit system
-struct length_unit : base_unit<length_unit, length_type, 4> {};
-struct mass_unit : base_unit<mass_unit, mass_type, 5> {};
-struct time_unit : base_unit<time_unit, time_type, 6> {};
+struct length_unit : base_unit<length_unit, length_dimension, 4> {};
+struct mass_unit : base_unit<mass_unit, mass_dimension, 5> {};
+struct time_unit : base_unit<time_unit, time_dimension, 6> {};
 
 typedef make_system<length_unit, mass_unit, time_unit>::type system;
 
 /// unit typedefs
 typedef unit<dimensionless_type,system>     dimensionless;
 
-typedef unit<length_type,system>            length;
-typedef unit<mass_type,system>              mass;
-typedef unit<time_type,system>              time;
+typedef unit<length_dimension,system>            length;
+typedef unit<mass_dimension,system>              mass;
+typedef unit<time_dimension,system>              time;
 
-typedef unit<area_type,system>              area;
-typedef unit<energy_type,system>            energy;
-typedef unit<inverse_energy_type,system>    inverse_energy;
-typedef unit<velocity_type,system>          velocity;
-typedef unit<volume_type,system>            volume;
+typedef unit<area_dim,system>              area;
+typedef unit<energy_dim,system>            energy;
+typedef unit<inverse_energy_dim,system>    inverse_energy;
+typedef unit<velocity_dim,system>          velocity;
+typedef unit<volume_dim,system>            volume;
 
 /// unit constants 
 BOOST_UNITS_STATIC_CONSTANT(meter,length);

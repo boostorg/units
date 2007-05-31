@@ -54,7 +54,7 @@ namespace nautical {
 
 //typedef homogeneous_system<system_tag>  system;
 
-struct length_base_unit : base_unit<length_base_unit, length_type, 1>
+struct length_base_unit : base_unit<length_base_unit, length_dimension, 1>
 {
     static std::string name()       { return "nautical mile"; }
     static std::string symbol()     { return "nmi"; }
@@ -63,7 +63,7 @@ struct length_base_unit : base_unit<length_base_unit, length_type, 1>
 typedef make_system<length_base_unit>::type system;
 
 /// unit typedefs
-typedef unit<length_type,system>            length;
+typedef unit<length_dimension,system>            length;
 
 static const length mile,miles;
 
@@ -91,7 +91,7 @@ namespace imperial {
 //
 //typedef homogeneous_system<system_tag>  system;
 
-struct length_base_unit : base_unit<length_base_unit, length_type, 2>
+struct length_base_unit : base_unit<length_base_unit, length_dimension, 2>
 {
     static std::string name()       { return "foot"; }
     static std::string symbol()     { return "ft"; }
@@ -100,7 +100,7 @@ struct length_base_unit : base_unit<length_base_unit, length_type, 2>
 typedef make_system<length_base_unit>::type system;
 
 /// unit typedefs
-typedef unit<length_type,system>            length;
+typedef unit<length_dimension,system>            length;
 
 static const length foot,feet;
 
@@ -121,20 +121,20 @@ namespace units {
 // radar beam height functions
 //[unit_example_16_function_snippet_1
 template<class System,typename T>
-quantity<unit<length_type,System>,T>
-radar_beam_height(const quantity<unit<length_type,System>,T>& radar_range,
-                  const quantity<unit<length_type,System>,T>& earth_radius,
+quantity<unit<length_dimension,System>,T>
+radar_beam_height(const quantity<unit<length_dimension,System>,T>& radar_range,
+                  const quantity<unit<length_dimension,System>,T>& earth_radius,
                   T k = 4.0/3.0)
 {
-    return quantity<unit<length_type,System>,T>(pow<2>(radar_range)/(2.0*k*earth_radius));
+    return quantity<unit<length_dimension,System>,T>(pow<2>(radar_range)/(2.0*k*earth_radius));
 }
 //]
 
 //[unit_example_16_function_snippet_2
 template<class return_type,class System1,class System2,typename T>
 return_type
-radar_beam_height(const quantity<unit<length_type,System1>,T>& radar_range,
-                  const quantity<unit<length_type,System2>,T>& earth_radius,
+radar_beam_height(const quantity<unit<length_dimension,System1>,T>& radar_range,
+                  const quantity<unit<length_dimension,System2>,T>& earth_radius,
                   T k = 4.0/3.0)
 {
     // need to decide which system to use for calculation
