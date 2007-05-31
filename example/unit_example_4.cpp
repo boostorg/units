@@ -472,12 +472,12 @@ int main()
     sstream2 << "Q1^X2 : 1 m^(4/3) kg^(4/3) s^(-8/3)" << std::endl;
     sstream2 << "X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)" << std::endl;
     sstream2 << std::endl;
-    sstream2 << "l1 == l2	false" << std::endl;
-    sstream2 << "l1 != l2	true" << std::endl;
-    sstream2 << "l1 <= l2	true" << std::endl;
-    sstream2 << "l1 < l2 	true" << std::endl;
-    sstream2 << "l1 >= l2	false" << std::endl;
-    sstream2 << "l1 > l2 	false" << std::endl;
+    sstream2 << "l1 == l2\tfalse" << std::endl;
+    sstream2 << "l1 != l2\ttrue" << std::endl;
+    sstream2 << "l1 <= l2\ttrue" << std::endl;
+    sstream2 << "l1 < l2 \ttrue" << std::endl;
+    sstream2 << "l1 >= l2\tfalse" << std::endl;
+    sstream2 << "l1 > l2 \tfalse" << std::endl;
     sstream2 << std::endl;
     sstream2 << "dimless = 1" << std::endl;
     sstream2 << std::endl;

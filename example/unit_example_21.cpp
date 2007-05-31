@@ -43,47 +43,13 @@ struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dimension, 1>
 
 typedef make_system<imperial_gallon_tag>::type imperial;
 
-typedef unit<volume_dimension,imperial>	imperial_gallon;
+typedef unit<volume_dimension,imperial> imperial_gallon;
 
 struct us_gallon_tag : base_unit<us_gallon_tag, volume_dimension, 2> { };
 
 typedef make_system<us_gallon_tag>::type us;
 
-typedef unit<volume_dimension,us>			us_gallon;
-
-///// convert imperial gallons to us gallons
-//template<class Y>
-//class conversion_helper< quantity<unit<volume_dimension,imperial>,Y>,
-//                         quantity<unit<volume_dimension,us>,Y> >
-//{
-//    public:
-//        typedef quantity<unit<volume_dimension,imperial>,Y>    from_quantity_type;
-//        typedef quantity<unit<volume_dimension,us>,Y>          to_quantity_type;
-//
-//        static
-//        to_quantity_type
-//        convert(const from_quantity_type& source)
-//        {
-//            return to_quantity_type::from_value(source.value()*1.2009499255);
-//        }
-//};
-//
-///// convert us gallons to imperial gallons
-//template<class Y>
-//class conversion_helper< quantity<unit<volume_dimension,us>,Y>,
-//                         quantity<unit<volume_dimension,imperial>,Y> >
-//{
-//    public:
-//        typedef quantity<unit<volume_dimension,us>,Y>          from_quantity_type;
-//        typedef quantity<unit<volume_dimension,imperial>,Y>    to_quantity_type;
-//
-//        static
-//        to_quantity_type
-//        convert(const from_quantity_type& source)
-//        {
-//            return to_quantity_type::from_value(source.value()/1.2009499255);
-//        }
-//};
+typedef unit<volume_dimension,us> us_gallon;
 
 template<>
 struct is_implicitly_convertible<unit<volume_dimension,imperial>,

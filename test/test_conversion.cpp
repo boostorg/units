@@ -24,8 +24,6 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
-//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
-//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
 
 #include <iostream>
 
@@ -85,17 +83,17 @@ int test_main(int,char *[])
     //BOOST_CHECK((std::abs(F1.value() - 2.0e-4) < .000000001));
     
     //deprecated
-	//bu::quantity<bu::SI::force> F2 = bu::quantity_cast<bu::quantity<bu::SI::force> >(20 * bu::CGS::dyne);
+    //bu::quantity<bu::SI::force> F2 = bu::quantity_cast<bu::quantity<bu::SI::force> >(20 * bu::CGS::dyne);
     //BOOST_CHECK((std::abs(F2.value() - 2.0e-4) < .000000001));
 
-	bu::quantity<bu::SI::force> F3(F0);
+    bu::quantity<bu::SI::force> F3(F0);
     BOOST_CHECK((std::abs(F3.value() - 2.0e-4) < .000000001));
-	//quantity<SI::force> F4 = F0;
+    //quantity<SI::force> F4 = F0;
 
-	bu::quantity<bu::SI::force> F5(20 * bu::CGS::dyne);
+    bu::quantity<bu::SI::force> F5(20 * bu::CGS::dyne);
     BOOST_CHECK((std::abs(F5.value() - 2.0e-4) < .000000001));
     
-	//quantity<SI::force> F6 = 20 * CGS::dyne;
+    //quantity<SI::force> F6 = 20 * CGS::dyne;
 
 
 
