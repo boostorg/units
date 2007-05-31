@@ -36,7 +36,7 @@ template<class T, long N> struct base_unit_pair { };
 
 /// Defines a base dimension.  To define a unit you need to provide
 /// the derived class (CRTP), a dimension list and a unique integer.
-/// struct my_unit : boost::units::base_unit<my_dimension, length_type, 1> {};
+/// struct my_unit : boost::units::base_unit<my_dimension, length_dimension, 1> {};
 /// It is designed so that you will get an error message if you try
 /// to use the same value in multiple definitions.
 template<class Derived,

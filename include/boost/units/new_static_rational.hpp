@@ -103,7 +103,7 @@ value(const static_rational<N,D>& r)
 
 /// raise @c int to a @c static_rational power
 template<long N,long D> 
-struct power_typeof_helper<int,static_rational<N,D> >                
+struct power_dimof_helper<int,static_rational<N,D> >                
 { 
     typedef double    type; 
     
@@ -117,7 +117,7 @@ struct power_typeof_helper<int,static_rational<N,D> >
 
 /// raise @c float to a @c static_rational power
 template<long N,long D> 
-struct power_typeof_helper<float,static_rational<N,D> >                
+struct power_dimof_helper<float,static_rational<N,D> >                
 { 
     typedef double    type; 
     
@@ -131,7 +131,7 @@ struct power_typeof_helper<float,static_rational<N,D> >
 
 /// raise @c double to a @c static_rational power
 template<long N,long D> 
-struct power_typeof_helper<double,static_rational<N,D> >                
+struct power_dimof_helper<double,static_rational<N,D> >                
 { 
     typedef double    type; 
     
@@ -145,7 +145,7 @@ struct power_typeof_helper<double,static_rational<N,D> >
 
 /// raise @c std::complex<float> to a @c static_rational power
 template<long N,long D> 
-struct power_typeof_helper<std::complex<float>,static_rational<N,D> >  
+struct power_dimof_helper<std::complex<float>,static_rational<N,D> >  
 { 
     typedef std::complex<float>    type; 
     
@@ -159,7 +159,7 @@ struct power_typeof_helper<std::complex<float>,static_rational<N,D> >
 
 /// raise @c std::complex<double> to a @c static_rational power
 template<long N,long D> 
-struct power_typeof_helper<std::complex<double>,static_rational<N,D> >  
+struct power_dimof_helper<std::complex<double>,static_rational<N,D> >  
 { 
     typedef std::complex<double>    type; 
     
@@ -245,18 +245,18 @@ struct root_typeof_helper<std::complex<double>,static_rational<N,D> >
 
 /// raise a value to a @c static_rational power
 template<class Rat,class Y>
-typename power_typeof_helper<Y,Rat>::type
+typename power_dimof_helper<Y,Rat>::type
 pow(const Y& x)
 {
-    return power_typeof_helper<Y,Rat>::value(x);
+    return power_dimof_helper<Y,Rat>::value(x);
 }
 
 /// raise a value to an integer power
 template<long N,class Y>
-typename power_typeof_helper<Y,static_rational<N> >::type
+typename power_dimof_helper<Y,static_rational<N> >::type
 pow(const Y& x)
 {
-    return power_typeof_helper<Y,static_rational<N> >::value(x);
+    return power_dimof_helper<Y,static_rational<N> >::value(x);
 }
 
 /// take the @c static_rational root of a value
