@@ -135,6 +135,18 @@ struct times_impl<boost::units::heterogeneous_system_dim_tag, boost::units::deta
 
 /// INTERNAL ONLY
 template<>
+struct divides_impl<boost::units::heterogeneous_system_dim_tag, boost::units::detail::static_rational_tag> {
+    template<class T0, class T1>
+    struct apply {
+        typedef boost::units::heterogeneous_system_dim<
+            typename T0::tag_type,
+            typename mpl::divides<typename T0::value_type,T1>::type
+        > type;
+    };
+};
+
+/// INTERNAL ONLY
+template<>
 struct negate_impl<boost::units::heterogeneous_system_dim_tag> {
     template<class T>
     struct apply {
