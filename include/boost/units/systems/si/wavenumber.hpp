@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_WAVENUMBER_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/wavenumber_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<wavenumber_dim,SI::system>    wavenumber;
+typedef unit<wavenumber_dimension,SI::system>    wavenumber;
     
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_meter,wavenumber);   
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_meters,wavenumber);  

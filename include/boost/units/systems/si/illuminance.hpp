@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_ILLUMINANCE_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/illuminance_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<illuminance_dim,SI::system>      illuminance;
+typedef unit<illuminance_dimension,SI::system>      illuminance;
     
 BOOST_UNITS_STATIC_CONSTANT(lux,illuminance); 
 

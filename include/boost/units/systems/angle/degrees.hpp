@@ -27,7 +27,7 @@ namespace units {
 
 namespace degree {
 
-typedef make_system<degree_tag>::type system;
+typedef make_system<degree_base_unit>::type system;
 
 typedef unit<dimensionless_type,system>     dimensionless;
 typedef unit<plane_angle_dimension,system>       plane_angle;           ///< angle degree unit constant

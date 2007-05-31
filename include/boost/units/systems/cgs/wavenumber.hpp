@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_WAVENUMBER_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/wavenumber_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<wavenumber_dim,CGS::system>   wavenumber;
+typedef unit<wavenumber_dimension,CGS::system>   wavenumber;
     
 BOOST_UNITS_STATIC_CONSTANT(kayser,wavenumber); 
 BOOST_UNITS_STATIC_CONSTANT(kaysers,wavenumber);    

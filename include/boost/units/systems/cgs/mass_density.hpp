@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_MASS_DENSITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/mass_density_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<mass_density_dim,CGS::system>     mass_density;
+typedef unit<mass_density_dimension,CGS::system>     mass_density;
 
 } // namespace CGS
 

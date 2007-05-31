@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_ENERGY_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/energy_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<energy_dim,SI::system>    energy;
+typedef unit<energy_dimension,SI::system>    energy;
     
 BOOST_UNITS_STATIC_CONSTANT(joule,energy);  
 BOOST_UNITS_STATIC_CONSTANT(joules,energy); 

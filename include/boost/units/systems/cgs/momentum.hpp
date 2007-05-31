@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_MOMENTUM_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/momentum_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<momentum_dim,CGS::system>     momentum;
+typedef unit<momentum_dimension,CGS::system>     momentum;
 
 } // namespace CGS
 

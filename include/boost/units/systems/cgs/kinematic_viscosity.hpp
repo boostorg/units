@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_KINEMATIC_VISCOSITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/kinematic_viscosity_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<kinematic_viscosity_dim,CGS::system>     kinematic_viscosity;
+typedef unit<kinematic_viscosity_dimension,CGS::system>     kinematic_viscosity;
  
 BOOST_UNITS_STATIC_CONSTANT(stoke,kinematic_viscosity);           
 BOOST_UNITS_STATIC_CONSTANT(stokes,kinematic_viscosity);    

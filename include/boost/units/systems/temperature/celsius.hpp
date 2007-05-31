@@ -25,7 +25,7 @@ namespace units {
 
 namespace celsius {
 
-typedef make_system<celsius_tag>::type system;
+typedef make_system<celsius_base_unit>::type system;
 
 typedef unit<temperature_dimension,system>   temperature;
 

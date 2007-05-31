@@ -25,7 +25,7 @@ namespace units {
 
 namespace fahrenheit {
 
-typedef make_system<fahrenheit_tag>::type system;
+typedef make_system<fahrenheit_base_unit>::type system;
 
 typedef unit<temperature_dimension,system>   temperature;
 

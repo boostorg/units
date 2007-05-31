@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_VELOCITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/velocity_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<velocity_dim,SI::system>      velocity;
+typedef unit<velocity_dimension,SI::system>      velocity;
     
 BOOST_UNITS_STATIC_CONSTANT(meter_per_second,velocity); 
 BOOST_UNITS_STATIC_CONSTANT(meters_per_second,velocity);    

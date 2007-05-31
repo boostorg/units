@@ -17,8 +17,10 @@
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_units.hpp>
-#include <boost/units/systems/base_units.hpp>
+
+#include <boost/units/systems/base_units/centimeter_base_unit.hpp>
+#include <boost/units/systems/base_units/gram_base_unit.hpp>
+#include <boost/units/systems/base_units/second_base_unit.hpp>
 
 namespace boost {
 
@@ -27,7 +29,7 @@ namespace units {
 namespace CGS {
 
 /// placeholder class defining CGS unit system
-typedef make_system<centimeter_tag, gram_tag, second_tag>::type system;
+typedef make_system<centimeter_base_unit, gram_base_unit, second_base_unit>::type system;
 
 /// various unit typedefs for convenience
 typedef unit<dimensionless_type,system>         dimensionless;

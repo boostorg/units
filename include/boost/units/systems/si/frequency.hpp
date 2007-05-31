@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_FREQUENCY_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/frequency_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<frequency_dim,SI::system>     frequency;
+typedef unit<frequency_dimension,SI::system>     frequency;
     
 BOOST_UNITS_STATIC_CONSTANT(hertz,frequency);   
 

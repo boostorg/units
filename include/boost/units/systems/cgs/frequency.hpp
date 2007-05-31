@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_FREQUENCY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/frequency_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<frequency_dim,CGS::system>        frequency;
+typedef unit<frequency_dimension,CGS::system>        frequency;
     
 } // namespace CGS
 

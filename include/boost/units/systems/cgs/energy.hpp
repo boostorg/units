@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_ENERGY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/energy_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<energy_dim,CGS::system>   energy;
+typedef unit<energy_dimension,CGS::system>   energy;
     
 BOOST_UNITS_STATIC_CONSTANT(erg,energy);
 BOOST_UNITS_STATIC_CONSTANT(ergs,energy);

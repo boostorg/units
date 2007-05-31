@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_VELOCITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/velocity_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<velocity_dim,CGS::system>     velocity;
+typedef unit<velocity_dimension,CGS::system>     velocity;
     
 BOOST_UNITS_STATIC_CONSTANT(centimeter_per_second,velocity);    
 BOOST_UNITS_STATIC_CONSTANT(centimeters_per_second,velocity);   

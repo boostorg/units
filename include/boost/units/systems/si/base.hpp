@@ -17,8 +17,16 @@
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_units.hpp>
-#include <boost/units/systems/base_units.hpp>
+
+#include <boost/units/systems/base_units/meter_base_unit.hpp>
+#include <boost/units/systems/base_units/kilogram_base_unit.hpp>
+#include <boost/units/systems/base_units/second_base_unit.hpp>
+#include <boost/units/systems/base_units/ampere_base_unit.hpp>
+#include <boost/units/systems/base_units/kelvin_base_unit.hpp>
+#include <boost/units/systems/base_units/mole_base_unit.hpp>
+#include <boost/units/systems/base_units/candela_base_unit.hpp>
+#include <boost/units/systems/base_units/radian_base_unit.hpp>
+#include <boost/units/systems/base_units/steradian_base_unit.hpp>
 
 namespace boost {
 
@@ -27,7 +35,7 @@ namespace units {
 namespace SI {
 
 /// placeholder class defining SI unit system
-typedef make_system<meter_tag, kilogram_tag, second_tag, ampere_tag, kelvin_tag, mole_tag, candela_tag, radian_tag, steradian_tag>::type system;
+typedef make_system<meter_base_unit, kilogram_base_unit, second_base_unit, ampere_base_unit, kelvin_base_unit, mole_base_unit, candela_base_unit, radian_base_unit, steradian_base_unit>::type system;
 
 /// dimensionless SI unit
 typedef unit<dimensionless_type,system>         dimensionless;

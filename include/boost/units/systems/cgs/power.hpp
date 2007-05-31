@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_POWER_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/power_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<power_dim,CGS::system>    power;
+typedef unit<power_dimension,CGS::system>    power;
 
 } // namespace CGS
 

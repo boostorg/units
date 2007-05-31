@@ -131,7 +131,7 @@ struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>
 /// Defines the offset between two absolute units.
 /// Requires the value to be in the destination units e.g
 /// @code
-/// BOOST_UNITS_DEFINE_AFFINE_CONVERSION(celsius_tag, fahrenheit_tag::unit_type, double, 32.0);
+/// BOOST_UNITS_DEFINE_AFFINE_CONVERSION(celsius_base_unit, fahrenheit_base_unit::unit_type, double, 32.0);
 /// @endcode
 /// @c BOOST_UNITS_DEFINE_CONVERSION is also necessary to
 /// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION

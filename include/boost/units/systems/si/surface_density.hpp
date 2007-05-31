@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_SURFACE_DENSITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/surface_density_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<surface_density_dim,SI::system>  surface_density;
+typedef unit<surface_density_dimension,SI::system>  surface_density;
 
 BOOST_UNITS_STATIC_CONSTANT(kilogram_per_square_meter,surface_density);
 BOOST_UNITS_STATIC_CONSTANT(kilograms_per_square_meter,surface_density);

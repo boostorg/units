@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_AREA_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/area_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<area_dim,SI::system>      area;
+typedef unit<area_dimension,SI::system>      area;
     
 BOOST_UNITS_STATIC_CONSTANT(square_meter,area);
 BOOST_UNITS_STATIC_CONSTANT(square_meters,area);

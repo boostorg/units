@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_ACTIVITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/activity_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<activity_dim,SI::system>  activity;
+typedef unit<activity_dimension,SI::system>  activity;
 
 BOOST_UNITS_STATIC_CONSTANT(becquerel,activity);
 BOOST_UNITS_STATIC_CONSTANT(becquerels,activity);

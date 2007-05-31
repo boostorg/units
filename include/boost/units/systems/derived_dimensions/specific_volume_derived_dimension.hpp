@@ -20,7 +20,7 @@ namespace boost {
 namespace units {
 
 /// derived dimension for specific volume : L^3 M^-1
-typedef derived_dimension<length_base_dimension,3,mass_base_dimension,-1>::type     specific_volume_dim;            
+typedef derived_dimension<length_base_dimension,3,mass_base_dimension,-1>::type     specific_volume_dimension;            
 
 } // namespace units
 

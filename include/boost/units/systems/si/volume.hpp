@@ -12,6 +12,7 @@
 #define BOOST_UNITS_SI_VOLUME_HPP
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/systems/derived_dimensions/volume_derived_dimension.hpp>
 
 namespace boost {
 
@@ -19,7 +20,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<volume_dim,SI::system>    volume;
+typedef unit<volume_dimension,SI::system>    volume;
     
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);    
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);   
