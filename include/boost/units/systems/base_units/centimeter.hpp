@@ -8,20 +8,20 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_KILOGRAM_BASE_UNIT_HPP
-#define BOOST_UNITS_KILOGRAM_BASE_UNIT_HPP
+#ifndef BOOST_UNITS_CENTIMETER_BASE_UNIT_HPP
+#define BOOST_UNITS_CENTIMETER_BASE_UNIT_HPP
 
 #include <boost/units/scaled_base_unit.hpp>
-#include <boost/units/systems/base_units/gram_base_unit.hpp>
+#include <boost/units/systems/base_units/meter.hpp>
 
 namespace boost {
 
 namespace units {
 
-typedef scaled_base_unit<gram_base_unit, scale<10, static_rational<3> > > kilogram_base_unit;
+typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<-2> > > centimeter_base_unit;
 
 } // namespace units
 
 } // namespace boost
 
-#endif // BOOST_UNITS_KILOGRAM_BASE_UNIT_HPP
+#endif // BOOST_UNITS_CENTIMETER_BASE_UNIT_HPP

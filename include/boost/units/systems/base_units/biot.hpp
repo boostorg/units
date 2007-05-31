@@ -12,7 +12,7 @@
 #define BOOST_UNITS_BIOT_BASE_UNIT_HPP
 
 #include <boost/units/scaled_base_unit.hpp>
-#include <boost/units/systems/base_units/ampere_base_unit.hpp>
+#include <boost/units/systems/base_units/ampere.hpp>
 
 namespace boost {
 
