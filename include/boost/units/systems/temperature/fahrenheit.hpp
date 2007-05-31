@@ -16,7 +16,7 @@
 #include <boost/units/absolute.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/base_units/fahrenheit_base_unit.hpp>
+#include <boost/units/systems/base_units/fahrenheit.hpp>
 
 namespace boost {
 

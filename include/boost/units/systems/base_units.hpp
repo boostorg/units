@@ -15,32 +15,31 @@
 
 #include <boost/units/config.hpp>
 #include <boost/units/base_unit.hpp>
-//#include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/absolute.hpp>
 
-#include <boost/units/systems/base_units/ampere_base_unit.hpp>
-#include <boost/units/systems/base_units/biot_base_unit.hpp>
-#include <boost/units/systems/base_units/candela_base_unit.hpp>
-#include <boost/units/systems/base_units/celsius_base_unit.hpp>
-#include <boost/units/systems/base_units/centimeter_base_unit.hpp>
-#include <boost/units/systems/base_units/degree_base_unit.hpp>
-#include <boost/units/systems/base_units/fahrenheit_base_unit.hpp>
-#include <boost/units/systems/base_units/foot_base_unit.hpp>
-#include <boost/units/systems/base_units/gradian_base_unit.hpp>
-#include <boost/units/systems/base_units/gram_base_unit.hpp>
-#include <boost/units/systems/base_units/hour_base_unit.hpp>
-#include <boost/units/systems/base_units/inch_base_unit.hpp>
-#include <boost/units/systems/base_units/kelvin_base_unit.hpp>
-#include <boost/units/systems/base_units/kilogram_base_unit.hpp>
-#include <boost/units/systems/base_units/meter_base_unit.hpp>
-#include <boost/units/systems/base_units/mile_base_unit.hpp>
-#include <boost/units/systems/base_units/minute_base_unit.hpp>
-#include <boost/units/systems/base_units/mole_base_unit.hpp>
-#include <boost/units/systems/base_units/radian_base_unit.hpp>
-#include <boost/units/systems/base_units/revolution_base_unit.hpp>
-#include <boost/units/systems/base_units/second_base_unit.hpp>
-#include <boost/units/systems/base_units/steradian_base_unit.hpp>
-#include <boost/units/systems/base_units/yard_base_unit.hpp>
+#include <boost/units/systems/base_units/ampere.hpp>
+#include <boost/units/systems/base_units/biot.hpp>
+#include <boost/units/systems/base_units/candela.hpp>
+#include <boost/units/systems/base_units/celsius.hpp>
+#include <boost/units/systems/base_units/centimeter.hpp>
+#include <boost/units/systems/base_units/degree.hpp>
+#include <boost/units/systems/base_units/fahrenheit.hpp>
+#include <boost/units/systems/base_units/foot.hpp>
+#include <boost/units/systems/base_units/gradian.hpp>
+#include <boost/units/systems/base_units/gram.hpp>
+#include <boost/units/systems/base_units/hour.hpp>
+#include <boost/units/systems/base_units/inch.hpp>
+#include <boost/units/systems/base_units/kelvin.hpp>
+#include <boost/units/systems/base_units/kilogram.hpp>
+#include <boost/units/systems/base_units/meter.hpp>
+#include <boost/units/systems/base_units/mile.hpp>
+#include <boost/units/systems/base_units/minute.hpp>
+#include <boost/units/systems/base_units/mole.hpp>
+#include <boost/units/systems/base_units/radian.hpp>
+#include <boost/units/systems/base_units/revolution.hpp>
+#include <boost/units/systems/base_units/second.hpp>
+#include <boost/units/systems/base_units/steradian.hpp>
+#include <boost/units/systems/base_units/yard.hpp>
 
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::meter_base_unit, boost::units::foot_base_unit::unit_type, double, 0.3048);
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::meter_base_unit, boost::units::inch_base_unit::unit_type, double, 25.4e-3);

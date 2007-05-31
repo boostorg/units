@@ -18,15 +18,15 @@
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
 
-#include <boost/units/systems/base_units/meter_base_unit.hpp>
-#include <boost/units/systems/base_units/kilogram_base_unit.hpp>
-#include <boost/units/systems/base_units/second_base_unit.hpp>
-#include <boost/units/systems/base_units/ampere_base_unit.hpp>
-#include <boost/units/systems/base_units/kelvin_base_unit.hpp>
-#include <boost/units/systems/base_units/mole_base_unit.hpp>
-#include <boost/units/systems/base_units/candela_base_unit.hpp>
-#include <boost/units/systems/base_units/radian_base_unit.hpp>
-#include <boost/units/systems/base_units/steradian_base_unit.hpp>
+#include <boost/units/systems/base_units/meter.hpp>
+#include <boost/units/systems/base_units/kilogram.hpp>
+#include <boost/units/systems/base_units/second.hpp>
+#include <boost/units/systems/base_units/ampere.hpp>
+#include <boost/units/systems/base_units/kelvin.hpp>
+#include <boost/units/systems/base_units/mole.hpp>
+#include <boost/units/systems/base_units/candela.hpp>
+#include <boost/units/systems/base_units/radian.hpp>
+#include <boost/units/systems/base_units/steradian.hpp>
 
 namespace boost {
 

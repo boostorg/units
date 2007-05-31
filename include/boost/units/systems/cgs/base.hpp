@@ -18,9 +18,9 @@
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
 
-#include <boost/units/systems/base_units/centimeter_base_unit.hpp>
-#include <boost/units/systems/base_units/gram_base_unit.hpp>
-#include <boost/units/systems/base_units/second_base_unit.hpp>
+#include <boost/units/systems/base_units/centimeter.hpp>
+#include <boost/units/systems/base_units/gram.hpp>
+#include <boost/units/systems/base_units/second.hpp>
 
 namespace boost {
 
