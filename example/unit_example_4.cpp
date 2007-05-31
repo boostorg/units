@@ -179,8 +179,8 @@ asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 //[unit_example_4_function_snippet_3
 /// the physical definition of work - computed for an arbitrary unit system 
 template<class System,class Y>
-quantity<unit<energy_dim,System>,Y> 
-work(quantity<unit<force_dim,System>,Y> F,
+quantity<unit<energy_dimension,System>,Y> 
+work(quantity<unit<force_dimension,System>,Y> F,
      quantity<unit<length_dimension,System>,Y> dx)
 {
     return F*dx;

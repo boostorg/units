@@ -406,7 +406,7 @@ int main()
     using namespace boost;
     using namespace boost::units;
     
-    typedef make_system<mpl::list<meter_tag,gram_tag,second_tag> >::type   system1_type;
+    typedef make_system<mpl::list<meter_base_unit,gram_base_unit,second_base_unit> >::type   system1_type;
     
     std::cout << simplify_typename(system1_type()) << std::endl;
     

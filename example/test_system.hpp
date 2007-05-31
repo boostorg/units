@@ -49,18 +49,18 @@ typedef time_base_dimension::type      time_dimension;
 
 #if 0
 //[test_system_snippet_4
-typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<2> > > >::type   area_dim;
+typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<2> > > >::type   area_dimension;
 typedef make_dimension_list< boost::mpl::list< dim< mass_base_dimension,static_rational<1> >,
                                                dim< length_base_dimension,static_rational<2> >,
-                                               dim< time_base_dimension,static_rational<-2> > > >::type    energy_dim;
+                                               dim< time_base_dimension,static_rational<-2> > > >::type    energy_dimension;
 //]
 #endif
 
 //[test_system_snippet_5
-typedef derived_dimension<length_base_dimension,2>::type  area_dim;
+typedef derived_dimension<length_base_dimension,2>::type  area_dimension;
 typedef derived_dimension<mass_base_dimension,1,
                           length_base_dimension,2,
-                          time_base_dimension,-2>::type   energy_dim;
+                          time_base_dimension,-2>::type   energy_dimension;
 //]
 
 namespace test {
@@ -88,8 +88,8 @@ typedef unit<length_dimension,mks_system>        length;
 typedef unit<mass_dimension,mks_system>          mass;
 typedef unit<time_dimension,mks_system>          time;
 
-typedef unit<area_dim,mks_system>          area;
-typedef unit<energy_dim,mks_system>        energy;
+typedef unit<area_dimension,mks_system>          area;
+typedef unit<energy_dimension,mks_system>        energy;
 //]
 
 //[test_system_snippet_7

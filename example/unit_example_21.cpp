@@ -39,26 +39,26 @@ namespace boost {
 
 namespace units {
 
-struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dim, 1> { };
+struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dimension, 1> { };
 
 typedef make_system<imperial_gallon_tag>::type imperial;
 
-typedef unit<volume_dim,imperial>	imperial_gallon;
+typedef unit<volume_dimension,imperial>	imperial_gallon;
 
-struct us_gallon_tag : base_unit<us_gallon_tag, volume_dim, 2> { };
+struct us_gallon_tag : base_unit<us_gallon_tag, volume_dimension, 2> { };
 
 typedef make_system<us_gallon_tag>::type us;
 
-typedef unit<volume_dim,us>			us_gallon;
+typedef unit<volume_dimension,us>			us_gallon;
 
 ///// convert imperial gallons to us gallons
 //template<class Y>
-//class conversion_helper< quantity<unit<volume_dim,imperial>,Y>,
-//                         quantity<unit<volume_dim,us>,Y> >
+//class conversion_helper< quantity<unit<volume_dimension,imperial>,Y>,
+//                         quantity<unit<volume_dimension,us>,Y> >
 //{
 //    public:
-//        typedef quantity<unit<volume_dim,imperial>,Y>    from_quantity_type;
-//        typedef quantity<unit<volume_dim,us>,Y>          to_quantity_type;
+//        typedef quantity<unit<volume_dimension,imperial>,Y>    from_quantity_type;
+//        typedef quantity<unit<volume_dimension,us>,Y>          to_quantity_type;
 //
 //        static
 //        to_quantity_type
@@ -70,12 +70,12 @@ typedef unit<volume_dim,us>			us_gallon;
 //
 ///// convert us gallons to imperial gallons
 //template<class Y>
-//class conversion_helper< quantity<unit<volume_dim,us>,Y>,
-//                         quantity<unit<volume_dim,imperial>,Y> >
+//class conversion_helper< quantity<unit<volume_dimension,us>,Y>,
+//                         quantity<unit<volume_dimension,imperial>,Y> >
 //{
 //    public:
-//        typedef quantity<unit<volume_dim,us>,Y>          from_quantity_type;
-//        typedef quantity<unit<volume_dim,imperial>,Y>    to_quantity_type;
+//        typedef quantity<unit<volume_dimension,us>,Y>          from_quantity_type;
+//        typedef quantity<unit<volume_dimension,imperial>,Y>    to_quantity_type;
 //
 //        static
 //        to_quantity_type
@@ -86,14 +86,14 @@ typedef unit<volume_dim,us>			us_gallon;
 //};
 
 template<>
-struct is_implicitly_convertible<unit<volume_dim,imperial>,
-                                 unit<volume_dim,us> > :
+struct is_implicitly_convertible<unit<volume_dimension,imperial>,
+                                 unit<volume_dimension,us> > :
     public mpl::true_
 { };
 
 template<>
-struct is_implicitly_convertible<unit<volume_dim,us>,
-                                 unit<volume_dim,imperial> > :
+struct is_implicitly_convertible<unit<volume_dimension,us>,
+                                 unit<volume_dimension,imperial> > :
     public mpl::true_
 { };
 

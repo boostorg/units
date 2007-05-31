@@ -24,7 +24,6 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/absolute.hpp>
 #include <boost/units/unit.hpp>
-#include <boost/units/systems/derived_dimensions/temperature_derived_dimension.hpp>
 #include <boost/units/make_system.hpp>
 #include <boost/units/systems/base_units.hpp>
 
@@ -36,11 +35,11 @@ Output:
 
 namespace bu = boost::units;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::kelvin_tag>::type> kelvin_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::kelvin_base_unit>::type> kelvin_type;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::celsius_tag>::type> celsius_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::celsius_base_unit>::type> celsius_type;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::fahrenheit_tag>::type> fahrenheit_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::fahrenheit_base_unit>::type> fahrenheit_type;
 
 int test_main(int,char *[])
 {

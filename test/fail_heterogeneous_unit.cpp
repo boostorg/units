@@ -30,8 +30,8 @@ Output:
 namespace bu = boost::units;
 
 template<class System>
-bu::quantity<bu::unit<bu::energy_dim, System> > f(bu::quantity<bu::unit<bu::length_dimension, System> > l) {
-    return(static_cast<bu::quantity<bu::unit<bu::energy_dim, System> > >(f(static_cast<bu::quantity<bu::SI::length> >(l))));
+bu::quantity<bu::unit<bu::energy_dimension, System> > f(bu::quantity<bu::unit<bu::length_dimension, System> > l) {
+    return(static_cast<bu::quantity<bu::unit<bu::energy_dimension, System> > >(f(static_cast<bu::quantity<bu::SI::length> >(l))));
 }
 bu::quantity<bu::SI::energy> f(bu::quantity<bu::SI::length> l) {
     return(l * l * 2.0 * bu::SI::kilograms / bu::pow<2>(bu::SI::seconds));
