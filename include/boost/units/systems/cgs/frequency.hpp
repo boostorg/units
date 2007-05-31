@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<frequency_type,CGS::system>        frequency;
+typedef unit<frequency_dim,CGS::system>        frequency;
     
 } // namespace CGS
 

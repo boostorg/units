@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<action_type,SI::system>    action;
+typedef unit<action_dim,SI::system>    action;
 
 } // namespace SI
 

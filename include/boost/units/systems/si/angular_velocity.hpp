@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<angular_velocity_type,SI::system>      angular_velocity;
+typedef unit<angular_velocity_dim,SI::system>      angular_velocity;
     
 BOOST_UNITS_STATIC_CONSTANT(radian_per_second,angular_velocity); 
 BOOST_UNITS_STATIC_CONSTANT(radians_per_second,angular_velocity);    

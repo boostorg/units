@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<dynamic_viscosity_type,CGS::system>     dynamic_viscosity;
+typedef unit<dynamic_viscosity_dim,CGS::system>     dynamic_viscosity;
     
 BOOST_UNITS_STATIC_CONSTANT(poise,dynamic_viscosity);    
 

@@ -20,9 +20,9 @@ namespace units {
 namespace SI {
 
 /// catalytic activity : T^-1 A^1
-typedef derived_dimension<time_dim,-1,amount_dim,1>::type                             catalytic_activity_type;    
+typedef derived_dimension<time_base_dimension,-1,amount_base_dimension,1>::type                             catalytic_activity_dim;    
 
-typedef unit<SI::catalytic_activity_type,SI::system>                                    catalytic_activity;
+typedef unit<SI::catalytic_activity_dim,SI::system>                                    catalytic_activity;
 
 BOOST_UNITS_STATIC_CONSTANT(katal,catalytic_activity);
 BOOST_UNITS_STATIC_CONSTANT(katals,catalytic_activity);

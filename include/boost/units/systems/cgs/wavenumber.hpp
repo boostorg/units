@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<wavenumber_type,CGS::system>   wavenumber;
+typedef unit<wavenumber_dim,CGS::system>   wavenumber;
     
 BOOST_UNITS_STATIC_CONSTANT(kayser,wavenumber); 
 BOOST_UNITS_STATIC_CONSTANT(kaysers,wavenumber);    

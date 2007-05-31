@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<mass_density_type,CGS::system>     mass_density;
+typedef unit<mass_density_dim,CGS::system>     mass_density;
 
 } // namespace CGS
 

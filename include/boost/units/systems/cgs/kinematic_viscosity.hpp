@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<kinematic_viscosity_type,CGS::system>     kinematic_viscosity;
+typedef unit<kinematic_viscosity_dim,CGS::system>     kinematic_viscosity;
  
 BOOST_UNITS_STATIC_CONSTANT(stoke,kinematic_viscosity);           
 BOOST_UNITS_STATIC_CONSTANT(stokes,kinematic_viscosity);    

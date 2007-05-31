@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<frequency_type,SI::system>     frequency;
+typedef unit<frequency_dim,SI::system>     frequency;
     
 BOOST_UNITS_STATIC_CONSTANT(hertz,frequency);   
 

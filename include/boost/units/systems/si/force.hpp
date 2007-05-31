@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<force_type,SI::system>     force;
+typedef unit<force_dim,SI::system>     force;
     
 BOOST_UNITS_STATIC_CONSTANT(newton,force);  
 BOOST_UNITS_STATIC_CONSTANT(newtons,force); 

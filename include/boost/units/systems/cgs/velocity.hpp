@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<velocity_type,CGS::system>     velocity;
+typedef unit<velocity_dim,CGS::system>     velocity;
     
 BOOST_UNITS_STATIC_CONSTANT(centimeter_per_second,velocity);    
 BOOST_UNITS_STATIC_CONSTANT(centimeters_per_second,velocity);   

@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<power_type,CGS::system>    power;
+typedef unit<power_dim,CGS::system>    power;
 
 } // namespace CGS
 

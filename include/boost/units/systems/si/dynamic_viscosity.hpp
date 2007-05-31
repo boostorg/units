@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<dynamic_viscosity_type,SI::system>     dynamic_viscosity;
+typedef unit<dynamic_viscosity_dim,SI::system>     dynamic_viscosity;
     
 } // namespace SI
 

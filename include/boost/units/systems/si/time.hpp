@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<time_type,SI::system>      time;
+typedef unit<time_dimension,SI::system>      time;
 
 BOOST_UNITS_STATIC_CONSTANT(second,time);   
 BOOST_UNITS_STATIC_CONSTANT(seconds,time);  

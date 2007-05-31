@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<pressure_type,SI::system>      pressure;
+typedef unit<pressure_dim,SI::system>      pressure;
 
 // windef.h #defines pascal on Metrowerks compilers
 #if defined(__MWERKS__)

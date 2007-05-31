@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<mass_type,SI::system>      mass;
+typedef unit<mass_dimension,SI::system>      mass;
     
 BOOST_UNITS_STATIC_CONSTANT(kilogram,mass); 
 BOOST_UNITS_STATIC_CONSTANT(kilograms,mass);    

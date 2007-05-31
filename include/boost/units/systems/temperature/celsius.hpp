@@ -27,7 +27,7 @@ namespace celsius {
 
 typedef make_system<celsius_tag>::type system;
 
-typedef unit<temperature_type,system>   temperature;
+typedef unit<temperature_dimension,system>   temperature;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);

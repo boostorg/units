@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<velocity_type,SI::system>      velocity;
+typedef unit<velocity_dim,SI::system>      velocity;
     
 BOOST_UNITS_STATIC_CONSTANT(meter_per_second,velocity); 
 BOOST_UNITS_STATIC_CONSTANT(meters_per_second,velocity);    

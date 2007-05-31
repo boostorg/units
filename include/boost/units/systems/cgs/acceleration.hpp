@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<acceleration_type,CGS::system>     acceleration;
+typedef unit<acceleration_dim,CGS::system>     acceleration;
 
 BOOST_UNITS_STATIC_CONSTANT(gal,acceleration);  
 BOOST_UNITS_STATIC_CONSTANT(gals,acceleration); 

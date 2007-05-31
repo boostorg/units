@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<absorbed_dose_type,SI::system>     absorbed_dose;
+typedef unit<absorbed_dose_dim,SI::system>     absorbed_dose;
     
 BOOST_UNITS_STATIC_CONSTANT(gray,absorbed_dose);  
 BOOST_UNITS_STATIC_CONSTANT(grays,absorbed_dose); 

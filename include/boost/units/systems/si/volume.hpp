@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<volume_type,SI::system>    volume;
+typedef unit<volume_dim,SI::system>    volume;
     
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);    
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);   

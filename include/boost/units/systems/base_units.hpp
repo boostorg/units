@@ -23,107 +23,126 @@ namespace boost {
 
 namespace units {
 
-struct meter_tag : public base_unit<meter_tag, length_type, -20>
+struct meter_tag : public base_unit<meter_tag, length_dimension, -20>
 {
     static std::string name() { return("meter"); }
     static std::string symbol() { return("m"); }
 };
-struct foot_tag : public base_unit<foot_tag, length_type, -19>
+
+struct foot_tag : public base_unit<foot_tag, length_dimension, -19>
 {
     static std::string name() { return("foot"); }
     static std::string symbol() { return("ft"); }
 };
-struct inch_tag : public base_unit<inch_tag, length_type, -18>
+
+struct inch_tag : public base_unit<inch_tag, length_dimension, -18>
 {
     static std::string name() { return("inch"); }
     static std::string symbol() { return("in"); }
 };
-struct yard_tag : public base_unit<yard_tag, length_type, -17>
+
+struct yard_tag : public base_unit<yard_tag, length_dimension, -17>
 {
     static std::string name() { return("yard"); }
     static std::string symbol() { return("yd"); }
 };
-struct mile_tag : public base_unit<mile_tag, length_type, -16>
+
+struct mile_tag : public base_unit<mile_tag, length_dimension, -16>
 {
     static std::string name() { return("mile"); }
     static std::string symbol() { return("mi"); }
 };
+
 typedef scaled_base_unit<meter_tag, scale<10, static_rational<-2> > > centimeter_tag;
 
-struct gram_tag : public base_unit<gram_tag, mass_type, -15>
+struct gram_tag : public base_unit<gram_tag, mass_dimension, -15>
 {
     static std::string name() { return("gram"); }
     static std::string symbol() { return("g"); }
 };
+
 typedef scaled_base_unit<gram_tag, scale<10, static_rational<3> > > kilogram_tag;
 
-struct second_tag : public base_unit<second_tag, time_type, -14>
+struct second_tag : public base_unit<second_tag, time_dimension, -14>
 {
     static std::string name() { return("second"); }
     static std::string symbol() { return("s"); }
 };
-struct minute_tag : public base_unit<minute_tag, time_type, -13>
+
+struct minute_tag : public base_unit<minute_tag, time_dimension, -13>
 {
     static std::string name() { return("minute"); }
     static std::string symbol() { return("min"); }
 };
-struct hour_tag : public base_unit<hour_tag, time_type, -12>
+
+struct hour_tag : public base_unit<hour_tag, time_dimension, -12>
 {
     static std::string name() { return("foot"); }
     static std::string symbol() { return("ft"); }
 };
 
-struct ampere_tag : public base_unit<ampere_tag, current_type, -11>
+struct ampere_tag : public base_unit<ampere_tag, current_dimension, -11>
 {
     static std::string name() { return("ampere"); }
     static std::string symbol() { return("A"); }
 };
 
-struct kelvin_tag : public base_unit<kelvin_tag, temperature_type, -9>
+struct biot_tag : public base_unit<biot_tag, current_dimension, -10> 
+{
+    static std::string name() { return("biot"); }
+    //static std::string symbol() { return(""); }
+};
+
+struct kelvin_tag : public base_unit<kelvin_tag, temperature_dimension, -9>
 {
     static std::string name() { return("kelvin"); }
     static std::string symbol() { return("K"); }
 };
-struct celsius_tag : public base_unit<celsius_tag, temperature_type, -8>
+
+struct celsius_tag : public base_unit<celsius_tag, temperature_dimension, -8>
 {
     static std::string name() { return("celsius"); }
     static std::string symbol() { return("C"); }
 };
-struct fahrenheit_tag : public base_unit<fahrenheit_tag, temperature_type, -7>
+
+
+struct fahrenheit_tag : public base_unit<fahrenheit_tag, temperature_dimension, -7>
 {
     static std::string name() { return("fahrenheit"); }
     static std::string symbol() { return("F"); }
 };
 
-struct mole_tag : public base_unit<mole_tag, amount_type, -6>
+struct mole_tag : public base_unit<mole_tag, amount_dimension, -6>
 {
     static std::string name() { return("mole"); }
     static std::string symbol() { return("mol"); }
 };
 
-struct candela_tag : public base_unit<candela_tag, luminous_intensity_type, -5>
+struct candela_tag : public base_unit<candela_tag, luminous_intensity_dimension, -5>
 {
     static std::string name() { return("candela"); }
     static std::string symbol() { return("cd"); }
 };
 
-struct radian_tag : public base_unit<radian_tag, plane_angle_type, -4>
+struct radian_tag : public base_unit<radian_tag, plane_angle_dimension, -4>
 {
     static std::string name() { return("radian"); }
     static std::string symbol() { return("rad"); }
 };
-struct degree_tag : public base_unit<degree_tag, plane_angle_type, -3>
+
+struct degree_tag : public base_unit<degree_tag, plane_angle_dimension, -3>
 {
     static std::string name() { return("degree"); }
     static std::string symbol() { return("deg"); }
 };
-struct gradian_tag : public base_unit<gradian_tag, plane_angle_type, -2>
+
+struct gradian_tag : public base_unit<gradian_tag, plane_angle_dimension, -2>
 {
     static std::string name() { return("gradian"); }
     static std::string symbol() { return("grad"); }
 };
 
-struct steradian_tag : public base_unit<steradian_tag, solid_angle_type, -1>
+struct steradian_tag : public base_unit<steradian_tag, solid_angle_dimension, -1>
 {
     static std::string name() { return("steradian"); }
     static std::string symbol() { return("sr"); }

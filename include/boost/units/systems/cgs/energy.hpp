@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<energy_type,CGS::system>   energy;
+typedef unit<energy_dim,CGS::system>   energy;
     
 BOOST_UNITS_STATIC_CONSTANT(erg,energy);
 BOOST_UNITS_STATIC_CONSTANT(ergs,energy);

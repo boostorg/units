@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<current_type,SI::system>   current;
+typedef unit<current_dimension,SI::system>   current;
     
 BOOST_UNITS_STATIC_CONSTANT(ampere,current);
 BOOST_UNITS_STATIC_CONSTANT(amperes,current);

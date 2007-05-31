@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<temperature_type,SI::system>   temperature;
+typedef unit<temperature_dimension,SI::system>   temperature;
     
 BOOST_UNITS_STATIC_CONSTANT(kelvin,temperature);    
 BOOST_UNITS_STATIC_CONSTANT(kelvins,temperature);   

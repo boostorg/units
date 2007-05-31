@@ -30,7 +30,7 @@ namespace gradian {
 typedef make_system<gradian_tag>::type system;
 
 typedef unit<dimensionless_type,system>     dimensionless;
-typedef unit<plane_angle_type,system>       plane_angle;          ///< angle gradian unit constant
+typedef unit<plane_angle_dimension,system>       plane_angle;          ///< angle gradian unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(gradian,plane_angle);
 BOOST_UNITS_STATIC_CONSTANT(gradians,plane_angle);

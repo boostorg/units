@@ -29,9 +29,9 @@ struct system_tag : public ordinal<110> { };
 
 typedef homogeneous_system<system_tag>  system;
 
-typedef fundamental_dimension<temperature_tag>::type    temperature_type;
+typedef fundamental_dimension<temperature_tag>::type    temperature_dimension;
 
-typedef unit<temperature_type,system>                   temperature;
+typedef unit<temperature_dimension,system>                   temperature;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
@@ -45,18 +45,18 @@ template<> struct unit_info<fahrenheit::system_tag,temperature_tag>
 };
 
 template<>
-struct is_implicitly_convertible< unit<temperature_type,fahrenheit::system>,
-                                  unit<temperature_type,SI::system> > : 
+struct is_implicitly_convertible< unit<temperature_dimension,fahrenheit::system>,
+                                  unit<temperature_dimension,SI::system> > : 
     public mpl::true_
 { };
 
 template<class Y>
-class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,absolute<Y> >,
-                         quantity<unit<temperature_type,SI::system>,absolute<Y> > >
+class conversion_helper< quantity<unit<temperature_dimension,fahrenheit::system>,absolute<Y> >,
+                         quantity<unit<temperature_dimension,SI::system>,absolute<Y> > >
 {
     public:
-        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-        typedef unit<temperature_type,SI::system>           unit2_type;
+        typedef unit<temperature_dimension,fahrenheit::system>   unit1_type;
+        typedef unit<temperature_dimension,SI::system>           unit2_type;
         
         typedef quantity<unit1_type,absolute<Y> >           from_quantity_type;
         typedef quantity<unit2_type,absolute<Y> >           to_quantity_type;
@@ -72,12 +72,12 @@ class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,abso
 };
 
 template<class Y>
-class conversion_helper< quantity<unit<temperature_type,fahrenheit::system>,Y >,
-                         quantity<unit<temperature_type,SI::system>,Y > >
+class conversion_helper< quantity<unit<temperature_dimension,fahrenheit::system>,Y >,
+                         quantity<unit<temperature_dimension,SI::system>,Y > >
 {
     public:
-        typedef unit<temperature_type,fahrenheit::system>   unit1_type;
-        typedef unit<temperature_type,SI::system>           unit2_type;
+        typedef unit<temperature_dimension,fahrenheit::system>   unit1_type;
+        typedef unit<temperature_dimension,SI::system>           unit2_type;
         
         typedef quantity<unit1_type,relative<Y> >           from_quantity_type;
         typedef quantity<unit2_type,relative<Y> >           to_quantity_type;

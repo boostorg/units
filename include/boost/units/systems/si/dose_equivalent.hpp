@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<dose_equivalent_type,SI::system>     dose_equivalent;
+typedef unit<dose_equivalent_dim,SI::system>     dose_equivalent;
     
 BOOST_UNITS_STATIC_CONSTANT(sievert,dose_equivalent);  
 BOOST_UNITS_STATIC_CONSTANT(sieverts,dose_equivalent); 

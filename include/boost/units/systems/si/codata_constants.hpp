@@ -11,32 +11,6 @@
 #ifndef BOOST_UNITS_CODATA_CONSTANTS_HPP
 #define BOOST_UNITS_CODATA_CONSTANTS_HPP
 
-#include <boost/units/systems/si/base.hpp>
-
-/// \file includes all the files boost/units/systems/si/codata/*.hpp
-
-namespace boost {
-
-namespace units {
-
-namespace SI { 
-
-namespace constants {
-
-namespace CODATA {
-
-//typedef dimensionless_quantity<SI::system,double>::type    dimensionless_constant;
-
-} // namespace CODATA
-
-} // namespace constants
-
-} // namespace SI
-
-} // namespace units
-
-} // namespace boost
-
 #include <boost/units/systems/si/codata/atomic_and_nuclear_constants.hpp>
 #include <boost/units/systems/si/codata/electromagnetic_constants.hpp>
 #include <boost/units/systems/si/codata/physico-chemical_constants.hpp>

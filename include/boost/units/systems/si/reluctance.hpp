@@ -20,7 +20,7 @@ namespace units {
 namespace SI {
 
 /// reluctance : L^-2 M^-1 T^2 C^2
-typedef derived_dimension<length_dim,-2,mass_dim,-1,time_dim,2,current_dim,2>::type   reluctance_type;
+typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,2,current_base_dimension,2>::type   reluctance_type;
 
 typedef unit<SI::reluctance_type,SI::system>                                            reluctance;
 

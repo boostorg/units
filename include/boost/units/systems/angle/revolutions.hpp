@@ -51,7 +51,7 @@ namespace revolution {
 typedef homogeneous_system<system_tag>      system;                ///< revolution unit system
 
 typedef unit<dimensionless_type,system>     dimensionless;
-typedef unit<plane_angle_dim,system>       plane_angle;           ///< angle revolution unit constant
+typedef unit<plane_angle_dimension,system>       plane_angle;           ///< angle revolution unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(revolution,plane_angle);
 BOOST_UNITS_STATIC_CONSTANT(revolutions,plane_angle);
@@ -59,7 +59,7 @@ BOOST_UNITS_STATIC_CONSTANT(revolutions,plane_angle);
 } // namespace revolution
 
 template<> 
-struct base_unit_info<plane_angle_base_dim,revolution::system_tag> 
+struct base_unit_info<plane_angle_base_dimension,revolution::system_tag> 
 { 
     static std::string name()       { return "revolution"; }
     static std::string symbol()     { return "rev"; }

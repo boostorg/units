@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<illuminance_type,SI::system>      illuminance;
+typedef unit<illuminance_dim,SI::system>      illuminance;
     
 BOOST_UNITS_STATIC_CONSTANT(lux,illuminance); 
 

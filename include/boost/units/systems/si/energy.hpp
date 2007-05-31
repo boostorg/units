@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<energy_type,SI::system>    energy;
+typedef unit<energy_dim,SI::system>    energy;
     
 BOOST_UNITS_STATIC_CONSTANT(joule,energy);  
 BOOST_UNITS_STATIC_CONSTANT(joules,energy); 

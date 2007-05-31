@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<luminous_intensity_type,SI::system>      luminous_intensity;
+typedef unit<luminous_intensity_dimension,SI::system>      luminous_intensity;
     
 BOOST_UNITS_STATIC_CONSTANT(candela,luminous_intensity); 
 BOOST_UNITS_STATIC_CONSTANT(candelas,luminous_intensity);    

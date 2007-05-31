@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<force_type,CGS::system>        force;
+typedef unit<force_dim,CGS::system>        force;
     
 BOOST_UNITS_STATIC_CONSTANT(dyne,force);
 BOOST_UNITS_STATIC_CONSTANT(dynes,force);

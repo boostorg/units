@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<amount_type,SI::system>    amount;
+typedef unit<amount_dimension,SI::system>    amount;
 
 BOOST_UNITS_STATIC_CONSTANT(mole,amount);
 BOOST_UNITS_STATIC_CONSTANT(moles,amount);

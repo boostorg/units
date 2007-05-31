@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<activity_type,SI::system>  activity;
+typedef unit<activity_dim,SI::system>  activity;
 
 BOOST_UNITS_STATIC_CONSTANT(becquerel,activity);
 BOOST_UNITS_STATIC_CONSTANT(becquerels,activity);

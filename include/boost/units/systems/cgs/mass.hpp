@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<mass_type,CGS::system>     mass;
+typedef unit<mass_dimension,CGS::system>     mass;
     
 BOOST_UNITS_STATIC_CONSTANT(gram,mass); 
 BOOST_UNITS_STATIC_CONSTANT(grams,mass);    

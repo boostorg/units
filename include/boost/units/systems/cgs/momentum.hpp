@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<momentum_type,CGS::system>     momentum;
+typedef unit<momentum_dim,CGS::system>     momentum;
 
 } // namespace CGS
 

@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<wavenumber_type,SI::system>    wavenumber;
+typedef unit<wavenumber_dim,SI::system>    wavenumber;
     
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_meter,wavenumber);   
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_meters,wavenumber);  

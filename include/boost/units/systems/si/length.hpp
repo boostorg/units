@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<length_type,SI::system>    length;
+typedef unit<length_dimension,SI::system>    length;
     
 BOOST_UNITS_STATIC_CONSTANT(meter,length);  
 BOOST_UNITS_STATIC_CONSTANT(meters,length); 

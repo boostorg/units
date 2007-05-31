@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<power_type,SI::system>     power;
+typedef unit<power_dim,SI::system>     power;
     
 BOOST_UNITS_STATIC_CONSTANT(watt,power);    
 BOOST_UNITS_STATIC_CONSTANT(watts,power);   

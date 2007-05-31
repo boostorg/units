@@ -30,7 +30,7 @@ namespace degree {
 typedef make_system<degree_tag>::type system;
 
 typedef unit<dimensionless_type,system>     dimensionless;
-typedef unit<plane_angle_type,system>       plane_angle;           ///< angle degree unit constant
+typedef unit<plane_angle_dimension,system>       plane_angle;           ///< angle degree unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(degree,plane_angle);
 BOOST_UNITS_STATIC_CONSTANT(degrees,plane_angle);

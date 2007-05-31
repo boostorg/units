@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<time_type,CGS::system>     time;
+typedef unit<time_dimension,CGS::system>     time;
 
 BOOST_UNITS_STATIC_CONSTANT(second,time);   
 BOOST_UNITS_STATIC_CONSTANT(seconds,time);  

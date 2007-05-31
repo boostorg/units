@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<luminous_flux_type,SI::system>      luminous_flux;
+typedef unit<luminous_flux_dim,SI::system>      luminous_flux;
     
 BOOST_UNITS_STATIC_CONSTANT(lumen,luminous_flux); 
 BOOST_UNITS_STATIC_CONSTANT(lumens,luminous_flux);    

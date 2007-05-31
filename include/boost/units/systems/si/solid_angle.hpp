@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<solid_angle_type,SI::system>      solid_angle;
+typedef unit<solid_angle_dimension,SI::system>      solid_angle;
     
 BOOST_UNITS_STATIC_CONSTANT(steradian,solid_angle); 
 BOOST_UNITS_STATIC_CONSTANT(steradians,solid_angle);    

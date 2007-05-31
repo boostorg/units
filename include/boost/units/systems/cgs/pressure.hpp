@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<pressure_type,CGS::system>     pressure;
+typedef unit<pressure_dim,CGS::system>     pressure;
     
 BOOST_UNITS_STATIC_CONSTANT(barye,pressure);    
 BOOST_UNITS_STATIC_CONSTANT(baryes,pressure);   

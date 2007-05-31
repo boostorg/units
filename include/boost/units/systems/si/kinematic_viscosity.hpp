@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<kinematic_viscosity_type,SI::system>     kinematic_viscosity;
+typedef unit<kinematic_viscosity_dim,SI::system>     kinematic_viscosity;
     
 } // namespace SI
 

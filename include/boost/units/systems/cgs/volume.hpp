@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<volume_type,CGS::system>   volume;
+typedef unit<volume_dim,CGS::system>   volume;
     
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimeter,volume);   
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimeters,volume);  

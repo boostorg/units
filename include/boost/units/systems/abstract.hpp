@@ -26,15 +26,15 @@ namespace units {
 
 namespace abstract {
 
-struct length_unit_tag : base_unit<length_unit_tag, length_type, -30> {};
-struct mass_unit_tag : base_unit<mass_unit_tag, mass_type, -29> {};
-struct time_unit_tag : base_unit<time_unit_tag, time_type, -28> {};
-struct current_unit_tag : base_unit<current_unit_tag, current_type, -27> {};
-struct temperature_unit_tag : base_unit<temperature_unit_tag, temperature_type, -26> {};
-struct amount_unit_tag : base_unit<amount_unit_tag, amount_type, -25> {};
-struct luminous_intensity_unit_tag : base_unit<luminous_intensity_unit_tag, luminous_intensity_type, -24> {};
-struct plane_angle_unit_tag : base_unit<plane_angle_unit_tag, plane_angle_type, -23> {};
-struct solid_angle_unit_tag : base_unit<solid_angle_unit_tag, solid_angle_type, -22> {};
+struct length_unit_tag : base_unit<length_unit_tag, length_dimension, -30> {};
+struct mass_unit_tag : base_unit<mass_unit_tag, mass_dimension, -29> {};
+struct time_unit_tag : base_unit<time_unit_tag, time_dimension, -28> {};
+struct current_unit_tag : base_unit<current_unit_tag, current_dimension, -27> {};
+struct temperature_unit_tag : base_unit<temperature_unit_tag, temperature_dimension, -26> {};
+struct amount_unit_tag : base_unit<amount_unit_tag, amount_dimension, -25> {};
+struct luminous_intensity_unit_tag : base_unit<luminous_intensity_unit_tag, luminous_intensity_dimension, -24> {};
+struct plane_angle_unit_tag : base_unit<plane_angle_unit_tag, plane_angle_dimension, -23> {};
+struct solid_angle_unit_tag : base_unit<solid_angle_unit_tag, solid_angle_dimension, -22> {};
 
 typedef make_system<
     length_unit_tag,
@@ -48,15 +48,15 @@ typedef make_system<
     solid_angle_unit_tag
 >::type system;
 
-typedef unit<length_type,system>                length;                 ///< abstract unit of length
-typedef unit<mass_type,system>                  mass;                   ///< abstract unit of mass
-typedef unit<time_type,system>                  time;                   ///< abstract unit of time
-typedef unit<current_type,system>               current;                ///< abstract unit of current
-typedef unit<temperature_type,system>           temperature;            ///< abstract unit of temperature
-typedef unit<amount_type,system>                amount;                 ///< abstract unit of amount
-typedef unit<luminous_intensity_type,system>    luminous_intensity;     ///< abstract unit of luminous intensity
-typedef unit<plane_angle_type,system>           plane_angle;            ///< abstract unit of plane angle
-typedef unit<solid_angle_type,system>           solid_angle;            ///< abstract unit of solid angle
+typedef unit<length_dimension,system>                length;                 ///< abstract unit of length
+typedef unit<mass_dimension,system>                  mass;                   ///< abstract unit of mass
+typedef unit<time_dimension,system>                  time;                   ///< abstract unit of time
+typedef unit<current_dimension,system>               current;                ///< abstract unit of current
+typedef unit<temperature_dimension,system>           temperature;            ///< abstract unit of temperature
+typedef unit<amount_dimension,system>                amount;                 ///< abstract unit of amount
+typedef unit<luminous_intensity_dimension,system>    luminous_intensity;     ///< abstract unit of luminous intensity
+typedef unit<plane_angle_dimension,system>           plane_angle;            ///< abstract unit of plane angle
+typedef unit<solid_angle_dimension,system>           solid_angle;            ///< abstract unit of solid angle
 
 } // namespace abstract
 

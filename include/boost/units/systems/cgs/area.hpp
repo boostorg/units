@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<area_type,CGS::system>     area;
+typedef unit<area_dim,CGS::system>     area;
     
 BOOST_UNITS_STATIC_CONSTANT(square_centimeter,area);
 BOOST_UNITS_STATIC_CONSTANT(square_centimeters,area);

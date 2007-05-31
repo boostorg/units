@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<mass_density_type,SI::system>  mass_density;
+typedef unit<mass_density_dim,SI::system>  mass_density;
 
 BOOST_UNITS_STATIC_CONSTANT(kilogram_per_cubic_meter,mass_density);
 BOOST_UNITS_STATIC_CONSTANT(kilograms_per_cubic_meter,mass_density);

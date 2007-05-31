@@ -19,7 +19,7 @@ namespace units {
 
 namespace CGS {
 
-typedef unit<length_type,CGS::system>   length;
+typedef unit<length_dimension,CGS::system>   length;
     
 BOOST_UNITS_STATIC_CONSTANT(centimeter,length); 
 BOOST_UNITS_STATIC_CONSTANT(centimeters,length);    

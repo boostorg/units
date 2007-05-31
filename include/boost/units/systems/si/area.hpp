@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<area_type,SI::system>      area;
+typedef unit<area_dim,SI::system>      area;
     
 BOOST_UNITS_STATIC_CONSTANT(square_meter,area);
 BOOST_UNITS_STATIC_CONSTANT(square_meters,area);

@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-typedef unit<momentum_type,SI::system>  momentum;
+typedef unit<momentum_dim,SI::system>  momentum;
 
 } // namespace SI
 
