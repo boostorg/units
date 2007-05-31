@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_DYNAMIC_VISCOSITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/dynamic_viscosity_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/dynamic_viscosity.hpp>
 
 namespace boost {
 

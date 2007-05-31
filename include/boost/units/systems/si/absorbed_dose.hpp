@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_ABSORBED_DOSE_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/absorbed_dose_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/absorbed_dose.hpp>
 
 namespace boost {
 

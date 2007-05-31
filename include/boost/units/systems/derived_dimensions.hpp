@@ -16,30 +16,30 @@
 ///
 /// \detailed This file includes a number of common derived physical dimensions.
 
-#include <boost/units/systems/derived_dimensions/absorbed_dose_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/acceleration_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/action_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/activity_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/angular_velocity_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/area_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/dose_equivalent_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/dynamic_viscosity_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/energy_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/force_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/frequency_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/illuminance_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/kinematic_viscosity_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/luminance_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/luminous_flux_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/mass_density_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/momentum_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/power_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/pressure_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/specific_volume_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/stress_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/surface_density_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/velocity_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/volume_derived_dimension.hpp>
-#include <boost/units/systems/derived_dimensions/wavenumber_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/absorbed_dose.hpp>
+#include <boost/units/systems/physical_dimensions/acceleration.hpp>
+#include <boost/units/systems/physical_dimensions/action.hpp>
+#include <boost/units/systems/physical_dimensions/activity.hpp>
+#include <boost/units/systems/physical_dimensions/angular_velocity.hpp>
+#include <boost/units/systems/physical_dimensions/area.hpp>
+#include <boost/units/systems/physical_dimensions/dose_equivalent.hpp>
+#include <boost/units/systems/physical_dimensions/dynamic_viscosity.hpp>
+#include <boost/units/systems/physical_dimensions/energy.hpp>
+#include <boost/units/systems/physical_dimensions/force.hpp>
+#include <boost/units/systems/physical_dimensions/frequency.hpp>
+#include <boost/units/systems/physical_dimensions/illuminance.hpp>
+#include <boost/units/systems/physical_dimensions/kinematic_viscosity.hpp>
+#include <boost/units/systems/physical_dimensions/luminance.hpp>
+#include <boost/units/systems/physical_dimensions/luminous_flux.hpp>
+#include <boost/units/systems/physical_dimensions/mass_density.hpp>
+#include <boost/units/systems/physical_dimensions/momentum.hpp>
+#include <boost/units/systems/physical_dimensions/power.hpp>
+#include <boost/units/systems/physical_dimensions/pressure.hpp>
+#include <boost/units/systems/physical_dimensions/specific_volume.hpp>
+#include <boost/units/systems/physical_dimensions/stress.hpp>
+#include <boost/units/systems/physical_dimensions/surface_density.hpp>
+#include <boost/units/systems/physical_dimensions/velocity.hpp>
+#include <boost/units/systems/physical_dimensions/volume.hpp>
+#include <boost/units/systems/physical_dimensions/wavenumber.hpp>
 
 #endif // BOOST_UNITS_DERIVED_DIMENSIONS_HPP

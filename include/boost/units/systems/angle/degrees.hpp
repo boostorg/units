@@ -15,11 +15,10 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/io.hpp>
-#include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
+#include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_units.hpp>
-#include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/base_units/degree_base_unit.hpp>
 
 namespace boost {
 
@@ -29,8 +28,8 @@ namespace degree {
 
 typedef make_system<degree_base_unit>::type system;
 
-typedef unit<dimensionless_type,system>     dimensionless;
-typedef unit<plane_angle_dimension,system>       plane_angle;           ///< angle degree unit constant
+typedef unit<dimensionless_type,system>         dimensionless;
+typedef unit<plane_angle_dimension,system>      plane_angle;           ///< angle degree unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(degree,plane_angle);
 BOOST_UNITS_STATIC_CONSTANT(degrees,plane_angle);

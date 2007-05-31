@@ -16,8 +16,7 @@
 #include <boost/units/absolute.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_units.hpp>
-#include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/base_units/celsius_base_unit.hpp>
 
 namespace boost {
 

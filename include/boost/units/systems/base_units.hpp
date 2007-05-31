@@ -37,6 +37,7 @@
 #include <boost/units/systems/base_units/minute_base_unit.hpp>
 #include <boost/units/systems/base_units/mole_base_unit.hpp>
 #include <boost/units/systems/base_units/radian_base_unit.hpp>
+#include <boost/units/systems/base_units/revolution_base_unit.hpp>
 #include <boost/units/systems/base_units/second_base_unit.hpp>
 #include <boost/units/systems/base_units/steradian_base_unit.hpp>
 #include <boost/units/systems/base_units/yard_base_unit.hpp>
@@ -69,6 +70,7 @@ BOOST_UNITS_DEFINE_AFFINE_CONVERSION(boost::units::celsius_base_unit::unit_type,
 
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_base_unit, boost::units::degree_base_unit::unit_type, double, 180/3.14159265358979323846);
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_base_unit, boost::units::gradian_base_unit::unit_type, double, 200/3.14159265358979323846);
+BOOST_UNITS_DEFINE_CONVERSION(boost::units::radian_base_unit, boost::units::revolution_base_unit::unit_type, double, 0.5/3.14159265358979323846);
 BOOST_UNITS_DEFINE_CONVERSION(boost::units::degree_base_unit, boost::units::gradian_base_unit::unit_type, double, 10/9.);
 
 #endif // BOOST_UNITS_OTHER_UNITS_HPP_INCLUDED

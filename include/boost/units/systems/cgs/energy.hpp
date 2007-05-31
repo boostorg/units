@@ -12,7 +12,7 @@
 #define BOOST_UNITS_CGS_ENERGY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/derived_dimensions/energy_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/energy.hpp>
 
 namespace boost {
 

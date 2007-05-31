@@ -18,8 +18,7 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_units.hpp>
-#include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/base_units/gradian_base_unit.hpp>
 
 namespace boost {
 
@@ -29,8 +28,8 @@ namespace gradian {
 
 typedef make_system<gradian_base_unit>::type system;
 
-typedef unit<dimensionless_type,system>     dimensionless;
-typedef unit<plane_angle_dimension,system>       plane_angle;          ///< angle gradian unit constant
+typedef unit<dimensionless_type,system>         dimensionless;
+typedef unit<plane_angle_dimension,system>      plane_angle;          ///< angle gradian unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(gradian,plane_angle);
 BOOST_UNITS_STATIC_CONSTANT(gradians,plane_angle);

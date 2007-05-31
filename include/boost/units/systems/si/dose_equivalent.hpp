@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_DOSE_EQUIVALENT_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/dose_equivalent_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/dose_equivalent.hpp>
 
 namespace boost {
 

@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_ILLUMINANCE_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/illuminance_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/illuminance.hpp>
 
 namespace boost {
 

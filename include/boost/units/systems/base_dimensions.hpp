@@ -20,14 +20,14 @@
 /// However, incorrect use of degrees and radians is a common source of errors, 
 /// so we treat them on the same footing as the seven physical dimensions.
 
-#include <boost/units/systems/base_dimensions/amount_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/current_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/length_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/luminous_intensity_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/mass_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/plane_angle_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/solid_angle_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/temperature_base_dimension.hpp>
-#include <boost/units/systems/base_dimensions/time_base_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/amount.hpp>
+#include <boost/units/systems/physical_dimensions/current.hpp>
+#include <boost/units/systems/physical_dimensions/length.hpp>
+#include <boost/units/systems/physical_dimensions/luminous_intensity.hpp>
+#include <boost/units/systems/physical_dimensions/mass.hpp>
+#include <boost/units/systems/physical_dimensions/plane_angle.hpp>
+#include <boost/units/systems/physical_dimensions/solid_angle.hpp>
+#include <boost/units/systems/physical_dimensions/temperature.hpp>
+#include <boost/units/systems/physical_dimensions/time.hpp>
 
 #endif // BOOST_UNITS_BASE_DIMENSIONS_HPP

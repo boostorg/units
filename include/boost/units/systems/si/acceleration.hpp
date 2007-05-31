@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_ACCELERATION_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/acceleration_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/acceleration.hpp>
 
 namespace boost {
 

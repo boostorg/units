@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_ACTIVITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/activity_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/activity.hpp>
 
 namespace boost {
 

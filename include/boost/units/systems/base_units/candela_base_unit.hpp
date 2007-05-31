@@ -15,7 +15,7 @@
 
 #include <boost/units/config.hpp>
 #include <boost/units/base_unit.hpp>
-#include <boost/units/systems/base_dimensions/luminous_intensity_base_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/luminous_intensity.hpp>
 
 namespace boost {
 

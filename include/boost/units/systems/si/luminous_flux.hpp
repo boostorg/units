@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_LUMINOUS_FLUX_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/luminous_flux_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/luminous_flux.hpp>
 
 namespace boost {
 

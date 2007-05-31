@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_KINEMATIC_VISCOSITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/kinematic_viscosity_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/kinematic_viscosity.hpp>
 
 namespace boost {
 

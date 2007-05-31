@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_FREQUENCY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/derived_dimensions/frequency_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/frequency.hpp>
 
 namespace boost {
 

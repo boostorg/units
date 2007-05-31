@@ -15,7 +15,7 @@
 
 #include <boost/units/config.hpp>
 #include <boost/units/base_unit.hpp>
-#include <boost/units/systems/base_dimensions/current_base_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/current.hpp>
 
 namespace boost {
 

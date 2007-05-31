@@ -12,7 +12,7 @@
 #define BOOST_UNITS_CGS_FORCE_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/derived_dimensions/force_derived_dimension.hpp>
+#include <boost/units/systems/physical_dimensions/force.hpp>
 
 namespace boost {
 
