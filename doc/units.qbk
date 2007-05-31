@@ -1,6 +1,6 @@
 [library Boost.Units
   [quickbook 1.3]
-  [version 0.8.0]
+  [version 0.9.0]
   [authors [Schabel, Matthias C.]]
   [authors [Watanabe, Steven]]
   [copyright 2003-2007 Matthias Christian Schabel, 2007 Steven Watanabe]
@@ -31,7 +31,7 @@
 [def __subtract_typeof_helper [classref boost::units::subtract_typeof_helper subtract_typeof_helper]]
 [def __multiply_typeof_helper [classref boost::units::multiply_typeof_helper multiply_typeof_helper]]
 [def __divide_typeof_helper [classref boost::units::divide_typeof_helper divide_typeof_helper]]
-[def __power_typeof_helper [classref boost::units::power_typeof_helper power_typeof_helper]]
+[def __power_dimof_helper [classref boost::units::power_dimof_helper power_dimof_helper]]
 [def __root_typeof_helper [classref boost::units::root_typeof_helper root_typeof_helper]]
 
 [def __static_negate [classref boost::units::static_negate static_negate]]
@@ -64,9 +64,10 @@ provide dimension checking in performance-critical code. Support for units
 and quantities (defined as a unit and associated value) for arbitrary unit system models and arbitrary  
 value types is provided, as is a fine-grained general facility for unit conversions. Complete SI and CGS unit 
 systems are provided, along with systems for 
-angles measured in degrees, gradians and systems for temperatures measured in degrees Celsius or Fahrenheit. 
+angles measured in degrees, radians, gradians, and revolutions and 
+systems for temperatures measured in Kelvin, degrees Celsius or Fahrenheit. 
 The library architecture has been designed with flexibility and extensibility in mind; demonstrations of the ease
-of adding new units and new unit systems are provided in the examples.
+of adding new units and unit conversions are provided in the examples.
 
 In order to enable complex compile-time dimensional analysis calculations with no runtime overhead,
 Boost.Units relies heavily on the [___boost_mpl] (MPL) and on template metaprogramming techniques, and is, as a consequence, 
@@ -74,6 +75,7 @@ fairly demanding of compiler compliance to ISO standards. At present, it has bee
 compiled and tested on the following compilers/platforms :
 
 # g++ 4.0.1 on Mac OSX 10.4
+# Intel CC 9.1 on Mac OSX 10.4
 # g++ 3.4.4 on Windows XP
 # Microsoft Visual C++ 7.1 on Windows XP
 # Microsoft Visual C++ 8.0 on Windows XP
@@ -81,10 +83,10 @@ compiled and tested on the following compilers/platforms :
 
 The following compilers/platforms are known *not* to work :
 
+# g++ 3.3.x
 # Microsoft Visual C++ 6.0 on Windows XP
 # Microsoft Visual C++ 7.0 on Windows XP
 # Metrowerks CodeWarrior 8.0 on Windows XP.
-# g++ 3.3.x
 
 [endsect]
 
@@ -93,19 +95,22 @@ The following compilers/platforms are known *not* to work :
 Before discussing the basics of the library, we first define a few terms that will be used frequently
 in the following :
 
-*  *Base dimension* : A base dimension is defined as a measurable entity that forms a component of the basis
-   of a unit system. The SI unit system defines seven base dimensions : length \[L\], mass \[M\], time \[T\], 
-   current \[I\], temperature \[theta\], amount \[N\], and luminous intensity \[J\].
+*  *Base dimension* : A base dimension is loosely defined as a measurable entity of interest; in conventional 
+   dimensional analysis, base dimensions include length (\[L\]), mass (\[M\]), time (\[T\]), etc... 
 *  *Derived dimension* : A collection of one or more base dimensions, each
    potentially raised to a different rational power. For example, area = \[L\]^2, velocity = \[L\]/\[T\], and
    energy = \[M\] \[L\]^2/\[T\]^2 are all derived dimensions.
 *  *Dimension* : The general term dimension is used to refer to either a base or a derived dimension.
 *  *Base unit* : A base unit represents a specific measure of a base dimension. While length is an abstract measure of
-   distance, the meter is the concrete base unit of distance in the SI system. 
+   distance, the meter is a concrete base unit of distance. 
 *  *Derived unit* : Derived units represent a specific measure of a derived dimension.
 *  *Unit* : The general term unit is used to refer to either a base or a derived unit.
+*  *System* : A unit system is a collection of units representing all the measurable entities of interest for a 
+   specific problem. For example, the SI unit system defines seven base units : length (\[L\]) in meters, 
+   mass (\[M\]) in kilograms, time (\[T\]) in seconds, current (\[I\]) in amperes, temperature (\[theta\]) in kelvin, 
+   amount (\[N\]) in moles, and luminous intensity (\[J\]) in candelas. 
 *  *Base quantity* : A base quantity represents a concrete amount of a base unit. Thus, while the meter is the base 
-   unit of length in the SI system, 5.5 meters is a base quantity of length in that system. 
+   unit of length in the SI system, 5.5 meters is a base quantity in that system. 
 *  *Derived quantity* : Derived quantities represent a concrete amount of a derived unit.
 *  *Quantity* : The general term quantity is used to refer to either a base or a derived quantity.
 
@@ -128,11 +133,11 @@ The intent and function of the above code should be obvious; the output produced
 
 [tutorial_output]
 
-While this library attempts to make simple dimensionsional computations easy to code, it is in no way
+While this library attempts to make simple dimensional computations easy to code, it is in no way
 tied to any particular unit system (SI or otherwise). Instead, it provides a highly flexible compile-time
-system for dimensional analysis, supporting arbitrary collections of fundamental dimensions, rational 
+system for dimensional analysis, supporting arbitrary collections of base dimensions, rational 
 powers of units, and both explicit and implicit quantity conversions, controllable on a per fundamental
-dimension basis. In addition, it accomplishes all of this via template metaprogramming techniques. With 
+dimension basis. It accomplishes all of this via template metaprogramming techniques. With 
 modern optimizing compilers, this results in zero runtime overhead for quantity computations relative to the 
 same code without unit checking.
 
@@ -148,24 +153,25 @@ correctness of an equation or computation by propagating the physical measuremen
 of various quantities through the equation along with their numerical values. There are a number of standard 
 unit systems in common use, the most prominent of which is the 
 [@http://en.wikipedia.org/wiki/SI_units Systeme International] 
-(also known as SI or MKS, for meter-kilogram-second, three of the fundamental dimensions on which the system is based), 
-which is the international standard unit system and is widely utilized in science and engineering. 
+(also known as SI or MKS (meter-kilogram-second), which was a metric predecessor to the SI system named 
+for three of the base units on which the system is based). The SI  
+is the only official international standard unit system and is widely utilized in science and engineering. 
 Other common systems include the [@http://en.wikipedia.org/wiki/Cgs_units CGS]
 (centimeter-gram-second) system and the 
 [@http://en.wikipedia.org/wiki/English_units English]
 system still in use in some problem domains in the United States and elsewhere. In physics, 
 there also exist a number of other systems that are in common use in specialized subdisciplines. These are 
 collectively referred to as [@http://en.wikipedia.org/wiki/Natural_units natural units]. When 
-quantities representing different physical quantities are combined, dimensional analysis provides the means of 
+quantities representing different measurables are combined, dimensional analysis provides the means of 
 assessing the consistency of the resulting calculation. For example, the sum of two lengths is also a length, 
-while the product of two lengths is an area, and the sum of a length and an area is undefined. Similarly, the 
-arguments to many functions (such as exp, log, etc...) must be dimensionless quantities, as can be easily seen by 
-examining their series expansions. This requirement can also be enforced in code involving dimensioned quantities
-where appropriate.
+while the product of two lengths is an area, and the sum of a length and an area is undefined. The fact that the
+arguments to many functions (such as exp, log, etc...) must be dimensionless quantities can be easily demonstrated by 
+examining their series expansions in the context of dimensional analysis. This library facilitates the enforcement 
+of this type of restriction in code involving dimensioned quantities where appropriate.
 
-In the following, we view dimensional analysis as an abstraction in which an arbitrary set of 
+In the following discussion we view dimensional analysis as an abstraction in which an arbitrary set of 
 [@http://en.wikipedia.org/wiki/Fundamental_units units] obey the rules of a specific algebra. 
-We will refer to a pair of a fundamental unit and a rational exponent as a *fundamental dimension*, 
+We will refer to a pair of a base dimension and a rational exponent as a *fundamental dimension*, 
 and a list composed of an arbitrary number of fundamental dimensions as a *composite dimension* or, simply,
 *dimension*. In particular, given a set of [$form_0.png] fundamental dimensions denoted by [$form_1.png] and
 a set of [$form_0.png] rational exponents [$form_2.png], any possible (composite) dimension can be written
@@ -182,7 +188,7 @@ Users of a dimensional analysis library should be able to specify an arbitrary l
 produce a composite dimension. This potentially includes both repeated tags and dimensionless tags. For example, 
 it should be possible to express energy as [$form_9.png], [$form_10.png], 
 [$form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
-1, 2, and -2, respectively. In addition, in some cases, multiple fundamental dimensions representing the same dimension 
+1, 2, and -2, respectively. In addition, in some cases, multiple distinct fundamental dimensions representing the same dimension 
 measured in different unit systems may appear. In order to be able to perform computations on arbitrary sets of dimensions, 
 all composite dimensions must be reducible to an unambiguous final composite dimension, which we will refer to as a 
 *reduced dimension*, for which
@@ -264,7 +270,7 @@ In addition to supporting the compile-time dimensional analysis operations, the 
 for [___unit] variables. Because the dimension associated with powers and roots must be computed at compile-time, it is not 
 possible to provide overloads for `std::pow` that function correctly for [___unit]s. These operations are supported through 
 free functions [___pow] and [___root] that are templated on integer and [___static_rational] values and can take as an argument 
-any type for which the utility classes [___power_typeof_helper] and [___root_typeof_helper] have been defined.
+any type for which the utility classes [___power_dimof_helper] and [___root_typeof_helper] have been defined.
 
 As an example, in the following we will implement a subset of the SI unit system based on the fundamental dimensions 
 given above, demonstrating all steps necessary for a completely functional system. First, we simply define a unit system
@@ -404,9 +410,9 @@ to produce new composite dimensions :
 
 [unit_example_1_snippet_1]
 
-    typedef static_multiply<length_type,mass_type>::type                                       LM_type;
-    typedef static_divide<length_type,time_type>::type                                         L_T_type;
-    typedef static_root<static_divide<energy_type,mass_type>::type,static_rational<2> >::type  V_type;
+    typedef static_multiply<length_dimension,mass_dimension>::type                                       LM_type;
+    typedef static_divide<length_dimension,time_dimension>::type                                         L_T_type;
+    typedef static_root<static_divide<energy_dimension,mass_dimension>::type,static_rational<2> >::type  V_type;
 
 outputting (with symbol demangling, implemented in [headerref boost/units/detail/utility.hpp])
 
@@ -559,7 +565,7 @@ User-defined value types that support the appropriate arithmetic operations are 
 as quantity value types. The operators that are supported by default for quantity value types are unary plus, unary minus,
 addition, subtraction, multiplication, division, equal-to, not-equal-to, less-than, less-or-equal-to, 
 greater-than, and greater-or-equal-to. Support for rational powers and roots can be added by overloading
-the [___power_typeof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
+the [___power_dimof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
 class that models a numerical measurement with an associated measurement error and the appropriate algebra and
 demonstrates its use as a quantity value type; the full code is found in [@../examples/measurement.hpp measurement.hpp]:
 
@@ -693,7 +699,7 @@ gives the following:
 ([@../examples/unit_example_8.cpp unit_example_8.cpp])
 
 This example demonstrates the use of `boost::math::quaternion` as a value type for  [___quantity] and the converse.
-For the first case, we first define specializations of [___power_typeof_helper] and [___root_typeof_helper] for 
+For the first case, we first define specializations of [___power_dimof_helper] and [___root_typeof_helper] for 
 powers and roots, respectively:
 
 [import ../example/unit_example_8.cpp]
@@ -719,7 +725,7 @@ the multiplication and division operations fail because `quaternion` implements 
 `/=` operators, respectively, which are incapable of representing the heterogenous unit algebra needed for 
 quantities (an identical problem 
 occurs with `std::complex<T>`, for the same reason). In order to compute rational powers and roots, we need to 
-specialize [___power_typeof_helper] and [___root_typeof_helper] as follows:
+specialize [___power_dimof_helper] and [___root_typeof_helper] as follows:
 
 [unit_example_8_class_snippet_2]
 
@@ -738,7 +744,7 @@ quantity value type and as a quantity container class, including heterogeneous m
 operations and rational powers and roots. Naturally, heterogeneous operations are only supported on
 compilers that implement `typeof`. The primary differences are that binary operations are not implemented
 using the `op=` operators and use the utility classes [___add_typeof_helper], [___subtract_typeof_helper], 
-[___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_typeof_helper] and
+[___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_dimof_helper] and
 [___root_typeof_helper] are defined for both cases :
 
 [import ../example/unit_example_9.cpp]
@@ -1259,7 +1265,7 @@ the design and implementation of this library.
 
 * completely reimplemented SI and CGS unit systems and changed syntax for quantities
 * significantly streamlined `pow` and `root` so for most applications it is only
-  necessary to define `power_typeof_helper` and `root_typeof_helper` to gain this
+  necessary to define `power_dimof_helper` and `root_typeof_helper` to gain this
   functionality
 * added a selection of physical constants from the CODATA tables
 * added a skeleton `complex` class that correctly supports both `complex<quantity<Y,Unit> >`
