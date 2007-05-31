@@ -12,6 +12,7 @@
 #define BOOST_UNITS_CGS_AREA_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
+#include <boost/units/systems/derived_dimensions/area_derived_dimension.hpp>
 
 namespace boost {
 
