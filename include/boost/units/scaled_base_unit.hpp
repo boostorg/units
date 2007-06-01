@@ -55,7 +55,7 @@ struct scale<Base, static_rational<0> > {
 
 #define BOOST_UNITS_SCALE_SPECIALIZATION(base_,exponent_,val,name,symbol)   \
 template<>                                                                  \
-struct scale<base_, exponent_>                                              \
+struct scale<base_, exponent_ >                                             \
 {                                                                           \
     static const long base = base_;                                         \
     typedef exponent_ exponent;                                             \
@@ -155,7 +155,7 @@ struct unscale {
 
 template<class S, class Scale>
 struct unscale<scaled_base_unit<S, Scale> > {
-    typedef S type;
+    typedef typename unscale<S>::type type;
 };
 
 template<class D, class S>
@@ -176,7 +176,7 @@ struct get_scale_list {
 
 template<class S, class Scale>
 struct get_scale_list<scaled_base_unit<S, Scale> > {
-    typedef dimension_list<scale_list_dim<Scale>, dimensionless_type> type;
+    typedef typename mpl::times<dimension_list<scale_list_dim<Scale>, dimensionless_type>, typename get_scale_list<S>::type>::type type;
 };
 
 template<class D, class S>
