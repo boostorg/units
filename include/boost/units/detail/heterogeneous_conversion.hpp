@@ -104,7 +104,7 @@ template<>
 struct make_solve_list_internal_zero<static_rational<0> > {
     template<class Next, class X>
     struct apply {
-        typedef typename solve_internal_zero<Next> type;
+        typedef solve_internal_zero<Next> type;
     };
 };
 
