@@ -14,6 +14,7 @@
 #include <boost/mpl/list/list10.hpp>
 
 #include <boost/units/config.hpp>
+#include <boost/units/static_rational.hpp>
 #include <boost/units/detail/sort.hpp>
 
 #ifdef BOOST_UNITS_CHECK_HOMOGENEOUS_UNITS
@@ -95,47 +96,47 @@ struct make_system<> {
 };
 
 template<class T0>
-struct make_system<T0> {
+struct make_system<T0, na, na, na, na, na, na, na, na, na> {
     typedef homogeneous_system<dimension_list<T0, dimensionless_type> > type;
 };
 
 template<class T0, class T1>
-struct make_system<T0, T1> {
+struct make_system<T0, T1, na, na, na, na, na, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list2<T0, T1> >::type> type;
 };
 
 template<class T0, class T1, class T2>
-struct make_system<T0, T1, T2> {
+struct make_system<T0, T1, T2, na, na, na, na, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list3<T0, T1, T2> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3>
-struct make_system<T0, T1, T2, T3> {
+struct make_system<T0, T1, T2, T3, na, na, na, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list4<T0, T1, T2, T3> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3, class T4>
-struct make_system<T0, T1, T2, T3, T4> {
+struct make_system<T0, T1, T2, T3, T4, na, na, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list5<T0, T1, T2, T3, T4> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3, class T4, class T5>
-struct make_system<T0, T1, T2, T3, T4, T5> {
+struct make_system<T0, T1, T2, T3, T4, T5, na, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list6<T0, T1, T2, T3, T4, T5> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3, class T4, class T5, class T6>
-struct make_system<T0, T1, T2, T3, T4, T5, T6> {
+struct make_system<T0, T1, T2, T3, T4, T5, T6, na, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list7<T0, T1, T2, T3, T4, T5, T6> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-struct make_system<T0, T1, T2, T3, T4, T5, T6, T7> {
+struct make_system<T0, T1, T2, T3, T4, T5, T6, T7, na, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list8<T0, T1, T2, T3, T4, T5, T6, T7> >::type> type;
 };
 
 template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
-struct make_system<T0, T1, T2, T3, T4, T5, T6, T7, T8> {
+struct make_system<T0, T1, T2, T3, T4, T5, T6, T7, T8, na> {
     typedef homogeneous_system<typename detail::bubble_sort<mpl::list9<T0, T1, T2, T3, T4, T5, T6, T7, T8> >::type> type;
 };
 

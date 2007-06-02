@@ -61,6 +61,15 @@ struct is_non_narrowing_conversion :
 template<>
 struct is_non_narrowing_conversion<long double, double> : mpl::false_ {};
 
+// msvc 7.1 needs extra disambiguation
+template<class T, class U>
+struct disable_if_is_same {
+	typedef void type;
+};
+
+template<class T>
+struct disable_if_is_same<T, T> {};
+
 }
  
 /// class declaration
@@ -149,7 +158,8 @@ class quantity
                         //units are not convertible at all
                         typename is_implicitly_convertible<Unit2,Unit>::type,
                         detail::is_non_narrowing_conversion<YY, Y>
-                    >
+                    >,
+					typename detail::disable_if_is_same<Unit, Unit2>::type
                  >::type* = 0)
              : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
@@ -164,7 +174,8 @@ class quantity
                      mpl::and_<
                          typename is_implicitly_convertible<Unit2,Unit>::type,
                          detail::is_non_narrowing_conversion<YY, Y>
-                     >
+                     >,
+					typename detail::disable_if_is_same<Unit, Unit2>::type
                  >::type* = 0)
              : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
@@ -339,7 +350,8 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
         quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
-            typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y> >::type* = 0) :
+            typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y>,
+			typename detail::disable_if_is_same<SystemTag, System2>::type>::type* = 0) :
             val_(source.value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -348,7 +360,8 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
         explicit quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
-            typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y> >::type* = 0) :
+            typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y>,
+			typename detail::disable_if_is_same<SystemTag, System2>::type>::type* = 0) :
             val_(static_cast<Y>(source.value())) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);

@@ -29,6 +29,7 @@ kg s^(-3) K^(-1)
 
 #include <iostream>
 
+#include <boost/units/cmath.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/cgs/acceleration.hpp>
