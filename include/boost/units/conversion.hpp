@@ -23,6 +23,7 @@
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
+#include <boost/units/detail/heterogeneous_conversion.hpp>
 
 namespace boost {
 
@@ -260,6 +261,28 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
                 typename mpl::begin<typename L2::type>::type,
                 homogeneous_system<L1>
             >::value()
+            ));
+    }
+};
+
+template<class D, class S1, class T1, class S2, class T2>
+struct conversion_helper<quantity<unit<D, heterogeneous_system<S1> >, T1>, quantity<unit<D, heterogeneous_system<S2> >, T2> > {
+    typedef quantity<unit<D, heterogeneous_system<S1> >, T1> source_type;
+    typedef quantity<unit<D, heterogeneous_system<S2> >, T2> destination_type;
+    typedef typename detail::extract_base_units<mpl::size<typename S1::type>::value>::template apply<typename mpl::begin<typename S1::type>::type, mpl::list0<> >::type from_base_units;
+    typedef typename detail::extract_base_units<mpl::size<typename S2::type>::value>::template apply<typename mpl::begin<typename S2::type>::type, from_base_units>::type all_base_units;
+    typedef typename detail::make_homogeneous_system<all_base_units>::type system;
+    static destination_type convert(const source_type& source) {
+        return(destination_type::from_value(source.value() * 
+            (detail::conversion_impl<mpl::size<typename S1::type>::value>::template apply<
+                typename mpl::begin<typename S1::type>::type,
+                system
+            >::value() /
+            detail::conversion_impl<mpl::size<typename S2::type>::value>::template apply<
+                typename mpl::begin<typename S2::type>::type,
+                system
+            >::value()
+            )
             ));
     }
 };

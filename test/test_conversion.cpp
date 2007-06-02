@@ -64,9 +64,9 @@ int test_main(int,char *[])
     bu::quantity<mixed_energy_1> e1(2.0 * mixed_energy_1());
 
     //heterogeneous->heterogeneous is broken
-    //bu::quantity<mixed_energy_2> e2(e1);
+    bu::quantity<mixed_energy_2> e2(e1);
 
-    //BOOST_CHECK((std::abs(e2.value() - 20.0) < .0001));
+    BOOST_CHECK((std::abs(e2.value() - 20.0) < .0001));
 
     bu::quantity<bu::SI::energy> e3(e1);
     BOOST_CHECK((std::abs(e3.value() - .0002) < .0001));
@@ -102,15 +102,15 @@ int test_main(int,char *[])
 
     typedef bu::multiply_typeof_helper<bu::SI::length, bu::CGS::length>::type m_cm;
     typedef bu::divide_typeof_helper<m_cm, m_cm>::type heterogeneous_dimensionless;
-//    bu::quantity<heterogeneous_dimensionless> dimensionless_test2(1.0*bu::CGS::dyne/bu::SI::newton);
-//    BOOST_CHECK(dimensionless_test2.value() == 1e-5);
-//    bu::quantity<bu::divide_typeof_helper<bu::CGS::force, bu::SI::force>::type> dimensionless_test3(dimensionless_test2);
-//    BOOST_UNITS_CHECK_CLOSE(dimensionless_test3.value(), 1.0);
+    bu::quantity<heterogeneous_dimensionless> dimensionless_test2(1.0*bu::CGS::dyne/bu::SI::newton);
+    BOOST_CHECK(dimensionless_test2.value() == 1e-5);
+    bu::quantity<bu::divide_typeof_helper<bu::CGS::force, bu::SI::force>::type> dimensionless_test3(dimensionless_test2);
+    BOOST_UNITS_CHECK_CLOSE(dimensionless_test3.value(), 1.0);
 
     //m/cm -> g/kg
-//    bu::quantity<bu::divide_typeof_helper<bu::SI::length, bu::CGS::length>::type> dimensionless_test4(2.0 * bu::SI::meters / bu::CGS::centimeters);
-//    bu::quantity<bu::divide_typeof_helper<bu::CGS::mass, bu::SI::mass>::type> dimensionless_test5(dimensionless_test4);
-//    BOOST_UNITS_CHECK_CLOSE(dimensionless_test5.value(), 2e5);
+    bu::quantity<bu::divide_typeof_helper<bu::SI::length, bu::CGS::length>::type> dimensionless_test4(2.0 * bu::SI::meters / bu::CGS::centimeters);
+    bu::quantity<bu::divide_typeof_helper<bu::CGS::mass, bu::SI::mass>::type> dimensionless_test5(dimensionless_test4);
+    BOOST_UNITS_CHECK_CLOSE(dimensionless_test5.value(), 2e5);
 
     return(0);
 }
