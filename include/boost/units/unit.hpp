@@ -11,13 +11,15 @@
 #ifndef BOOST_UNITS_UNIT_HPP
 #define BOOST_UNITS_UNIT_HPP
 
+#include <boost/static_assert.hpp>
 #include <boost/mpl/bool_fwd.hpp>
 
+#include <boost/units/config.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/detail/unit_impl.hpp>
-#include <boost/units/make_system.hpp>
 
 namespace boost {
 
@@ -60,66 +62,6 @@ namespace boost {
 
 namespace units {
 
-/// class to specialize for IO
-//template<class SystemTag,class DimensionTag> struct unit_info;
-//
-///// utility class to simplify construction of dimensionless units in a system
-//template<class System>
-//struct dimensionless_unit
-//{
-//    typedef unit<dimensionless_type,System> type;
-//};
-//
-//template<class T>
-//struct is_unit : 
-//    public mpl::false_
-//{ };
-//
-///// check that a type is a unit
-//template<class Dim,class System>
-//struct is_unit< unit<Dim,System> > :
-//    public mpl::true_
-//{ };
-//
-//template<class T,class System>
-//struct is_unit_of_system :
-//    public mpl::false_
-//{ };
-//
-//template<class T,class Dim>
-//struct is_unit_of_dimension :
-//    public mpl::false_
-//{ };
-//
-///// check that a type is a unit of the specified dimension
-//template<class Dim,class System>
-//struct is_unit_of_dimension< unit<Dim,System>,Dim > :
-//    public mpl::true_
-//{ };
-//
-///// check that a type is a dimensionless unit
-//template<class T>
-//struct is_dimensionless_unit :
-//    public is_unit_of_dimension<T,dimensionless_type>
-//{ };
-//    
-///// check that a type is a unit in a specified system
-//template<class Dim,class System>
-//struct is_unit_of_system< unit<Dim,System>,System > :
-//    public mpl::true_
-//{ };
-
-//template<class T>
-//struct is_dimensionless :
-//    public mpl::false_
-//{ };
-//
-///// check if a unit is dimensionless
-//template<class System>
-//struct is_dimensionless< unit<dimensionless_type,System> > :
-//    public mpl::true_
-//{ };
-
 //template<class S1,class S2> struct is_implicitly_convertible;
 
 #ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
@@ -137,95 +79,18 @@ struct is_implicitly_convertible :
 
 #endif
 
-///// Determine if two homogeneous units are implicitly convertible
-//template<class S1,
-//         class S2,
-//         class Dim1>
-//struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
-//                                  unit<Dim1,homogeneous_system<S2> > > :
-//    mpl::bool_<detail::implicit_conversion_homo_to_homo_impl<mpl::size<Dim1>::value>::template
-//                apply<typename mpl::begin<Dim1>::type, homogeneous_system<S1>, homogeneous_system<S2> >::value>
-//{        
-//    typedef homogeneous_system<S1>              system1_type;
-//    typedef homogeneous_system<S2>              system2_type;
-//};
-//
-///// Determine if a homogeneous unit is implicitly convertible to a heterogeneous unit
-//template<class S1,
-//         class S2,
-//         class Dim1>
-//struct is_implicitly_convertible< unit<Dim1,homogeneous_system<S1> >,
-//                                  unit<Dim1,heterogeneous_system<S2> > > :
-//    mpl::false_
-//{        
-//    typedef homogeneous_system<S1>          system1_type;
-//    typedef heterogeneous_system<S2>        system2_type;
-//};
-//
-///// Determine if a heterogeneous unit is implicitly convertible to a homogeneous unit
-//template<class S1,
-//         class S2,
-//         class Dim1>
-//struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
-//                                  unit<Dim1,homogeneous_system<S2> > > :
-//    mpl::false_
-//{
-//    typedef heterogeneous_system<S1>        system1_type;
-//    typedef homogeneous_system<S2>          system2_type;
-//};
-//
-///// Determine if two heterogeneous units are implicitly convertible
-//template<class S1,
-//         class S2,
-//         class Dim1>
-//struct is_implicitly_convertible< unit<Dim1,heterogeneous_system<S1> >,
-//                                  unit<Dim1,heterogeneous_system<S2> > > :
-//    //mpl::and_<
-//    //    is_implicitly_convertible<
-//    //        unit<Dim1,heterogeneous_system<S1> >,
-//    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >
-//    //    >,
-//    //    is_implicitly_convertible<
-//    //        unit<Dim1,homogeneous_system<typename mpl::front<typename system1_type::type>::type::tag_type> >,
-//    //        unit<Dim1,heterogeneous_system<S2> >
-//    //    >
-//    //>
-//    mpl::false_
-//{        
-//    typedef heterogeneous_system<S1>        system1_type;
-//    typedef heterogeneous_system<S2>        system2_type;
-//};
-
-//template<class T> struct get_dimension;
-//
-///// get the dimension of a unit
-//template<class Dim,class System>
-//struct get_dimension< unit<Dim,System> >
-//{
-//    typedef Dim type;
-//};
-
-//template<class T> struct get_system;
-//
-///// get the system of a unit
-//template<class Dim,class System>
-//struct get_system< unit<Dim,System> >
-//{
-//    typedef System type;
-//};
-
 /// unit unary plus typeof helper
 template<class Dim,class System>
 struct unary_plus_typeof_helper< unit<Dim,System> >
 {
-    typedef unit<typename make_dimension_list<Dim>::type,System>    type;
+    typedef unit<Dim,System>    type;
 };
 
 /// unit unary minus typeof helper
 template<class Dim,class System>
 struct unary_minus_typeof_helper< unit<Dim,System> >
 {
-    typedef unit<typename make_dimension_list<Dim>::type,System>    type;
+    typedef unit<Dim,System>    type;
 };
 
 /// unit add typeof helper
@@ -237,7 +102,7 @@ struct add_typeof_helper< unit<Dim1,System>,unit<Dim2,System> >
     // ensure dimension lists are commensurate
     BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
 
-    typedef unit<typename make_dimension_list<Dim1>::type,System>   type;
+    typedef unit<Dim1,System>   type;
 };
 
 /// unit subtract typeof helper
@@ -249,7 +114,7 @@ struct subtract_typeof_helper< unit<Dim1,System>,unit<Dim2,System> >
     // ensure dimension lists are commensurate
     BOOST_STATIC_ASSERT((is_same<Dim1,Dim2>::value == true));
 
-    typedef unit<typename make_dimension_list<Dim1>::type,System>   type;
+    typedef unit<Dim1,System>   type;
 };
 
 /// unit multiply typeof helper for two identical homogeneous systems

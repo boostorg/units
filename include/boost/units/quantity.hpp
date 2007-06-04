@@ -28,6 +28,7 @@
 #include <boost/units/unit.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/conversion.hpp>
+#include <boost/units/homogeneous_system.hpp>
 
 namespace boost {
 

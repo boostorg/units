@@ -19,7 +19,7 @@
 #include <boost/mpl/divides.hpp>
 
 #include <boost/units/scaled_base_unit.hpp>
-#include <boost/units/make_system.hpp>
+#include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
@@ -60,7 +60,8 @@ struct conversion_helper;
 /// }
 /// @endcode
 template<class From, class To>
-struct conversion_helper {
+struct conversion_helper
+{
     static To convert(const From&);
 };
 
@@ -68,14 +69,16 @@ struct conversion_helper {
 
 /// INTERNAL ONLY
 template<class Source, class Destination>
-struct select_base_unit_converter {
+struct select_base_unit_converter
+{
     typedef Source source_type;
     typedef Destination destination_type;
 };
 
 /// INTERNAL ONLY
 template<class Source, class Destination>
-struct base_unit_converter {
+struct base_unit_converter
+{
     typedef select_base_unit_converter<typename unscale<Source>::type, typename unscale<Destination>::type> selector;
     typedef typename selector::source_type source_type;
     typedef typename selector::destination_type destination_type;
@@ -85,7 +88,8 @@ struct base_unit_converter {
     typedef typename mpl::divides<source_factor, destination_factor>::type factor;
     typedef eval_scale_list<factor> eval_factor;
     typedef typename multiply_typeof_helper<typename converter::type, typename eval_factor::type>::type type;
-    static type value() {
+    static type value()
+    {
         return(converter::value() * eval_factor::value());
     }
 };
@@ -96,9 +100,11 @@ template<bool try_inverse, bool trivial>
 struct inverse_base_unit_converter_impl;
 
 template<>
-struct inverse_base_unit_converter_impl<false, false> {
+struct inverse_base_unit_converter_impl<false, false>
+{
     template<class Source, class Destination>
-    struct apply {
+    struct apply
+    {
         typedef select_base_unit_converter<typename unscale<Source>::type, typename unscale<typename Destination::unit_type>::type> selector;
         typedef typename selector::source_type source_type;
         typedef typename selector::destination_type destination_type;
@@ -108,35 +114,42 @@ struct inverse_base_unit_converter_impl<false, false> {
         typedef typename mpl::divides<source_factor, destination_factor>::type factor;
         typedef eval_scale_list<factor> eval_factor;
         typedef typename multiply_typeof_helper<typename converter::type, typename eval_factor::type>::type type;
-        static type value() {
+        static type value()
+        {
             return(converter::value() * eval_factor::value());
         }
     };
 };
 
 template<>
-struct inverse_base_unit_converter_impl<true, false> {
+struct inverse_base_unit_converter_impl<true, false>
+{
     template<class Source, class Destination>
-    struct apply {
+    struct apply
+    {
         typedef base_unit_converter<Destination, typename Source::unit_type> inverse;
         typedef typename inverse::type type;
-        static type value() {
+        static type value()
+        {
             return(one()/inverse::value());
         }
     };
 };
 
 template<bool dummy>
-struct inverse_base_unit_converter_impl<dummy, true> {
+struct inverse_base_unit_converter_impl<dummy, true>
+{
     template<class Source, class Destination>
-    struct apply {
+    struct apply
+    {
         typedef one type;
         static type value() { return(type()); }
     };
 };
 
 template<class Source, class Dest>
-struct use_inverse_conversion {
+struct use_inverse_conversion
+{
     typedef select_base_unit_converter<typename unscale<Source>::type, typename unscale<typename Dest::unit_type>::type> selector;
     enum { value = (boost::is_same<Source, typename selector::source_type>::value) &&
         (boost::is_same<typename Dest::unit_type, typename selector::destination_type>::value) };
@@ -157,37 +170,47 @@ struct base_unit_converter<
             >
         >
     >
-> : detail::inverse_base_unit_converter_impl<detail::use_inverse_conversion<Source, Dest>::value, boost::is_same<Source, Dest>::value>::template apply<Source, Dest> {
-};
+> : detail::inverse_base_unit_converter_impl<
+        detail::use_inverse_conversion<Source, Dest>::value,
+        boost::is_same<Source, Dest>::value
+    >::template apply<Source, Dest>
+{};
 
 /// Defines the conversion factor from a base unit to any unit
 /// with the correct dimensions.  Must appear at global scope.
 /// If the destination unit is a unit that contains only one
 /// base unit which is raised to the first power (e.g. feet->meters)
 /// the reverse need not be defined.
-#define BOOST_UNITS_DEFINE_CONVERSION(Source, Destination, type_, value_)\
-namespace boost {\
-namespace units {\
-template<>\
-struct select_base_unit_converter<unscale<Source>::type,unscale<reduce_unit<Destination>::type>::type> {\
-    typedef Source source_type;\
-    typedef Destination destination_type;\
-};\
-template<>\
-struct base_unit_converter<Source, reduce_unit<Destination>::type> {\
-    typedef type_ type;\
-    static type value() { return(value_); }\
-};\
-}\
-}\
+#define BOOST_UNITS_DEFINE_CONVERSION(Source, Destination, type_, value_)   \
+namespace boost {                                                           \
+namespace units {                                                           \
+    template<>                                                              \
+    struct select_base_unit_converter<                                      \
+        unscale<Source>::type,                                              \
+        unscale<reduce_unit<Destination>::type>::type                       \
+    >                                                                       \
+    {                                                                       \
+        typedef Source source_type;                                         \
+        typedef Destination destination_type;                               \
+    };                                                                      \
+    template<>                                                              \
+    struct base_unit_converter<Source, reduce_unit<Destination>::type>      \
+    {                                                                       \
+        typedef type_ type;                                                 \
+        static type value() { return(value_); }                             \
+    };                                                                      \
+}                                                                           \
+}                                                                           \
 void boost_units_require_semicolon()
 
 namespace detail {
 
 template<int N>
-struct conversion_impl {
+struct conversion_impl
+{
     template<class Begin, class DestinationSystem>
-    struct apply {
+    struct apply
+    {
         typedef typename conversion_impl<N-1>::template apply<
             typename mpl::next<Begin>::type,
             DestinationSystem
@@ -203,9 +226,11 @@ struct conversion_impl {
 };
 
 template<>
-struct conversion_impl<0> {
+struct conversion_impl<0>
+{
     template<class Begin, class DestinationSystem>
-    struct apply {
+    struct apply
+    {
         typedef one type;
         static type value() { return(one()); }
     };
@@ -215,14 +240,16 @@ struct conversion_impl<0> {
 
 /// conversions between homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
-struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> > {
+struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> >
+{
     /// INTERNAL ONLY
     typedef quantity<unit<D, homogeneous_system<L2> >, T2> destination_type;
     /// INTERNAL ONLY
     typedef typename reduce_unit<unit<D, homogeneous_system<L1> > >::type source_unit;
     /// INTERNAL ONLY
     typedef typename source_unit::system_type::type unit_list;
-    static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source) {
+    static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source)
+    {
         return(destination_type::from_value(source.value() * 
             detail::conversion_impl<mpl::size<unit_list>::value>::template apply<
                 typename mpl::begin<unit_list>::type,
@@ -234,10 +261,12 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
 
 /// conversions between heterogeneous systems and homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
-struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> > {
+struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> >
+{
     /// INTERNAL ONLY
     typedef quantity<unit<D, homogeneous_system<L2> >, T2> destination_type;
-    static destination_type convert(const quantity<unit<D, heterogeneous_system<L1> >, T1>& source) {
+    static destination_type convert(const quantity<unit<D, heterogeneous_system<L1> >, T1>& source)
+    {
         return(destination_type::from_value(source.value() * 
             detail::conversion_impl<mpl::size<typename L1::type>::value>::template apply<
                 typename mpl::begin<typename L1::type>::type,
@@ -252,10 +281,12 @@ struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quant
 // heterogeneous->homogeneous case
 /// conversions between heterogeneous systems and homogeneous systems are defined
 template<class D, class L1, class T1, class L2, class T2>
-struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, heterogeneous_system<L2> >, T2> > {
+struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, heterogeneous_system<L2> >, T2> >
+{
     /// INTERNAL ONLY
     typedef quantity<unit<D, heterogeneous_system<L2> >, T2> destination_type;
-    static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source) {
+    static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source)
+    {
         return(destination_type::from_value(source.value() /
             detail::conversion_impl<mpl::size<typename L2::type>::value>::template apply<
                 typename mpl::begin<typename L2::type>::type,
@@ -265,14 +296,29 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
     }
 };
 
+/// Requires that all possible conversions
+/// between base units are defined.
 template<class D, class S1, class T1, class S2, class T2>
-struct conversion_helper<quantity<unit<D, heterogeneous_system<S1> >, T1>, quantity<unit<D, heterogeneous_system<S2> >, T2> > {
+struct conversion_helper<quantity<unit<D, heterogeneous_system<S1> >, T1>, quantity<unit<D, heterogeneous_system<S2> >, T2> >
+{
+    /// INTERNAL ONLY
     typedef quantity<unit<D, heterogeneous_system<S1> >, T1> source_type;
+    /// INTERNAL ONLY
     typedef quantity<unit<D, heterogeneous_system<S2> >, T2> destination_type;
-    typedef typename detail::extract_base_units<mpl::size<typename S1::type>::value>::template apply<typename mpl::begin<typename S1::type>::type, mpl::list0<> >::type from_base_units;
-    typedef typename detail::extract_base_units<mpl::size<typename S2::type>::value>::template apply<typename mpl::begin<typename S2::type>::type, from_base_units>::type all_base_units;
+    /// INTERNAL ONLY
+    typedef typename detail::extract_base_units<mpl::size<typename S1::type>::value>::template apply<
+        typename mpl::begin<typename S1::type>::type,
+        mpl::list0<>
+    >::type from_base_units;
+    /// INTERNAL ONLY
+    typedef typename detail::extract_base_units<mpl::size<typename S2::type>::value>::template apply<
+        typename mpl::begin<typename S2::type>::type,
+        from_base_units
+    >::type all_base_units;
+    /// INTERNAL ONLY
     typedef typename detail::make_homogeneous_system<all_base_units>::type system;
-    static destination_type convert(const source_type& source) {
+    static destination_type convert(const source_type& source)
+    {
         return(destination_type::from_value(source.value() * 
             (detail::conversion_impl<mpl::size<typename S1::type>::value>::template apply<
                 typename mpl::begin<typename S1::type>::type,
