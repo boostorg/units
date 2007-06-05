@@ -11,35 +11,18 @@
 #ifndef BOOST_UNITS_DIM_HPP
 #define BOOST_UNITS_DIM_HPP
 
-#include <boost/mpl/bool_fwd.hpp>
-#include <boost/mpl/int.hpp>
+#include <boost/static_assert.hpp>
+
+#include <boost/type_traits/is_same.hpp>
+
+#include <boost/mpl/arithmetic.hpp>
 
 #include <boost/units/config.hpp>
-#include <boost/units/is_dim.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/dim_impl.hpp>
 
 /// \file 
 /// \brief Handling of fundamental dimension/exponent pairs.
-
-//namespace boost {
-//
-//namespace units {
-//
-///// Class for defining a cardinal ordering of tags to faciliate compile-time sorting.
-//template<long N> struct ordinal { typedef typename boost::mpl::int_<N> value; };
-//
-//}
-//
-//}
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::ordinal, (long))
-//
-//#endif
 
 namespace boost {
 

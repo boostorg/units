@@ -12,7 +12,6 @@
 #define BOOST_UNITS_BASE_UNIT_HPP
 
 #include <boost/units/config.hpp>
-#include <boost/units/dim.hpp>
 #include <boost/units/dimension_list.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/static_rational.hpp>
@@ -51,7 +50,6 @@ class base_unit :
 {
     public:
         typedef base_unit           this_type;
-        //typedef mpl::long_<N>       value;
         typedef Dim                 dimension_type;
 
         typedef Derived type;

@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_HOMOGENEOUS_SYSTEM_HPP_INCLUDED
 #define BOOST_UNITS_HOMOGENEOUS_SYSTEM_HPP_INCLUDED
 
+#include <boost/mpl/bool.hpp>
+
 #include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
 
@@ -32,13 +34,21 @@ struct homogeneous_system {
     typedef L type;
 };
 
+template<class T, class E>
+struct static_power;
+
+template<class T, class R>
+struct static_root;
+
 template<class L, long N, long D>
-struct static_power<homogeneous_system<L>, static_rational<N,D> > {
+struct static_power<homogeneous_system<L>, static_rational<N,D> >
+{
     typedef homogeneous_system<L> type;
 };
 
 template<class L, long N, long D>
-struct static_root<homogeneous_system<L>, static_rational<N,D> > {
+struct static_root<homogeneous_system<L>, static_rational<N,D> >
+{
     typedef homogeneous_system<L> type;
 };
 
@@ -64,8 +74,7 @@ struct check_system<homogeneous_system<L>, Dimensions> :
 #else
 
 template<class L, class Dimensions>
-struct check_system<homogeneous_system<L>, Dimensions> : mpl::true_ {
-};
+struct check_system<homogeneous_system<L>, Dimensions> : mpl::true_ {};
 
 #endif
 

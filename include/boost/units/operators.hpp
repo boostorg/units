@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_OPERATORS_HPP 
 #define BOOST_UNITS_OPERATORS_HPP
 
-#include <cmath>
-#include <complex>
-
 #include <boost/static_assert.hpp>
 #include <boost/type_traits/is_same.hpp>
 

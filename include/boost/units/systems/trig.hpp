@@ -13,6 +13,7 @@
 
 #include <cmath>
 
+#include <boost/units/dimensionless_quantity.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si/plane_angle.hpp>
 

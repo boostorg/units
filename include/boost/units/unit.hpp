@@ -12,13 +12,16 @@
 #define BOOST_UNITS_UNIT_HPP
 
 #include <boost/static_assert.hpp>
-#include <boost/mpl/bool_fwd.hpp>
+#include <boost/mpl/bool.hpp>
+#include <boost/type_traits/is_same.hpp>
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimension.hpp>
+#include <boost/units/operators.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/static_rational.hpp>
 #include <boost/units/detail/unit_impl.hpp>
 
 namespace boost {

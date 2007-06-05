@@ -29,6 +29,7 @@
 #include <boost/mpl/advance.hpp>
 #include <boost/mpl/erase.hpp>
 #include <boost/mpl/front.hpp>
+#include <boost/mpl/and.hpp>
 
 #include <boost/units/detail/sort.hpp>
 

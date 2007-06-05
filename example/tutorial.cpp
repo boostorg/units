@@ -38,6 +38,8 @@ I*Z == V? true
 #include <complex>
 #include <iostream>
 
+#include <boost/typeof/std/complex.hpp>
+
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si/energy.hpp>
 #include <boost/units/systems/si/force.hpp>

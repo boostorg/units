@@ -14,21 +14,23 @@
 #include <algorithm>
 
 #include <boost/config.hpp>
-#include <boost/mpl/bool_fwd.hpp>
+#include <boost/static_assert.hpp>
+#include <boost/mpl/bool.hpp>
 #include <boost/mpl/and.hpp>
+#include <boost/mpl/not.hpp>
 #include <boost/mpl/or.hpp>
 #include <boost/utility/enable_if.hpp>
-#include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_arithmetic.hpp>
+#include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_integral.hpp>
+#include <boost/type_traits/is_same.hpp>
 
-#include <boost/units/dimensionless_quantity.hpp>
-#include <boost/units/get_dimension.hpp>
-#include <boost/units/get_system.hpp>
-#include <boost/units/unit.hpp>
-#include <boost/units/units_fwd.hpp>
 #include <boost/units/conversion.hpp>
+#include <boost/units/dimensionless_type.hpp>
 #include <boost/units/homogeneous_system.hpp>
+#include <boost/units/operators.hpp>
+#include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 
 namespace boost {
 
@@ -64,7 +66,8 @@ struct is_non_narrowing_conversion<long double, double> : mpl::false_ {};
 
 // msvc 7.1 needs extra disambiguation
 template<class T, class U>
-struct disable_if_is_same {
+struct disable_if_is_same
+{
 	typedef void type;
 };
 

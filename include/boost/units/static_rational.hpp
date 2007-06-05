@@ -15,9 +15,9 @@
 #include <complex>
 
 #include <boost/math/common_factor_ct.hpp>
+#include <boost/mpl/less.hpp>
 #include <boost/mpl/arithmetic.hpp>
 #include <boost/mpl/less.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <boost/units/operators.hpp>
 
@@ -92,14 +92,6 @@ class static_rational
         static_rational() { }
         //~static_rational() { }
         
-//        // static rationals are implicitly convertible if reduced types are the same
-//        template<integer_type NN,integer_type DD>
-//        operator static_rational<NN,DD>()
-//        {
-//            BOOST_STATIC_ASSERT((boost::is_same<type,typename static_rational<NN,DD>::type>::value == true));
-//            
-//            return static_rational<NN,DD>();
-//        }
 };
 
 }

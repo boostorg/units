@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_CMATH_HPP 
 #define BOOST_UNITS_CMATH_HPP
 
+#include <cmath>
+
 #include <boost/units/quantity.hpp>
 #include <boost/units/detail/cmath_impl.hpp>
 

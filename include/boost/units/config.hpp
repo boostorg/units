@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_CONFIG_HPP
 #define BOOST_UNITS_CONFIG_HPP
 
-#include <boost/version.hpp>
 #include <boost/config.hpp>
+#include <boost/version.hpp>
 
 #if (BOOST_VERSION >= 103400)
     #define BOOST_UNITS_HAS_BOOST_TYPEOF    1
@@ -25,8 +25,7 @@
 //#define BOOST_UNITS_HAS_BOOST_TYPEOF      0   
 
 #if (BOOST_UNITS_HAS_BOOST_TYPEOF)
-    #include <boost/typeof/typeof.hpp>   
-    #include <boost/typeof/std/complex.hpp>   
+    #include <boost/typeof/typeof.hpp> 
     #define BOOST_UNITS_HAS_TYPEOF          1
 #else    
     #if (__GNUC__ && __cplusplus && __GNUC__ >= 3)

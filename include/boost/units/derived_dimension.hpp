@@ -13,6 +13,9 @@
 
 #include <boost/mpl/list.hpp>
 
+#include <boost/units/dim.hpp>
+#include <boost/units/dimension.hpp>
+#include <boost/units/dimension_list.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 

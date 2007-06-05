@@ -59,6 +59,8 @@ L^(3/2)                           = (2,11) m^(3/2)
 
 #include <boost/mpl/list.hpp>
 
+#include <boost/typeof/std/complex.hpp>
+
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
 

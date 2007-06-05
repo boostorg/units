@@ -13,17 +13,14 @@
 
 #include <boost/static_assert.hpp>
 
+#include <boost/type_traits/is_same.hpp>
+
 #include <boost/mpl/arithmetic.hpp>
-#include <boost/mpl/and.hpp>
-#include <boost/mpl/begin_end.hpp>
-#include <boost/mpl/bool_fwd.hpp>
-#include <boost/mpl/is_sequence.hpp>
-#include <boost/mpl/list.hpp>
-#include <boost/mpl/long.hpp>
+#include <boost/mpl/begin.hpp>
 #include <boost/mpl/size.hpp>
 
 #include <boost/units/dim.hpp>
-#include <boost/units/dimensionless_type.hpp>
+#include <boost/units/dimension_list.hpp>
 #include <boost/units/operators.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/dimension_impl.hpp>

@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_STATIC_CONSTANT_HPP
 #define BOOST_UNITS_STATIC_CONSTANT_HPP
 
+#include <boost/units/config.hpp>
+
 /// A convenience macro that allows definition of static
 /// constants in headers in an ODR-safe way.
 #define BOOST_UNITS_STATIC_CONSTANT(name, type)             \

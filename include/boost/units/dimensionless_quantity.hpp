@@ -12,7 +12,7 @@
 #define BOOST_UNITS_DIMENSIONLESS_QUANTITY_HPP
 
 #include <boost/units/dimensionless_unit.hpp>
-#include <boost/units/units_fwd.hpp>
+#include <boost/units/quantity.hpp>
 
 namespace boost {
 

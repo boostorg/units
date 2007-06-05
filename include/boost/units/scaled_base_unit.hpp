@@ -13,8 +13,19 @@
 
 #include <string>
 
-#include <boost/units/dimension.hpp>
+#include <boost/mpl/bool.hpp>
+#include <boost/mpl/size.hpp>
+#include <boost/mpl/begin.hpp>
+#include <boost/mpl/next.hpp>
+#include <boost/mpl/deref.hpp>
+#include <boost/mpl/plus.hpp>
+#include <boost/mpl/times.hpp>
+#include <boost/mpl/negate.hpp>
+#include <boost/mpl/less.hpp>
+#include <boost/type_traits/is_same.hpp>
+
 #include <boost/units/config.hpp>
+#include <boost/units/dimension.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
@@ -36,7 +47,8 @@ template<class T, class E>
 struct heterogeneous_system_dim;
 
 template<long Base, class Exponent>
-struct scale {
+struct scale
+{
     enum { base = Base };
     typedef Exponent exponent;
     typedef double value_type;
@@ -44,7 +56,8 @@ struct scale {
 };
 
 template<long Base>
-struct scale<Base, static_rational<0> > {
+struct scale<Base, static_rational<0> >
+{
     static const long base = Base;
     typedef static_rational<0> exponent;
     typedef one value_type;
@@ -123,10 +136,12 @@ struct scaled_base_unit
         >
     > unit_type;
 
-    static std::string symbol() {
+    static std::string symbol()
+    {
         return(Scale::symbol_prefix() + S::symbol());
     }
-    static std::string name() {
+    static std::string name()
+    {
         return(Scale::name_prefix() + S::name());
     }
 };
@@ -149,12 +164,14 @@ namespace boost {
 namespace units {
 
 template<class T>
-struct unscale {
+struct unscale
+{
     typedef T type;
 };
 
 template<class S, class Scale>
-struct unscale<scaled_base_unit<S, Scale> > {
+struct unscale<scaled_base_unit<S, Scale> >
+{
     typedef typename unscale<S>::type type;
 };
 
@@ -162,7 +179,8 @@ template<class D, class S>
 class unit;
 
 template<class D, class S>
-struct unscale<unit<D, S> > {
+struct unscale<unit<D, S> >
+{
     typedef unit<D, typename unscale<S>::type> type;
 };
 
@@ -170,24 +188,28 @@ template<class Scale>
 struct scale_list_dim;
 
 template<class T>
-struct get_scale_list {
+struct get_scale_list
+{
     typedef dimensionless_type type;
 };
 
 template<class S, class Scale>
-struct get_scale_list<scaled_base_unit<S, Scale> > {
+struct get_scale_list<scaled_base_unit<S, Scale> >
+{
     typedef typename mpl::times<dimension_list<scale_list_dim<Scale>, dimensionless_type>, typename get_scale_list<S>::type>::type type;
 };
 
 template<class D, class S>
-struct get_scale_list<unit<D, S> > {
+struct get_scale_list<unit<D, S> >
+{
     typedef typename get_scale_list<S>::type type;
 };
 
 struct scale_dim_tag {};
 
 template<class Scale>
-struct scale_list_dim : Scale {
+struct scale_list_dim : Scale
+{
     typedef scale_dim_tag tag;
     typedef scale_list_dim type;
 };
@@ -195,27 +217,32 @@ struct scale_list_dim : Scale {
 namespace detail {
 
 template<class Scale1, class Scale2>
-struct less<scale_list_dim<Scale1>, scale_list_dim<Scale2> > : mpl::bool_<((Scale1::base) < (Scale2::base))> {
-};
+struct less<scale_list_dim<Scale1>, scale_list_dim<Scale2> > : mpl::bool_<((Scale1::base) < (Scale2::base))> {};
 
 template<int N>
-struct eval_scale_list_impl {
+struct eval_scale_list_impl
+{
     template<class Begin>
-    struct apply {
+    struct apply
+    {
         typedef typename eval_scale_list_impl<N-1>::template apply<typename mpl::next<Begin>::type> next_iteration;
         typedef typename multiply_typeof_helper<typename next_iteration::type, typename mpl::deref<Begin>::type::value_type>::type type;
-        static type value() {
+        static type value()
+        {
             return(next_iteration::value() * mpl::deref<Begin>::type::value());
         }
     };
 };
 
 template<>
-struct eval_scale_list_impl<0> {
+struct eval_scale_list_impl<0>
+{
     template<class Begin>
-    struct apply {
+    struct apply
+    {
         typedef one type;
-        static type value() {
+        static type value()
+        {
             return(type());
         }
     };
@@ -224,17 +251,18 @@ struct eval_scale_list_impl<0> {
 }
 
 template<class T>
-struct eval_scale_list : detail::eval_scale_list_impl<mpl::size<T>::value>::template apply<typename mpl::begin<T>::type> {
-};
+struct eval_scale_list : detail::eval_scale_list_impl<mpl::size<T>::value>::template apply<typename mpl::begin<T>::type> {};
 
 } // namespace units
 
 namespace mpl {
 
 template<>
-struct plus_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag> {
+struct plus_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
+{
     template<class T0, class T1>
-    struct apply {
+    struct apply
+    {
         typedef boost::units::scale_list_dim<
             boost::units::scale<
                 (T0::base),
@@ -245,9 +273,11 @@ struct plus_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag> {
 };
 
 template<>
-struct negate_impl<boost::units::scale_dim_tag> {
+struct negate_impl<boost::units::scale_dim_tag>
+{
     template<class T0>
-    struct apply {
+    struct apply
+    {
         typedef boost::units::scale_list_dim<
             boost::units::scale<
                 (T0::base),
@@ -258,9 +288,11 @@ struct negate_impl<boost::units::scale_dim_tag> {
 };
 
 template<>
-struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rational_tag> {
+struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rational_tag>
+{
     template<class T0, class T1>
-    struct apply {
+    struct apply
+    {
         typedef boost::units::scale_list_dim<
             boost::units::scale<
                 (T0::base),
@@ -271,33 +303,33 @@ struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rati
 };
 
 template<class Tag>
-struct less_impl<boost::units::scaled_base_unit_tag, Tag> {
+struct less_impl<boost::units::scaled_base_unit_tag, Tag>
+{
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<typename T0::system_type, T1>::value) ||
-        ((boost::is_same<typename T0::system_type, T1>::value) && ((T0::scale_type::exponent::Numerator) < 0)))> {
-    };
+        ((boost::is_same<typename T0::system_type, T1>::value) && ((T0::scale_type::exponent::Numerator) < 0)))> {};
 };
 
 template<class Tag>
-struct less_impl<Tag, boost::units::scaled_base_unit_tag> {
+struct less_impl<Tag, boost::units::scaled_base_unit_tag>
+{
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<T0, typename T1::system_type>::value) ||
-        ((boost::is_same<T0, typename T1::system_type>::value) && ((T1::scale_type::exponent::Numerator) > 0)))> {
-    };
+        ((boost::is_same<T0, typename T1::system_type>::value) && ((T1::scale_type::exponent::Numerator) > 0)))> {};
 };
 
 template<>
-struct less_impl<boost::units::scaled_base_unit_tag, boost::units::scaled_base_unit_tag> {
+struct less_impl<boost::units::scaled_base_unit_tag, boost::units::scaled_base_unit_tag>
+{
     template<class T0, class T1>
     struct apply : mpl::bool_<
         ((mpl::less<typename T0::system_type, typename T1::system_type>::value) ||
         ((boost::is_same<typename T0::system_type, typename T1::system_type>::value) &&
             (((T0::scale_type::base) < (T1::scale_type::base)) ||
         (((T0::scale_type::base) == (T1::scale_type::base)) &&
-        (mpl::less<typename T0::scale_type::exponent,typename T1::scale_type::exponent>::value)))))> {
-    };
+        (mpl::less<typename T0::scale_type::exponent,typename T1::scale_type::exponent>::value)))))> {};
 };
 
 } // namespace mpl

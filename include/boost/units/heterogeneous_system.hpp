@@ -15,16 +15,20 @@
 #include <boost/mpl/plus.hpp>
 #include <boost/mpl/times.hpp>
 #include <boost/mpl/divides.hpp>
+#include <boost/mpl/negate.hpp>
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/front.hpp>
+#include <boost/mpl/push_front.hpp>
+#include <boost/mpl/pop_front.hpp>
 
 #include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/scaled_base_unit.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/push_front_if.hpp>
 #include <boost/units/detail/linear_algebra.hpp>
 
@@ -45,7 +49,7 @@ struct is_zero : mpl::false_ {};
 template<>
 struct is_zero<static_rational<0> > : mpl::true_ {};
 
-}
+} // namespace detail
 
 /// INTERNAL ONLY
 template<class L, class Dimensions>
@@ -263,13 +267,17 @@ struct static_root<heterogeneous_system<S>, static_rational<N,D> >
 
 /// Returns a unique type for every unit.
 template<class Unit>
-struct reduce_unit
+struct reduce_unit;
+
+/// Returns a unique type for every unit.
+template<class Dim, class System>
+struct reduce_unit<unit<Dim, System> >
 {
     typedef unit<
-        typename Unit::dimension_type,
+        Dim,
         typename detail::make_heterogeneous_system<
-            typename Unit::dimension_type,
-            typename Unit::system_type
+            Dim,
+            System
         >::type
     > type;
 };
@@ -344,7 +352,7 @@ struct unscale_heterogeneous_system_impl<0>
     };
 };
 
-}
+} // namespace detail
 
 /// Unscale all the base units. e.g
 /// km s -> m s

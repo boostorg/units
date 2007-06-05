@@ -11,9 +11,8 @@
 #ifndef BOOST_UNITS_DIMENSIONLESS_UNIT_HPP
 #define BOOST_UNITS_DIMENSIONLESS_UNIT_HPP
 
-//#include <boost/units/dimensionless_type.hpp>
-#include <boost/units/dimension.hpp>
-#include <boost/units/units_fwd.hpp>
+#include <boost/units/dimensionless_type.hpp>
+#include <boost/units/unit.hpp>
 
 namespace boost {
 

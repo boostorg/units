@@ -17,23 +17,21 @@
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/divides.hpp>
+#include <boost/type_traits/is_same.hpp>
 
-#include <boost/units/scaled_base_unit.hpp>
-#include <boost/units/homogeneous_system.hpp>
+#include <boost/units/dimension_list.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/homogeneous_system.hpp>
+#include <boost/units/scaled_base_unit.hpp>
+#include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/heterogeneous_conversion.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
-#include <boost/units/detail/heterogeneous_conversion.hpp>
 
 namespace boost {
 
 namespace units {
-
-template<class Dimension, class System>
-class unit;
-
-template<class Unit, class T>
-class quantity;
 
 template<class From, class To>
 struct conversion_helper;
@@ -155,7 +153,7 @@ struct use_inverse_conversion
         (boost::is_same<typename Dest::unit_type, typename selector::destination_type>::value) };
 };
 
-}
+} // namespace detail
 
 /// INTERNAL ONLY
 template<class Source, class Dest>
@@ -339,7 +337,8 @@ template<class Source, class Dest>
 struct conversion_factor_helper;
 
 template<class D, class L1, class L2>
-struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, homogeneous_system<L2> > > {
+struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, homogeneous_system<L2> > >
+{
     typedef typename reduce_unit<unit<D, homogeneous_system<L1> > >::type source_unit;
     typedef typename source_unit::system_type::type unit_list;
     typedef typename detail::conversion_impl<mpl::size<unit_list>::value>::template apply<
@@ -347,19 +346,22 @@ struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, homoge
         homogeneous_system<L2>
     > impl;
     typedef typename impl::type type;
-    static type value() {
+    static type value()
+    {
         return(impl::value());
     }
 };
 
 template<class D, class L1, class L2>
-struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homogeneous_system<L2> > > {
+struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homogeneous_system<L2> > >
+{
     typedef typename detail::conversion_impl<mpl::size<typename L1::type>::value>::template apply<
         typename mpl::begin<typename L1::type>::type,
         homogeneous_system<L2>
     > impl;
     typedef typename impl::type type;
-    static type convert() {
+    static type convert()
+    {
         return(impl::value());
     }
 };
@@ -368,18 +370,20 @@ struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homo
 // other than just defining it as the reverse of the
 // heterogeneous->homogeneous case
 template<class D, class L1, class L2>
-struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, heterogeneous_system<L2> > > {
+struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, heterogeneous_system<L2> > >
+{
     typedef typename detail::conversion_impl<mpl::size<typename L2::type>::value>::template apply<
         typename mpl::begin<typename L2::type>::type,
         homogeneous_system<L1>
     > impl;
     typedef typename impl::type type;
-    static type value() {
+    static type value()
+    {
         return(one() / impl::value());
     }
 };
 
-}
+} // namespace detail
 
 /// Find the conversion factor between two units.
 template<class FromUnit,class ToUnit>
@@ -400,7 +404,7 @@ conversion_factor(const FromUnit&,const ToUnit&)
     return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
 }
 
-} //namespace units
+} // namespace units
 
 } // namespace boost
 
