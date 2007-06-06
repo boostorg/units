@@ -214,10 +214,22 @@ struct scale_list_dim : Scale
     typedef scale_list_dim type;
 };
 
-namespace detail {
+} // namespace units
 
-template<class Scale1, class Scale2>
-struct less<scale_list_dim<Scale1>, scale_list_dim<Scale2> > : mpl::bool_<((Scale1::base) < (Scale2::base))> {};
+namespace mpl {
+
+template<>
+struct less_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
+{
+    template<class T0, class T1>
+    struct apply : mpl::bool_<((T0::base) < (T1::base))> {};
+};
+
+}
+
+namespace units {
+
+namespace detail {
 
 template<int N>
 struct eval_scale_list_impl

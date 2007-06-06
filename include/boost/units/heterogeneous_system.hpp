@@ -16,6 +16,7 @@
 #include <boost/mpl/times.hpp>
 #include <boost/mpl/divides.hpp>
 #include <boost/mpl/negate.hpp>
+#include <boost/mpl/less.hpp>
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/next.hpp>
@@ -97,14 +98,21 @@ BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_dim, (class)(c
 
 namespace boost {
 
+namespace mpl {
+
+/// INTERNAL ONLY
+template<>
+struct less_impl<boost::units::heterogeneous_system_dim_tag, boost::units::heterogeneous_system_dim_tag>
+{
+    template<class T0, class T1>
+    struct apply : mpl::less<typename T0::tag_type, typename T1::tag_type> {};
+};
+
+}
+
 namespace units {
 
 namespace detail {
-
-template<class Unit1, class Exponent1, class Unit2, class Exponent2>
-struct less<heterogeneous_system_dim<Unit1,Exponent1>,heterogeneous_system_dim<Unit2,Exponent2> > :
-    mpl::less<Unit1, Unit2>
-{};
 
 template<class Unit1, class Exponent1>
 struct is_empty_dim<heterogeneous_system_dim<Unit1,Exponent1> > : detail::is_zero<Exponent1> {};

@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_DIM_IMPL_HPP
 #define BOOST_UNITS_DIM_IMPL_HPP
 
-#include <boost/mpl/bool_fwd.hpp>
+#include <boost/mpl/bool.hpp>
 #include <boost/mpl/less.hpp>
 
 #include <boost/units/units_fwd.hpp>
@@ -19,64 +19,39 @@
 /// \file 
 /// \brief Class encapsulating a dimension tag/value pair
 
-//namespace boost {
-//
-//namespace units {
-//
-//namespace detail {
-//
-//struct dim_tag { };
-//
-//} // namespace detail
-//
-///// \brief Dimension tag/exponent pair for a single fundamental dimension.
-/////
-///// \detailed 
-///// The dim class represents a single dimension tag/dimension exponent pair.
-///// That is, @c dim<tag_type,value_type> is a pair where @c tag_type represents the
-///// fundamental dimension being represented and @c value_type represents the 
-///// exponent of that fundamental dimension as a @c static_rational or other type 
-///// providing the required compile-time arithmetic operations. @c tag_type must 
-///// provide an ordinal value to allow sorting of lists of dims at compile-time.
-///// This can be easily accomplished by inheriting from @c ordinal<N>. Otherwise,
-///// @c tag_type may be any type. 
-//template<typename T,typename V> 
-//struct dim
-//{
-//    typedef dim             type;
-//    typedef detail::dim_tag tag;
-//    typedef T               tag_type;
-//    typedef V               value_type;
-//};
-//
-//} // namespace units
-//
-//} // namespace boost
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dim, 2)
-//
-//#endif
-
 namespace boost {
 
 namespace units {
 
 namespace detail {
 
-/// Less than comparison for sorting @c dim.
-template<typename T,typename V> struct less;
+struct dim_tag;
 
-template<typename T1,typename V1,typename T2,typename V2>
-struct less< dim<T1,V1>,dim<T2,V2> >
+}
+
+}
+
+namespace mpl {
+
+/// Less than comparison for sorting @c dim.
+template<>
+struct less_impl<boost::units::detail::dim_tag, boost::units::detail::dim_tag>
 {
-    typedef typename boost::mpl::less<T1,T2>::type  type;
-    
-    static const bool   value = boost::is_same<type,boost::mpl::true_>::value;
+    template<class T0, class T1>
+    struct apply : mpl::less<typename T0::tag_type, typename T1::tag_type> {};
 };
+
+}
+
+namespace units {
+
+template<class Tag, class Exponent>
+struct dim;
+
+template<long N, long D>
+class static_rational;
+
+namespace detail {
 
 /// Extract @c tag_type from a @c dim.
 template<typename T>

@@ -18,6 +18,7 @@
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/push_front.hpp>
 #include <boost/mpl/size.hpp>
+#include <boost/mpl/less.hpp>
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimension_list.hpp>
@@ -27,59 +28,7 @@
 
 /// \file 
 /// \brief Core class and metaprogramming utilities for compile-time dimensional analysis.
-///
-/// \detailed 
 
-//namespace boost {
-//
-//namespace units {
-//
-//struct dimensionless_type;
-//
-//}
-//
-//}
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TYPE(boost::units::dimensionless_type)
-//
-//#endif
-
-//namespace boost {
-//
-//namespace units {
-//
-//namespace detail {
-//
-//struct dimension_list_tag { };
-//
-//} // namespace detail
-//
-//template<class Item, class Next>
-//struct dimension_list
-//{
-//    typedef detail::dimension_list_tag  tag;
-//    typedef dimension_list              type;
-//    typedef Item                        item;
-//    typedef Next                        next;
-//    typedef typename mpl::next<typename Next::size>::type size;
-//};
-//
-//}
-//
-//}
-//
-//#if BOOST_UNITS_HAS_BOOST_TYPEOF
-//
-//#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-//
-//BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dimension_list, 2)
-//
-//#endif
-//
 namespace boost {
 
 namespace units {
@@ -233,7 +182,7 @@ struct partition_dims_forward_impl
     {
         typedef typename partition_dims_forward_impl<N - 1>::template apply<
             typename Begin::next,
-            typename partition_dims_state_insert<less<typename Begin::item, Value>::type::value>::template apply<State, typename Begin::item>::type,
+            typename partition_dims_state_insert<mpl::less<typename Begin::item, Value>::value>::template apply<State, typename Begin::item>::type,
             Value
         >::type type;
     };
@@ -409,8 +358,8 @@ struct merge_dimensions_impl {
         typedef typename boost::mpl::deref<Begin1>::type dim1;
         typedef typename boost::mpl::deref<Begin2>::type dim2;
 
-        typedef typename merge_dimensions_func<(less<dim1,dim2>::value == true),
-                (less<dim2,dim1>::value == true)>::template apply<
+        typedef typename merge_dimensions_func<(mpl::less<dim1,dim2>::value == true),
+                (mpl::less<dim2,dim1>::value == true)>::template apply<
             Begin1,
             Begin2,
             N1,
