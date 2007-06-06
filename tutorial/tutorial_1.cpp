@@ -74,12 +74,49 @@ BOOST_UNITS_STATIC_CONSTANT(second,time);
 
 namespace esu {
 
+typedef make_system<centimeter_base_unit,
+                    gram_base_unit,
+                    second_base_unit>::type system;
+
 /// derived dimension for charge in electrostatic units : L^3/2 M^1/2 T^-1
 typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<3,2> >,
                                         dim<mass_base_dimension,static_rational<1,2> >,
                                         dim<time_base_dimension,static_rational<-1> > > >::type    charge_dimension; 
 
-typedef unit<charge_dimension,CGS::system>  charge;
+/// derived dimension for current in electrostatic units : L^3/2 M^1/2 T^-2
+typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<3,2> >,
+                                        dim<mass_base_dimension,static_rational<1,2> >,
+                                        dim<time_base_dimension,static_rational<-2> > > >::type    current_dimension; 
+
+/// derived dimension for electric potential in electrostatic units : L^1/2 M^1/2 T^-1
+typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<1,2> >,
+                                        dim<mass_base_dimension,static_rational<1,2> >,
+                                        dim<time_base_dimension,static_rational<-1> > > >::type    electric_potential_dimension; 
+
+/// derived dimension for electric field in electrostatic units : L^-1/2 M^1/2 T^-1
+typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<-1,2> >,
+                                        dim<mass_base_dimension,static_rational<1,2> >,
+                                        dim<time_base_dimension,static_rational<-1> > > >::type    electric_field_dimension; 
+
+/// unit typedefs
+typedef unit<dimensionless_type,system>     dimensionless;
+
+typedef unit<length_dimension,system>       length;
+typedef unit<mass_dimension,system>         mass;
+typedef unit<time_dimension,system>         time;
+
+typedef unit<charge_dimension,system>               charge;
+typedef unit<current_dimension,system>              current;
+typedef unit<electric_potential_dimension,system>   electric_potential;
+typedef unit<electric_field_dimension,system>       electric_field;
+
+/// unit constants 
+BOOST_UNITS_STATIC_CONSTANT(centimeter,length);
+BOOST_UNITS_STATIC_CONSTANT(gram,mass);
+BOOST_UNITS_STATIC_CONSTANT(second,time);
+
+BOOST_UNITS_STATIC_CONSTANT(esu,charge);
+BOOST_UNITS_STATIC_CONSTANT(statvolt,electric_potential);
 
 } // namespace esu
 
@@ -115,6 +152,9 @@ int main(void)
     
     std::cout << cg_length/cgs_length << std::endl;
 
+    std::cout << esu::gram*pow<2>(esu::centimeter/esu::second)/esu::esu << std::endl;
+    std::cout << esu::statvolt/esu::centimeter << std::endl;
+    
     //std::cout << root<2>(gram*pow<3>(centimeter)/pow<2>(second)) << std::endl;
     
     return 0;
