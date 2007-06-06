@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-/// capacitance : L^-2 M^-1 T^4 C^2
+/// capacitance : L^-2 M^-1 T^4 I^2
 typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,4,current_base_dimension,2>::type   capacitance_type;            
 
 typedef unit<SI::capacitance_type,SI::system>                                           capacitance;

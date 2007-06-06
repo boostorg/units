@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-/// resistance : L^2 M T^-3 C^-2  
+/// resistance : L^2 M T^-3 I^-2  
 typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-2>::type   resistance_type;              
 
 typedef unit<SI::resistance_type,SI::system>                                            resistance;

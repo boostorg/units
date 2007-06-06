@@ -19,7 +19,7 @@ namespace units {
 
 namespace SI {
 
-/// permeability : L M T^-2 C^-2
+/// permeability : L M T^-2 I^-2
 typedef derived_dimension<length_base_dimension,1,mass_base_dimension,1,time_base_dimension,-2,current_base_dimension,-2>::type   permeability_type;
 
 typedef unit<SI::permeability_type,SI::system>                                          permeability;
