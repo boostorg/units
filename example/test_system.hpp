@@ -28,7 +28,7 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-struct length_base_dimension : boost::units::base_dimension<length_base_dimension, 1> { };      ///> base dimension of length
+struct length_base_dimension : boost::units::base_dimension<length_base_dimension,1> { };       ///> base dimension of length
 struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };           ///> base dimension of mass
 struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };           ///> base dimension of time
 //]
