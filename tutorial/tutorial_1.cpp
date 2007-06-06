@@ -78,25 +78,30 @@ typedef make_system<centimeter_base_unit,
                     gram_base_unit,
                     second_base_unit>::type system;
 
+/// derived dimension for force in electrostatic units : L M T^-2
+typedef derived_dimension<length_base_dimension,1,
+                          mass_base_dimension,1,
+                          time_base_dimension,-2>::type                                             force_dimension;
+                          
 /// derived dimension for charge in electrostatic units : L^3/2 M^1/2 T^-1
 typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<3,2> >,
                                         dim<mass_base_dimension,static_rational<1,2> >,
-                                        dim<time_base_dimension,static_rational<-1> > > >::type    charge_dimension; 
+                                        dim<time_base_dimension,static_rational<-1> > > >::type     charge_dimension; 
 
 /// derived dimension for current in electrostatic units : L^3/2 M^1/2 T^-2
 typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<3,2> >,
                                         dim<mass_base_dimension,static_rational<1,2> >,
-                                        dim<time_base_dimension,static_rational<-2> > > >::type    current_dimension; 
+                                        dim<time_base_dimension,static_rational<-2> > > >::type     current_dimension; 
 
 /// derived dimension for electric potential in electrostatic units : L^1/2 M^1/2 T^-1
 typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<1,2> >,
                                         dim<mass_base_dimension,static_rational<1,2> >,
-                                        dim<time_base_dimension,static_rational<-1> > > >::type    electric_potential_dimension; 
+                                        dim<time_base_dimension,static_rational<-1> > > >::type     electric_potential_dimension; 
 
 /// derived dimension for electric field in electrostatic units : L^-1/2 M^1/2 T^-1
 typedef make_dimension_list< mpl::list< dim<length_base_dimension,static_rational<-1,2> >,
                                         dim<mass_base_dimension,static_rational<1,2> >,
-                                        dim<time_base_dimension,static_rational<-1> > > >::type    electric_field_dimension; 
+                                        dim<time_base_dimension,static_rational<-1> > > >::type     electric_field_dimension; 
 
 /// unit typedefs
 typedef unit<dimensionless_type,system>     dimensionless;
@@ -104,6 +109,8 @@ typedef unit<dimensionless_type,system>     dimensionless;
 typedef unit<length_dimension,system>       length;
 typedef unit<mass_dimension,system>         mass;
 typedef unit<time_dimension,system>         time;
+
+typedef unit<force_dimension,system>        force;
 
 typedef unit<charge_dimension,system>               charge;
 typedef unit<current_dimension,system>              current;
@@ -114,6 +121,8 @@ typedef unit<electric_field_dimension,system>       electric_field;
 BOOST_UNITS_STATIC_CONSTANT(centimeter,length);
 BOOST_UNITS_STATIC_CONSTANT(gram,mass);
 BOOST_UNITS_STATIC_CONSTANT(second,time);
+
+BOOST_UNITS_STATIC_CONSTANT(dyne,force);
 
 BOOST_UNITS_STATIC_CONSTANT(esu,charge);
 BOOST_UNITS_STATIC_CONSTANT(statvolt,electric_potential);
@@ -138,6 +147,14 @@ template<> struct base_unit_info<second_base_unit>
     static std::string symbol()             { return "s"; }
 };
 
+template<class Y>
+quantity<esu::force,Y> coulombLaw(const quantity<esu::charge,Y>& q1,
+                                  const quantity<esu::charge,Y>& q2,
+                                  const quantity<esu::length,Y>& r)
+{
+    return q1*q2/(r*r);
+}
+
 } // namespace units
 
 } // namespace boost
@@ -147,15 +164,20 @@ int main(void)
     using namespace boost::units;
     using namespace boost::units::CGS;
 
-    quantity<CG::length>    cg_length(1.5*CG::centimeter);
-    quantity<CGS::length>   cgs_length(1.5*CGS::centimeter);
+    quantity<CG::length>    cg_length(1.0*CG::centimeter);
+    quantity<CGS::length>   cgs_length(1.0*CGS::centimeter);
     
     std::cout << cg_length/cgs_length << std::endl;
 
     std::cout << esu::gram*pow<2>(esu::centimeter/esu::second)/esu::esu << std::endl;
     std::cout << esu::statvolt/esu::centimeter << std::endl;
     
-    //std::cout << root<2>(gram*pow<3>(centimeter)/pow<2>(second)) << std::endl;
+    quantity<esu::charge>   q1 = 1.0*esu::esu,
+                            q2 = 2.0*esu::esu;
+    quantity<esu::length>   r = 1.0*esu::centimeter;
+    
+    std::cout << coulombLaw(q1,q2,r) << std::endl;
+    std::cout << coulombLaw(q1,q2,cgs_length) << std::endl;
     
     return 0;
 }
