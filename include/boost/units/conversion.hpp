@@ -17,6 +17,7 @@
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/divides.hpp>
+#include <boost/preprocessor/seq/enum.hpp>
 #include <boost/type_traits/is_same.hpp>
 
 #include <boost/units/dimension_list.hpp>
@@ -174,6 +175,86 @@ struct base_unit_converter<
     >::template apply<Source, Dest>
 {};
 
+/// Defines the conversion factor from a base unit to any other base
+/// unit with the same dimensions.  Must appear at global scope.
+/// If the destination unit is a unit that contains only one
+/// base unit which is raised to the first power (e.g. feet->meters)
+/// the reverse need not be defined.
+#define BOOST_UNITS_DEFINE_BASE_CONVERSION(Source, Destination, type_, value_)   \
+namespace boost {                                                           \
+namespace units {                                                           \
+    template<>                                                              \
+    struct select_base_unit_converter<                                      \
+        unscale<Source>::type,                                              \
+        unit<                                                               \
+            Source::dimension_type,                                         \
+            heterogeneous_system<                                           \
+                heterogeneous_system_pair<                                  \
+                    unscale<Destination>::type,                             \
+                    Source::dimension_type                                  \
+                >                                                           \
+            >                                                               \
+        >                                                                   \
+    >                                                                       \
+    {                                                                       \
+        typedef Source source_type;                                         \
+        typedef unit<                                                       \
+            Source::dimension_type,                                         \
+            heterogeneous_system<                                           \
+                heterogeneous_system_pair<                                  \
+                Destination,                                                \
+                Source::dimension_type> > > destination_type;               \
+    };                                                                      \
+    template<>                                                              \
+    struct base_unit_converter<                                             \
+        Source,                                                             \
+            unit<                                                           \
+            Source::dimension_type,                                         \
+            heterogeneous_system<                                           \
+                heterogeneous_system_pair<                                  \
+                    unscale<Destination>::type,                             \
+                    Source::dimension_type                                  \
+                >                                                           \
+            >                                                               \
+        >                                                                   \
+    >                                                                       \
+    {                                                                       \
+        typedef type_ type;                                                 \
+        static type value() { return(value_); }                             \
+    };                                                                      \
+}                                                                           \
+}                                                                           \
+void boost_units_require_semicolon()
+
+/// Defines the conversion factor from a base unit to any other base
+/// unit with the same dimensions.  Must appear at global scope.
+/// If the destination unit is a unit that contains only one
+/// base unit which is raised to the first power (e.g. feet->meters)
+/// the reverse need not be defined.  Does not work with scaling. Sigh.
+#define BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
+namespace boost {                                                           \
+namespace units {                                                           \
+    template<BOOST_PP_SEQ_ENUM(Params)>                                     \
+    struct base_unit_converter<                                             \
+        Source,                                                             \
+            unit<                                                           \
+            Source::dimension_type,                                         \
+            heterogeneous_system<                                           \
+                heterogeneous_system_pair<                                  \
+                    unscale<Destination>::type,                             \
+                    Source::dimension_type                                  \
+                >                                                           \
+            >                                                               \
+        >                                                                   \
+    >                                                                       \
+    {                                                                       \
+        typedef type_ type;                                                 \
+        static type value() { return(value_); }                             \
+    };                                                                      \
+}                                                                           \
+}                                                                           \
+void boost_units_require_semicolon()
+
 /// Defines the conversion factor from a base unit to any unit
 /// with the correct dimensions.  Must appear at global scope.
 /// If the destination unit is a unit that contains only one
@@ -192,6 +273,24 @@ namespace units {                                                           \
         typedef Destination destination_type;                               \
     };                                                                      \
     template<>                                                              \
+    struct base_unit_converter<Source, reduce_unit<Destination>::type>      \
+    {                                                                       \
+        typedef type_ type;                                                 \
+        static type value() { return(value_); }                             \
+    };                                                                      \
+}                                                                           \
+}                                                                           \
+void boost_units_require_semicolon()
+
+/// Defines the conversion factor from a base unit to any unit
+/// with the correct dimensions.  Must appear at global scope.
+/// If the destination unit is a unit that contains only one
+/// base unit which is raised to the first power (e.g. feet->meters)
+/// the reverse need not be defined. Does not work with scaling. Sigh.
+#define BOOST_UNITS_DEFINE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
+namespace boost {                                                           \
+namespace units {                                                           \
+    template<BOOST_PP_SEQ_ENUM(Params)>                                     \
     struct base_unit_converter<Source, reduce_unit<Destination>::type>      \
     {                                                                       \
         typedef type_ type;                                                 \
