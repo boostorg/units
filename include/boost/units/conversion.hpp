@@ -177,9 +177,7 @@ struct base_unit_converter<
 
 /// Defines the conversion factor from a base unit to any other base
 /// unit with the same dimensions.  Must appear at global scope.
-/// If the destination unit is a unit that contains only one
-/// base unit which is raised to the first power (e.g. feet->meters)
-/// the reverse need not be defined.
+/// The reverse need not be defined.
 #define BOOST_UNITS_DEFINE_BASE_CONVERSION(Source, Destination, type_, value_)   \
 namespace boost {                                                           \
 namespace units {                                                           \
@@ -212,7 +210,7 @@ namespace units {                                                           \
             Source::dimension_type,                                         \
             heterogeneous_system<                                           \
                 heterogeneous_system_pair<                                  \
-                    unscale<Destination>::type,                             \
+                    Destination,                                            \
                     Source::dimension_type                                  \
                 >                                                           \
             >                                                               \
@@ -228,9 +226,7 @@ void boost_units_require_semicolon()
 
 /// Defines the conversion factor from a base unit to any other base
 /// unit with the same dimensions.  Must appear at global scope.
-/// If the destination unit is a unit that contains only one
-/// base unit which is raised to the first power (e.g. feet->meters)
-/// the reverse need not be defined.  Does not work with scaling. Sigh.
+/// The reverse need not be defined.  Does not work with scaling. Sigh.
 #define BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
 namespace boost {                                                           \
 namespace units {                                                           \
@@ -238,11 +234,11 @@ namespace units {                                                           \
     struct base_unit_converter<                                             \
         Source,                                                             \
             unit<                                                           \
-            Source::dimension_type,                                         \
+            typename Source::dimension_type,                                \
             heterogeneous_system<                                           \
                 heterogeneous_system_pair<                                  \
-                    unscale<Destination>::type,                             \
-                    Source::dimension_type                                  \
+                    Destination,                                            \
+                    typename Source::dimension_type                         \
                 >                                                           \
             >                                                               \
         >                                                                   \
@@ -291,7 +287,7 @@ void boost_units_require_semicolon()
 namespace boost {                                                           \
 namespace units {                                                           \
     template<BOOST_PP_SEQ_ENUM(Params)>                                     \
-    struct base_unit_converter<Source, reduce_unit<Destination>::type>      \
+    struct base_unit_converter<Source, Destination>                         \
     {                                                                       \
         typedef type_ type;                                                 \
         static type value() { return(value_); }                             \
