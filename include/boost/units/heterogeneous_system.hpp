@@ -31,6 +31,7 @@
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/push_front_if.hpp>
+#include <boost/units/detail/push_front_or_add.hpp>
 #include <boost/units/detail/linear_algebra.hpp>
 
 namespace boost {
@@ -291,49 +292,6 @@ struct reduce_unit<unit<Dim, System> >
 };
 
 namespace detail {
-
-/// add an instantiation of dim to Sequence.
-template<bool>
-struct push_front_or_add_impl;
-
-template<>
-struct push_front_or_add_impl<true>
-{
-    template<typename Sequence, typename T>
-    struct apply
-    {
-        typedef typename mpl::plus<T, typename mpl::front<Sequence>::type>::type item;
-        typedef typename push_front_if<!is_empty_dim<item>::value>::template apply<
-            typename mpl::pop_front<Sequence>::type,
-            item
-        > type;
-    };
-};
-
-template<>
-struct push_front_or_add_impl<false>
-{
-    template<typename Sequence, typename T>
-    struct apply
-    {
-        typedef typename mpl::push_front<Sequence, T>::type type;
-    };
-};
-
-template<typename Sequence, typename T>
-struct push_front_or_add
-{
-    typedef typename push_front_or_add_impl<boost::is_same<typename T::tag_type, typename mpl::front<Sequence>::type::tag_type>::value>::template apply<
-        Sequence,
-        T
-    >::type type;
-};
-
-template<typename T>
-struct push_front_or_add<dimensionless_type, T>
-{
-    typedef typename mpl::push_front<dimensionless_type, T>::type type;
-};
 
 template<int N>
 struct unscale_heterogeneous_system_impl

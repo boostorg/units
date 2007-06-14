@@ -25,6 +25,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/push_front_if.hpp>
+#include <boost/units/detail/push_front_or_add.hpp>
 
 /// \file 
 /// \brief Core class and metaprogramming utilities for compile-time dimensional analysis.
@@ -35,265 +36,118 @@ namespace units {
 
 namespace detail {
 
-template<bool remove>
-struct strip_zero_dims_func;
+template<bool second_is_less>
+struct sort_dims_conditional_swap;
 
 template<>
-struct strip_zero_dims_func<true>
+struct sort_dims_conditional_swap<true>
 {
-    template<typename Sequence, typename T>
+    template<class T0, class T1>
     struct apply
     {
-        typedef Sequence type;
+        typedef T1 first;
+        typedef T0 second;
     };
 };
 
 template<>
-struct strip_zero_dims_func<false>
+struct sort_dims_conditional_swap<false>
 {
-    template<typename Sequence, typename T>
+    template<class T0, class T1>
     struct apply
     {
-        typedef typename mpl::push_front<Sequence, T>::type type;
+        typedef T0 first;
+        typedef T1 second;
     };
 };
 
 template<int N>
-struct strip_zero_dims_impl
+struct sort_dims_pass_impl
 {
-    template<typename Begin>
-    struct apply {
-        typedef typename strip_zero_dims_func<
-            boost::is_same<typename boost::mpl::deref<Begin>::type::tag_type, static_rational<0> >::value
-        >::template apply<
-            typename strip_zero_dims_impl<N-1>::template apply<
-                typename boost::mpl::next<Begin>::type
-            >::type,
-            typename boost::mpl::deref<Begin>::type
-        >::type type;
+    template<class Begin, class Current>
+    struct apply
+    {
+        typedef typename mpl::deref<Begin>::type val;
+        typedef typename sort_dims_conditional_swap<mpl::less<val, Current>::value>::template apply<Current, val> pair;
+        typedef typename sort_dims_pass_impl<N-1>::template apply<typename mpl::next<Begin>::type, typename pair::second> next;
+        typedef typename push_front_or_add<typename next::type, typename pair::first>::type type;
+        enum { value = next::value || mpl::less<val, Current>::value };
     };
 };
 
-/// remove all dimensionless dimensions
-template<typename Seq>
-struct strip_zero_dims
+template<>
+struct sort_dims_pass_impl<0>
 {
-    typedef typename strip_zero_dims_impl<mpl::size<Seq>::value>::template apply<typename mpl::begin<Seq>::type>::type    type;
+    template<class Begin, class Current>
+    struct apply
+    {
+        typedef typename mpl::push_front<dimensionless_type, Current>::type type;
+        enum { value = false };
+    };
 };
 
-/// a more efficient type sequence than @c mpl::list
-struct sort_dims_list_end
-{
-    enum { size = 0 };
-};
-
-template<typename T, typename Next = sort_dims_list_end>
-struct sort_dims_list
-{
-    typedef T item;
-    typedef Next next;
-    enum { size = Next::size + 1 };
-};
-
-/// add an instantiation of dim to Sequence.
 template<bool>
-struct sort_dims_insert_impl;
+struct sort_dims_impl;
 
 template<>
-struct sort_dims_insert_impl<true>
+struct sort_dims_impl<true>
 {
-    template<typename Sequence, typename T>
+    template<class T>
     struct apply
     {
-        typedef sort_dims_list<
-            typename mpl::plus<T, typename Sequence::item>::type,
-            typename Sequence::next
-        > type;
+        typedef typename mpl::begin<T>::type begin;
+        typedef typename sort_dims_pass_impl<mpl::size<T>::value - 1>::template apply<
+            typename mpl::next<begin>::type,
+            typename mpl::deref<begin>::type
+        > single_pass;
+        typedef typename sort_dims_impl<(single_pass::value)>::template apply<typename single_pass::type>::type type;
     };
 };
 
 template<>
-struct sort_dims_insert_impl<false>
+struct sort_dims_impl<false>
 {
-    template<typename Sequence, typename T>
+    template<class T>
     struct apply
     {
-        typedef typename boost::mpl::if_<boost::is_same<typename Sequence::item::value_type, static_rational<0> >,
-            typename Sequence::next,
-            Sequence
-        >::type type1;
-        typedef sort_dims_list<T, type1> type;
+        typedef T type;
     };
 };
 
-template<typename Sequence, typename T>
-struct sort_dims_insert
-{
-    typedef typename sort_dims_insert_impl<boost::is_same<typename T::tag_type, typename Sequence::item::tag_type>::value>::template apply<
-        Sequence,
-        T
-    >::type type;
-};
-
-template<typename T>
-struct sort_dims_insert<sort_dims_list_end, T>
-{
-    typedef sort_dims_list<T> type;
-};
-
-/// a pair of output sequences
-template<typename Out1, typename Out2>
-struct partition_dims_state
-{
-    typedef Out1 out1;
-    typedef Out2 out2;
-};
-
-/// determine which sequence to insert in
-template<bool insert_in_first>
-struct partition_dims_state_insert;
-
-template<>
-struct partition_dims_state_insert<true>
-{
-    template<typename State, typename T>
-    struct apply
-    {
-        typedef partition_dims_state<sort_dims_list<T, typename State::out1>, typename State::out2> type;
-    };
-};
-
-template<>
-struct partition_dims_state_insert<false>
-{
-    template<typename State, typename T>
-    struct apply
-    {
-        typedef partition_dims_state<typename State::out1, sort_dims_list<T, typename State::out2> > type;
-    };
-};
-
-/// quicksort uses recusive partitioning
 template<int N>
-struct partition_dims_forward_impl
+struct sort_dims_one_or_zero
 {
-    template<typename Begin, typename State, typename Value>
+    template<class T>
     struct apply
     {
-        typedef typename partition_dims_forward_impl<N - 1>::template apply<
-            typename Begin::next,
-            typename partition_dims_state_insert<mpl::less<typename Begin::item, Value>::value>::template apply<State, typename Begin::item>::type,
-            Value
-        >::type type;
+        typedef typename sort_dims_impl<true>::template apply<T>::type type;
     };
-};
-
-/// terminate the recursion
-template<>
-struct partition_dims_forward_impl<0>
-{
-    template<typename Begin, typename State, typename Value>
-    struct apply
-    {
-        typedef State type;
-    };
-};
-
-template<typename Sequence, typename Output>
-struct sort_dims_forward;
-
-/// primary template for the implementation of sort
-template<int N>
-struct sort_dims_forward_impl
-{
-    template<typename Begin, typename Output>
-    struct apply
-    {
-        typedef typename 
-            partition_dims_forward_impl<N - 1>::template apply<
-                typename Begin::next,
-                partition_dims_state<sort_dims_list_end, sort_dims_list_end>,
-                typename Begin::item
-            >::type partitioned;
-        //we're using push_front so we have to push the elements in reverse order
-        typedef typename sort_dims_forward<typename partitioned::out2, Output>::type step1;
-        typedef typename sort_dims_insert<step1, typename Begin::item>::type step2;
-        typedef typename sort_dims_forward<typename partitioned::out1, step2>::type type;
-    };
-};
-
-/// sorting a zero element sequence returns a zero element sequence
-template<>
-struct sort_dims_forward_impl<0>
-{
-    template<typename Begin, typename Output>
-    struct apply
-    {
-        typedef Output type;
-    };
-};
-
-/// a single element sequence is trivial too
-template<>
-struct sort_dims_forward_impl<1>
-{
-    template<typename Begin, typename Output>
-    struct apply
-    {
-        typedef typename sort_dims_insert<Output, typename Begin::item>::type type;
-    };
-};
-
-/// basic quicksort (@c mpl::sort is horribly inefficient)
-template<typename Sequence, typename Output>
-struct sort_dims_forward
-{
-    typedef typename sort_dims_forward_impl<Sequence::size>::template apply<
-        Sequence,
-        Output
-    >::type type;
-};
-
-/// convert an mpl sequence to a @c sort_dims_list removing @c dimensionless_type in the process
-template<int N>
-struct remove_dimensionless
-{
-    template<typename Begin, typename Out>
-    struct apply
-    {
-        typedef typename boost::mpl::deref<Begin>::type deref;
-        typedef typename boost::mpl::if_<boost::is_same<typename deref::tag_type, dimensionless_type>,
-            Out,
-            sort_dims_list<deref, Out>
-        >::type type1;
-        typedef typename remove_dimensionless<N - 1>::template 
-            apply<typename boost::mpl::next<Begin>::type, type1>::type type;
-    };
-};
-
-/// terminate the recursion
-template<>
-struct remove_dimensionless<0>
-{
-    template<typename Begin, typename Out>
-    struct apply
-    {
-        typedef Out type;
-    };
-};
-
-/// when we're finished with the computation we have to get back an @c mpl::list
-template<typename Sequence>
-struct sort_dims_to_mpl_list
-{
-    typedef typename boost::mpl::push_front<typename sort_dims_to_mpl_list<typename Sequence::next>::type, 
-                                            typename Sequence::item>::type type;
 };
 
 template<>
-struct sort_dims_to_mpl_list<sort_dims_list_end>
+struct sort_dims_one_or_zero<0>
 {
-    typedef dimensionless_type type;
+    template<class T>
+    struct apply
+    {
+        typedef dimensionless_type type;
+    };
+};
+
+template<>
+struct sort_dims_one_or_zero<1>
+{
+    template<class T>
+    struct apply
+    {
+        typedef typename mpl::push_front<dimensionless_type, typename mpl::front<T>::type>::type type;
+    };
+};
+
+template<class T>
+struct sort_dims
+{
+    typedef typename sort_dims_one_or_zero<mpl::size<T>::value>::template apply<T>::type type;
 };
 
 /// sorted sequences can be merged in linear time

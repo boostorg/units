@@ -45,6 +45,160 @@ struct derived_dimension
                                     dim< DT8,static_rational<E8> > > >::type type;
 };
 
+/// INTERNAL ONLY
+template<class DT1,long E1>
+struct derived_dimension<
+    DT1, E1,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2,
+         class DT3,long E3>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    DT3, E3,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> >,
+                                    dim< DT3,static_rational<E3> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2,
+         class DT3,long E3,
+         class DT4,long E4>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    DT3, E3,
+    DT4, E4,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> >,
+                                    dim< DT3,static_rational<E3> >,
+                                    dim< DT4,static_rational<E4> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2,
+         class DT3,long E3,
+         class DT4,long E4,
+         class DT5,long E5>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    DT3, E3,
+    DT4, E4,
+    DT5, E5,
+    dimensionless_type,0,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> >,
+                                    dim< DT3,static_rational<E3> >,
+                                    dim< DT4,static_rational<E4> >,
+                                    dim< DT5,static_rational<E5> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2,
+         class DT3,long E3,
+         class DT4,long E4,
+         class DT5,long E5,
+         class DT6,long E6>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    DT3, E3,
+    DT4, E4,
+    DT5, E5,
+    DT6, E6,
+    dimensionless_type,0,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> >,
+                                    dim< DT3,static_rational<E3> >,
+                                    dim< DT4,static_rational<E4> >,
+                                    dim< DT5,static_rational<E5> >,
+                                    dim< DT6,static_rational<E6> > > >::type type;
+};
+
+/// INTERNAL ONLY
+template<class DT1,long E1,
+         class DT2,long E2,
+         class DT3,long E3,
+         class DT4,long E4,
+         class DT5,long E5,
+         class DT6,long E6,
+         class DT7,long E7>
+struct derived_dimension<
+    DT1, E1,
+    DT2, E2,
+    DT3, E3,
+    DT4, E4,
+    DT5, E5,
+    DT6, E6,
+    DT7, E7,
+    dimensionless_type,0>
+{
+    typedef typename 
+    make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
+                                    dim< DT2,static_rational<E2> >,
+                                    dim< DT3,static_rational<E3> >,
+                                    dim< DT4,static_rational<E4> >,
+                                    dim< DT5,static_rational<E5> >,
+                                    dim< DT6,static_rational<E6> >,
+                                    dim< DT7,static_rational<E7> > > >::type type;
+};
+
 } // namespace units
 
 } // namespace boost                                                                   

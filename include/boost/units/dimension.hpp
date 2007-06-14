@@ -33,19 +33,13 @@ namespace boost {
 namespace units {
 
 /// Reduce dimension list to cardinal form. This algorithm collapses duplicate unit 
-/// tags, strips dimensionless tags, and sorts the resulting list. Sorting of homogeneous
-/// units is by the tag ordinal value. Heterogeneous units are sorted by... 
+/// tags and sorts the resulting list by the tag ordinal value.
 /// Dimension lists that resolve to the same dimension are guaranteed to be  
 /// represented by an identical type.
 template<typename Seq>
 struct make_dimension_list
 {
-    typedef typename detail::remove_dimensionless<boost::mpl::size<Seq>::value>::template 
-        apply<typename boost::mpl::begin<Seq>::type, detail::sort_dims_list_end>::type      sequence;
-    
-    typedef typename detail::sort_dims_forward<sequence, detail::sort_dims_list_end>::type  type2;
-
-    typedef typename detail::sort_dims_to_mpl_list<type2>::type                             type;
+    typedef typename detail::sort_dims<Seq>::type type;
 };
 
 /// Raise a dimension list to a scalar power.
