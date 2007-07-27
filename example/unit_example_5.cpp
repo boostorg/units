@@ -22,9 +22,11 @@ Output:
 //[unit_example_5_output_1
 L1 = 2 m
 L2 = 2 m
-L3 = 5 m
-L4 = 4 m
-L5 = 200 cm
+L3 = 2 m
+L4 = 200 cm
+L5 = 5 m
+L6 = 4 m
+L7 = 200 cm
 //]
 
 //[unit_example_5_output_2
@@ -64,8 +66,6 @@ velocity (2 cm/s) = 0.02 m s^-1
 #include <boost/units/io.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>
-//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
-//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
 
 using namespace boost::units;
 
@@ -82,32 +82,27 @@ int main()
     quantity<SI::length,int>    L2(quantity<SI::length,double>(2.5*SI::meters));
     //]
     
-    //[unit_example_5_snippet_2
-    //deprecated
-    //quantity<SI::length,int>    L3 = quantity_cast< quantity<SI::length,int> >(2.5);
-    //]
-    
     //[unit_example_5_snippet_3
-    //deprecated
-    //quantity<SI::length,int>    L4 = quantity_cast<quantity<SI::length,int> >(L1);
+    quantity<SI::length,int>    L3 = static_cast<quantity<SI::length,int> >(L1);
     //]
     
     //[unit_example_5_snippet_4
-    //deprecated
-    //quantity<CGS::length>       L5 = quantity_cast<quantity<CGS::length> >(L1);
+    quantity<CGS::length>       L4 = static_cast<quantity<CGS::length> >(L1);
     //]
     
-    quantity<SI::length,int>    L3(4*SI::meters),
-                                L4(5*SI::meters);
-    quantity<CGS::length>       L5(L1);
+    quantity<SI::length,int>    L5(4*SI::meters),
+                                L6(5*SI::meters);
+    quantity<CGS::length>       L7(L1);
     
-    swap(L3,L4);
+    swap(L5,L6);
     
     sstream1  << "L1 = " << L1 << std::endl
               << "L2 = " << L2 << std::endl
               << "L3 = " << L3 << std::endl
               << "L4 = " << L4 << std::endl
               << "L5 = " << L5 << std::endl
+              << "L6 = " << L6 << std::endl
+              << "L7 = " << L7 << std::endl
               << std::endl;
     }
     
@@ -147,26 +142,28 @@ int main()
              << "implicit conversions enabled"
              << std::endl;
               
+    //[unit_example_5_snippet_6
     quantity<SI::volume>     vs(1.0*pow<3>(SI::meter));      
     quantity<CGS::volume>    vc;
     
     vc = vs;
-                        
-    sstream1 << "volume (m^3)  = " << vs << std::endl
-             << "volume (cm^3) = " << vc << std::endl
-             << std::endl;
             
     quantity<SI::energy>     es(1.0*SI::joule);      
     quantity<CGS::energy>    ec;
     
     ec = es;
     
+    quantity<SI::velocity>  v1 = 2.0*SI::meters/SI::second,
+                            v2 = 2.0*CGS::centimeters/CGS::second; 
+    //]
+                        
+    sstream1 << "volume (m^3)  = " << vs << std::endl
+             << "volume (cm^3) = " << vc << std::endl
+             << std::endl;
+    
     sstream1 << "energy (joules) = " << es << std::endl
              << "energy (ergs)   = " << ec << std::endl
              << std::endl;
-    
-    quantity<SI::velocity>  v1 = 2.0*SI::meters/SI::second,
-                            v2 = 2.0*CGS::centimeters/CGS::second; 
     
     sstream1 << "velocity (2 m/s)  = " << v1 << std::endl
              << "velocity (2 cm/s) = " << v2 << std::endl
@@ -175,9 +172,11 @@ int main()
     
     sstream2  << "L1 = 2 m" << std::endl;
     sstream2  << "L2 = 2 m" << std::endl;
-    sstream2  << "L3 = 5 m" << std::endl;
-    sstream2  << "L4 = 4 m" << std::endl;
-    sstream2  << "L5 = 200 cm" << std::endl;
+    sstream2  << "L3 = 2 m" << std::endl;
+    sstream2  << "L4 = 200 cm" << std::endl;
+    sstream2  << "L5 = 5 m" << std::endl;
+    sstream2  << "L6 = 4 m" << std::endl;
+    sstream2  << "L7 = 200 cm" << std::endl;
     sstream2  << std::endl;
     sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
     sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;

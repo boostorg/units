@@ -21,9 +21,10 @@
 [def __static_rational [classref boost::units::static_rational static_rational]]
 [def __make_dimension_list [classref boost::units::make_dimension_list make_dimension_list]]
 [def __unit [classref boost::units::unit unit]]
-[def __base_unit_info [classref boost::units::base_unit_info unit_info]]
+[def __base_unit_info [classref boost::units::base_unit_info base_unit_info]]
 [def __quantity [classref boost::units::quantity quantity]]
 [def __conversion_helper [classref boost::units::conversion_helper conversion_helper]]
+[def __absolute [classref boost::units::absolute absolute]]
 
 [def __unary_plus_typeof_helper [classref boost::units::unary_plus_typeof_helper unary_plus_typeof_helper]]
 [def __unary_minus_typeof_helper [classref boost::units::unary_minus_typeof_helper unary_minus_typeof_helper]]
@@ -402,8 +403,8 @@ Naturally, it is also possible to define heterogeneous operators between differe
 ([@../examples/unit_example_1.cpp unit_example_1.cpp])
 
 By using MPL metafunctions and the template specializations for operations on composite dimensions
-defined in [headerref boost/units/dimension.hpp],
-it is possible to perform compile time arithmetic according to the dimensional analysis rules described above
+defined in [headerref boost/units/dimension.hpp], it is possible to perform compile time arithmetic
+according to the dimensional analysis rules described [link boost_units.Dimensional_Analysis above]
 to produce new composite dimensions :
 
 [import ../example/unit_example_1.cpp]
@@ -563,11 +564,7 @@ addition, subtraction, multiplication, division, equal-to, not-equal-to, less-th
 greater-than, and greater-or-equal-to. Support for rational powers and roots can be added by overloading
 the [___power_dimof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
 class that models a numerical measurement with an associated measurement error and the appropriate algebra and
-demonstrates its use as a quantity value type; the full code is found in [@../examples/measurement.hpp measurement.hpp]:
-
-[import ../example/measurement.hpp]
-
-[measurement_snippet_1]
+demonstrates its use as a quantity value type; the full code is found in [@../examples/measurement.hpp measurement.hpp].
 
 Then, defining some `measurement` [___quantity] variables
 
@@ -577,10 +574,7 @@ gives
 
 [unit_example_4_output_13]
 
-If we implement the overloaded helper classes for rational powers and roots :
-
-[measurement_snippet_2]
-
+If we implement the overloaded helper classes for rational powers and roots
 then we can also compute rational powers of measurement quantities :
 
 [unit_example_4_output_14]
@@ -593,7 +587,7 @@ then we can also compute rational powers of measurement quantities :
 
 ([@../examples/unit_example_5.cpp unit_example_5.cpp])
 
-This example demonstrates [___quantity_cast] and the various allowed conversions between SI and CGS units. Defining some
+This example demonstrates the various allowed conversions between SI and CGS units. Defining some
 quantities
 
 [import ../example/unit_example_5.cpp]
@@ -601,11 +595,9 @@ quantities
 [unit_example_5_snippet_1]
 
 illustrates implicit conversion of quantities of different value types where implicit conversion 
-of the value types themselves is allowed. [___quantity_cast] allows explicit conversions for three cases:
-
-* construction of a quantity from a raw value :
-
-[unit_example_5_snippet_2]
+of the value types themselves is allowed.  N.B. The conversion from double to int is treated
+as an explicit conversion because there is no way to emulate the exact behavior of the built-in
+conversion.  Explicit constructors allow conversions for two cases:
 
 * explicit casting of a [___quantity] to a different `value_type` :
 
@@ -619,7 +611,7 @@ giving the following output :
 
 [unit_example_5_output_1]
 
-Explicit unit system conversion is allowed in the [___quantity] constructor :
+A few more explicit unit system conversions :
 
 [unit_example_5_snippet_5]
 
@@ -628,11 +620,11 @@ which produces the following output:
 [unit_example_5_output_2]
 
 While the library default is to enable only those unit conversions for which the conversion of every
-fundamental dimension present in a quantity is specifically enabled as implicit, it is possible to 
+base unit present in a quantity is specifically enabled as implicit, it is possible to 
 supersede this behavior and enable all implicit conversions by defining the preprocessor 
 constant [___BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]. This allows us to do things like the following:
 
-[unit_example_5_snippet_3]
+[unit_example_5_snippet_6]
 
 which produces the following output:
 
@@ -913,7 +905,25 @@ gives
 
 ([@../example/unit_example_18.cpp unit_example_18.cpp])
 
+[import ../example/units_example_18.cpp]
+
 Mixed units and mixed unit conversions.
+
+First a look at the output:
+
+[unit_example_18_snippet_1]
+
+printing
+
+[unit_example_18_output_1]
+
+Arbitrary conversions also work:
+
+[unit_example_18_snippet_2]
+
+yielding
+
+[unit_example_18_output_2]
 
 [endsect]
 
@@ -936,37 +946,25 @@ constants] in SI units provided in [headerref boost/units/systems/si/codata_cons
 
 [import ../example/unit_example_20.cpp]
 
-This example shows a method for implementing absolute temperatures and relative temperature differences in Fahrenheit 
+This example demonstrates using of absolute temperatures and relative temperature differences in Fahrenheit 
 and converting between these and the Kelvin temperature scale. This issue touches on some surprisingly deep mathematical
 concepts (see [@http://en.wikipedia.org/wiki/Affine_space Wikipedia] for a basic review), but for our purposes here, we
 will simply observe that it is important to be able to differentiate between an absolute temperature measurement and a 
-measurement of temperature difference. This is accomplished by defining two wrapper classes :
+measurement of temperature difference. This is accomplished by using the [___absolute] wrapper class.
 
-[unit_example_20_class_snippet_1]
-
-that implement the correct algebra for points and vectors in 1D. We then define a unit system for Fahrenheit temperature and 
-associated classes :
-
-[unit_example_20_class_snippet_2]
-
-Finally, we manually define __conversion_helper for converting absolute temperatures and temperature differences in Fahrenheit
-to Kelvin and specify that these conversions may be done implicitly to demonstrate fine-grained control over implicit unit
-conversions :
-
-[unit_example_20_class_snippet_3]
-
-Note that the absolute conversion includes both scale and offset, while relative conversion only includes scale. With this, we 
-can define Fahrenheit temperatures :
+First we define a system using the predefined fahrenheit base unit:
 
 [unit_example_20_snippet_1]
 
-and convert them to SI :
+For convenience we make conversions implicit:
 
 [unit_example_20_snippet_2]
 
-resulting in the expected values :
+Now we can create some quantities:
 
-[unit_example_20_output]
+[unit_example_20_snippet_3]
+
+Note the use of [___absolute] to wrap a unit.
 
 [endsect]
 
@@ -1084,23 +1082,6 @@ naturally, a typedef for torque could also be added to make the intent more tran
 
 [endsect]
 
-[section:Namespace_Boost Why is everything in the boost namespace?]
-
-Boost.Units (formerly `mcs::units`) was originally written as an example of generic programming for dimensional analysis for the
-Boost mailing list. There is also significant interest in development of a Boost Units library,
-and this library represents my vision for how it could be done cleanly. Andrew Little has an extensive
-project that was recently reviewed and rejected by Boost that demonstrates his (very different) 
-take on the idea 
-[@http://quan.sourceforge.net here]. There are also a number of additional units projects 
-of varying degrees of completion in the 
-[@http://boost-consulting.com/vault/index.php?&direction=0&order=&directory=Units Boost Vault]
-and the
-[@http://boost-consulting.com/vault/index.php?&direction=0&order=&directory=Units Boost Files] 
-page on Yahoo! Groups (accessing the latter may require registration). As of February 6, 2007, `mcs::units`
-has been officially submitted for public review for inclusion into Boost.
-
-[endsect]
-
 [section:Angle_Are_Units Angles are treated as units]
 
 If you don't like this, you can just ignore the angle units and 
@@ -1117,10 +1098,25 @@ Consider the following code:
 
 What should this print?  If only heterogeneous
 systems are available it would print 3.14159+ rad
-Why?  Well, asin would return a quantity<dimensionless>
+Why?  Well, `asin` would return a `quantity<dimensionless>`
 effectively losing the information that degrees
 are being used.  In order to propogate this extra information
 we need homogeneous systems.
+
+[endsect]
+
+[section:NoConstructorFromValueType Why can't I construct a quantity directly from the value type?]
+
+This only breaks generic code--which ought to break anyway.  The only
+literal value that ought to be converted to a quantity by generic code
+is zero, which can be handled by the default constructor.
+
+[endsect]
+
+[section:ExplicitConversions Why are conversions explicit by default?]
+
+Safety.  Implicit conversions are dangerous and should
+not occur without a good reason.
 
 [endsect]
 

@@ -54,15 +54,18 @@ namespace units {
 
 namespace fahrenheit {
 
+//[unit_example_20_snippet_1
 typedef make_system<fahrenheit_base_unit>::type  system;
 
 typedef unit<temperature_dimension,system>                   temperature;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
+//]
 
 } // fahrenheit
 
+//[unit_example_20_snippet_2
 template<>
 struct is_implicitly_convertible< unit<temperature_dimension,fahrenheit::system>,
                                   unit<temperature_dimension,SI::system> > : 
@@ -74,6 +77,7 @@ struct is_implicitly_convertible<absolute< unit<temperature_dimension,fahrenheit
                                   absolute< unit<temperature_dimension,SI::system> > > : 
     public mpl::true_
 { };
+//]
 
 } // namespace units
 
@@ -83,6 +87,7 @@ int main()
 {
     std::stringstream sstream1, sstream2;
     
+    //[unit_example_20_snippet_3
     quantity<absolute<fahrenheit::temperature> >   T1p(32.0*absolute<fahrenheit::temperature>());
     quantity<fahrenheit::temperature>               T1v(32.0*fahrenheit::degrees);
     
@@ -90,7 +95,8 @@ int main()
     quantity<absolute<SI::temperature> >           T3p = T1p;
     quantity<SI::temperature>                       T2v(T1v);
     quantity<SI::temperature>                       T3v = T1v;
-    
+    //]
+
     typedef conversion_helper<quantity<absolute<fahrenheit::temperature> >,
                               quantity<absolute<SI::temperature> > >           absolute_conv_type;
     typedef conversion_helper<quantity<fahrenheit::temperature,double>,

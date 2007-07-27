@@ -49,11 +49,6 @@ namespace units {
 //[unit_example_16_class_snippet_1
 namespace nautical {
 
-/// placeholder class defining nautical unit system
-//struct system_tag : public ordinal<100> { };
-
-//typedef homogeneous_system<system_tag>  system;
-
 struct length_base_unit : base_unit<length_base_unit, length_dimension, 1>
 {
     static std::string name()       { return "nautical mile"; }
@@ -85,11 +80,6 @@ namespace units {
 
 //[unit_example_16_class_snippet_2
 namespace imperial {
-
-///// placeholder class defining imperial unit system
-//struct system_tag : public ordinal<101> { };
-//
-//typedef homogeneous_system<system_tag>  system;
 
 struct length_base_unit : base_unit<length_base_unit, length_dimension, 2>
 {

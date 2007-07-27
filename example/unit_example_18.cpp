@@ -19,6 +19,7 @@ Test heterogeneous units and quantities.
 Output:
 @verbatim
 
+//[unit_example_18_output_1
 1.5 m
 1 g
 1.5 m g
@@ -29,8 +30,11 @@ Output:
 
 1 cm kg s^-2
 1 cm m^-1 kg s^-2
+//]
 
+//[unit_example_18_output_2
 0.015 m^2
+//]
 
 @endverbatim
 **/
@@ -46,8 +50,6 @@ Output:
 #include <boost/units/detail/utility.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>
-//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
-//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
 
 using namespace boost::units;
 
@@ -55,6 +57,7 @@ int main()
 {
     std::stringstream sstream1, sstream2;
 
+    //[unit_example_18_snippet_1
     quantity<SI::length>        L(1.5*SI::meter);
     quantity<CGS::mass>         M(1.0*CGS::gram);
     
@@ -71,11 +74,14 @@ int main()
     sstream1 << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second) << std::endl
              << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second)/SI::meter << std::endl
              << std::endl;
-              
+    //]
+    
+    //unit_example_18_snippet_2
     quantity<SI::area>      A(1.5*SI::meter*CGS::centimeter);
     
     sstream1 << A << std::endl
              << std::endl;
+    //]
 
     sstream2 << "1.5 m" << std::endl
              << "1 g" << std::endl
