@@ -40,11 +40,15 @@ template<class T, long N> struct base_unit_pair { };
 /// to use the same value in multiple definitions.
 template<class Derived,
          class Dim,
-         long N,
+         long N
+#ifndef BOOST_UNITS_DOXYGEN
+         ,
          class = typename detail::ordinal_has_already_been_defined<
              sizeof(boost_units_unit_is_registered(units::base_unit_ordinal<N>())) == sizeof(detail::yes) &&
              sizeof(boost_units_unit_is_registered(units::base_unit_pair<Derived, N>())) != sizeof(detail::yes)
-         >::type>
+         >::type
+#endif
+>
 class base_unit : 
     public mpl::long_<N> 
 {

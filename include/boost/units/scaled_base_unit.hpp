@@ -66,6 +66,8 @@ struct scale<Base, static_rational<0> >
     static std::string symbol_prefix() { return(std::string()); }
 };
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 #define BOOST_UNITS_SCALE_SPECIALIZATION(base_,exponent_,val,name,symbol)   \
 template<>                                                                  \
 struct scale<base_, exponent_ >                                             \
@@ -112,6 +114,8 @@ BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<60>, 1152921504606846976.0, 
 
 #undef BOOST_UNITS_SCALE_DEF
 #undef BOOST_UNITS_SCALE_SPECIALIZATION
+
+#endif
 
 struct scaled_base_unit_tag {};
 

@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_UNITSFWD_HPP
 #define BOOST_UNITS_UNITSFWD_HPP
 
+/// \file Forward declarations of library components.
+
 namespace boost {
 
 namespace units {

@@ -37,11 +37,15 @@ template<class T, long N> struct base_dimension_pair { };
 /// It is designed so that you will get an error message if you try
 /// to use the same value in multiple definitions.
 template<class Derived,
-         long N,
+         long N
+#ifndef BOOST_UNITS_DOXYGEN
+         ,
          class = typename detail::ordinal_has_already_been_defined<
              sizeof(boost_units_is_registered(units::base_dimension_ordinal<N>())) == sizeof(detail::yes) &&
              sizeof(boost_units_is_registered(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
-         >::type>
+         >::type
+#endif
+>
 class base_dimension : 
     public mpl::long_<N> 
 {

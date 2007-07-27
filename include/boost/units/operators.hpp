@@ -86,7 +86,7 @@ template<typename X,typename Y> struct subtract_typeof_helper   { typedef __type
 template<typename X,typename Y> struct multiply_typeof_helper   { typedef __typeof__((typeof_::make<X>()*typeof_::make<Y>())) type; };
 template<typename X,typename Y> struct divide_typeof_helper     { typedef __typeof__((typeof_::make<X>()/typeof_::make<Y>())) type; };
 
-#elif (BOOST_UNITS_HAS_GNU_TYPEOF)
+#elif (BOOST_UNITS_HAS_GNU_TYPEOF) || defined(BOOST_UNITS_DOXYGEN)
 
 template<typename X> struct unary_plus_typeof_helper            { typedef typeof((+typeof_::make<X>())) type; };
 template<typename X> struct unary_minus_typeof_helper           { typedef typeof((-typeof_::make<X>())) type; };

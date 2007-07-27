@@ -15,8 +15,10 @@
 #include <boost/version.hpp>
 
 #if (BOOST_VERSION >= 103400)
+    ///INTERNAL ONLY
     #define BOOST_UNITS_HAS_BOOST_TYPEOF    1
 #else
+    ///INTERNAL ONLY
     #define BOOST_UNITS_HAS_BOOST_TYPEOF    0
 #endif
 
@@ -26,15 +28,21 @@
 
 #if (BOOST_UNITS_HAS_BOOST_TYPEOF)
     #include <boost/typeof/typeof.hpp> 
+    ///INTERNAL ONLY
     #define BOOST_UNITS_HAS_TYPEOF          1
 #else    
     #if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
+        ///INTERNAL ONLY
         #define BOOST_UNITS_HAS_TYPEOF          1
+        ///INTERNAL ONLY
         #define BOOST_UNITS_HAS_GNU_TYPEOF      1
     #elif defined(__MWERKS__)
+        ///INTERNAL ONLY
         #define BOOST_UNITS_HAS_TYPEOF          1
+        ///INTERNAL ONLY
         #define BOOST_UNITS_HAS_MWERKS_TYPEOF   1
     #else
+        ///INTERNAL ONLY
         #define BOOST_UNITS_HAS_TYPEOF          0
     #endif
 #endif
@@ -72,9 +80,23 @@
 #endif
 
 #ifdef BOOST_UNITS_REQUIRE_LAYOUT_COMPATIBILITY
+    ///INTERNAL ONLY
     #define BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(a, b) BOOST_STATIC_ASSERT((sizeof(a) == sizeof(b)))
 #else
+    ///INTERNAL ONLY
     #define BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(a, b) ((void)0)
+#endif
+
+#ifdef BOOST_UNITS_DOXYGEN
+
+/// If defined will trigger a static assertion if quantity<Unit, T>
+/// is not layout compatible with T
+#define BOOST_UNITS_REQUIRE_LAYOUT_COMPATIBILITY
+
+/// If defined will diasable a preprocessor check that the
+/// compiler is able to handle the library.
+#define BOOST_UNITS_NO_COMPILER_CHECK
+
 #endif
 
 #endif

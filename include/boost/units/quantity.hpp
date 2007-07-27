@@ -470,7 +470,7 @@ struct quantity_cast_helper<Y,const quantity<Unit,X> >
 /// quantity_cast provides mutating access to underlying quantity value_type
 template<class X,class Y>
 inline 
-typename detail::quantity_cast_helper<X,Y>::type
+X
 quantity_cast(Y& source)
 {
     detail::quantity_cast_helper<X,Y>   qch;
@@ -480,7 +480,7 @@ quantity_cast(Y& source)
 
 template<class X,class Y>
 inline 
-typename detail::quantity_cast_helper<X,const Y>::type
+X
 quantity_cast(const Y& source)
 {
     detail::quantity_cast_helper<X,const Y>   qch;
