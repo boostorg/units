@@ -92,12 +92,12 @@ boostbook standalone
   :
     units
   :
-    <dependency>.//units_reference
-    <dependency>.//si_reference
-    <dependency>.//cgs_reference
-    <dependency>.//trig_reference
-    <dependency>.//abstract_reference
-    <dependency>.//temperature_reference
+    <dependency>units_reference
+    <dependency>si_reference
+    <dependency>cgs_reference
+    <dependency>trig_reference
+    <dependency>abstract_reference
+    <dependency>temperature_reference
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8

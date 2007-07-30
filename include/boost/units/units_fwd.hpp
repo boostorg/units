@@ -11,7 +11,10 @@
 #ifndef BOOST_UNITS_UNITSFWD_HPP
 #define BOOST_UNITS_UNITSFWD_HPP
 
-/// \file Forward declarations of library components.
+/// \file
+/// Forward declarations of library components.
+
+#ifndef BOOST_UNITS_DOXYGEN
 
 namespace boost {
 
@@ -48,5 +51,7 @@ template<class T,class System> struct is_quantity_of_system;
 } // namespace units
 
 } // namespace boost
+
+#endif
 
 #endif // BOOST_UNITS_UNITSFWD_HPP

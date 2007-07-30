@@ -21,8 +21,8 @@
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/implicit_conversion.hpp>
 #include <boost/units/static_rational.hpp>
-#include <boost/units/detail/unit_impl.hpp>
 
 namespace boost {
 
@@ -76,9 +76,12 @@ struct is_implicitly_convertible : mpl::true_ {};
 
 template<class S1,class S2> 
 struct is_implicitly_convertible :
-    //public mpl::false_
     boost::is_same<typename reduce_unit<S1>::type, typename reduce_unit<S2>::type>
 { };
+
+template<class D, class S1, class S2>
+struct is_implicitly_convertible<unit<D, homogeneous_system<S1> >, unit<D, homogeneous_system<S2> > >
+    : detail::unit_is_implicitly_convertible<unit<D, homogeneous_system<S1> >, unit<D, homogeneous_system<S2> > >::type {};
 
 #endif
 

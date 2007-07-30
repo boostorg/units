@@ -160,15 +160,7 @@ struct use_inverse_conversion
 template<class Source, class Dest>
 struct base_unit_converter<
     Source,
-    unit<
-        typename Source::dimension_type,
-        heterogeneous_system<
-            heterogeneous_system_pair<
-                dimension_list<heterogeneous_system_dim<Dest, static_rational<1> >, dimensionless_type>,
-                typename Source::dimension_type
-            >
-        >
-    >
+    BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Dest, typename Source::dimension_type)
 > : detail::inverse_base_unit_converter_impl<
         detail::use_inverse_conversion<Source, Dest>::value,
         boost::is_same<Source, Dest>::value
@@ -184,37 +176,16 @@ namespace units {                                                           \
     template<>                                                              \
     struct select_base_unit_converter<                                      \
         unscale<Source>::type,                                              \
-        unit<                                                               \
-            Source::dimension_type,                                         \
-            heterogeneous_system<                                           \
-                heterogeneous_system_pair<                                  \
-                    unscale<Destination>::type,                             \
-                    Source::dimension_type                                  \
-                >                                                           \
-            >                                                               \
-        >                                                                   \
+        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(unscale<Destination>::type, Source::dimension_type)\
     >                                                                       \
     {                                                                       \
         typedef Source source_type;                                         \
-        typedef unit<                                                       \
-            Source::dimension_type,                                         \
-            heterogeneous_system<                                           \
-                heterogeneous_system_pair<                                  \
-                Destination,                                                \
-                Source::dimension_type> > > destination_type;               \
+        typedef BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, Source::dimension_type) destination_type;\
     };                                                                      \
     template<>                                                              \
     struct base_unit_converter<                                             \
         Source,                                                             \
-            unit<                                                           \
-            Source::dimension_type,                                         \
-            heterogeneous_system<                                           \
-                heterogeneous_system_pair<                                  \
-                    Destination,                                            \
-                    Source::dimension_type                                  \
-                >                                                           \
-            >                                                               \
-        >                                                                   \
+        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, Source::dimension_type)\
     >                                                                       \
     {                                                                       \
         typedef type_ type;                                                 \
@@ -233,15 +204,7 @@ namespace units {                                                           \
     template<BOOST_PP_SEQ_ENUM(Params)>                                     \
     struct base_unit_converter<                                             \
         Source,                                                             \
-            unit<                                                           \
-            typename Source::dimension_type,                                \
-            heterogeneous_system<                                           \
-                heterogeneous_system_pair<                                  \
-                    Destination,                                            \
-                    typename Source::dimension_type                         \
-                >                                                           \
-            >                                                               \
-        >                                                                   \
+        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, typename Source::dimension_type)\
     >                                                                       \
     {                                                                       \
         typedef type_ type;                                                 \

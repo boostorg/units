@@ -82,6 +82,24 @@ struct heterogeneous_system_dim
     typedef Exponent value_type;
 };
 
+/// INTERNAL ONLY
+#define BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(BaseUnit, Dimensions)   \
+    boost::units::unit<                                             \
+        Dimensions,                                                 \
+        boost::units::heterogeneous_system<                         \
+            boost::units::heterogeneous_system_pair<                \
+                boost::units::dimension_list<                       \
+                    boost::units::heterogeneous_system_dim<         \
+                        BaseUnit,                                   \
+                        boost::units::static_rational<1>            \
+                    >,                                              \
+                    boost::units::dimensionless_type                \
+                >,                                                  \
+                Dimensions                                          \
+            >                                                       \
+        >                                                           \
+    >
+
 } // namespace units
 
 } // namespace boost
