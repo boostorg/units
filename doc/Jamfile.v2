@@ -95,7 +95,5 @@ boostbook standalone
     <xsl:param>chunk.section.depth=8
     <xsl:param>fop1.extensions=1
     <xsl:param>fop.extensions=0
-    <xsl:param>tex.math.in.alt="latex"
-    <xsl:param>passivetex.extensions="1"
     <xsl:param>boost.root="../../../.."
   ;
