@@ -75,13 +75,6 @@ run_doxygen abstract_reference
     "Abstract System Reference"
   ;
 
-run_doxygen temperature_reference
-  :
-    ../../../boost/units/systems/other/temperature_fahrenheit.hpp
-  :
-    "Temperature System Reference"
-  ;
-
 xml units
   :
     units.qbk
@@ -97,7 +90,6 @@ boostbook standalone
     <dependency>cgs_reference
     <dependency>trig_reference
     <dependency>abstract_reference
-    <dependency>temperature_reference
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8
@@ -105,4 +97,5 @@ boostbook standalone
     <xsl:param>fop.extensions=0
     <xsl:param>tex.math.in.alt="latex"
     <xsl:param>passivetex.extensions="1"
+    <xsl:param>boost.root="../../../.."
   ;

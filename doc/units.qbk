@@ -905,7 +905,7 @@ gives
 
 ([@../example/unit_example_18.cpp unit_example_18.cpp])
 
-[import ../example/units_example_18.cpp]
+[import ../example/unit_example_18.cpp]
 
 Mixed units and mixed unit conversions.
 
@@ -1036,17 +1036,15 @@ Relatively complete SI and CGS unit systems are provided in [headerref boost/uni
 
 [section:Reference Reference]
 
-[xinclude units_reference.boostbook]
+[xinclude units_reference.xml]
 
-[xinclude si_reference.boostbook]
+[xinclude si_reference.xml]
 
-[xinclude cgs_reference.boostbook]
+[xinclude cgs_reference.xml]
 
-[xinclude trig_reference.boostbook]
+[xinclude trig_reference.xml]
 
-[xinclude abstract_reference.boostbook]
-
-[xinclude temperature_reference.boostbook]
+[xinclude abstract_reference.xml]
 
 [endsect]
 
