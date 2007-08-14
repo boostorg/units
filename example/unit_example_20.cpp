@@ -74,7 +74,7 @@ struct is_implicitly_convertible< unit<temperature_dimension,fahrenheit::system>
 
 template<>
 struct is_implicitly_convertible<absolute< unit<temperature_dimension,fahrenheit::system> >,
-                                  absolute< unit<temperature_dimension,SI::system> > > : 
+                                 absolute< unit<temperature_dimension,SI::system> > > : 
     public mpl::true_
 { };
 //]
@@ -91,14 +91,14 @@ int main()
     quantity<absolute<fahrenheit::temperature> >   T1p(32.0*absolute<fahrenheit::temperature>());
     quantity<fahrenheit::temperature>               T1v(32.0*fahrenheit::degrees);
     
-    quantity<absolute<SI::temperature> >           T2p(T1p);
-    quantity<absolute<SI::temperature> >           T3p = T1p;
+    quantity<absolute<SI::temperature> >            T2p(T1p);
+    quantity<absolute<SI::temperature> >            T3p = T1p;
     quantity<SI::temperature>                       T2v(T1v);
     quantity<SI::temperature>                       T3v = T1v;
     //]
 
     typedef conversion_helper<quantity<absolute<fahrenheit::temperature> >,
-                              quantity<absolute<SI::temperature> > >           absolute_conv_type;
+                              quantity<absolute<SI::temperature> > >            absolute_conv_type;
     typedef conversion_helper<quantity<fahrenheit::temperature,double>,
                               quantity<SI::temperature,double> >                relative_conv_type;
     
