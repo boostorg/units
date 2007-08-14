@@ -174,23 +174,23 @@ In the following discussion we view dimensional analysis as an abstraction in wh
 [@http://en.wikipedia.org/wiki/Fundamental_units units] obey the rules of a specific algebra. 
 We will refer to a pair of a base dimension and a rational exponent as a *fundamental dimension*, 
 and a list composed of an arbitrary number of fundamental dimensions as a *composite dimension* or, simply,
-*dimension*. In particular, given a set of [$../../libs/units/images/form_0.png] fundamental dimensions
-denoted by [$../../libs/units/images/form_1.png] and a set of [$../../libs/units/images/form_0.png]
-rational exponents [$../../libs/units/images/form_2.png], any possible (composite) dimension can be written
-as [$../../libs/units/images/form_3.png].  
+*dimension*. In particular, given a set of [$../../../units/images/form_0.png] fundamental dimensions
+denoted by [$../../../units/images/form_1.png] and a set of [$../../../units/images/form_0.png]
+rational exponents [$../../../units/images/form_2.png], any possible (composite) dimension can be written
+as [$../../../units/images/form_3.png].  
 
 Composite dimensions obey the algebraic rules for dimensional analysis. In particular, for any scalar value,
-[$../../libs/units/images/form_4.png], 
-and composite dimensions [$../../libs/units/images/form_5.png]
-and [$../../libs/units/images/form_6.png], where 
-[$../../libs/units/images/form_7.png], we have:
+[$../../../units/images/form_4.png], 
+and composite dimensions [$../../../units/images/form_5.png]
+and [$../../../units/images/form_6.png], where 
+[$../../../units/images/form_7.png], we have:
 
-[$../../libs/units/images/form_8.png]
+[$../../../units/images/form_8.png]
 
 Users of a dimensional analysis library should be able to specify an arbitrary list of fundamental dimensions to 
 produce a composite dimension. This potentially includes both repeated tags and dimensionless tags. For example, 
-it should be possible to express energy as [$../../libs/units/images/form_9.png], [$../../libs/units/images/form_10.png], 
-[$../../libs/units/images/form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
+it should be possible to express energy as [$../../../units/images/form_9.png], [$../../../units/images/form_10.png], 
+[$../../../units/images/form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
 1, 2, and -2, respectively. In addition, in some cases, multiple distinct fundamental dimensions representing the same dimension 
 measured in different unit systems may appear. In order to be able to perform computations on arbitrary sets of dimensions, 
 all composite dimensions must be reducible to an unambiguous final composite dimension, which we will refer to as a 
@@ -198,7 +198,7 @@ all composite dimensions must be reducible to an unambiguous final composite dim
 
 # fundamental dimensions are consistently ordered
 # dimensions with zero exponent are elided. Note that reduced dimensions are never composed of more than 
-  [$../../libs/units/images/form_0.png] dimension tags, one for each distinct fundamental dimension, but may have fewer.
+  [$../../../units/images/form_0.png] dimension tags, one for each distinct fundamental dimension, but may have fewer.
 
 In our implementation, fundamental dimensions are associated with tag types. As we will ultimately 
 represent composite dimensions as typelists, we must provide some mechanism for 
@@ -368,10 +368,10 @@ are instances where this is not the case. A simple example is given by the [@htt
 natural numbers] where the operator arithmetic obeys the following rules (using the standard notation for 
 [@http://en.wikipedia.org/wiki/Number number systems]):
 
-* [$../../libs/units/images/form_12.png]
-* [$../../libs/units/images/form_13.png]
-* [$../../libs/units/images/form_14.png]
-* [$../../libs/units/images/form_15.png]
+* [$../../../units/images/form_12.png]
+* [$../../../units/images/form_13.png]
+* [$../../../units/images/form_14.png]
+* [$../../../units/images/form_15.png]
 
 This library is designed to support arbitrary value type algebra for addition, subtraction, multiplication, division, and 
 rational powers and roots. For compilers that support `typeof`, the appropriate value type will be automatically deduced. 
