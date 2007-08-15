@@ -66,7 +66,7 @@ and quantities (defined as a unit and associated value) for arbitrary unit syste
 value types is provided, as is a fine-grained general facility for unit conversions. Complete SI and CGS unit 
 systems are provided, along with systems for 
 angles measured in degrees, radians, gradians, and revolutions and 
-systems for temperatures measured in Kelvin, degrees Celsius or Fahrenheit. 
+systems for temperatures measured in Kelvin, degrees Celsius and degrees Fahrenheit. 
 The library architecture has been designed with flexibility and extensibility in mind; demonstrations of the ease
 of adding new units and unit conversions are provided in the examples.
 
@@ -76,7 +76,7 @@ fairly demanding of compiler compliance to ISO standards. At present, it has bee
 compiled and tested on the following compilers/platforms :
 
 # g++ 4.0.1 on Mac OSX 10.4
-# Intel CC 9.1 on Mac OSX 10.4
+# Intel CC 9.1 and 10.0 on Mac OSX 10.4
 # g++ 3.4.4 on Windows XP
 # Microsoft Visual C++ 7.1 on Windows XP
 # Microsoft Visual C++ 8.0 on Windows XP
@@ -97,23 +97,24 @@ Before discussing the basics of the library, we first define a few terms that wi
 in the following :
 
 *  *Base dimension* : A base dimension is loosely defined as a measurable entity of interest; in conventional 
-   dimensional analysis, base dimensions include length (\[L\]), mass (\[M\]), time (\[T\]), etc....
-   Base dimensions are used only to define dimensions.
+   dimensional analysis, base dimensions include length (\[L\]), mass (\[M\]), time (\[T\]), etc... but there is
+   no specific restriction on what base dimensions can be used. Base dimensions are essentially a tag type and 
+   provide no dimensional analysis functionality themselves.
 *  *Dimension* : A collection of zero or more base dimensions, each
    potentially raised to a different rational power. For example, area = \[L\]^2, velocity = \[L\]^1/\[T\]^1, and
    energy = \[M\]^1 \[L\]^2/\[T\]^2 are all dimensions.
-*  *Base unit* : A base unit represents a specific measure of a dimension. While length is an abstract measure of
+*  *Base unit* : A base unit represents a specific measure of a dimension. For example, while length is an abstract measure of
    distance, the meter is a concrete base unit of distance.  Conversions are defined using base units.
-   Much like base dimensions, base units are used soley to define new units--quantities cannot use base units
-   directly.
-*  *Unit* : A set of base units raised to rational exponents.  e.g.  newtons = kg^1 m^1 / s^2.
-   There are several ways of representing units see [link boost_units.Units].
+   Much like base dimensions, base units are a tag type used solely to define units and do not support dimensional
+   analysis algebra.
+*  *Unit* : A set of base units raised to rational exponents, e.g. kg^1 m^1/s^2.
 *  *System* : A unit system is a collection of base units representing all the measurable entities of interest for a 
    specific problem. For example, the SI unit system defines seven base units : length (\[L\]) in meters, 
    mass (\[M\]) in kilograms, time (\[T\]) in seconds, current (\[I\]) in amperes, temperature (\[theta\]) in kelvin, 
-   amount (\[N\]) in moles, and luminous intensity (\[J\]) in candelas. 
+   amount (\[N\]) in moles, and luminous intensity (\[J\]) in candelas. All measurable entities within the SI system can 
+   be represented as products of various integer or rational powers of these seven base units.
 *  *Quantity* : A quantity represents a concrete amount of a unit. Thus, while the meter is the base 
-   unit of length in the SI system, 5.5 meters is a base quantity in that system.
+   unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
 To begin, we present two short tutorials. [@../../libs/units/tutorial/tutorial_1.cpp Tutorial1] demonstrates the use of 
 [@http://en.wikipedia.org/wiki/SI_units SI] units. After including the appropriate system headers 
@@ -192,42 +193,46 @@ produce a composite dimension. This potentially includes both repeated tags and 
 it should be possible to express energy as [$../../../units/images/form_9.png], [$../../../units/images/form_10.png], 
 [$../../../units/images/form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
 1, 2, and -2, respectively. In addition, in some cases, multiple distinct fundamental dimensions representing the same dimension 
-measured in different unit systems may appear. In order to be able to perform computations on arbitrary sets of dimensions, 
+measured in different unit systems may appear. We term units with multiple base units for one or more base dimensions heterogeneous,
+while those with a one-to-one relationship between base units and base dimensions are termed homogeneous. 
+For example kg (m/s) (ft/hr) is a heterogeneous unit of energy, 
+with the joule = kg m^2/s^2, being the homogeneous SI equivalent. 
+In order to be able to perform computations on arbitrary sets of dimensions, 
 all composite dimensions must be reducible to an unambiguous final composite dimension, which we will refer to as a 
 *reduced dimension*, for which
 
 # fundamental dimensions are consistently ordered
-# dimensions with zero exponent are elided. Note that reduced dimensions are never composed of more than 
+# dimensions with zero exponent are elided. Note that reduced dimensions never have more than 
   [$../../../units/images/form_0.png] dimension tags, one for each distinct fundamental dimension, but may have fewer.
 
 In our implementation, fundamental dimensions are associated with tag types. As we will ultimately 
 represent composite dimensions as typelists, we must provide some mechanism for 
 sorting dimension tags in order to make it possible to convert an arbitrary composite dimension into a reduced
-dimension. A CRTP base class is provided for this purpose (found in [headerref boost/units/base_dimension.hpp]):
+dimension. The [___base_dimension] class (found in [headerref boost/units/base_dimension.hpp]) uses the curiously recurring
+template pattern (CRTP) technique to ensure that ordinals specified for base dimensions are unique across translation units:
 
     template<class Derived, long N> struct base_dimension { ... };
 
-With this, we can define the fundamental types for length, mass, and time as (noting that the specific ordering
+With this, we can define the base dimensions for length, mass, and time as (noting that the specific ordering
 is not important, only the uniqueness of the ordinal values) :
 
 [import ../example/test_system.hpp]
 [test_system_snippet_1]
 
 It is important to note that the choice of order is completely arbitrary as long as each tag has a unique enumerable
-value.  Negative ordinals are reserved for use by the library.  To define the fundamental dimensions themselves, we
-simply create MPL-conformant typelists having unit exponents by using the [___dim] class to encapsulate the fundamental
-dimension tag with a [___static_rational] exponent.  The [___make_dimension_list] class acts as a wrapper to ensure
+value; non-unique ordinals are flagged as errors at compile-time. Negative ordinals are reserved for use by the library.  
+To define composite dimensions corresponding to the base dimensions, we
+simply create MPL-conformant typelists of fundamental dimensions by using the [___dim] class to encapsulate pairs of base dimensions 
+and [___static_rational] exponents.  The [___make_dimension_list] class acts as a wrapper to ensure
 that the resulting type is in the form of a reduced dimension:
 
 [test_system_snippet_2]
 
-To facilitate definition of fundamental dimensions, a convenience typedef is provided:
+This can also be easily accomplished using a convenience typedef provided by [___base_dimension]:
 
 [test_system_snippet_3]
 
-so that the above code is identical to the full typelist definition.
-
-Naturally, we also define composite dimensions via a typelist:
+so that the above code is identical to the full typelist definition. Composite dimensions are similarly defined via a typelist:
 
 [test_system_snippet_4]
 
@@ -239,25 +244,28 @@ A convenience class for composite dimensions with integer powers is also provide
 
 [section:Units Units]
 
-We define a *unit* as a composite dimension expressed in some *unit system*, where the latter is a self-consistent 
-set of reference measures corresponding to the fundamental dimensions comprising the unit system. For example,
+We define a *unit* as a composite dimension expressed in some *unit system*, where the latter is a collection of base units
+corresponding to the base dimensions that the system can represent. For example,
 length is an abstract concept that can be made concrete by associating it with a unit system. Thus, the meter is a unit
-of length in the SI system. Units are, like composite dimensions, purely compile-time variables with no associated value.
+of length in the SI system. Units are, like dimensions, purely compile-time variables with no associated value.
 Units obey the same algebra as dimensions do; the presence of the unit system serves to ensure that units having identical
 reduced dimension in different systems (like feet and meters) cannot be inadvertently mixed in computations.
 
-There are two distinct types of unit system that can be envisioned:
+There are two distinct types of units that can be envisioned:
 
-* *Homogeneous systems* : Systems composed of a set of base units, for example, meters, kilograms, and seconds.
-  Capable of representing any dimension that can be constructed from the dimensions of these base units.
-  Thus, energy in the SI system is meters^2 kilograms seconds^-2.  If the representation of any unit
-  is ambiguous then the system is ill-formed as in meters and feet.
-* *Heterogeneous systems* : Mixed systems consisting of base units raised to rational powers.  Any
-  conceivable unit can be represented in some heterogeneous system.  Unfortunately, a system of
-  this kind is only capable of representing one dimension because the exponents of all the base units
-  are fixed. For example, an empirical equation for radar beam height (in feet) is H = (r/C)^2 where r is the
-  radar range in nautical miles. In order for this equation to be dimensionally correct, the constant, C, must be expressed in 
-  nautical miles per foot^(1/2), which mixes two distinct fundamental length dimensions in a single unit.
+* *Homogeneous units* : Units for which there is a one-to-one correspondence between base dimensions and base units 
+  are termed homogeneous. For example, the SI system has seven base dimensions and seven base units corresponding to them, 
+  so units in the SI system are homogeneous.
+* *Heterogeneous units* : Units for which there is at least one base dimension that is represented by one (or more) 
+  base units are termed heterogeneous. For example, area in 
+  m ft is a heterogeneous unit because there are two base units (meters and feet) corresponding to a single base dimension
+  (length). Essentially any unit that can be represented with rational powers can be represented as a heterogeneous unit. 
+  While one can conceptually imagine a heterogeneous system being a collection of all the base units that could be used 
+  in representing a unit, for reasons of implementation efficiency, each distinct heterogeneous unit has a unique associated
+  system. A practical example of the need for heterogeneous units, is an empirical equation used in 
+  aviation: H = (r/C)^2 where H is the radar beam height in feet and r is the radar range in nautical miles. In order to 
+  enforce dimensional correctness of this 
+  equation, the constant, C, must be expressed in nautical miles per foot^(1/2), mixing two distinct base units of length.
 
 Units are implemented by the [___unit] template class defined in [headerref boost/units/unit.hpp] :
 
