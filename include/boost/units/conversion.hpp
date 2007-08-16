@@ -418,7 +418,7 @@ struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homo
         homogeneous_system<L2>
     > impl;
     typedef typename impl::type type;
-    static type convert()
+    static type value()
     {
         return(impl::value());
     }

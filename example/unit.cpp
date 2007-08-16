@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_2.cpp
+\brief unit.cpp
 
 \detailed
 Test unit algebra.
@@ -19,7 +19,7 @@ Test unit algebra.
 Output:
 @verbatim
 
-//[unit_example_2_output
+//[unit_output
 L             = m
 L+L           = m
 L-L           = m
@@ -47,7 +47,7 @@ int main()
     using namespace boost::units;
     using namespace boost::units::test;
 
-    //[unit_example_2_snippet_1
+    //[unit_snippet_1
     const length                    L;
     const mass                      M;
     // needs to be namespace-qualified because of global time definition

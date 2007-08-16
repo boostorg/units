@@ -31,6 +31,16 @@ template<long N> struct base_dimension_ordinal { };
 /// INTERNAL ONLY
 template<class T, long N> struct base_dimension_pair { };
 
+/// INTERNAL ONLY
+template<class T, long N>
+struct check_base_dimension {
+    enum {
+        value = 
+            sizeof(boost_units_is_registered(units::base_dimension_ordinal<N>())) == sizeof(detail::yes) &&
+            sizeof(boost_units_is_registered(units::base_dimension_pair<T, N>())) != sizeof(detail::yes)
+    };
+};
+
 /// Defines a base dimension.  To define a dimension you need to provide
 /// the derived class (CRTP) and a unique integer.
 /// struct my_dimension : boost::units::base_dimension<my_dimension, 1> {};
@@ -41,8 +51,7 @@ template<class Derived,
 #ifndef BOOST_UNITS_DOXYGEN
          ,
          class = typename detail::ordinal_has_already_been_defined<
-             sizeof(boost_units_is_registered(units::base_dimension_ordinal<N>())) == sizeof(detail::yes) &&
-             sizeof(boost_units_is_registered(units::base_dimension_pair<Derived, N>())) != sizeof(detail::yes)
+             check_base_dimension<Derived, N>::value
          >::type
 #endif
 >

@@ -7,39 +7,25 @@
 # accomanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt
 
-UNITS_REQUIREMENTS = <include>$(BOOST_ROOT) <include>../../.. <warnings>all ;
-
 import testing ;
+import path ;
+
+project units_examples :
+  : requirements <include>$(BOOST_ROOT) <include>../../.. <warnings>all
+;
+
+rule make_tests ( files * ) {
+  local results = ;
+  for local file in $(files) {
+    results += [ run $(file) : : : ] ;
+  }
+}
 
 {
   test-suite units
    :
-    [ run tutorial.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_1.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_2.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_3.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_4.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_5.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_6.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_7.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_8.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_9.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_10.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_11.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_12.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_13.cpp $(BOOST_ROOT)/libs/serialization/build//boost_serialization : : : $(UNITS_REQUIREMENTS) <define>BOOST_SERIALIZATION_NO_LIB : ]
-    [ compile unit_example_14.cpp : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_15.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ compile-fail unit_example_15.cpp : $(UNITS_REQUIREMENTS) <define>BOOST_UNITS_EXAMPLE_15_FAIL=1 : unit_example_15_fail_1 ]
-    [ compile-fail unit_example_15.cpp : $(UNITS_REQUIREMENTS) <define>BOOST_UNITS_EXAMPLE_15_FAIL=2 : unit_example_15_fail_2 ]
-    [ compile-fail unit_example_15.cpp : $(UNITS_REQUIREMENTS) <define>BOOST_UNITS_EXAMPLE_15_FAIL=3 : unit_example_15_fail_3 ]
-    [ run unit_example_16.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_17.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_18.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_19.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_20.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_21.cpp : : : $(UNITS_REQUIREMENTS) : ]
-    [ run unit_example_22.cpp : : : $(UNITS_REQUIREMENTS) : ]
+    [ make_tests [ path.glob . : *.cpp : performance.* ] ]
+    [ compile performance.cpp ]
    ;
 
 }

@@ -11,17 +11,19 @@
 /** 
 \file
     
-\brief unit_example_22.cpp
+\brief conversion_factor.cpp
 
-\detailed Another example of defining units.
+\detailed An example of using conversion_factor.
 
 Output:
 @verbatim
 
-//[unit_example_22_output
-kg s^(-3) K^(-1)
-kg s^(-3) K^(-1)
-1 kg s^(-3) K^(-1)
+//[conversion_factor_output
+1e-005
+100
+1e-005
+100
+0.01
 //]
 
 @endverbatim
@@ -43,34 +45,20 @@ kg s^(-3) K^(-1)
 
 #include <boost/units/systems/other/non_si_units.hpp>
 
-struct blah { };
-struct blahblah { };
-
-blahblah operator+(const blah&) { return blahblah(); }
-
-template<typename I,I N,I D> 
-class static_rational
-{ };
-
 int main()
 {
     using namespace boost;
     using namespace boost::units;
+
+    //[conversion_factor_snippet_1
     
-    std::cout << quantity<SI::dimensionless>(1.0*CGS::dyne/SI::newton) << std::endl;
-//    std::cout << exp(1.0*(SI::newtons*CGS::dynes)/(SI::newtons*CGS::dynes)) << std::endl;
-    std::cout << exp(quantity<SI::dimensionless>(1.0*(SI::newtons*CGS::dynes)/(SI::newtons*CGS::dynes))) << std::endl;
     std::cout << conversion_factor<double>(CGS::dyne,SI::newton) << std::endl;
     std::cout << conversion_factor<double>(SI::newton/SI::kilogram,CGS::dyne/CGS::gram) << std::endl;
     std::cout << conversion_factor<double>(CGS::momentum(),SI::momentum()) << std::endl;
     std::cout << conversion_factor<double>(SI::momentum()/SI::mass(),CGS::momentum()/CGS::mass()) << std::endl;
     std::cout << conversion_factor<double>(CGS::gal,SI::meter_per_second_squared) << std::endl;
     
-    blah    b;
-    
-    std::cout << typeid(+b).name() << std::cout;
-    
+    //]
+
     return 0;
 }
-
-

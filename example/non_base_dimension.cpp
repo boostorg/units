@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_21.cpp
+\brief non_base_dimension.cpp
 
 \detailed
 Another example of user-defined units with conversions.
@@ -19,7 +19,7 @@ Another example of user-defined units with conversions.
 Output:
 @verbatim
 
-//[unit_example_21_output
+//[non_base_dimension_output
 //]
 
 @endverbatim
@@ -39,6 +39,8 @@ namespace boost {
 
 namespace units {
 
+//[non_base_dimension_snippet_1
+
 struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dimension, 1> { };
 
 typedef make_system<imperial_gallon_tag>::type imperial;
@@ -50,6 +52,8 @@ struct us_gallon_tag : base_unit<us_gallon_tag, volume_dimension, 2> { };
 typedef make_system<us_gallon_tag>::type us;
 
 typedef unit<volume_dimension,us> us_gallon;
+
+//]
 
 template<>
 struct is_implicitly_convertible<unit<volume_dimension,imperial>,

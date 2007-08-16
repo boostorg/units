@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_4.cpp
+\brief kitchen_sink.cpp
 
 \detailed
 More extensive quantity tests.
@@ -19,7 +19,7 @@ More extensive quantity tests.
 Output:
 @verbatim
 
-//[unit_example_4_output_1
+//[kitchen_sink_output_1
 S1 :    2
 X1 :    2
 X2 :    (4/3)
@@ -29,14 +29,14 @@ Q1 :    1 m kg s^-2
 Q2 :    2 m^2 kg s^-2
 //]
 
-//[unit_example_4_output_2
+//[kitchen_sink_output_2
 U1*S1 : 2 m kg s^-2
 S1*U1 : 2 m kg s^-2
 U1/S1 : 0.5 m kg s^-2
 S1/U1 : 2 m^-1 kg^-1 s^2
 //]
 
-//[unit_example_4_output_3
+//[kitchen_sink_output_3
 U1+U1 : m kg s^-2
 U1-U1 : m kg s^-2
 U1*U1 : m^2 kg^2 s^-4
@@ -49,21 +49,21 @@ U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)
 X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
-//[unit_example_4_output_4
+//[kitchen_sink_output_4
 Q1*S1 : 2 m kg s^-2
 S1*Q1 : 2 m kg s^-2
 Q1/S1 : 0.5 m kg s^-2
 S1/Q1 : 2 m^-1 kg^-1 s^2
 //]
 
-//[unit_example_4_output_5
+//[kitchen_sink_output_5
 U1*Q1 : 1 m^2 kg^2 s^-4
 Q1*U1 : 1 m^2 kg^2 s^-4
 U1/Q1 : 1 dimensionless
 Q1/U1 : 1 dimensionless
 //]
 
-//[unit_example_4_output_6
+//[kitchen_sink_output_6
 +Q1   : 1 m kg s^-2
 -Q1   : -1 m kg s^-2
 Q1+Q1 : 2 m kg s^-2
@@ -78,7 +78,7 @@ Q1^X2 : 1 m^(4/3) kg^(4/3) s^(-8/3)
 X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
-//[unit_example_4_output_7
+//[kitchen_sink_output_7
 l1 == l2    false
 l1 != l2    true
 l1 <= l2    true
@@ -89,17 +89,17 @@ l1 > l2     false
 
 dimless = 1
 
-//[unit_example_4_output_8
+//[kitchen_sink_output_8
 v1 = 2 m s^-1
 //]
 
-//[unit_example_4_output_9
+//[kitchen_sink_output_9
 F  = 1 m kg s^-2
 dx = 1 m
 E  = 1 m^2 kg s^-2
 //]
 
-//[unit_example_4_output_10
+//[kitchen_sink_output_10
 r = 5e-07 m
 P = 101325 m^-1 kg s^-2
 V = 5.23599e-19 m^3
@@ -108,26 +108,26 @@ n = 2.05835e-17 mol
 R = 8.31447 m^2 kg s^-2 K^-1 mol^-1
 //]
 
-//[unit_example_4_output_11
+//[kitchen_sink_output_11
 theta            = 0.375 rd
 sin(theta)       = 0.366273 dimensionless
 asin(sin(theta)) = 0.375 rd
 //]
 
-//[unit_example_4_output_12
+//[kitchen_sink_output_12
 V   = (12.5,0) m^2 kg s^-3 A^-1
 I   = (3,4) A
 Z   = (1.5,-2) m^2 kg s^-3 A^-2
 I*Z = (12.5,0) m^2 kg s^-3 A^-1
 //]
 
-//[unit_example_4_output_13
+//[kitchen_sink_output_13
 x+y-w         = 0.48(+/-0.632772) m
 w*x           = 9.04(+/-0.904885) m^2
 x/y           = 0.666667(+/-0.149071) dimensionless
 //]
 
-//[unit_example_4_output_14
+//[kitchen_sink_output_14
 w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1
 w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 //]
@@ -155,7 +155,7 @@ namespace boost {
 namespace units {
 
 /*
-//[unit_example_4_function_snippet_1
+//[kitchen_sink_function_snippet_1
 /// sin takes a quantity and returns a dimensionless quantity
 template<class System,class Y>
 quantity<unit<dimensionless_type,System>,Y>
@@ -165,7 +165,7 @@ sin(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 }
 //]
 
-//[unit_example_4_function_snippet_2
+//[kitchen_sink_function_snippet_2
 /// asin takes a dimensionless quantity and returns a quantity
 template<class System,class Y>
 quantity<unit<plane_angle_dimension,System>,Y>
@@ -178,7 +178,7 @@ asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 //]
 */
 
-//[unit_example_4_function_snippet_3
+//[kitchen_sink_function_snippet_3
 /// the physical definition of work - computed for an arbitrary unit system 
 template<class System,class Y>
 quantity<unit<energy_dimension,System>,Y> 
@@ -189,7 +189,7 @@ work(quantity<unit<force_dimension,System>,Y> F,
 }
 //]
 
-//[unit_example_4_function_snippet_4
+//[kitchen_sink_function_snippet_4
 /// the ideal gas law in SI units
 template<class Y>
 quantity<SI::amount,Y> 
@@ -219,7 +219,7 @@ int main()
     std::stringstream sstream1, sstream2;
 
     {
-    //[unit_example_4_snippet_1
+    //[kitchen_sink_snippet_1
     /// scalar
     const double    s1 = 2;
     
@@ -310,7 +310,7 @@ int main()
               << "X2vQ1 : " << root<static_rational<4,3> >(q1) << std::endl
               << std::endl;
     
-    //[unit_example_4_snippet_2
+    //[kitchen_sink_snippet_2
     /// check comparison tests
     quantity<length>    l1(1.0*meter),
                         l2(2.0*meters);
@@ -325,7 +325,7 @@ int main()
               << "l1 > l2 " << "\t" << (l1  > l2) << std::endl
               << std::endl;
     
-    //[unit_example_4_snippet_3
+    //[kitchen_sink_snippet_3
     /// check implicit unit conversion from dimensionless to value_type  
     const double    dimless = (q1/q1);
     //]
@@ -338,7 +338,7 @@ int main()
     sstream1 << "v1 = " << v1 << std::endl
               << std::endl;
     
-    //[unit_example_4_snippet_4
+    //[kitchen_sink_snippet_4
     /// test calcuation of work
     quantity<force>       F(1.0*newton);
     quantity<length>      dx(1.0*meter);
@@ -351,7 +351,7 @@ int main()
               << std::endl;
     
     {
-    //[unit_example_4_snippet_5
+    //[kitchen_sink_snippet_5
     /// test ideal gas law
     quantity<temperature>   T = (273.+37.)*kelvin;
     quantity<pressure>      P = 1.01325e5*pascals;
@@ -373,7 +373,7 @@ int main()
               << std::endl;
     }         
     
-    //[unit_example_4_snippet_6
+    //[kitchen_sink_snippet_6
     /// test trig stuff
     quantity<plane_angle>           theta = 0.375*radians;
     quantity<dimensionless>         sin_theta = sin(theta);
@@ -398,7 +398,7 @@ int main()
     /// check complex quantities
     typedef std::complex<double>    complex_type;
     
-    //[unit_example_4_snippet_7
+    //[kitchen_sink_snippet_7
     quantity<electric_potential,complex_type>   v = complex_type(12.5,0.0)*volts;
     quantity<current,complex_type>              i = complex_type(3.0,4.0)*amperes;
     quantity<resistance,complex_type>           z = complex_type(1.5,-2.0)*ohms;
@@ -412,7 +412,7 @@ int main()
     
     /// check quantities using user-defined type encapsulating error propagation
 
-    //[unit_example_4_snippet_8
+    //[kitchen_sink_snippet_8
     quantity<length,measurement<double> >   u(measurement<double>(1.0,0.0)*meters),
                                             w(measurement<double>(4.52,0.02)*meters),
                                             x(measurement<double>(2.0,0.2)*meters),

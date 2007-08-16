@@ -408,163 +408,163 @@ Naturally, it is also possible to define heterogeneous operators between differe
 
 [section:Examples Examples]
 
-[section:Example_1 Example 1]
+[section:DimensionExample Dimension Example]
 
-([@../../libs/units/example/unit_example_1.cpp unit_example_1.cpp])
+([@../../libs/units/example/dimension.cpp dimension.cpp])
 
 By using MPL metafunctions and the template specializations for operations on composite dimensions
 defined in [headerref boost/units/dimension.hpp], it is possible to perform compile time arithmetic
 according to the dimensional analysis rules described [link boost_units.Dimensional_Analysis above]
 to produce new composite dimensions :
 
-[import ../example/unit_example_1.cpp]
+[import ../example/dimension.cpp]
 
-[unit_example_1_snippet_1]
+[dimension_snippet_1]
 
 outputting (with symbol demangling, implemented in [headerref boost/units/detail/utility.hpp])
 
-[unit_example_1_output]
+[dimension_output]
 
 [endsect]
 
-[section:Example_2 Example 2]
+[section:UnitExample Unit Example]
 
-([@../../libs/units/example/unit_example_2.cpp unit_example_2.cpp])
+([@../../libs/units/example/unit.cpp unit.cpp])
 
 This example demonstrates the use of the simple but functional unit system implemented in 
 [headerref libs/units/example/test_system.hpp] :
 
-[import ../example/unit_example_2.cpp]
+[import ../example/unit.cpp]
 
-[unit_example_2_snippet_1]
+[unit_snippet_1]
 
 We can perform various algebraic operations on these units, resulting in the following output:
 
-[unit_example_2_output]
+[unit_output]
 
 [endsect]
 
-[section:Example_3 Example 3]
+[section:QuantityExample Quantity Example]
 
-([@../../libs/units/example/unit_example_3.cpp unit_example_3.cpp])
+([@../../libs/units/example/quantity.cpp quantity.cpp])
 
 This example demonstrates how to use quantities of our toy unit system :
 
-[import ../example/unit_example_3.cpp]
+[import ../example/quantity.cpp]
 
-[unit_example_3_snippet_1]
+[quantity_snippet_1]
 
 giving us the basic quantity functionality :
 
-[unit_example_3_output_double]
+[quantity_output_double]
 
 As a further demonstration of the flexibility of the system, we replace the `double` value type 
 with a `std::complex<double>` value type (ignoring the question of the meaningfulness of
 complex lengths and energies) :
 
-[unit_example_3_snippet_2]
+[quantity_snippet_2]
 
 and find that the code functions exactly as expected with no additional work, delegating operations 
 to `std::complex<double>` and performing the appropriate dimensional analysis :
 
-[unit_example_3_output_complex]
+[quantity_output_complex]
 
 [endsect]
 
-[section:Example_4 Example 4]
+[section:KitchenSinkExample Kitchen Sink Example]
 
-([@../../libs/units/example/unit_example_4.cpp unit_example_4.cpp])
+([@../../libs/units/example/kitchen_sink.cpp kitchen_sink.cpp])
 
 This example provides a fairly extensive set of tests covering most of the [___quantity] functionality.
 It uses the SI unit system defined in [headerref boost/units/systems/si.hpp].
 
 If we define a few units and associated quantities,
 
-[import ../example/unit_example_4.cpp]
+[import ../example/kitchen_sink.cpp]
 
-[unit_example_4_snippet_1]
+[kitchen_sink_snippet_1]
 
 the various algebraic operations between scalars, units, and quantities give 
 
-[unit_example_4_output_1]
+[kitchen_sink_output_1]
 
 Scalar/unit operations :
 
-[unit_example_4_output_2]
+[kitchen_sink_output_2]
 
 Unit/unit operations and integral/rational powers of units :
 
-[unit_example_4_output_3]
+[kitchen_sink_output_3]
 
 Scalar/quantity operations :
 
-[unit_example_4_output_4]
+[kitchen_sink_output_4]
 
 Unit/quantity operations :
 
-[unit_example_4_output_5]
+[kitchen_sink_output_5]
 
 Quantity/quantity operations and integral/rational powers of quantities :
 
-[unit_example_4_output_6]
+[kitchen_sink_output_6]
 
 Logical comparison operators are also defined between quantities :
 
-[unit_example_4_snippet_2]
+[kitchen_sink_snippet_2]
 
 giving
 
-[unit_example_4_output_7]
+[kitchen_sink_output_7]
 
 Implicit conversion is allowed between dimensionless quantities and their corresponding value types :
 
-[unit_example_4_snippet_3]
+[kitchen_sink_snippet_3]
 
 A generic function for computing mechanical work can be defined that takes force and distance arguments
 in an arbitrary unit system and returns energy in the same system:
 
-[unit_example_4_function_snippet_3]
+[kitchen_sink_function_snippet_3]
 
-[unit_example_4_snippet_4]
+[kitchen_sink_snippet_4]
 
 which functions as expected for SI quantities :
 
-[unit_example_4_output_9]
+[kitchen_sink_output_9]
 
 The ideal gas law can also be implemented in SI units :
 
-[unit_example_4_function_snippet_4]
+[kitchen_sink_function_snippet_4]
 
-[unit_example_4_snippet_5]
+[kitchen_sink_snippet_5]
 
 with the resulting output :
 
-[unit_example_4_output_10]
+[kitchen_sink_output_10]
 
 Trigonometric and inverse trigonometric functions can be implemented for any unit system
 that provides an angular fundamental dimension. These behave as one expects, with trigonometric functions
 taking an angular quantity and returning a dimensionless quantity, while the inverse trigonometric functions
 take a dimensionless quantity and return an angular quantity :
 
-[unit_example_4_function_snippet_1]
+[kitchen_sink_function_snippet_1]
 
-[unit_example_4_function_snippet_2]
+[kitchen_sink_function_snippet_2]
 
 Defining a few angular quantities,
 
-[unit_example_4_snippet_6]
+[kitchen_sink_snippet_6]
 
 yields
 
-[unit_example_4_output_11]
+[kitchen_sink_output_11]
 
 Dealing with complex quantities is trivial. Here is the calculation of complex impedance :
 
-[unit_example_4_snippet_7]
+[kitchen_sink_snippet_7]
 
 giving
 
-[unit_example_4_output_12]
+[kitchen_sink_output_12]
 
 [section:UDT_Quantities User-defined value types]
 
@@ -578,31 +578,31 @@ demonstrates its use as a quantity value type; the full code is found in [@../..
 
 Then, defining some `measurement` [___quantity] variables
 
-[unit_example_4_snippet_8]
+[kitchen_sink_snippet_8]
 
 gives
 
-[unit_example_4_output_13]
+[kitchen_sink_output_13]
 
 If we implement the overloaded helper classes for rational powers and roots
 then we can also compute rational powers of measurement quantities :
 
-[unit_example_4_output_14]
+[kitchen_sink_output_14]
 
 [endsect]
 
 [endsect]
 
-[section:Example_5 Example 5]
+[section:ConversionExample Conversion Example]
 
-([@../../libs/units/example/unit_example_5.cpp unit_example_5.cpp])
+([@../../libs/units/example/conversion.cpp conversion.cpp])
 
 This example demonstrates the various allowed conversions between SI and CGS units. Defining some
 quantities
 
-[import ../example/unit_example_5.cpp]
+[import ../example/conversion.cpp]
 
-[unit_example_5_snippet_1]
+[conversion_snippet_1]
 
 illustrates implicit conversion of quantities of different value types where implicit conversion 
 of the value types themselves is allowed.  N.B. The conversion from double to int is treated
@@ -611,34 +611,34 @@ conversion.  Explicit constructors allow conversions for two cases:
 
 * explicit casting of a [___quantity] to a different `value_type` :
 
-[unit_example_5_snippet_3]
+[conversion_snippet_3]
 
 * and explicit casting of a [___quantity] to a different unit :
 
-[unit_example_5_snippet_4]
+[conversion_snippet_4]
 
 giving the following output :
 
-[unit_example_5_output_1]
+[conversion_output_1]
 
 A few more explicit unit system conversions :
 
-[unit_example_5_snippet_5]
+[conversion_snippet_5]
 
 which produces the following output:
 
-[unit_example_5_output_2]
+[conversion_output_2]
 
 While the library default is to enable only those unit conversions for which the conversion of every
 base unit present in a quantity is specifically enabled as implicit, it is possible to 
 supersede this behavior and enable all implicit conversions by defining the preprocessor 
 constant [___BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]. This allows us to do things like the following:
 
-[unit_example_5_snippet_6]
+[conversion_snippet_6]
 
 which produces the following output:
 
-[unit_example_5_output_3]
+[conversion_output_3]
 
 Of course, blindly enabling implicit conversions entails some risk of unnecessary conversions being done
 in the background, with the potential for loss of precision and other related concerns. These issues should
@@ -648,75 +648,31 @@ SI and CGS systems).
 
 [endsect]
 
-[section:Example_6 Example 6]
+[section:UDTExample User Defined Types]
 
-([@../../libs/units/example/unit_example_6.cpp unit_example_6.cpp])
-
-This example demonstrates use of a user-defined `scaled_value` value type that carries with it
-a base and exponent as a compile-time prefactor and has a heterogeneous algebra. That is, the result of the product
-of two scaled values is not normally the same scaled value as either of the arguments. This class can be 
-used, for example, to represent numbers in scientific notation over a dramatically larger range than even
-double precision floating point variables. For example,
-
-[import ../example/unit_example_6.cpp]
-
-[unit_example_6_snippet_1]
-
-defines the variable `length` as `4.0 * 10^3` meters and `time` as `10.0 * 10^{-2}` seconds.
-Performing various operations on these variables correctly handles the heterogeneous algebra both for the value
-type and for the dimensional analysis:
-
-[unit_example_6_output_1]
-
-[endsect]
-
-[section:Example_7 Example 7]
-
-([@../../libs/units/example/unit_example_7.cpp unit_example_7.cpp])
-
-This example integrates Boost.Units into an N-dimensional array class, again demonstrating the ability 
-to propagate quantities seamlessly through calculations. It is worthwhile noting that the `Array` class itself has no
-knowledge of quantities, other than carefully implementing the various operators necessary. Because the associated 
-array code is extensive, the array headers are not included (a similar example using built in C++ arrays is also
-found in the source code to this example). This code
-
-[import ../example/unit_example_7.cpp]
-
-[unit_example_7_snippet_1]
-
-[unit_example_7_snippet_2]
-
-gives the following:
-
-[unit_example_7_output_1]
-
-[endsect]
-
-[section:Example_8 Example 8]
-
-([@../../libs/units/example/unit_example_8.cpp unit_example_8.cpp])
+([@../../libs/units/example/quaternion.cpp quaternion.cpp])
 
 This example demonstrates the use of `boost::math::quaternion` as a value type for  [___quantity] and the converse.
 For the first case, we first define specializations of [___power_dimof_helper] and [___root_typeof_helper] for 
 powers and roots, respectively:
 
-[import ../example/unit_example_8.cpp]
+[import ../example/quaternion.cpp]
 
-[unit_example_8_class_snippet_1]
+[quaternion_class_snippet_1]
 
 We can now declare a [___quantity] of a `quaternion` :
 
-[unit_example_8_snippet_1]
+[quaternion_snippet_1]
 
 so that all operations that are defined in the `quaternion` class behave correctly. If rational
 powers were defined for this class, it would be possible to compute rational powers and roots with
 no additional changes. 
 
-[unit_example_8_output_1]
+[quaternion_output_1]
 
 Now, if for some reason we preferred the [___quantity] to be the value type of the `quaternion` class we would have :
 
-[unit_example_8_snippet_2]
+[quaternion_snippet_2]
 
 Here, the unary plus and minus and addition and subtraction operators function correctly. Unfortunately, 
 the multiplication and division operations fail because `quaternion` implements them in terms of the `*=` and 
@@ -725,17 +681,17 @@ quantities (an identical problem
 occurs with `std::complex<T>`, for the same reason). In order to compute rational powers and roots, we need to 
 specialize [___power_dimof_helper] and [___root_typeof_helper] as follows:
 
-[unit_example_8_class_snippet_2]
+[quaternion_class_snippet_2]
 
 giving:
 
-[unit_example_8_output_2]
+[quaternion_output_2]
 
 [endsect]
 
-[section:Example_9 Example 9]
+[section:ComplexExample Complex Example]
 
-([@../../libs/units/example/unit_example_9.cpp unit_example_9.cpp])
+([@../../libs/units/example/complex.cpp complex.cpp])
 
 This example demonstrates how to implement a replacement `complex` class that functions correctly both as a 
 quantity value type and as a quantity container class, including heterogeneous multiplication and division 
@@ -745,216 +701,112 @@ using the `op=` operators and use the utility classes [___add_typeof_helper], [_
 [___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_dimof_helper] and
 [___root_typeof_helper] are defined for both cases :
 
-[import ../example/unit_example_9.cpp]
+[import ../example/complex.cpp]
 
-[unit_example_9_class_snippet_1]
+[complex_class_snippet_1]
 
 With this replacement `complex` class, we can declare a complex variable :
 
-[unit_example_9_snippet_1]   
+[complex_snippet_1]   
 
 to get the correct behavior for all cases supported by [___quantity] with a `complex` value type :
 
-[unit_example_9_output_1]
+[complex_output_1]
 
 and, similarly, `complex` with a [___quantity] value type 
 
-[unit_example_9_snippet_2]
+[complex_snippet_2]
 
 gives
 
-[unit_example_9_output_2]
+[complex_output_2]
 
 [endsect]
 
-[section:Example_10 Example 10]
+[section:PerformanceExample Performance Example]
 
-([@../../libs/units/example/unit_example_10.cpp unit_example_10.cpp])
-
-This is an extended example of use of quantities with trigonometric functions. Angle representations in
-degrees, radians, and gradians are implemented in [headerref boost/units/systems/trig.hpp]. Defining angles
-in each system as :
-
-[import ../example/unit_example_10.cpp]
-
-[unit_example_10_snippet_1]
-
-we can use them as arguments to the trigonometric functions to obtain :
-
-[unit_example_10_output]
-
-[endsect]
-
-[section:Example_11 Example 11]
-
-([@../../libs/units/example/unit_example_11.cpp unit_example_11.cpp])
-
-This example demonstrates overloaded `cmath` functions from [headerref boost/units/cmath.hpp]. The support
-for C99 standard functions in <cmath> is variable between compilers, so some functions may not be provided.
-
-[import ../example/unit_example_11.cpp]
-
-[unit_example_11_output]
-
-[endsect]
-
-[section:Example_12 Example 12]
-
-([@../../libs/units/example/unit_example_12.cpp unit_example_12.cpp])
-
-This example demonstrates interoperability with `boost::numeric::interval`, with
-
-[import ../example/unit_example_12.cpp]
-
-[unit_example_12_snippet_1]
-
-giving
-
-[unit_example_12_output_1]
-
-[endsect]
-
-[section:Example_13 Example 13]
-
-([@../../libs/units/example/unit_example_13.cpp unit_example_13.cpp])
-
-This example demonstrates Boost.Serialization support, provided for units and quantities, with
-
-[import ../example/unit_example_13.cpp]
-
-[unit_example_13_snippet_1]
-
-giving
-
-[unit_example_13_output]
-
-[endsect]
-
-[section:Example_14 Example 14]
-
-([@../../libs/units/example/unit_example_14.cpp unit_example_14.cpp])
+([@../../libs/units/example/performance.cpp performance.cpp])
 
 This example provides an ad hoc performance test to verify that zero runtime overhead 
 is incurred when using [___quantity] in place of `double`. 
 
 [endsect]
 
-[section:Example_15 Example 15]
+[section:RadarBeamHeightExample Radar Beam Height]
 
-([@../../libs/units/example/unit_example_15.cpp unit_example_15.cpp])
+([@../../libs/units/example/radar_beam_height.cpp radar_beam_height.cpp])
 
-This example demonstrates use of Boost.Units to differentiate coordinate systems. 
-Conversions between unit systems (either explicit or implicit) could also be added,
-if desired.
-
-[endsect]
-
-[section:Example_16 Example 16]
-
-([@../../libs/units/example/unit_example_16.cpp unit_example_16.cpp])
-
-[import ../example/unit_example_16.cpp]
+[import ../example/radar_beam_height.cpp]
 
 This example demonstrates the implementation of two non-SI units of length, the 
 nautical mile :
 
-[unit_example_16_class_snippet_1]
+[radar_beam_height_class_snippet_1]
 
 and the imperial foot :
 
-[unit_example_16_class_snippet_2]
+[radar_beam_height_class_snippet_2]
 
 These units include conversions between themselves and the meter. Three functions
 for computing radar beam height from radar range and the local earth radius are 
 defined. The first takes arguments in one system and returns a value in the same 
 system :
 
-[unit_example_16_function_snippet_1]
+[radar_beam_height_function_snippet_1]
 
 The second is similar, but is templated on return type, so that the arguments are
 converted to the return unit system internally :
 
-[unit_example_16_function_snippet_2]
+[radar_beam_height_function_snippet_2]
 
 Finally, the third function is an empirical approximation that is only valid for
 radar ranges specified in nautical miles, returning beam height in feet. This 
 function uses the heterogeneous unit of nautical miles per square root of feet to
 ensure dimensional correctness :
 
-[unit_example_16_function_snippet_3]
+[radar_beam_height_function_snippet_3]
 
 With these, we can compute radar beam height in various unit systems :
 
-[unit_example_16_snippet_1]
+[radar_beam_height_snippet_1]
 
 giving
 
-[unit_example_16_output]
+[radar_beam_height_output]
 
 [endsect]
 
-[section:Example_17 Example 17]
+[section:HeterogeneousUnitExample Heterogeneous Unit Example]
 
-([@../../libs/units/example/unit_example_17.cpp unit_example_17.cpp])
+([@../../libs/units/example/heterogeneous_unit.cpp heterogeneous_unit.cpp])
 
-This example demonstrates the abstract physical unit system provided for strictly
-dimensional analysis calculations. This system explicitly prohibits quantity 
-conversions of any sort to ensure that it cannot be mixed with other unit systems.
-
-[import ../example/unit_example_17.cpp]
-
-[unit_example_17_snippet_1]
-
-gives
-
-[unit_example_17_output]
-
-[endsect]
-
-[section:Example_18 Example 18]
-
-([@../../libs/units/example/unit_example_18.cpp unit_example_18.cpp])
-
-[import ../example/unit_example_18.cpp]
+[import ../example/heterogeneous_unit.cpp]
 
 Mixed units and mixed unit conversions.
 
 First a look at the output:
 
-[unit_example_18_snippet_1]
+[heterogeneous_unit_snippet_1]
 
 printing
 
-[unit_example_18_output_1]
+[heterogeneous_unit_output_1]
 
 Arbitrary conversions also work:
 
-[unit_example_18_snippet_2]
+[heterogeneous_unit_snippet_2]
 
 yielding
 
-[unit_example_18_output_2]
+[heterogeneous_unit_output_2]
 
 [endsect]
 
-[section:Example_19 Example 19]
+[section:AbsoluteRelativeTemperatureExample Absolute and Relative Temperature Example]
 
-([@../../libs/units/example/unit_example_19.cpp unit_example_19.cpp])
+([@../../libs/units/example/temperature.cpp temperature.cpp])
 
-This example demonstrates the fairly complete subset of the [@http://physics.nist.gov/cuu/Constants/index.html CODATA physical 
-constants] in SI units provided in [headerref boost/units/systems/si/codata_constants.hpp].
-
-[import ../example/unit_example_19.cpp]
-
-[unit_example_19_output]
-
-[endsect]
-
-[section:Example_20 Example 20]
-
-([@../../libs/units/example/unit_example_20.cpp unit_example_20.cpp])
-
-[import ../example/unit_example_20.cpp]
+[import ../example/temperature.cpp]
 
 This example demonstrates using of absolute temperatures and relative temperature differences in Fahrenheit 
 and converting between these and the Kelvin temperature scale. This issue touches on some surprisingly deep mathematical
@@ -964,17 +816,78 @@ measurement of temperature difference. This is accomplished by using the [___abs
 
 First we define a system using the predefined fahrenheit base unit:
 
-[unit_example_20_snippet_1]
+[temperature_snippet_1]
 
 For convenience we make conversions implicit:
 
-[unit_example_20_snippet_2]
+[temperature_snippet_2]
 
 Now we can create some quantities:
 
-[unit_example_20_snippet_3]
+[temperature_snippet_3]
 
 Note the use of [___absolute] to wrap a unit.
+
+[endsect]
+
+[section:RuntimeConversionFactorExample Runtime Conversion Factor Example]
+
+([@../../libs/units/example/runtime_conversion_factor.cpp runtime_conversion_factor.cpp])
+
+[import ../example/runtime_conversion_factor.cpp]
+
+The Units library does not require that the conversion factors
+be compile time constants.
+
+[runtime_conversion_factor_snippet_1]
+
+[endsect]
+
+[section:UnitsWithNonbaseDimensions Units with Non-base Dimensions]
+
+([@../../libs/units/example/non_base_dimension.cpp non_base_dimension.cpp])
+
+[import ../example/non_base_dimension.cpp]
+
+It is possible to define base units that do
+not have base dimensions.
+
+[non_base_dimension_snippet_1]
+
+[endsect]
+
+[section:OutputForCompositeUnits Output for Composite Units]
+
+([@../../libs/units/example/composite_output.cpp composite_output.cpp])
+
+[import ../example/composite_output.cpp]
+
+You can overload the ostream operator for a unit if
+it has a special symbol, in this case Newtons.
+
+[composite_output_snippet_1]
+
+[endsect]
+
+[section:ConversionFactor Conversion Factor]
+
+([@../../libs/units/example/conversion_factor.cpp conversion_factor.cpp])
+
+[import ../example/conversion_factor.cpp]
+
+[conversion_factor_snippet_1]
+
+Produces
+
+[conversion_factor_output]
+
+[endsect]
+
+[section:RuntimeUnits Runtime Units]
+
+([@../../libs/units/example/runtime_unit.cpp runtime_unit.cpp])
+
+TODO: finish this example.
 
 [endsect]
 
@@ -1197,7 +1110,7 @@ the design and implementation of this library.
 * added abstract units in [headerref boost/units/systems/abstract.hpp] to allow abstract dimensional
   analysis
 * new example demonstrating implementation of code based on requirements from 
-  Michael Fawcett ([@../../libs/units/example/unit_example_16.hpp unit_example_16.cpp])
+  Michael Fawcett ([@../../libs/units/example/radar_beam_height.hpp radar_beam_height.cpp])
 
 0.6.1 (February 13, 2007) :
 

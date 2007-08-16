@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_16.cpp
+\brief radar_beam_height.cpp
 
 \detailed
 Demonstrate library usage for user test cases suggested by Michael Fawcett.
@@ -19,7 +19,7 @@ Demonstrate library usage for user test cases suggested by Michael Fawcett.
 Output:
 @verbatim
 
-//[unit_example_16_output
+//[radar_beam_height_output
 radar range        : 300 nmi
 earth radius       : 6.37101e+06 m
 beam height 1      : 18169.7 m
@@ -46,7 +46,7 @@ namespace boost {
 
 namespace units {
 
-//[unit_example_16_class_snippet_1
+//[radar_beam_height_class_snippet_1
 namespace nautical {
 
 struct length_base_unit : base_unit<length_base_unit, length_dimension, 1>
@@ -78,7 +78,7 @@ namespace units {
 
 //]
 
-//[unit_example_16_class_snippet_2
+//[radar_beam_height_class_snippet_2
 namespace imperial {
 
 struct length_base_unit : base_unit<length_base_unit, length_dimension, 2>
@@ -109,7 +109,7 @@ namespace units {
 //]
 
 // radar beam height functions
-//[unit_example_16_function_snippet_1
+//[radar_beam_height_function_snippet_1
 template<class System,typename T>
 quantity<unit<length_dimension,System>,T>
 radar_beam_height(const quantity<unit<length_dimension,System>,T>& radar_range,
@@ -120,7 +120,7 @@ radar_beam_height(const quantity<unit<length_dimension,System>,T>& radar_range,
 }
 //]
 
-//[unit_example_16_function_snippet_2
+//[radar_beam_height_function_snippet_2
 template<class return_type,class System1,class System2,typename T>
 return_type
 radar_beam_height(const quantity<unit<length_dimension,System1>,T>& radar_range,
@@ -135,7 +135,7 @@ radar_beam_height(const quantity<unit<length_dimension,System1>,T>& radar_range,
 }
 //]
 
-//[unit_example_16_function_snippet_3
+//[radar_beam_height_function_snippet_3
 quantity<imperial::length> radar_beam_height(const quantity<nautical::length>& range)
 {
     return quantity<imperial::length>(pow<2>(range/(1.23*nautical::miles/root<2>(imperial::feet))));
@@ -154,7 +154,7 @@ int main(void)
 
     std::stringstream sstream1, sstream2;
     
-    //[unit_example_16_snippet_1
+    //[radar_beam_height_snippet_1
     const quantity<nautical::length>    radar_range(300.0*miles);
     const quantity<SI::length>          earth_radius(6371.0087714*kilo*meters);
     

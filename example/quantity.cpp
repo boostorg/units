@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_3.cpp
+\brief quantity.cpp
 
 \detailed
 Test quantity algebra.
@@ -19,7 +19,7 @@ Test quantity algebra.
 Output:
 @verbatim
 
-//[unit_example_3_output_double
+//[quantity_output_double
 L                                 = 2 m
 L+L                               = 4 m
 L-L                               = 0 m
@@ -34,7 +34,7 @@ L^(3/2)                           = 2.82843 m^(3/2)
 (3/2)vL                           = 1.5874 m^(2/3)
 //]
 
-//[unit_example_3_output_complex
+//[quantity_output_complex
 L                                 = (3,4) m
 L+L                               = (6,8) m
 L-L                               = (0,0) m
@@ -74,7 +74,7 @@ int main(void)
     std::stringstream sstream1, sstream2;
     
     {
-    //[unit_example_3_snippet_1
+    //[quantity_snippet_1
     quantity<length>        L = 2.0*meters;                     // quantity of length
     quantity<energy>        E = kilograms*pow<2>(L/seconds);    // quantity of energy
     //]
@@ -95,7 +95,7 @@ int main(void)
     }
     
     {
-    //[unit_example_3_snippet_2
+    //[quantity_snippet_2
     quantity<length,std::complex<double> >  L(std::complex<double>(3.0,4.0)*meters);
     quantity<energy,std::complex<double> >  E(kilograms*pow<2>(L/seconds));
     //]

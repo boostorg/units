@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_1.cpp
+\brief dimension.cpp
 
 \detailed
 Test dimension list manipulation.
@@ -19,7 +19,7 @@ Test dimension list manipulation.
 Output:
 @verbatim
 
-//[unit_example_1_output
+//[dimension_output
 length_dimension  = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
 mass_dimension    = dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
 time_dimension    = dimension_list<dim<time_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
@@ -67,7 +67,7 @@ int main(void)
               << "time_dimension    = " << simplify_typename(time_dimension()) << std::endl
               << "energy_dimension  = " << simplify_typename(energy_dimension()) << std::endl;
     
-    //[unit_example_1_snippet_1
+    //[dimension_snippet_1
     typedef mpl::times<length_dimension,mass_dimension>::type                                             LM_type;
     typedef mpl::divides<length_dimension,time_dimension>::type                                           L_T_type;
     typedef static_root<mpl::divides<energy_dimension,mass_dimension>::type,static_rational<2> >::type    V_type;

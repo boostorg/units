@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief unit_example_9.cpp
+\brief complex.cpp
 
 \detailed
 Demonstrate a complex number class that functions correctly with quantities.
@@ -19,7 +19,7 @@ Demonstrate a complex number class that functions correctly with quantities.
 Output:
 @verbatim
 
-//[unit_example_9_output_1
+//[complex_output_1
 +L      = 2 + 1 i m
 -L      = -2 + -1 i m
 L+L     = 4 + 2 i m
@@ -32,7 +32,7 @@ L^(3/2) = 2.56713 + 2.14247 i m^(3/2)
 (3/2)vL = 1.62894 + 0.520175 i m^(2/3)
 //]
 
-//[unit_example_9_output_2
+//[complex_output_2
 +L      = 2 m + 1 m i
 -L      = -2 m + -1 m i
 L+L     = 4 m + 2 m i
@@ -61,7 +61,7 @@ L^(3/2) = 2.56713 m^(3/2) + 2.14247 m^(3/2) i
 
 #include "test_system.hpp"
 
-//[unit_example_9_class_snippet_1
+//[complex_class_snippet_1
 namespace boost {
 
 namespace units {
@@ -276,7 +276,7 @@ int main(void)
     std::stringstream sstream1, sstream2;
     
     {
-    //[unit_example_9_snippet_1
+    //[complex_snippet_1
     typedef quantity<length,complex<double> >     length_dimension;
         
     length_dimension    L(complex<double>(2.0,1.0)*meters);
@@ -296,7 +296,7 @@ int main(void)
     }
     
     {
-    //[unit_example_9_snippet_2
+    //[complex_snippet_2
     typedef complex<quantity<length> >     length_dimension;
         
     length_dimension    L(2.0*meters,1.0*meters);
