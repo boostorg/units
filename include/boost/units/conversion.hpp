@@ -40,7 +40,7 @@ struct conversion_helper;
 #ifdef BOOST_UNITS_DOXYGEN
 
 /// Template for defining conversions between
-/// quanties.  This template should be specialized
+/// quantities.  This template should be specialized
 /// for every quantity that allows conversions.
 /// For example, if you have a two units
 /// called pair and dozen you would write
