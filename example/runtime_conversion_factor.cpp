@@ -19,7 +19,7 @@ static const long currency_base = 1;
 
 struct currency_base_dimension : boost::units::base_dimension<currency_base_dimension, 1> {};
 
-typedef currency_base_dimension::type currency_type;
+typedef currency_base_dimension::dimension_type currency_type;
 
 template<long N>
 struct currency_base_unit : boost::units::base_unit<currency_base_unit<N>, currency_type, currency_base + N> {};

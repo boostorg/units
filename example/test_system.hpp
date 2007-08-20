@@ -42,9 +42,9 @@ typedef make_dimension_list< boost::mpl::list< dim< time_base_dimension,static_r
 #endif
 
 //[test_system_snippet_3
-typedef length_base_dimension::type    length_dimension;
-typedef mass_base_dimension::type      mass_dimension;
-typedef time_base_dimension::type      time_dimension;
+typedef length_base_dimension::dimension_type    length_dimension;
+typedef mass_base_dimension::dimension_type      mass_dimension;
+typedef time_base_dimension::dimension_type      time_dimension;
 //]
 
 #if 0

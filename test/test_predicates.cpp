@@ -42,7 +42,7 @@ namespace bu = boost::units;
 
 struct dimension_tag : boost::units::base_dimension<dimension_tag,0> { };
 
-typedef dimension_tag::type dimension;
+typedef dimension_tag::dimension_type dimension;
 
 struct base_unit1 : bu::base_unit<base_unit1, dimension, 100> {};
 struct base_unit2 : bu::base_unit<base_unit2, dimension, 101> {};

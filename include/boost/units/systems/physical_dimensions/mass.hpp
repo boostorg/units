@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of mass (M)
-typedef mass_base_dimension::type   mass_dimension;           
+typedef mass_base_dimension::dimension_type   mass_dimension;           
 
 } // namespace units
 

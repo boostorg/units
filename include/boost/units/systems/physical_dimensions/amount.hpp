@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of amount of substance (N)
-typedef amount_base_dimension::type     amount_dimension;
+typedef amount_base_dimension::dimension_type     amount_dimension;
 
 } // namespace units
 

@@ -44,9 +44,9 @@ struct length_base_dimension : boost::units::base_dimension<length_base_dimensio
 struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };         ///> base dimension of mass
 struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };         ///> base dimension of time
 
-typedef length_base_dimension::type    length_dimension;
-typedef mass_base_dimension::type      mass_dimension;
-typedef time_base_dimension::type      time_dimension;
+typedef length_base_dimension::dimension_type    length_dimension;
+typedef mass_base_dimension::dimension_type      mass_dimension;
+typedef time_base_dimension::dimension_type      time_dimension;
 
 typedef derived_dimension<length_base_dimension,2>::type area_dimension;
 typedef derived_dimension<mass_base_dimension,1,

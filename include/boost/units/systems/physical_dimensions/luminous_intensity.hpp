@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of luminous intensity (J)
-typedef luminous_intensity_base_dimension::type luminous_intensity_dimension;
+typedef luminous_intensity_base_dimension::dimension_type luminous_intensity_dimension;
 
 } // namespace units
 

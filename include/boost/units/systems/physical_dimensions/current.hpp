@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of electric current (I)
-typedef current_base_dimension::type    current_dimension;
+typedef current_base_dimension::dimension_type    current_dimension;
 
 } // namespace units
 

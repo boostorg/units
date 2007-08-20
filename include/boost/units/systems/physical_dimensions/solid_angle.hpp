@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// base dimension of solid angle (QS)
-typedef solid_angle_base_dimension::type    solid_angle_dimension;
+typedef solid_angle_base_dimension::dimension_type    solid_angle_dimension;
 
 } // namespace units
 

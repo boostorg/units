@@ -1059,7 +1059,7 @@ struct is_simple_system_impl<0> {
 template<class T>
 struct is_simple_system {
     typedef typename mpl::begin<T>::type Begin;
-    typedef is_base_dimension_unit<typename mpl::deref<Begin>::type> test;
+    typedef is_base_dimension_unit<typename mpl::deref<Begin>::type::dimension_type> test;
     typedef typename mpl::and_<
         typename test::type,
         typename is_simple_system_impl<

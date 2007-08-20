@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of time (T)
-typedef time_base_dimension::type   time_dimension;
+typedef time_base_dimension::dimension_type time_dimension;
 
 } // namespace units
 

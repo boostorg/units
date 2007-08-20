@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of temperature (Theta)
-typedef temperature_base_dimension::type                                                                                        temperature_dimension;
+typedef temperature_base_dimension::dimension_type temperature_dimension;
 
 } // namespace units
 

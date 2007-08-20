@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// dimension of length (L)
-typedef length_base_dimension::type length_dimension;
+typedef length_base_dimension::dimension_type length_dimension;
 
 } // namespace units
 

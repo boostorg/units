@@ -38,7 +38,7 @@ namespace boost {
 namespace units {
 
 /// base dimension of plane angle (QP)
-typedef plane_angle_base_dimension::type    plane_angle_dimension;
+typedef plane_angle_base_dimension::dimension_type    plane_angle_dimension;
 
 } // namespace units
 
