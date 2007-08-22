@@ -12,6 +12,7 @@
 #define BOOST_UNITS_DIMENSIONLESS_TYPE_HPP
 
 #include <boost/mpl/long.hpp>
+#include <boost/mpl/deref.hpp>
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimension_list.hpp>
@@ -29,6 +30,13 @@ struct dimensionless_type
 };
 
 } // namespace units
+
+namespace mpl {
+
+// INTERNAL ONLY
+template<> struct deref<units::dimensionless_type> { };
+
+} // namespace mpl
 
 } // namespace boost
 

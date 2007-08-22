@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_SI_PREFIXES_HPP
 #define BOOST_UNITS_SI_PREFIXES_HPP
 
+#include <boost/units/static_constant.hpp>
+
 namespace boost {
 
 namespace units { 

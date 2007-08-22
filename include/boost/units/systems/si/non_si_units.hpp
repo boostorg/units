@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_NON_SI_CONSTANTS_HPP
 #define BOOST_UNITS_NON_SI_CONSTANTS_HPP
 
+#error "this file uses the wrong types"
+
 #include <boost/units/systems/si.hpp>
 
 namespace boost {

@@ -11,6 +11,7 @@
 #ifndef BOOST_UNITS_IS_UNIT_HPP
 #define BOOST_UNITS_IS_UNIT_HPP
 
+#include <boost/mpl/bool.hpp>
 #include <boost/units/units_fwd.hpp>
 
 namespace boost {

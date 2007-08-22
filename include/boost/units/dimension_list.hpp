@@ -12,12 +12,20 @@
 #define BOOST_UNITS_DIMENSION_LIST_HPP
 
 #include <boost/mpl/next.hpp>
+#include <boost/mpl/deref.hpp>
+#include <boost/mpl/push_front_fwd.hpp>
+#include <boost/mpl/pop_front_fwd.hpp>
+#include <boost/mpl/size_fwd.hpp>
+#include <boost/mpl/begin_end_fwd.hpp>
+#include <boost/mpl/front_fwd.hpp>
 
 #include <boost/units/config.hpp>
 
 namespace boost {
 
 namespace units {
+
+struct dimensionless_type;
 
 namespace detail {
 
@@ -37,6 +45,79 @@ struct dimension_list
 
 } // namespace units
 
+namespace mpl {
+
+// INTERNAL ONLY
+template<>
+struct size_impl<units::detail::dimension_list_tag>
+{
+    template<class L> struct apply : public L::size { };
+};
+
+// INTERNAL ONLY
+template<>
+struct begin_impl<units::detail::dimension_list_tag>
+{
+    template<class L>
+    struct apply 
+    {
+        typedef L type;
+    };
+};
+
+// INTERNAL ONLY
+template<>
+struct end_impl<units::detail::dimension_list_tag>
+{
+    template<class L>
+    struct apply 
+    {
+        typedef units::dimensionless_type type;
+    };
+};
+
+// INTERNAL ONLY
+template<>
+struct push_front_impl<units::detail::dimension_list_tag>
+{
+    template<class L, class T>
+    struct apply 
+    {
+        typedef units::dimension_list<T, L> type;
+    };
+};
+
+// INTERNAL ONLY
+template<>
+struct pop_front_impl<units::detail::dimension_list_tag>
+{
+    template<class L>
+    struct apply 
+    {
+        typedef typename L::next type;
+    };
+};
+
+// INTERNAL ONLY
+template<>
+struct front_impl<units::detail::dimension_list_tag>
+{
+    template<class L>
+    struct apply 
+    {
+        typedef typename L::item type;
+    };
+};
+
+// INTERNAL ONLY
+template<class Item, class Next>
+struct deref<units::dimension_list<Item, Next> >
+{
+    typedef Item type;
+};
+
+} // namespace mpl
+
 } // namespace boost
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
@@ -46,5 +127,7 @@ struct dimension_list
 BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dimension_list, 2)
 
 #endif
+
+#include <boost/units/dimensionless_type.hpp>
 
 #endif // BOOST_UNITS_DIMENSION_LIST_HPP

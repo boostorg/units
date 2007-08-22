@@ -15,6 +15,8 @@
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/deref.hpp>
+#include <boost/mpl/push_front.hpp>
+#include <boost/mpl/less.hpp>
 
 #include <boost/units/dimension_list.hpp>
 #include <boost/units/dimensionless_type.hpp>

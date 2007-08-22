@@ -20,7 +20,6 @@
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/arithmetic.hpp>
-#include <boost/mpl/sort.hpp>
 #include <boost/mpl/front_inserter.hpp>
 #include <boost/mpl/set.hpp>
 #include <boost/mpl/insert.hpp>
@@ -31,6 +30,10 @@
 #include <boost/mpl/front.hpp>
 #include <boost/mpl/and.hpp>
 
+#include <boost/units/dim.hpp>
+#include <boost/units/dimension_list.hpp>
+#include <boost/units/dimensionless_type.hpp>
+#include <boost/units/static_rational.hpp>
 #include <boost/units/detail/sort.hpp>
 
 namespace boost {

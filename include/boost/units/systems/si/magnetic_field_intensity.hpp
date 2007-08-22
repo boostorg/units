@@ -11,6 +11,7 @@
 #ifndef BOOST_UNITS_SI_MAGNETIC_FIELD_INTENSITY_HPP
 #define BOOST_UNITS_SI_MAGNETIC_FIELD_INTENSITY_HPP
 
+#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
 namespace boost {

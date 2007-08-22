@@ -22,6 +22,7 @@
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimension_list.hpp>
+#include <boost/units/dimensionless_type.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/push_front_if.hpp>
@@ -357,74 +358,6 @@ struct static_root_impl<0> {
 } // namespace detail
 
 } // namespace units
-
-namespace mpl {
-
-template<>
-struct size_impl<units::detail::dimension_list_tag>
-{
-    template<class L> struct apply : public L::size { };
-};
-
-template<>
-struct begin_impl<units::detail::dimension_list_tag>
-{
-    template<class L>
-    struct apply 
-    {
-        typedef L type;
-    };
-};
-
-template<>
-struct end_impl<units::detail::dimension_list_tag>
-{
-    template<class L>
-    struct apply 
-    {
-        typedef units::dimensionless_type type;
-    };
-};
-
-template<>
-struct push_front_impl<units::detail::dimension_list_tag>
-{
-    template<class L, class T>
-    struct apply 
-    {
-        typedef units::dimension_list<T, L> type;
-    };
-};
-
-template<>
-struct pop_front_impl<units::detail::dimension_list_tag>
-{
-    template<class L>
-    struct apply 
-    {
-        typedef typename L::next type;
-    };
-};
-
-template<>
-struct front_impl<units::detail::dimension_list_tag>
-{
-    template<class L>
-    struct apply 
-    {
-        typedef typename L::item type;
-    };
-};
-
-template<class Item, class Next>
-struct deref<units::dimension_list<Item, Next> >
-{
-    typedef Item type;
-};
-
-template<> struct deref<units::dimensionless_type> { };
-
-} // namespace mpl
 
 } // namespace boost
 

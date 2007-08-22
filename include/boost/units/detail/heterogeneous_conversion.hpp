@@ -21,6 +21,7 @@
 #include <boost/mpl/print.hpp>
 
 #include <boost/units/static_rational.hpp>
+#include <boost/units/homogeneous_system.hpp>
 #include <boost/units/detail/linear_algebra.hpp>
 
 namespace boost {

@@ -11,6 +11,7 @@
 #ifndef BOOST_UNITS_SI_CONDUCTANCE_HPP
 #define BOOST_UNITS_SI_CONDUCTANCE_HPP
 
+#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
 namespace boost {

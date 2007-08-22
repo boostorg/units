@@ -13,6 +13,7 @@
 
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/physical_dimensions/length.hpp>
+#include <boost/units/systems/physical_dimensions/mass.hpp>
 #include <boost/units/systems/physical_dimensions/time.hpp>
 
 namespace boost {

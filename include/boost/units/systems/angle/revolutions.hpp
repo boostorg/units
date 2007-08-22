@@ -32,7 +32,7 @@ typedef unit<dimensionless_type,system>         dimensionless;
 typedef unit<plane_angle_dimension,system>      plane_angle;          ///< angle revolution unit constant
 
 BOOST_UNITS_STATIC_CONSTANT(revolution,plane_angle);
-BOOST_UNITS_STATIC_CONSTANT(revolution,plane_angle);
+BOOST_UNITS_STATIC_CONSTANT(revolutions,plane_angle);
 
 } // namespace revolution
 

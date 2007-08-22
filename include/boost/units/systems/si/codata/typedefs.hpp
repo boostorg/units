@@ -23,6 +23,7 @@
 #include <boost/units/systems/si/frequency.hpp>
 #include <boost/units/systems/si/magnetic_flux_density.hpp>
 #include <boost/units/systems/si/mass.hpp>
+#include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/power.hpp>
 #include <boost/units/systems/si/solid_angle.hpp>
 #include <boost/units/systems/si/temperature.hpp>

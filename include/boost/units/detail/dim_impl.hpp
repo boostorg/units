@@ -72,7 +72,7 @@ template<class T>
 struct is_empty_dim;
 
 template<typename T>
-struct is_empty_dim< dim<T, static_rational<0> > > :
+struct is_empty_dim< dim<T, static_rational<0, 1> > > :
     mpl::true_ 
 { };
 

@@ -18,6 +18,8 @@
 #include <boost/io/ios_state.hpp>
 
 #include <boost/units/static_constant.hpp>
+#include <boost/units/units_fwd.hpp>
+#include <boost/units/operators.hpp>
 
 namespace boost {
 

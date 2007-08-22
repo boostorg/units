@@ -25,6 +25,7 @@
 #include <boost/units/systems/si/time.hpp>
 #include <boost/units/systems/si/velocity.hpp>
 #include <boost/units/systems/si/volume.hpp>
+#include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
 /// CODATA recommended values of fundamental universal constants
