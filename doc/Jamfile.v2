@@ -7,6 +7,8 @@
 # accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt
 
+import path ;
+
 using quickbook ;
 
 using doxygen ;
@@ -44,35 +46,11 @@ run_doxygen units_reference
     "Units Reference"
   ;
 
-run_doxygen si_reference
+run_doxygen systems_reference
   :
-    ../../../boost/units/systems/si.hpp
-    [ glob ../../../boost/units/systems/si/*.hpp ]
-    [ glob ../../../boost/units/systems/si/codata/*.hpp ]
+    [ path.glob-tree ../../../boost/units/systems : *.hpp ]
   :
-    "SI Reference"
-  ;
-
-run_doxygen cgs_reference
-  :
-    ../../../boost/units/systems/cgs.hpp
-    [ glob ../../../boost/units/systems/cgs/*.hpp ]
-  :
-    "CGS Reference"
-  ;
-
-run_doxygen trig_reference
-  :
-    ../../../boost/units/systems/trig.hpp
-  :
-    "Trig Reference"
-  ;
-
-run_doxygen abstract_reference
-  :
-    ../../../boost/units/systems/abstract.hpp
-  :
-    "Abstract System Reference"
+    "Systems Reference"
   ;
 
 xml units
@@ -86,10 +64,7 @@ boostbook standalone
     units
   :
     <dependency>units_reference
-    <dependency>si_reference
-    <dependency>cgs_reference
-    <dependency>trig_reference
-    <dependency>abstract_reference
+    <dependency>systems_reference
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8
