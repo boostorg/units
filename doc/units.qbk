@@ -887,7 +887,13 @@ Produces
 
 ([@../../libs/units/example/runtime_unit.cpp runtime_unit.cpp])
 
-TODO: finish this example.
+[import ../example/runtime_unit.cpp]
+
+This example shows how to implement an interface that
+allow different units at runtime while still maintaining
+type safety for internal calculations.
+
+[runtime_unit_snippet_1]
 
 [endsect]
 

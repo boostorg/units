@@ -24,8 +24,9 @@ rule make_tests ( files * ) {
 {
   test-suite units
    :
-    [ make_tests [ path.glob . : *.cpp : performance.* ] ]
+    [ make_tests [ path.glob . : *.cpp : performance.* runtime_unit.* ] ]
     [ compile performance.cpp ]
+    [ run runtime_unit.cpp : <runtime_unit_input.txt : : ]
    ;
 
 }
