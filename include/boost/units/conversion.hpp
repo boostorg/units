@@ -80,8 +80,47 @@ struct call_base_unit_converter;
 /// INTERNAL ONLY
 struct undefined_base_unit_converter_base {};
 
+/// INTERNAL ONLY
+struct no_default_conversion {};
+
+/// INTERNAL ONLY
 template<class BaseUnit>
-struct get_default_conversion;
+struct unscaled_get_default_conversion : no_default_conversion {};
+
+/// INTERNAL ONLY
+template<bool is_defined>
+struct unscaled_get_default_conversion_impl;
+
+/// INTERNAL ONLY
+template<>
+struct unscaled_get_default_conversion_impl<true>
+{
+    template<class T>
+    struct apply
+    {
+        typedef typename unscaled_get_default_conversion<typename unscale<T>::type>::type type;
+    };
+};
+
+/// INTERNAL ONLY
+template<>
+struct unscaled_get_default_conversion_impl<false>
+{
+    template<class T>
+    struct apply
+    {
+        typedef typename T::unit_type type;
+    };
+};
+
+/// INTERNAL ONLY
+template<class BaseUnit>
+struct get_default_conversion
+{
+    typedef typename unscaled_get_default_conversion_impl<
+        !boost::is_base_and_derived<no_default_conversion, unscaled_get_default_conversion<typename unscale<BaseUnit>::type> >::value
+    >::template apply<BaseUnit>::type type;
+};
 
 /// INTERNAL ONLY
 template<class Source, class Destination>
@@ -412,16 +451,16 @@ void boost_units_require_semicolon()
 /// no direct conversion is available.
 /// Source is a base unit.  Dest is any unit with the
 /// same dimensions.
-#define BOOST_UNITS_DEFAULT_CONVERSION(Source, Dest)\
-    namespace boost {\
-    namespace units {\
-    template<>\
-    struct get_default_conversion<Source>\
-    {\
-        typedef Dest type;\
-    };\
-    }\
-    }\
+#define BOOST_UNITS_DEFAULT_CONVERSION(Source, Dest)                \
+    namespace boost {                                               \
+    namespace units {                                               \
+    template<>                                                      \
+    struct unscaled_get_default_conversion<unscale<Source>::type>   \
+    {                                                               \
+        typedef Dest type;                                          \
+    };                                                              \
+    }                                                               \
+    }                                                               \
     void boost_units_require_semicolon()
 
 /// Specifies the default conversion to be applied when
@@ -429,16 +468,16 @@ void boost_units_require_semicolon()
 /// Params is a PP Sequence of template arguments.
 /// Source is a base unit.  Dest is any unit with the
 /// same dimensions.
-#define BOOST_UNITS_DEFAULT_CONVERSION_TEMPLATE(Params, Source, Dest)\
-    namespace boost {\
-    namespace units {\
-    template<BOOST_PP_SEQ_ENUM(Params)>\
-    struct get_default_conversion<Source>\
-    {\
-        typedef Dest type;\
-    };\
-    }\
-    }\
+#define BOOST_UNITS_DEFAULT_CONVERSION_TEMPLATE(Params, Source, Dest)   \
+    namespace boost {                                                   \
+    namespace units {                                                   \
+    template<BOOST_PP_SEQ_ENUM(Params)>                                 \
+    struct unscaled_get_default_conversion<Source>                      \
+    {                                                                   \
+        typedef Dest type;                                              \
+    };                                                                  \
+    }                                                                   \
+    }                                                                   \
     void boost_units_require_semicolon()
 
 namespace detail {
