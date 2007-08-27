@@ -26,6 +26,7 @@ import testing ;
     [ run test_base_dimension.cpp : : : : ]
     [ run test_absolute.cpp : : : : ]
     [ run test_default_conversion.cpp : : : : ]
+    [ run test_cmath.cpp : : : : ]
     [ compile-fail fail_implicit_conversion.cpp : : ]
     [ compile-fail fail_quantity_construct.cpp : : ]
     [ compile-fail fail_quantity_assign.cpp : : ]

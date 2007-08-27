@@ -432,25 +432,25 @@ frexp(const quantity<Unit, Y>& q,Int* ex)
 /// and roots can be computed by @c pow<Ex> and @c root<Rt> respectively.
 template<class S, class Y>
 inline
-quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>
-pow(const quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>& q1,
-    const quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>& q2)
+quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
+pow(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q1,
+    const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q2)
 {
     using std::pow;
 
-    typedef quantity<unit<dimensionless_type, homogeneous_system<S> >,Y> quantity_type;
+    typedef quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S),Y> quantity_type;
 
     return quantity_type::from_value(pow(q1.value(), q2.value()));
 }
 
 template<class S, class Y>
 inline
-quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>
-exp(const quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>& q)
+quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
+exp(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
     using std::exp;
 
-    typedef quantity<unit<dimensionless_type, homogeneous_system<S> >, Y> quantity_type;
+    typedef quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y> quantity_type;
 
     return quantity_type::from_value(exp(q.value()));
 }
@@ -469,24 +469,24 @@ ldexp(const quantity<Unit, Y>& q,const Int& ex)
 
 template<class S, class Y>
 inline
-quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>
-log(const quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>& q)
+quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
+log(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
     using std::log;
 
-    typedef quantity<unit<dimensionless_type, homogeneous_system<S> >, Y> quantity_type;
+    typedef quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y> quantity_type;
 
     return quantity_type::from_value(log(q.value()));
 }
 
 template<class S, class Y>
 inline
-quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>
-log10(const quantity<unit<dimensionless_type, homogeneous_system<S> >, Y>& q)
+quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
+log10(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
     using std::log10;
 
-    typedef quantity<unit<dimensionless_type, homogeneous_system<S> >, Y> quantity_type;
+    typedef quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y> quantity_type;
 
     return quantity_type::from_value(log10(q.value()));
 }
