@@ -31,6 +31,7 @@
 #include <boost/units/operators.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/dimensionless_unit.hpp>
 
 namespace boost {
 
@@ -269,11 +270,10 @@ class quantity
 /// unit systems are allowed because all dimensionless quantities are equivalent.
 /// Implicit construction and assignment from and conversion to @c value_type is
 /// also allowed.
-template<class SystemTag,class Y>
-class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
+template<class System,class Y>
+class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
 {
     public:
-        typedef homogeneous_system<SystemTag> System;
         typedef quantity<unit<dimensionless_type,System>,Y>     this_type;
                                    
         typedef Y                                               value_type;
@@ -353,9 +353,9 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
 
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
-        quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
+        quantity(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System2),Y2>& source,
             typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<SystemTag, System2>::type>::type* = 0) :
+			typename detail::disable_if_is_same<System, System2>::type>::type* = 0) :
             val_(source.value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -363,9 +363,9 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
 
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
-        explicit quantity(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y2>& source,
+        explicit quantity(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System2),Y2>& source,
             typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<SystemTag, System2>::type>::type* = 0) :
+			typename detail::disable_if_is_same<System, System2>::type>::type* = 0) :
             val_(static_cast<Y>(source.value())) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -387,15 +387,15 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
         /// conversion between different unit systems is explicit when
         /// the units are not equivalent.
         template<class System2, class Y2> 
-        explicit quantity(const quantity<unit<dimensionless_type,System2>,Y2>& source) :
-            val_(conversion_helper<quantity<unit<dimensionless_type,System2>,Y2>, this_type>::convert(source).value()) 
+        explicit quantity(const quantity<BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(System2),Y2>& source) :
+            val_(conversion_helper<quantity<BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(System2),Y2>, this_type>::convert(source).value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
         }
 
         /// implicit assignment between different unit systems is allowed
         template<class System2>
-        this_type& operator=(const quantity<unit<dimensionless_type,homogeneous_system<System2> >,Y>& source)
+        this_type& operator=(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System2),Y>& source)
         {
             *this = this_type(source);
             
@@ -425,6 +425,14 @@ class quantity<unit<dimensionless_type,homogeneous_system<SystemTag> >,Y>
    private:
         value_type    val_;
 };
+
+#ifdef BOOST_MSVC
+// HACK: For some obscure reason msvc 8.0 needs these specializations
+template<class System, class T>
+class quantity<unit<int, System>, T> {};
+template<class T>
+class quantity<int, T> {};
+#endif
 
 } // namespace units
 
