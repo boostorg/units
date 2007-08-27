@@ -497,6 +497,7 @@ inline void swap(quantity<Unit,Y>& lhs, quantity<Unit,Y>& rhs)
 }
 
 /// specialize unary plus typeof helper
+/// INTERNAL ONLY
 template<class Unit,class Y>
 struct unary_plus_typeof_helper< quantity<Unit,Y> >
 {
@@ -506,6 +507,7 @@ struct unary_plus_typeof_helper< quantity<Unit,Y> >
 };
 
 /// specialize unary minus typeof helper
+/// INTERNAL ONLY
 template<class Unit,class Y>
 struct unary_minus_typeof_helper< quantity<Unit,Y> >
 {
@@ -515,6 +517,7 @@ struct unary_minus_typeof_helper< quantity<Unit,Y> >
 };
 
 /// specialize add typeof helper
+/// INTERNAL ONLY
 template<class Unit1,
          class Unit2,
          class X,
@@ -527,6 +530,7 @@ struct add_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >
 };
 
 /// specialize subtract typeof helper
+/// INTERNAL ONLY
 template<class Unit1,
          class Unit2,
          class X,
@@ -539,6 +543,7 @@ struct subtract_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >
 };
 
 /// scalar times unit typeof helper
+/// INTERNAL ONLY
 template<class System,
          class Dim,
          class X>
@@ -550,6 +555,7 @@ struct multiply_typeof_helper< X,unit<Dim,System> >
 };
 
 /// unit times scalar typeof helper
+/// INTERNAL ONLY
 template<class System,
          class Dim,
          class X>
@@ -561,6 +567,7 @@ struct multiply_typeof_helper< unit<Dim,System>,X >
 };
 
 /// scalar times quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class X,
          class Y>
@@ -572,6 +579,7 @@ struct multiply_typeof_helper< X,quantity<Unit,Y> >
 };
 
 /// quantity times scalar typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class X,
          class Y>
@@ -583,6 +591,7 @@ struct multiply_typeof_helper< quantity<Unit,X>,Y >
 };
 
 /// unit times quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class System,
          class Dim,
@@ -595,6 +604,7 @@ struct multiply_typeof_helper< unit<Dim,System>,quantity<Unit,X> >
 };
 
 /// quantity times unit typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class System,
          class Dim,
@@ -607,6 +617,7 @@ struct multiply_typeof_helper< quantity<Unit,X>,unit<Dim,System> >
 };
 
 /// quantity times quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit1,
          class Unit2,
          class X,
@@ -619,6 +630,7 @@ struct multiply_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >
 };
 
 /// scalar divided by unit typeof helper
+/// INTERNAL ONLY
 template<class System,
          class Dim,
          class X>
@@ -630,6 +642,7 @@ struct divide_typeof_helper< X,unit<Dim,System> >
 };
 
 /// unit divided by scalar typeof helper
+/// INTERNAL ONLY
 template<class System,
          class Dim,
          class X>
@@ -641,6 +654,7 @@ struct divide_typeof_helper< unit<Dim,System>,X >
 };
 
 /// scalar divided by quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class X,
          class Y>
@@ -652,6 +666,7 @@ struct divide_typeof_helper< X,quantity<Unit,Y> >
 };
 
 /// quantity divided by scalar typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class X,
          class Y>
@@ -663,6 +678,7 @@ struct divide_typeof_helper< quantity<Unit,X>,Y >
 };
 
 /// unit divided by quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class System,
          class Dim,
@@ -675,6 +691,7 @@ struct divide_typeof_helper< unit<Dim,System>,quantity<Unit,X> >
 };
 
 /// quantity divided by unit typeof helper
+/// INTERNAL ONLY
 template<class Unit,
          class System,
          class Dim,
@@ -687,6 +704,7 @@ struct divide_typeof_helper< quantity<Unit,X>,unit<Dim,System> >
 };
 
 /// quantity divided by quantity typeof helper
+/// INTERNAL ONLY
 template<class Unit1,
          class Unit2,
          class X,
@@ -699,6 +717,7 @@ struct divide_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >
 };
 
 /// specialize power typeof helper
+/// INTERNAL ONLY
 template<class Unit,long N,long D,class Y> 
 struct power_dimof_helper< quantity<Unit,Y>,static_rational<N,D> >                
 { 
@@ -713,6 +732,7 @@ struct power_dimof_helper< quantity<Unit,Y>,static_rational<N,D> >
 };
 
 /// specialize root typeof helper
+/// INTERNAL ONLY
 template<class Unit,long N,long D,class Y> 
 struct root_typeof_helper< quantity<Unit,Y>,static_rational<N,D> >                
 { 
@@ -727,6 +747,7 @@ struct root_typeof_helper< quantity<Unit,Y>,static_rational<N,D> >
 };
 
 /// runtime unit times scalar
+/// INTERNAL ONLY
 template<class System,
          class Dim,
          class Y>

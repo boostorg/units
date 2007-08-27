@@ -55,6 +55,7 @@ struct scale
     static value_type value() { return(detail::static_rational_power<Exponent>(static_cast<double>(base))); }
 };
 
+/// INTERNAL ONLY
 template<long Base>
 struct scale<Base, static_rational<0> >
 {
@@ -117,6 +118,7 @@ BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<60>, 1152921504606846976.0, 
 
 #endif
 
+/// INTERNAL ONLY
 struct scaled_base_unit_tag {};
 
 template<class S, class Scale>
@@ -167,12 +169,24 @@ namespace boost {
 
 namespace units {
 
+namespace detail {
+
+struct unspecified;
+
+}
+
+/// removes all scaling from a unit or a base unit.
 template<class T>
 struct unscale
 {
+#ifndef BOOST_UNITS_DOXYGEN
     typedef T type;
+#else
+    typedef detail::unspecified type;
+#endif
 };
 
+/// INTERNAL ONLY
 template<class S, class Scale>
 struct unscale<scaled_base_unit<S, Scale> >
 {
@@ -182,35 +196,42 @@ struct unscale<scaled_base_unit<S, Scale> >
 template<class D, class S>
 class unit;
 
+/// INTERNAL ONLY
 template<class D, class S>
 struct unscale<unit<D, S> >
 {
     typedef unit<D, typename unscale<S>::type> type;
 };
 
+/// INTERNAL ONLY
 template<class Scale>
 struct scale_list_dim;
 
+/// INTERNAL ONLY
 template<class T>
 struct get_scale_list
 {
     typedef dimensionless_type type;
 };
 
+/// INTERNAL ONLY
 template<class S, class Scale>
 struct get_scale_list<scaled_base_unit<S, Scale> >
 {
     typedef typename mpl::times<dimension_list<scale_list_dim<Scale>, dimensionless_type>, typename get_scale_list<S>::type>::type type;
 };
 
+/// INTERNAL ONLY
 template<class D, class S>
 struct get_scale_list<unit<D, S> >
 {
     typedef typename get_scale_list<S>::type type;
 };
 
+/// INTERNAL ONLY
 struct scale_dim_tag {};
 
+/// INTERNAL ONLY
 template<class Scale>
 struct scale_list_dim : Scale
 {
@@ -222,6 +243,7 @@ struct scale_list_dim : Scale
 
 namespace mpl {
 
+/// INTERNAL ONLY
 template<>
 struct less_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
 {
@@ -266,6 +288,7 @@ struct eval_scale_list_impl<0>
 
 }
 
+/// INTERNAL ONLY
 template<class T>
 struct eval_scale_list : detail::eval_scale_list_impl<mpl::size<T>::value>::template apply<typename mpl::begin<T>::type> {};
 
@@ -273,6 +296,7 @@ struct eval_scale_list : detail::eval_scale_list_impl<mpl::size<T>::value>::temp
 
 namespace mpl {
 
+/// INTERNAL ONLY
 template<>
 struct plus_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
 {
@@ -288,6 +312,7 @@ struct plus_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
     };
 };
 
+/// INTERNAL ONLY
 template<>
 struct negate_impl<boost::units::scale_dim_tag>
 {
@@ -303,6 +328,7 @@ struct negate_impl<boost::units::scale_dim_tag>
     };
 };
 
+/// INTERNAL ONLY
 template<>
 struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rational_tag>
 {
@@ -318,6 +344,7 @@ struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rati
     };
 };
 
+/// INTERNAL ONLY
 template<class Tag>
 struct less_impl<boost::units::scaled_base_unit_tag, Tag>
 {
@@ -327,6 +354,7 @@ struct less_impl<boost::units::scaled_base_unit_tag, Tag>
         ((boost::is_same<typename T0::system_type, T1>::value) && ((T0::scale_type::exponent::Numerator) < 0)))> {};
 };
 
+/// INTERNAL ONLY
 template<class Tag>
 struct less_impl<Tag, boost::units::scaled_base_unit_tag>
 {
@@ -336,6 +364,7 @@ struct less_impl<Tag, boost::units::scaled_base_unit_tag>
         ((boost::is_same<T0, typename T1::system_type>::value) && ((T1::scale_type::exponent::Numerator) > 0)))> {};
 };
 
+/// INTERNAL ONLY
 template<>
 struct less_impl<boost::units::scaled_base_unit_tag, boost::units::scaled_base_unit_tag>
 {

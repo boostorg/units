@@ -34,6 +34,7 @@ namespace units {
 // to avoid need for default constructor and eliminate divide by zero errors
 namespace typeof_ {
 
+/// INTERNAL ONLY
 template<class T> T make();
 
 } // namespace typeof_

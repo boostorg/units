@@ -40,12 +40,14 @@ struct static_power;
 template<class T, class R>
 struct static_root;
 
+/// INTERNAL ONLY
 template<class L, long N, long D>
 struct static_power<homogeneous_system<L>, static_rational<N,D> >
 {
     typedef homogeneous_system<L> type;
 };
 
+/// INTERNAL ONLY
 template<class L, long N, long D>
 struct static_root<homogeneous_system<L>, static_rational<N,D> >
 {

@@ -113,6 +113,7 @@ struct affine_conversion_impl<false, true>
 
 }
 
+/// INTERNAL ONLY
 template<class Unit1, class T1, class Unit2, class T2>
 struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>, T2> >
 {
@@ -187,6 +188,7 @@ Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
     return Y(aval1.value()-aval2.value());
 }
 
+/// INTERNAL ONLY
 template<class D, class S>
 struct reduce_unit<absolute<unit<D, S> > >
 {

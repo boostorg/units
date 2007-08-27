@@ -17,6 +17,9 @@ namespace boost {
 
 namespace units {
 
+template<class T>
+struct get_dimension {};
+
 /// get the dimension of a unit
 template<class Dim,class System>
 struct get_dimension< unit<Dim,System> >

@@ -17,6 +17,9 @@ namespace boost {
 
 namespace units {
 
+template<class T>
+struct get_system {};
+
 /// get the system of a unit
 template<class Dim,class System>
 struct get_system< unit<Dim,System> >

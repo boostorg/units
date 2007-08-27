@@ -516,6 +516,7 @@ struct conversion_impl<0>
 } // namespace detail
 
 /// conversions between homogeneous systems are defined
+/// INTERNAL ONLY
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> >
 {
@@ -537,6 +538,7 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
 };
 
 /// conversions between heterogeneous systems and homogeneous systems are defined
+/// INTERNAL ONLY
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quantity<unit<D, homogeneous_system<L2> >, T2> >
 {
@@ -557,6 +559,7 @@ struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quant
 // other than just defining it as the reverse of the
 // heterogeneous->homogeneous case
 /// conversions between heterogeneous systems and homogeneous systems are defined
+/// INTERNAL ONLY
 template<class D, class L1, class T1, class L2, class T2>
 struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantity<unit<D, heterogeneous_system<L2> >, T2> >
 {
@@ -575,6 +578,7 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
 
 /// Requires that all possible conversions
 /// between base units are defined.
+/// INTERNAL ONLY
 template<class D, class S1, class T1, class S2, class T2>
 struct conversion_helper<quantity<unit<D, heterogeneous_system<S1> >, T1>, quantity<unit<D, heterogeneous_system<S2> >, T2> >
 {

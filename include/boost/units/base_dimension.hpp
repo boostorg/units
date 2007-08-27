@@ -43,7 +43,9 @@ struct check_base_dimension {
 
 /// Defines a base dimension.  To define a dimension you need to provide
 /// the derived class (CRTP) and a unique integer.
+/// @code
 /// struct my_dimension : boost::units::base_dimension<my_dimension, 1> {};
+/// @endcode
 /// It is designed so that you will get an error message if you try
 /// to use the same value in multiple definitions.
 template<class Derived,

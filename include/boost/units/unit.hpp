@@ -86,6 +86,7 @@ struct is_implicitly_convertible<unit<D, homogeneous_system<S1> >, unit<D, homog
 #endif
 
 /// unit unary plus typeof helper
+/// INTERNAL ONLY
 template<class Dim,class System>
 struct unary_plus_typeof_helper< unit<Dim,System> >
 {
@@ -93,6 +94,7 @@ struct unary_plus_typeof_helper< unit<Dim,System> >
 };
 
 /// unit unary minus typeof helper
+/// INTERNAL ONLY
 template<class Dim,class System>
 struct unary_minus_typeof_helper< unit<Dim,System> >
 {
@@ -100,6 +102,7 @@ struct unary_minus_typeof_helper< unit<Dim,System> >
 };
 
 /// unit add typeof helper
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System>
@@ -112,6 +115,7 @@ struct add_typeof_helper< unit<Dim1,System>,unit<Dim2,System> >
 };
 
 /// unit subtract typeof helper
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System>
@@ -124,6 +128,7 @@ struct subtract_typeof_helper< unit<Dim1,System>,unit<Dim2,System> >
 };
 
 /// unit multiply typeof helper for two identical homogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System>
@@ -134,6 +139,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System> >,
 };
 
 /// unit multiply typeof helper for two different homogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -151,6 +157,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
 };
 
 /// unit multiply typeof helper for a heterogeneous and a homogeneous system
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -168,6 +175,7 @@ struct multiply_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 };
 
 /// unit multiply typeof helper for a homogeneous and a heterogeneous system
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -185,6 +193,7 @@ struct multiply_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
 };
 
 /// unit multiply typeof helper for two heterogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -202,6 +211,7 @@ struct multiply_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 };
 
 /// unit divide typeof helper for two identical homogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System>
@@ -212,6 +222,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System> >,
 };
 
 /// unit divide typeof helper for two different homogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -229,6 +240,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
 };
 
 /// unit divide typeof helper for a heterogeneous and a homogeneous system
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -246,6 +258,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 };
 
 /// unit divide typeof helper for a homogeneous and a heterogeneous system
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
@@ -263,6 +276,7 @@ struct divide_typeof_helper< unit<Dim1,homogeneous_system<System1> >,
 };
 
 /// unit divide typeof helper for two heterogeneous systems
+/// INTERNAL ONLY
 template<class Dim1,
          class Dim2,
          class System1,
