@@ -43,7 +43,7 @@ struct check_base_unit {
     };
 };
 
-/// Defines a base dimension.  To define a unit you need to provide
+/// Defines a base unit.  To define a unit you need to provide
 /// the derived class (CRTP), a dimension list and a unique integer.
 /// @code
 /// struct my_unit : boost::units::base_unit<my_unit, length_dimension, 1> {};
@@ -64,11 +64,16 @@ class base_unit :
     public mpl::long_<N> 
 {
     public:
+        /// INTERNAL ONLY
         typedef base_unit           this_type;
+        /// The dimensions of this base unit.
         typedef Dim                 dimension_type;
 
+        /// Provided for mpl compatability.
         typedef Derived type;
 
+        /// The unit corresponding to this base unit.
+#ifndef BOOST_UNITS_DOXYGEN
         typedef unit<
             Dim,
             heterogeneous_system<
@@ -81,6 +86,9 @@ class base_unit :
                 >
             >
         > unit_type;
+#else
+        typedef detail::unspecified unit_type;
+#endif
 
     private:
         /// Register this ordinal

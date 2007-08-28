@@ -61,8 +61,15 @@ class base_dimension :
     public mpl::long_<N> 
 {
     public:
+        /// INTERNAL ONLY
         typedef base_dimension                                                          this_type;
+        /// A convenience typedef.  Equivalent to boost::units::derived_dimension<Derived,1>::type.
+#ifndef BOOST_UNITS_DOXYGEN 
         typedef dimension_list<dim<Derived,static_rational<1> >, dimensionless_type>    dimension_type;
+#else
+        typedef detail::unspecified dimension_type;
+#endif
+        /// Provided for mpl compatability.
         typedef Derived type;
 
     private:
