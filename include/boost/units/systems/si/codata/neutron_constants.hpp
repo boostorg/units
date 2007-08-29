@@ -13,7 +13,7 @@
 
 #include <boost/units/static_constant.hpp>
 
-#include <boost/units/systems/constants.hpp>
+#include <boost/units/systems/detail/constants.hpp>
 #include <boost/units/systems/si/amount.hpp>
 #include <boost/units/systems/si/area.hpp>
 #include <boost/units/systems/si/electric_charge.hpp>

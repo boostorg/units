@@ -48,7 +48,7 @@ run_doxygen units_reference
 
 run_doxygen systems_reference
   :
-    [ path.glob-tree ../../../boost/units/systems : *.hpp ]
+    [ path.glob-tree ../../../boost/units/systems : *.hpp : detail ]
   :
     "Systems Reference"
   ;

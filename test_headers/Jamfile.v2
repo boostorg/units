@@ -19,7 +19,7 @@ rule setup ( ) {
 
   for local file in [ path.glob-tree ../../../boost/units : *.hpp ] {
 
-    result += [ compile test.cpp : <define>BOOST_UNITS_HEADER_NAME=$(file) : [ regex.replace [ path.relative-to ../../.. $(file) ] "/" "_" ] ] ;
+    result += [ compile test.cpp : <define>BOOST_UNITS_HEADER_NAME=$(file) <dependency>$(file) : [ regex.replace [ path.relative-to ../../.. $(file) ] "/" "_" ] ] ;
 
   }
 
