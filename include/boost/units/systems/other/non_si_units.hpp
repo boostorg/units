@@ -22,6 +22,7 @@
 #include <boost/units/systems/si/time.hpp>
 #include <boost/units/systems/si/velocity.hpp>
 #include <boost/units/systems/si/volume.hpp>
+#include <boost/units/systems/si/force.hpp>
 
 #define BOOST_UNITS_NON_SI_UNIT(name, factor, unit, id)                     \
 namespace boost {                                                           \
