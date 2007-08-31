@@ -385,7 +385,7 @@ void boost_units_require_semicolon()
 
 /// Defines the conversion factor from a base unit to any other base
 /// unit with the same dimensions.  Must appear at global scope.
-/// The reverse need not be defined.  Does not work with scaling. Sigh.
+/// The reverse need not be defined.  Neither base unit may be scaled.
 #define BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
 namespace boost {                                                           \
 namespace units {                                                           \
@@ -433,7 +433,10 @@ void boost_units_require_semicolon()
 /// with the correct dimensions.  Must appear at global scope.
 /// If the destination unit is a unit that contains only one
 /// base unit which is raised to the first power (e.g. feet->meters)
-/// the reverse need not be defined. Does not work with scaling. Sigh.
+/// the reverse need not be defined. Neither unit may be scaled.
+/// The destination must be a heterogeneous unit.  These requirements
+/// are rather difficult to check.  If they are not met the specialization
+/// will probably vanish silently.
 #define BOOST_UNITS_DEFINE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
 namespace boost {                                                           \
 namespace units {                                                           \
@@ -467,7 +470,8 @@ void boost_units_require_semicolon()
 /// no direct conversion is available.
 /// Params is a PP Sequence of template arguments.
 /// Source is a base unit.  Dest is any unit with the
-/// same dimensions.
+/// same dimensions.  The source must not be a scaled
+/// base unit.
 #define BOOST_UNITS_DEFAULT_CONVERSION_TEMPLATE(Params, Source, Dest)   \
     namespace boost {                                                   \
     namespace units {                                                   \
@@ -709,6 +713,8 @@ conversion_factor(const FromUnit&,const ToUnit&)
     return(detail::conversion_factor_helper<FromUnit, ToUnit>::value());
 }
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 /// Find the conversion factor between two units with an explicit return type.
 /// e.g. conversion_factor<int>(newton, dyne) returns 100000
 template<class Y, class FromUnit,class ToUnit>
@@ -718,6 +724,20 @@ conversion_factor(const FromUnit&,const ToUnit&)
 {
     return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
 }
+
+#else
+
+/// Find the conversion factor between two units with an explicit return type.
+/// e.g. conversion_factor<int>(newton, dyne) returns 100000
+template<class Y, class FromUnit,class ToUnit>
+inline
+Y
+conversion_factor<Y>(const FromUnit&,const ToUnit&)
+{
+    return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
+}
+
+#endif
 
 } // namespace units
 
