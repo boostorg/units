@@ -292,9 +292,18 @@ struct static_root<heterogeneous_system<S>, static_rational<N,D> >
     > type;
 };
 
-/// Returns a unique type for every unit.
 template<class Unit>
 struct reduce_unit;
+
+#ifdef BOOST_UNITS_DOXYGEN
+
+/// Returns a unique type for every unit.
+template<class Unit>
+struct reduce_unit {
+    typedef detail::unspecified type;
+};
+
+#endif
 
 /// Returns a unique type for every unit.
 template<class Dim, class System>

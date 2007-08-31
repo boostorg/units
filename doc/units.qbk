@@ -25,6 +25,8 @@
 [def __quantity [classref boost::units::quantity quantity]]
 [def __conversion_helper [classref boost::units::conversion_helper conversion_helper]]
 [def __absolute [classref boost::units::absolute absolute]]
+[def __base_unit [classref boost::units::base_unit base_unit]]
+[def __scaled_base_unit [classref boost::units::scaled_base_unit base_unit]]
 
 [def __unary_plus_typeof_helper [classref boost::units::unary_plus_typeof_helper unary_plus_typeof_helper]]
 [def __unary_minus_typeof_helper [classref boost::units::unary_minus_typeof_helper unary_minus_typeof_helper]]
@@ -53,8 +55,15 @@
 [def __from_value [memberref boost::units::quantity::from_value from_value]]
 [def __value [memberref boost::units::quantity::value value]]
 
+[def __reduce_unit [classref boost::units::reduce_unit reduce_unit]]
+[def __unscale [classref boost::units::unscale unscale]]
+
 [def __BOOST_UNITS_STATIC_CONSTANT [macroref BOOST_UNITS_STATIC_CONSTANT]]
 [def __BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS [macroref BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]]
+
+[def __BOOST_UNITS_DEFINE_CONVERSION [macroref BOOST_UNITS_DEFINE_CONVERSION]]
+[def __BOOST_UNITS_DEFINE_BASE_CONVERSION [macroref BOOST_UNITS_DEFINE_BASE_CONVERSION]]
+[def __BOOST_UNITS_DEFAULT_CONVERSION [macroref BOOST_UNITS_DEFAULT_CONVERSION]]
 
 [section:Introduction Introduction]
 
@@ -403,6 +412,57 @@ Naturally, it is also possible to define heterogeneous operators between differe
     template<> struct add_typeof_helper<integer,natural>        { typedef integer   type; };
 
 [endsect]
+
+[endsect]
+
+[section:Conversions Conversions]
+
+The macros needed for defining conversion can be found in
+[headerref boost/units/conversion.hpp], [headerref boost/units/absolute.hpp]
+(for affine conversions), and [headerref boost/units/implicit_conversion.hpp]
+
+For most purposes [___BOOST_UNITS_DEFINE_BASE_CONVERSION] will be
+sufficient.  It defines a conversion between two base units with
+the same dimensions.  If you define use different dimensions for
+defining base units then you will need to use the more general form
+[___BOOST_UNITS_DEFINE_CONVERSION] which works for arbitrary units.
+
+If you need to define a conversion as a template then
+you can add _TEMPLATE onto the end of any of the macros.
+
+[warning
+
+[___BOOST_UNITS_DEFINE_CONVERSION] has to apply [___unscale] to its
+parameters.  This does not work for templates.  You must guarantee
+that you do not pass any [___scaled_base_unit]s to the macro.
+
+]
+
+The macro [___BOOST_UNITS_DEFAULT_CONVERSION] defines a conversion
+that will be applied to a base unit when no direct conversion is
+possible.  This can be used to make arbitray conversion work
+with a single specialization.
+
+    struct my_unit_tag : boost::units::base_unit<my_unit_tag, boost::units::force_type, 1> {};
+    // define the conversion factor
+    BOOST_UNITS_DEFINE_CONVERSION(my_unit_tag, SI::force, double, 3.14159265358979323846);
+    // make conversion to SI the default.
+    BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
+
+[warning
+
+For all the conversion macros the destination unit needs
+to be reduced to a unique type with [___reduce_unit].
+The template forms cannot do this reduction automatically.
+
+]
+
+The following are the exact rules for conversions.
+First the implementation attempts to find a direct conversion defined
+with [___BOOST_UNITS_DEFINE_CONVERSION] and its kin.  If there is no such
+exact conversion then it will look for a definition of some scaled
+form of the conversion.  If that also fails then it will transform
+every [___base_unit] using [___BOOST_UNITS_DEFAULT_CONVERSION] and recurse.
 
 [endsect]
 
