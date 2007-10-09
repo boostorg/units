@@ -34,7 +34,7 @@ int main() {
     known_units["foot"] = conversion_factor(boost::units::foot_base_unit::unit_type(), boost::units::SI::meter) * boost::units::SI::meters;;
     std::string output_type("meter");
     std::string input;
-    while(std::cin >> input) {
+    while((std::cout << ">") && (std::cin >> input)) {
         if(input == "exit") break;
         else if(input == "help") {
             std::cout << "type \"exit\" to exit\n"
