@@ -13,8 +13,10 @@ using quickbook ;
 
 using doxygen ;
 
-rule run_doxygen ( target : files * : name )
+rule run_doxygen ( target : files * : name : expand ? )
 {
+
+    expand ?= <doxygen:param>EXPAND_ONLY_PREDEF=YES ;
 
 doxygen $(target)
   :
@@ -31,7 +33,7 @@ doxygen $(target)
         <doxygen:param>EXTRACT_PRIVATE=NO
         <doxygen:param>ENABLE_PREPROCESSING=YES
         <doxygen:param>MACRO_EXPANSION=YES
-        <doxygen:param>EXPAND_ONLY_PREDEF=YES
+        $(expand)
         <doxygen:param>SEARCH_INCLUDES=NO
         <reftitle>$(name)
   ;
@@ -46,11 +48,61 @@ run_doxygen units_reference
     "Units Reference"
   ;
 
-run_doxygen systems_reference
+run_doxygen si_reference
   :
-    [ path.glob-tree ../../../boost/units/systems : *.hpp : detail ]
+    ../../../boost/units/systems/si.hpp
+    [ path.glob-tree ../../../boost/units/systems/si : *.hpp : detail ]
   :
-    "Systems Reference"
+    "SI System Reference"
+  ;
+
+run_doxygen cgs_reference
+  :
+    ../../../boost/units/systems/cgs.hpp
+    [ path.glob-tree ../../../boost/units/systems/cgs : *.hpp : detail ]
+  :
+    "CGS System Reference"
+  ;
+
+run_doxygen base_units_reference
+  :
+    ../../../boost/units/systems/base_units.hpp
+    ../../../boost/units/systems/other/non_si_units.hpp
+    [ path.glob-tree ../../../boost/units/systems/base_units : *.hpp : detail ]
+  :
+    "Base Units Reference"
+  :
+    <doxygen:param>EXPAND_ONLY_PREDEF=NO
+  ;
+
+run_doxygen dimensions_reference
+  :
+    ../../../boost/units/systems/physical_units.hpp
+    [ path.glob-tree ../../../boost/units/systems/physical_dimensions : *.hpp : detail ]
+  :
+    "Dimensions Reference"
+  ;
+
+run_doxygen trig_reference
+  :
+    ../../../boost/units/systems/trig.hpp
+    [ path.glob-tree ../../../boost/units/systems/angle : *.hpp : detail ]
+  :
+    "Trigonometry and Angle System Reference"
+  ;
+
+run_doxygen temperature_reference
+  :
+    [ path.glob-tree ../../../boost/units/systems/temperature : *.hpp : detail ]
+  :
+    "Temperature System Reference"
+  ;
+
+run_doxygen abstart_reference
+  :
+    ../../../boost/units/systems/abstract.hpp
+  :
+    "Abstract System Reference"
   ;
 
 xml units
@@ -64,7 +116,12 @@ boostbook standalone
     units
   :
     <dependency>units_reference
-    <dependency>systems_reference
+    <dependency>si_reference
+    <dependency>cgs_reference
+    <dependency>base_units_reference
+    <dependency>dimensions_reference
+    <dependency>trig_reference
+    <dependency>temperature_reference
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8

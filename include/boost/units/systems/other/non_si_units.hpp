@@ -24,6 +24,14 @@
 #include <boost/units/systems/si/volume.hpp>
 #include <boost/units/systems/si/force.hpp>
 
+#ifdef BOOST_UNITS_DOXYGEN
+///INTERNAL ONLY
+#define BOOST_UNITS_DEFINE_CONVERSION(name, unit, type, factor)
+///INTERNAL ONLY
+#define BOOST_UNITS_DEFAULT_CONVERSION(name, unit)
+#endif
+
+///INTERNAL ONLY
 #define BOOST_UNITS_NON_SI_UNIT(name, factor, unit, id)                     \
 namespace boost {                                                           \
 namespace units {                                                           \
@@ -35,6 +43,7 @@ struct name : base_unit<name, unit::dimension_type, id - 100> {};           \
 BOOST_UNITS_DEFINE_CONVERSION(BOOST_UNITS_NAMESPACE::name, unit, double, factor); \
 BOOST_UNITS_DEFAULT_CONVERSION(BOOST_UNITS_NAMESPACE::name, unit)
 
+///INTERNAL ONLY
 #define BOOST_UNITS_NAMESPACE astronomical
 
 BOOST_UNITS_NON_SI_UNIT(astronomical_unit_base_unit, 149597870691.0, meter_base_unit::unit_type, 0);
@@ -205,6 +214,7 @@ BOOST_UNITS_NON_SI_UNIT(acre_base_unit,4046.873,reduce_unit<SI::area>::type, 29)
 #undef BOOST_UNITS_NAMESPACE
 #undef BOOST_UNITS_END_NAMESPACE
 
+/*
 namespace boost {
 
 namespace units { 
@@ -213,7 +223,6 @@ namespace SI {
                             
 namespace constants {
 
-/*
 namespace english {
 
 /// barleycorn
@@ -308,7 +317,7 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(span,0.1524*meters);
 BOOST_UNITS_AUTO_STATIC_CONSTANT(cloth_span,0.2286*meters);
 /// stick
 BOOST_UNITS_AUTO_STATIC_CONSTANT(stick,50.8e-3*meters);
-*/
+
 } // constants                                                                                  
 
 } // namespace SI
@@ -316,5 +325,6 @@ BOOST_UNITS_AUTO_STATIC_CONSTANT(stick,50.8e-3*meters);
 } // namespace units
 
 } // namespace boost
+*/
 
 #endif // BOOST_UNITS_NON_SI_CONSTANTS_HPP
