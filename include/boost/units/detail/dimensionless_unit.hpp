@@ -14,11 +14,19 @@
 #include <boost/utility/enable_if.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/heterogeneous_system.hpp>
-#include <boost/units/homogeneous_system.hpp>
 
 namespace boost {
 namespace units {
+
+template<class T>
+struct heterogeneous_system;
+
+template<class T>
+struct homogeneous_system;
+
+template<class T1, class T2>
+struct heterogeneous_system_pair;
+
 namespace detail {
 
 template<class T>
@@ -37,10 +45,37 @@ struct is_dimensionless_system<
    >
 > : boost::mpl::true_ {};
 
-#define BOOST_UNITS_DIMENSIONLESS_UNIT(T)\
-    boost::units::unit<typename boost::enable_if<boost::units::detail::is_dimensionless_system<T>, boost::units::dimensionless_type>::type, T>
+#ifdef BOOST_MSVC
 
-#define BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(T) boost::units::unit<typename boost::disable_if<boost::units::detail::is_dimensionless_system<T>, boost::units::dimensionless_type>::type, T>
+#define BOOST_UNITS_DIMENSIONLESS_UNIT(T)\
+    boost::units::unit<\
+        typename boost::enable_if<boost::units::detail::is_dimensionless_system<T>, boost::units::dimensionless_type>::type,\
+        T\
+    >
+
+#define BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(T)\
+    boost::units::unit<\
+        typename boost::disable_if<boost::units::detail::is_dimensionless_system<T>, boost::units::dimensionless_type>::type,\
+        T\
+    >
+
+#else
+
+#define BOOST_UNITS_DIMENSIONLESS_UNIT(T)\
+    boost::units::unit<\
+        boost::units::dimensionless_type,\
+        T,\
+        typename boost::enable_if<boost::units::detail::is_dimensionless_system<T> >::type\
+    >
+
+#define BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(T)\
+    boost::units::unit<\
+        boost::units::dimensionless_type,\
+        T,\
+        typename boost::disable_if<boost::units::detail::is_dimensionless_system<T> >::type\
+    >
+
+#endif
 
 }
 }

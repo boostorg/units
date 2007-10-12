@@ -18,14 +18,12 @@
 #include <boost/mpl/bool.hpp>
 
 #include <boost/units/operators.hpp>
-
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/units_fwd.hpp>
 
 namespace boost {
 
 namespace units {
-
-template<class Dim,class System> class unit;
 
 namespace detail {
 

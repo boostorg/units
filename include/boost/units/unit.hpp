@@ -31,7 +31,7 @@ namespace units {
 /// class representing a model-dependent unit with no associated value
 
 /// (e.g. meters, Kelvin, feet, etc...)
-template<class Dim,class System>
+template<class Dim,class System, class Enable>
 class unit
 {
     public:

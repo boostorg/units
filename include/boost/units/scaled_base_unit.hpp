@@ -27,15 +27,13 @@
 #include <boost/units/config.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
 
 namespace boost {
 
 namespace units {
-
-template<class Dimensions, class System>
-class unit;
 
 template<class T>
 struct heterogeneous_system;
@@ -192,9 +190,6 @@ struct unscale<scaled_base_unit<S, Scale> >
 {
     typedef typename unscale<S>::type type;
 };
-
-template<class D, class S>
-class unit;
 
 /// INTERNAL ONLY
 template<class D, class S>
