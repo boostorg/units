@@ -21,6 +21,7 @@
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/is_dimension_list.hpp>
 #include <boost/units/implicit_conversion.hpp>
 #include <boost/units/static_rational.hpp>
 
@@ -47,6 +48,7 @@ class unit
         
     private:
         BOOST_STATIC_ASSERT((detail::check_system<System, Dim>::value == true));
+        BOOST_STATIC_ASSERT((is_dimension_list<Dim>::value == true));
 };
 
 }
