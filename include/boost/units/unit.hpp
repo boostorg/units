@@ -22,8 +22,8 @@
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/is_dimension_list.hpp>
-#include <boost/units/implicit_conversion.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/detail/implicit_conversion.hpp>
 
 namespace boost {
 
