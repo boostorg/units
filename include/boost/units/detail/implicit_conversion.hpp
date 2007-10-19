@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_UNIT_IMPL_HPP
-#define BOOST_UNITS_UNIT_IMPL_HPP
+#ifndef BOOST_UNITS_IMPLICIT_CONVERSION_HPP
+#define BOOST_UNITS_IMPLICIT_CONVERSION_HPP
 
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/size.hpp>
@@ -116,4 +116,4 @@ struct unit_is_implicitly_convertible {
 
 } // namespace boost
 
-#endif // BOOST_UNITS_UNIT_IMPL_HPP
+#endif // BOOST_UNITS_IMPLICIT_CONVERSION_HPP
