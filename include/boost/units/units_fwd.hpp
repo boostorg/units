@@ -32,8 +32,9 @@ template<class S1,class S2> struct is_implicitly_convertible;
 template<class T> struct get_dimension;
 template<class T> struct get_system;
 
-template<class Dim,class System, class Enable=void> class unit;
 template<class Y> class absolute;
+
+template<class Dim,class System, class Enable=void> class unit;
 
 template<class BaseUnitTag> struct base_unit_info;
 template<class System> struct dimensionless_unit;
@@ -47,6 +48,8 @@ template<class System,class Y> struct dimensionless_quantity;
 template<class T> struct is_quantity;
 template<class T,class Dim> struct is_quantity_of_dimension;
 template<class T,class System> struct is_quantity_of_system;
+
+template<class From,class To> struct conversion_helper;
 
 } // namespace units
 

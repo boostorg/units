@@ -54,17 +54,6 @@ struct dim
     typedef V               value_type;
 };
 
-///// Check that a type is a valid @c dim.
-//template<typename T> 
-//struct is_dim :
-//    public mpl::false_
-//{ };
-//
-//template<typename T,typename V>
-//struct is_dim< dim<T,V> > :
-//    public mpl::true_
-//{ };
-
 } // namespace units
 
 } // namespace boost
@@ -80,6 +69,8 @@ BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dim, 2)
 namespace boost {
 
 namespace mpl {
+
+// define MPL operators acting on dim<T,V>
 
 template<>
 struct plus_impl<boost::units::detail::dim_tag,boost::units::detail::dim_tag>

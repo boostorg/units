@@ -26,7 +26,7 @@
 
 #ifdef BOOST_UNITS_DOXYGEN
 ///INTERNAL ONLY
-#define BOOST_UNITS_DEFINE_CONVERSION(name, unit, type, factor)
+#define BOOST_UNITS_DEFINE_CONVERSION_FACTOR(name, unit, type, factor)
 ///INTERNAL ONLY
 #define BOOST_UNITS_DEFAULT_CONVERSION(name, unit)
 #endif
@@ -40,7 +40,7 @@ struct name : base_unit<name, unit::dimension_type, id - 100> {};           \
 }                                                                           \
 }                                                                           \
 }                                                                           \
-BOOST_UNITS_DEFINE_CONVERSION(BOOST_UNITS_NAMESPACE::name, unit, double, factor); \
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(BOOST_UNITS_NAMESPACE::name, unit, double, factor); \
 BOOST_UNITS_DEFAULT_CONVERSION(BOOST_UNITS_NAMESPACE::name, unit)
 
 ///INTERNAL ONLY
@@ -65,7 +65,7 @@ namespace metric {
 // units of length
 typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<10> > > angstrom_base_unit;
 typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<15> > > fermi_base_unit;
-typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<6> > > micron_base_unit;
+typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<6> > >  micron_base_unit;
 
 // units of mass
 typedef scaled_base_unit<kilogram_base_unit, scale<10, static_rational<3> > > ton_base_unit;

@@ -74,7 +74,7 @@ struct check_extra_equations_impl;
 template<int N>
 struct normalize_units_impl;
 
-struct inconsistant {};
+struct inconsistent {};
 
 // eliminate_from_pair_of_equations takes a pair of
 // equations and eliminates the first variable.
@@ -125,7 +125,7 @@ struct eliminate_from_pair_of_equations {
 };
 
 // Eliminates the first variable from a list of equations
-// returns inconsistant if all its coefficients are 0.  Otherwise
+// returns inconsistent if all its coefficients are 0.  Otherwise
 // recursively calls solve to find the remaining variables
 //
 // list<rational> eliminate(list<equation> system) {
@@ -143,7 +143,7 @@ struct eliminate_from_pair_of_equations {
 //         }
 //     }
 //     if(eliminate_against == null) {
-//         return(inconsistant);
+//         return(inconsistent);
 //     } else {
 //         list<rational> solution = solve(result);
 //         return(push_front(solution, substitute(eliminate_against,solution)));
@@ -173,7 +173,7 @@ template<>
 struct elimination_skip_leading_zeros_impl<true, true> {
     template<class Begin, int N, class L>
     struct apply {
-        typedef inconsistant type;
+        typedef inconsistent type;
     };
 };
 
@@ -211,10 +211,10 @@ struct combine_solutions {
 };
 
 template<>
-struct combine_solutions<inconsistant> {
+struct combine_solutions<inconsistent> {
     template<class Iterator>
     struct apply {
-        typedef inconsistant type;
+        typedef inconsistent type;
     };
 };
 
@@ -310,7 +310,7 @@ template<class T>
 struct check_extra_equations_func {
     template<class Begin, int N>
     struct apply {
-        typedef inconsistant type;
+        typedef inconsistent type;
     };
 };
 
@@ -712,7 +712,7 @@ struct add_solutions_impl<0> {
 
 // S is the solution for this particular base dimension.
 // if the base dimension cannot be represented then
-// solve will return inconsistant hence the two specializations.
+// solve will return inconsistent hence the two specializations.
 
 template<class S>
 struct normalize_units_func {
@@ -756,7 +756,7 @@ struct normalize_units_func {
 // cannot be represented with the base units
 // and the dummies allready added.
 template<>
-struct normalize_units_func<inconsistant> {
+struct normalize_units_func<inconsistent> {
     template<class ReverseEquations, int M, class DimensionIterator, int N, int Extra, int I, class ExtraEquations>
     struct apply {
         // Find the position that needs to be erased. (Since this
@@ -957,7 +957,7 @@ struct multiply_add_units<1> {
 
 
 // strip_zeroes erases the first N elements of a list if
-// they are all zero, otherwise returns inconsistant
+// they are all zero, otherwise returns inconsistent
 //
 // list strip_zeroes(list l, int N) {
 //     if(N == 0) {
@@ -965,7 +965,7 @@ struct multiply_add_units<1> {
 //     } else if(l.front == 0) {
 //         return(strip_zeroes(pop_front(l), N-1));
 //     } else {
-//         return(inconsistant);
+//         return(inconsistent);
 //     }
 // }
 
@@ -976,7 +976,7 @@ template<class T>
 struct strip_zeroes_func {
     template<class L, int N>
     struct apply {
-        typedef inconsistant type;
+        typedef inconsistent type;
     };
 };
 

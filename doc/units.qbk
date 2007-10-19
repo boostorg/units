@@ -61,7 +61,7 @@
 [def __BOOST_UNITS_STATIC_CONSTANT [macroref BOOST_UNITS_STATIC_CONSTANT]]
 [def __BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS [macroref BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]]
 
-[def __BOOST_UNITS_DEFINE_CONVERSION [macroref BOOST_UNITS_DEFINE_CONVERSION]]
+[def __BOOST_UNITS_DEFINE_CONVERSION [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR]]
 [def __BOOST_UNITS_DEFINE_BASE_CONVERSION [macroref BOOST_UNITS_DEFINE_BASE_CONVERSION]]
 [def __BOOST_UNITS_DEFAULT_CONVERSION [macroref BOOST_UNITS_DEFAULT_CONVERSION]]
 
@@ -445,7 +445,7 @@ with a single specialization.
 
     struct my_unit_tag : boost::units::base_unit<my_unit_tag, boost::units::force_type, 1> {};
     // define the conversion factor
-    BOOST_UNITS_DEFINE_CONVERSION(my_unit_tag, SI::force, double, 3.14159265358979323846);
+    BOOST_UNITS_DEFINE_CONVERSION_FACTOR(my_unit_tag, SI::force, double, 3.14159265358979323846);
     // make conversion to SI the default.
     BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
 

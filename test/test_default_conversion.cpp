@@ -41,7 +41,7 @@ BOOST_UNITS_DEFINE_BASE_CONVERSION(unit1_tag, unit2_tag, double, 2.0);
 BOOST_UNITS_DEFINE_BASE_CONVERSION(unit2_tag, unit3_tag, double, 3.0);
 
 typedef boost::units::multiply_typeof_helper<unit3_tag::unit_type, unit4_tag::unit_type>::type unit34_type;
-BOOST_UNITS_DEFINE_CONVERSION(unit5_tag, unit34_type , double, 5.0);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(unit5_tag, unit34_type , double, 5.0);
 
 BOOST_UNITS_DEFAULT_CONVERSION(unit1_tag, unit2_tag::unit_type);
 

@@ -69,7 +69,7 @@ struct check_system<homogeneous_system<L>, Dimensions> :
                 L,
                 Dimensions
             >::type,
-            inconsistant
+            inconsistent
         >
     > {};
 

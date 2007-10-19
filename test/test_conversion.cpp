@@ -33,7 +33,7 @@ Output:
 
 namespace bu = boost::units;
 
-typedef bu::SI::length si_length;
+typedef bu::SI::length  si_length;
 typedef bu::SI::time    si_time;
 typedef bu::SI::mass    si_mass;
 typedef bu::SI::area    si_area;
@@ -62,8 +62,6 @@ int test_main(int,char *[])
     BOOST_CHECK((std::abs(a3.value() - 2.0) < .0001));
 
     bu::quantity<mixed_energy_1> e1(2.0 * mixed_energy_1());
-
-    //heterogeneous->heterogeneous is broken
     bu::quantity<mixed_energy_2> e2(e1);
 
     BOOST_CHECK((std::abs(e2.value() - 20.0) < .0001));
@@ -73,29 +71,14 @@ int test_main(int,char *[])
     bu::quantity<mixed_energy_2> e4(e3);
     BOOST_CHECK((std::abs(e4.value() - 20.0) < .0001));
 
-
-
     bu::quantity<bu::CGS::force> F0 = 20 * bu::CGS::dyne;
     BOOST_CHECK((std::abs(F0.value() - 20.0) < .0001));
 
-    //deprecated
-    //bu::quantity<bu::SI::force> F1 = bu::quantity_cast<bu::quantity<bu::SI::force> >(F0);
-    //BOOST_CHECK((std::abs(F1.value() - 2.0e-4) < .000000001));
-    
-    //deprecated
-    //bu::quantity<bu::SI::force> F2 = bu::quantity_cast<bu::quantity<bu::SI::force> >(20 * bu::CGS::dyne);
-    //BOOST_CHECK((std::abs(F2.value() - 2.0e-4) < .000000001));
-
     bu::quantity<bu::SI::force> F3(F0);
     BOOST_CHECK((std::abs(F3.value() - 2.0e-4) < .000000001));
-    //quantity<SI::force> F4 = F0;
 
     bu::quantity<bu::SI::force> F5(20 * bu::CGS::dyne);
     BOOST_CHECK((std::abs(F5.value() - 2.0e-4) < .000000001));
-    
-    //quantity<SI::force> F6 = 20 * CGS::dyne;
-
-
 
     bu::quantity<bu::SI::dimensionless> dimensionless_test1(1.0*bu::CGS::dyne/bu::SI::newton);
     BOOST_CHECK(dimensionless_test1 == 1e-5);

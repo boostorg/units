@@ -13,21 +13,17 @@
 
 #include <iosfwd>
 
-#include <boost/type_traits/is_base_and_derived.hpp>
-
-#include <boost/units/config.hpp>
-#include <boost/units/conversion.hpp>
-#include <boost/units/heterogeneous_system.hpp>
-#include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/absolute_impl.hpp>
 
 namespace boost {
 
 namespace units {
 
-/// A wrapper to represent absolute units.  Intended
-/// originally for temperatures, this template causes
-/// absolute<T> +/- T -> absolute<T>
-/// absolute<T> - absolute<T> -> T
+/// A wrapper to represent absolute units (points rather than vectors).  Intended
+/// originally for temperatures, this class implements operators for absolute units 
+/// so that addition of a relative unit to an absolute unit results in another
+/// absolute unit : absolute<T> +/- T -> absolute<T> and subtraction of one absolute
+/// unit from another results in a relative unit : absolute<T> - absolute<T> -> T
 template<class Y>
 class absolute
 {
@@ -49,116 +45,6 @@ class absolute
     private:
         value_type   val_;
 };
-
-} // namespace units
-
-} // namespace boost
-
-#if BOOST_UNITS_HAS_BOOST_TYPEOF
-
-#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
-
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::absolute, (class))
-
-#endif
-
-namespace boost {
-
-namespace units {
-
-namespace detail {
-
-struct undefined_affine_conversion_base {};
-
-}
-
-/// INTERNAL ONLY
-template<class From, class To>
-struct affine_conversion_helper : detail::undefined_affine_conversion_base {};
-
-namespace detail {
-
-template<bool IsDefined, bool ReverseIsDefined>
-struct affine_conversion_impl;
-
-template<bool ReverseIsDefined>
-struct affine_conversion_impl<true, ReverseIsDefined>
-{
-    template<class Unit1, class Unit2, class T0, class T1>
-    struct apply {
-        static T1 value(const T0& t0)
-        {
-            return(
-                t0 * 
-                conversion_factor(Unit1(), Unit2()) +
-                affine_conversion_helper<typename reduce_unit<Unit1>::type, typename reduce_unit<Unit2>::type>::value());
-        }
-    };
-};
-
-template<>
-struct affine_conversion_impl<false, true>
-{
-    template<class Unit1, class Unit2, class T0, class T1>
-    struct apply
-    {
-        static T1 value(const T0& t0)
-        {
-            return(
-                (t0 - affine_conversion_helper<typename reduce_unit<Unit2>::type, typename reduce_unit<Unit1>::type>::value()) * 
-                conversion_factor(Unit1(), Unit2()));
-        }
-    };
-};
-
-}
-
-/// INTERNAL ONLY
-template<class Unit1, class T1, class Unit2, class T2>
-struct conversion_helper<quantity<absolute<Unit1>, T1>, quantity<absolute<Unit2>, T2> >
-{
-    typedef quantity<absolute<Unit1>, T1> from_quantity_type;
-    typedef quantity<absolute<Unit2>, T2> to_quantity_type;
-    static to_quantity_type convert(const from_quantity_type& source)
-    {
-        return(
-            to_quantity_type::from_value(
-                detail::affine_conversion_impl<
-                    !boost::is_base_and_derived<
-                        detail::undefined_affine_conversion_base, 
-                        affine_conversion_helper<typename reduce_unit<Unit1>::type, typename reduce_unit<Unit2>::type>
-                    >::value,
-                    !boost::is_base_and_derived<
-                        detail::undefined_affine_conversion_base,
-                        affine_conversion_helper<typename reduce_unit<Unit2>::type, typename reduce_unit<Unit1>::type>
-                    >::value
-                >::template apply<Unit1, Unit2, T1, T2>::value(source.value())
-            )
-        );
-    }
-};
-
-/// Defines the offset between two absolute units.
-/// Requires the value to be in the destination units e.g
-/// @code
-/// BOOST_UNITS_DEFINE_AFFINE_CONVERSION(celsius_base_unit, fahrenheit_base_unit::unit_type, double, 32.0);
-/// @endcode
-/// @c BOOST_UNITS_DEFINE_CONVERSION is also necessary to
-/// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION
-/// defining celsius->fahrenheit as above will be sufficient
-/// to get fahrenheit->celsius also.
-#define BOOST_UNITS_DEFINE_AFFINE_CONVERSION(From, To, type_, value_)   \
-    namespace boost {                                                   \
-    namespace units {                                                   \
-    template<>                                                          \
-    struct affine_conversion_helper<From, To>                           \
-    {                                                                   \
-        typedef type_ type;                                             \
-        static type value() { return(value_); }                         \
-    };                                                                  \
-    }                                                                   \
-    }                                                                   \
-    void boost_units_require_semicolon()
 
 /// add a relative value to an absolute one
 template<class Y>
@@ -188,13 +74,6 @@ Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
     return Y(aval1.value()-aval2.value());
 }
 
-/// INTERNAL ONLY
-template<class D, class S>
-struct reduce_unit<absolute<unit<D, S> > >
-{
-    typedef absolute<typename reduce_unit<unit<D, S> >::type> type;
-};
-
 /// multiplying an absolute unit by a scalar gives a quantity
 /// just like an ordinary unit
 template<class D, class S, class T>
@@ -219,6 +98,45 @@ std::ostream& operator<<(std::ostream& os,const absolute<Y>& aval)
     
     return os;
 }
+
+} // namespace units
+
+} // namespace boost
+
+#if BOOST_UNITS_HAS_BOOST_TYPEOF
+
+#include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
+
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::absolute, (class))
+
+#endif
+
+namespace boost {
+
+namespace units {
+
+/// Macro to define the offset between two absolute units.
+/// Requires the value to be in the destination units e.g
+/// @code
+/// BOOST_UNITS_DEFINE_CONVERSION_OFFSET(celsius_base_unit, fahrenheit_base_unit::unit_type, double, 32.0);
+/// @endcode
+/// @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR is also necessary to
+/// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR
+/// this macro defines both forward and reverse conversions so 
+/// defining, e.g., the conversion from celsius to fahrenheit as above will also
+/// define the inverse conversion from fahrenheit to celsius.
+#define BOOST_UNITS_DEFINE_CONVERSION_OFFSET(From, To, type_, value_)   \
+    namespace boost {                                                   \
+    namespace units {                                                   \
+    template<>                                                          \
+    struct affine_conversion_helper<From, To>                           \
+    {                                                                   \
+        typedef type_ type;                                             \
+        static type value() { return(value_); }                         \
+    };                                                                  \
+    }                                                                   \
+    }                                                                   \
+    void boost_units_require_semicolon()
 
 } // namespace units
 

@@ -165,16 +165,44 @@ operator*(const complex<X>& x,const complex<Y>& y)
     typedef typename boost::units::multiply_typeof_helper<X,Y>::type    type;
     
     return complex<type>(x.real()*y.real()-x.imag()*y.imag(),x.real()*y.imag()+x.imag()*y.real());
+
+//  fully correct implementation has more complex return type
+//
+//    typedef typename boost::units::multiply_typeof_helper<X,Y>::type    xy_type;
+//    
+//    typedef typename boost::units::add_typeof_helper<xy_type,xy_type>::type         xy_plus_xy_type;
+//    typedef typename boost::units::subtract_typeof_helper<xy_type,xy_type>::type    xy_minus_xy_type;
+//    
+//    BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_type,xy_minus_xy_type>::value == true));
+//    
+//    return complex<xy_plus_xy_type>(x.real()*y.real()-x.imag()*y.imag(),x.real()*y.imag()+x.imag()*y.real());
 }
 
 template<class X,class Y>
 complex<typename boost::units::divide_typeof_helper<X,Y>::type>
 operator/(const complex<X>& x,const complex<Y>& y)
 {
-    typedef typename boost::units::divide_typeof_helper<X,Y>::type  type;
-    
+    // naive implementation of complex division
+    typedef typename boost::units::divide_typeof_helper<X,Y>::type          type;
+
     return complex<type>((x.real()*y.real()+x.imag()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()),
                          (x.imag()*y.real()-x.real()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()));
+                         
+//  fully correct implementation has more complex return type
+//
+//  typedef typename boost::units::multiply_typeof_helper<X,Y>::type    xy_type;
+//  typedef typename boost::units::multiply_typeof_helper<Y,Y>::type    yy_type;
+//
+//  typedef typename boost::units::add_typeof_helper<xy_type,xy_type>::type         xy_plus_xy_type;
+//  typedef typename boost::units::subtract_typeof_helper<xy_type,xy_type>::type    xy_minus_xy_type;
+//
+//  typedef typename boost::units::divide_typeof_helper<xy_plus_xy_type,yy_type>::type      xy_plus_xy_over_yy_type;
+//  typedef typename boost::units::divide_typeof_helper<xy_minus_xy_type,yy_type>::type     xy_minus_xy_over_yy_type;
+//
+//  BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_over_yy_type,xy_minus_xy_over_yy_type>::value == true));
+//
+//  return complex<xy_plus_xy_over_yy_type>((x.real()*y.real()+x.imag()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()),
+//                                          (x.imag()*y.real()-x.real()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()));
 }
 
 template<class Y>
@@ -196,7 +224,7 @@ std::ostream& operator<<(std::ostream& os,const complex<Y>& val)
     return os;
 }
 
-/// specialize power typeof helper
+/// specialize power typeof helper for complex<Y>
 template<class Y,long N,long D> 
 struct power_dimof_helper<complex<Y>,static_rational<N,D> >                
 { 
@@ -212,7 +240,7 @@ struct power_dimof_helper<complex<Y>,static_rational<N,D> >
     }
 };
 
-/// specialize root typeof helper
+/// specialize root typeof helper for complex<Y>
 template<class Y,long N,long D> 
 struct root_typeof_helper<complex<Y>,static_rational<N,D> >                
 { 
