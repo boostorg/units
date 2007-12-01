@@ -20,8 +20,8 @@ class numeric_limits< ::boost::units::quantity<Unit, T> >
     public:
         typedef ::boost::units::quantity<Unit, T> quantity_type;
         static const bool is_specialized = std::numeric_limits<T>::is_specialized;
-        static quantity_type min() { return(quantity_type::from_value(std::numeric_limits<T>::min())); }
-        static quantity_type max() { return(quantity_type::from_value(std::numeric_limits<T>::max())); }
+        static quantity_type (min)() { return(quantity_type::from_value((std::numeric_limits<T>::min)())); }
+        static quantity_type (max)() { return(quantity_type::from_value((std::numeric_limits<T>::max)())); }
         static const int digits = std::numeric_limits<T>::digits;
         static const int digits10 = std::numeric_limits<T>::digits10;
         static const bool is_signed = std::numeric_limits<T>::is_signed;
