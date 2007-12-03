@@ -18,6 +18,8 @@ import testing ;
    :
     [ compile test_predicates.cpp : : ]
     [ compile test_negative_denominator.cpp : : ]
+    [ compile test_dimensionless_ice1.cpp : : ]
+    [ compile test_dimensionless_ice2.cpp : : ]
     [ run test_dimensionless_quantity.cpp : : : : ]
     [ run test_implicit_conversion.cpp : : : : ]
     [ run test_quantity.cpp : : : : ]

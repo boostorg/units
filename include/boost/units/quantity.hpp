@@ -353,9 +353,10 @@ class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
 
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
-        quantity(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System2),Y2>& source,
+        quantity(const quantity<unit<dimensionless_type, System2>,Y2>& source,
             typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<System, System2>::type>::type* = 0) :
+			typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
+            typename boost::enable_if<detail::is_dimensionless_system<System2> >::type* = 0) :
             val_(source.value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -363,9 +364,10 @@ class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
 
         /// implicit conversion between different unit systems is allowed
         template<class System2, class Y2> 
-        explicit quantity(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System2),Y2>& source,
+        explicit quantity(const quantity<unit<dimensionless_type, System2>,Y2>& source,
             typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<System, System2>::type>::type* = 0) :
+			typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
+            typename boost::enable_if<detail::is_dimensionless_system<System2> >::type* = 0) :
             val_(static_cast<Y>(source.value())) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
@@ -387,8 +389,9 @@ class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
         /// conversion between different unit systems is explicit when
         /// the units are not equivalent.
         template<class System2, class Y2> 
-        explicit quantity(const quantity<BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(System2),Y2>& source) :
-            val_(conversion_helper<quantity<BOOST_UNITS_HETEROGENEOUS_DIMENSIONLESS_UNIT(System2),Y2>, this_type>::convert(source).value()) 
+        explicit quantity(const quantity<unit<dimensionless_type, System2>,Y2>& source,
+            typename boost::disable_if<detail::is_dimensionless_system<System2> >::type* = 0) :
+            val_(conversion_helper<quantity<unit<dimensionless_type, System2>,Y2>, this_type>::convert(source).value()) 
         {
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
         }
