@@ -423,9 +423,13 @@ The macros needed for defining conversion can be found in
 
 For most purposes [___BOOST_UNITS_DEFINE_BASE_CONVERSION] will be
 sufficient.  It defines a conversion between two base units with
-the same dimensions.  If you define use different dimensions for
-defining base units then you will need to use the more general form
-[___BOOST_UNITS_DEFINE_CONVERSION] which works for arbitrary units.
+the same dimensions.  If you need to use different set of
+dimensions when defining base units then you will
+need to use the more general form [___BOOST_UNITS_DEFINE_CONVERSION]
+which works for arbitrary units.  Example:  If you are using SI
+and want to define mmHg you cannot do it using [___BOOST_UNITS_DEFINE_BASE_CONVERSION]
+because none of the SI base units has the same dimensions (pressure).
+You need to use [___BOOST_UNITS_DEFINE_CONVERSION](mmHg_base_unit, SI::pressure, ..., ...)
 
 If you need to define a conversion as a template then
 you can add _TEMPLATE onto the end of any of the macros.
