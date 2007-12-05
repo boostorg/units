@@ -197,7 +197,7 @@ and [$../../../units/images/form_6.png], where
 
 [$../../../units/images/form_8.png]
 
-Users of a dimensional analysis library should be able to specify an arbitrary list of fundamental dimensions to 
+Users of a dimensional analysis library should be able to specify an arbitrary list of base dimensions to 
 produce a composite dimension. This potentially includes both repeated tags and dimensionless tags. For example, 
 it should be possible to express energy as [$../../../units/images/form_9.png], [$../../../units/images/form_10.png], 
 [$../../../units/images/form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
@@ -212,11 +212,11 @@ all composite dimensions must be reducible to an unambiguous final composite dim
 
 # fundamental dimensions are consistently ordered
 # dimensions with zero exponent are elided. Note that reduced dimensions never have more than 
-  [$../../../units/images/form_0.png] dimension tags, one for each distinct fundamental dimension, but may have fewer.
+  [$../../../units/images/form_0.png] base dimensions, one for each distinct fundamental dimension, but may have fewer.
 
-In our implementation, fundamental dimensions are associated with tag types. As we will ultimately 
+In our implementation, base dimensions are associated with tag types. As we will ultimately 
 represent composite dimensions as typelists, we must provide some mechanism for 
-sorting dimension tags in order to make it possible to convert an arbitrary composite dimension into a reduced
+sorting base dimension tags in order to make it possible to convert an arbitrary composite dimension into a reduced
 dimension. The [___base_dimension] class (found in [headerref boost/units/base_dimension.hpp]) uses the curiously recurring
 template pattern (CRTP) technique to ensure that ordinals specified for base dimensions are unique across translation units:
 
@@ -309,7 +309,7 @@ dimension tag to provide information needed for I/O:
 
 [test_system_snippet_8]
 
-and similarly for `mass_tag` and `time_tag`. A future version of the library will provide a more flexible system
+and similarly for `kilogram_base_unit` and `second_base_unit`. A future version of the library will provide a more flexible system
 allowing for internationalization through a facet/locale-type mechanism. 
 The `name()` and `symbol()` methods of [___base_unit_info] provide full and short names for the base unit. With these definitions, 
 we have the rudimentary beginnings of our unit system, which can be used to determine reduced dimensions for arbitrary 
@@ -606,7 +606,7 @@ with the resulting output :
 [kitchen_sink_output_10]
 
 Trigonometric and inverse trigonometric functions can be implemented for any unit system
-that provides an angular fundamental dimension. These behave as one expects, with trigonometric functions
+that provides an angular base dimension. These behave as one expects, with trigonometric functions
 taking an angular quantity and returning a dimensionless quantity, while the inverse trigonometric functions
 take a dimensionless quantity and return an angular quantity :
 
