@@ -96,15 +96,15 @@ enum { max_value = 1000};
 
 template<class F, class T, class N, class R>
 R solve_differential_equation(F f, T lower, T upper, N steps, R start) {
-    T h = (upper - lower) / steps;
+    T h = (upper - lower) / (1.0*steps);
     for(N i = N(); i < steps; ++i) {
         R y = start;
-        T x = lower + h * i;
+        T x = lower + h * (1.0*i);
         typename F::template result<T, R>::type k1 = f(x, y);
-        typename F::template result<T, R>::type k2 = f(x + h/2, y + h * k1 / 2);
-        typename F::template result<T, R>::type k3 = f(x + h/2, y + h * k2 / 2);
+        typename F::template result<T, R>::type k2 = f(x + h / 2.0, y + h * k1 / 2.0);
+        typename F::template result<T, R>::type k3 = f(x + h / 2.0, y + h * k2 / 2.0);
         typename F::template result<T, R>::type k4 = f(x + h, y + h * k3);
-        start = y + h * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+        start = y + h * (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;
     }
     return(start);
 }
@@ -116,14 +116,14 @@ struct f {
     template<class Arg1, class Arg2> struct result;
     
     double operator()(const double& x, const double& y) const {
-        return(1 - x + 4 * y);
+        return(1.0 - x + 4.0 * y);
     }
 
     boost::units::quantity<boost::units::SI::velocity>
     operator()(const quantity<SI::time>& x, const quantity<SI::length>& y) const {
         using namespace boost::units;
         using namespace SI;
-        return(1 * meters / second - x * meters / pow<2>(seconds) + 4 * y / seconds );
+        return(1.0 * meters / second - x * meters / pow<2>(seconds) + 4.0 * y / seconds );
     }
 };
 

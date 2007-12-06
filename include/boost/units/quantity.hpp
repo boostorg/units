@@ -810,54 +810,102 @@ operator/(const Y& lhs,const unit<Dim,System>&)
     return type::from_value(lhs);
 }
 
+///// runtime quantity times scalar
+//template<class Unit,
+//         class X,
+//         class Y>
+//inline
+//typename multiply_typeof_helper< quantity<Unit,X>,Y >::type
+//operator*(const quantity<Unit,X>& lhs,const Y& rhs)
+//{
+//    typedef typename multiply_typeof_helper< quantity<Unit,X>,Y >::type type;
+//    
+//    return type::from_value(lhs.value()*rhs);
+//}
+//
+///// runtime scalar times quantity
+//template<class Unit,
+//         class X,
+//         class Y>
+//inline
+//typename multiply_typeof_helper< X,quantity<Unit,Y> >::type
+//operator*(const X& lhs,const quantity<Unit,Y>& rhs)
+//{
+//    typedef typename multiply_typeof_helper< X,quantity<Unit,Y> >::type type;
+//    
+//    return type::from_value(lhs*rhs.value());
+//}
+
 /// runtime quantity times scalar
 template<class Unit,
-         class X,
-         class Y>
+         class X>
 inline
-typename multiply_typeof_helper< quantity<Unit,X>,Y >::type
-operator*(const quantity<Unit,X>& lhs,const Y& rhs)
+typename multiply_typeof_helper< quantity<Unit,X>,X >::type
+operator*(const quantity<Unit,X>& lhs,const X& rhs)
 {
-    typedef typename multiply_typeof_helper< quantity<Unit,X>,Y >::type type;
+    typedef typename multiply_typeof_helper< quantity<Unit,X>,X >::type type;
     
     return type::from_value(lhs.value()*rhs);
 }
 
 /// runtime scalar times quantity
 template<class Unit,
-         class X,
-         class Y>
+         class X>
 inline
-typename multiply_typeof_helper< X,quantity<Unit,Y> >::type
-operator*(const X& lhs,const quantity<Unit,Y>& rhs)
+typename multiply_typeof_helper< X,quantity<Unit,X> >::type
+operator*(const X& lhs,const quantity<Unit,X>& rhs)
 {
-    typedef typename multiply_typeof_helper< X,quantity<Unit,Y> >::type type;
+    typedef typename multiply_typeof_helper< X,quantity<Unit,X> >::type type;
     
     return type::from_value(lhs*rhs.value());
 }
 
+///// runtime quantity divided by scalar
+//template<class Unit,
+//         class X,
+//         class Y>
+//inline
+//typename divide_typeof_helper< quantity<Unit,X>,Y >::type
+//operator/(const quantity<Unit,X>& lhs,const Y& rhs)
+//{
+//    typedef typename divide_typeof_helper< quantity<Unit,X>,Y >::type   type;
+//    
+//    return type::from_value(lhs.value()/rhs);
+//}
+//
+///// runtime scalar divided by quantity
+//template<class Unit,
+//         class X,
+//         class Y>
+//inline
+//typename divide_typeof_helper< X,quantity<Unit,Y> >::type
+//operator/(const X& lhs,const quantity<Unit,Y>& rhs)
+//{
+//    typedef typename divide_typeof_helper< X,quantity<Unit,Y> >::type   type;
+//    
+//    return type::from_value(lhs/rhs.value());
+//}
+
 /// runtime quantity divided by scalar
 template<class Unit,
-         class X,
-         class Y>
+         class X>
 inline
-typename divide_typeof_helper< quantity<Unit,X>,Y >::type
-operator/(const quantity<Unit,X>& lhs,const Y& rhs)
+typename divide_typeof_helper< quantity<Unit,X>,X >::type
+operator/(const quantity<Unit,X>& lhs,const X& rhs)
 {
-    typedef typename divide_typeof_helper< quantity<Unit,X>,Y >::type   type;
+    typedef typename divide_typeof_helper< quantity<Unit,X>,X >::type   type;
     
     return type::from_value(lhs.value()/rhs);
 }
 
 /// runtime scalar divided by quantity
 template<class Unit,
-         class X,
-         class Y>
+         class X>
 inline
-typename divide_typeof_helper< X,quantity<Unit,Y> >::type
-operator/(const X& lhs,const quantity<Unit,Y>& rhs)
+typename divide_typeof_helper< X,quantity<Unit,X> >::type
+operator/(const X& lhs,const quantity<Unit,X>& rhs)
 {
-    typedef typename divide_typeof_helper< X,quantity<Unit,Y> >::type   type;
+    typedef typename divide_typeof_helper< X,quantity<Unit,X> >::type   type;
     
     return type::from_value(lhs/rhs.value());
 }
