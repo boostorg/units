@@ -92,15 +92,51 @@ class complex
         const T& real() const       { return r_; }
         const T& imag() const       { return i_; }
 
-        this_type& operator+=(const T& val)             { r_ += val; return *this; }
-        this_type& operator-=(const T& val)             { r_ -= val; return *this; }
-        this_type& operator*=(const T& val)             { r_ *= val; i_ *= val; return *this; }
-        this_type& operator/=(const T& val)             { r_ /= val; i_ /= val; return *this; }
+        this_type& operator+=(const T& val)
+        {
+            r_ += val;
+            return *this;
+        }
+        this_type& operator-=(const T& val)
+        {
+            r_ -= val;
+            return *this;
+        }
+        this_type& operator*=(const T& val)
+        {
+            r_ *= val;
+            i_ *= val;
+            return *this;
+        }
+        this_type& operator/=(const T& val)
+        {
+            r_ /= val;
+            i_ /= val;
+            return *this;
+        }
         
-        this_type& operator+=(const this_type& source)  { r_ += source.r_; i_ += source.i_; return *this; }
-        this_type& operator-=(const this_type& source)  { r_ -= source.r_; i_ -= source.i_; return *this; }
-        this_type& operator*=(const this_type& source)  { *this = *this*source; return *this; }
-        this_type& operator/=(const this_type& source)  { *this = *this/source; return *this; }
+        this_type& operator+=(const this_type& source)
+        {
+            r_ += source.r_;
+            i_ += source.i_;
+            return *this;
+        }
+        this_type& operator-=(const this_type& source)
+        {
+            r_ -= source.r_;
+            i_ -= source.i_;
+            return *this;
+        }
+        this_type& operator*=(const this_type& source)
+        {
+            *this = *this * source;
+            return *this;
+        }
+        this_type& operator/=(const this_type& source)
+        {
+            *this = *this / source;
+            return *this;
+        }
         
     private:
         T   r_,i_;
@@ -164,18 +200,24 @@ operator*(const complex<X>& x,const complex<Y>& y)
 {
     typedef typename boost::units::multiply_typeof_helper<X,Y>::type    type;
     
-    return complex<type>(x.real()*y.real()-x.imag()*y.imag(),x.real()*y.imag()+x.imag()*y.real());
+    return complex<type>(x.real()*y.real() - x.imag()*y.imag(),
+                         x.real()*y.imag() + x.imag()*y.real());
 
 //  fully correct implementation has more complex return type
 //
-//    typedef typename boost::units::multiply_typeof_helper<X,Y>::type    xy_type;
+//    typedef typename boost::units::multiply_typeof_helper<X,Y>::type xy_type;
 //    
-//    typedef typename boost::units::add_typeof_helper<xy_type,xy_type>::type         xy_plus_xy_type;
-//    typedef typename boost::units::subtract_typeof_helper<xy_type,xy_type>::type    xy_minus_xy_type;
+//    typedef typename boost::units::add_typeof_helper<
+//      xy_type,xy_type>::type         xy_plus_xy_type;
+//    typedef typename
+//        boost::units::subtract_typeof_helper<xy_type,xy_type>::type
+//        xy_minus_xy_type;
 //    
-//    BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_type,xy_minus_xy_type>::value == true));
+//    BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_type,
+//                                       xy_minus_xy_type>::value == true));
 //    
-//    return complex<xy_plus_xy_type>(x.real()*y.real()-x.imag()*y.imag(),x.real()*y.imag()+x.imag()*y.real());
+//    return complex<xy_plus_xy_type>(x.real()*y.real()-x.imag()*y.imag(),
+//                                    x.real()*y.imag()+x.imag()*y.real());
 }
 
 template<class X,class Y>
@@ -183,26 +225,36 @@ complex<typename boost::units::divide_typeof_helper<X,Y>::type>
 operator/(const complex<X>& x,const complex<Y>& y)
 {
     // naive implementation of complex division
-    typedef typename boost::units::divide_typeof_helper<X,Y>::type          type;
+    typedef typename boost::units::divide_typeof_helper<X,Y>::type type;
 
-    return complex<type>((x.real()*y.real()+x.imag()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()),
-                         (x.imag()*y.real()-x.real()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()));
+    return complex<type>((x.real()*y.real()+x.imag()*y.imag())/
+                            (y.real()*y.real()+y.imag()*y.imag()),
+                         (x.imag()*y.real()-x.real()*y.imag())/
+                            (y.real()*y.real()+y.imag()*y.imag()));
                          
 //  fully correct implementation has more complex return type
 //
-//  typedef typename boost::units::multiply_typeof_helper<X,Y>::type    xy_type;
-//  typedef typename boost::units::multiply_typeof_helper<Y,Y>::type    yy_type;
+//  typedef typename boost::units::multiply_typeof_helper<X,Y>::type xy_type;
+//  typedef typename boost::units::multiply_typeof_helper<Y,Y>::type yy_type;
 //
-//  typedef typename boost::units::add_typeof_helper<xy_type,xy_type>::type         xy_plus_xy_type;
-//  typedef typename boost::units::subtract_typeof_helper<xy_type,xy_type>::type    xy_minus_xy_type;
+//  typedef typename boost::units::add_typeof_helper<xy_type, xy_type>::type
+//      xy_plus_xy_type;
+//  typedef typename boost::units::subtract_typeof_helper<
+//      xy_type,xy_type>::type xy_minus_xy_type;
 //
-//  typedef typename boost::units::divide_typeof_helper<xy_plus_xy_type,yy_type>::type      xy_plus_xy_over_yy_type;
-//  typedef typename boost::units::divide_typeof_helper<xy_minus_xy_type,yy_type>::type     xy_minus_xy_over_yy_type;
+//  typedef typename boost::units::divide_typeof_helper<
+//      xy_plus_xy_type,yy_type>::type      xy_plus_xy_over_yy_type;
+//  typedef typename boost::units::divide_typeof_helper<
+//      xy_minus_xy_type,yy_type>::type     xy_minus_xy_over_yy_type;
 //
-//  BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_over_yy_type,xy_minus_xy_over_yy_type>::value == true));
+//  BOOST_STATIC_ASSERT((boost::is_same<xy_plus_xy_over_yy_type,
+//                                  xy_minus_xy_over_yy_type>::value == true));
 //
-//  return complex<xy_plus_xy_over_yy_type>((x.real()*y.real()+x.imag()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()),
-//                                          (x.imag()*y.real()-x.real()*y.imag())/(y.real()*y.real()+y.imag()*y.imag()));
+//  return complex<xy_plus_xy_over_yy_type>(
+//      (x.real()*y.real()+x.imag()*y.imag())/
+//          (y.real()*y.real()+y.imag()*y.imag()),
+//      (x.imag()*y.real()-x.real()*y.imag())/
+//          (y.real()*y.real()+y.imag()*y.imag()));
 }
 
 template<class Y>
@@ -228,7 +280,9 @@ std::ostream& operator<<(std::ostream& os,const complex<Y>& val)
 template<class Y,long N,long D> 
 struct power_dimof_helper<complex<Y>,static_rational<N,D> >                
 { 
-    typedef complex<typename power_dimof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef complex<
+        typename power_dimof_helper<Y,static_rational<N,D> >::type
+    > type; 
     
     static type value(const complex<Y>& x)  
     { 
@@ -244,7 +298,9 @@ struct power_dimof_helper<complex<Y>,static_rational<N,D> >
 template<class Y,long N,long D> 
 struct root_typeof_helper<complex<Y>,static_rational<N,D> >                
 { 
-    typedef complex<typename root_typeof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef complex<
+        typename root_typeof_helper<Y,static_rational<N,D> >::type
+    > type; 
     
     static type value(const complex<Y>& x)  
     { 
@@ -258,35 +314,45 @@ struct root_typeof_helper<complex<Y>,static_rational<N,D> >
 
 /// specialize power typeof helper for complex<quantity<Unit,Y> >
 template<class Y,class Unit,long N,long D> 
-struct power_dimof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >                
+struct power_dimof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >
 { 
-    typedef typename power_dimof_helper<Y,static_rational<N,D> >::type     value_type;
-    typedef typename power_dimof_helper<Unit,static_rational<N,D> >::type  unit_type;
-    typedef quantity<unit_type,value_type>                                  quantity_type;
-    typedef complex<quantity_type>                                          type; 
+    typedef typename
+        power_dimof_helper<Y,static_rational<N,D> >::type       value_type;
+    typedef typename
+        power_dimof_helper<Unit,static_rational<N,D> >::type    unit_type;
+    typedef quantity<unit_type,value_type>                      quantity_type;
+    typedef complex<quantity_type>                              type; 
     
     static type value(const complex<quantity<Unit,Y> >& x)  
     { 
-        const complex<value_type>   tmp = pow<static_rational<N,D> >(complex<Y>(x.real().value(),x.imag().value()));
+        const complex<value_type>   tmp =
+            pow<static_rational<N,D> >(complex<Y>(x.real().value(),
+                                                  x.imag().value()));
         
-        return type(quantity_type::from_value(tmp.real()),quantity_type::from_value(tmp.imag()));
+        return type(quantity_type::from_value(tmp.real()),
+                    quantity_type::from_value(tmp.imag()));
     }
 };
 
 /// specialize root typeof helper for complex<quantity<Unit,Y> >
 template<class Y,class Unit,long N,long D> 
-struct root_typeof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >                
+struct root_typeof_helper<complex<quantity<Unit,Y> >,static_rational<N,D> >
 { 
-    typedef typename root_typeof_helper<Y,static_rational<N,D> >::type      value_type;
-    typedef typename root_typeof_helper<Unit,static_rational<N,D> >::type   unit_type;
-    typedef quantity<unit_type,value_type>                                  quantity_type;
-    typedef complex<quantity_type>                                          type; 
+    typedef typename
+        root_typeof_helper<Y,static_rational<N,D> >::type       value_type;
+    typedef typename
+        root_typeof_helper<Unit,static_rational<N,D> >::type    unit_type;
+    typedef quantity<unit_type,value_type>                      quantity_type;
+    typedef complex<quantity_type>                              type; 
     
     static type value(const complex<quantity<Unit,Y> >& x)  
     { 
-        const complex<value_type>   tmp = root<static_rational<N,D> >(complex<Y>(x.real().value(),x.imag().value()));
+        const complex<value_type>   tmp =
+            root<static_rational<N,D> >(complex<Y>(x.real().value(),
+                                                   x.imag().value()));
         
-        return type(quantity_type::from_value(tmp.real()),quantity_type::from_value(tmp.imag()));
+        return type(quantity_type::from_value(tmp.real()),
+                   quantity_type::from_value(tmp.imag()));
     }
 };
 
@@ -343,6 +409,10 @@ int main(void)
               << std::endl;
     }
 
+
+// Expected output:
+
+
     sstream2 << "+L      = 2 + 1 i m" << std::endl;
     sstream2 << "-L      = -2 + -1 i m" << std::endl;
     sstream2 << "L+L     = 4 + 2 i m" << std::endl;
@@ -381,14 +451,16 @@ int main(void)
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
