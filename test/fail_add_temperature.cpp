@@ -22,6 +22,7 @@ Output:
 **/
 
 #include <boost/units/quantity.hpp>
+#include <boost/units/absolute.hpp>
 #include <boost/units/systems/si/temperature.hpp>
 
 namespace bu = boost::units;
