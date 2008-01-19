@@ -11,7 +11,7 @@ import testing ;
 import path ;
 
 project units_examples :
-  : requirements <include>$(BOOST_ROOT) <include>../../.. <warnings>all
+  : requirements <include>$(BOOST_ROOT) <include>../../.. #<warnings>all
 ;
 
 rule make_tests ( files * ) {
