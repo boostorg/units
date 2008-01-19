@@ -51,8 +51,20 @@ int main(void)
 {   
     using namespace boost::units;
 
-    BOOST_MPL_ASSERT((boost::is_same<length_dimension, mpl::push_front<dimensionless_type, dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
-    BOOST_MPL_ASSERT((boost::is_same<mass_dimension, mpl::push_front<dimensionless_type, dim<mass_base_dimension, static_rational<1L, 1L> > >::type>));
+    BOOST_MPL_ASSERT((boost::is_same<
+        length_dimension,
+        mpl::push_front<
+            dimensionless_type,
+            dim<length_base_dimension, static_rational<1L, 1L> >
+        >::type
+    >));
+    BOOST_MPL_ASSERT((boost::is_same<
+        mass_dimension,
+        mpl::push_front<
+            dimensionless_type,
+            dim<mass_base_dimension, static_rational<1L, 1L> >
+        >::type
+    >));
     BOOST_MPL_ASSERT((boost::is_same<energy_dimension, 
         mpl::push_front<
         mpl::push_front<
@@ -62,15 +74,22 @@ int main(void)
         dim<mass_base_dimension, static_rational<1L, 1L> > >::type,
         dim<length_base_dimension, static_rational<2L, 1L> > >::type>));
                               
-    std::cout << "length_dimension  = " << simplify_typename(length_dimension()) << std::endl
-              << "mass_dimension    = " << simplify_typename(mass_dimension()) << std::endl
-              << "time_dimension    = " << simplify_typename(time_dimension()) << std::endl
-              << "energy_dimension  = " << simplify_typename(energy_dimension()) << std::endl;
+    std::cout << "length_dimension  = "
+              << simplify_typename(length_dimension()) << std::endl
+              << "mass_dimension    = "
+              << simplify_typename(mass_dimension()) << std::endl
+              << "time_dimension    = "
+              << simplify_typename(time_dimension()) << std::endl
+              << "energy_dimension  = "
+              << simplify_typename(energy_dimension()) << std::endl;
     
     //[dimension_snippet_1
-    typedef mpl::times<length_dimension,mass_dimension>::type                                             LM_type;
-    typedef mpl::divides<length_dimension,time_dimension>::type                                           L_T_type;
-    typedef static_root<mpl::divides<energy_dimension,mass_dimension>::type,static_rational<2> >::type    V_type;
+    typedef mpl::times<length_dimension,mass_dimension>::type   LM_type;
+    typedef mpl::divides<length_dimension,time_dimension>::type L_T_type;
+    typedef static_root<
+        mpl::divides<energy_dimension,mass_dimension>::type,
+        static_rational<2>
+    >::type    V_type;
     //]
     
     BOOST_MPL_ASSERT((boost::is_same<LM_type, 

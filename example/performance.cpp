@@ -28,15 +28,30 @@ solving y' = 1 - x + 4 * y with quantity: 1.84 seconds
 
 @endverbatim
 **/
+
+#define _SCL_SECURE_NO_WARNINGS
+
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
 
+#include <boost/config.hpp>
 #include <boost/timer.hpp>
 #include <boost/utility/result_of.hpp>
+
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable:4267; disable:4127; disable:4244; disable:4100)
+#endif
+
 #include <boost/numeric/ublas/matrix.hpp>
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/cmath.hpp>
@@ -46,7 +61,13 @@ enum {
 };
 
 template<class T0, class T1, class Out>
-void tiled_multiply_carray_inner(T0* first, T1* second, Out* out, int totalwidth, int width2, int height1, int common) {
+void tiled_multiply_carray_inner(T0* first,
+                                 T1* second,
+                                 Out* out,
+                                 int totalwidth,
+                                 int width2,
+                                 int height1,
+                                 int common) {
     for(int j = 0; j < height1; ++j) {
         for(int i = 0; i < width2; ++i) {
             Out value = out[j * totalwidth + i];
@@ -59,7 +80,12 @@ void tiled_multiply_carray_inner(T0* first, T1* second, Out* out, int totalwidth
 }
 
 template<class T0, class T1, class Out>
-void tiled_multiply_carray_outer(T0* first, T1* second, Out* out, int width2, int height1, int common) {
+void tiled_multiply_carray_outer(T0* first,
+                                 T1* second,
+                                 Out* out,
+                                 int width2,
+                                 int height1,
+                                 int common) {
     std::fill_n(out, width2 * height1, Out());
     int j = 0;
     for(; j < height1 - tile_block_size; j += tile_block_size) {
@@ -67,43 +93,98 @@ void tiled_multiply_carray_outer(T0* first, T1* second, Out* out, int width2, in
         for(; i < width2 - tile_block_size; i += tile_block_size) {
             int k = 0;
             for(; k < common - tile_block_size; k += tile_block_size) {
-                tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, tile_block_size, tile_block_size, tile_block_size);
+                tiled_multiply_carray_inner(
+                    &first[k + width2 * j],
+                    &second[k * width2 + i],
+                    &out[j * width2 + i],
+                    width2,
+                    tile_block_size,
+                    tile_block_size,
+                    tile_block_size);
             }
-            tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, tile_block_size, tile_block_size, common - k);
+            tiled_multiply_carray_inner(
+                &first[k + width2 * j],
+                &second[k * width2 + i],
+                &out[j * width2 + i],
+                width2,
+                tile_block_size,
+                tile_block_size,
+                common - k);
         }
         int k = 0;
         for(; k < common - tile_block_size; k += tile_block_size) {
-            tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, width2 - i, tile_block_size, tile_block_size);
+            tiled_multiply_carray_inner(
+                &first[k + width2 * j],
+                &second[k * width2 + i],
+                &out[j * width2 + i],
+                width2, width2 - i,
+                tile_block_size,
+                tile_block_size);
         }
-        tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, width2 - i, tile_block_size, common - k);
+        tiled_multiply_carray_inner(
+            &first[k + width2 * j],
+            &second[k * width2 + i],
+            &out[j * width2 + i],
+            width2, width2 - i,
+            tile_block_size,
+            common - k);
     }
     int i = 0;
     for(; i < width2 - tile_block_size; i += tile_block_size) {
         int k = 0;
         for(; k < common - tile_block_size; k += tile_block_size) {
-            tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, tile_block_size, height1 - j, tile_block_size);
+            tiled_multiply_carray_inner(
+                &first[k + width2 * j],
+                &second[k * width2 + i],
+                &out[j * width2 + i],
+                width2,
+                tile_block_size,
+                height1 - j,
+                tile_block_size);
         }
-        tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, tile_block_size, height1 - j, common - k);
+        tiled_multiply_carray_inner(
+            &first[k + width2 * j],
+            &second[k * width2 + i],
+            &out[j * width2 + i],
+            width2,
+            tile_block_size,
+            height1 - j,
+            common - k);
     }
     int k = 0;
     for(; k < common - tile_block_size; k += tile_block_size) {
-        tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, width2 - i, height1 - j, tile_block_size);
+        tiled_multiply_carray_inner(
+            &first[k + width2 * j],
+            &second[k * width2 + i],
+            &out[j * width2 + i],
+            width2,
+            width2 - i,
+            height1 - j,
+            tile_block_size);
     }
-    tiled_multiply_carray_inner(&first[k + width2 * j], &second[k * width2 + i], &out[j * width2 + i], width2, width2 - i, height1 - j, common - k);
+    tiled_multiply_carray_inner(
+        &first[k + width2 * j],
+        &second[k * width2 + i],
+        &out[j * width2 + i],
+        width2,
+        width2 - i,
+        height1 - j,
+        common - k);
 }
 
 enum { max_value = 1000};
 
 template<class F, class T, class N, class R>
 R solve_differential_equation(F f, T lower, T upper, N steps, R start) {
+    typedef typename F::template result<T, R>::type f_result;
     T h = (upper - lower) / (1.0*steps);
     for(N i = N(); i < steps; ++i) {
         R y = start;
         T x = lower + h * (1.0*i);
-        typename F::template result<T, R>::type k1 = f(x, y);
-        typename F::template result<T, R>::type k2 = f(x + h / 2.0, y + h * k1 / 2.0);
-        typename F::template result<T, R>::type k3 = f(x + h / 2.0, y + h * k2 / 2.0);
-        typename F::template result<T, R>::type k4 = f(x + h, y + h * k3);
+        f_result k1 = f(x, y);
+        f_result k2 = f(x + h / 2.0, y + h * k1 / 2.0);
+        f_result k3 = f(x + h / 2.0, y + h * k2 / 2.0);
+        f_result k4 = f(x + h, y + h * k3);
         start = y + h * (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;
     }
     return(start);
@@ -120,10 +201,13 @@ struct f {
     }
 
     boost::units::quantity<boost::units::SI::velocity>
-    operator()(const quantity<SI::time>& x, const quantity<SI::length>& y) const {
+    operator()(const quantity<SI::time>& x,
+               const quantity<SI::length>& y) const {
         using namespace boost::units;
         using namespace SI;
-        return(1.0 * meters / second - x * meters / pow<2>(seconds) + 4.0 * y / seconds );
+        return(1.0 * meters / second -
+                x * meters / pow<2>(seconds) +
+                4.0 * y / seconds );
     }
 };
 
@@ -169,15 +253,19 @@ int main() {
                 m2(i,j) = std::rand();
             }
         }
-        std::cout << "multiplying ublas::matrix<double>(" << max_value << ", " << max_value << ") : ";
+        std::cout << "multiplying ublas::matrix<double>("
+                  << max_value << ", " << max_value << ") : ";
         boost::timer timer;
         ublas_result = (prod(m1, m2));
         std::cout << timer.elapsed() << " seconds" << std::endl;
     }
-    boost::numeric::ublas::matrix<boost::units::quantity<boost::units::SI::dimensionless> > ublas_resultq;
+    typedef boost::numeric::ublas::matrix<
+        boost::units::quantity<boost::units::SI::dimensionless>
+    > matrix_type;
+    matrix_type ublas_resultq;
     {
-        boost::numeric::ublas::matrix<boost::units::quantity<boost::units::SI::dimensionless> > m1(max_value, max_value);
-        boost::numeric::ublas::matrix<boost::units::quantity<boost::units::SI::dimensionless> > m2(max_value, max_value);
+        matrix_type m1(max_value, max_value);
+        matrix_type m2(max_value, max_value);
         std::srand(1492);
         for(int i = 0; i < max_value; ++i) {
             for(int j = 0; j < max_value; ++j) {
@@ -185,7 +273,8 @@ int main() {
                 m2(i,j) = std::rand();
             }
         }
-        std::cout << "multiplying ublas::matrix<quantity>(" << max_value << ", " << max_value << ") : ";
+        std::cout << "multiplying ublas::matrix<quantity>("
+                  << max_value << ", " << max_value << ") : ";
         boost::timer timer;
         ublas_resultq = (prod(m1, m2));
         std::cout << timer.elapsed() << " seconds" << std::endl;
@@ -199,30 +288,56 @@ int main() {
             m1[i] = std::rand();
             m2[i] = std::rand();
         }
-        std::cout << "tiled_matrix_multiply<double>(" << max_value << ", " << max_value << ") : ";
+        std::cout << "tiled_matrix_multiply<double>("
+                  << max_value << ", " << max_value << ") : ";
         boost::timer timer;
-        tiled_multiply_carray_outer(&m1[0], &m2[0], &cresult[0], max_value, max_value, max_value);
+        tiled_multiply_carray_outer(
+            &m1[0],
+            &m2[0],
+            &cresult[0],
+            max_value,
+            max_value,
+            max_value);
         std::cout << timer.elapsed() << " seconds" << std::endl;
     }
-    std::vector<boost::units::quantity<boost::units::SI::energy> > cresultq(max_value * max_value);
+    std::vector<
+        boost::units::quantity<boost::units::SI::energy>
+    >  cresultq(max_value * max_value);
     {
-        std::vector<boost::units::quantity<boost::units::SI::force> > m1(max_value * max_value);
-        std::vector<boost::units::quantity<boost::units::SI::length> > m2(max_value * max_value);
+        std::vector<
+            boost::units::quantity<boost::units::SI::force>
+        > m1(max_value * max_value);
+        std::vector<
+            boost::units::quantity<boost::units::SI::length>
+        > m2(max_value * max_value);
         std::srand(1492);
         for(int i = 0; i < max_value * max_value; ++i) {
             m1[i] = std::rand() * boost::units::SI::newtons;
             m2[i] = std::rand() * boost::units::SI::meters;
         }
-        std::cout << "tiled_matrix_multiply<quantity>(" << max_value << ", " << max_value << ") : ";
+        std::cout << "tiled_matrix_multiply<quantity>("
+                  << max_value << ", " << max_value << ") : ";
         boost::timer timer;
-        tiled_multiply_carray_outer(&m1[0], &m2[0], &cresultq[0], max_value, max_value, max_value);
+        tiled_multiply_carray_outer(
+            &m1[0],
+            &m2[0],
+            &cresultq[0],
+            max_value,
+            max_value,
+            max_value);
         std::cout << timer.elapsed() << " seconds" << std::endl;
     }
     for(int i = 0; i < max_value; ++i) {
         for(int j = 0; j < max_value; ++j) {
-            if(std::abs(ublas_result(i,j) - cresult[i * max_value + j]) > ublas_result(i,j) /1e14) {
-                std::cout << std::setprecision(15) << "Uh Oh. ublas_result(" << i << "," << j << ") = " << ublas_result(i,j) << std::endl
-                          << "cresult[" << i << " * " << max_value << " + " << j << "] = " << cresult[i * max_value + j] << std::endl;
+            double diff =
+                std::abs(ublas_result(i,j) - cresult[i * max_value + j]);
+            if(diff > ublas_result(i,j) /1e14) {
+                std::cout << std::setprecision(15) << "Uh Oh. ublas_result("
+                          << i << "," << j << ") = " << ublas_result(i,j)
+                          << std::endl
+                          << "cresult[" << i << " * " << max_value << " + "
+                          << j << "] = " << cresult[i * max_value + j]
+                          << std::endl;
                 return(EXIT_FAILURE);
             }
         }
@@ -240,7 +355,9 @@ int main() {
             double x = .1 * i;
             double value = 1.0/4.0 * x - 3.0/16.0 + 19.0/16.0 * std::exp(4 * x);
             if(std::abs(values[i] - value) > value / 1e9) {
-                std::cout << std::setprecision(15) << "i = : " << i << ", value = " << value << " approx = "  << values[i] << std::endl;
+                std::cout << std::setprecision(15) << "i = : " << i
+                          << ", value = " << value << " approx = "  << values[i]
+                          << std::endl;
                 return(EXIT_FAILURE);
             }
         }
@@ -253,14 +370,22 @@ int main() {
         boost::timer timer;
         for(int i = 0; i < 1000; ++i) {
             quantity<SI::time> x = .1 * i * seconds;
-            values[i] = solve_differential_equation(f(), 0.0 * seconds, x, i * 100, 1.0 * meters);
+            values[i] = solve_differential_equation(
+                f(),
+                0.0 * seconds,
+                x,
+                i * 100,
+                1.0 * meters);
         }
         std::cout << timer.elapsed() << " seconds" << std::endl;
         for(int i = 0; i < 1000; ++i) {
             double x = .1 * i;
-            quantity<SI::length> value = (1.0/4.0 * x - 3.0/16.0 + 19.0/16.0 * std::exp(4 * x)) * meters;
+            quantity<SI::length> value =
+                (1.0/4.0 * x - 3.0/16.0 + 19.0/16.0 * std::exp(4 * x)) * meters;
             if(abs(values[i] - value) > value / 1e9) {
-                std::cout << std::setprecision(15) << "i = : " << i << ", value = " << value << " approx = "  << values[i] << std::endl;
+                std::cout << std::setprecision(15) << "i = : " << i
+                          << ", value = " << value << " approx = "
+                          << values[i] << std::endl;
                 return(EXIT_FAILURE);
             }
         }

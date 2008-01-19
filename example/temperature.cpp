@@ -67,14 +67,15 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 //[temperature_snippet_2
 template<>
-struct is_implicitly_convertible< unit<temperature_dimension,fahrenheit::system>,
-                                  unit<temperature_dimension,SI::system> > : 
+struct is_implicitly_convertible<unit<temperature_dimension,fahrenheit::system>,
+                                 unit<temperature_dimension,SI::system> > : 
     public mpl::true_
 { };
 
 template<>
-struct is_implicitly_convertible<absolute< unit<temperature_dimension,fahrenheit::system> >,
-                                 absolute< unit<temperature_dimension,SI::system> > > : 
+struct is_implicitly_convertible<
+    absolute< unit<temperature_dimension,fahrenheit::system> >,
+    absolute< unit<temperature_dimension,SI::system> > > : 
     public mpl::true_
 { };
 //]
@@ -88,8 +89,10 @@ int main()
     std::stringstream sstream1, sstream2;
     
     //[temperature_snippet_3
-    quantity<absolute<fahrenheit::temperature> >    T1p(32.0*absolute<fahrenheit::temperature>());
-    quantity<fahrenheit::temperature>               T1v(32.0*fahrenheit::degrees);
+    quantity<absolute<fahrenheit::temperature> >    T1p(
+        32.0*absolute<fahrenheit::temperature>());
+    quantity<fahrenheit::temperature>               T1v(
+        32.0*fahrenheit::degrees);
     
     quantity<absolute<SI::temperature> >            T2p(T1p);
     quantity<absolute<SI::temperature> >            T3p = T1p;
@@ -97,10 +100,12 @@ int main()
     quantity<SI::temperature>                       T3v = T1v;
     //]
 
-    typedef conversion_helper<quantity<absolute<fahrenheit::temperature> >,
-                              quantity<absolute<SI::temperature> > >            absolute_conv_type;
-    typedef conversion_helper<quantity<fahrenheit::temperature>,
-                              quantity<SI::temperature> >                       relative_conv_type;
+    typedef conversion_helper<
+        quantity<absolute<fahrenheit::temperature> >,
+        quantity<absolute<SI::temperature> > >          absolute_conv_type;
+    typedef conversion_helper<
+        quantity<fahrenheit::temperature>,
+        quantity<SI::temperature> >                     relative_conv_type;
     
     sstream1  << T1p << std::endl
               << absolute_conv_type::convert(T1p) << std::endl
@@ -137,14 +142,16 @@ int main()
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;

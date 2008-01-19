@@ -41,7 +41,8 @@ namespace units {
 
 //[non_base_dimension_snippet_1
 
-struct imperial_gallon_tag : base_unit<imperial_gallon_tag, volume_dimension, 1> { };
+struct imperial_gallon_tag :
+    base_unit<imperial_gallon_tag, volume_dimension, 1> { };
 
 typedef make_system<imperial_gallon_tag>::type imperial;
 
@@ -71,7 +72,9 @@ struct is_implicitly_convertible<unit<volume_dimension,us>,
 
 } // namespace boost
 
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial_gallon_tag, boost::units::us_gallon_tag::unit_type, double, 1.2009499255);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial_gallon_tag,
+                                     boost::units::us_gallon_tag::unit_type,
+                                     double, 1.2009499255);
 
 using namespace boost::units;
 

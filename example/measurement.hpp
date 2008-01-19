@@ -17,7 +17,6 @@
 #include <iostream>
 
 #include <boost/io/ios_state.hpp>
-//#include <boost/numeric/interval.hpp>
 #include <boost/units/static_rational.hpp>
 
 namespace boost {
@@ -40,7 +39,6 @@ class measurement
     public:
         typedef measurement<Y>                  this_type;
         typedef Y                               value_type;
-//        typedef numeric::interval<value_type>   interval_type;
         
         measurement(const value_type& val = value_type(),
                     const value_type& err = value_type()) : 
@@ -65,14 +63,12 @@ class measurement
             return *this;
         }
         
-        operator value_type() const                     { return value_; }
+        operator value_type() const    { return value_; }
         
-        value_type value() const                        { return value_; }
-        value_type uncertainty() const                  { return uncertainty_; }
-        value_type lower_bound() const                  { return value_-uncertainty_; }
-        value_type upper_bound() const                  { return value_+uncertainty_; }
-        
-//        interval_type get_interval() const              { return interval_type(lower_bound(),upper_bound()); }
+        value_type value() const       { return value_; }
+        value_type uncertainty() const { return uncertainty_; }
+        value_type lower_bound() const { return value_-uncertainty_; }
+        value_type upper_bound() const { return value_+uncertainty_; }
         
         this_type& operator+=(const value_type& val)            
         { 
@@ -273,9 +269,11 @@ operator/(const measurement<Y>& lhs,const measurement<Y>& rhs)
 
 /// specialize power typeof helper
 template<class Y,long N,long D> 
-struct power_dimof_helper<measurement<Y>,static_rational<N,D> >                
+struct power_dimof_helper<measurement<Y>,static_rational<N,D> >
 { 
-    typedef measurement<typename power_dimof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef measurement<
+        typename power_dimof_helper<Y,static_rational<N,D> >::type
+    > type; 
     
     static type value(const measurement<Y>& x)  
     { 
@@ -293,7 +291,9 @@ struct power_dimof_helper<measurement<Y>,static_rational<N,D> >
 template<class Y,long N,long D> 
 struct root_typeof_helper<measurement<Y>,static_rational<N,D> >                
 { 
-    typedef measurement<typename root_typeof_helper<Y,static_rational<N,D> >::type>    type; 
+    typedef measurement<
+        typename root_typeof_helper<Y,static_rational<N,D> >::type
+    > type; 
     
     static type value(const measurement<Y>& x)  
     { 
@@ -313,35 +313,7 @@ inline
 std::ostream& operator<<(std::ostream& os,const measurement<Y>& val)
 {
     boost::io::ios_precision_saver precision_saver(os);
-    //boost::io::ios_width_saver width_saver(os);
     boost::io::ios_flags_saver flags_saver(os);
-
-    //os << std::setw(21);
-    
-//    if (val.uncertainty() > Y(0))
-//    {
-//        const Y relative_uncertainty = std::abs(val.uncertainty()/val.value());
-//    
-//        const double  exponent = std::log10(relative_uncertainty);
-//        const long digits_of_precision = static_cast<long>(std::ceil(std::abs(exponent)))+3;
-//        
-//        // should try to replicate NIST CODATA syntax 
-//        os << std::setprecision(digits_of_precision) 
-//           //<< std::setw(digits_of_precision+8) 
-//           //<< std::scientific
-//           << val.value();
-////           << long(10*(relative_uncertainty/std::pow(Y(10),Y(exponent))));
-//
-//        os << " (rel. unc. = " 
-//           << std::setprecision(1) 
-//           //<< std::setw(7) 
-//           << std::scientific
-//           << relative_uncertainty << ")";
-//    }
-//    else
-//    {
-//        os << val.value() << " (exact)";
-//    }
     
     os << val.value() << "(+/-" << val.uncertainty() << ")";
     

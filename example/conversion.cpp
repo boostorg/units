@@ -78,21 +78,21 @@ int main()
     {
     // implicit value_type conversions
     //[conversion_snippet_1
-    quantity<SI::length>        L1 = quantity<SI::length,int>(int(2.5)*SI::meters);
-    quantity<SI::length,int>    L2(quantity<SI::length,double>(2.5*SI::meters));
+    quantity<SI::length>     L1 = quantity<SI::length,int>(int(2.5)*SI::meters);
+    quantity<SI::length,int> L2(quantity<SI::length,double>(2.5*SI::meters));
     //]
     
     //[conversion_snippet_3
-    quantity<SI::length,int>    L3 = static_cast<quantity<SI::length,int> >(L1);
+    quantity<SI::length,int> L3 = static_cast<quantity<SI::length,int> >(L1);
     //]
     
     //[conversion_snippet_4
-    quantity<CGS::length>       L4 = static_cast<quantity<CGS::length> >(L1);
+    quantity<CGS::length>    L4 = static_cast<quantity<CGS::length> >(L1);
     //]
     
-    quantity<SI::length,int>    L5(4*SI::meters),
-                                L6(5*SI::meters);
-    quantity<CGS::length>       L7(L1);
+    quantity<SI::length,int> L5(4*SI::meters),
+                             L6(5*SI::meters);
+    quantity<CGS::length>    L7(L1);
     
     swap(L5,L6);
     
@@ -118,7 +118,7 @@ int main()
     quantity<SI::energy>    es2(ec);
                         
     quantity<SI::velocity>  v1 = 2.0*SI::meters/SI::second,     
-                            v2(quantity<CGS::velocity>(2.0*CGS::centimeters/CGS::second));
+                            v2(2.0*CGS::centimeters/CGS::second);
     //]
     
     sstream1 << "volume (m^3)  = " << vs << std::endl
@@ -218,14 +218,16 @@ int main()
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;

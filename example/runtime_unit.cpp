@@ -20,18 +20,21 @@
 
 namespace {
 
-std::map<std::string, boost::units::quantity<boost::units::SI::length> > known_units;
+using namespace boost::units;
+
+std::map<std::string, quantity<SI::length> > known_units;
 
 }
 
-boost::units::quantity<boost::units::SI::length> calculate(const boost::units::quantity<boost::units::SI::length>& t) {
-    return(boost::units::hypot(t, 2.0 * boost::units::SI::meters));
+quantity<SI::length> calculate(const quantity<SI::length>& t) {
+    return(boost::units::hypot(t, 2.0 * SI::meters));
 }
 
 int main() {
-    known_units["meter"] = 1.0 * boost::units::SI::meters;
-    known_units["centimeter"] = .01 * boost::units::SI::meters;;
-    known_units["foot"] = conversion_factor(boost::units::foot_base_unit::unit_type(), boost::units::SI::meter) * boost::units::SI::meters;;
+    known_units["meter"] = 1.0 * SI::meters;
+    known_units["centimeter"] = .01 * SI::meters;;
+    known_units["foot"] =
+        conversion_factor(foot_base_unit::unit_type(), SI::meter) * SI::meter;
     std::string output_type("meter");
     std::string input;
     while((std::cout << ">") && (std::cin >> input)) {
@@ -39,14 +42,16 @@ int main() {
         else if(input == "help") {
             std::cout << "type \"exit\" to exit\n"
                 "type \"return 'unit'\" to set the return units\n"
-                "type \"'number' 'unit'\" to do a simple calculation" << std::endl;
+                "type \"'number' 'unit'\" to do a simple calculation"
+                << std::endl;
         } else if(input == "return") {
             if(std::cin >> input) {
                 if(known_units.find(input) != known_units.end()) {
                     output_type = input;
                     std::cout << "Done." << std::endl;
                 } else {
-                    std::cout << "Unknown unit \"" << input << "\"" << std::endl;
+                    std::cout << "Unknown unit \"" << input << "\""
+                         << std::endl;
                 }
             } else break;
         } else {
@@ -54,9 +59,13 @@ int main() {
                 double value = boost::lexical_cast<double>(input);
                 if(std::cin >> input) {
                     if(known_units.find(input) != known_units.end()) {
-                        std::cout << static_cast<double>(calculate(value * known_units[input]) / known_units[output_type]) << ' ' << output_type << std::endl;
+                        std::cout << static_cast<double>(
+                            calculate(value * known_units[input]) /
+                            known_units[output_type])
+                            << ' ' << output_type << std::endl;
                     } else {
-                        std::cout << "Unknown unit \"" << input << "\"" << std::endl;
+                        std::cout << "Unknown unit \"" << input << "\""
+                            << std::endl;
                     }
                 } else break;
             } catch(...) {

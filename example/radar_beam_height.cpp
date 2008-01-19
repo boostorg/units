@@ -70,7 +70,9 @@ static const length mile,miles;
 
 } // namespace boost
 
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::nautical::length_base_unit, boost::units::meter_base_unit::unit_type, double, 1.852e3);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::nautical::length_base_unit,
+                                     boost::units::meter_base_unit::unit_type,
+                                     double, 1.852e3);
 
 namespace boost {
 
@@ -100,7 +102,9 @@ static const length foot,feet;
 
 } // namespace boost
 
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial::length_base_unit, boost::units::meter_base_unit::unit_type, double, 1.0/3.28083989501312);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial::length_base_unit,
+                                     boost::units::meter_base_unit::unit_type,
+                                     double, 1.0/3.28083989501312);
 
 namespace boost {
 
@@ -116,7 +120,8 @@ radar_beam_height(const quantity<unit<length_dimension,System>,T>& radar_range,
                   const quantity<unit<length_dimension,System>,T>& earth_radius,
                   T k = 4.0/3.0)
 {
-    return quantity<unit<length_dimension,System>,T>(pow<2>(radar_range)/(2.0*k*earth_radius));
+    return quantity<unit<length_dimension,System>,T>(
+        pow<2>(radar_range)/(2.0*k*earth_radius));
 }
 //]
 
@@ -124,7 +129,7 @@ radar_beam_height(const quantity<unit<length_dimension,System>,T>& radar_range,
 template<class return_type,class System1,class System2,typename T>
 return_type
 radar_beam_height(const quantity<unit<length_dimension,System1>,T>& radar_range,
-                  const quantity<unit<length_dimension,System2>,T>& earth_radius,
+                 const quantity<unit<length_dimension,System2>,T>& earth_radius,
                   T k = 4.0/3.0)
 {
     // need to decide which system to use for calculation
@@ -136,9 +141,11 @@ radar_beam_height(const quantity<unit<length_dimension,System1>,T>& radar_range,
 //]
 
 //[radar_beam_height_function_snippet_3
-quantity<imperial::length> radar_beam_height(const quantity<nautical::length>& range)
+quantity<imperial::length>
+radar_beam_height(const quantity<nautical::length>& range)
 {
-    return quantity<imperial::length>(pow<2>(range/(1.23*nautical::miles/root<2>(imperial::feet))));
+    return quantity<imperial::length>(
+        pow<2>(range/(1.23*nautical::miles/root<2>(imperial::feet))));
 }
 //]
 
@@ -155,13 +162,13 @@ int main(void)
     std::stringstream sstream1, sstream2;
     
     //[radar_beam_height_snippet_1
-    const quantity<nautical::length>    radar_range(300.0*miles);
-    const quantity<SI::length>          earth_radius(6371.0087714*kilo*meters);
+    const quantity<nautical::length> radar_range(300.0*miles);
+    const quantity<SI::length>       earth_radius(6371.0087714*kilo*meters);
     
-    const quantity<SI::length>          beam_height_1(radar_beam_height(quantity<SI::length>(radar_range),earth_radius));
-    const quantity<nautical::length>    beam_height_2(radar_beam_height(radar_range,quantity<nautical::length>(earth_radius)));
-    const quantity<SI::length>          beam_height_3(radar_beam_height< quantity<SI::length> >(radar_range,earth_radius));
-    const quantity<nautical::length>    beam_height_4(radar_beam_height< quantity<nautical::length> >(radar_range,earth_radius));
+    const quantity<SI::length>       beam_height_1(radar_beam_height(quantity<SI::length>(radar_range),earth_radius));
+    const quantity<nautical::length> beam_height_2(radar_beam_height(radar_range,quantity<nautical::length>(earth_radius)));
+    const quantity<SI::length>       beam_height_3(radar_beam_height< quantity<SI::length> >(radar_range,earth_radius));
+    const quantity<nautical::length> beam_height_4(radar_beam_height< quantity<nautical::length> >(radar_range,earth_radius));
     //]
     
     sstream1  << "radar range        : " << radar_range << std::endl
@@ -170,9 +177,11 @@ int main(void)
               << "beam height 2      : " << beam_height_2 << std::endl
               << "beam height 3      : " << beam_height_3 << std::endl
               << "beam height 4      : " << beam_height_4 << std::endl
-              << "beam height approx : " << radar_beam_height(radar_range) << std::endl
-              << "beam height approx : " << quantity<SI::length>(radar_beam_height(radar_range)) << std::endl
-              << std::endl;
+              << "beam height approx : " << radar_beam_height(radar_range)
+              << std::endl
+              << "beam height approx : "
+              << quantity<SI::length>(radar_beam_height(radar_range))
+              << std::endl << std::endl;
     
     sstream2 << "radar range        : 300 nmi" << std::endl;
     sstream2 << "earth radius       : " << 6.37101e6 << " m" << std::endl;
@@ -199,14 +208,16 @@ int main(void)
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;

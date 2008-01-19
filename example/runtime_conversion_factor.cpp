@@ -15,14 +15,18 @@
 
 //[runtime_conversion_factor_snippet_1
 
+using boost::units::base_dimension;
+using boost::units::base_unit;
+
 static const long currency_base = 1;
 
-struct currency_base_dimension : boost::units::base_dimension<currency_base_dimension, 1> {};
+struct currency_base_dimension : base_dimension<currency_base_dimension, 1> {};
 
 typedef currency_base_dimension::dimension_type currency_type;
 
 template<long N>
-struct currency_base_unit : boost::units::base_unit<currency_base_unit<N>, currency_type, currency_base + N> {};
+struct currency_base_unit :
+    base_unit<currency_base_unit<N>, currency_type, currency_base + N> {};
 
 typedef currency_base_unit<0> us_dollar_base_unit;
 typedef currency_base_unit<1> euro_base_unit;
@@ -45,7 +49,11 @@ void set_conversion_factor(long from, long to, double value) {
     conversion_factors[to][from] = 1.0 / value;
 }
 
-BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE((long N1)(long N2), currency_base_unit<N1>, currency_base_unit<N2>, double, get_conversion_factor(N1, N2));
+BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE((long N1)(long N2),
+                                            currency_base_unit<N1>, 
+                                            currency_base_unit<N2>,
+                                            double,
+                                            get_conversion_factor(N1, N2));
 
 //]
 

@@ -399,9 +399,9 @@ int main()
     typedef std::complex<double>    complex_type;
     
     //[kitchen_sink_snippet_7
-    quantity<electric_potential,complex_type>   v = complex_type(12.5,0.0)*volts;
-    quantity<current,complex_type>              i = complex_type(3.0,4.0)*amperes;
-    quantity<resistance,complex_type>           z = complex_type(1.5,-2.0)*ohms;
+    quantity<electric_potential,complex_type> v = complex_type(12.5,0.0)*volts;
+    quantity<current,complex_type>            i = complex_type(3.0,4.0)*amperes;
+    quantity<resistance,complex_type>         z = complex_type(1.5,-2.0)*ohms;
     //]
     
     sstream1  << "V   = " << v << std::endl
@@ -413,18 +413,19 @@ int main()
     /// check quantities using user-defined type encapsulating error propagation
 
     //[kitchen_sink_snippet_8
-    quantity<length,measurement<double> >   u(measurement<double>(1.0,0.0)*meters),
-                                            w(measurement<double>(4.52,0.02)*meters),
-                                            x(measurement<double>(2.0,0.2)*meters),
-                                            y(measurement<double>(3.0,0.6)*meters);
+    quantity<length,measurement<double> >
+        u(measurement<double>(1.0,0.0)*meters),
+        w(measurement<double>(4.52,0.02)*meters),
+        x(measurement<double>(2.0,0.2)*meters),
+        y(measurement<double>(3.0,0.6)*meters);
     //]
                                         
     sstream1  << "x+y-w         = " << x+y-w << std::endl
               << "w*x           = " << w*x << std::endl
               << "x/y           = " << x/y << std::endl
               << "w*y^2/(u*x)^2 = " << w*y*y/pow<2>(u*x) << std::endl
-              << "w/(u*x)^(1/2) = " << w/pow< static_rational<1,2> >(u*x) << std::endl
-              << std::endl;
+              << "w/(u*x)^(1/2) = " << w/pow< static_rational<1,2> >(u*x)
+              << std::endl << std::endl;
     }
 
     sstream2 << "S1 :    2" << std::endl;
@@ -495,13 +496,15 @@ int main()
     sstream2 << "T = 310 K" << std::endl;
     sstream2 << "n = " << 2.05835e-17 << " mol" << std::endl;
     #if BOOST_UNITS_HAS_TYPEOF
-    sstream2 << "R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = " << 1.8e-6 << ")" << std::endl;
+    sstream2 << "R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = "
+             << 1.8e-6 << ")" << std::endl;
     #else
     sstream2 << "no typeof" << std::endl;
     #endif // BOOST_UNITS_HAS_TYPEOF
     sstream2 << std::endl;
     sstream2 << "theta            = " << 0.375 << " rad" << std::endl;
-    sstream2 << "sin(theta)       = " << 0.366273 << " dimensionless" << std::endl;
+    sstream2 << "sin(theta)       = " << 0.366273 << " dimensionless"
+             << std::endl;
     sstream2 << "asin(sin(theta)) = " << 0.375 << " rad" << std::endl;
     sstream2 << std::endl;
     sstream2 << "V   = (12.5,0) m^2 kg s^-3 A^-1" << std::endl;
@@ -513,9 +516,11 @@ int main()
 
     sstream2 << "x+y-w         = 0.48(+/-0.632772) m" << std::endl;
     sstream2 << "w*x           = 9.04(+/-0.904885) m^2" << std::endl;
-    sstream2 << "x/y           = 0.666667(+/-0.149071) dimensionless" << std::endl;
+    sstream2 << "x/y           = 0.666667(+/-0.149071) dimensionless"
+             << std::endl;
     sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1" << std::endl;
-    sstream2 << "w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless" << std::endl;
+    sstream2 << "w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless"
+             << std::endl;
 
     sstream2 << std::endl;
 
@@ -534,14 +539,16 @@ int main()
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;

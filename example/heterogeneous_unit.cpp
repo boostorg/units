@@ -68,12 +68,12 @@ int main()
              << std::endl;
               
     sstream1 << 1.0*SI::meter*SI::kilogram/pow<2>(SI::second) << std::endl
-             << 1.0*SI::meter*SI::kilogram/pow<2>(SI::second)/SI::meter << std::endl
-             << std::endl;
+             << 1.0*SI::meter*SI::kilogram/pow<2>(SI::second)/SI::meter
+             << std::endl << std::endl;
 
     sstream1 << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second) << std::endl
-             << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second)/SI::meter << std::endl
-             << std::endl;
+             << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second)/SI::meter
+             << std::endl << std::endl;
     //]
     
     //heterogeneous_unit_snippet_2
@@ -112,14 +112,16 @@ int main()
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;

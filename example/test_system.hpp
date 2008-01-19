@@ -28,16 +28,31 @@ namespace boost {
 namespace units {
 
 //[test_system_snippet_1
-struct length_base_dimension : boost::units::base_dimension<length_base_dimension,1> { };       ///> base dimension of length
-struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };           ///> base dimension of mass
-struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };           ///> base dimension of time
+
+/// base dimension of length
+struct length_base_dimension : base_dimension<length_base_dimension,1> { };
+/// base dimension of mass
+struct mass_base_dimension : base_dimension<mass_base_dimension,2> { };
+/// base dimension of time
+struct time_base_dimension : base_dimension<time_base_dimension,3> { };
+
 //]
 
 #if 0
 //[test_system_snippet_2
-typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<1> > > >::type   length_dimension;
-typedef make_dimension_list< boost::mpl::list< dim< mass_base_dimension,static_rational<1> > > >::type     mass_dimension;
-typedef make_dimension_list< boost::mpl::list< dim< time_base_dimension,static_rational<1> > > >::type     time_dimension;
+
+typedef make_dimension_list<
+    boost::mpl::list< dim< length_base_dimension,static_rational<1> > >
+>::type   length_dimension;
+
+typedef make_dimension_list<
+    boost::mpl::list< dim< mass_base_dimension,static_rational<1> > >
+>::type     mass_dimension;
+
+typedef make_dimension_list<
+    boost::mpl::list< dim< time_base_dimension,static_rational<1> > >
+>::type     time_dimension;
+
 //]
 #endif
 
@@ -49,10 +64,17 @@ typedef time_base_dimension::dimension_type      time_dimension;
 
 #if 0
 //[test_system_snippet_4
-typedef make_dimension_list< boost::mpl::list< dim< length_base_dimension,static_rational<2> > > >::type   area_dimension;
-typedef make_dimension_list< boost::mpl::list< dim< mass_base_dimension,static_rational<1> >,
-                                               dim< length_base_dimension,static_rational<2> >,
-                                               dim< time_base_dimension,static_rational<-2> > > >::type    energy_dimension;
+
+typedef make_dimension_list<
+    boost::mpl::list< dim< length_base_dimension,static_rational<2> > >
+>::type   area_dimension;
+
+typedef make_dimension_list<
+    boost::mpl::list< dim< mass_base_dimension,static_rational<1> >,
+                      dim< length_base_dimension,static_rational<2> >,
+                      dim< time_base_dimension,static_rational<-2> > >
+>::type    energy_dimension;
+
 //]
 #endif
 
@@ -67,15 +89,18 @@ namespace test {
 
 //[test_system_snippet_6
 
-struct meter_base_unit : base_unit<meter_base_unit, length_dimension, 1> { };
-struct kilogram_base_unit : base_unit<kilogram_base_unit, mass_dimension, 2> { };
-struct second_base_unit : base_unit<second_base_unit, time_dimension, 3> { };
+struct meter_base_unit : base_unit<meter_base_unit, length_dimension, 1> {};
+struct kilogram_base_unit : base_unit<kilogram_base_unit, mass_dimension, 2> {};
+struct second_base_unit : base_unit<second_base_unit, time_dimension, 3> {};
 
 typedef make_system<meter_base_unit>::type      m_system;
 typedef make_system<kilogram_base_unit>::type   kg_system;
 typedef make_system<second_base_unit>::type     s_system;
 
-typedef make_system<meter_base_unit,kilogram_base_unit,second_base_unit>::type mks_system;
+typedef make_system<
+    meter_base_unit,
+    kilogram_base_unit,
+    second_base_unit>::type mks_system;
 
 /// unit typedefs
 typedef unit<dimensionless_type,mks_system>   dimensionless;

@@ -52,11 +52,25 @@ int main()
 
     //[conversion_factor_snippet_1
     
-    std::cout << conversion_factor<double>(CGS::dyne,SI::newton) << std::endl;
-    std::cout << conversion_factor<double>(SI::newton/SI::kilogram,CGS::dyne/CGS::gram) << std::endl;
-    std::cout << conversion_factor<double>(CGS::momentum(),SI::momentum()) << std::endl;
-    std::cout << conversion_factor<double>(SI::momentum()/SI::mass(),CGS::momentum()/CGS::mass()) << std::endl;
-    std::cout << conversion_factor<double>(CGS::gal,SI::meter_per_second_squared) << std::endl;
+    double dyne_to_newton =
+        conversion_factor(CGS::dyne,SI::newton);
+    std::cout << dyne_to_newton << std::endl;
+
+    double force_over_mass_conversion =
+        conversion_factor(SI::newton/SI::kilogram,CGS::dyne/CGS::gram);
+    std::cout << force_over_mass_conversion << std::endl;
+
+    double momentum_conversion =
+        conversion_factor(CGS::momentum(),SI::momentum());
+    std::cout << momentum_conversion << std::endl;
+
+    double momentum_over_mass_conversion =
+        conversion_factor(SI::momentum()/SI::mass(),CGS::momentum()/CGS::gram);
+    std::cout << momentum_over_mass_conversion << std::endl;
+
+    double acceleration_conversion =
+        conversion_factor(CGS::gal,SI::meter_per_second_squared);
+    std::cout << acceleration_conversion << std::endl;
     
     //]
 

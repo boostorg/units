@@ -72,9 +72,9 @@ int main()
     /// check complex quantities
     typedef std::complex<double>    complex_type;
     
-    quantity<electric_potential,complex_type>   v = complex_type(12.5,0.0)*volts;
-    quantity<current,complex_type>              i = complex_type(3.0,4.0)*amperes;
-    quantity<resistance,complex_type>           z = complex_type(1.5,-2.0)*ohms;
+    quantity<electric_potential,complex_type> v = complex_type(12.5,0.0)*volts;
+    quantity<current,complex_type>            i = complex_type(3.0,4.0)*amperes;
+    quantity<resistance,complex_type>         z = complex_type(1.5,-2.0)*ohms;
     
     std::cout << "V   = " << v << std::endl
               << "I   = " << i << std::endl

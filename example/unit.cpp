@@ -65,9 +65,11 @@ int main()
               << "M*(L/T)*(L/T) = " << M*(L/T)*(L/T) << std::endl
               << "M*(L/T)^2     = " << M*pow<2>(L/T) << std::endl
               << "L^3           = " << pow<3>(L) << std::endl
-              << "L^(3/2)       = " << pow<static_rational<3,2> >(L) << std::endl
+              << "L^(3/2)       = " << pow<static_rational<3,2> >(L)
+              << std::endl
               << "2vM           = " << root<2>(M) << std::endl
-              << "(3/2)vM       = " << root<static_rational<3,2> >(M) << std::endl;
+              << "(3/2)vM       = " << root<static_rational<3,2> >(M)
+              << std::endl;
 
     sstream2  << "L             = m" << std::endl
               << "L+L           = m" << std::endl
@@ -96,14 +98,16 @@ int main()
         
         if(str1.size() < str2.size()) 
         {
-            std::string::iterator iter = std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
             
             std::cout << iter - str1.begin() << std::endl;
             std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
         } 
         else 
         {
-            std::string::iterator iter = std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
+            std::string::iterator iter =
+                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
             
             std::cout << iter - str2.begin() << std::endl;
             std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
