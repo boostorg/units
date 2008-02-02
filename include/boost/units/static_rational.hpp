@@ -14,12 +14,15 @@
 #include <cmath>
 #include <complex>
 
+#include <boost/type_traits/is_integral.hpp>
 #include <boost/math/common_factor_ct.hpp>
 #include <boost/mpl/less.hpp>
 #include <boost/mpl/arithmetic.hpp>
 #include <boost/mpl/less.hpp>
+#include <boost/mpl/if.hpp>
 
 #include <boost/units/operators.hpp>
+#include <boost/units/detail/static_rational_power.hpp>
 
 /// \file 
 /// \brief Compile-time rational numbers and operators.
@@ -115,157 +118,15 @@ template<integer_type N> class static_rational<N,0>;
 
 /// get decimal value of @c static_rational
 template<class T,integer_type N,integer_type D>
-typename divide_typeof_helper<T,T>::type 
-value(const static_rational<N,D>& r)
+inline typename divide_typeof_helper<T,T>::type 
+value(const static_rational<N,D>&)
 {
     return T(N)/T(D);
 }
 
-/// raise @c int to a @c static_rational power
-template<long N,long D> 
-struct power_dimof_helper<int,static_rational<N,D> >                
-{ 
-    typedef double    type; 
-    
-    static type value(const int& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(double(x),double(rat.numerator())/double(rat.denominator())); 
-    }
-};
-
-/// raise @c float to a @c static_rational power
-template<long N,long D> 
-struct power_dimof_helper<float,static_rational<N,D> >                
-{ 
-    typedef double    type; 
-    
-    static type value(const float& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,float(rat.numerator())/float(rat.denominator())); 
-    }
-};
-
-/// raise @c double to a @c static_rational power
-template<long N,long D> 
-struct power_dimof_helper<double,static_rational<N,D> >                
-{ 
-    typedef double    type; 
-    
-    static type value(const double& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,double(rat.numerator())/double(rat.denominator())); 
-    }
-};
-
-/// raise @c std::complex<float> to a @c static_rational power
-template<long N,long D> 
-struct power_dimof_helper<std::complex<float>,static_rational<N,D> >  
-{ 
-    typedef std::complex<float>    type; 
-    
-    static type value(const std::complex<float>& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,std::complex<float>(rat.numerator())/std::complex<float>(rat.denominator())); 
-    }
-};
-
-/// raise @c std::complex<double> to a @c static_rational power
-template<long N,long D> 
-struct power_dimof_helper<std::complex<double>,static_rational<N,D> >  
-{ 
-    typedef std::complex<double>    type; 
-    
-    static type value(const std::complex<double>& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,std::complex<double>(rat.numerator())/std::complex<double>(rat.denominator())); 
-    }
-};
-
-/// take @c static_rational root of an @c int
-template<long N,long D> 
-struct root_typeof_helper<int,static_rational<N,D> >                
-{ 
-    typedef double    type; 
-    
-    static type value(const int& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(double(x),double(rat.denominator())/double(rat.numerator())); 
-    }
-};
-
-/// take @c static_rational root of a @c float
-template<long N,long D> 
-struct root_typeof_helper<float,static_rational<N,D> >                
-{ 
-    typedef float    type; 
-    
-    static type value(const float& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,float(rat.denominator())/float(rat.numerator())); 
-    }
-};
-
-/// take @c static_rational root of a @c double
-template<long N,long D> 
-struct root_typeof_helper<double,static_rational<N,D> >                
-{ 
-    typedef double    type; 
-    
-    static type value(const double& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,double(rat.denominator())/double(rat.numerator())); 
-    }
-};
-
-/// take @c static_rational root of a @c std::complex<float>
-template<long N,long D> 
-struct root_typeof_helper<std::complex<float>,static_rational<N,D> >  
-{ 
-    typedef std::complex<float>    type; 
-    
-    static type value(const std::complex<float>& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,std::complex<float>(rat.denominator())/std::complex<float>(rat.numerator())); 
-    }
-};
-
-/// take @c static_rational root of a @c std::complex<double>
-template<long N,long D> 
-struct root_typeof_helper<std::complex<double>,static_rational<N,D> >  
-{ 
-    typedef std::complex<double>    type; 
-    
-    static type value(const std::complex<double>& x)  
-    { 
-        const static_rational<N,D>  rat;
-        
-        return std::pow(x,std::complex<double>(rat.denominator())/std::complex<double>(rat.numerator())); 
-    }
-};
-
-// need powers and roots of char, short, long long, unsigned integers...
-
 /// raise a value to a @c static_rational power
 template<class Rat,class Y>
-typename power_dimof_helper<Y,Rat>::type
+inline typename power_dimof_helper<Y,Rat>::type
 pow(const Y& x)
 {
     return power_dimof_helper<Y,Rat>::value(x);
@@ -273,11 +134,30 @@ pow(const Y& x)
 
 /// raise a value to an integer power
 template<long N,class Y>
-typename power_dimof_helper<Y,static_rational<N> >::type
+inline typename power_dimof_helper<Y,static_rational<N> >::type
 pow(const Y& x)
 {
     return power_dimof_helper<Y,static_rational<N> >::value(x);
 }
+
+/// raise @c T to a @c static_rational power
+template<class T, long N,long D> 
+struct power_dimof_helper<T, static_rational<N,D> >                
+{ 
+    typedef typename mpl::if_<boost::is_integral<T>, double, T>::type internal_type;
+    typedef detail::static_rational_power_impl<static_rational<N, D>, internal_type> impl;
+    typedef typename impl::type type; 
+    
+    static type value(const T& x)  
+    {
+        return impl::call(x);
+    }
+};
+
+/// raise @c int to a @c static_rational power
+template<long N,long D> 
+struct power_dimof_helper<float, static_rational<N,D> >
+    : power_dimof_helper<double, static_rational<N,D> > {};
 
 /// take the @c static_rational root of a value
 template<class Rat,class Y>
@@ -294,6 +174,11 @@ root(const Y& x)
 {
     return root_typeof_helper<Y,static_rational<N> >::value(x);
 }
+
+/// take @c static_rational root of an @c T
+template<class T, long N,long D> 
+struct root_typeof_helper<T,static_rational<N,D> >     
+    : power_dimof_helper<T, static_rational<D,N> > {};
 
 } // namespace units
 
