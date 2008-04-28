@@ -11,8 +11,10 @@
 #ifndef BOOST_UNITS_UTILITY_HPP
 #define BOOST_UNITS_UTILITY_HPP
 
+#include <cstdlib>
 #include <complex>
 #include <iostream>
+#include <typeinfo>
 #include <string>
 
 #include <boost/assert.hpp>
@@ -53,7 +55,7 @@ demangle(const char* name)
     if (realname != NULL)
     {
         const std::string   out(realname);
-        free(realname);
+        std::free(realname);
         
         return out;
     }
