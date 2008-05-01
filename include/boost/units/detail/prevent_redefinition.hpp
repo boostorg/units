@@ -2,14 +2,14 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2007 Matthias Christian Schabel
-// Copyright (C) 2007 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_PREVENT_ORDINAL_REDEFINITION_IMPL_HPP
-#define BOOST_UNITS_PREVENT_ORDINAL_REDEFINITION_IMPL_HPP
+#ifndef BOOST_UNITS_DETAIL_PREVENT_REDEFINITION_HPP
+#define BOOST_UNITS_DETAIL_PREVENT_REDEFINITION_HPP
 
 #include <boost/mpl/long.hpp>
 
@@ -41,6 +41,7 @@ detail::no
 boost_units_is_registered(const T&) 
 { return(detail::no()); }
 
+/// INTERNAL ONLY
 template<class T>
 detail::no 
 boost_units_unit_is_registered(const T&) 

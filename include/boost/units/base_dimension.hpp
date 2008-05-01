@@ -17,7 +17,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 
-#include <boost/units/detail/prevent_ordinal_redefinition_impl.hpp>
+#include <boost/units/detail/prevent_redefinition.hpp>
 
 namespace boost {
 
