@@ -98,7 +98,7 @@ run_doxygen temperature_reference
     "Temperature System Reference"
   ;
 
-run_doxygen abstart_reference
+run_doxygen abstract_reference
   :
     ../../../boost/units/systems/abstract.hpp
   :
@@ -122,6 +122,7 @@ boostbook standalone
     <dependency>dimensions_reference
     <dependency>trig_reference
     <dependency>temperature_reference
+    <dependency>abstract_reference
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8
