@@ -11,7 +11,7 @@
 /** 
 \file
     
-\brief fail_quantity_scalar_subtract.cpp
+\brief fail_quantity_scalar_sub.cpp
 
 \detailed
 Test subtraction of quantity and scalar.

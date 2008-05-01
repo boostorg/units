@@ -1,6 +1,6 @@
 # Jamfile.v2
 #
-# Copyright (c) 2007
+# Copyright (c) 2007-2008
 # Steven Watanabe
 #
 # Distributed under the Boost Software License, Version 1.0. (See
@@ -37,13 +37,13 @@ import testing ;
     [ compile-fail fail_quantity_add.cpp : : ]
     [ compile-fail fail_quantity_subtract.cpp : : ]
     [ compile-fail fail_quantity_add_assign.cpp : : ]
-    [ compile-fail fail_quantity_subtract_assign.cpp : : ]
+    [ compile-fail fail_quantity_sub_assign.cpp : : ]
     [ compile-fail fail_quantity_scalar_add.cpp : : ]
-    [ compile-fail fail_quantity_scalar_subtract.cpp : : ]
+    [ compile-fail fail_quantity_scalar_sub.cpp : : ]
     [ compile-fail fail_quantity_unit_add.cpp : : ]
     [ compile-fail fail_quantity_unit_subtract.cpp : : ]
     [ compile-fail fail_scalar_quantity_add.cpp : : ]
-    [ compile-fail fail_scalar_quantity_subtract.cpp : : ]
+    [ compile-fail fail_scalar_quantity_sub.cpp : : ]
     [ compile-fail fail_unit_quantity_add.cpp : : ]
     [ compile-fail fail_unit_quantity_subtract.cpp : : ]
     [ compile-fail fail_adl_detail.cpp : : ]

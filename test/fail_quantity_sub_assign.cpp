@@ -11,10 +11,10 @@
 /** 
 \file
     
-\brief fail_scalar_quantity_subtract.cpp
+\brief fail_quantity_sub_assign.cpp
 
 \detailed
-Test subtraction of scalar and quantity.
+Test -= of quantity from different dimensions.
 
 Output:
 @verbatim
@@ -26,10 +26,11 @@ Output:
 
 namespace bu = boost::units;
 
-int main(int argc,char *argv[])
+int main(int,char *[])
 {
 
-    2.0 - 2.0 * bu::SI::meters;
+    bu::quantity<bu::SI::length> T1;
+    T1 -= 2.0 * bu::SI::seconds;
 
     return 0;
 }

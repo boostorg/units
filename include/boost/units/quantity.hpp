@@ -69,7 +69,7 @@ struct is_non_narrowing_conversion<long double, double> : mpl::false_ {};
 template<class T, class U>
 struct disable_if_is_same
 {
-	typedef void type;
+    typedef void type;
 };
 
 template<class T>
@@ -164,7 +164,7 @@ class quantity
                         typename is_implicitly_convertible<Unit2,Unit>::type,
                         detail::is_non_narrowing_conversion<YY, Y>
                     >,
-					typename detail::disable_if_is_same<Unit, Unit2>::type
+                    typename detail::disable_if_is_same<Unit, Unit2>::type
                  >::type* = 0)
              : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
@@ -180,7 +180,7 @@ class quantity
                          typename is_implicitly_convertible<Unit2,Unit>::type,
                          detail::is_non_narrowing_conversion<YY, Y>
                      >,
-					typename detail::disable_if_is_same<Unit, Unit2>::type
+                     typename detail::disable_if_is_same<Unit, Unit2>::type
                  >::type* = 0)
              : val_(conversion_helper<quantity<Unit2,YY>,this_type>::convert(source).value())
         {
@@ -355,7 +355,7 @@ class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
         template<class System2, class Y2> 
         quantity(const quantity<unit<dimensionless_type, System2>,Y2>& source,
             typename boost::enable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
+            typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
             typename boost::enable_if<detail::is_dimensionless_system<System2> >::type* = 0) :
             val_(source.value()) 
         {
@@ -366,7 +366,7 @@ class quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(System),Y>
         template<class System2, class Y2> 
         explicit quantity(const quantity<unit<dimensionless_type, System2>,Y2>& source,
             typename boost::disable_if<detail::is_non_narrowing_conversion<Y2, Y>,
-			typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
+            typename detail::disable_if_is_same<System, System2>::type>::type* = 0,
             typename boost::enable_if<detail::is_dimensionless_system<System2> >::type* = 0) :
             val_(static_cast<Y>(source.value())) 
         {

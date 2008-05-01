@@ -23,7 +23,7 @@ namespace boost {
 
 namespace units {
 
-namespace sqr_namespace {
+namespace sqr_namespace /**/ {
 
 template<class Y>
 Y sqr(Y val)

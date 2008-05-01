@@ -155,7 +155,7 @@ int test_main(int,char *[])
     
     const bu::quantity<bu::dimensionless>   E8((bu::exp)(E7));
     
-	BOOST_CHECK(std::abs(E8 - std::exp(1.0)) < .000001);
+    BOOST_CHECK(std::abs(E8 - std::exp(1.0)) < .000001);
     BOOST_CHECK(bu::log(E8) == E7);
     
     const bu::quantity<bu::dimensionless>   E9(100.0);
