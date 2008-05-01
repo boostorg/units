@@ -86,9 +86,8 @@ compiled and tested on the following compilers/platforms :
 
 # g++ 4.0.1 on Mac OSX 10.4
 # Intel CC 9.1 and 10.0 on Mac OSX 10.4
-# g++ 3.4.4 on Windows XP
-# Microsoft Visual C++ 7.1 on Windows XP
-# Microsoft Visual C++ 8.0 on Windows XP
+# g++ 3.4.4, 4.2.1, and 4.3.0 on Windows XP
+# Microsoft Visual C++ 7.1, 8.0, and 9.0 on Windows XP
 # Metrowerks CodeWarrior 9.2 on Windows XP.  
 
 The following compilers/platforms are known *not* to work :
