@@ -9,7 +9,9 @@
 
 import path ;
 
-using quickbook ;
+import quickbook ;
+
+using boostbook ;
 
 using doxygen ;
 
@@ -105,15 +107,9 @@ run_doxygen abstract_reference
     "Abstract System Reference"
   ;
 
-xml units
-  :
-    units.qbk
-  :
-  ;
-
 boostbook standalone
   :
-    units
+    units.qbk
   :
     <dependency>units_reference
     <dependency>si_reference
