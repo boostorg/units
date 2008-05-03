@@ -49,33 +49,8 @@ struct conversion_helper
 
 #endif
 
-/// Defines the conversion factor from a base unit to any other base
-/// unit with the same dimensions.  Must appear at global scope.
-/// The reverse need not be defined.
-#define BOOST_UNITS_DEFINE_BASE_CONVERSION(Source, Destination, type_, value_)   \
-    namespace boost {                                                       \
-    namespace units {                                                       \
-    template<>                                                              \
-    struct select_base_unit_converter<                                      \
-        unscale<Source>::type,                                              \
-        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(unscale<Destination>::type, Source::dimension_type)\
-    >                                                                       \
-    {                                                                       \
-        typedef Source source_type;                                         \
-        typedef BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, Source::dimension_type) destination_type;\
-    };                                                                      \
-    template<>                                                              \
-    struct base_unit_converter<                                             \
-        Source,                                                             \
-        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, Source::dimension_type)\
-    >                                                                       \
-    {                                                                       \
-        typedef type_ type;                                                 \
-        static type value() { return(value_); }                             \
-    };                                                                      \
-    }                                                                       \
-    }                                                                       \
-    void boost_units_require_semicolon()
+/// This macro is deprecated.  Please use BOOST_UNITS_DEFINE_CONVERSION_FACTOR.
+#define BOOST_UNITS_DEFINE_BASE_CONVERSION BOOST_UNITS_DEFINE_CONVERSION_FACTOR
 
 /// Defines the conversion factor from a base unit to any other base
 /// unit with the same dimensions.  Must appear at global scope.
@@ -97,24 +72,25 @@ struct conversion_helper
     void boost_units_require_semicolon()
 
 /// Defines the conversion factor from a base unit to any unit
-/// with the correct dimensions.  Must appear at global scope.
-/// If the destination unit is a unit that contains only one
-/// base unit which is raised to the first power (e.g. feet->meters)
-/// the reverse need not be defined.
-#define BOOST_UNITS_DEFINE_CONVERSION_FACTOR(Source, Destination, type_, value_)   \
+/// or to another base unit with the correct dimensions.  Uses
+/// of this macro must appear at global scope.
+/// If the destination unit is a base unit or a unit that contains
+/// only one base unit which is raised to the first power (e.g. feet->meters)
+/// the reverse (meters->feet in this example) need not be defined.
+#define BOOST_UNITS_DEFINE_CONVERSION_FACTOR(Source, Destination, type_, value_)    \
     namespace boost {                                                       \
     namespace units {                                                       \
     template<>                                                              \
     struct select_base_unit_converter<                                      \
         unscale<Source>::type,                                              \
-        unscale<reduce_unit<Destination>::type>::type                       \
+        unscale<reduce_unit<Destination::unit_type>::type>::type            \
     >                                                                       \
     {                                                                       \
         typedef Source source_type;                                         \
-        typedef Destination destination_type;                               \
+        typedef reduce_unit<Destination::unit_type>::type destination_type; \
     };                                                                      \
     template<>                                                              \
-    struct base_unit_converter<Source, reduce_unit<Destination>::type>      \
+    struct base_unit_converter<Source, reduce_unit<Destination::unit_type>::type>   \
     {                                                                       \
         typedef type_ type;                                                 \
         static type value() { return(value_); }                             \

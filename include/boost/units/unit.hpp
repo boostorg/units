@@ -36,6 +36,7 @@ template<class Dim,class System, class Enable>
 class unit
 {
     public:
+        typedef unit<Dim, System>   unit_type;
         typedef unit<Dim,System>    this_type;
         typedef Dim                 dimension_type; 
         typedef System              system_type;
