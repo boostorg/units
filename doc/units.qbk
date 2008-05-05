@@ -61,8 +61,8 @@
 [def __BOOST_UNITS_STATIC_CONSTANT [macroref BOOST_UNITS_STATIC_CONSTANT]]
 [def __BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS [macroref BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]]
 
-[def __BOOST_UNITS_DEFINE_CONVERSION [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR]]
-[def __BOOST_UNITS_DEFINE_BASE_CONVERSION [macroref BOOST_UNITS_DEFINE_BASE_CONVERSION]]
+[def __BOOST_UNITS_DEFINE_CONVERSION_FACTOR [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR]]
+[def __BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE]]
 [def __BOOST_UNITS_DEFAULT_CONVERSION [macroref BOOST_UNITS_DEFAULT_CONVERSION]]
 
 [section:Introduction Introduction]
@@ -418,30 +418,30 @@ Naturally, it is also possible to define heterogeneous operators between differe
 
 The macros needed for defining conversion can be found in
 [headerref boost/units/conversion.hpp], [headerref boost/units/absolute.hpp]
-(for affine conversions), and [headerref boost/units/implicit_conversion.hpp]
+(for conversion offsets), and [headerref boost/units/implicit_conversion.hpp]
 
-For most purposes [___BOOST_UNITS_DEFINE_BASE_CONVERSION] will be
-sufficient.  It defines a conversion between two base units with
-the same dimensions.  If you need to use different set of
-dimensions when defining base units then you will
-need to use the more general form [___BOOST_UNITS_DEFINE_CONVERSION]
-which works for arbitrary units.  Example:  If you are using SI
-and want to define mmHg you cannot do it using [___BOOST_UNITS_DEFINE_BASE_CONVERSION]
-because none of the SI base units has the same dimensions (pressure).
-You need to use [___BOOST_UNITS_DEFINE_CONVERSION](mmHg_base_unit, SI::pressure, ..., ...)
+The macro [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] specifies the
+factor to convert from the first argument to the second.  The
+first argument must be a [___base_unit].  The second argument
+can be either a [___base_unit] or a [___unit].
 
-If you need to define a conversion as a template then
-you can add _TEMPLATE onto the end of any of the macros.
+Let's declare a simple base unit.
 
-[warning
+    struct foot_base_unit : base_unit<foot_base_unit, length_dimension, 1> {};
 
-[___BOOST_UNITS_DEFINE_CONVERSION] has to apply [___unscale] to its
-parameters.  This does not work for templates.  You must guarantee
-that you do not pass any [___scaled_base_unit]s to the macro.
+Now, we want to be able to convert feet to meters and vice versa.  A foot
+is 0.3048 meters so we can write the following
 
-]
+    BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, meter_base_unit, double, 0.3048);
 
-The macro [___BOOST_UNITS_DEFAULT_CONVERSION] defines a conversion
+Alternately, we can use the SI length.
+
+    BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, SI::length, double, 0.3048);
+
+Since the SI unit of length is the meter, these two
+definitions have exactly the same effect.
+
+The macro [___BOOST_UNITS_DEFAULT_CONVERSION] specifies a conversion
 that will be applied to a base unit when no direct conversion is
 possible.  This can be used to make arbitray conversion work
 with a single specialization.
@@ -452,17 +452,9 @@ with a single specialization.
     // make conversion to SI the default.
     BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
 
-[warning
-
-For all the conversion macros the destination unit needs
-to be reduced to a unique type with [___reduce_unit].
-The template forms cannot do this reduction automatically.
-
-]
-
 The following are the exact rules for conversions.
 First the implementation attempts to find a direct conversion defined
-with [___BOOST_UNITS_DEFINE_CONVERSION] and its kin.  If there is no such
+with [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] and its kin.  If there is no such
 exact conversion then it will look for a definition of some scaled
 form of the conversion.  If that also fails then it will transform
 every [___base_unit] using [___BOOST_UNITS_DEFAULT_CONVERSION] and recurse.
