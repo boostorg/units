@@ -11,6 +11,8 @@
 #ifndef BOOST_UNITS_NON_SI_CONSTANTS_HPP
 #define BOOST_UNITS_NON_SI_CONSTANTS_HPP
 
+#error this header is obsolete, please use the separate headers for each unit
+
 // SI conversion factors for various non-SI units
 
 #include <boost/units/conversion.hpp>
