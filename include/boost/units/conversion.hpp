@@ -49,28 +49,6 @@ struct conversion_helper
 
 #endif
 
-/// This macro is deprecated.  Please use BOOST_UNITS_DEFINE_CONVERSION_FACTOR.
-#define BOOST_UNITS_DEFINE_BASE_CONVERSION BOOST_UNITS_DEFINE_CONVERSION_FACTOR
-
-/// Defines the conversion factor from a base unit to any other base
-/// unit with the same dimensions.  Must appear at global scope.
-/// The reverse need not be defined.  Neither base unit may be scaled.
-#define BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE(Params, Source, Destination, type_, value_)   \
-    namespace boost {                                                       \
-    namespace units {                                                       \
-    template<BOOST_PP_SEQ_ENUM(Params)>                                     \
-    struct base_unit_converter<                                             \
-        Source,                                                             \
-        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, typename Source::dimension_type)\
-    >                                                                       \
-    {                                                                       \
-        typedef type_ type;                                                 \
-        static type value() { return(value_); }                             \
-    };                                                                      \
-    }                                                                       \
-    }                                                                       \
-    void boost_units_require_semicolon()
-
 /// Defines the conversion factor from a base unit to any unit
 /// or to another base unit with the correct dimensions.  Uses
 /// of this macro must appear at global scope.
@@ -99,19 +77,23 @@ struct conversion_helper
     }                                                                       \
     void boost_units_require_semicolon()
 
-/// Defines the conversion factor from a base unit to any unit
-/// with the correct dimensions.  Must appear at global scope.
-/// If the destination unit is a unit that contains only one
-/// base unit which is raised to the first power (e.g. feet->meters)
-/// the reverse need not be defined. Neither unit may be scaled.
-/// The destination must be a heterogeneous unit.  These requirements
-/// are rather difficult to check.  If they are not met the specialization
-/// will probably vanish silently.
+/// Defines the conversion factor from a base unit to any other base
+/// unit with the same dimensions.  Params should be a Boost.Preprocessor
+/// Seq of template parameters, such as (class T1)(class T2)
+/// All uses of must appear at global scope. The reverse conversion will
+/// be defined automatically.  This macro is a little dangerous, because,
+/// unlike the non-template form, it will silently fail if either base
+/// unit is scaled.  This is probably not an issue if both the source
+/// and destination types depend on the template parameters, but be aware
+/// that a generic conversion to kilograms is not going to work.
 #define BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE(Params, Source, Destination, type_, value_)   \
     namespace boost {                                                       \
     namespace units {                                                       \
     template<BOOST_PP_SEQ_ENUM(Params)>                                     \
-    struct base_unit_converter<Source, Destination>                         \
+    struct base_unit_converter<                                             \
+        Source,                                                             \
+        BOOST_UNITS_MAKE_HETEROGENEOUS_UNIT(Destination, typename Source::dimension_type)\
+    >                                                                       \
     {                                                                       \
         typedef type_ type;                                                 \
         static type value() { return(value_); }                             \

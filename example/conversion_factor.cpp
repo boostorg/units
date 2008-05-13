@@ -43,8 +43,6 @@ Output:
 #include <boost/units/systems/si/momentum.hpp>
 #include <boost/units/systems/cgs/momentum.hpp>
 
-#include <boost/units/systems/other/non_si_units.hpp>
-
 int main()
 {
     using namespace boost;

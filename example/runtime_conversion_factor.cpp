@@ -49,11 +49,10 @@ void set_conversion_factor(long from, long to, double value) {
     conversion_factors[to][from] = 1.0 / value;
 }
 
-BOOST_UNITS_DEFINE_BASE_CONVERSION_TEMPLATE((long N1)(long N2),
-                                            currency_base_unit<N1>, 
-                                            currency_base_unit<N2>,
-                                            double,
-                                            get_conversion_factor(N1, N2));
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE((long N1)(long N2),
+    currency_base_unit<N1>,
+    currency_base_unit<N2>,
+    double, get_conversion_factor(N1, N2));
 
 //]
 
