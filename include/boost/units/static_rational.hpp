@@ -55,11 +55,11 @@ static rationals should always be accessed through @c static_rational<N,D>::type
 prevents instantiation of zero denominators (i.e. @c static_rational<N,0>). The following compile-time 
 arithmetic operators are provided for static_rational variables only (no operators are defined between 
 long and static_rational):
-    - @c static_negate
-    - @c static_add
-    - @c static_subtract
-    - @c static_multiply
-    - @c static_divide
+    - @c mpl::negate
+    - @c mpl::plus
+    - @c mpl::minus
+    - @c mpl::times
+    - @c mpl::divides
 
 Neither @c static_power nor @c static_root are defined for @c static_rational. This is because template types 
 may not be floating point values, while powers and roots of rational numbers can produce floating point 
@@ -84,6 +84,7 @@ class static_rational
         static const integer_type   Numerator = N/den,
                                     Denominator = D/den;
         
+        /// INTERNAL ONLY
         typedef static_rational<N,D>    this_type;
         
         /// static_rational<N,D> reduced by GCD
@@ -92,6 +93,7 @@ class static_rational
         static integer_type numerator()      { return Numerator; }
         static integer_type denominator()    { return Denominator; }
         
+        // INTERNAL ONLY
         static_rational() { }
         //~static_rational() { }
         
@@ -140,6 +142,8 @@ pow(const Y& x)
     return power_dimof_helper<Y,static_rational<N> >::value(x);
 }
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 /// raise @c T to a @c static_rational power
 template<class T, long N,long D> 
 struct power_dimof_helper<T, static_rational<N,D> >                
@@ -154,10 +158,12 @@ struct power_dimof_helper<T, static_rational<N,D> >
     }
 };
 
-/// raise @c int to a @c static_rational power
+/// raise @c float to a @c static_rational power
 template<long N,long D> 
 struct power_dimof_helper<float, static_rational<N,D> >
     : power_dimof_helper<double, static_rational<N,D> > {};
+
+#endif
 
 /// take the @c static_rational root of a value
 template<class Rat,class Y>
@@ -175,12 +181,18 @@ root(const Y& x)
     return root_typeof_helper<Y,static_rational<N> >::value(x);
 }
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 /// take @c static_rational root of an @c T
 template<class T, long N,long D> 
 struct root_typeof_helper<T,static_rational<N,D> >     
     : power_dimof_helper<T, static_rational<D,N> > {};
 
+#endif
+
 } // namespace units
+
+#ifndef BOOST_UNITS_DOXYGEN
 
 namespace mpl {
 
@@ -253,6 +265,8 @@ struct less_impl<boost::units::detail::static_rational_tag, boost::units::detail
 
 
 }
+
+#endif
 
 } // namespace boost
 

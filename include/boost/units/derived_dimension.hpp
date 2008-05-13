@@ -34,6 +34,9 @@ template<class DT1 = dimensionless_type,long E1 = 0,
          class DT8 = dimensionless_type,long E8 = 0>
 struct derived_dimension
 {
+#ifdef BOOST_UNITS_DOXYGEN
+    typedef detail::unspecified type;
+#else
     typedef typename 
     make_dimension_list< mpl::list< dim< DT1,static_rational<E1> >,
                                     dim< DT2,static_rational<E2> >,
@@ -43,6 +46,7 @@ struct derived_dimension
                                     dim< DT6,static_rational<E6> >,
                                     dim< DT7,static_rational<E7> >,
                                     dim< DT8,static_rational<E8> > > >::type type;
+#endif
 };
 
 /// INTERNAL ONLY

@@ -31,6 +31,8 @@ namespace units {
 
 #if BOOST_UNITS_HAS_TYPEOF
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 // to avoid need for default constructor and eliminate divide by zero errors
 namespace typeof_ {
 
@@ -38,6 +40,8 @@ namespace typeof_ {
 template<class T> T make();
 
 } // namespace typeof_
+
+#endif
 
 #if (BOOST_UNITS_HAS_BOOST_TYPEOF)
 

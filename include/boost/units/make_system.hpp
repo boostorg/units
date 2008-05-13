@@ -35,7 +35,7 @@ struct unspecified {};
 /// represent any combination of the base units.  There must
 /// be no way to represent any of the base units in terms
 /// of the others.  make_system<foot_base_unit, meter_base_unit>::type
-/// is not allowed.
+/// is not allowed, for example.
 template<class BaseUnit0, class BaseUnit1, class BaseUnit2, ..., class BaseUnitN>
 struct make_system
 {

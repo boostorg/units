@@ -44,14 +44,19 @@ struct heterogeneous_system_pair;
 template<class T, class E>
 struct heterogeneous_system_dim;
 
+/// class representing a scaling factor such as 10^3
+/// The exponent should be a static rational.
 template<long Base, class Exponent>
 struct scale
 {
-    enum { base = Base };
+    static const long base = Base;
     typedef Exponent exponent;
     typedef double value_type;
     static value_type value() { return(detail::static_rational_power<Exponent>(static_cast<double>(base))); }
 };
+
+template<long Base, class Exponent>
+const long scale<Base, Exponent>::base;
 
 /// INTERNAL ONLY
 template<long Base>
@@ -127,6 +132,13 @@ struct scaled_base_unit
     typedef S system_type;
     typedef Scale scale_type;
     typedef typename S::dimension_type dimension_type;
+
+#ifdef BOOST_UNITS_DOXYGEN
+
+    typedef detail::unspecified unit_type;
+
+#else
+
     typedef unit<
         dimension_type,
         heterogeneous_system<
@@ -139,6 +151,8 @@ struct scaled_base_unit
             >
         >
     > unit_type;
+
+#endif
 
     static std::string symbol()
     {
@@ -236,6 +250,8 @@ struct scale_list_dim : Scale
 
 } // namespace units
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 namespace mpl {
 
 /// INTERNAL ONLY
@@ -247,6 +263,8 @@ struct less_impl<boost::units::scale_dim_tag, boost::units::scale_dim_tag>
 };
 
 }
+
+#endif
 
 namespace units {
 
@@ -288,6 +306,8 @@ template<class T>
 struct eval_scale_list : detail::eval_scale_list_impl<mpl::size<T>::value>::template apply<typename mpl::begin<T>::type> {};
 
 } // namespace units
+
+#ifndef BOOST_UNITS_DOXYGEN
 
 namespace mpl {
 
@@ -373,6 +393,8 @@ struct less_impl<boost::units::scaled_base_unit_tag, boost::units::scaled_base_u
 };
 
 } // namespace mpl
+
+#endif
 
 } // namespace boost
 

@@ -31,12 +31,16 @@ struct dimensionless_type
 
 } // namespace units
 
+#ifndef BOOST_UNITS_DOXYGEN
+
 namespace mpl {
 
 // INTERNAL ONLY
 template<> struct deref<units::dimensionless_type> { };
 
 } // namespace mpl
+
+#endif
 
 } // namespace boost
 

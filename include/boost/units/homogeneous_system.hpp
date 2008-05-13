@@ -29,8 +29,16 @@ namespace boost {
 
 namespace units {
 
+/// A system that can uniquely represent any unit
+/// which can be composed from a linearly independent set
+/// of base units.  It is safe to rebind a unit with
+/// such a system to different dimensions.
+///
+/// Do not construct this template directly.  Use
+/// make_system instead.
 template<class L>
 struct homogeneous_system {
+    /// INTERNAL ONLY
     typedef L type;
 };
 

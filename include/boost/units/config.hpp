@@ -97,6 +97,11 @@
 /// compiler is able to handle the library.
 #define BOOST_UNITS_NO_COMPILER_CHECK
 
+/// Enable checking to verify that a homogeneous system
+/// is actually capable of representing all the dimensions
+/// that it is used with.  Off by default.
+#define BOOST_UNITS_CHECK_HOMOGENEOUS_UNITS
+
 #endif
 
 #endif

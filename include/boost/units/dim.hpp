@@ -40,11 +40,26 @@ struct dim_tag { };
 /// The dim class represents a single dimension tag/dimension exponent pair.
 /// That is, @c dim<tag_type,value_type> is a pair where @c tag_type represents the
 /// fundamental dimension being represented and @c value_type represents the 
-/// exponent of that fundamental dimension as a @c static_rational or other type 
-/// providing the required compile-time arithmetic operations. @c tag_type must 
-/// provide an ordinal value to allow sorting of lists of dims at compile-time.
-/// This can be easily accomplished by inheriting from @c ordinal<N>. Otherwise,
-/// @c tag_type may be any type. 
+/// exponent of that fundamental dimension as a @c static_rational. @c tag_type must 
+/// be a derived from a specialization of @c base_dimension.
+/// Specialization of the following Boost.MPL metafunctions are provided
+///
+/// @c mpl::plus for two @c dims
+///
+/// @c mpl::minus for two @c dims
+///
+/// @c mpl::negate for a @c dim
+///
+/// These metafunctions all operate on the exponent, and require
+/// that the @c dim operands have the same base dimension tag.
+/// In addition, multiplication and division by @c static_rational
+/// is supported.
+///
+/// @c mpl::times for a @c static_rational and a @c dim in either order
+///
+/// @c mpl::divides for a @c static_rational and a @c dim in either order
+///
+/// These metafunctions likewise operate on the exponent only.
 template<typename T,typename V> 
 struct dim
 {
@@ -65,6 +80,8 @@ struct dim
 BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dim, 2)
 
 #endif
+
+#ifndef BOOST_UNITS_DOXYGEN
 
 namespace boost {
 
@@ -147,5 +164,7 @@ struct negate_impl<boost::units::detail::dim_tag>
 } // namespace mpl
 
 } // namespace boost
+
+#endif
 
 #endif // BOOST_UNITS_DIM_HPP
