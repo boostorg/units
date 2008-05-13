@@ -69,7 +69,7 @@ run_doxygen cgs_reference
 run_doxygen base_units_reference
   :
     ../../../boost/units/systems/base_units.hpp
-    ../../../boost/units/systems/other/non_si_units.hpp
+    [ path.glob-tree ../../../boost/units/systems/other : *.hpp : detail ]
     [ path.glob-tree ../../../boost/units/systems/base_units : *.hpp : detail ]
   :
     "Base Units Reference"

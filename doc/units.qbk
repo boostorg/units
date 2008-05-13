@@ -417,8 +417,8 @@ Naturally, it is also possible to define heterogeneous operators between differe
 [section:Conversions Conversions]
 
 The macros needed for defining conversion can be found in
-[headerref boost/units/conversion.hpp], [headerref boost/units/absolute.hpp]
-(for conversion offsets), and [headerref boost/units/implicit_conversion.hpp]
+[headerref boost/units/conversion.hpp] and [headerref boost/units/absolute.hpp]
+(for conversion offsets)
 
 The macro [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] specifies the
 factor to convert from the first argument to the second.  The
