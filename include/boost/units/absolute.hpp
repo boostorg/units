@@ -67,22 +67,21 @@ absolute<Y> operator-(const absolute<Y>& aval,const Y& rval)
     return absolute<Y>(aval.value()-rval);
 }
 
-/// subtracting two absolutes gives a difference (Like pointers)
+/// subtracting two absolutes gives a difference
 template<class Y>
 Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
 {
     return Y(aval1.value()-aval2.value());
 }
 
-/// multiplying an absolute unit by a scalar gives a quantity
-/// just like an ordinary unit
+/// creates a quantity from an absolute unit and a raw value
 template<class D, class S, class T>
 quantity<absolute<unit<D, S> >, T> operator*(const T& t, const absolute<unit<D, S> >&)
 {
     return(quantity<absolute<unit<D, S> >, T>::from_value(t));
 }
-/// multiplying an absolute unit by a scalar gives a quantity
-/// just like an ordinary unit
+
+/// creates a quantity from an absolute unit and a raw value
 template<class D, class S, class T>
 quantity<absolute<unit<D, S> >, T> operator*(const absolute<unit<D, S> >&, const T& t)
 {
@@ -118,7 +117,7 @@ namespace units {
 /// Macro to define the offset between two absolute units.
 /// Requires the value to be in the destination units e.g
 /// @code
-/// BOOST_UNITS_DEFINE_CONVERSION_OFFSET(celsius_base_unit, fahrenheit_base_unit::unit_type, double, 32.0);
+/// BOOST_UNITS_DEFINE_CONVERSION_OFFSET(celsius_base_unit, fahrenheit_base_unit, double, 32.0);
 /// @endcode
 /// @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR is also necessary to
 /// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR
@@ -129,7 +128,9 @@ namespace units {
     namespace boost {                                                   \
     namespace units {                                                   \
     template<>                                                          \
-    struct affine_conversion_helper<From, To>                           \
+    struct affine_conversion_helper<                                    \
+        reduce_unit<From::unit_type>::type,                             \
+        reduce_unit<To::unit_type>::type>                               \
     {                                                                   \
         typedef type_ type;                                             \
         static type value() { return(value_); }                         \
