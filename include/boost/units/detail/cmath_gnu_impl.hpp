@@ -22,30 +22,6 @@ namespace units {
 namespace detail {
 
 template<class Y> 
-inline bool isfinite(const Y& val)
-{
-    return std::isfinite(val);
-}
-
-template<class Y> 
-inline bool isinf(const Y& val)
-{
-    return std::isinf(val);
-}
-
-template<class Y> 
-inline bool isnan(const Y& val)
-{
-    return std::isnan(val);
-}
-
-template<class Y> 
-inline bool isnormal(const Y& val)
-{
-    return std::isnormal(val);
-}
-
-template<class Y> 
 inline bool isgreater(const Y& v1,const Y& v2)
 {
     return __builtin_isgreater(v1,v2);
@@ -82,36 +58,6 @@ inline bool isunordered(const Y& v1,const Y& v2)
 }
 
 template<class Y>
-inline Y abs(const Y& val)
-{
-    return std::abs(val);
-}
-
-template<class Y>
-inline Y ceil(const Y& val)
-{
-    return __builtin_ceil(val);
-}
-
-template<class Y>
-inline Y copysign(const Y& v1,const Y& v2)
-{
-    return __builtin_copysign(v1,v2);
-}
-
-template<class Y>
-inline Y fabs(const Y& val)
-{
-    return __builtin_fabs(val);
-}
-
-template<class Y>
-inline Y floor(const Y& val)
-{
-    return __builtin_floor(val);
-}
-
-template<class Y>
 inline Y fdim(const Y& v1,const Y& v2)
 {
     return __builtin_fdim(v1,v2);
@@ -133,18 +79,6 @@ template<class Y>
 inline Y fmin(const Y& v1,const Y& v2)
 {
     return __builtin_fmin(v1,v2);
-}
-
-template<class Y>
-inline int fpclassify(const Y& val)
-{
-    return std::fpclassify(val);
-}
-
-template<class Y>
-inline Y hypot(const Y& v1,const Y& v2)
-{
-    return __builtin_hypot(v1,v2);
 }
 
 //template<class Y>
@@ -181,12 +115,6 @@ template<class Y>
 inline Y rint(const Y& val)
 {
     return __builtin_rint(val);
-}
-
-template<class Y>
-inline Y round(const Y& val)
-{
-    return __builtin_round(val);
 }
 
 template<class Y>

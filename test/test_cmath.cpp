@@ -128,10 +128,10 @@ int test_main(int,char *[])
     BOOST_CHECK((bu::nexttoward)(E4,E5).value() == (bu::detail::nexttoward)(E4.value(),E5.value()));
     BOOST_CHECK((bu::nexttoward)(E5,E4).value() == (bu::detail::nexttoward)(E5.value(),E4.value()));
 
-    BOOST_CHECK((bu::round)(E4) == -3.0*bu::joules);
-    BOOST_CHECK((bu::round)(E5) == 3.0*bu::joules);    
-    BOOST_CHECK((bu::signbit)(E4) == true);
-    BOOST_CHECK((bu::signbit)(E5) == false);
+    BOOST_CHECK((bu::round)(E4 - 0.00000000001 * bu::joules) == -3.0*bu::joules);
+    BOOST_CHECK((bu::round)(E5 + 0.00000000001 * bu::joules) == 3.0*bu::joules);    
+    BOOST_CHECK((bu::signbit)(E4) == 1);
+    BOOST_CHECK((bu::signbit)(E5) == 0);
     BOOST_CHECK((bu::trunc)(E4) == -2.0*bu::joules);
     BOOST_CHECK((bu::trunc)(E5) == 2.0*bu::joules);
 

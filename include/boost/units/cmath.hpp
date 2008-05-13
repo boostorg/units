@@ -12,9 +12,14 @@
 #define BOOST_UNITS_CMATH_HPP
 
 #include <cmath>
+#include <cstdlib>
 
 #include <boost/units/quantity.hpp>
 #include <boost/units/detail/cmath_impl.hpp>
+#include <boost/math/special_functions/fpclassify.hpp>
+#include <boost/math/special_functions/sign.hpp>
+#include <boost/math/special_functions/hypot.hpp>
+#include <boost/math/special_functions/round.hpp>
 
 /// \file 
 /// \brief Overloads of functions in \<cmath\> for quantities
@@ -39,7 +44,7 @@ inline
 bool 
 isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::isfinite;
     return isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -48,7 +53,7 @@ inline
 bool 
 isinf BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::isinf;
     return isinf BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -57,7 +62,7 @@ inline
 bool 
 isnan BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::isnan;
     return isnan BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -66,7 +71,7 @@ inline
 bool 
 isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::isnormal;
     return isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -135,7 +140,7 @@ inline
 quantity<Unit,Y> 
 abs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using namespace detail;
+    using std::abs;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -147,7 +152,7 @@ inline
 quantity<Unit,Y> 
 ceil BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using namespace detail;
+    using std::ceil;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -160,7 +165,7 @@ quantity<Unit,Y>
 copysign BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
          const quantity<Unit,Y>& q2)
 {
-    using namespace detail;
+    using boost::math::copysign;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -172,7 +177,7 @@ inline
 quantity<Unit,Y> 
 fabs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using namespace detail;
+    using std::fabs;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -184,7 +189,7 @@ inline
 quantity<Unit,Y> 
 floor BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using namespace detail;
+    using std::floor;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -257,7 +262,7 @@ inline
 int 
 fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::fpclassify;
 
     return fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
@@ -273,7 +278,7 @@ typename root_typeof_helper<
         static_rational<2> >::type
 hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantity<Unit,Y>& q2)
 {
-    using namespace detail;
+    using boost::math::hypot;
 
     typedef quantity<Unit,Y>    type1;
     
@@ -363,7 +368,7 @@ inline
 quantity<Unit,Y> 
 round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using namespace detail;
+    using boost::math::round;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -372,10 +377,10 @@ round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 
 template<class Unit,class Y>
 inline 
-bool 
+int 
 signbit BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using namespace detail;
+    using boost::math::signbit;
 
     return signbit BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }

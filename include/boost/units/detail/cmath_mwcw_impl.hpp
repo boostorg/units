@@ -28,30 +28,6 @@ namespace units {
 namespace detail {
 
 template<class Y> 
-inline bool isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return isfinite(val);
-}
-
-template<class Y> 
-inline bool isinf BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return isinf(val);
-}
-
-template<class Y> 
-inline bool isnan BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return isnan(val);
-}
-
-template<class Y> 
-inline bool isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return isnormal(val);
-}
-
-template<class Y> 
 inline bool isgreater BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
 {
     return ::isgreater(v1,v2);
@@ -88,36 +64,6 @@ inline bool isunordered BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v
 }
 
 template<class Y>
-inline Y abs BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::abs(val);
-}
-
-template<class Y>
-inline Y ceil BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::ceil(val);
-}
-
-template<class Y>
-inline Y copysign BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
-{
-    return std::copysign(v1,v2);
-}
-
-template<class Y>
-inline Y fabs BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::fabs(val);
-}
-
-template<class Y>
-inline Y floor BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::floor(val);
-}
-
-template<class Y>
 inline Y fdim BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
 {
     return std::fdim(v1,v2);
@@ -139,18 +85,6 @@ template<class Y>
 inline Y fmin BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
 {
     return std::fmin(v1,v2);
-}
-
-template<class Y>
-inline int fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return fpclassify(val);
-}
-
-template<class Y>
-inline Y hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& v1,const Y& v2)
-{
-    return std::hypot(v1,v2);
 }
 
 //template<class Y>
@@ -187,18 +121,6 @@ template<class Y>
 inline Y rint BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
 {
     return std::rint(val);
-}
-
-template<class Y>
-inline Y round BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return std::round(val);
-}
-
-template<class Y>
-inline bool signbit BOOST_PREVENT_MACRO_SUBSTITUTION (const Y& val)
-{
-    return signbit(val);
 }
 
 template<class Y>
