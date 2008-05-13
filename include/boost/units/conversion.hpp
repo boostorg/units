@@ -145,32 +145,6 @@ conversion_factor(const FromUnit&,const ToUnit&)
     return(detail::conversion_factor_helper<FromUnit, ToUnit>::value());
 }
 
-#ifndef BOOST_UNITS_DOXYGEN
-
-/// Find the conversion factor between two units with an explicit return type.
-/// e.g. conversion_factor<int>(newton, dyne) returns 100000
-template<class Y, class FromUnit,class ToUnit>
-inline
-Y
-conversion_factor(const FromUnit&,const ToUnit&)
-{
-    return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
-}
-
-#else
-
-/// Find the conversion factor between two units with an explicit return type.
-/// e.g. conversion_factor<int>(newton, dyne) returns 100000
-template<class Y, class FromUnit,class ToUnit>
-inline
-Y
-conversion_factor<Y>(const FromUnit&,const ToUnit&)
-{
-    return(static_cast<Y>(detail::conversion_factor_helper<FromUnit, ToUnit>::value()));
-}
-
-#endif
-
 } // namespace units
 
 } // namespace boost
