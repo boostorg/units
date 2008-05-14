@@ -57,6 +57,7 @@ L^(3/2) = 2.56713 m^(3/2) + 2.14247 m^(3/2) i
 #include <boost/mpl/list.hpp>
 
 #include <boost/units/io.hpp>
+#include <boost/units/pow.hpp>
 #include <boost/units/quantity.hpp>
 
 #include "test_system.hpp"

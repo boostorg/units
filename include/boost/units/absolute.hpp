@@ -11,7 +11,8 @@
 #ifndef BOOST_UNITS_ABSOLUTE_HPP
 #define BOOST_UNITS_ABSOLUTE_HPP
 
-#include <iosfwd>
+// necessary because the expression os << "absolute " is not dependent.
+#include <ostream>
 
 #include <boost/units/detail/absolute_impl.hpp>
 

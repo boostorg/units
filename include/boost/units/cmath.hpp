@@ -14,12 +14,14 @@
 #include <cmath>
 #include <cstdlib>
 
-#include <boost/units/quantity.hpp>
-#include <boost/units/detail/cmath_impl.hpp>
 #include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/math/special_functions/sign.hpp>
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/round.hpp>
+
+#include <boost/units/pow.hpp>
+#include <boost/units/quantity.hpp>
+#include <boost/units/detail/cmath_impl.hpp>
 
 /// \file 
 /// \brief Overloads of functions in \<cmath\> for quantities

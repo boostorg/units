@@ -42,6 +42,8 @@ L^(3/2)       = m^(3/2)
 
 #include "test_system.hpp"
 
+#include <boost/units/pow.hpp>
+
 int main()
 {
     using namespace boost::units;

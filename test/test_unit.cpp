@@ -23,6 +23,8 @@ Output:
 
 #include "test_header.hpp"
 
+#include <boost/units/pow.hpp>
+
 namespace bu = boost::units;
 
 int test_main(int,char *[])

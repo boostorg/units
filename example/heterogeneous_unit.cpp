@@ -47,6 +47,7 @@ Output:
 #include <algorithm>
 
 #include <boost/units/io.hpp>
+#include <boost/units/pow.hpp>
 #include <boost/units/detail/utility.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>

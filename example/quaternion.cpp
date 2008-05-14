@@ -47,6 +47,7 @@ L^3     = (-104 m^3,102 m^3,68 m^3,34 m^3)
 #include <boost/math/quaternion.hpp>
 #include <boost/mpl/list.hpp>
 
+#include <boost/units/pow.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
 
