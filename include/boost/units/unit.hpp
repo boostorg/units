@@ -22,6 +22,7 @@
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/is_dimension_list.hpp>
+#include <boost/units/reduce_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/implicit_conversion.hpp>
 
@@ -67,6 +68,19 @@ BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::unit, 2)
 namespace boost {
 
 namespace units {
+
+/// Returns a unique type for every unit.
+template<class Dim, class System>
+struct reduce_unit<unit<Dim, System> >
+{
+    typedef unit<
+        Dim,
+        typename detail::make_heterogeneous_system<
+            Dim,
+            System
+        >::type
+    > type;
+};
 
 //template<class S1,class S2> struct is_implicitly_convertible;
 

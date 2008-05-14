@@ -19,6 +19,7 @@
 
 #include <boost/units/operators.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/reduce_unit.hpp>
 #include <boost/units/units_fwd.hpp>
 
 namespace boost {

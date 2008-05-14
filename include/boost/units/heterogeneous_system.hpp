@@ -64,8 +64,8 @@ struct heterogeneous_system_pair
 /// A system that can represent any possible combination
 /// of units at the expense of not preserving information
 /// about how it was created.  Do not create specializations
-/// of this template directly. Instead use reduce_unit and
-/// base_unit<...>::unit_type.
+/// of this template directly. Instead use @c reduce_unit and
+/// @c base_unit<...>::unit_type.
 template<class T>
 struct heterogeneous_system : T {};
 
@@ -289,32 +289,6 @@ struct static_root<heterogeneous_system<S>, static_rational<N,D> >
             typename static_root<typename S::type, static_rational<N,D> >::type,
             typename static_root<typename S::dimensions, static_rational<N,D> >::type
         >
-    > type;
-};
-
-template<class Unit>
-struct reduce_unit;
-
-#ifdef BOOST_UNITS_DOXYGEN
-
-/// Returns a unique type for every unit.
-template<class Unit>
-struct reduce_unit {
-    typedef detail::unspecified type;
-};
-
-#endif
-
-/// Returns a unique type for every unit.
-template<class Dim, class System>
-struct reduce_unit<unit<Dim, System> >
-{
-    typedef unit<
-        Dim,
-        typename detail::make_heterogeneous_system<
-            Dim,
-            System
-        >::type
     > type;
 };
 
