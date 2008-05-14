@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_LIGHT_YEAR_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_LIGHT_YEAR_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(astronomical, light_year, light_year, 9.460730472580e15, meter_base_unit, 5);

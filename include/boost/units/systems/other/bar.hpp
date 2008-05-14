@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_BAR_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_BAR_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/pressure.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(metric, bar, bar, 1.0e5, SI::pressure, 14);

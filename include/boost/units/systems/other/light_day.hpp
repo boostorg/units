@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_LIGHT_DAY_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_LIGHT_DAY_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(astronomical, light_day, light_day, 2.59020683712e13, meter_base_unit, 1);

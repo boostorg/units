@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_ARCDEGREE_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_ARCDEGREE_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/radian.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(metric, arcdegree, argdegree, (3.14159265358979323846264338328/180), radian_base_unit, 7);

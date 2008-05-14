@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_DRY_PINT_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_DRY_PINT_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(us, dry_pint, dry_pint, 5.506105e-4, SI::volume, 20);

@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_LIGHT_MINUTE_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_LIGHT_MINUTE_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(astronomical, light_minute, light_minute, 1.798754748e10, meter_base_unit, 3);

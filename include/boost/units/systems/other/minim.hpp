@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_MINIM_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_MINIM_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(us, minim, minim, 6.161152e-8, SI::volume, 19);

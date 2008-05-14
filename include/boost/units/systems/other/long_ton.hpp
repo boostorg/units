@@ -11,7 +11,7 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_LONG_TON_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_LONG_TON_HPP_INCLUDED
 
-#include <boost/units/systems/other/non_si_unit.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/kilogram.hpp>
 
 BOOST_UNITS_NON_SI_UNIT(us, long_ton, long_ton, 1.0160469088e3, kilogram_base_unit, 22);
