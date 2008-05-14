@@ -13,15 +13,23 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
 namespace boost {
 namespace units {
 namespace metric {
 
-typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<10> > > angstrom_base_unit;
+typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<-10> > > angstrom_base_unit;
 
 }
+
+template<>
+struct base_unit_info<metric::angstrom_base_unit> {
+    static const char* name() { return("angstrom"); }
+    static const char* symbol() { return("Å"); }
+};
+
 }
 }
 

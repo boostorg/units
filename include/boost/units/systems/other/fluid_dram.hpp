@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/other/minim.hpp>
 
 namespace boost {
@@ -20,6 +21,13 @@ namespace units {
 namespace us {
 typedef scaled_base_unit<minim_base_unit, scale<60, static_rational<1> > > fluid_dram_base_unit; //3.696691e-6*cubic_meters
 }
+
+template<>
+struct base_unit_info<us::fluid_dram_base_unit> {
+    static const char* name() { return("fluid_dram"); }
+    static const char* symbol() { return("fluid_dram"); }
+};
+
 }
 }
 

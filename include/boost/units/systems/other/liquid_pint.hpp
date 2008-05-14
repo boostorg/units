@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/other/fluid_dram.hpp>
 
 namespace boost {
@@ -20,6 +21,13 @@ namespace units {
 namespace us {
 typedef scaled_base_unit<fluid_dram_base_unit, scale<2, static_rational<7> > > liquid_pint_base_unit; //4.731765e-4*cubic_meters
 }
+
+template<>
+struct base_unit_info<us::liquid_pint_base_unit> {
+    static const char* name() { return("liquid_pint"); }
+    static const char* symbol() { return("pt"); }
+};
+
 }
 }
 

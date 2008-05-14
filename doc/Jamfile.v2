@@ -25,11 +25,20 @@ doxygen $(target)
     $(files)
   :
         <doxygen:param>EXTRACT_ALL=YES
+
+# Horribly ugly, but then macros usually are :(
         <doxygen:param>"PREDEFINED=\"BOOST_UNITS_STATIC_CONSTANT(a,b)=static const b a\" \\
                                    \"BOOST_UNITS_AUTO_STATIC_CONSTANT(a,b)=static const auto a = b\" \\
                                    \"BOOST_UNITS_TYPEOF(a)=typeof(a)\" \\
                                    \"BOOST_PREVENT_MACRO_SUBSTITUTION=\" \\
                                    \"BOOST_UNITS_HAS_TYPEOF=1\" \\
+                                   \"BOOST_UNITS_NON_SI_UNIT(namespace_, name_, symbol_, factor, other_unit, id)= \\
+                                   namespace boost { namespace units { namespace namespace_ { \\
+                                     struct name_ ## _base_unit : boost::units::base_unit<name_ ## _base_unit, other_unit::dimension_type, id> { \\
+                                       static const char* name(); \\
+                                       static const char* symbol(); \\
+                                     }; \\
+                                   } } }\" \\
                                    \"BOOST_UNITS_DOXYGEN=1\""
         <doxygen:param>HIDE_UNDOC_MEMBERS=NO
         <doxygen:param>EXTRACT_PRIVATE=NO

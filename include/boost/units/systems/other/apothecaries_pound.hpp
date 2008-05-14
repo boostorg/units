@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/other/apothecaries_ounce.hpp>
 
 namespace boost {
@@ -20,6 +21,13 @@ namespace units {
 namespace us {
 typedef scaled_base_unit<apothecaries_ounce_base_unit, scale<12, static_rational<1> > > apothecaries_pound_base_unit;//3.732417216e-1*kilograms
 }
+
+template<>
+struct base_unit_info<us::apothecaries_pound_base_unit> {
+    static const char* name() { return("apothecaries_pound"); }
+    static const char* symbol() { return("apothecaries_pound"); }
+};
+
 }
 }
 

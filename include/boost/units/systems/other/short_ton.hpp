@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/other/avoirdupois_pound.hpp>
 
 namespace boost {
@@ -20,6 +21,13 @@ namespace units {
 namespace us {
 typedef scaled_base_unit<avoirdupois_pound_base_unit, scale<2000, static_rational<1> > > short_ton_base_unit; //9.0718474e2*kilograms
 }
+
+template<>
+struct base_unit_info<us::short_ton_base_unit> {
+    static const char* name() { return("short_ton"); }
+    static const char* symbol() { return("short_ton"); }
+};
+
 }
 }
 

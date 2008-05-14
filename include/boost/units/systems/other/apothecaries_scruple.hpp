@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/other/grain.hpp>
 
 namespace boost {
@@ -20,6 +21,13 @@ namespace units {
 namespace us {
 typedef scaled_base_unit<grain_base_unit, scale<20, static_rational<1> > > apothecaries_scruple_base_unit; //1.2959782e-3*kilograms
 }
+
+template<>
+struct base_unit_info<us::apothecaries_scruple_base_unit> {
+    static const char* name() { return("apothecaries_scruple"); }
+    static const char* symbol() { return("apothecaries_scruple"); }
+};
+
 }
 }
 

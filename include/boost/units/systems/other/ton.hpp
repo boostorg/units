@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/base_units/kilogram.hpp>
 
 namespace boost {
@@ -22,6 +23,13 @@ namespace metric {
 typedef scaled_base_unit<kilogram_base_unit, scale<10, static_rational<3> > > ton_base_unit;
 
 }
+
+template<>
+struct base_unit_info<metric::ton_base_unit> {
+    static const char* name() { return("ton"); }
+    static const char* symbol() { return("ton"); }
+};
+
 }
 }
 
