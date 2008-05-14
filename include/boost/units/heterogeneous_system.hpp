@@ -28,7 +28,7 @@
 #include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/dimension.hpp>
-#include <boost/units/scaled_base_unit.hpp>
+#include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/push_front_if.hpp>
 #include <boost/units/detail/push_front_or_add.hpp>

@@ -13,6 +13,7 @@
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/systems/base_units/second.hpp>
 
