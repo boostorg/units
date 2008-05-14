@@ -234,7 +234,7 @@ struct get_default_conversion_impl
         typedef typename source_pair::tag_type source;
         typedef typename get_default_conversion<source>::type new_source;
         typedef typename get_default_conversion_impl<N-1>::template apply<typename mpl::next<Begin>::type> next_iteration;
-        typedef typename multiply_typeof_helper<typename power_dimof_helper<new_source, exponent>::type, typename next_iteration::unit_type>::type unit_type;
+        typedef typename multiply_typeof_helper<typename power_typeof_helper<new_source, exponent>::type, typename next_iteration::unit_type>::type unit_type;
         typedef call_base_unit_converter<source, new_source> conversion;
         typedef typename multiply_typeof_helper<typename conversion::type, typename next_iteration::type>::type type;
         static type value() {

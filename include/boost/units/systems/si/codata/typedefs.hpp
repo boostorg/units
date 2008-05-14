@@ -51,7 +51,7 @@ typedef divide_typeof_helper<energy,temperature>::type energy_over_temperature;
 typedef divide_typeof_helper<energy_over_temperature,amount>::type energy_over_temperature_amount;
 typedef divide_typeof_helper<
     divide_typeof_helper<power,area>::type,
-    power_dimof_helper<temperature,static_rational<4> >::type
+    power_typeof_helper<temperature,static_rational<4> >::type
 >::type power_over_area_temperature_4;
 typedef multiply_typeof_helper<power,area>::type power_area;
 typedef divide_typeof_helper<power_area,solid_angle>::type power_area_over_solid_angle;

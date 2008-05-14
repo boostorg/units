@@ -69,13 +69,13 @@ namespace units {
 //[quaternion_class_snippet_1
 /// specialize power typeof helper
 template<class Y,long N,long D> 
-struct power_dimof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
+struct power_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
 { 
     // boost::math::quaternion only supports integer powers
     BOOST_STATIC_ASSERT(D==1);
     
     typedef boost::math::quaternion<
-        typename power_dimof_helper<Y,static_rational<N,D> >::type
+        typename power_typeof_helper<Y,static_rational<N,D> >::type
     > type; 
     
     static type value(const boost::math::quaternion<Y>& x)  
@@ -105,16 +105,16 @@ struct root_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
 //[quaternion_class_snippet_2
 /// specialize power typeof helper for quaternion<quantity<Unit,Y> >
 template<class Unit,long N,long D,class Y> 
-struct power_dimof_helper<
+struct power_typeof_helper<
     boost::math::quaternion<quantity<Unit,Y> >,
     static_rational<N,D> >                
 { 
-    typedef typename power_dimof_helper<
+    typedef typename power_typeof_helper<
         Y,
         static_rational<N,D>
     >::type     value_type;
 
-    typedef typename power_dimof_helper<
+    typedef typename power_typeof_helper<
         Unit,
         static_rational<N,D>
     >::type  unit_type;

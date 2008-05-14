@@ -269,10 +269,10 @@ operator/(const measurement<Y>& lhs,const measurement<Y>& rhs)
 
 /// specialize power typeof helper
 template<class Y,long N,long D> 
-struct power_dimof_helper<measurement<Y>,static_rational<N,D> >
+struct power_typeof_helper<measurement<Y>,static_rational<N,D> >
 { 
     typedef measurement<
-        typename power_dimof_helper<Y,static_rational<N,D> >::type
+        typename power_typeof_helper<Y,static_rational<N,D> >::type
     > type; 
     
     static type value(const measurement<Y>& x)  

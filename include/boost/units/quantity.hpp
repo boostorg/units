@@ -657,7 +657,7 @@ template<class System,
 struct divide_typeof_helper< X,unit<Dim,System> >
 {
     typedef X                                                                           value_type;
-    typedef typename power_dimof_helper< unit<Dim,System>,static_rational<-1> >::type  unit_type;
+    typedef typename power_typeof_helper< unit<Dim,System>,static_rational<-1> >::type  unit_type;
     typedef quantity<unit_type,value_type>                                              type;
 };
 
@@ -681,7 +681,7 @@ template<class Unit,
 struct divide_typeof_helper< X,quantity<Unit,Y> >
 {
     typedef typename divide_typeof_helper<X,Y>::type                        value_type;
-    typedef typename power_dimof_helper< Unit,static_rational<-1> >::type  unit_type;
+    typedef typename power_typeof_helper< Unit,static_rational<-1> >::type  unit_type;
     typedef quantity<unit_type,value_type>                                  type;
 };
 
@@ -739,15 +739,15 @@ struct divide_typeof_helper< quantity<Unit1,X>,quantity<Unit2,Y> >
 /// specialize power typeof helper
 /// INTERNAL ONLY
 template<class Unit,long N,long D,class Y> 
-struct power_dimof_helper< quantity<Unit,Y>,static_rational<N,D> >                
+struct power_typeof_helper< quantity<Unit,Y>,static_rational<N,D> >                
 { 
-    typedef typename power_dimof_helper<Y,static_rational<N,D> >::type     value_type;
-    typedef typename power_dimof_helper<Unit,static_rational<N,D> >::type  unit_type;
+    typedef typename power_typeof_helper<Y,static_rational<N,D> >::type     value_type;
+    typedef typename power_typeof_helper<Unit,static_rational<N,D> >::type  unit_type;
     typedef quantity<unit_type,value_type>                                  type; 
     
     static type value(const quantity<Unit,Y>& x)  
     { 
-        return type::from_value(power_dimof_helper<Y,static_rational<N,D> >::value(x.value()));
+        return type::from_value(power_typeof_helper<Y,static_rational<N,D> >::value(x.value()));
     }
 };
 

@@ -312,7 +312,7 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 
 /// raise unit to a @c static_rational power
 template<class Dim,class System,long N,long D> 
-struct power_dimof_helper<unit<Dim,System>,static_rational<N,D> >                
+struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
 { 
     typedef unit<typename static_power<Dim,static_rational<N,D> >::type,typename static_power<System, static_rational<N,D> >::type>     type; 
     

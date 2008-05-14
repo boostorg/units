@@ -273,9 +273,9 @@ template<class Unit,class Y>
 inline 
 typename root_typeof_helper<
     typename add_typeof_helper<
-        typename power_dimof_helper<quantity<Unit,Y>,
+        typename power_typeof_helper<quantity<Unit,Y>,
                                      static_rational<2> >::type,
-        typename power_dimof_helper<quantity<Unit,Y>,
+        typename power_typeof_helper<quantity<Unit,Y>,
                                      static_rational<2> >::type>::type,
         static_rational<2> >::type
 hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantity<Unit,Y>& q2)
@@ -284,7 +284,7 @@ hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantit
 
     typedef quantity<Unit,Y>    type1;
     
-    typedef typename power_dimof_helper<type1,static_rational<2> >::type   pow_type;
+    typedef typename power_typeof_helper<type1,static_rational<2> >::type   pow_type;
     typedef typename add_typeof_helper<pow_type,pow_type>::type             add_type;
     typedef typename root_typeof_helper<add_type,static_rational<2> >::type quantity_type;
         

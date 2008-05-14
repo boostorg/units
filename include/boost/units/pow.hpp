@@ -26,25 +26,25 @@ namespace units {
 
 /// raise a value to a @c static_rational power
 template<class Rat,class Y>
-inline typename power_dimof_helper<Y,Rat>::type
+inline typename power_typeof_helper<Y,Rat>::type
 pow(const Y& x)
 {
-    return power_dimof_helper<Y,Rat>::value(x);
+    return power_typeof_helper<Y,Rat>::value(x);
 }
 
 /// raise a value to an integer power
 template<long N,class Y>
-inline typename power_dimof_helper<Y,static_rational<N> >::type
+inline typename power_typeof_helper<Y,static_rational<N> >::type
 pow(const Y& x)
 {
-    return power_dimof_helper<Y,static_rational<N> >::value(x);
+    return power_typeof_helper<Y,static_rational<N> >::value(x);
 }
 
 #ifndef BOOST_UNITS_DOXYGEN
 
 /// raise @c T to a @c static_rational power
 template<class T, long N,long D> 
-struct power_dimof_helper<T, static_rational<N,D> >                
+struct power_typeof_helper<T, static_rational<N,D> >                
 { 
     typedef typename mpl::if_<boost::is_integral<T>, double, T>::type internal_type;
     typedef detail::static_rational_power_impl<static_rational<N, D>, internal_type> impl;
@@ -58,8 +58,8 @@ struct power_dimof_helper<T, static_rational<N,D> >
 
 /// raise @c float to a @c static_rational power
 template<long N,long D> 
-struct power_dimof_helper<float, static_rational<N,D> >
-    : power_dimof_helper<double, static_rational<N,D> > {};
+struct power_typeof_helper<float, static_rational<N,D> >
+    : power_typeof_helper<double, static_rational<N,D> > {};
 
 #endif
 
@@ -84,7 +84,7 @@ root(const Y& x)
 /// take @c static_rational root of an @c T
 template<class T, long N,long D> 
 struct root_typeof_helper<T,static_rational<N,D> >     
-    : power_dimof_helper<T, static_rational<D,N> > {};
+    : power_typeof_helper<T, static_rational<D,N> > {};
 
 #endif
 

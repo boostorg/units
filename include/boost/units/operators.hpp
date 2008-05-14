@@ -115,7 +115,7 @@ template<typename X,typename Y> struct divide_typeof_helper     { BOOST_STATIC_A
 
 #endif // BOOST_UNITS_HAS_TYPEOF
 
-template<typename X,typename Y> struct power_dimof_helper;
+template<typename X,typename Y> struct power_typeof_helper;
 template<typename X,typename Y> struct root_typeof_helper;
 
 } // namespace units
