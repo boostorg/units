@@ -50,6 +50,7 @@ import testing ;
     [ compile-fail fail_heterogeneous_unit.cpp : : ]
     [ compile-fail fail_base_dimension.cpp : : ]
     [ compile-fail fail_add_temperature.cpp : : ]
+    [ compile-fail fail_quantity_non_unit.cpp : : ]
    ;
 
 }

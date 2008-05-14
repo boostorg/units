@@ -19,6 +19,7 @@
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/not.hpp>
 #include <boost/mpl/or.hpp>
+#include <boost/mpl/assert.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/is_arithmetic.hpp>
 #include <boost/type_traits/is_convertible.hpp>
@@ -38,6 +39,12 @@ namespace boost {
 namespace units {
 
 namespace detail {
+
+template<class T, class Enable = void>
+struct is_base_unit : mpl::false_ {};
+
+template<class T>
+struct is_base_unit<T, typename T::boost_units_is_base_unit_type> : mpl::true_ {};
 
 template<class Source, class Destination>
 struct is_narrowing_conversion_impl : mpl::bool_<(sizeof(Source) > sizeof(Destination))> {};
@@ -81,6 +88,8 @@ struct disable_if_is_same<T, T> {};
 template<class Unit,class Y = double>
 class quantity
 {
+        // base units are not the same as units.
+        BOOST_MPL_ASSERT_NOT((detail::is_base_unit<Unit>));
         enum { force_instantiation_of_unit = sizeof(Unit) };
     public:
         typedef quantity<Unit,Y>                        this_type;

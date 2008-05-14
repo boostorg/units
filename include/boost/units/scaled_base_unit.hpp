@@ -50,6 +50,8 @@ struct scaled_base_unit_tag {};
 template<class S, class Scale>
 struct scaled_base_unit
 {
+    /// INTERNAL ONLY
+    typedef void boost_units_is_base_unit_type;
     typedef scaled_base_unit type;
     typedef scaled_base_unit_tag tag;
     typedef S system_type;

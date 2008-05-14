@@ -65,6 +65,8 @@ class base_unit :
 {
     public:
         /// INTERNAL ONLY
+        typedef void boost_units_is_base_unit_type;
+        /// INTERNAL ONLY
         typedef base_unit           this_type;
         /// The dimensions of this base unit.
         typedef Dim                 dimension_type;
