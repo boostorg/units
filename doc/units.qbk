@@ -34,7 +34,7 @@
 [def __subtract_typeof_helper [classref boost::units::subtract_typeof_helper subtract_typeof_helper]]
 [def __multiply_typeof_helper [classref boost::units::multiply_typeof_helper multiply_typeof_helper]]
 [def __divide_typeof_helper [classref boost::units::divide_typeof_helper divide_typeof_helper]]
-[def __power_dimof_helper [classref boost::units::power_dimof_helper power_dimof_helper]]
+[def __power_typeof_helper [classref boost::units::power_typeof_helper power_typeof_helper]]
 [def __root_typeof_helper [classref boost::units::root_typeof_helper root_typeof_helper]]
 
 [def __static_negate [classref boost::units::static_negate static_negate]]
@@ -283,7 +283,7 @@ In addition to supporting the compile-time dimensional analysis operations, the 
 for [___unit] variables. Because the dimension associated with powers and roots must be computed at compile-time, it is not 
 possible to provide overloads for `std::pow` that function correctly for [___unit]s. These operations are supported through 
 free functions [___pow] and [___root] that are templated on integer and [___static_rational] values and can take as an argument 
-any type for which the utility classes [___power_dimof_helper] and [___root_typeof_helper] have been defined.
+any type for which the utility classes [___power_typeof_helper] and [___root_typeof_helper] have been defined.
 
 Base units are defined much like base dimensions.
 
@@ -627,7 +627,7 @@ User-defined value types that support the appropriate arithmetic operations are 
 as quantity value types. The operators that are supported by default for quantity value types are unary plus, unary minus,
 addition, subtraction, multiplication, division, equal-to, not-equal-to, less-than, less-or-equal-to, 
 greater-than, and greater-or-equal-to. Support for rational powers and roots can be added by overloading
-the [___power_dimof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
+the [___power_typeof_helper] and [___root_typeof_helper] classes. Here we implement a user-defined `measurement`
 class that models a numerical measurement with an associated measurement error and the appropriate algebra and
 demonstrates its use as a quantity value type; the full code is found in [@../../libs/units/example/measurement.hpp measurement.hpp].
 
@@ -708,7 +708,7 @@ SI and CGS systems).
 ([@../../libs/units/example/quaternion.cpp quaternion.cpp])
 
 This example demonstrates the use of `boost::math::quaternion` as a value type for  [___quantity] and the converse.
-For the first case, we first define specializations of [___power_dimof_helper] and [___root_typeof_helper] for 
+For the first case, we first define specializations of [___power_typeof_helper] and [___root_typeof_helper] for 
 powers and roots, respectively:
 
 [import ../example/quaternion.cpp]
@@ -734,7 +734,7 @@ the multiplication and division operations fail because `quaternion` implements 
 `/=` operators, respectively, which are incapable of representing the heterogeneous unit algebra needed for 
 quantities (an identical problem 
 occurs with `std::complex<T>`, for the same reason). In order to compute rational powers and roots, we need to 
-specialize [___power_dimof_helper] and [___root_typeof_helper] as follows:
+specialize [___power_typeof_helper] and [___root_typeof_helper] as follows:
 
 [quaternion_class_snippet_2]
 
@@ -753,7 +753,7 @@ quantity value type and as a quantity container class, including heterogeneous m
 operations and rational powers and roots. Naturally, heterogeneous operations are only supported on
 compilers that implement `typeof`. The primary differences are that binary operations are not implemented
 using the `op=` operators and use the utility classes [___add_typeof_helper], [___subtract_typeof_helper], 
-[___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_dimof_helper] and
+[___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_typeof_helper] and
 [___root_typeof_helper] are defined for both cases :
 
 [import ../example/complex.cpp]
@@ -1253,7 +1253,7 @@ the design and implementation of this library.
 
 * completely reimplemented SI and CGS unit systems and changed syntax for quantities
 * significantly streamlined `pow` and `root` so for most applications it is only
-  necessary to define `power_dimof_helper` and `root_typeof_helper` to gain this
+  necessary to define `power_typeof_helper` and `root_typeof_helper` to gain this
   functionality
 * added a selection of physical constants from the CODATA tables
 * added a skeleton `complex` class that correctly supports both `complex<quantity<Y,Unit> >`
