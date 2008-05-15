@@ -492,9 +492,9 @@ int main()
     sstream2 << std::endl;
     sstream2 << "r = " << 5e-7 << " m" << std::endl;
     sstream2 << "P = 101325 m^-1 kg s^-2" << std::endl;
-    sstream2 << "V = " << 5.23599e-19 << " m^3" << std::endl;
+    sstream2 << "V = " << 5.23598666666667e-019 << " m^3" << std::endl;
     sstream2 << "T = 310 K" << std::endl;
-    sstream2 << "n = " << 2.05835e-17 << " mol" << std::endl;
+    sstream2 << "n = " << 2.05834787514993e-017 << " mol" << std::endl;
     #if BOOST_UNITS_HAS_TYPEOF
     sstream2 << "R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = "
              << 1.8e-6 << ")" << std::endl;
@@ -503,7 +503,7 @@ int main()
     #endif // BOOST_UNITS_HAS_TYPEOF
     sstream2 << std::endl;
     sstream2 << "theta            = " << 0.375 << " rad" << std::endl;
-    sstream2 << "sin(theta)       = " << 0.366273 << " dimensionless"
+    sstream2 << "sin(theta)       = " << 0.366272529086048 << " dimensionless"
              << std::endl;
     sstream2 << "asin(sin(theta)) = " << 0.375 << " rad" << std::endl;
     sstream2 << std::endl;
@@ -512,14 +512,13 @@ int main()
     sstream2 << "Z   = (1.5,-2) m^2 kg s^-3 A^-2" << std::endl;
     sstream2 << "I*Z = (12.5,0) m^2 kg s^-3 A^-1" << std::endl;
     sstream2 << std::endl;
-    sstream2 << std::scientific << std::setprecision(1);
 
-    sstream2 << "x+y-w         = 0.48(+/-0.632772) m" << std::endl;
-    sstream2 << "w*x           = 9.04(+/-0.904885) m^2" << std::endl;
-    sstream2 << "x/y           = 0.666667(+/-0.149071) dimensionless"
+    sstream2 << "x+y-w         = 0.48(+/-" << 0.632771680782255 << ") m" << std::endl;
+    sstream2 << "w*x           = 9.04(+/-" << 0.904884523019374 << ") m^2" << std::endl;
+    sstream2 << "x/y           = " << 0.666666666666667 << "(+/-0.149071) dimensionless"
              << std::endl;
-    sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1" << std::endl;
-    sstream2 << "w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless"
+    sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-" << 3.5232787286844 << ") m^-1" << std::endl;
+    sstream2 << "w/(u*x)^(1/2) = " << 3.19612265096319 << "(+/-" << 0.160430670384437 << ") dimensionless"
              << std::endl;
 
     sstream2 << std::endl;

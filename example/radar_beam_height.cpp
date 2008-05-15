@@ -185,13 +185,13 @@ int main(void)
               << std::endl << std::endl;
     
     sstream2 << "radar range        : 300 nmi" << std::endl;
-    sstream2 << "earth radius       : " << 6.37101e6 << " m" << std::endl;
-    sstream2 << "beam height 1      : 18169.7 m" << std::endl;
-    sstream2 << "beam height 2      : 9.81085 nmi" << std::endl;
-    sstream2 << "beam height 3      : 18169.7 m" << std::endl;
-    sstream2 << "beam height 4      : 9.81085 nmi" << std::endl;
-    sstream2 << "beam height approx : 59488.4 ft" << std::endl;
-    sstream2 << "beam height approx : 18132.1 m" << std::endl;
+    sstream2 << "earth radius       : " << 6371008.7714 << " m" << std::endl;
+    sstream2 << "beam height 1      : " << 18169.690884692 << " m" << std::endl;
+    sstream2 << "beam height 2      : " << 9.81084820987694 << " nmi" << std::endl;
+    sstream2 << "beam height 3      : " << 18169.6908846921 << " m" << std::endl;
+    sstream2 << "beam height 4      : " << 9.81084820987694 << " nmi" << std::endl;
+    sstream2 << "beam height approx : " << 59488.3997620464 << " ft" << std::endl;
+    sstream2 << "beam height approx : " << 18132.0642474718 << " m" << std::endl;
     sstream2 << std::endl;
 
     std::string str1(sstream1.str());

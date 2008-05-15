@@ -421,9 +421,9 @@ int main(void)
     sstream2 << "L*L     = 3 + 4 i m^2" << std::endl;
     sstream2 << "L/L     = 1 + 0 i dimensionless" << std::endl;
     sstream2 << "L^3     = 2 + 11 i m^3" << std::endl;
-    sstream2 << "L^(3/2) = 2.56713 + 2.14247 i m^(3/2)" << std::endl;
+    sstream2 << "L^(3/2) = 2.56713 + " << 2.14246818967038 << " i m^(3/2)" << std::endl;
     sstream2 << "3vL     = 1.29207 + 0.201294 i m^(1/3)" << std::endl;
-    sstream2 << "(3/2)vL = 1.62894 + 0.520175 i m^(2/3)" << std::endl;
+    sstream2 << "(3/2)vL = " << 1.62893714592218 <<  " + " << 0.520174502304546 << " i m^(2/3)" << std::endl;
     sstream2 << std::endl;
     sstream2 << "+L      = 2 m + 1 m i" << std::endl;
     sstream2 << "-L      = -2 m + -1 m i" << std::endl;
@@ -432,9 +432,9 @@ int main(void)
     sstream2 << "L*L     = 3 m^2 + 4 m^2 i" << std::endl;
     sstream2 << "L/L     = 1 dimensionless + 0 dimensionless i" << std::endl;
     sstream2 << "L^3     = 2 m^3 + 11 m^3 i" << std::endl;
-    sstream2 << "L^(3/2) = 2.56713 m^(3/2) + 2.14247 m^(3/2) i" << std::endl;
+    sstream2 << "L^(3/2) = 2.56713 m^(3/2) + " << 2.14246818967038 << " m^(3/2) i" << std::endl;
     sstream2 << "3vL     = 1.29207 m^(1/3) + 0.201294 m^(1/3) i" << std::endl;
-    sstream2 << "(3/2)vL = 1.62894 m^(2/3) + 0.520175 m^(2/3) i" << std::endl;
+    sstream2 << "(3/2)vL = " << 1.62893714592218 << " m^(2/3) + " << 0.520174502304546 << " m^(2/3) i" << std::endl;
     sstream2 << std::endl;
 
     std::string str1(sstream1.str());

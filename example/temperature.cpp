@@ -122,9 +122,9 @@ int main()
               << "273.15 absolute K" << std::endl
               << "273.15 absolute K" << std::endl
               << "32 F" << std::endl
-              << "17.7778 K" << std::endl
-              << "17.7778 K" << std::endl
-              << "17.7778 K" << std::endl
+              << 17.77777777777 << " K" << std::endl
+              << 17.77777777777 << " K" << std::endl
+              << 17.77777777777 << " K" << std::endl
               << std::endl;
     
     std::string str1(sstream1.str());
