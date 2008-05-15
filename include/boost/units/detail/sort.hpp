@@ -18,8 +18,8 @@
 #include <boost/mpl/push_front.hpp>
 #include <boost/mpl/less.hpp>
 
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/dimensionless_type.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 
 namespace boost {
 

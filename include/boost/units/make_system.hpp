@@ -15,8 +15,8 @@
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimensionless_type.hpp>
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/homogeneous_system.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/sort.hpp>
 
 namespace boost {

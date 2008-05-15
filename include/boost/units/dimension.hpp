@@ -20,9 +20,9 @@
 #include <boost/mpl/size.hpp>
 
 #include <boost/units/dim.hpp>
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/operators.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/dimension_impl.hpp>
 
 /// \file 
@@ -32,10 +32,30 @@ namespace boost {
 
 namespace units {
 
-/// Reduce dimension list to cardinal form. This algorithm collapses duplicate unit 
-/// tags and sorts the resulting list by the tag ordinal value.
+struct S;
+
+/// Reduce dimension list to cardinal form. This algorithm collapses duplicate
+/// base dimension tags and sorts the resulting list by the tag ordinal value.
 /// Dimension lists that resolve to the same dimension are guaranteed to be  
 /// represented by an identical type.
+///
+/// The argument should be an MPL forward sequence containing instances
+/// of the @c dim template.
+///
+/// The result is also an MPL forward sequence.  It also supports the
+/// following metafunctions to allow use as a dimension.
+///
+///    - @c mpl::plus is defined only on two equal dimensions and returns the argument unchanged.
+///    - @c mpl::minus is defined only for two equal dimensions and returns the argument unchanged.
+///    - @c mpl::negate will return its argument unchanged.
+///    - @c mpl::times is defined for any dimensions and adds corresponding exponents.
+///    - @c mpl::divides is defined for any dimensions and subtracts the exponents of the
+///         right had argument from the corresponding exponents of the left had argument.
+///         Missing base dimension tags are assumed to have an exponent of zero.
+///    - @c static_power takes a dimension and a static_rational and multiplies all
+///         the exponents of the dimension by the static_rational.
+///    - @c static_root takes a dimension and a static_rational and divides all
+///         the exponents of the dimension by the static_rational.
 template<typename Seq>
 struct make_dimension_list
 {
@@ -52,16 +72,6 @@ struct static_power
     >::type type;    
 };
 
-/// @c static_power specialized to a @c static_rational exponent.
-template<typename DL,long N,long D> 
-struct static_power< DL,static_rational<N,D> >
-{
-    typedef typename detail::static_power_impl<mpl::size<DL>::value>::template apply<
-        typename mpl::begin<DL>::type,
-        static_rational<N,D>
-    >::type type;    
-};
-
 /// Take a scalar root of a dimension list.
 template<typename DL,typename Rt> 
 struct static_root
@@ -72,17 +82,9 @@ struct static_root
     >::type type;    
 };
 
-/// @c static_root specialized to a @c static_rational root.
-template<typename DL,long N,long D> 
-struct static_root< DL,static_rational<N,D> >
-{
-    typedef typename detail::static_root_impl<mpl::size<DL>::value>::template apply<
-        typename mpl::begin<DL>::type,
-        static_rational<N,D>
-    >::type type; 
-};
-
 } // namespace units
+
+#ifndef BOOST_UNITS_DOXYGEN
 
 namespace mpl {
 
@@ -146,6 +148,8 @@ struct negate_impl<boost::units::detail::dimension_list_tag>
 };
 
 } // namespace mpl
+
+#endif
 
 } // namespace boost
 

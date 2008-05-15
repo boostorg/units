@@ -13,13 +13,19 @@
 
 #include <boost/mpl/long.hpp>
 #include <boost/mpl/deref.hpp>
+#include <boost/mpl/arithmetic.hpp>
 
 #include <boost/units/config.hpp>
-#include <boost/units/dimension_list.hpp>
 
 namespace boost {
 
 namespace units {
+
+namespace detail {
+
+struct dimension_list_tag;
+
+}
 
 /// Dimension lists in which all exponents resolve to zero reduce to @c dimensionless_type.
 struct dimensionless_type
@@ -35,8 +41,43 @@ struct dimensionless_type
 
 namespace mpl {
 
-// INTERNAL ONLY
+/// INTERNAL ONLY
 template<> struct deref<units::dimensionless_type> { };
+
+/// INTERNAL ONLY
+template<>
+struct plus<units::dimensionless_type, units::dimensionless_type>
+{
+    typedef units::dimensionless_type type;
+};
+
+/// INTERNAL ONLY
+template<>
+struct minus<units::dimensionless_type, units::dimensionless_type>
+{
+    typedef units::dimensionless_type type;
+};
+
+/// INTERNAL ONLY
+template<>
+struct times<units::dimensionless_type, units::dimensionless_type>
+{
+    typedef units::dimensionless_type type;
+};
+
+/// INTERNAL ONLY
+template<>
+struct divides<units::dimensionless_type, units::dimensionless_type>
+{
+    typedef units::dimensionless_type type;
+};
+
+/// INTERNAL ONLY
+template<>
+struct negate<units::dimensionless_type>
+{
+    typedef units::dimensionless_type type;
+};
 
 } // namespace mpl
 

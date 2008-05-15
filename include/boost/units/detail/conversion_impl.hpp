@@ -21,13 +21,13 @@
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_base_and_derived.hpp>
 
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/reduce_unit.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/heterogeneous_conversion.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>

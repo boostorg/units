@@ -31,9 +31,9 @@
 #include <boost/mpl/and.hpp>
 
 #include <boost/units/dim.hpp>
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/dimensionless_type.hpp>
 #include <boost/units/static_rational.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/sort.hpp>
 
 namespace boost {

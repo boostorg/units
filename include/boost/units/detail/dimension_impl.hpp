@@ -21,10 +21,10 @@
 #include <boost/mpl/less.hpp>
 
 #include <boost/units/config.hpp>
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/dimensionless_type.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/push_front_if.hpp>
 #include <boost/units/detail/push_front_or_add.hpp>
 

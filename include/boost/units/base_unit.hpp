@@ -12,12 +12,11 @@
 #define BOOST_UNITS_BASE_UNIT_HPP
 
 #include <boost/units/config.hpp>
-#include <boost/units/dimension_list.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/unit.hpp>
-
+#include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/prevent_redefinition.hpp>
 
 namespace boost {
