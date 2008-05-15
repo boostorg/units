@@ -28,7 +28,7 @@ typedef scaled_base_unit<fluid_dram_base_unit, scale<2, static_rational<3> > > f
 template<>
 struct base_unit_info<us::fluid_ounce_base_unit> {
     static const char* name() { return("fluid ounce"); }
-    static const char* symbol() { return("oz"); }
+    static const char* symbol() { return("fl oz"); }
 };
 
 }

@@ -28,7 +28,7 @@ typedef scaled_base_unit<minim_base_unit, scale<60, static_rational<1> > > fluid
 template<>
 struct base_unit_info<us::fluid_dram_base_unit> {
     static const char* name() { return("fluid dram"); }
-    static const char* symbol() { return("fluid dram"); }
+    static const char* symbol() { return("fl dram"); }
 };
 
 }
