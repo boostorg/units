@@ -1,7 +1,7 @@
-// mcs::units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
-// Copyright (C) 2003-2007 Matthias Christian Schabel
+// Copyright (C) 2003-2008 Matthias Christian Schabel
 // Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
@@ -20,13 +20,15 @@
 namespace boost {
 namespace units {
 namespace us {
+
 typedef scaled_base_unit<apothecaries_ounce_base_unit, scale<12, static_rational<1> > > apothecaries_pound_base_unit;//3.732417216e-1*kilograms
+
 }
 
 template<>
 struct base_unit_info<us::apothecaries_pound_base_unit> {
-    static const char* name() { return("apothecaries_pound"); }
-    static const char* symbol() { return("apothecaries_pound"); }
+    static const char* name() { return("apothecaries pound"); }
+    static const char* symbol() { return("apothecaries pound"); }
 };
 
 }

@@ -1,7 +1,7 @@
-// mcs::units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
-// Copyright (C) 2003-2007 Matthias Christian Schabel
+// Copyright (C) 2003-2008 Matthias Christian Schabel
 // Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
@@ -20,9 +20,16 @@ namespace boost {
 namespace units {
 namespace metric {
 
-typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<6> > >  micron_base_unit;
+typedef scaled_base_unit<meter_base_unit, scale<10, static_rational<-6> > >  micron_base_unit;
 
 }
+
+template<>
+struct base_unit_info<metric::micron_base_unit> {
+    static const char* name()   { return("micron"); }
+    static const char* symbol() { return("µ"); }
+};
+
 }
 }
 

@@ -1,8 +1,8 @@
-// mcs::units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
-// Copyright (C) 2003-2007 Matthias Christian Schabel
-// Copyright (C) 2007 Steven Watanabe
+// Copyright (C) 2003-2008 Matthias Christian Schabel
+// Copyright (C) 2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -24,7 +24,7 @@ namespace units {
 struct degree_base_unit : public base_unit<degree_base_unit, plane_angle_dimension, -3>
 {
     static std::string name()   { return("degree"); }
-    static std::string symbol() { return("deg"); }
+    static std::string symbol() { return("°"); }
 };
 
 } // namespace units

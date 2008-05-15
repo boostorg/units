@@ -1,7 +1,7 @@
-// mcs::units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
-// Copyright (C) 2003-2007 Matthias Christian Schabel
+// Copyright (C) 2003-2008 Matthias Christian Schabel
 // Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
@@ -20,13 +20,15 @@
 namespace boost {
 namespace units {
 namespace us {
+
 typedef scaled_base_unit<dry_pint_base_unit, scale<2, static_rational<1> > > dry_quart_base_unit; //1.101221e-3*cubic_meters
+
 }
 
 template<>
 struct base_unit_info<us::dry_quart_base_unit> {
-    static const char* name() { return("dry_quart"); }
-    static const char* symbol() { return("dry_quart"); }
+    static const char* name() { return("dry quart"); }
+    static const char* symbol() { return("qt"); }
 };
 
 }
