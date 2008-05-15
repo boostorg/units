@@ -24,7 +24,6 @@
 #include <boost/units/is_dimension_list.hpp>
 #include <boost/units/reduce_unit.hpp>
 #include <boost/units/static_rational.hpp>
-#include <boost/units/detail/implicit_conversion.hpp>
 
 namespace boost {
 
@@ -82,25 +81,10 @@ struct reduce_unit<unit<Dim, System> >
     > type;
 };
 
-//template<class S1,class S2> struct is_implicitly_convertible;
-
-#ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
-
-template<class S1, class S2>
-struct is_implicitly_convertible : mpl::true_ {};
-
-#else
-
 template<class S1,class S2> 
 struct is_implicitly_convertible :
     boost::is_same<typename reduce_unit<S1>::type, typename reduce_unit<S2>::type>
 { };
-
-template<class D, class S1, class S2>
-struct is_implicitly_convertible<unit<D, homogeneous_system<S1> >, unit<D, homogeneous_system<S2> > >
-    : detail::unit_is_implicitly_convertible<unit<D, homogeneous_system<S1> >, unit<D, homogeneous_system<S2> > >::type {};
-
-#endif
 
 /// unit unary plus typeof helper
 /// INTERNAL ONLY

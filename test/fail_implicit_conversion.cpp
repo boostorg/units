@@ -24,17 +24,13 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
-//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
-//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
 
 namespace bu = boost::units;
 
 int main(int,char *[])
 {
-    #ifndef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     const bu::quantity<bu::SI::length>  T1(2.0 * bu::SI::meters);
     const bu::quantity<bu::CGS::length> T2 = T1;
-    #endif // BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
     
     return 0;
 }

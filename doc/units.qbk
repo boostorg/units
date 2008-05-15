@@ -59,7 +59,6 @@
 [def __unscale [classref boost::units::unscale unscale]]
 
 [def __BOOST_UNITS_STATIC_CONSTANT [macroref BOOST_UNITS_STATIC_CONSTANT]]
-[def __BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS [macroref BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]]
 
 [def __BOOST_UNITS_DEFINE_CONVERSION_FACTOR [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR]]
 [def __BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE [macroref BOOST_UNITS_DEFINE_CONVERSION_FACTOR_TEMPLATE]]
@@ -683,23 +682,6 @@ A few more explicit unit system conversions :
 which produces the following output:
 
 [conversion_output_2]
-
-While the library default is to enable only those unit conversions for which the conversion of every
-base unit present in a quantity is specifically enabled as implicit, it is possible to 
-supersede this behavior and enable all implicit conversions by defining the preprocessor 
-constant [___BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSIONS]. This allows us to do things like the following:
-
-[conversion_snippet_6]
-
-which produces the following output:
-
-[conversion_output_3]
-
-Of course, blindly enabling implicit conversions entails some risk of unnecessary conversions being done
-in the background, with the potential for loss of precision and other related concerns. These issues should
-be seriously considered, and, if possible, implicit conversions limited to cases where it is expressly 
-allowed such as in the conversion between two identical units in different unit systems (e.g. seconds in
-SI and CGS systems).
 
 [endsect]
 

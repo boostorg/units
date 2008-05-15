@@ -42,22 +42,8 @@ velocity (2 m/s)  = 2 m s^-1
 velocity (2 cm/s) = 0.02 m s^-1
 //]
 
-//[conversion_output_3
-implicit conversions enabled
-volume (m^3)  = 1 m^3
-volume (cm^3) = 1e+06 cm^3
-
-energy (joules) = 1 m^2 kg s^-2
-energy (ergs)   = 1e+07 cm^2 g s^-2
-
-velocity (2 m/s)  = 2 m s^-1
-velocity (2 cm/s) = 0.02 m s^-1
-//]
-
 @endverbatim
 **/
-
-#define BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
 
 #include <iostream>
 #include <sstream>
@@ -136,40 +122,6 @@ int main()
              << "velocity (2 cm/s) = " << v2 << std::endl
              << std::endl;
     }
-        
-    // test implicit unit system conversion
-    {
-    sstream1 << std::endl
-             << "implicit conversions enabled"
-             << std::endl;
-              
-    //[conversion_snippet_6
-    quantity<SI::volume>     vs(1.0*pow<3>(SI::meter));      
-    quantity<CGS::volume>    vc;
-    
-    vc = vs;
-            
-    quantity<SI::energy>     es(1.0*SI::joule);      
-    quantity<CGS::energy>    ec;
-    
-    ec = es;
-    
-    quantity<SI::velocity>  v1 = 2.0*SI::meters/SI::second,
-                            v2 = 2.0*CGS::centimeters/CGS::second; 
-    //]
-                        
-    sstream1 << "volume (m^3)  = " << vs << std::endl
-             << "volume (cm^3) = " << vc << std::endl
-             << std::endl;
-    
-    sstream1 << "energy (joules) = " << es << std::endl
-             << "energy (ergs)   = " << ec << std::endl
-             << std::endl;
-    
-    sstream1 << "velocity (2 m/s)  = " << v1 << std::endl
-             << "velocity (2 cm/s) = " << v2 << std::endl
-             << std::endl;
-    }
     
     sstream2  << "L1 = 2 m" << std::endl;
     sstream2  << "L2 = 2 m" << std::endl;
@@ -190,19 +142,6 @@ int main()
     sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
     sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;
     sstream2  << std::endl;
-#ifdef BOOST_UNITS_ENABLE_IMPLICIT_UNIT_CONVERSION
-    sstream2  << std::endl;
-    sstream2  << "implicit conversions enabled" << std::endl;
-    sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
-    sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;
-    sstream2  << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
-    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^-2" << std::endl;
-    sstream2  << std::endl;
-    sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
-    sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;
-    sstream2  << std::endl;
-#endif
 
     std::string str1(sstream1.str());
     std::string str2(sstream2.str());
