@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2007 Matthias Christian Schabel
-// Copyright (C) 2007 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -44,20 +44,17 @@ struct dim_tag { };
 /// be a derived from a specialization of @c base_dimension.
 /// Specialization of the following Boost.MPL metafunctions are provided
 ///
-/// @c mpl::plus for two @c dims
-///
-/// @c mpl::minus for two @c dims
-///
-/// @c mpl::negate for a @c dim
+///     - @c mpl::plus for two @c dims
+///     - @c mpl::minus for two @c dims
+///     - @c mpl::negate for a @c dim
 ///
 /// These metafunctions all operate on the exponent, and require
 /// that the @c dim operands have the same base dimension tag.
 /// In addition, multiplication and division by @c static_rational
 /// is supported.
 ///
-/// @c mpl::times for a @c static_rational and a @c dim in either order
-///
-/// @c mpl::divides for a @c static_rational and a @c dim in either order
+///     - @c mpl::times for a @c static_rational and a @c dim in either order
+///     - @c mpl::divides for a @c static_rational and a @c dim in either order
 ///
 /// These metafunctions likewise operate on the exponent only.
 template<typename T,typename V> 

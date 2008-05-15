@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2007 Matthias Christian Schabel
-// Copyright (C) 2007 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -19,8 +19,6 @@
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/size.hpp>
 
-#include <boost/units/dim.hpp>
-#include <boost/units/operators.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/dimension_impl.hpp>
@@ -31,8 +29,6 @@
 namespace boost {
 
 namespace units {
-
-struct S;
 
 /// Reduce dimension list to cardinal form. This algorithm collapses duplicate
 /// base dimension tags and sorts the resulting list by the tag ordinal value.
