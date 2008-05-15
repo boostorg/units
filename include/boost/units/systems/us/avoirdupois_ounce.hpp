@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_APOTHECARIES_DRAM_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_APOTHECARIES_DRAM_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_AVOIRDUPOIS_OUNCE_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_AVOIRDUPOIS_OUNCE_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/grain.hpp>
+#include <boost/units/systems/us/avoirdupois_dram.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<grain_base_unit, scale<60, static_rational<1> > > apothecaries_dram_base_unit; //3.8879346e-3*kilograms
+typedef scaled_base_unit<avoirdupois_dram_base_unit, scale<2, static_rational<4> > > avoirdupois_ounce_base_unit; //2.8349523125e-2*kilograms
 }
 
 template<>
-struct base_unit_info<us::apothecaries_dram_base_unit> {
-    static const char* name() { return("apothecaries_dram"); }
-    static const char* symbol() { return("apothecaries_dram"); }
+struct base_unit_info<us::avoirdupois_ounce_base_unit> {
+    static const char* name() { return("avoirdupois_ounce"); }
+    static const char* symbol() { return("oz"); }
 };
 
 }

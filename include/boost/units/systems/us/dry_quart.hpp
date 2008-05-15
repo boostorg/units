@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_FLUID_DRAM_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_FLUID_DRAM_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_DRY_QUART_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_DRY_QUART_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/minim.hpp>
+#include <boost/units/systems/us/dry_pint.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<minim_base_unit, scale<60, static_rational<1> > > fluid_dram_base_unit; //3.696691e-6*cubic_meters
+typedef scaled_base_unit<dry_pint_base_unit, scale<2, static_rational<1> > > dry_quart_base_unit; //1.101221e-3*cubic_meters
 }
 
 template<>
-struct base_unit_info<us::fluid_dram_base_unit> {
-    static const char* name() { return("fluid_dram"); }
-    static const char* symbol() { return("fluid_dram"); }
+struct base_unit_info<us::dry_quart_base_unit> {
+    static const char* name() { return("dry_quart"); }
+    static const char* symbol() { return("dry_quart"); }
 };
 
 }

@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_LIQUID_PINT_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_LIQUID_PINT_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_PENNYWEIGHT_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_PENNYWEIGHT_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/fluid_dram.hpp>
+#include <boost/units/systems/us/grain.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<fluid_dram_base_unit, scale<2, static_rational<7> > > liquid_pint_base_unit; //4.731765e-4*cubic_meters
+typedef scaled_base_unit<grain_base_unit, scale<24, static_rational<1> > > pennyweight_base_unit; //1.55517384e-3*kilograms
 }
 
 template<>
-struct base_unit_info<us::liquid_pint_base_unit> {
-    static const char* name() { return("liquid_pint"); }
-    static const char* symbol() { return("pt"); }
+struct base_unit_info<us::pennyweight_base_unit> {
+    static const char* name() { return("pennyweight"); }
+    static const char* symbol() { return("pennyweight"); }
 };
 
 }

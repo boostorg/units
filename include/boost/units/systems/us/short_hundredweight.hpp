@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_PECK_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_PECK_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_SHORT_HUNDREDWEIGHT_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_SHORT_HUNDREDWEIGHT_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/dry_pint.hpp>
+#include <boost/units/systems/us/avoirdupois_pound.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<dry_pint_base_unit, scale<2, static_rational<4> > > peck_base_unit; //8.809768e-3*cubic_meters
+typedef scaled_base_unit<avoirdupois_pound_base_unit, scale<10, static_rational<2> > > short_hundredweight_base_unit; //4.5359237e1*kilograms
 }
 
 template<>
-struct base_unit_info<us::peck_base_unit> {
-    static const char* name() { return("peck"); }
-    static const char* symbol() { return("peck"); }
+struct base_unit_info<us::short_hundredweight_base_unit> {
+    static const char* name() { return("short_hundredweight"); }
+    static const char* symbol() { return("short_hundredweight"); }
 };
 
 }

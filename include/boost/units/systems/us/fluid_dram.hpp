@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_APOTHECARIES_POUND_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_APOTHECARIES_POUND_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_FLUID_DRAM_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_FLUID_DRAM_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/apothecaries_ounce.hpp>
+#include <boost/units/systems/us/minim.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<apothecaries_ounce_base_unit, scale<12, static_rational<1> > > apothecaries_pound_base_unit;//3.732417216e-1*kilograms
+typedef scaled_base_unit<minim_base_unit, scale<60, static_rational<1> > > fluid_dram_base_unit; //3.696691e-6*cubic_meters
 }
 
 template<>
-struct base_unit_info<us::apothecaries_pound_base_unit> {
-    static const char* name() { return("apothecaries_pound"); }
-    static const char* symbol() { return("apothecaries_pound"); }
+struct base_unit_info<us::fluid_dram_base_unit> {
+    static const char* name() { return("fluid_dram"); }
+    static const char* symbol() { return("fluid_dram"); }
 };
 
 }

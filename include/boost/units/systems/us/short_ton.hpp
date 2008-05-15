@@ -15,7 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/avoirdupois_pound.hpp>
+#include <boost/units/systems/us/avoirdupois_pound.hpp>
 
 namespace boost {
 namespace units {

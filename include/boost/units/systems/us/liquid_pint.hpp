@@ -8,25 +8,25 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_AVOIRDUPOIS_OUNCE_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_AVOIRDUPOIS_OUNCE_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_LIQUID_PINT_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_LIQUID_PINT_HPP_INCLUDED
 
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/systems/other/avoirdupois_dram.hpp>
+#include <boost/units/systems/us/fluid_dram.hpp>
 
 namespace boost {
 namespace units {
 namespace us {
-typedef scaled_base_unit<avoirdupois_dram_base_unit, scale<2, static_rational<4> > > avoirdupois_ounce_base_unit; //2.8349523125e-2*kilograms
+typedef scaled_base_unit<fluid_dram_base_unit, scale<2, static_rational<7> > > liquid_pint_base_unit; //4.731765e-4*cubic_meters
 }
 
 template<>
-struct base_unit_info<us::avoirdupois_ounce_base_unit> {
-    static const char* name() { return("avoirdupois_ounce"); }
-    static const char* symbol() { return("oz"); }
+struct base_unit_info<us::liquid_pint_base_unit> {
+    static const char* name() { return("liquid_pint"); }
+    static const char* symbol() { return("pt"); }
 };
 
 }
