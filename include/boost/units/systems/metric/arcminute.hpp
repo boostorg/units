@@ -11,11 +11,6 @@
 #ifndef BOOST_UNIT_SYSTEMS_OTHER_ARCMINUTE_HPP_INCLUDED
 #define BOOST_UNIT_SYSTEMS_OTHER_ARCMINUTE_HPP_INCLUDED
 
-//#include <boost/units/systems/detail/non_si_unit.hpp>
-//#include <boost/units/systems/base_units/radian.hpp>
-//
-//BOOST_UNITS_NON_SI_UNIT(metric, arcminute, arcminute, (3.14159265358979323846264338328/10800), radian_base_unit, 8);
-
 #include <boost/units/scaled_base_unit.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
@@ -27,13 +22,14 @@ namespace metric {
 
 typedef scaled_base_unit<degree_base_unit, scale<60, static_rational<-1> > >  arcminute_base_unit;
 
+}
+
 template<>
 struct base_unit_info<metric::arcminute_base_unit> {
     static const char* name()   { return("arcminute"); }
     static const char* symbol() { return("'"); }
 };
 
-}
 }
 }
 
