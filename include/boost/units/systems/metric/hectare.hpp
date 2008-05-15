@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/area.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(metric, hectare, hectare, 1.0e4, SI::area, 12);
+BOOST_UNITS_NON_SI_UNIT(metric, hectare, "hectare", "ha", 1.0e4, SI::area, 12);
 
 #endif

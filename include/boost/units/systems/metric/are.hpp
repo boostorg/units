@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/area.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(metric, are, are, 1.0e2, SI::area, 10);
+BOOST_UNITS_NON_SI_UNIT(metric, are, "are", "a", 1.0e2, SI::area, 10);
 
 #endif

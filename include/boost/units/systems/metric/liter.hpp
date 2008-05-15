@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(metric, liter, L, 1.0e-3, SI::volume, 13);
+BOOST_UNITS_NON_SI_UNIT(metric, liter, "liter", "L", 1.0e-3, SI::volume, 13);
 
 #endif

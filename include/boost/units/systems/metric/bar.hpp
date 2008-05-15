@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/pressure.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(metric, bar, bar, 1.0e5, SI::pressure, 14);
+BOOST_UNITS_NON_SI_UNIT(metric, bar, "bar", "bar", 1.0e5, SI::pressure, 14);
 
 #endif

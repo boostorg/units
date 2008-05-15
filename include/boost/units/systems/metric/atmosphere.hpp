@@ -8,12 +8,12 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNIT_SYSTEMS_OTHER_LIGHT_MINUTE_HPP_INCLUDED
-#define BOOST_UNIT_SYSTEMS_OTHER_LIGHT_MINUTE_HPP_INCLUDED
+#ifndef BOOST_UNIT_SYSTEMS_OTHER_ATMOSPHERE_HPP_INCLUDED
+#define BOOST_UNIT_SYSTEMS_OTHER_ATMOSPHERE_HPP_INCLUDED
 
 #include <boost/units/systems/detail/non_si_unit.hpp>
-#include <boost/units/systems/base_units/meter.hpp>
+#include <boost/units/systems/si/pressure.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(astronomical, light_minute, "light minute", "lm", 1.798754748e10, meter_base_unit, 3);
+BOOST_UNITS_NON_SI_UNIT(metric, atmosphere, "atmosphere", "atm", 1.01325e5, SI::pressure, 14);
 
 #endif

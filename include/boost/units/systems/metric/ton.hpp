@@ -27,7 +27,7 @@ typedef scaled_base_unit<kilogram_base_unit, scale<10, static_rational<3> > > to
 
 template<>
 struct base_unit_info<metric::ton_base_unit> {
-    static const char* name()   { return("ton"); }
+    static const char* name()   { return("metric ton"); }
     static const char* symbol() { return("t"); }
 };
 

@@ -14,7 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-// TODO: what is the symbol???
-BOOST_UNITS_NON_SI_UNIT(astronomical, astronomical_unit, astronomical_unit, 149597870691.0, meter_base_unit, 0);
+BOOST_UNITS_NON_SI_UNIT(astronomical, astronomical_unit, "astronomical unit", "a.u.", 149597870691.0, meter_base_unit, 0);
 
 #endif

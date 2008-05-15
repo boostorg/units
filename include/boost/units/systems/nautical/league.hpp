@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(nautical, league, league, 5556.0, meter_base_unit, 17);
+BOOST_UNITS_NON_SI_UNIT(nautical, league, "league", "league", 5556.0, meter_base_unit, 17);
 
 #endif

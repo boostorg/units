@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(astronomical, parsec, parsec, 3.0856775813e16, meter_base_unit, 6);
+BOOST_UNITS_NON_SI_UNIT(astronomical, parsec, "parsec", "parsec", 3.0856775813e16, meter_base_unit, 6);
 
 #endif

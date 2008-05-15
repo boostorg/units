@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(astronomical, light_year, light_year, 9.460730472580e15, meter_base_unit, 5);
+BOOST_UNITS_NON_SI_UNIT(astronomical, light_year, "light year", "ly", 9.460730472580e15, meter_base_unit, 5);
 
 #endif

@@ -27,7 +27,7 @@ typedef scaled_base_unit<units::hour_base_unit, scale<24, static_rational<1> > >
 template<>
 struct base_unit_info<metric::day_base_unit> {
     static const char* name()   { return("day"); }
-    static const char* symbol() { return("day"); }
+    static const char* symbol() { return("d"); }
 };
 
 }

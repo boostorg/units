@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/kilogram.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(imperial, pound, lb, 0.45359237, kilogram_base_unit, 21);
+BOOST_UNITS_NON_SI_UNIT(imperial, pound, "pound", "lb", 0.45359237, kilogram_base_unit, 21);
 
 #endif
