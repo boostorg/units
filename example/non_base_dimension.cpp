@@ -73,7 +73,7 @@ struct is_implicitly_convertible<unit<volume_dimension,us>,
 } // namespace boost
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial_gallon_tag,
-                                     boost::units::us_gallon_tag::unit_type,
+                                     boost::units::us_gallon_tag,
                                      double, 1.2009499255);
 
 using namespace boost::units;

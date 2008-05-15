@@ -46,9 +46,9 @@ BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::inch_base_unit, boost::units:
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::meter_base_unit, double, 0.9144);
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::meter_base_unit, double, 1609.344);
 
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::yard_base_unit::unit_type, double, 1760.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::foot_base_unit::unit_type, double, 5280.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::inch_base_unit::unit_type, double, 63360.0);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::yard_base_unit, double, 1760.0);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::foot_base_unit, double, 5280.0);
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::inch_base_unit, double, 63360.0);
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::foot_base_unit, double, 3.0);
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::inch_base_unit, double, 36.0);
@@ -59,7 +59,7 @@ BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::hour_base_unit, boost::units:
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::hour_base_unit, boost::units::second_base_unit, double, 3600.0);
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::minute_base_unit, boost::units::second_base_unit, double, 60.0);
 
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::kelvin_base_unit, boost::units::celsius_base_unit::unit_type, one, one());
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::kelvin_base_unit, boost::units::celsius_base_unit, one, one());
 BOOST_UNITS_DEFINE_CONVERSION_OFFSET(boost::units::kelvin_base_unit, boost::units::celsius_base_unit, double, -273.15);
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::kelvin_base_unit, boost::units::fahrenheit_base_unit, double, 9.0/5.0);
