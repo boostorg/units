@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -24,13 +24,13 @@
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/homogeneous_system.hpp>
 #include <boost/units/reduce_unit.hpp>
-#include <boost/units/scale.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/dimension_list.hpp>
 #include <boost/units/detail/heterogeneous_conversion.hpp>
 #include <boost/units/detail/one.hpp>
 #include <boost/units/detail/static_rational_power.hpp>
+#include <boost/units/detail/unscale.hpp>
 
 #include <boost/units/units_fwd.hpp>
 
