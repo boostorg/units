@@ -15,6 +15,8 @@
 
 #include <cmath>
 
+#include <boost/config.hpp>
+
 // BOOST_PREVENT_MACRO_SUBSTITUTION is used for all functions even though it
 // isn't necessary -- I didn't want to think :)
 
