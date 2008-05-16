@@ -39,7 +39,9 @@ template<>
 struct check_quiet_NaN<true> {
     template<class T>
     static void apply() {
-        BOOST_CHECK(isnan BOOST_PREVENT_MACRO_SUBSTITUTION ((std::numeric_limits<quantity<unit_type, T> >::quiet_NaN)()));
+        quantity<unit_type, T> q((std::numeric_limits<quantity<unit_type, T> >::quiet_NaN)());
+        bool test = isnan BOOST_PREVENT_MACRO_SUBSTITUTION (q);
+        BOOST_CHECK(test);
     }
 };
 
@@ -56,7 +58,9 @@ template<>
 struct check_signaling_NaN<true> {
     template<class T>
     static void apply() {
-        BOOST_CHECK(isnan BOOST_PREVENT_MACRO_SUBSTITUTION ((std::numeric_limits<quantity<unit_type, T> >::signaling_NaN)()));
+        quantity<unit_type, T> q((std::numeric_limits<quantity<unit_type, T> >::signaling_NaN)());
+        bool test = isnan BOOST_PREVENT_MACRO_SUBSTITUTION (q);
+        BOOST_CHECK(test);
     }
 };
 
