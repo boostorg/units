@@ -3,7 +3,7 @@
   [version 0.9.0]
   [authors [Schabel, Matthias C.]]
   [authors [Watanabe, Steven]]
-  [copyright 2003-2007 Matthias Christian Schabel, 2007 Steven Watanabe]
+  [copyright 2003-2008 Matthias Christian Schabel, 2007-2008 Steven Watanabe]
   [license
       Distributed under the Boost Software License, Version 1.0.
       (See accompanying file LICENSE_1_0.txt or copy at
@@ -85,7 +85,7 @@ compiled and tested on the following compilers/platforms :
 
 # g++ 4.0.1 on Mac OSX 10.4
 # Intel CC 9.1 and 10.0 on Mac OSX 10.4
-# g++ 3.4.4, 4.2.1, and 4.3.0 on Windows XP
+# g++ 3.4.4, 4.2.3, and 4.3.0 on Windows XP
 # Microsoft Visual C++ 7.1, 8.0, and 9.0 on Windows XP
 # Metrowerks CodeWarrior 9.2 on Windows XP.  
 
@@ -464,7 +464,7 @@ every [___base_unit] using [___BOOST_UNITS_DEFAULT_CONVERSION] and recurse.
 
 [section:DimensionExample Dimension Example]
 
-([@../../libs/units/example/dimension.cpp dimension.cpp])
+([@../../example/dimension.cpp dimension.cpp])
 
 By using MPL metafunctions and the template specializations for operations on composite dimensions
 defined in [headerref boost/units/dimension.hpp], it is possible to perform compile time arithmetic
@@ -483,7 +483,7 @@ outputting (with symbol demangling, implemented in [headerref boost/units/detail
 
 [section:UnitExample Unit Example]
 
-([@../../libs/units/example/unit.cpp unit.cpp])
+([@../../example/unit.cpp unit.cpp])
 
 This example demonstrates the use of the simple but functional unit system implemented in 
 [headerref libs/units/example/test_system.hpp] :
@@ -500,7 +500,7 @@ We can perform various algebraic operations on these units, resulting in the fol
 
 [section:QuantityExample Quantity Example]
 
-([@../../libs/units/example/quantity.cpp quantity.cpp])
+([@../../example/quantity.cpp quantity.cpp])
 
 This example demonstrates how to use quantities of our toy unit system :
 
@@ -527,7 +527,7 @@ to `std::complex<double>` and performing the appropriate dimensional analysis :
 
 [section:KitchenSinkExample Kitchen Sink Example]
 
-([@../../libs/units/example/kitchen_sink.cpp kitchen_sink.cpp])
+([@../../example/kitchen_sink.cpp kitchen_sink.cpp])
 
 This example provides a fairly extensive set of tests covering most of the [___quantity] functionality.
 It uses the SI unit system defined in [headerref boost/units/systems/si.hpp].
@@ -649,7 +649,7 @@ then we can also compute rational powers of measurement quantities :
 
 [section:ConversionExample Conversion Example]
 
-([@../../libs/units/example/conversion.cpp conversion.cpp])
+([@../../example/conversion.cpp conversion.cpp])
 
 This example demonstrates the various allowed conversions between SI and CGS units. Defining some
 quantities
@@ -687,7 +687,7 @@ which produces the following output:
 
 [section:UDTExample User Defined Types]
 
-([@../../libs/units/example/quaternion.cpp quaternion.cpp])
+([@../../example/quaternion.cpp quaternion.cpp])
 
 This example demonstrates the use of `boost::math::quaternion` as a value type for  [___quantity] and the converse.
 For the first case, we first define specializations of [___power_typeof_helper] and [___root_typeof_helper] for 
@@ -728,7 +728,7 @@ giving:
 
 [section:ComplexExample Complex Example]
 
-([@../../libs/units/example/complex.cpp complex.cpp])
+([@../../example/complex.cpp complex.cpp])
 
 This example demonstrates how to implement a replacement `complex` class that functions correctly both as a 
 quantity value type and as a quantity container class, including heterogeneous multiplication and division 
@@ -762,7 +762,7 @@ gives
 
 [section:PerformanceExample Performance Example]
 
-([@../../libs/units/example/performance.cpp performance.cpp])
+([@../../example/performance.cpp performance.cpp])
 
 This example provides an ad hoc performance test to verify that zero runtime overhead 
 is incurred when using [___quantity] in place of `double`. 
@@ -771,7 +771,7 @@ is incurred when using [___quantity] in place of `double`.
 
 [section:RadarBeamHeightExample Radar Beam Height]
 
-([@../../libs/units/example/radar_beam_height.cpp radar_beam_height.cpp])
+([@../../example/radar_beam_height.cpp radar_beam_height.cpp])
 
 [import ../example/radar_beam_height.cpp]
 
@@ -815,7 +815,7 @@ giving
 
 [section:HeterogeneousUnitExample Heterogeneous Unit Example]
 
-([@../../libs/units/example/heterogeneous_unit.cpp heterogeneous_unit.cpp])
+([@../../example/heterogeneous_unit.cpp heterogeneous_unit.cpp])
 
 [import ../example/heterogeneous_unit.cpp]
 
@@ -841,7 +841,7 @@ yielding
 
 [section:AbsoluteRelativeTemperatureExample Absolute and Relative Temperature Example]
 
-([@../../libs/units/example/temperature.cpp temperature.cpp])
+([@../../example/temperature.cpp temperature.cpp])
 
 [import ../example/temperature.cpp]
 
@@ -869,7 +869,7 @@ Note the use of [___absolute] to wrap a unit.
 
 [section:RuntimeConversionFactorExample Runtime Conversion Factor Example]
 
-([@../../libs/units/example/runtime_conversion_factor.cpp runtime_conversion_factor.cpp])
+([@../../example/runtime_conversion_factor.cpp runtime_conversion_factor.cpp])
 
 [import ../example/runtime_conversion_factor.cpp]
 
@@ -882,7 +882,7 @@ be compile time constants.
 
 [section:UnitsWithNonbaseDimensions Units with Non-base Dimensions]
 
-([@../../libs/units/example/non_base_dimension.cpp non_base_dimension.cpp])
+([@../../example/non_base_dimension.cpp non_base_dimension.cpp])
 
 [import ../example/non_base_dimension.cpp]
 
@@ -895,7 +895,7 @@ not have base dimensions.
 
 [section:OutputForCompositeUnits Output for Composite Units]
 
-([@../../libs/units/example/composite_output.cpp composite_output.cpp])
+([@../../example/composite_output.cpp composite_output.cpp])
 
 [import ../example/composite_output.cpp]
 
@@ -908,7 +908,7 @@ it has a special symbol, in this case Newtons.
 
 [section:ConversionFactor Conversion Factor]
 
-([@../../libs/units/example/conversion_factor.cpp conversion_factor.cpp])
+([@../../example/conversion_factor.cpp conversion_factor.cpp])
 
 [import ../example/conversion_factor.cpp]
 
@@ -922,7 +922,7 @@ Produces
 
 [section:RuntimeUnits Runtime Units]
 
-([@../../libs/units/example/runtime_unit.cpp runtime_unit.cpp])
+([@../../example/runtime_unit.cpp runtime_unit.cpp])
 
 [import ../example/runtime_unit.cpp]
 
