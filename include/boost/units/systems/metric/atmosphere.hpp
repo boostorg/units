@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/pressure.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(metric, atmosphere, "atmosphere", "atm", 1.01325e5, SI::pressure, 14);
+BOOST_UNITS_NON_SI_UNIT(metric, atmosphere, "atmosphere", "atm", 1.01325e5, SI::pressure, 33);
 
 #endif

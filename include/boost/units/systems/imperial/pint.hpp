@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(imperial, pint, "pint", "pt", 0.56826125, SI::volume, 21); // exact conversion
+BOOST_UNITS_NON_SI_UNIT(imperial, pint, "pint", "pt", 0.56826125, SI::volume, 31); // exact conversion
 
 #endif
