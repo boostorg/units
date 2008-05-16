@@ -88,7 +88,7 @@ run_doxygen base_units_reference
 
 run_doxygen dimensions_reference
   :
-    ../../../boost/units/systems/physical_units.hpp
+    ../../../boost/units/systems/physical_dimensions.hpp
     [ path.glob-tree ../../../boost/units/systems/physical_dimensions : *.hpp : detail ]
   :
     "Dimensions Reference"

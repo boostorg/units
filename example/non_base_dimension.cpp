@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -31,7 +31,7 @@ Output:
 #include <boost/units/conversion.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
-#include <boost/units/systems/physical_units.hpp>
+#include <boost/units/systems/physical_dimensions.hpp>
 #include <boost/units/base_unit.hpp>
 #include <boost/units/make_system.hpp>
 
