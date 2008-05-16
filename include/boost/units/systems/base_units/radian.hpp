@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -37,7 +37,8 @@ struct radian_base_unit : public base_unit<radian_base_unit, plane_angle_dimensi
 
 BOOST_TYPEOF_REGISTER_TYPE(boost::units::radian_base_unit)
 
-
 #endif
+
+#include <boost/units/systems/base_units/detail/conversions.hpp>
 
 #endif // BOOST_UNITS_RADIAN_BASE_UNIT_HPP

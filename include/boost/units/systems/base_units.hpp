@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -40,39 +40,5 @@
 #include <boost/units/systems/base_units/second.hpp>
 #include <boost/units/systems/base_units/steradian.hpp>
 #include <boost/units/systems/base_units/yard.hpp>
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::foot_base_unit, boost::units::meter_base_unit, double, 0.3048);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::inch_base_unit, boost::units::meter_base_unit, double, 25.4e-3);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::meter_base_unit, double, 0.9144);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::meter_base_unit, double, 1609.344);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::yard_base_unit, double, 1760.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::foot_base_unit, double, 5280.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::mile_base_unit, boost::units::inch_base_unit, double, 63360.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::foot_base_unit, double, 3.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::yard_base_unit, boost::units::inch_base_unit, double, 36.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::foot_base_unit, boost::units::inch_base_unit, double, 12.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::hour_base_unit, boost::units::minute_base_unit, double, 60.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::hour_base_unit, boost::units::second_base_unit, double, 3600.0);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::minute_base_unit, boost::units::second_base_unit, double, 60.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::kelvin_base_unit, boost::units::celsius_base_unit, one, one());
-BOOST_UNITS_DEFINE_CONVERSION_OFFSET(boost::units::kelvin_base_unit, boost::units::celsius_base_unit, double, -273.15);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::kelvin_base_unit, boost::units::fahrenheit_base_unit, double, 9.0/5.0);
-BOOST_UNITS_DEFINE_CONVERSION_OFFSET(boost::units::kelvin_base_unit, boost::units::fahrenheit_base_unit, double, -273.15 * 9.0 / 5.0 + 32.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::celsius_base_unit, boost::units::fahrenheit_base_unit, double, 9.0/5.0);
-BOOST_UNITS_DEFINE_CONVERSION_OFFSET(boost::units::celsius_base_unit, boost::units::fahrenheit_base_unit, double, 32.0);
-
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::radian_base_unit, boost::units::degree_base_unit, double, 180/3.14159265358979323846);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::radian_base_unit, boost::units::gradian_base_unit, double, 200/3.14159265358979323846);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::radian_base_unit, boost::units::revolution_base_unit, double, 0.5/3.14159265358979323846);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::degree_base_unit, boost::units::gradian_base_unit, double, 10/9.);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::degree_base_unit, boost::units::revolution_base_unit, double, 1/360.);
-BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::gradian_base_unit, boost::units::revolution_base_unit, double, 1/400.);
 
 #endif // BOOST_UNITS_OTHER_UNITS_HPP_INCLUDED

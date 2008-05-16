@@ -11,6 +11,13 @@ project units_test :
     requirements <include>$(BOOST_ROOT) <include>../../.. <warnings>all
 ;
 
+check-conversion-dependencies = [ path.glob-tree ../../../boost/units/systems/base_units : *.hpp ] ;
+checklibs =
+    $(BOOST_ROOT)/libs/regex/build//boost_regex
+    $(BOOST_ROOT)/libs/filesystem/build//boost_filesystem
+    $(BOOST_ROOT)/libs/system/build//boost_system
+;
+
 import testing ;
 
 {
@@ -31,6 +38,7 @@ import testing ;
     [ run test_cmath.cpp : : : : ]
     [ run test_limits.cpp : : : : ]
     [ run test_custom_unit.cpp : : : : ]
+#    [ run check_conversion_defs.cpp $(checklibs) : : : <dependency>$(check-conversion-dependencies) : ]
     [ compile-fail fail_implicit_conversion.cpp : : ]
     [ compile-fail fail_quantity_construct.cpp : : ]
     [ compile-fail fail_quantity_assign.cpp : : ]
