@@ -10,25 +10,32 @@
 import testing ;
 import path ;
 import regex ;
+import print ;
+import generate_header ;
 
-project test :
+project test_headers :
     requirements <include>$(BOOST_ROOT) <include>../../..
 ;
 
-rule setup ( ) {
+headers = ;
 
+rule setup ( ) {
   for local file in [ path.glob-tree ../../../boost/units : *.hpp ] {
 
+    headers += $(file) ;
     result += [ compile test.cpp : <define>BOOST_UNITS_HEADER_NAME=$(file) <dependency>$(file) : [ regex.replace [ path.relative-to ../../.. $(file) ] "/" "_" ] ] ;
 
   }
-
   return $(result) ;
-
 }
+
+tests = [ setup ] ;
+
+generate-include-all-cpp include_all : $(headers) ;
 
 import testing ;
 
 test-suite units_headers :
-  [ setup ]
+  $(tests)
+  [ compile include_all : <include>. : include_all_headers ]
   ;
