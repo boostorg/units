@@ -18,7 +18,7 @@
 #include <boost/units/detail/static_rational_power.hpp>
 
 /// \file 
-/// \brief Raise values to exponents known as compile-time
+/// \brief Raise values to exponents known at compile-time
 
 namespace boost {
 

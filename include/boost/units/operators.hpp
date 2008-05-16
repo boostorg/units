@@ -21,7 +21,7 @@
 ///
 /// \detailed 
 /// These operators declare the compile-time operators needed to support dimensional
-/// analysis algebra. Specializations must be defined for all desired operand types. 
+/// analysis algebra.  They require the use of Boost.Typeof.
 /// Typeof helper classes define result type for heterogeneous operators on value types. 
 /// These must be defined through specialization for powers and roots.
 
@@ -117,6 +117,38 @@ template<typename X,typename Y> struct divide_typeof_helper     { BOOST_STATIC_A
 
 template<typename X,typename Y> struct power_typeof_helper;
 template<typename X,typename Y> struct root_typeof_helper;
+
+#ifdef BOOST_UNITS_DOXYGEN
+
+/// A helper for computing the result of
+/// raising a runtime object to a compile time
+/// known exponent.  This template is intended to
+/// be specialized.  All specializations must
+/// conform to the interface shown here.
+template<typename BaseType, typename Exponent>
+struct power_typeof_helper
+{
+    /// specifies the result type
+    typedef detail::unspecified type;
+    /// Carries out the runtime calculation.
+    static type value(const BaseType& base);
+};
+
+/// A helper for computing taking a root
+/// of a runtime object using a compile time
+/// known index.  This template is intended to
+/// be specialized.  All specializations must
+/// conform to the interface shown here.
+template<typename Radicand, typename Index>
+struct root_typeof_helper
+{
+    /// specifies the result type
+    typedef detail::unspecified type;
+    /// Carries out the runtime calculation.
+    static type value(const BaseType& base);
+};
+
+#endif
 
 } // namespace units
 
