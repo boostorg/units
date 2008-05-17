@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_DEGREE_HPP
-#define BOOST_UNITS_DEGREE_HPP
+#ifndef BOOST_UNITS_ANGLE_DEGREE_HPP
+#define BOOST_UNITS_ANGLE_DEGREE_HPP
 
 #include <cmath>
 
@@ -18,7 +18,7 @@
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/base_units/degree.hpp>
+#include <boost/units/systems/angle/base_units/degree.hpp>
 
 namespace boost {
 
@@ -26,7 +26,7 @@ namespace units {
 
 namespace degree {
 
-typedef make_system<degree_base_unit>::type system;
+typedef make_system<boost::units::angle::degree_base_unit>::type system;
 
 typedef unit<dimensionless_type,system>         dimensionless;
 typedef unit<plane_angle_dimension,system>      plane_angle;           ///< angle degree unit constant
@@ -40,4 +40,4 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,plane_angle);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_DEGREE_HPP
+#endif // BOOST_UNITS_ANGLE_DEGREE_HPP

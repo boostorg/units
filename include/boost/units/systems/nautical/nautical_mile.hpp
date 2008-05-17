@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(nautical, nautical_mile, "nautical mile", "nautical mile", 1852.0, meter_base_unit, 18);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(nautical, nautical_mile, "nautical mile", "nautical mile", 1852.0, meter_base_unit, 18);
 
 #endif

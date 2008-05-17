@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(nautical, fathom, "fathom", "fathom", 1.852, meter_base_unit, 15);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(nautical, fathom, "fathom", "fathom", 1.852, meter_base_unit, 15);
 
 #endif

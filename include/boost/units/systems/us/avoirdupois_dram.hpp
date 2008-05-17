@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/kilogram.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(us, avoirdupois_dram, "avoirdupois_dram", "avoirdupois_dram", 1.7718451953125e-3, kilogram_base_unit, 21);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, avoirdupois_dram, "avoirdupois_dram", "avoirdupois_dram", 1.7718451953125e-3, kilogram_base_unit, 21);
 
 #endif

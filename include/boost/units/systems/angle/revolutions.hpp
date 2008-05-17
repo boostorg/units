@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_REVOLUTIONS_HPP
-#define BOOST_UNITS_REVOLUTIONS_HPP
+#ifndef BOOST_UNITS_ANGLE_REVOLUTIONS_HPP
+#define BOOST_UNITS_ANGLE_REVOLUTIONS_HPP
 
 #include <cmath>
 
@@ -18,7 +18,7 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/base_units/revolution.hpp>
+#include <boost/units/systems/angle/base_units/revolution.hpp>
 
 namespace boost {
 
@@ -26,7 +26,7 @@ namespace units {
 
 namespace revolution {
 
-typedef make_system<revolution_base_unit>::type system;
+typedef make_system<boost::units::angle::revolution_base_unit>::type system;
 
 typedef unit<dimensionless_type,system>         dimensionless;
 typedef unit<plane_angle_dimension,system>      plane_angle;          ///< angle revolution unit constant
@@ -40,4 +40,4 @@ BOOST_UNITS_STATIC_CONSTANT(revolutions,plane_angle);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_REVOLUTIONS_HPP
+#endif // BOOST_UNITS_ANGLE_REVOLUTIONS_HPP

@@ -18,15 +18,15 @@
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
 
-#include <boost/units/systems/base_units/meter.hpp>
-#include <boost/units/systems/base_units/kilogram.hpp>
-#include <boost/units/systems/base_units/second.hpp>
-#include <boost/units/systems/base_units/ampere.hpp>
-#include <boost/units/systems/base_units/kelvin.hpp>
-#include <boost/units/systems/base_units/mole.hpp>
-#include <boost/units/systems/base_units/candela.hpp>
-#include <boost/units/systems/base_units/radian.hpp>
-#include <boost/units/systems/base_units/steradian.hpp>
+#include <boost/units/systems/SI/base_units/meter.hpp>
+#include <boost/units/systems/SI/base_units/kilogram.hpp>
+#include <boost/units/systems/SI/base_units/second.hpp>
+#include <boost/units/systems/SI/base_units/ampere.hpp>
+#include <boost/units/systems/SI/base_units/kelvin.hpp>
+#include <boost/units/systems/SI/base_units/mole.hpp>
+#include <boost/units/systems/SI/base_units/candela.hpp>
+#include <boost/units/systems/angle/base_units/radian.hpp>
+#include <boost/units/systems/angle/base_units/steradian.hpp>
 
 namespace boost {
 
@@ -35,7 +35,15 @@ namespace units {
 namespace SI {
 
 /// placeholder class defining SI unit system
-typedef make_system<meter_base_unit, kilogram_base_unit, second_base_unit, ampere_base_unit, kelvin_base_unit, mole_base_unit, candela_base_unit, radian_base_unit, steradian_base_unit>::type system;
+typedef make_system<meter_base_unit, 
+					kilogram_base_unit, 
+					second_base_unit, 
+					ampere_base_unit, 
+					kelvin_base_unit, 
+					mole_base_unit, 
+					candela_base_unit, 
+					boost::units::angle::radian_base_unit, 
+					boost::units::angle::steradian_base_unit>::type system;
 
 /// dimensionless SI unit
 typedef unit<dimensionless_type,system>         dimensionless;

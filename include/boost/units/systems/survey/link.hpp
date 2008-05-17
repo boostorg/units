@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(survey, link, "link", "link", 0.2011684, meter_base_unit, 24);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(survey, link, "link", "link", 0.2011684, meter_base_unit, 24);
 
 #endif

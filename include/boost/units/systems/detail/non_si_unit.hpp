@@ -13,7 +13,7 @@
 
 #include <boost/units/conversion.hpp>
 
-//#define BOOST_UNITS_NON_SI_UNIT(namespace_, name_, symbol_, factor, unit, id)\
+//#define BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(namespace_, name_, symbol_, factor, unit, id)\
 //namespace boost {                                                           \
 //namespace units {                                                           \
 //namespace namespace_ {                                                      \
@@ -28,12 +28,12 @@
 //BOOST_UNITS_DEFINE_CONVERSION_FACTOR(namespace_::name_ ## _base_unit, unit, double, factor); \
 //BOOST_UNITS_DEFAULT_CONVERSION(namespace_::name_ ## _base_unit, unit)
 
-#define BOOST_UNITS_NON_SI_UNIT(namespace_, name_, name_string_, symbol_string_, factor, unit, id)\
+#define BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(namespace_, name_, name_string_, symbol_string_, factor, unit, id)\
 namespace boost {                                                           \
 namespace units {                                                           \
 namespace namespace_ {                                                      \
 struct name_ ## _base_unit                                                  \
-  : base_unit<name_ ## _base_unit, unit::dimension_type, id - 100> {        \
+  : base_unit<name_ ## _base_unit, unit::dimension_type, id> {              \
     static const char* name() { return(name_string_); }                     \
     static const char* symbol() { return(symbol_string_); };                \
 };                                                                          \

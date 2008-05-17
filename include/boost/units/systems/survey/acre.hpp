@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/area.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(survey, acre, "acre", "acre", 4046.873, SI::area, 29);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(survey, acre, "acre", "acre", 4046.873, SI::area, 29);
 
 #endif

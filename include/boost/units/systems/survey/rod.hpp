@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(survey, rod, "rod", "rod", 5.029210, meter_base_unit, 26);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(survey, rod, "rod", "rod", 5.029210, meter_base_unit, 26);
 
 #endif

@@ -14,6 +14,6 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/base_units/meter.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(survey, mile, "mile", "mile", 1609.347, meter_base_unit, 28);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(survey, mile, "mile", "mile", 1609.347, meter_base_unit, 28);
 
 #endif

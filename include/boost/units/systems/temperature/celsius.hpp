@@ -8,15 +8,15 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_CELSIUS_HPP
-#define BOOST_UNITS_CELSIUS_HPP
+#ifndef BOOST_UNITS_TEMPERATURE_CELSIUS_HPP
+#define BOOST_UNITS_TEMPERATURE_CELSIUS_HPP
 
 #include <string>
 
 #include <boost/units/absolute.hpp>
 #include <boost/units/static_constant.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/base_units/celsius.hpp>
+#include <boost/units/systems/temperature/base_units/celsius.hpp>
 
 namespace boost {
 
@@ -24,7 +24,7 @@ namespace units {
 
 namespace celsius {
 
-typedef make_system<celsius_base_unit>::type system;
+typedef make_system<boost::units::temperature::celsius_base_unit>::type system;
 
 typedef unit<temperature_dimension,system>   temperature;
 
@@ -37,4 +37,4 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_CELSIUS_HPP
+#endif // BOOST_UNITS_TEMPERATURE_CELSIUS_HPP

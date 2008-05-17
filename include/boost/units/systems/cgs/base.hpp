@@ -18,9 +18,10 @@
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
 
-#include <boost/units/systems/base_units/centimeter.hpp>
-#include <boost/units/systems/base_units/gram.hpp>
-#include <boost/units/systems/base_units/second.hpp>
+#include <boost/units/systems/CGS/base_units/centimeter.hpp>
+#include <boost/units/systems/CGS/base_units/gram.hpp>
+#include <boost/units/systems/SI/base_units/second.hpp>
+#include <boost/units/systems/CGS/base_units/biot.hpp>
 
 namespace boost {
 
@@ -29,7 +30,10 @@ namespace units {
 namespace CGS {
 
 /// placeholder class defining CGS unit system
-typedef make_system<centimeter_base_unit, gram_base_unit, second_base_unit>::type system;
+typedef make_system<centimeter_base_unit, 
+					gram_base_unit, 
+					boost::units::SI::second_base_unit,
+					biot_base_unit>::type system;
 
 /// various unit typedefs for convenience
 typedef unit<dimensionless_type,system>         dimensionless;

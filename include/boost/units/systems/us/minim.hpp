@@ -14,7 +14,7 @@
 #include <boost/units/systems/detail/non_si_unit.hpp>
 #include <boost/units/systems/si/volume.hpp>
 
-BOOST_UNITS_NON_SI_UNIT(us, minim, "minim", "minim", 6.161152e-8, SI::volume, 19);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, minim, "minim", "minim", 6.161152e-8, SI::volume, 19);
 
 //#include <boost/units/scaled_base_unit.hpp>
 //#include <boost/units/static_rational.hpp>

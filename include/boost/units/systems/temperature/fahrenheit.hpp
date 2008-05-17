@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_FAHRENHEIT_HPP
-#define BOOST_UNITS_FAHRENHEIT_HPP
+#ifndef BOOST_UNITS_TEMPERATURE_FAHRENHEIT_HPP
+#define BOOST_UNITS_TEMPERATURE_FAHRENHEIT_HPP
 
 #include <string>
 
@@ -17,7 +17,7 @@
 #include <boost/units/io.hpp>
 #include <boost/units/make_system.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/base_units/fahrenheit.hpp>
+#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
 
 namespace boost {
 
@@ -25,7 +25,7 @@ namespace units {
 
 namespace fahrenheit {
 
-typedef make_system<fahrenheit_base_unit>::type system;
+typedef make_system<boost::units::temperature::fahrenheit_base_unit>::type system;
 
 typedef unit<temperature_dimension,system>   temperature;
 
@@ -38,4 +38,4 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // namespace boost
 
-#endif // BOOST_UNITS_FAHRENHEIT_HPP
+#endif // BOOST_UNITS_TEMPERATURE_FAHRENHEIT_HPP

@@ -44,7 +44,7 @@ Output:
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/detail/utility.hpp>
 
-#include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
 
 using namespace boost::units;
 
@@ -55,7 +55,7 @@ namespace units {
 namespace fahrenheit {
 
 //[temperature_snippet_1
-typedef make_system<fahrenheit_base_unit>::type  system;
+typedef make_system<boost::units::temperature::fahrenheit_base_unit>::type  system;
 
 typedef unit<temperature_dimension,system>                   temperature;
 
@@ -117,11 +117,11 @@ int main()
               << T3v << std::endl
               << std::endl;
     
-    sstream2  << "32 absolute F" << std::endl
+    sstream2  << "32 absolute °F" << std::endl
               << "273.15 absolute K" << std::endl
               << "273.15 absolute K" << std::endl
               << "273.15 absolute K" << std::endl
-              << "32 F" << std::endl
+              << "32 °F" << std::endl
               << 17.77777777777 << " K" << std::endl
               << 17.77777777777 << " K" << std::endl
               << 17.77777777777 << " K" << std::endl

@@ -72,7 +72,7 @@ static const length mile,miles;
 } // namespace boost
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::nautical::length_base_unit,
-                                     boost::units::meter_base_unit,
+                                     boost::units::SI::meter_base_unit,
                                      double, 1.852e3);
 
 namespace boost {
@@ -104,7 +104,7 @@ static const length foot,feet;
 } // namespace boost
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial::length_base_unit,
-                                     boost::units::meter_base_unit,
+                                     boost::units::SI::meter_base_unit,
                                      double, 1.0/3.28083989501312);
 
 namespace boost {
