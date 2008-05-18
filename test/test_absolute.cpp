@@ -25,7 +25,10 @@ Output:
 #include <boost/units/absolute.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/physical_dimensions.hpp>
+#include <boost/units/systems/si/base_units/kelvin.hpp>
+#include <boost/units/systems/temperature/base_units/celsius.hpp>
+#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
 
 #include <iostream>
 
@@ -34,12 +37,15 @@ Output:
 #define BOOST_UNITS_CHECK_CLOSE(a, b) (BOOST_CHECK((std::abs((a) - (b)) < .0000001)))
 
 namespace bu = boost::units;
+using bu::SI::kelvin_base_unit;
+using bu::temperature::celsius_base_unit;
+using bu::temperature::fahrenheit_base_unit;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::kelvin_base_unit>::type> kelvin_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<kelvin_base_unit>::type> kelvin_type;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::celsius_base_unit>::type> celsius_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<celsius_base_unit>::type> celsius_type;
 
-typedef bu::unit<bu::temperature_dimension,bu::make_system<bu::fahrenheit_base_unit>::type> fahrenheit_type;
+typedef bu::unit<bu::temperature_dimension,bu::make_system<fahrenheit_base_unit>::type> fahrenheit_type;
 
 int test_main(int,char *[])
 {
