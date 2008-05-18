@@ -53,7 +53,6 @@ doxygen $(target)
 
 run_doxygen units_reference
   :
-    ../../../boost/units/systems/physical_units.hpp
     [ glob ../../../boost/units/*.hpp ]
   :
     "Units Reference"
