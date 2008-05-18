@@ -26,6 +26,7 @@
 [def __conversion_helper [classref boost::units::conversion_helper conversion_helper]]
 [def __absolute [classref boost::units::absolute absolute]]
 [def __base_unit [classref boost::units::base_unit base_unit]]
+[def __base_dimension [classref boost::units::base_dimension base_dimension]]
 [def __scaled_base_unit [classref boost::units::scaled_base_unit base_unit]]
 
 [def __unary_plus_typeof_helper [classref boost::units::unary_plus_typeof_helper unary_plus_typeof_helper]]
@@ -123,7 +124,7 @@ in the following :
 *  *Quantity* : A quantity represents a concrete amount of a unit. Thus, while the meter is the base 
    unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
-To begin, we present two short tutorials. [@../../libs/units/tutorial/tutorial_1.cpp Tutorial1] demonstrates the use of 
+To begin, we present two short tutorials. [@../../tutorial/tutorial_1.cpp Tutorial1] demonstrates the use of 
 [@http://en.wikipedia.org/wiki/SI_units SI] units. After including the appropriate system headers 
 and the headers for the various SI units we will need (all SI units can be included with  
 [headerref boost/units/systems/si.hpp]) and for quantity I/O ([headerref boost/units/io.hpp]), we define 
