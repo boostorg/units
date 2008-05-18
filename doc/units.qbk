@@ -334,7 +334,7 @@ assignment operator.  Operators +, -, *, and / are provided for algebraic operat
 scalars and units, scalars and quantities, units and quantities, and between quantities. In addition, integral and
 rational powers and roots can be computed using the [___pow]<R> and [___root]<R> functions. Finally,  
 the standard set of boolean comparison operators ( `==, !=,  <, <=, >, and >=` ) are provided to allow 
-comparison of quantities from the same unit system.  All operators require simply delegate to the
+comparison of quantities from the same unit system.  All operators simply delegate to the
 corresponding operator of the value type if the units permit.
 
 [section:Quantity_Construction_and_Conversion Construction and Conversion of Quantities]
