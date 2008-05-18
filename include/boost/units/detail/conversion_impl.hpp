@@ -297,7 +297,10 @@ template<class Source, class Dest>
 struct base_unit_converter_scaled_is_undefined :
     boost::is_base_and_derived<
         undefined_base_unit_converter_base,
-        base_unit_converter<typename unscale<Source>::type, typename unscale<Dest>::type>
+        base_unit_converter<
+            typename select_base_unit_converter<typename unscale<Source>::type, typename unscale<Dest>::type>::source_type,
+            typename select_base_unit_converter<typename unscale<Source>::type, typename unscale<Dest>::type>::destination_type
+        >
     > {};
 
 template<class Source, class Dest>
