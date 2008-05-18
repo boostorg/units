@@ -8,19 +8,12 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_BASE_UNIT_HPP_INCLUDED
-#define BOOST_UNITS_BASE_UNIT_HPP_INCLUDED
+#ifndef BOOST_UNITS_SCALED_BASE_UNIT_HPP_INCLUDED
+#define BOOST_UNITS_SCALED_BASE_UNIT_HPP_INCLUDED
 
 #include <string>
 
 #include <boost/mpl/bool.hpp>
-#include <boost/mpl/size.hpp>
-#include <boost/mpl/begin.hpp>
-#include <boost/mpl/next.hpp>
-#include <boost/mpl/deref.hpp>
-#include <boost/mpl/plus.hpp>
-#include <boost/mpl/times.hpp>
-#include <boost/mpl/negate.hpp>
 #include <boost/mpl/less.hpp>
 #include <boost/type_traits/is_same.hpp>
 
@@ -28,8 +21,6 @@
 #include <boost/units/dimension.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
-#include <boost/units/detail/one.hpp>
-#include <boost/units/detail/static_rational_power.hpp>
 
 namespace boost {
 
@@ -38,8 +29,8 @@ namespace units {
 template<class T>
 struct heterogeneous_system;
 
-template<class T, class D>
-struct heterogeneous_system_pair;
+template<class T, class D, class Scale>
+struct heterogeneous_system_impl;
 
 template<class T, class E>
 struct heterogeneous_system_dim;
@@ -67,12 +58,13 @@ struct scaled_base_unit
     typedef unit<
         dimension_type,
         heterogeneous_system<
-            heterogeneous_system_pair<
+            heterogeneous_system_impl<
                 dimension_list<
                     heterogeneous_system_dim<scaled_base_unit,static_rational<1> >,
                     dimensionless_type
                 >,
-                dimension_type
+                dimension_type,
+                dimensionless_type
             >
         >
     > unit_type;

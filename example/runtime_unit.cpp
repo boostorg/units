@@ -15,12 +15,14 @@
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/base_units.hpp>
+#include <boost/units/systems/imperial/base_units/foot.hpp>
 
 //[runtime_unit_snippet_1
 
 namespace {
 
 using namespace boost::units;
+using imperial::foot_base_unit;
 
 std::map<std::string, quantity<SI::length> > known_units;
 

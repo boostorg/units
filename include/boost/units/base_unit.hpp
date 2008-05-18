@@ -79,12 +79,13 @@ class base_unit :
         typedef unit<
             Dim,
             heterogeneous_system<
-                heterogeneous_system_pair<
+                heterogeneous_system_impl<
                     dimension_list<
                         heterogeneous_system_dim<Derived,static_rational<1> >,
                         dimensionless_type
                     >,
-                    Dim
+                    Dim,
+                    no_scale
                 >
             >
         > unit_type;

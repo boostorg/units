@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -24,8 +24,8 @@ struct heterogeneous_system;
 template<class T>
 struct homogeneous_system;
 
-template<class T1, class T2>
-struct heterogeneous_system_pair;
+template<class T1, class T2, class Scale>
+struct heterogeneous_system_impl;
 
 namespace detail {
 
@@ -38,7 +38,8 @@ struct is_dimensionless_system<boost::units::homogeneous_system<T> > : boost::mp
 template<>
 struct is_dimensionless_system<
    boost::units::heterogeneous_system<
-       boost::units::heterogeneous_system_pair<
+       boost::units::heterogeneous_system_impl<
+           boost::units::dimensionless_type,
            boost::units::dimensionless_type,
            boost::units::dimensionless_type
        >

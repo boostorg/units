@@ -17,6 +17,7 @@
 #include <boost/units/base_unit.hpp>
 #include <boost/units/systems/physical_dimensions/length.hpp>
 #include <boost/units/systems/SI/base_units/meter.hpp>
+#include <boost/units/systems/detail/non_si_unit.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(imperial, yard, "yard", "yd", 0.9144, SI::meter_base_unit, -301);	// exact conversion
 

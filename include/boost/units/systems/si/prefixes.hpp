@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -18,6 +18,31 @@ namespace boost {
 namespace units { 
 
 namespace SI {
+
+//#define BOOST_UNITS_METRIC_PREFIX(exponent, name)                                                       \
+//    typedef make_scaled_unit<dimensionless, scale<10, static_rational<exponent> > >::type name ## _type;\
+//    BOOST_UNITS_STATIC_CONSTANT(name, name ## _type)
+//
+//BOOST_UNITS_METRIC_PREFIX(-24, yocto);
+//BOOST_UNITS_METRIC_PREFIX(-21, zepto);
+//BOOST_UNITS_METRIC_PREFIX(-18, atto);
+//BOOST_UNITS_METRIC_PREFIX(-15, femto);
+//BOOST_UNITS_METRIC_PREFIX(-12, pico);
+//BOOST_UNITS_METRIC_PREFIX(-9, nano);
+//BOOST_UNITS_METRIC_PREFIX(-6, micro);
+//BOOST_UNITS_METRIC_PREFIX(-3, milli);
+//BOOST_UNITS_METRIC_PREFIX(-2, centi);
+//BOOST_UNITS_METRIC_PREFIX(-1, deci);
+//BOOST_UNITS_METRIC_PREFIX(1, deka);
+//BOOST_UNITS_METRIC_PREFIX(2, hecto);
+//BOOST_UNITS_METRIC_PREFIX(3, kilo);
+//BOOST_UNITS_METRIC_PREFIX(6, mega);
+//BOOST_UNITS_METRIC_PREFIX(9, giga);
+//BOOST_UNITS_METRIC_PREFIX(12, tera);
+//BOOST_UNITS_METRIC_PREFIX(15, peta);
+//BOOST_UNITS_METRIC_PREFIX(18, exa);
+//BOOST_UNITS_METRIC_PREFIX(21, zetta);
+//BOOST_UNITS_METRIC_PREFIX(24, yotta);
 
 BOOST_UNITS_STATIC_CONSTANT(yocto,long double) = (1e-24);       ///< metric prefix for 1.0e-24
 BOOST_UNITS_STATIC_CONSTANT(zepto,long double) = (1e-21);       ///< metric prefix for 1.0e-21

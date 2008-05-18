@@ -54,12 +54,16 @@ struct is_zero<static_rational<0> > : mpl::true_ {};
 } // namespace detail
 
 /// INTERNAL ONLY
-template<class L, class Dimensions>
-struct heterogeneous_system_pair
+template<class L, class Dimensions, class Scale>
+struct heterogeneous_system_impl
 {
     typedef L type;
     typedef Dimensions dimensions;
+    typedef Scale scale;
 };
+
+/// INTERNAL ONLY
+typedef dimensionless_type no_scale;
 
 /// A system that can represent any possible combination
 /// of units at the expense of not preserving information
@@ -87,7 +91,7 @@ struct heterogeneous_system_dim
     boost::units::unit<                                             \
         Dimensions,                                                 \
         boost::units::heterogeneous_system<                         \
-            boost::units::heterogeneous_system_pair<                \
+            boost::units::heterogeneous_system_impl<                \
                 boost::units::dimension_list<                       \
                     boost::units::heterogeneous_system_dim<         \
                         BaseUnit,                                   \
@@ -95,7 +99,8 @@ struct heterogeneous_system_dim
                     >,                                              \
                     boost::units::dimensionless_type                \
                 >,                                                  \
-                Dimensions                                          \
+                Dimensions,                                         \
+                boost::units::no_scale                              \
             >                                                       \
         >                                                           \
     >
@@ -109,7 +114,7 @@ struct heterogeneous_system_dim
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_pair, (class)(class))
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_impl, (class)(class)(class))
 BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system, (class))
 BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::heterogeneous_system_dim, (class)(class))
 
@@ -235,7 +240,7 @@ struct make_heterogeneous_system
         typename mpl::begin<typename System::type>::type,
         typename mpl::begin<exponents>::type
     >::type unit_list;
-    typedef heterogeneous_system<heterogeneous_system_pair<unit_list,Dimensions> > type;
+    typedef heterogeneous_system<heterogeneous_system_impl<unit_list, Dimensions, no_scale> > type;
 };
 
 template<class Dimensions, class T>
@@ -248,9 +253,10 @@ template<class T0, class T1>
 struct multiply_systems
 {
     typedef heterogeneous_system<
-        heterogeneous_system_pair<
+        heterogeneous_system_impl<
             typename mpl::times<typename T0::type, typename T1::type>::type,
-            typename mpl::times<typename T0::dimensions, typename T1::dimensions>::type
+            typename mpl::times<typename T0::dimensions, typename T1::dimensions>::type,
+            typename mpl::times<typename T0::scale, typename T1::scale>::type
         >
     > type;
 };
@@ -259,9 +265,10 @@ template<class T0, class T1>
 struct divide_systems
 {
     typedef heterogeneous_system<
-        heterogeneous_system_pair<
+        heterogeneous_system_impl<
             typename mpl::divides<typename T0::type, typename T1::type>::type,
-            typename mpl::divides<typename T0::dimensions, typename T1::dimensions>::type
+            typename mpl::divides<typename T0::dimensions, typename T1::dimensions>::type,
+            typename mpl::divides<typename T0::scale, typename T1::scale>::type
         >
     > type;
 };
@@ -273,9 +280,10 @@ template<class S, long N, long D>
 struct static_power<heterogeneous_system<S>, static_rational<N,D> >
 {
     typedef heterogeneous_system<
-        heterogeneous_system_pair<
+        heterogeneous_system_impl<
             typename static_power<typename S::type, static_rational<N,D> >::type,
-            typename static_power<typename S::dimensions, static_rational<N,D> >::type
+            typename static_power<typename S::dimensions, static_rational<N,D> >::type,
+            typename static_power<typename S::scale, static_rational<N,D> >::type
         >
     > type;
 };
@@ -285,9 +293,10 @@ template<class S, long N, long D>
 struct static_root<heterogeneous_system<S>, static_rational<N,D> >
 {
     typedef heterogeneous_system<
-        heterogeneous_system_pair<
+        heterogeneous_system_impl<
             typename static_root<typename S::type, static_rational<N,D> >::type,
-            typename static_root<typename S::dimensions, static_rational<N,D> >::type
+            typename static_root<typename S::dimensions, static_rational<N,D> >::type,
+            typename static_root<typename S::scale, static_rational<N,D> >::type
         >
     > type;
 };
@@ -329,13 +338,14 @@ template<class T>
 struct unscale<heterogeneous_system<T> >
 {
     typedef heterogeneous_system<
-        heterogeneous_system_pair<
+        heterogeneous_system_impl<
             typename detail::unscale_heterogeneous_system_impl<
                 mpl::size<typename T::type>::value
             >::template apply<
                 typename mpl::begin<typename T::type>::type
             >::type,
-            typename T::dimensions
+            typename T::dimensions,
+            no_scale
         >
     > type;
 };
@@ -380,9 +390,12 @@ struct get_scale_list_of_heterogeneous_system_impl<0>
 template<class T>
 struct get_scale_list<heterogeneous_system<T> >
 {
-    typedef typename detail::get_scale_list_of_heterogeneous_system_impl<
-        mpl::size<typename T::type>::value
-    >::template apply<typename T::type>::type type;
+    typedef typename mpl::times<
+        typename detail::get_scale_list_of_heterogeneous_system_impl<
+            mpl::size<typename T::type>::value
+        >::template apply<typename T::type>::type,
+        typename T::scale
+    >::type type;
 };
 
 /// INTERNAL ONLY
@@ -397,8 +410,8 @@ namespace detail {
 template<class System, class Dimension>
 struct check_system : mpl::false_ {};
 
-template<class System, class Dimension>
-struct check_system<heterogeneous_system<heterogeneous_system_pair<System, Dimension> >, Dimension> : mpl::true_ {};
+template<class System, class Dimension, class Scale>
+struct check_system<heterogeneous_system<heterogeneous_system_impl<System, Dimension, Scale> >, Dimension> : mpl::true_ {};
 
 } // namespace detail
 

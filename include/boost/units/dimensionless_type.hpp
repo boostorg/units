@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -36,52 +36,6 @@ struct dimensionless_type
 };
 
 } // namespace units
-
-#ifndef BOOST_UNITS_DOXYGEN
-
-namespace mpl {
-
-/// INTERNAL ONLY
-template<> struct deref<units::dimensionless_type> { };
-
-/// INTERNAL ONLY
-template<>
-struct plus<units::dimensionless_type, units::dimensionless_type>
-{
-    typedef units::dimensionless_type type;
-};
-
-/// INTERNAL ONLY
-template<>
-struct minus<units::dimensionless_type, units::dimensionless_type>
-{
-    typedef units::dimensionless_type type;
-};
-
-/// INTERNAL ONLY
-template<>
-struct times<units::dimensionless_type, units::dimensionless_type>
-{
-    typedef units::dimensionless_type type;
-};
-
-/// INTERNAL ONLY
-template<>
-struct divides<units::dimensionless_type, units::dimensionless_type>
-{
-    typedef units::dimensionless_type type;
-};
-
-/// INTERNAL ONLY
-template<>
-struct negate<units::dimensionless_type>
-{
-    typedef units::dimensionless_type type;
-};
-
-} // namespace mpl
-
-#endif
 
 } // namespace boost
 

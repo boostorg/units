@@ -17,7 +17,8 @@ rule generate_include_all ( target : sources * : properties * ) {
     print.output $(target) ;
 
     for local file in $(sources) {
-        print.text "#include <$(file:G=)>" ;
+        print.text "#include <$(file:G=)>
+" ;
     }
 
 }

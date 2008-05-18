@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -145,6 +145,24 @@ struct print_impl<0>
     };
 };
 
+template<int N>
+struct print_scale_impl {
+    template<class Begin, class Os>
+    struct apply {
+        static void value(Os& os) {
+            os << ' ' << mpl::deref<Begin>::type::base << '^' << mpl::deref<Begin>::type::exponent;
+        }
+    };
+};
+
+template<>
+struct print_scale_impl<0> {
+    template<class Begin, class Os>
+    struct apply {
+        static void value(Os&) {}
+    };
+};
+
 } // namespace detail
 
 /// Print an @c unit as a list of base units and exponents e.g "m s^-1"
@@ -159,6 +177,10 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, heterogeneous_system<System> >&)
 {
+    detail::print_scale_impl<mpl::size<typename System::scale>::value>::template apply<
+        typename mpl::begin<typename System::scale>::type,
+        std::basic_ostream<Char, Traits>
+    >::value(os);
     detail::print_impl<mpl::size<typename System::type>::value>::template apply<
         typename mpl::begin<typename System::type>::type,
         std::basic_ostream<Char, Traits> >::value(os);

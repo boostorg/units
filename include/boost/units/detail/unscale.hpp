@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_UNSCALE_HPP_INCLUDED
-#define BOOST_UNITS_UNSCALE_HPP_INCLUDED
+#ifndef BOOST_UNITS_DETAIL_UNSCALE_HPP_INCLUDED
+#define BOOST_UNITS_DETAIL_UNSCALE_HPP_INCLUDED
 
 #include <string>
 
@@ -37,8 +37,8 @@ namespace units {
 template<class T>
 struct heterogeneous_system;
 
-template<class T, class D>
-struct heterogeneous_system_pair;
+template<class T, class D, class Scale>
+struct heterogeneous_system_impl;
 
 template<class T, class E>
 struct heterogeneous_system_dim;

@@ -13,18 +13,7 @@
 
 #include <string>
 
-#include <boost/mpl/bool.hpp>
-#include <boost/mpl/size.hpp>
-#include <boost/mpl/begin.hpp>
-#include <boost/mpl/next.hpp>
-#include <boost/mpl/deref.hpp>
-#include <boost/mpl/plus.hpp>
-#include <boost/mpl/times.hpp>
-#include <boost/mpl/negate.hpp>
-#include <boost/mpl/less.hpp>
-
 #include <boost/units/config.hpp>
-#include <boost/units/dimension.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/detail/one.hpp>
@@ -33,15 +22,6 @@
 namespace boost {
 
 namespace units {
-
-template<class T>
-struct heterogeneous_system;
-
-template<class T, class D>
-struct heterogeneous_system_pair;
-
-template<class T, class E>
-struct heterogeneous_system_dim;
 
 template<class S, class Scale>
 struct scaled_base_unit;
@@ -71,6 +51,9 @@ struct scale<Base, static_rational<0> >
     static std::string name_prefix() { return(std::string()); }
     static std::string symbol_prefix() { return(std::string()); }
 };
+
+template<long Base>
+const long scale<Base, static_rational<0> >::base;
 
 #ifndef BOOST_UNITS_DOXYGEN
 

@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_CONVERSION_IMPL_HPP
-#define BOOST_UNITS_CONVERSION_IMPL_HPP
+#ifndef BOOST_UNITS_DETAIL_CONVERSION_IMPL_HPP
+#define BOOST_UNITS_DETAIL_CONVERSION_IMPL_HPP
 
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/size.hpp>
@@ -249,7 +249,7 @@ struct get_default_conversion_impl<0>
     template<class Begin>
     struct apply
     {
-        typedef unit<dimensionless_type, heterogeneous_system<heterogeneous_system_pair<dimensionless_type, dimensionless_type> > > unit_type;
+        typedef unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, no_scale> > > unit_type;
         typedef one type;
         static type value() {
             return(type());
