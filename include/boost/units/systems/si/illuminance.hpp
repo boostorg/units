@@ -26,6 +26,11 @@ BOOST_UNITS_STATIC_CONSTANT(lux,illuminance);
 
 } // namespace si
 
+std::ostream& operator<<(std::ostream& os, const boost::units::si::illuminance&) 
+{
+    return(os << "lx");
+}
+
 } // namespace units
 
 } // namespace boost

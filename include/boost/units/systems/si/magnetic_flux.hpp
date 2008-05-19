@@ -30,6 +30,11 @@ BOOST_UNITS_STATIC_CONSTANT(webers,magnetic_flux);
 
 } // namespace si
 
+std::ostream& operator<<(std::ostream& os, const boost::units::si::magnetic_flux&) 
+{
+    return(os << "Wb");
+}
+
 } // namespace units
 
 } // namespace boost

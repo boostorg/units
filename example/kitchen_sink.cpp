@@ -427,6 +427,25 @@ int main()
               << "w/(u*x)^(1/2) = " << w/pow< static_rational<1,2> >(u*x)
               << std::endl << std::endl;
     }
+	
+	std::cout << quantity<capacitance>(1.0*farad) << std::endl
+	          << quantity<catalytic_activity>(1.0*katal) << std::endl
+	          << quantity<conductance>(1.0*siemen) << std::endl
+	          << quantity<electric_charge>(1.0*coulomb) << std::endl
+	          << quantity<electric_potential>(1.0*volt) << std::endl
+	          << quantity<energy>(1.0*joule) << std::endl
+	          << quantity<force>(1.0*newton) << std::endl
+	          << quantity<frequency>(1.0*hertz) << std::endl
+	          << quantity<illuminance>(1.0*lux) << std::endl
+	          << quantity<inductance>(1.0*henry) << std::endl
+	          << quantity<luminous_flux>(1.0*lumen) << std::endl
+	          << quantity<magnetic_flux>(1.0*weber) << std::endl
+	          << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+	          << quantity<power>(1.0*watt) << std::endl
+		      << quantity<pressure>(1.0*pascals) << std::endl
+	          << quantity<resistance>(1.0*ohm) << std::endl
+	          << quantity<torque>(1.0*newton_meters) << std::endl
+	          << std::endl;
 
     sstream2 << "S1 :    2" << std::endl;
     sstream2 << "X1 :    2" << std::endl;

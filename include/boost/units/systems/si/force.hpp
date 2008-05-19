@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_FORCE_HPP
 #define BOOST_UNITS_SI_FORCE_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/force.hpp>
 
@@ -26,6 +29,11 @@ BOOST_UNITS_STATIC_CONSTANT(newton,force);
 BOOST_UNITS_STATIC_CONSTANT(newtons,force); 
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) 
+{
+    return(os << "N");
+}
 
 } // namespace units
 

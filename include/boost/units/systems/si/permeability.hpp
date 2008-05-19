@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_PERMEABILITY_HPP
 #define BOOST_UNITS_SI_PERMEABILITY_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
@@ -26,6 +29,11 @@ typedef derived_dimension<length_base_dimension,1,mass_base_dimension,1,time_bas
 typedef unit<si::permeability_type,si::system>                                          permeability;
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::permeability&) 
+{
+    return(os << "H/m");
+}
 
 } // namespace units
 

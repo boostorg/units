@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_ELECTRIC_CHARGE_HPP
 #define BOOST_UNITS_SI_ELECTRIC_CHARGE_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
@@ -29,6 +32,11 @@ BOOST_UNITS_STATIC_CONSTANT(coulomb,electric_charge);
 BOOST_UNITS_STATIC_CONSTANT(coulombs,electric_charge);  
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::electric_charge&) 
+{
+    return(os << "C");
+}
 
 } // namespace units
 

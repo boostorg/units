@@ -29,7 +29,7 @@ typedef scaled_base_unit<boost::units::astronomical::light_second_base_unit, sca
 template<>
 struct base_unit_info<astronomical::light_minute_base_unit> {
     static const char* name()   { return("light minute"); }
-    static const char* symbol() { return("lm"); }
+    static const char* symbol() { return("lmn"); }
 };
 
 } // namespace units

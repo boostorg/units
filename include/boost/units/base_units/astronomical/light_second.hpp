@@ -14,7 +14,7 @@
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/si/meter.hpp>
 
-BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, light_second, "light second", "ls", 2.99792458e8, boost::units::si::meter_base_unit, -201);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, light_second, "light second", "lsc", 2.99792458e8, boost::units::si::meter_base_unit, -201);
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 

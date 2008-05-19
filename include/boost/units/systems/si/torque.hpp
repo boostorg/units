@@ -8,24 +8,35 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_TORQUE_DERIVED_DIMENSION_HPP
-#define BOOST_UNITS_TORQUE_DERIVED_DIMENSION_HPP
+#ifndef BOOST_UNITS_SI_TORQUE_HPP
+#define BOOST_UNITS_SI_TORQUE_HPP
 
-#include <boost/units/derived_dimension.hpp>
-#include <boost/units/physical_dimensions/length.hpp>
-#include <boost/units/physical_dimensions/mass.hpp>
-#include <boost/units/physical_dimensions/plane_angle.hpp>
-#include <boost/units/physical_dimensions/time.hpp>
+#include <iostream>
+#include <boost/units/io.hpp>
+
+#include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/torque.hpp>
 
 namespace boost {
 
-namespace units {
+namespace units { 
 
-/// derived dimension for force : L M T^-2 QP^-1
-typedef derived_dimension<length_base_dimension,1,mass_base_dimension,1,time_base_dimension,-2,plane_angle_base_dimension,-1>::type       torque_dimension;                    
+namespace si {
+
+typedef unit<torque_dimension,si::system>     torque;
+    
+BOOST_UNITS_STATIC_CONSTANT(newton_meter,torque);  
+BOOST_UNITS_STATIC_CONSTANT(newton_meters,torque); 
+
+} // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::torque&) 
+{
+    return(os << "N m");
+}
 
 } // namespace units
 
 } // namespace boost
 
-#endif // BOOST_UNITS_TORQUE_DERIVED_DIMENSION_HPP
+#endif // BOOST_UNITS_SI_TORQUE_HPP

@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_ABSORBED_DOSE_HPP
 #define BOOST_UNITS_SI_ABSORBED_DOSE_HPP
 
+//#include <iostream>
+//#include <boost/units/io.hpp>
+
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/absorbed_dose.hpp>
 
@@ -26,6 +29,12 @@ BOOST_UNITS_STATIC_CONSTANT(gray,absorbed_dose);
 BOOST_UNITS_STATIC_CONSTANT(grays,absorbed_dose); 
 
 } // namespace si
+
+// Gy and Sv are dimensionally indistinguishable
+//std::ostream& operator<<(std::ostream& os, const boost::units::si::absorbed_dose&) 
+//{
+//    return(os << "Gy");
+//}
 
 } // namespace units
 

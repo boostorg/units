@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_PERMITTIVITY_HPP
 #define BOOST_UNITS_SI_PERMITTIVITY_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
@@ -26,6 +29,11 @@ typedef derived_dimension<length_base_dimension,-3,mass_base_dimension,-1,time_b
 typedef unit<si::permittivity_type,si::system>                                          permittivity;
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::permittivity&) 
+{
+    return(os << "F/m");
+}
 
 } // namespace units
 

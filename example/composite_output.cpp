@@ -9,7 +9,7 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 
 #include <boost/units/quantity.hpp>
-#include <boost/units/systems/si.hpp>
+#include <boost/units/systems/cgs.hpp>
 #include <boost/units/io.hpp>
 #include <iostream>
 
@@ -19,8 +19,8 @@ namespace units {
 
 //[composite_output_snippet_1
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) {
-    return(os << "N");
+std::ostream& operator<<(std::ostream& os, const boost::units::cgs::force&) {
+    return(os << "dyn");
 }
 
 //]
@@ -30,5 +30,5 @@ std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) {
 }
 
 int main() {
-    std::cout << 2.0 * boost::units::si::newton << std::endl;
+    std::cout << 2.0 * boost::units::cgs::dyne << std::endl;
 }

@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_CAPACITANCE_HPP
 #define BOOST_UNITS_SI_CAPACITANCE_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
@@ -29,6 +32,11 @@ BOOST_UNITS_STATIC_CONSTANT(farad,capacitance);
 BOOST_UNITS_STATIC_CONSTANT(farads,capacitance);
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::capacitance&) 
+{
+    return(os << "F");
+}
 
 } // namespace units
 

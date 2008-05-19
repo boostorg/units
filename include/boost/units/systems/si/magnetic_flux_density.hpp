@@ -11,6 +11,9 @@
 #ifndef BOOST_UNITS_SI_MAGNETIC_FLUX_DENSITY_HPP
 #define BOOST_UNITS_SI_MAGNETIC_FLUX_DENSITY_HPP
 
+#include <iostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
 
@@ -29,6 +32,11 @@ BOOST_UNITS_STATIC_CONSTANT(tesla,magnetic_flux_density);
 BOOST_UNITS_STATIC_CONSTANT(teslas,magnetic_flux_density);  
 
 } // namespace si
+
+std::ostream& operator<<(std::ostream& os, const boost::units::si::magnetic_flux_density&) 
+{
+    return(os << "T");
+}
 
 } // namespace units
 
