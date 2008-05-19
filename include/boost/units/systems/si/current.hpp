@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<current_dimension,SI::system>   current;
+typedef unit<current_dimension,si::system>   current;
     
 BOOST_UNITS_STATIC_CONSTANT(ampere,current);
 BOOST_UNITS_STATIC_CONSTANT(amperes,current);
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

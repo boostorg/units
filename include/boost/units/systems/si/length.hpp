@@ -17,16 +17,16 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<length_dimension,SI::system>    length;
+typedef unit<length_dimension,si::system>    length;
     
 BOOST_UNITS_STATIC_CONSTANT(meter,length);  
 BOOST_UNITS_STATIC_CONSTANT(meters,length); 
 BOOST_UNITS_STATIC_CONSTANT(metre,length);  
 BOOST_UNITS_STATIC_CONSTANT(metres,length); 
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

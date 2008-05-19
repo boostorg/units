@@ -12,20 +12,20 @@
 #define BOOST_UNITS_SI_POWER_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/power.hpp>
+#include <boost/units/physical_dimensions/power.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<power_dimension,SI::system>     power;
+typedef unit<power_dimension,si::system>     power;
     
 BOOST_UNITS_STATIC_CONSTANT(watt,power);    
 BOOST_UNITS_STATIC_CONSTANT(watts,power);   
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

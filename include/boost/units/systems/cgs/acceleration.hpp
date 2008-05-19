@@ -12,20 +12,20 @@
 #define BOOST_UNITS_CGS_ACCELERATION_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/acceleration.hpp>
+#include <boost/units/physical_dimensions/acceleration.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<acceleration_dimension,CGS::system>     acceleration;
+typedef unit<acceleration_dimension,cgs::system>     acceleration;
 
 BOOST_UNITS_STATIC_CONSTANT(gal,acceleration);  
 BOOST_UNITS_STATIC_CONSTANT(gals,acceleration); 
                                                     
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

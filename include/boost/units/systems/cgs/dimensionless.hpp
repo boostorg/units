@@ -17,11 +17,11 @@ namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
 BOOST_UNITS_STATIC_CONSTANT(cgs_dimensionless,dimensionless);
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

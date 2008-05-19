@@ -12,22 +12,22 @@
 #define BOOST_UNITS_CGS_VOLUME_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/volume.hpp>
+#include <boost/units/physical_dimensions/volume.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<volume_dimension,CGS::system>   volume;
+typedef unit<volume_dimension,cgs::system>   volume;
     
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimeter,volume);   
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimeters,volume);  
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimetre,volume);   
 BOOST_UNITS_STATIC_CONSTANT(cubic_centimetres,volume);  
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

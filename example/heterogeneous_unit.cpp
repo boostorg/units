@@ -59,8 +59,8 @@ int main()
     std::stringstream sstream1, sstream2;
 
     //[heterogeneous_unit_snippet_1
-    quantity<SI::length>        L(1.5*SI::meter);
-    quantity<CGS::mass>         M(1.0*CGS::gram);
+    quantity<si::length>        L(1.5*si::meter);
+    quantity<cgs::mass>         M(1.0*cgs::gram);
     
     sstream1 << L << std::endl
              << M << std::endl
@@ -68,17 +68,17 @@ int main()
              << L/M << std::endl
              << std::endl;
               
-    sstream1 << 1.0*SI::meter*SI::kilogram/pow<2>(SI::second) << std::endl
-             << 1.0*SI::meter*SI::kilogram/pow<2>(SI::second)/SI::meter
+    sstream1 << 1.0*si::meter*si::kilogram/pow<2>(si::second) << std::endl
+             << 1.0*si::meter*si::kilogram/pow<2>(si::second)/si::meter
              << std::endl << std::endl;
 
-    sstream1 << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second) << std::endl
-             << 1.0*CGS::centimeter*SI::kilogram/pow<2>(SI::second)/SI::meter
+    sstream1 << 1.0*cgs::centimeter*si::kilogram/pow<2>(si::second) << std::endl
+             << 1.0*cgs::centimeter*si::kilogram/pow<2>(si::second)/si::meter
              << std::endl << std::endl;
     //]
     
     //heterogeneous_unit_snippet_2
-    quantity<SI::area>      A(1.5*SI::meter*CGS::centimeter);
+    quantity<si::area>      A(1.5*si::meter*cgs::centimeter);
     
     sstream1 << A << std::endl
              << std::endl;

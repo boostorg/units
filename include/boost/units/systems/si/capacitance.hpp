@@ -18,17 +18,17 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// capacitance : L^-2 M^-1 T^4 I^2
 typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,4,current_base_dimension,2>::type   capacitance_type;            
 
-typedef unit<SI::capacitance_type,SI::system>                                           capacitance;
+typedef unit<si::capacitance_type,si::system>                                           capacitance;
     
 BOOST_UNITS_STATIC_CONSTANT(farad,capacitance);
 BOOST_UNITS_STATIC_CONSTANT(farads,capacitance);
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

@@ -25,7 +25,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -47,7 +47,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(E_h,quantity<energy>,4.35974394e-18*joules,2.2e-25
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

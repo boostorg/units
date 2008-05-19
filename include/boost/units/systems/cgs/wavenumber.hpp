@@ -12,15 +12,15 @@
 #define BOOST_UNITS_CGS_WAVENUMBER_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/wavenumber.hpp>
+#include <boost/units/physical_dimensions/wavenumber.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<wavenumber_dimension,CGS::system>   wavenumber;
+typedef unit<wavenumber_dimension,cgs::system>   wavenumber;
     
 BOOST_UNITS_STATIC_CONSTANT(kayser,wavenumber); 
 BOOST_UNITS_STATIC_CONSTANT(kaysers,wavenumber);    
@@ -29,7 +29,7 @@ BOOST_UNITS_STATIC_CONSTANT(reciprocal_centimeters,wavenumber);
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_centimetre,wavenumber);  
 BOOST_UNITS_STATIC_CONSTANT(reciprocal_centimetres,wavenumber); 
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

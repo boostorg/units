@@ -17,7 +17,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 //#define BOOST_UNITS_METRIC_PREFIX(exponent, name)                                                       \
 //    typedef make_scaled_unit<dimensionless, scale<10, static_rational<exponent> > >::type name ## _type;\
@@ -65,7 +65,7 @@ BOOST_UNITS_STATIC_CONSTANT(exa,long double) = (1e18);          ///< metric pref
 BOOST_UNITS_STATIC_CONSTANT(zetta,long double) = (1e21);        ///< metric prefix for 1.0e+21
 BOOST_UNITS_STATIC_CONSTANT(yotta,long double) = (1e24);        ///< metric prefix for 1.0e+24  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

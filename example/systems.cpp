@@ -14,7 +14,7 @@
 \brief systems.cpp
 
 \detailed
-Test various non-SI units
+Test various non-si units
 
 Output:
 @verbatim
@@ -25,76 +25,6 @@ Output:
 
 @endverbatim
 **/
-
-#include <iostream>
-#include <sstream>
-#include <algorithm>
-
-#include <boost/units/conversion.hpp>
-#include <boost/units/io.hpp>
-#include <boost/units/pow.hpp>
-
-#include <boost/units/systems/si.hpp>
-
-#include <boost/units/systems/angle/base_units/arcminute.hpp>
-#include <boost/units/systems/angle/base_units/arcsecond.hpp>
-#include <boost/units/systems/angle/base_units/degree.hpp>
-#include <boost/units/systems/angle/base_units/gradian.hpp>
-#include <boost/units/systems/angle/base_units/revolution.hpp>
-#include <boost/units/systems/angle/base_units/radian.hpp>
-#include <boost/units/systems/angle/base_units/steradian.hpp>
-
-#include <boost/units/systems/astronomical/base_units/astronomical_unit.hpp>
-#include <boost/units/systems/astronomical/base_units/light_second.hpp>
-#include <boost/units/systems/astronomical/base_units/light_minute.hpp>
-#include <boost/units/systems/astronomical/base_units/light_hour.hpp>
-#include <boost/units/systems/astronomical/base_units/light_day.hpp>
-#include <boost/units/systems/astronomical/base_units/light_year.hpp>
-#include <boost/units/systems/astronomical/base_units/parsec.hpp>
-
-#include <boost/units/systems/imperial/base_units/thou.hpp>
-#include <boost/units/systems/imperial/base_units/inch.hpp>
-#include <boost/units/systems/imperial/base_units/foot.hpp>
-#include <boost/units/systems/imperial/base_units/yard.hpp>
-#include <boost/units/systems/imperial/base_units/furlong.hpp>
-#include <boost/units/systems/imperial/base_units/mile.hpp>
-#include <boost/units/systems/imperial/base_units/league.hpp>
-
-#include <boost/units/systems/imperial/base_units/grain.hpp>
-#include <boost/units/systems/imperial/base_units/drachm.hpp>
-#include <boost/units/systems/imperial/base_units/ounce.hpp>
-#include <boost/units/systems/imperial/base_units/pound.hpp>
-#include <boost/units/systems/imperial/base_units/stone.hpp>
-#include <boost/units/systems/imperial/base_units/quarter.hpp>
-#include <boost/units/systems/imperial/base_units/hundredweight.hpp>
-#include <boost/units/systems/imperial/base_units/ton.hpp>
-
-#include <boost/units/systems/imperial/base_units/fluid_ounce.hpp>
-#include <boost/units/systems/imperial/base_units/gill.hpp>
-#include <boost/units/systems/imperial/base_units/pint.hpp>
-#include <boost/units/systems/imperial/base_units/quart.hpp>
-#include <boost/units/systems/imperial/base_units/gallon.hpp>
-
-#include <boost/units/systems/metric/base_units/angstrom.hpp>
-#include <boost/units/systems/metric/base_units/fermi.hpp>
-#include <boost/units/systems/metric/base_units/micron.hpp>
-
-#include <boost/units/systems/metric/base_units/ton.hpp>
-
-#include <boost/units/systems/metric/base_units/day.hpp>
-#include <boost/units/systems/metric/base_units/hour.hpp>
-#include <boost/units/systems/metric/base_units/minute.hpp>
-#include <boost/units/systems/metric/base_units/year.hpp>
-
-#include <boost/units/systems/metric/base_units/are.hpp>
-#include <boost/units/systems/metric/base_units/barn.hpp>
-#include <boost/units/systems/metric/base_units/hectare.hpp>
-
-#include <boost/units/systems/metric/base_units/liter.hpp>
-
-#include <boost/units/systems/metric/base_units/atmosphere.hpp>
-#include <boost/units/systems/metric/base_units/bar.hpp>
-#include <boost/units/systems/metric/base_units/torr.hpp>
 
 #define BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(namespace_,unit_name_,dimension_)				\
 namespace boost {																			\
@@ -107,6 +37,26 @@ static const unit_name_ ## _ ## dimension_	unit_name_ ## s;								\
 }																							\
 }																							\
 
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+
+#include <boost/units/conversion.hpp>
+#include <boost/units/io.hpp>
+#include <boost/units/pow.hpp>
+
+#include <boost/units/systems/cgs.hpp>
+#include <boost/units/systems/si.hpp>
+
+// angle base units
+#include <boost/units/base_units/angle/arcminute.hpp>
+#include <boost/units/base_units/angle/arcsecond.hpp>
+#include <boost/units/base_units/angle/degree.hpp>
+#include <boost/units/base_units/angle/gradian.hpp>
+#include <boost/units/base_units/angle/revolution.hpp>
+#include <boost/units/base_units/angle/radian.hpp>
+#include <boost/units/base_units/angle/steradian.hpp>
+
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,arcminute,plane_angle)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,arcsecond,plane_angle)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,degree,plane_angle)
@@ -116,6 +66,15 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,revolution,plane_angle)
 
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,steradian,solid_angle)
 
+// astronomical base units
+#include <boost/units/base_units/astronomical/astronomical_unit.hpp>
+#include <boost/units/base_units/astronomical/light_second.hpp>
+#include <boost/units/base_units/astronomical/light_minute.hpp>
+#include <boost/units/base_units/astronomical/light_hour.hpp>
+#include <boost/units/base_units/astronomical/light_day.hpp>
+#include <boost/units/base_units/astronomical/light_year.hpp>
+#include <boost/units/base_units/astronomical/parsec.hpp>
+
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,astronomical_unit,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_second,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_minute,length)
@@ -123,6 +82,32 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_hour,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_day,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_year,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,parsec,length)
+
+// imperial base units
+#include <boost/units/base_units/imperial/thou.hpp>
+#include <boost/units/base_units/imperial/inch.hpp>
+#include <boost/units/base_units/imperial/foot.hpp>
+#include <boost/units/base_units/imperial/yard.hpp>
+#include <boost/units/base_units/imperial/furlong.hpp>
+#include <boost/units/base_units/imperial/mile.hpp>
+#include <boost/units/base_units/imperial/league.hpp>
+
+#include <boost/units/base_units/imperial/grain.hpp>
+#include <boost/units/base_units/imperial/drachm.hpp>
+#include <boost/units/base_units/imperial/ounce.hpp>
+#include <boost/units/base_units/imperial/pound.hpp>
+#include <boost/units/base_units/imperial/stone.hpp>
+#include <boost/units/base_units/imperial/quarter.hpp>
+#include <boost/units/base_units/imperial/hundredweight.hpp>
+#include <boost/units/base_units/imperial/ton.hpp>
+
+#include <boost/units/base_units/imperial/fluid_ounce.hpp>
+#include <boost/units/base_units/imperial/gill.hpp>
+#include <boost/units/base_units/imperial/pint.hpp>
+#include <boost/units/base_units/imperial/quart.hpp>
+#include <boost/units/base_units/imperial/gallon.hpp>
+
+#include <boost/units/base_units/imperial/conversions.hpp>
 
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,thou,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,inch,length)
@@ -147,9 +132,36 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,pint,volume)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,quart,volume)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,gallon,volume)
 
+// metric base units
+#include <boost/units/base_units/metric/angstrom.hpp>
+#include <boost/units/base_units/metric/fermi.hpp>
+#include <boost/units/base_units/metric/micron.hpp>
+#include <boost/units/base_units/metric/nautical_mile.hpp>
+
+#include <boost/units/base_units/metric/ton.hpp>
+
+#include <boost/units/base_units/metric/day.hpp>
+#include <boost/units/base_units/metric/hour.hpp>
+#include <boost/units/base_units/metric/minute.hpp>
+#include <boost/units/base_units/metric/year.hpp>
+
+#include <boost/units/base_units/metric/knot.hpp>
+
+#include <boost/units/base_units/metric/are.hpp>
+#include <boost/units/base_units/metric/barn.hpp>
+#include <boost/units/base_units/metric/hectare.hpp>
+
+#include <boost/units/base_units/metric/liter.hpp>
+
+#include <boost/units/base_units/metric/atmosphere.hpp>
+#include <boost/units/base_units/metric/bar.hpp>
+#include <boost/units/base_units/metric/mmHg.hpp>
+#include <boost/units/base_units/metric/torr.hpp>
+
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,angstrom,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,fermi,length)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,micron,length)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,nautical_mile,length)
 
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,ton,mass)
 
@@ -157,6 +169,8 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,day,time)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,hour,time)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,minute,time)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,year,time)
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,knot,velocity)
 
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,are,area)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,barn,area)
@@ -166,7 +180,88 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,liter,volume)
 
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,atmosphere,pressure)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,bar,pressure)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,mmHg,pressure)
 BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,torr,pressure)
+
+// us base units
+
+#include <boost/units/base_units/us/mil.hpp>
+#include <boost/units/base_units/us/inch.hpp>
+#include <boost/units/base_units/us/foot.hpp>
+#include <boost/units/base_units/us/yard.hpp>
+#include <boost/units/base_units/us/mile.hpp>
+
+#include <boost/units/base_units/us/grain.hpp>
+#include <boost/units/base_units/us/dram.hpp>
+#include <boost/units/base_units/us/ounce.hpp>
+#include <boost/units/base_units/us/pound.hpp>
+#include <boost/units/base_units/us/hundredweight.hpp>
+#include <boost/units/base_units/us/ton.hpp>
+
+#include <boost/units/base_units/us/minim.hpp>
+#include <boost/units/base_units/us/fluid_dram.hpp>
+#include <boost/units/base_units/us/teaspoon.hpp>
+#include <boost/units/base_units/us/tablespoon.hpp>
+#include <boost/units/base_units/us/fluid_ounce.hpp>
+#include <boost/units/base_units/us/gill.hpp>
+#include <boost/units/base_units/us/cup.hpp>
+#include <boost/units/base_units/us/pint.hpp>
+#include <boost/units/base_units/us/quart.hpp>
+#include <boost/units/base_units/us/gallon.hpp>
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,mil,length)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,inch,length)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,foot,length)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,yard,length)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,mile,length)
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,grain,mass)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,dram,mass)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,ounce,mass)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,pound,mass)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,hundredweight,mass)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,ton,mass)
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,minim,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,fluid_dram,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,teaspoon,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,tablespoon,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,fluid_ounce,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,gill,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,cup,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,pint,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,quart,volume)
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,gallon,volume)
+
+#ifdef __GNUC__
+#include <cxxabi.h>
+#endif
+
+inline std::string demangle(const char* name)
+{
+    #ifdef __GNUC__
+    // need to demangle C++ symbols
+    char*       realname;
+    std::size_t len; 
+    int         stat;
+     
+	realname = abi::__cxa_demangle(name,NULL,&len,&stat);
+	
+	if (realname != NULL)
+	{
+		const std::string	out(realname);
+		free(realname);
+		
+		return out;
+	}
+	
+	return std::string("demangle :: error - unable to demangle specified symbol");
+    #else
+    return name;
+    #endif
+}
+
+// MCS I believe all the commented code should work, but there is a problem for unit conversions when scale exponent is non-unit
 
 int main(void)
 {
@@ -175,75 +270,150 @@ int main(void)
 	{
 		using namespace boost::units::angle;
 		
-		quantity<arcminute_plane_angle>		an1(1.0*arcminutes);
-		quantity<arcsecond_plane_angle>		an2(1.0*arcseconds);
-		quantity<degree_plane_angle>		an3(1.0*degrees);
-		quantity<gradian_plane_angle>		an4(1.0*gradians);
-		quantity<radian_plane_angle>		an5(1.0*radians);
-		quantity<revolution_plane_angle>	an6(1.0*revolutions);
+		std::cout << "Testing angle base units..." << std::endl;
 		
-		std::cout << an1 << std::endl
-				  << an2 << std::endl
-				  << an3 << std::endl
-				  << an4 << std::endl
-				  << an5 << std::endl
-				  << an6 << std::endl
-				  << quantity<SI::dimensionless>(an6/an1) << std::endl
-				  << quantity<SI::dimensionless>(an6/an2) << std::endl
-				  << quantity<SI::dimensionless>(an6/an3) << std::endl
-				  << quantity<SI::dimensionless>(an6/an4) << std::endl
-				  << quantity<SI::dimensionless>(an6/an5) << std::endl
-				  << quantity<SI::plane_angle>(an1) << std::endl
-				  << quantity<SI::plane_angle>(an2) << std::endl
-				  << quantity<SI::plane_angle>(an3) << std::endl
-				  << quantity<SI::plane_angle>(an4) << std::endl
-				  << quantity<SI::plane_angle>(an5) << std::endl
-				  << quantity<SI::plane_angle>(an6) << std::endl
+		quantity<arcsecond_plane_angle>		as(1.0*arcseconds);
+		quantity<arcminute_plane_angle>		am(1.0*arcminutes);
+		quantity<degree_plane_angle>		d(1.0*degrees);
+		quantity<gradian_plane_angle>		g(1.0*gradians);
+		quantity<radian_plane_angle>		r(1.0*radians);
+		quantity<revolution_plane_angle>	rev(1.0*revolutions);
+		
+		std::cout << as << std::endl
+				  << am << std::endl
+				  << d << std::endl
+				  << g << std::endl
+				  << r << std::endl
+				  << rev << std::endl
+				  << std::endl;
+		
+		std::cout << quantity<si::dimensionless>(rev/as) << std::endl
+				  << quantity<si::dimensionless>(rev/am) << std::endl
+				  << quantity<si::dimensionless>(rev/d) << std::endl
+				  << quantity<si::dimensionless>(rev/g) << std::endl
+				  << quantity<si::dimensionless>(rev/r) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<si::plane_angle>(as) << std::endl
+				  << quantity<si::plane_angle>(am) << std::endl
+				  << quantity<si::plane_angle>(d) << std::endl
+				  << quantity<si::plane_angle>(g) << std::endl
+				  << quantity<si::plane_angle>(r) << std::endl
+				  << quantity<si::plane_angle>(rev) << std::endl
+				  << std::endl;
+	
+		// conversions only work with exponent of +/- 1 in scaled_base_unit?
+		std::cout << quantity<arcsecond_plane_angle>(as) << std::endl
+				  << quantity<arcsecond_plane_angle>(am) << std::endl
+				  << quantity<arcsecond_plane_angle>(d) << std::endl
+				  << quantity<arcsecond_plane_angle>(rev) << std::endl
+				  << std::endl;
+				  
+		// conversions only work with exponent of +/- 1 in scaled_base_unit? see arcsecond.hpp
+		std::cout << quantity<arcminute_plane_angle>(as) << std::endl
+				  << quantity<arcminute_plane_angle>(am) << std::endl
+				  << quantity<arcminute_plane_angle>(d) << std::endl
+				  << quantity<arcminute_plane_angle>(rev) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<degree_plane_angle>(as) << std::endl
+				  << quantity<degree_plane_angle>(am) << std::endl
+				  << quantity<degree_plane_angle>(d) << std::endl
+				  << quantity<degree_plane_angle>(rev) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<revolution_plane_angle>(as) << std::endl
+				  << quantity<revolution_plane_angle>(am) << std::endl
+				  << quantity<revolution_plane_angle>(d) << std::endl
+				  << quantity<revolution_plane_angle>(rev) << std::endl
 				  << std::endl;
 				  
 		quantity<steradian_solid_angle>		sa1(1.0*steradians);
 		
 		std::cout << sa1 << std::endl
-				  << quantity<SI::solid_angle>(sa1) << std::endl
+				  << quantity<si::solid_angle>(sa1) << std::endl
 				  << std::endl;
 	}
 	
 	{
 		using namespace boost::units::astronomical;
 
-		quantity<astronomical_unit_length>	au(1.0*astronomical_units);
+		std::cout << "Testing astronomical base units..." << std::endl;
+		
 		quantity<light_second_length>		ls(1.0*light_seconds);
 		quantity<light_minute_length>		lm(1.0*light_minutes);
+		quantity<astronomical_unit_length>	au(1.0*astronomical_units);
 		quantity<light_hour_length>			lh(1.0*light_hours);
 		quantity<light_day_length>			ld(1.0*light_days);
 		quantity<light_year_length>			ly(1.0*light_years);
 		quantity<parsec_length>				ps(1.0*parsecs);
 		
-		std::cout << au << std::endl
-				  << ls << std::endl
+		std::cout << ls << std::endl
 				  << lm << std::endl
+				  << au << std::endl
 				  << lh << std::endl
 				  << ld << std::endl
 				  << ly << std::endl
 				  << ps << std::endl
-				  << quantity<SI::dimensionless>(ly/au) << std::endl
-				  << quantity<SI::dimensionless>(ly/ls) << std::endl
-				  << quantity<SI::dimensionless>(ly/lm) << std::endl
-				  << quantity<SI::dimensionless>(ly/ld) << std::endl
-				  << quantity<SI::dimensionless>(ly/lh) << std::endl
-				  << quantity<SI::dimensionless>(ly/ps) << std::endl
-				  << quantity<SI::length>(au) << std::endl
-				  << quantity<SI::length>(ls) << std::endl
-				  << quantity<SI::length>(lm) << std::endl
-				  << quantity<SI::length>(lh) << std::endl
-				  << quantity<SI::length>(ld) << std::endl
-				  << quantity<SI::length>(ly) << std::endl
-				  << quantity<SI::length>(ps) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<si::dimensionless>(ly/ls) << std::endl
+				  << quantity<si::dimensionless>(ly/lm) << std::endl
+				  << quantity<si::dimensionless>(ly/au) << std::endl
+				  << quantity<si::dimensionless>(ly/ld) << std::endl
+				  << quantity<si::dimensionless>(ly/lh) << std::endl
+				  << quantity<si::dimensionless>(ly/ps) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<si::length>(ls) << std::endl
+				  << quantity<si::length>(lm) << std::endl
+				  << quantity<si::length>(au) << std::endl
+				  << quantity<si::length>(lh) << std::endl
+				  << quantity<si::length>(ld) << std::endl
+				  << quantity<si::length>(ly) << std::endl
+				  << quantity<si::length>(ps) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<light_second_length>(ls) << std::endl
+				  << quantity<light_second_length>(lm) << std::endl
+				  << quantity<light_second_length>(lh) << std::endl
+				  << quantity<light_second_length>(ld) << std::endl
+				  << quantity<light_second_length>(ly) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<light_minute_length>(ls) << std::endl
+				  << quantity<light_minute_length>(lm) << std::endl
+				  << quantity<light_minute_length>(lh) << std::endl
+				  << quantity<light_minute_length>(ld) << std::endl
+				  << quantity<light_minute_length>(ly) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<light_hour_length>(ls) << std::endl
+				  << quantity<light_hour_length>(lm) << std::endl
+				  << quantity<light_hour_length>(lh) << std::endl
+				  << quantity<light_hour_length>(ld) << std::endl
+				  << quantity<light_hour_length>(ly) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<light_day_length>(ls) << std::endl
+				  << quantity<light_day_length>(lm) << std::endl
+				  << quantity<light_day_length>(lh) << std::endl
+				  << quantity<light_day_length>(ld) << std::endl
+				  << quantity<light_day_length>(ly) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<light_year_length>(ls) << std::endl
+				  << quantity<light_year_length>(lm) << std::endl
+				  << quantity<light_year_length>(ld) << std::endl
+				  << quantity<light_year_length>(lh) << std::endl
+				  << quantity<light_year_length>(ly) << std::endl
 				  << std::endl;
 	}
 	
 	{
 		using namespace boost::units::imperial;
+		
+		std::cout << "Testing imperial base units..." << std::endl;
 		
 		quantity<thou_length>			iml1(1.0*thous);
 		quantity<inch_length>			iml2(1.0*inchs);
@@ -260,21 +430,88 @@ int main(void)
 				  << iml5 << std::endl
 				  << iml6 << std::endl
 				  << iml7 << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml1) << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml2) << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml3) << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml4) << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml5) << std::endl
-				  << quantity<SI::dimensionless>(iml7/iml6) << std::endl
-				  << quantity<SI::length>(iml1) << std::endl
-				  << quantity<SI::length>(iml2) << std::endl
-				  << quantity<SI::length>(iml3) << std::endl
-				  << quantity<SI::length>(iml4) << std::endl
-				  << quantity<SI::length>(iml5) << std::endl
-				  << quantity<SI::length>(iml6) << std::endl
-				  << quantity<SI::length>(iml7) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<si::dimensionless>(iml7/iml1) << std::endl
+				  << quantity<si::dimensionless>(iml7/iml2) << std::endl
+				  << quantity<si::dimensionless>(iml7/iml3) << std::endl
+				  << quantity<si::dimensionless>(iml7/iml4) << std::endl
+				  << quantity<si::dimensionless>(iml7/iml5) << std::endl
+				  << quantity<si::dimensionless>(iml7/iml6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<si::length>(iml1) << std::endl
+				  << quantity<si::length>(iml2) << std::endl
+				  << quantity<si::length>(iml3) << std::endl
+				  << quantity<si::length>(iml4) << std::endl
+				  << quantity<si::length>(iml5) << std::endl
+				  << quantity<si::length>(iml6) << std::endl
+				  << quantity<si::length>(iml7) << std::endl
 				  << std::endl;
 
+		std::cout << quantity<thou_length>(iml1) << std::endl
+				  << quantity<thou_length>(iml2) << std::endl
+				  << quantity<thou_length>(iml3) << std::endl
+				  << quantity<thou_length>(iml4) << std::endl
+				  << quantity<thou_length>(iml5) << std::endl
+				  << quantity<thou_length>(iml6) << std::endl
+				  << quantity<thou_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<inch_length>(iml1) << std::endl
+				  << quantity<inch_length>(iml2) << std::endl
+				  << quantity<inch_length>(iml3) << std::endl
+				  << quantity<inch_length>(iml4) << std::endl
+				  << quantity<inch_length>(iml5) << std::endl
+				  << quantity<inch_length>(iml6) << std::endl
+				  << quantity<inch_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<foot_length>(iml1) << std::endl
+				  << quantity<foot_length>(iml2) << std::endl
+				  << quantity<foot_length>(iml3) << std::endl
+				  << quantity<foot_length>(iml4) << std::endl
+				  << quantity<foot_length>(iml5) << std::endl
+				  << quantity<foot_length>(iml6) << std::endl
+				  << quantity<foot_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<yard_length>(iml1) << std::endl
+				  << quantity<yard_length>(iml2) << std::endl
+				  << quantity<yard_length>(iml3) << std::endl
+				  << quantity<yard_length>(iml4) << std::endl
+				  << quantity<yard_length>(iml5) << std::endl
+				  << quantity<yard_length>(iml6) << std::endl
+				  << quantity<yard_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<furlong_length>(iml1) << std::endl
+				  << quantity<furlong_length>(iml2) << std::endl
+				  << quantity<furlong_length>(iml3) << std::endl
+				  << quantity<furlong_length>(iml4) << std::endl
+				  << quantity<furlong_length>(iml5) << std::endl
+				  << quantity<furlong_length>(iml6) << std::endl
+				  << quantity<furlong_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<mile_length>(iml1) << std::endl
+				  << quantity<mile_length>(iml2) << std::endl
+				  << quantity<mile_length>(iml3) << std::endl
+				  << quantity<mile_length>(iml4) << std::endl
+				  << quantity<mile_length>(iml5) << std::endl
+				  << quantity<mile_length>(iml6) << std::endl
+				  << quantity<mile_length>(iml7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<league_length>(iml1) << std::endl
+				  << quantity<league_length>(iml2) << std::endl
+				  << quantity<league_length>(iml3) << std::endl
+				  << quantity<league_length>(iml4) << std::endl
+				  << quantity<league_length>(iml5) << std::endl
+				  << quantity<league_length>(iml6) << std::endl
+				  << quantity<league_length>(iml7) << std::endl
+				  << std::endl;
+				  
 		quantity<grain_mass>			imm1(1.0*grains);
 		quantity<drachm_mass>			imm2(1.0*drachms);
 		quantity<ounce_mass>			imm3(1.0*ounces);
@@ -292,99 +529,674 @@ int main(void)
 				  << imm6 << std::endl
 				  << imm7 << std::endl
 				  << imm8 << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm1) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm2) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm3) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm4) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm5) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm6) << std::endl
-				  << quantity<SI::dimensionless>(imm8/imm7) << std::endl
-				  << quantity<SI::mass>(imm1) << std::endl
-				  << quantity<SI::mass>(imm2) << std::endl
-				  << quantity<SI::mass>(imm3) << std::endl
-				  << quantity<SI::mass>(imm4) << std::endl
-				  << quantity<SI::mass>(imm5) << std::endl
-				  << quantity<SI::mass>(imm6) << std::endl
-				  << quantity<SI::mass>(imm7) << std::endl
-				  << quantity<SI::mass>(imm8) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(imm8/imm1) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm2) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm3) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm4) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm5) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm6) << std::endl
+				  << quantity<si::dimensionless>(imm8/imm7) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::mass>(imm1) << std::endl
+				  << quantity<si::mass>(imm2) << std::endl
+				  << quantity<si::mass>(imm3) << std::endl
+				  << quantity<si::mass>(imm4) << std::endl
+				  << quantity<si::mass>(imm5) << std::endl
+				  << quantity<si::mass>(imm6) << std::endl
+				  << quantity<si::mass>(imm7) << std::endl
+				  << quantity<si::mass>(imm8) << std::endl
 				  << std::endl;
 				  
-		quantity<gallon_volume>			imv1(1.0*gallons);
-		quantity<fluid_ounce_volume>	imv2(1.0*fluid_ounces);
-		quantity<gill_volume>			imv3(1.0*gills);
-		quantity<pint_volume>			imv4(1.0*pints);
-		quantity<quart_volume>			imv5(1.0*quarts);
-		
-		//quantity<fluid_ounce_volume>	im6 = 1.0*gallons;	// why does this fail?
+		std::cout << quantity<grain_mass>(imm1) << std::endl
+				  << quantity<grain_mass>(imm2) << std::endl
+				  << quantity<grain_mass>(imm3) << std::endl
+				  << quantity<grain_mass>(imm4) << std::endl
+				  << quantity<grain_mass>(imm5) << std::endl
+				  << quantity<grain_mass>(imm6) << std::endl
+				  << quantity<grain_mass>(imm7) << std::endl
+				  << quantity<grain_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<drachm_mass>(imm1) << std::endl
+				  << quantity<drachm_mass>(imm2) << std::endl
+				  << quantity<drachm_mass>(imm3) << std::endl
+				  << quantity<drachm_mass>(imm4) << std::endl
+				  << quantity<drachm_mass>(imm5) << std::endl
+				  << quantity<drachm_mass>(imm6) << std::endl
+				  << quantity<drachm_mass>(imm7) << std::endl
+				  << quantity<drachm_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<ounce_mass>(imm1) << std::endl
+				  << quantity<ounce_mass>(imm2) << std::endl
+				  << quantity<ounce_mass>(imm3) << std::endl
+				  << quantity<ounce_mass>(imm4) << std::endl
+				  << quantity<ounce_mass>(imm5) << std::endl
+				  << quantity<ounce_mass>(imm6) << std::endl
+				  << quantity<ounce_mass>(imm7) << std::endl
+				  << quantity<ounce_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<pound_mass>(imm1) << std::endl
+				  << quantity<pound_mass>(imm2) << std::endl
+				  << quantity<pound_mass>(imm3) << std::endl
+				  << quantity<pound_mass>(imm4) << std::endl
+				  << quantity<pound_mass>(imm5) << std::endl
+				  << quantity<pound_mass>(imm6) << std::endl
+				  << quantity<pound_mass>(imm7) << std::endl
+				  << quantity<pound_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<stone_mass>(imm1) << std::endl
+				  << quantity<stone_mass>(imm2) << std::endl
+				  << quantity<stone_mass>(imm3) << std::endl
+				  << quantity<stone_mass>(imm4) << std::endl
+				  << quantity<stone_mass>(imm5) << std::endl
+				  << quantity<stone_mass>(imm6) << std::endl
+				  << quantity<stone_mass>(imm7) << std::endl
+				  << quantity<stone_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<quarter_mass>(imm1) << std::endl
+				  << quantity<quarter_mass>(imm2) << std::endl
+				  << quantity<quarter_mass>(imm3) << std::endl
+				  << quantity<quarter_mass>(imm4) << std::endl
+				  << quantity<quarter_mass>(imm5) << std::endl
+				  << quantity<quarter_mass>(imm6) << std::endl
+				  << quantity<quarter_mass>(imm7) << std::endl
+				  << quantity<quarter_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<hundredweight_mass>(imm1) << std::endl
+				  << quantity<hundredweight_mass>(imm2) << std::endl
+				  << quantity<hundredweight_mass>(imm3) << std::endl
+				  << quantity<hundredweight_mass>(imm4) << std::endl
+				  << quantity<hundredweight_mass>(imm5) << std::endl
+				  << quantity<hundredweight_mass>(imm6) << std::endl
+				  << quantity<hundredweight_mass>(imm7) << std::endl
+				  << quantity<hundredweight_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<ton_mass>(imm1) << std::endl
+				  << quantity<ton_mass>(imm2) << std::endl
+				  << quantity<ton_mass>(imm3) << std::endl
+				  << quantity<ton_mass>(imm4) << std::endl
+				  << quantity<ton_mass>(imm5) << std::endl
+				  << quantity<ton_mass>(imm6) << std::endl
+				  << quantity<ton_mass>(imm7) << std::endl
+				  << quantity<ton_mass>(imm8) << std::endl
+				  << std::endl;
+				  
+		quantity<fluid_ounce_volume>	imv1(1.0*fluid_ounces);
+		quantity<gill_volume>			imv2(1.0*gills);
+		quantity<pint_volume>			imv3(1.0*pints);
+		quantity<quart_volume>			imv4(1.0*quarts);
+		quantity<gallon_volume>			imv5(1.0*gallons);
 		
 		std::cout << imv1 << std::endl
 				  << imv2 << std::endl
 				  << imv3 << std::endl
 				  << imv4 << std::endl
 				  << imv5 << std::endl
-				  << quantity<SI::dimensionless>(imv1/imv2) << std::endl
-				  << quantity<SI::dimensionless>(imv1/imv3) << std::endl
-				  << quantity<SI::dimensionless>(imv1/imv4) << std::endl
-				  << quantity<SI::dimensionless>(imv1/imv5) << std::endl
-				  << quantity<SI::volume>(imv1) << std::endl
-				  << quantity<SI::volume>(imv2) << std::endl
-				  << quantity<SI::volume>(imv3) << std::endl
-				  << quantity<SI::volume>(imv4) << std::endl
-				  << quantity<SI::volume>(imv5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(imv5/imv1) << std::endl
+				  << quantity<si::dimensionless>(imv5/imv2) << std::endl
+				  << quantity<si::dimensionless>(imv5/imv3) << std::endl
+				  << quantity<si::dimensionless>(imv5/imv4) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::volume>(imv1) << std::endl
+				  << quantity<si::volume>(imv2) << std::endl
+				  << quantity<si::volume>(imv3) << std::endl
+				  << quantity<si::volume>(imv4) << std::endl
+				  << quantity<si::volume>(imv5) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<fluid_ounce_volume>(imv1) << std::endl
+				  << quantity<fluid_ounce_volume>(imv2) << std::endl
+				  << quantity<fluid_ounce_volume>(imv3) << std::endl
+				  << quantity<fluid_ounce_volume>(imv4) << std::endl
+				  << quantity<fluid_ounce_volume>(imv5) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<gill_volume>(imv1) << std::endl
+				  << quantity<gill_volume>(imv2) << std::endl
+				  << quantity<gill_volume>(imv3) << std::endl
+				  << quantity<gill_volume>(imv4) << std::endl
+				  << quantity<gill_volume>(imv5) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<pint_volume>(imv1) << std::endl
+				  << quantity<pint_volume>(imv2) << std::endl
+				  << quantity<pint_volume>(imv3) << std::endl
+				  << quantity<pint_volume>(imv4) << std::endl
+				  << quantity<pint_volume>(imv5) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<quart_volume>(imv1) << std::endl
+				  << quantity<quart_volume>(imv2) << std::endl
+				  << quantity<quart_volume>(imv3) << std::endl
+				  << quantity<quart_volume>(imv4) << std::endl
+				  << quantity<quart_volume>(imv5) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<gallon_volume>(imv1) << std::endl
+				  << quantity<gallon_volume>(imv2) << std::endl
+				  << quantity<gallon_volume>(imv3) << std::endl
+				  << quantity<gallon_volume>(imv4) << std::endl
+				  << quantity<gallon_volume>(imv5) << std::endl
 				  << std::endl;
 	}
 	
 	{
 		using namespace boost::units::metric;
 		
-		quantity<angstrom_length>	ml1(1.0*angstroms);
-		quantity<fermi_length>		ml2(1.0*fermis);
-		quantity<micron_length>		ml3(1.0*microns);
+		std::cout << "Testing metric base units..." << std::endl;
+		
+		quantity<fermi_length>			ml1(1.0*fermis);
+		quantity<angstrom_length>		ml2(1.0*angstroms);
+		quantity<micron_length>			ml3(1.0*microns);
+		quantity<nautical_mile_length>	ml4(1.0*nautical_miles);
 	
 		std::cout << ml1 << std::endl
 				  << ml2 << std::endl
 				  << ml3 << std::endl
-				  << quantity<SI::dimensionless>(ml3/ml1) << std::endl
-				  << quantity<SI::dimensionless>(ml3/ml2) << std::endl
-				  << quantity<SI::length>(ml1) << std::endl
-				  << quantity<SI::length>(ml2) << std::endl
-				  << quantity<SI::length>(ml3) << std::endl
+				  << ml4 << std::endl
 				  << std::endl;
 
-// probably more gram/kilogram business
-//		quantity<ton_mass>	mm1(1.0*tons);
-//		
-//		std::cout << mm1 << std::endl
-//				  << quantity<SI::mass>(mm1) << std::endl
+		std::cout << quantity<si::dimensionless>(ml4/ml1) << std::endl
+				  << quantity<si::dimensionless>(ml4/ml2) << std::endl
+				  << quantity<si::dimensionless>(ml4/ml3) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::length>(ml1) << std::endl
+				  << quantity<si::length>(ml2) << std::endl
+				  << quantity<si::length>(ml3) << std::endl
+				  << quantity<si::length>(ml4) << std::endl
+				  << std::endl;
+
+//		std::cout << quantity<fermi_length>(ml1) << std::endl
+//				  << quantity<fermi_length>(ml2) << std::endl
+//				  << quantity<fermi_length>(ml3) << std::endl
+//				  << quantity<fermi_length>(ml4) << std::endl
 //				  << std::endl;
+
+//		std::cout << quantity<angstrom_length>(ml1) << std::endl
+//				  << quantity<angstrom_length>(ml2) << std::endl
+//				  << quantity<angstrom_length>(ml3) << std::endl
+//				  << quantity<angstrom_length>(ml4) << std::endl
+//				  << std::endl;
+
+//		std::cout << quantity<micron_length>(ml1) << std::endl
+//				  << quantity<micron_length>(ml2) << std::endl
+//				  << quantity<micron_length>(ml3) << std::endl
+//				  << quantity<micron_length>(ml4) << std::endl
+//				  << std::endl;
+
+		std::cout << quantity<nautical_mile_length>(ml1) << std::endl
+				  << quantity<nautical_mile_length>(ml2) << std::endl
+				  << quantity<nautical_mile_length>(ml3) << std::endl
+				  << quantity<nautical_mile_length>(ml4) << std::endl
+				  << std::endl;
+
+		quantity<ton_mass>	mm1(1.0*tons);
+		
+		std::cout << mm1 << std::endl
+				  //<< quantity<si::mass>(mm1) << std::endl	// this should work... 
+				  << quantity<cgs::mass>(mm1) << std::endl
+				  << std::endl;
 				  
-		quantity<day_time>		mt1(1.0*days);
+		quantity<minute_time>	mt1(1.0*minutes);
 		quantity<hour_time>		mt2(1.0*hours);
-		quantity<minute_time>	mt3(1.0*minutes);
+		quantity<day_time>		mt3(1.0*days);
 		quantity<year_time>		mt4(1.0*years);
 		
 		std::cout << mt1 << std::endl
 				  << mt2 << std::endl
 				  << mt3 << std::endl
 				  << mt4 << std::endl
-				  << quantity<SI::dimensionless>(mt4/mt1) << std::endl
-				  << quantity<SI::dimensionless>(mt4/mt2) << std::endl
-				  << quantity<SI::dimensionless>(mt4/mt3) << std::endl
-				  << quantity<SI::time>(mt1) << std::endl
-				  << quantity<SI::time>(mt2) << std::endl
-				  << quantity<SI::time>(mt3) << std::endl
-				  << quantity<SI::time>(mt4) << std::endl
 				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(mt4/mt1) << std::endl
+				  << quantity<si::dimensionless>(mt4/mt2) << std::endl
+				  << quantity<si::dimensionless>(mt4/mt3) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::time>(mt1) << std::endl
+				  << quantity<si::time>(mt2) << std::endl
+				  << quantity<si::time>(mt3) << std::endl
+				  << quantity<si::time>(mt4) << std::endl
+				  << std::endl;
+
+//		std::cout << quantity<minute_time>(mt1) << std::endl
+//				  << quantity<minute_time>(mt2) << std::endl
+//				  << quantity<minute_time>(mt3) << std::endl
+//				  << quantity<minute_time>(mt4) << std::endl
+//				  << std::endl;
+
+//		std::cout << quantity<hour_time>(mt1) << std::endl
+//				  << quantity<hour_time>(mt2) << std::endl
+//				  << quantity<hour_time>(mt3) << std::endl
+//				  << quantity<hour_time>(mt4) << std::endl
+//				  << std::endl;
+
+		std::cout << quantity<day_time>(mt1) << std::endl
+				  << quantity<day_time>(mt2) << std::endl
+				  << quantity<day_time>(mt3) << std::endl
+				  << quantity<day_time>(mt4) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<year_time>(mt1) << std::endl
+				  << quantity<year_time>(mt2) << std::endl
+				  << quantity<year_time>(mt3) << std::endl
+				  << quantity<year_time>(mt4) << std::endl
+				  << std::endl;
+				  		
+		quantity<knot_velocity>	ms1(1.0*knots);
 		
-		quantity<are_area>		ma1(1.0*ares);
-		quantity<barn_area>		ma2(1.0*barns);
+		std::cout << ms1 << std::endl
+				  << quantity<si::velocity>(ms1) << std::endl
+				  << std::endl;
+				  
+		quantity<barn_area>		ma1(1.0*barns);
+		quantity<are_area>		ma2(1.0*ares);
 		quantity<hectare_area>	ma3(1.0*hectares);
+		
+		std::cout << ma1 << std::endl
+				  << ma2 << std::endl
+				  << ma3 << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(ma3/ma1) << std::endl
+				  << quantity<si::dimensionless>(ma3/ma2) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::area>(ma1) << std::endl
+				  << quantity<si::area>(ma2) << std::endl
+				  << quantity<si::area>(ma3) << std::endl
+				  << std::endl;
+
+//		std::cout << quantity<barn_area>(ma1) << std::endl
+//				  << quantity<barn_area>(ma2) << std::endl
+//				  << quantity<barn_area>(ma3) << std::endl
+//				  << std::endl;
+
+//		std::cout << quantity<are_area>(ma1) << std::endl
+//				  << quantity<are_area>(ma2) << std::endl
+//				  << quantity<are_area>(ma3) << std::endl
+//				  << std::endl;
+
+//		std::cout << quantity<hectare_area>(ma1) << std::endl
+//				  << quantity<hectare_area>(ma2) << std::endl
+//				  << quantity<hectare_area>(ma3) << std::endl
+//				  << std::endl;
 		
 		quantity<liter_volume>	mv1(1.0*liters);
 		
-		quantity<atmosphere_pressure>	mp1(1.0*atmospheres);
-		quantity<bar_pressure>			mp2(1.0*bars);
-		quantity<torr_pressure>			mp3(1.0*torrs);
+		std::cout << mv1 << std::endl
+				  << quantity<si::volume>(mv1) << std::endl
+				  << std::endl;
+		
+		quantity<mmHg_pressure>			mp1(1.0*mmHgs);
+		quantity<torr_pressure>			mp2(1.0*torrs);
+		quantity<bar_pressure>			mp3(1.0*bars);
+		quantity<atmosphere_pressure>	mp4(1.0*atmospheres);
+		
+		std::cout << mp1 << std::endl
+			      << mp2 << std::endl
+			      << mp3 << std::endl
+			      << mp4 << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(mp4/mp1) << std::endl
+			      << quantity<si::dimensionless>(mp4/mp2) << std::endl
+			      << quantity<si::dimensionless>(mp4/mp3) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::pressure>(mp1) << std::endl
+			      << quantity<si::pressure>(mp2) << std::endl
+			      << quantity<si::pressure>(mp3) << std::endl
+			      << quantity<si::pressure>(mp4) << std::endl
+			      << std::endl;
+
+//		std::cout << quantity<mmHg_pressure>(mp1) << std::endl
+//			      << quantity<mmHg_pressure>(mp2) << std::endl
+//			      << quantity<mmHg_pressure>(mp3) << std::endl
+//			      << quantity<mmHg_pressure>(mp4) << std::endl
+//			      << std::endl;
+
+//		std::cout << quantity<torr_pressure>(mp1) << std::endl
+//			      << quantity<torr_pressure>(mp2) << std::endl
+//			      << quantity<torr_pressure>(mp3) << std::endl
+//			      << quantity<torr_pressure>(mp4) << std::endl
+//			      << std::endl;
+
+//		std::cout << quantity<bar_pressure>(mp1) << std::endl
+//			      << quantity<bar_pressure>(mp2) << std::endl
+//			      << quantity<bar_pressure>(mp3) << std::endl
+//			      << quantity<bar_pressure>(mp4) << std::endl
+//			      << std::endl;
+
+//		std::cout << quantity<atmosphere_pressure>(mp1) << std::endl
+//			      << quantity<atmosphere_pressure>(mp2) << std::endl
+//			      << quantity<atmosphere_pressure>(mp3) << std::endl
+//			      << quantity<atmosphere_pressure>(mp4) << std::endl
+//			      << std::endl;
+	}
+	
+	{
+		using namespace boost::units::us;
+		
+		std::cout << "Testing U.S. customary base units..." << std::endl;
+		
+		quantity<mil_length>			iml1(1.0*mils);
+		quantity<inch_length>			iml2(1.0*inchs);
+		quantity<foot_length>			iml3(1.0*foots);
+		quantity<yard_length>			iml4(1.0*yards);
+		quantity<mile_length>			iml5(1.0*miles);
+		
+		std::cout << iml1 << std::endl
+				  << iml2 << std::endl
+				  << iml3 << std::endl
+				  << iml4 << std::endl
+				  << iml5 << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(iml5/iml1) << std::endl
+				  << quantity<si::dimensionless>(iml5/iml2) << std::endl
+				  << quantity<si::dimensionless>(iml5/iml3) << std::endl
+				  << quantity<si::dimensionless>(iml5/iml4) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::length>(iml1) << std::endl
+				  << quantity<si::length>(iml2) << std::endl
+				  << quantity<si::length>(iml3) << std::endl
+				  << quantity<si::length>(iml4) << std::endl
+				  << quantity<si::length>(iml5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<mil_length>(iml1) << std::endl
+				  << quantity<mil_length>(iml2) << std::endl
+				  << quantity<mil_length>(iml3) << std::endl
+				  << quantity<mil_length>(iml4) << std::endl
+				  << quantity<mil_length>(iml5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<inch_length>(iml1) << std::endl
+				  << quantity<inch_length>(iml2) << std::endl
+				  << quantity<inch_length>(iml3) << std::endl
+				  << quantity<inch_length>(iml4) << std::endl
+				  << quantity<inch_length>(iml5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<foot_length>(iml1) << std::endl
+				  << quantity<foot_length>(iml2) << std::endl
+				  << quantity<foot_length>(iml3) << std::endl
+				  << quantity<foot_length>(iml4) << std::endl
+				  << quantity<foot_length>(iml5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<yard_length>(iml1) << std::endl
+				  << quantity<yard_length>(iml2) << std::endl
+				  << quantity<yard_length>(iml3) << std::endl
+				  << quantity<yard_length>(iml4) << std::endl
+				  << quantity<yard_length>(iml5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<mile_length>(iml1) << std::endl
+				  << quantity<mile_length>(iml2) << std::endl
+				  << quantity<mile_length>(iml3) << std::endl
+				  << quantity<mile_length>(iml4) << std::endl
+				  << quantity<mile_length>(iml5) << std::endl
+				  << std::endl;
+
+		quantity<grain_mass>			imm1(1.0*grains);
+		quantity<dram_mass>				imm2(1.0*drams);
+		quantity<ounce_mass>			imm3(1.0*ounces);
+		quantity<pound_mass>			imm4(1.0*pounds);
+		quantity<hundredweight_mass>	imm5(1.0*hundredweights);
+		quantity<ton_mass>				imm6(1.0*tons);
+
+		std::cout << imm1 << std::endl
+				  << imm2 << std::endl
+				  << imm3 << std::endl
+				  << imm4 << std::endl
+				  << imm5 << std::endl
+				  << imm6 << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(imm6/imm1) << std::endl
+				  << quantity<si::dimensionless>(imm6/imm2) << std::endl
+				  << quantity<si::dimensionless>(imm6/imm3) << std::endl
+				  << quantity<si::dimensionless>(imm6/imm4) << std::endl
+				  << quantity<si::dimensionless>(imm6/imm5) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::mass>(imm1) << std::endl
+				  << quantity<si::mass>(imm2) << std::endl
+				  << quantity<si::mass>(imm3) << std::endl
+				  << quantity<si::mass>(imm4) << std::endl
+				  << quantity<si::mass>(imm5) << std::endl
+				  << quantity<si::mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<grain_mass>(imm1) << std::endl
+				  << quantity<grain_mass>(imm2) << std::endl
+				  << quantity<grain_mass>(imm3) << std::endl
+				  << quantity<grain_mass>(imm4) << std::endl
+				  << quantity<grain_mass>(imm5) << std::endl
+				  << quantity<grain_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<dram_mass>(imm1) << std::endl
+				  << quantity<dram_mass>(imm2) << std::endl
+				  << quantity<dram_mass>(imm3) << std::endl
+				  << quantity<dram_mass>(imm4) << std::endl
+				  << quantity<dram_mass>(imm5) << std::endl
+				  << quantity<dram_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<ounce_mass>(imm1) << std::endl
+				  << quantity<ounce_mass>(imm2) << std::endl
+				  << quantity<ounce_mass>(imm3) << std::endl
+				  << quantity<ounce_mass>(imm4) << std::endl
+				  << quantity<ounce_mass>(imm5) << std::endl
+				  << quantity<ounce_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<pound_mass>(imm1) << std::endl
+				  << quantity<pound_mass>(imm2) << std::endl
+				  << quantity<pound_mass>(imm3) << std::endl
+				  << quantity<pound_mass>(imm4) << std::endl
+				  << quantity<pound_mass>(imm5) << std::endl
+				  << quantity<pound_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<hundredweight_mass>(imm1) << std::endl
+				  << quantity<hundredweight_mass>(imm2) << std::endl
+				  << quantity<hundredweight_mass>(imm3) << std::endl
+				  << quantity<hundredweight_mass>(imm4) << std::endl
+				  << quantity<hundredweight_mass>(imm5) << std::endl
+				  << quantity<hundredweight_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		std::cout << quantity<ton_mass>(imm1) << std::endl
+				  << quantity<ton_mass>(imm2) << std::endl
+				  << quantity<ton_mass>(imm3) << std::endl
+				  << quantity<ton_mass>(imm4) << std::endl
+				  << quantity<ton_mass>(imm5) << std::endl
+				  << quantity<ton_mass>(imm6) << std::endl
+				  << std::endl;
+				  
+		quantity<minim_volume>			imv1(1.0*minims);
+		quantity<fluid_dram_volume>		imv2(1.0*fluid_drams);
+		quantity<teaspoon_volume>		imv3(1.0*teaspoons);
+		quantity<tablespoon_volume>		imv4(1.0*tablespoons);
+		quantity<fluid_ounce_volume>	imv5(1.0*fluid_ounces);
+		quantity<gill_volume>			imv6(1.0*gills);
+		quantity<cup_volume>			imv7(1.0*cups);
+		quantity<pint_volume>			imv8(1.0*pints);
+		quantity<quart_volume>			imv9(1.0*quarts);
+		quantity<gallon_volume>			imv10(1.0*gallons);
+		
+		std::cout << imv1 << std::endl
+				  << imv2 << std::endl
+				  << imv3 << std::endl
+				  << imv4 << std::endl
+				  << imv5 << std::endl
+				  << imv6 << std::endl
+				  << imv7 << std::endl
+				  << imv8 << std::endl
+				  << imv9 << std::endl
+				  << imv10 << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::dimensionless>(imv10/imv1) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv2) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv3) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv4) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv5) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv6) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv7) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv8) << std::endl
+				  << quantity<si::dimensionless>(imv10/imv9) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<si::volume>(imv1) << std::endl
+				  << quantity<si::volume>(imv2) << std::endl
+				  << quantity<si::volume>(imv3) << std::endl
+				  << quantity<si::volume>(imv4) << std::endl
+				  << quantity<si::volume>(imv5) << std::endl
+				  << quantity<si::volume>(imv6) << std::endl
+				  << quantity<si::volume>(imv7) << std::endl
+				  << quantity<si::volume>(imv8) << std::endl
+				  << quantity<si::volume>(imv9) << std::endl
+				  << quantity<si::volume>(imv10) << std::endl
+				  << std::endl;
+
+		std::cout << quantity<minim_volume>(imv1) << std::endl
+				  << quantity<minim_volume>(imv2) << std::endl
+				  << quantity<minim_volume>(imv3) << std::endl
+				  << quantity<minim_volume>(imv4) << std::endl
+				  << quantity<minim_volume>(imv5) << std::endl
+				  << quantity<minim_volume>(imv6) << std::endl
+				  << quantity<minim_volume>(imv7) << std::endl
+				  << quantity<minim_volume>(imv8) << std::endl
+				  << quantity<minim_volume>(imv9) << std::endl
+				  << quantity<minim_volume>(imv10) << std::endl
+				  << std::endl;
+
+//		std::cout << quantity<fluid_dram_volume>(imv1) << std::endl
+//				  << quantity<fluid_dram_volume>(imv2) << std::endl
+//				  << quantity<fluid_dram_volume>(imv3) << std::endl
+//				  << quantity<fluid_dram_volume>(imv4) << std::endl
+//				  << quantity<fluid_dram_volume>(imv5) << std::endl
+//				  << quantity<fluid_dram_volume>(imv6) << std::endl
+//				  << quantity<fluid_dram_volume>(imv7) << std::endl
+//				  << quantity<fluid_dram_volume>(imv8) << std::endl
+//				  << quantity<fluid_dram_volume>(imv9) << std::endl
+//				  << quantity<fluid_dram_volume>(imv10) << std::endl
+//				  << std::endl;
+
+		std::cout << quantity<teaspoon_volume>(imv1) << std::endl
+				  << quantity<teaspoon_volume>(imv2) << std::endl
+				  << quantity<teaspoon_volume>(imv3) << std::endl
+				  << quantity<teaspoon_volume>(imv4) << std::endl
+				  << quantity<teaspoon_volume>(imv5) << std::endl
+				  << quantity<teaspoon_volume>(imv6) << std::endl
+				  << quantity<teaspoon_volume>(imv7) << std::endl
+				  << quantity<teaspoon_volume>(imv8) << std::endl
+				  << quantity<teaspoon_volume>(imv9) << std::endl
+				  << quantity<teaspoon_volume>(imv10) << std::endl
+				  << std::endl;
+
+//		std::cout << quantity<tablespoon_volume>(imv1) << std::endl
+//				  << quantity<tablespoon_volume>(imv2) << std::endl
+//				  << quantity<tablespoon_volume>(imv3) << std::endl
+//				  << quantity<tablespoon_volume>(imv4) << std::endl
+//				  << quantity<tablespoon_volume>(imv5) << std::endl
+//				  << quantity<tablespoon_volume>(imv6) << std::endl
+//				  << quantity<tablespoon_volume>(imv7) << std::endl
+//				  << quantity<tablespoon_volume>(imv8) << std::endl
+//				  << quantity<tablespoon_volume>(imv9) << std::endl
+//				  << quantity<tablespoon_volume>(imv10) << std::endl
+//				  << std::endl;
+
+		std::cout << quantity<fluid_ounce_volume>(imv1) << std::endl
+				  << quantity<fluid_ounce_volume>(imv2) << std::endl
+				  << quantity<fluid_ounce_volume>(imv3) << std::endl
+				  << quantity<fluid_ounce_volume>(imv4) << std::endl
+				  << quantity<fluid_ounce_volume>(imv5) << std::endl
+				  << quantity<fluid_ounce_volume>(imv6) << std::endl
+				  << quantity<fluid_ounce_volume>(imv7) << std::endl
+				  << quantity<fluid_ounce_volume>(imv8) << std::endl
+				  << quantity<fluid_ounce_volume>(imv9) << std::endl
+				  << quantity<fluid_ounce_volume>(imv10) << std::endl
+				  << std::endl;
+//
+//		std::cout << quantity<gill_volume>(imv1) << std::endl
+//				  << quantity<gill_volume>(imv2) << std::endl
+//				  << quantity<gill_volume>(imv3) << std::endl
+//				  << quantity<gill_volume>(imv4) << std::endl
+//				  << quantity<gill_volume>(imv5) << std::endl
+//				  << quantity<gill_volume>(imv6) << std::endl
+//				  << quantity<gill_volume>(imv7) << std::endl
+//				  << quantity<gill_volume>(imv8) << std::endl
+//				  << quantity<gill_volume>(imv9) << std::endl
+//				  << quantity<gill_volume>(imv10) << std::endl
+//				  << std::endl;
+//
+//		std::cout << quantity<cup_volume>(imv1) << std::endl
+//				  << quantity<cup_volume>(imv2) << std::endl
+//				  << quantity<cup_volume>(imv3) << std::endl
+//				  << quantity<cup_volume>(imv4) << std::endl
+//				  << quantity<cup_volume>(imv5) << std::endl
+//				  << quantity<cup_volume>(imv6) << std::endl
+//				  << quantity<cup_volume>(imv7) << std::endl
+//				  << quantity<cup_volume>(imv8) << std::endl
+//				  << quantity<cup_volume>(imv9) << std::endl
+//				  << quantity<cup_volume>(imv10) << std::endl
+//				  << std::endl;
+//
+//		std::cout << quantity<pint_volume>(imv1) << std::endl
+//				  << quantity<pint_volume>(imv2) << std::endl
+//				  << quantity<pint_volume>(imv3) << std::endl
+//				  << quantity<pint_volume>(imv4) << std::endl
+//				  << quantity<pint_volume>(imv5) << std::endl
+//				  << quantity<pint_volume>(imv6) << std::endl
+//				  << quantity<pint_volume>(imv7) << std::endl
+//				  << quantity<pint_volume>(imv8) << std::endl
+//				  << quantity<pint_volume>(imv9) << std::endl
+//				  << quantity<pint_volume>(imv10) << std::endl
+//				  << std::endl;
+//
+//		std::cout << quantity<quart_volume>(imv1) << std::endl
+//				  << quantity<quart_volume>(imv2) << std::endl
+//				  << quantity<quart_volume>(imv3) << std::endl
+//				  << quantity<quart_volume>(imv4) << std::endl
+//				  << quantity<quart_volume>(imv5) << std::endl
+//				  << quantity<quart_volume>(imv6) << std::endl
+//				  << quantity<quart_volume>(imv7) << std::endl
+//				  << quantity<quart_volume>(imv8) << std::endl
+//				  << quantity<quart_volume>(imv9) << std::endl
+//				  << quantity<quart_volume>(imv10) << std::endl
+//				  << std::endl;
+//
+//		std::cout << quantity<gallon_volume>(imv1) << std::endl
+//				  << quantity<gallon_volume>(imv2) << std::endl
+//				  << quantity<gallon_volume>(imv3) << std::endl
+//				  << quantity<gallon_volume>(imv4) << std::endl
+//				  << quantity<gallon_volume>(imv5) << std::endl
+//				  << quantity<gallon_volume>(imv6) << std::endl
+//				  << quantity<gallon_volume>(imv7) << std::endl
+//				  << quantity<gallon_volume>(imv8) << std::endl
+//				  << quantity<gallon_volume>(imv9) << std::endl
+//				  << quantity<gallon_volume>(imv10) << std::endl
+//				  << std::endl;
 	}
 	
 	return 0;

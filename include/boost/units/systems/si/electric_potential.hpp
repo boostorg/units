@@ -18,17 +18,17 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// electric potential : L^2 M T^-3 I^-1
 typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-1>::type   electric_potential_type;        
 
-typedef unit<SI::electric_potential_type,SI::system>                                    electric_potential;
+typedef unit<si::electric_potential_type,si::system>                                    electric_potential;
     
 BOOST_UNITS_STATIC_CONSTANT(volt,electric_potential);   
 BOOST_UNITS_STATIC_CONSTANT(volts,electric_potential);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

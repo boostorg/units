@@ -12,22 +12,22 @@
 #define BOOST_UNITS_SI_ACCELERATION_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/acceleration.hpp>
+#include <boost/units/physical_dimensions/acceleration.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<acceleration_dimension,SI::system>  acceleration;
+typedef unit<acceleration_dimension,si::system>  acceleration;
 
 BOOST_UNITS_STATIC_CONSTANT(meter_per_second_squared,acceleration);
 BOOST_UNITS_STATIC_CONSTANT(meters_per_second_squared,acceleration);
 BOOST_UNITS_STATIC_CONSTANT(metre_per_second_squared,acceleration);
 BOOST_UNITS_STATIC_CONSTANT(metres_per_second_squared,acceleration);
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

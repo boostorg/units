@@ -18,14 +18,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// impedance : L^2 M T^-3 I^-2  
 typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-2>::type   impedance_type;              
 
-typedef unit<SI::impedance_type,SI::system>                                             impedance;
+typedef unit<si::impedance_type,si::system>                                             impedance;
                                             
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<temperature_dimension,SI::system>   temperature;
+typedef unit<temperature_dimension,si::system>   temperature;
     
 BOOST_UNITS_STATIC_CONSTANT(kelvin,temperature);    
 BOOST_UNITS_STATIC_CONSTANT(kelvins,temperature);   
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

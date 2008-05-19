@@ -17,11 +17,11 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 BOOST_UNITS_STATIC_CONSTANT(si_dimensionless,dimensionless);
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

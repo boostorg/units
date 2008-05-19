@@ -40,7 +40,7 @@ namespace detail {
 int main(int argc,char *argv[])
 {
 
-    bu::quantity<bu::SI::energy> q;
+    bu::quantity<bu::si::energy> q;
 
     this_function_should_not_be_found_by_adl(q);
 

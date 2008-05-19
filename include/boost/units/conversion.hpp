@@ -136,6 +136,22 @@ struct conversion_helper
     }                                                                   \
     void boost_units_require_semicolon()
 
+/// template that defines a base_unit and conversion to another dimensionally-consistent unit
+#define BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(namespace_, name_, name_string_, symbol_string_, factor, unit, id)\
+namespace boost {                                                           \
+namespace units {                                                           \
+namespace namespace_ {                                                      \
+struct name_ ## _base_unit                                                  \
+  : base_unit<name_ ## _base_unit, unit::dimension_type, id> {              \
+    static const char* name() { return(name_string_); }                     \
+    static const char* symbol() { return(symbol_string_); };                \
+};                                                                          \
+}                                                                           \
+}                                                                           \
+}                                                                           \
+BOOST_UNITS_DEFINE_CONVERSION_FACTOR(namespace_::name_ ## _base_unit, unit, double, factor); \
+BOOST_UNITS_DEFAULT_CONVERSION(namespace_::name_ ## _base_unit, unit)
+
 /// Find the conversion factor between two units.
 template<class FromUnit,class ToUnit>
 inline

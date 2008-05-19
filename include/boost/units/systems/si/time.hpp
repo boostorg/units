@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<time_dimension,SI::system>      time;
+typedef unit<time_dimension,si::system>      time;
 
 BOOST_UNITS_STATIC_CONSTANT(second,time);   
 BOOST_UNITS_STATIC_CONSTANT(seconds,time);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

@@ -14,7 +14,7 @@
 \brief tutorial.cpp
 
 \detailed
-Basic tutorial using SI units.
+Basic tutorial using si units.
 
 Output:
 @verbatim
@@ -49,7 +49,7 @@ I*Z == V? true
 #include <boost/units/systems/si/resistance.hpp>
 
 using namespace boost::units;
-using namespace boost::units::SI;
+using namespace boost::units::si;
 
 quantity<energy> 
 work(const quantity<force>& F,const quantity<length>& dx)

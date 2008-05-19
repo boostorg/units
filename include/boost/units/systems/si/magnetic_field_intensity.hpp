@@ -18,14 +18,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// magnetic field intensity : L^-1 I
 typedef derived_dimension<length_base_dimension,-1,current_base_dimension,1>::type                          magnetic_field_intensity_type;
 
-typedef unit<SI::magnetic_field_intensity_type,SI::system>                              magnetic_field_intensity;
+typedef unit<si::magnetic_field_intensity_type,si::system>                              magnetic_field_intensity;
                                             
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

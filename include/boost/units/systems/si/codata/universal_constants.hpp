@@ -35,7 +35,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -71,7 +71,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(t_P,quantity<time>,5.39124e-44*seconds,2.7e-48*sec
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

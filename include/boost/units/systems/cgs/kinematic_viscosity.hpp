@@ -12,20 +12,20 @@
 #define BOOST_UNITS_CGS_KINEMATIC_VISCOSITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/kinematic_viscosity.hpp>
+#include <boost/units/physical_dimensions/kinematic_viscosity.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<kinematic_viscosity_dimension,CGS::system>     kinematic_viscosity;
+typedef unit<kinematic_viscosity_dimension,cgs::system>     kinematic_viscosity;
  
 BOOST_UNITS_STATIC_CONSTANT(stoke,kinematic_viscosity);           
 BOOST_UNITS_STATIC_CONSTANT(stokes,kinematic_viscosity);    
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

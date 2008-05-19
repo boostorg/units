@@ -12,15 +12,15 @@
 #define BOOST_UNITS_SI_PRESSURE_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/pressure.hpp>
+#include <boost/units/physical_dimensions/pressure.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<pressure_dimension,SI::system>      pressure;
+typedef unit<pressure_dimension,si::system>      pressure;
 
 // windef.h #defines pascal on Metrowerks compilers
 #if defined(__MWERKS__)
@@ -40,7 +40,7 @@ BOOST_UNITS_STATIC_CONSTANT(pascal,pressure);
 #endif
 BOOST_UNITS_STATIC_CONSTANT(pascals,pressure);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

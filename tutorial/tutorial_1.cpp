@@ -203,7 +203,7 @@ BOOST_UNITS_STATIC_CONSTANT(gram,mass);
 
 } // namespace CG
 
-namespace CGS {
+namespace cgs {
 
 typedef make_system<centimeter_base_unit,gram_base_unit,second_base_unit>::type system;
 
@@ -219,7 +219,7 @@ BOOST_UNITS_STATIC_CONSTANT(centimeter,length);
 BOOST_UNITS_STATIC_CONSTANT(gram,mass);
 BOOST_UNITS_STATIC_CONSTANT(second,time);
 
-} // namespace CGS
+} // namespace cgs
 
 namespace esu {
 
@@ -295,7 +295,7 @@ int main(void)
     using namespace boost::units;
 
     quantity<CG::length>    cg_length(1.0*CG::centimeter);
-    quantity<CGS::length>   cgs_length(1.0*CGS::centimeter);
+    quantity<cgs::length>   cgs_length(1.0*cgs::centimeter);
     
     std::cout << cg_length/cgs_length << std::endl;
 

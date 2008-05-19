@@ -29,8 +29,8 @@ namespace bu = boost::units;
 
 int main(int,char *[])
 {
-    const bu::quantity<bu::SI::length>  T1(2.0 * bu::SI::meters);
-    const bu::quantity<bu::CGS::length> T2 = T1;
+    const bu::quantity<bu::si::length>  T1(2.0 * bu::si::meters);
+    const bu::quantity<bu::cgs::length> T2 = T1;
     
     return 0;
 }

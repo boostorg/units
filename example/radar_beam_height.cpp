@@ -65,14 +65,14 @@ static const length mile,miles;
 
 } // namespace nautical
 
-// helper for conversions between nautical length and SI length
+// helper for conversions between nautical length and si length
 
 } // namespace units
 
 } // namespace boost
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::nautical::length_base_unit,
-                                     boost::units::SI::meter_base_unit,
+                                     boost::units::si::meter_base_unit,
                                      double, 1.852e3);
 
 namespace boost {
@@ -104,7 +104,7 @@ static const length foot,feet;
 } // namespace boost
 
 BOOST_UNITS_DEFINE_CONVERSION_FACTOR(boost::units::imperial::length_base_unit,
-                                     boost::units::SI::meter_base_unit,
+                                     boost::units::si::meter_base_unit,
                                      double, 1.0/3.28083989501312);
 
 namespace boost {
@@ -157,18 +157,18 @@ radar_beam_height(const quantity<nautical::length>& range)
 int main(void)
 {
     using namespace boost::units;
-    using namespace boost::units::SI;
+    using namespace boost::units::si;
     using namespace boost::units::nautical;
 
     std::stringstream sstream1, sstream2;
     
     //[radar_beam_height_snippet_1
     const quantity<nautical::length> radar_range(300.0*miles);
-    const quantity<SI::length>       earth_radius(6371.0087714*kilo*meters);
+    const quantity<si::length>       earth_radius(6371.0087714*kilo*meters);
     
-    const quantity<SI::length>       beam_height_1(radar_beam_height(quantity<SI::length>(radar_range),earth_radius));
+    const quantity<si::length>       beam_height_1(radar_beam_height(quantity<si::length>(radar_range),earth_radius));
     const quantity<nautical::length> beam_height_2(radar_beam_height(radar_range,quantity<nautical::length>(earth_radius)));
-    const quantity<SI::length>       beam_height_3(radar_beam_height< quantity<SI::length> >(radar_range,earth_radius));
+    const quantity<si::length>       beam_height_3(radar_beam_height< quantity<si::length> >(radar_range,earth_radius));
     const quantity<nautical::length> beam_height_4(radar_beam_height< quantity<nautical::length> >(radar_range,earth_radius));
     //]
     
@@ -181,7 +181,7 @@ int main(void)
               << "beam height approx : " << radar_beam_height(radar_range)
               << std::endl
               << "beam height approx : "
-              << quantity<SI::length>(radar_beam_height(radar_range))
+              << quantity<si::length>(radar_beam_height(radar_range))
               << std::endl << std::endl;
     
     sstream2 << "radar range        : 300 nmi" << std::endl;

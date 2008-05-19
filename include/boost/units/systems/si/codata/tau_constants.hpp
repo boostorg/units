@@ -35,7 +35,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -62,7 +62,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(lambda_C_tau,quantity<length>,0.69772e-15*meters,1
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

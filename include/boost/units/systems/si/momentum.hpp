@@ -12,17 +12,17 @@
 #define BOOST_UNITS_SI_MOMENTUM_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/momentum.hpp>
+#include <boost/units/physical_dimensions/momentum.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<momentum_dimension,SI::system>  momentum;
+typedef unit<momentum_dimension,si::system>  momentum;
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

@@ -35,7 +35,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -56,7 +56,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(M_alpha,quantity<mass_over_amount>,4.001506179127e
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

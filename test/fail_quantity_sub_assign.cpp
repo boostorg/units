@@ -29,8 +29,8 @@ namespace bu = boost::units;
 int main(int,char *[])
 {
 
-    bu::quantity<bu::SI::length> T1;
-    T1 -= 2.0 * bu::SI::seconds;
+    bu::quantity<bu::si::length> T1;
+    T1 -= 2.0 * bu::si::seconds;
 
     return 0;
 }

@@ -35,7 +35,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -74,7 +74,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(gamma_n,quantity<frequency_over_magnetic_flux_dens
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

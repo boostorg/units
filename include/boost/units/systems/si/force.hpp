@@ -12,20 +12,20 @@
 #define BOOST_UNITS_SI_FORCE_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/force.hpp>
+#include <boost/units/physical_dimensions/force.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<force_dimension,SI::system>     force;
+typedef unit<force_dimension,si::system>     force;
     
 BOOST_UNITS_STATIC_CONSTANT(newton,force);  
 BOOST_UNITS_STATIC_CONSTANT(newtons,force); 
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

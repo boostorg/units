@@ -29,7 +29,7 @@ namespace bu = boost::units;
 int main(int argc,char *argv[])
 {
 
-    2.0 * bu::SI::seconds + 2.0 * bu::SI::meters;
+    2.0 * bu::si::seconds + 2.0 * bu::si::meters;
 
     return 0;
 }

@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<solid_angle_dimension,SI::system>      solid_angle;
+typedef unit<solid_angle_dimension,si::system>      solid_angle;
     
 BOOST_UNITS_STATIC_CONSTANT(steradian,solid_angle); 
 BOOST_UNITS_STATIC_CONSTANT(steradians,solid_angle);    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

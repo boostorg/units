@@ -12,7 +12,7 @@
 
 void foo()
 {
-    boost::units::quantity<boost::units::SI::dimensionless> d = boost::units::quantity< boost::units::SI::dimensionless >();
+    boost::units::quantity<boost::units::si::dimensionless> d = boost::units::quantity< boost::units::si::dimensionless >();
 }
 
 #include <boost/test/test_tools.hpp>

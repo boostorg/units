@@ -12,22 +12,22 @@
 #define BOOST_UNITS_CGS_AREA_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/area.hpp>
+#include <boost/units/physical_dimensions/area.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<area_dimension,CGS::system>     area;
+typedef unit<area_dimension,cgs::system>     area;
     
 BOOST_UNITS_STATIC_CONSTANT(square_centimeter,area);
 BOOST_UNITS_STATIC_CONSTANT(square_centimeters,area);
 BOOST_UNITS_STATIC_CONSTANT(square_centimetre,area);
 BOOST_UNITS_STATIC_CONSTANT(square_centimetres,area);
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

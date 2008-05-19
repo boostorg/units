@@ -23,24 +23,24 @@ namespace units {
 
 /// cos of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::system,Y>::type 
-cos(const quantity<SI::plane_angle,Y>& theta)
+typename dimensionless_quantity<si::system,Y>::type 
+cos(const quantity<si::plane_angle,Y>& theta)
 {
     return std::cos(theta.value());
 }
 
 /// sin of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::system,Y>::type 
-sin(const quantity<SI::plane_angle,Y>& theta)
+typename dimensionless_quantity<si::system,Y>::type 
+sin(const quantity<si::plane_angle,Y>& theta)
 {
     return std::sin(theta.value());
 }
 
 /// tan of theta in radians
 template<class Y>
-typename dimensionless_quantity<SI::system,Y>::type 
-tan(const quantity<SI::plane_angle,Y>& theta)
+typename dimensionless_quantity<si::system,Y>::type 
+tan(const quantity<si::plane_angle,Y>& theta)
 {
     return std::tan(theta.value());
 }
@@ -50,7 +50,7 @@ template<class System,class Y>
 typename dimensionless_quantity<System,Y>::type 
 cos(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
-    return cos(quantity<SI::plane_angle,Y>(theta));
+    return cos(quantity<si::plane_angle,Y>(theta));
 }
 
 /// sin of theta in other angular units 
@@ -58,7 +58,7 @@ template<class System,class Y>
 typename dimensionless_quantity<System,Y>::type 
 sin(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
-    return sin(quantity<SI::plane_angle,Y>(theta));
+    return sin(quantity<si::plane_angle,Y>(theta));
 }
 
 /// tan of theta in other angular units 
@@ -66,15 +66,15 @@ template<class System,class Y>
 typename dimensionless_quantity<System,Y>::type 
 tan(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
-    return tan(quantity<SI::plane_angle,Y>(theta));
+    return tan(quantity<si::plane_angle,Y>(theta));
 }
 
 /// acos of @c value_type returning angle in radians
 template<class Y>
-quantity<SI::plane_angle,Y>
+quantity<si::plane_angle,Y>
 acos(const Y& val)
 {
-    return quantity<SI::plane_angle,Y>(std::acos(val)*SI::radians);
+    return quantity<si::plane_angle,Y>(std::acos(val)*si::radians);
 }
 
 /// acos of dimensionless quantity returning angle in same system
@@ -82,15 +82,15 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 acos(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<plane_angle_dimension,System>,Y>(std::acos(val)*SI::radians);
+    return quantity<unit<plane_angle_dimension,System>,Y>(std::acos(val)*si::radians);
 }
 
 /// asin of @c value_type returning angle in radians
 template<class Y>
-quantity<SI::plane_angle,Y>
+quantity<si::plane_angle,Y>
 asin(const Y& val)
 {
-    return quantity<SI::plane_angle,Y>(std::asin(val)*SI::radians);
+    return quantity<si::plane_angle,Y>(std::asin(val)*si::radians);
 }
 
 /// asin of dimensionless quantity returning angle in same system
@@ -98,15 +98,15 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<plane_angle_dimension,System>,Y>(std::asin(val)*SI::radians);
+    return quantity<unit<plane_angle_dimension,System>,Y>(std::asin(val)*si::radians);
 }
 
 /// atan of @c value_type returning angle in radians
 template<class Y>
-quantity<SI::plane_angle,Y>
+quantity<si::plane_angle,Y>
 atan(const Y& val)
 {
-    return quantity<SI::plane_angle,Y>(std::atan(val)*SI::radians);
+    return quantity<si::plane_angle,Y>(std::atan(val)*si::radians);
 }
 
 /// atan of dimensionless quantity returning angle in same system
@@ -114,15 +114,15 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 atan(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-    return quantity<unit<plane_angle_dimension,System>,Y>(std::atan(val)*SI::radians);
+    return quantity<unit<plane_angle_dimension,System>,Y>(std::atan(val)*si::radians);
 }
 
 /// atan2 of @c value_type returning angle in radians
 template<class Y>
-quantity<SI::plane_angle,Y>
+quantity<si::plane_angle,Y>
 atan2(const Y& y,const Y& x)
 {
-    return quantity<SI::plane_angle,Y>(std::atan2(y,x)*SI::radians);
+    return quantity<si::plane_angle,Y>(std::atan2(y,x)*si::radians);
 }
 
 } // namespace units

@@ -18,17 +18,17 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// electric charge : T^1 I^1
 typedef derived_dimension<time_base_dimension,1,current_base_dimension,1>::type     electric_charge_type;        
 
-typedef unit<SI::electric_charge_type,SI::system>               electric_charge;
+typedef unit<si::electric_charge_type,si::system>               electric_charge;
     
 BOOST_UNITS_STATIC_CONSTANT(coulomb,electric_charge);   
 BOOST_UNITS_STATIC_CONSTANT(coulombs,electric_charge);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

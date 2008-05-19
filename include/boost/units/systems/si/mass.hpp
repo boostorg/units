@@ -17,16 +17,16 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<mass_dimension,SI::system>      mass;
+typedef unit<mass_dimension,si::system>      mass;
     
 BOOST_UNITS_STATIC_CONSTANT(kilogram,mass); 
 BOOST_UNITS_STATIC_CONSTANT(kilograms,mass);    
 BOOST_UNITS_STATIC_CONSTANT(kilogramme,mass);   
 BOOST_UNITS_STATIC_CONSTANT(kilogrammes,mass);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

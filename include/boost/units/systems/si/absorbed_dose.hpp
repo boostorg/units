@@ -12,20 +12,20 @@
 #define BOOST_UNITS_SI_ABSORBED_DOSE_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/absorbed_dose.hpp>
+#include <boost/units/physical_dimensions/absorbed_dose.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<absorbed_dose_dimension,SI::system>     absorbed_dose;
+typedef unit<absorbed_dose_dimension,si::system>     absorbed_dose;
     
 BOOST_UNITS_STATIC_CONSTANT(gray,absorbed_dose);  
 BOOST_UNITS_STATIC_CONSTANT(grays,absorbed_dose); 
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

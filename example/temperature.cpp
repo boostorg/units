@@ -44,7 +44,7 @@ Output:
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/detail/utility.hpp>
 
-#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
+#include <boost/units/base_units/temperature/fahrenheit.hpp>
 
 using namespace boost::units;
 
@@ -68,14 +68,14 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 //[temperature_snippet_2
 template<>
 struct is_implicitly_convertible<unit<temperature_dimension,fahrenheit::system>,
-                                 unit<temperature_dimension,SI::system> > : 
+                                 unit<temperature_dimension,si::system> > : 
     public mpl::true_
 { };
 
 template<>
 struct is_implicitly_convertible<
     absolute< unit<temperature_dimension,fahrenheit::system> >,
-    absolute< unit<temperature_dimension,SI::system> > > : 
+    absolute< unit<temperature_dimension,si::system> > > : 
     public mpl::true_
 { };
 //]
@@ -94,18 +94,18 @@ int main()
     quantity<fahrenheit::temperature>               T1v(
         32.0*fahrenheit::degrees);
     
-    quantity<absolute<SI::temperature> >            T2p(T1p);
-    quantity<absolute<SI::temperature> >            T3p = T1p;
-    quantity<SI::temperature>                       T2v(T1v);
-    quantity<SI::temperature>                       T3v = T1v;
+    quantity<absolute<si::temperature> >            T2p(T1p);
+    quantity<absolute<si::temperature> >            T3p = T1p;
+    quantity<si::temperature>                       T2v(T1v);
+    quantity<si::temperature>                       T3v = T1v;
     //]
 
     typedef conversion_helper<
         quantity<absolute<fahrenheit::temperature> >,
-        quantity<absolute<SI::temperature> > >          absolute_conv_type;
+        quantity<absolute<si::temperature> > >          absolute_conv_type;
     typedef conversion_helper<
         quantity<fahrenheit::temperature>,
-        quantity<SI::temperature> >                     relative_conv_type;
+        quantity<si::temperature> >                     relative_conv_type;
     
     sstream1  << T1p << std::endl
               << absolute_conv_type::convert(T1p) << std::endl

@@ -14,8 +14,7 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/length.hpp>
-#include <boost/units/systems/base_units.hpp>
-#include <boost/units/systems/imperial/base_units/foot.hpp>
+#include <boost/units/base_units/imperial/foot.hpp>
 
 //[runtime_unit_snippet_1
 
@@ -24,19 +23,19 @@ namespace {
 using namespace boost::units;
 using imperial::foot_base_unit;
 
-std::map<std::string, quantity<SI::length> > known_units;
+std::map<std::string, quantity<si::length> > known_units;
 
 }
 
-quantity<SI::length> calculate(const quantity<SI::length>& t) {
-    return(boost::units::hypot(t, 2.0 * SI::meters));
+quantity<si::length> calculate(const quantity<si::length>& t) {
+    return(boost::units::hypot(t, 2.0 * si::meters));
 }
 
 int main() {
-    known_units["meter"] = 1.0 * SI::meters;
-    known_units["centimeter"] = .01 * SI::meters;;
+    known_units["meter"] = 1.0 * si::meters;
+    known_units["centimeter"] = .01 * si::meters;;
     known_units["foot"] =
-        conversion_factor(foot_base_unit::unit_type(), SI::meter) * SI::meter;
+        conversion_factor(foot_base_unit::unit_type(), si::meter) * si::meter;
     std::string output_type("meter");
     std::string input;
     while((std::cout << ">") && (std::cin >> input)) {

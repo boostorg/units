@@ -190,14 +190,14 @@ work(quantity<unit<force_dimension,System>,Y> F,
 //]
 
 //[kitchen_sink_function_snippet_4
-/// the ideal gas law in SI units
+/// the ideal gas law in si units
 template<class Y>
-quantity<SI::amount,Y> 
-idealGasLaw(const quantity<SI::pressure,Y>& P,
-            const quantity<SI::volume,Y>& V,
-            const quantity<SI::temperature,Y>& T)
+quantity<si::amount,Y> 
+idealGasLaw(const quantity<si::pressure,Y>& P,
+            const quantity<si::volume,Y>& V,
+            const quantity<si::temperature,Y>& T)
 {
-    using namespace boost::units::SI;
+    using namespace boost::units::si;
     
     #if BOOST_UNITS_HAS_TYPEOF 
     return (P*V/(constants::CODATA::R*T));
@@ -214,7 +214,7 @@ idealGasLaw(const quantity<SI::pressure,Y>& P,
 int main()
 {    
     using namespace boost::units;
-    using namespace boost::units::SI;
+    using namespace boost::units::si;
 
     std::stringstream sstream1, sstream2;
 

@@ -12,7 +12,7 @@
 #define BOOST_UNITS_SI_HPP
 
 /// \file
-/// Includes all the SI unit headers
+/// Includes all the si unit headers
 
 #include <string>
 

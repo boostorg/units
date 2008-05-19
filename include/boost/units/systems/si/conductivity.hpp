@@ -18,14 +18,14 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// conductivity : L^-3 M^-1 T^3 I^2
 typedef derived_dimension<length_base_dimension,-3,mass_base_dimension,-1,time_base_dimension,3,current_base_dimension,2>::type   conductivity_type;                    
 
-typedef unit<SI::conductivity_type,SI::system>                                          conductivity;
+typedef unit<si::conductivity_type,si::system>                                          conductivity;
                                             
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

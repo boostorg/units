@@ -18,17 +18,17 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
 /// magnetic flux : L^2 M T^-2 I^-1
 typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-2,current_base_dimension,-1>::type   magnetic_flux_type;            
 
-typedef unit<SI::magnetic_flux_type,SI::system>                                         magnetic_flux;
+typedef unit<si::magnetic_flux_type,si::system>                                         magnetic_flux;
     
 BOOST_UNITS_STATIC_CONSTANT(weber,magnetic_flux);   
 BOOST_UNITS_STATIC_CONSTANT(webers,magnetic_flux);  
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

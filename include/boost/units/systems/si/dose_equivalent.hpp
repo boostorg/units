@@ -12,20 +12,20 @@
 #define BOOST_UNITS_SI_DOSE_EQUIVALENT_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/dose_equivalent.hpp>
+#include <boost/units/physical_dimensions/dose_equivalent.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<dose_equivalent_dimension,SI::system>     dose_equivalent;
+typedef unit<dose_equivalent_dimension,si::system>     dose_equivalent;
     
 BOOST_UNITS_STATIC_CONSTANT(sievert,dose_equivalent);  
 BOOST_UNITS_STATIC_CONSTANT(sieverts,dose_equivalent); 
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

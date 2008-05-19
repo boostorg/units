@@ -12,22 +12,22 @@
 #define BOOST_UNITS_SI_SURFACE_DENSITY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/surface_density.hpp>
+#include <boost/units/physical_dimensions/surface_density.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<surface_density_dimension,SI::system>  surface_density;
+typedef unit<surface_density_dimension,si::system>  surface_density;
 
 BOOST_UNITS_STATIC_CONSTANT(kilogram_per_square_meter,surface_density);
 BOOST_UNITS_STATIC_CONSTANT(kilograms_per_square_meter,surface_density);
 BOOST_UNITS_STATIC_CONSTANT(kilogramme_per_square_metre,surface_density);
 BOOST_UNITS_STATIC_CONSTANT(kilogrammes_per_square_metre,surface_density);
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

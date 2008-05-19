@@ -12,20 +12,20 @@
 #define BOOST_UNITS_CGS_FORCE_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/force.hpp>
+#include <boost/units/physical_dimensions/force.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<force_dimension,CGS::system>        force;
+typedef unit<force_dimension,cgs::system>        force;
     
 BOOST_UNITS_STATIC_CONSTANT(dyne,force);
 BOOST_UNITS_STATIC_CONSTANT(dynes,force);
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

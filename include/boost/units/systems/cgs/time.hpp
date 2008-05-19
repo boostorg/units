@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<time_dimension,CGS::system>     time;
+typedef unit<time_dimension,cgs::system>     time;
 
 BOOST_UNITS_STATIC_CONSTANT(second,time);   
 BOOST_UNITS_STATIC_CONSTANT(seconds,time);  
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

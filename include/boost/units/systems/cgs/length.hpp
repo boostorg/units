@@ -17,16 +17,16 @@ namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<length_dimension,CGS::system>   length;
+typedef unit<length_dimension,cgs::system>   length;
     
 BOOST_UNITS_STATIC_CONSTANT(centimeter,length); 
 BOOST_UNITS_STATIC_CONSTANT(centimeters,length);    
 BOOST_UNITS_STATIC_CONSTANT(centimetre,length); 
 BOOST_UNITS_STATIC_CONSTANT(centimetres,length);    
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

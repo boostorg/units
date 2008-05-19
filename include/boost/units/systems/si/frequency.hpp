@@ -12,19 +12,19 @@
 #define BOOST_UNITS_SI_FREQUENCY_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/frequency.hpp>
+#include <boost/units/physical_dimensions/frequency.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<frequency_dimension,SI::system>     frequency;
+typedef unit<frequency_dimension,si::system>     frequency;
     
 BOOST_UNITS_STATIC_CONSTANT(hertz,frequency);   
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

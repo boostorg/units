@@ -30,7 +30,7 @@ namespace bu = boost::units;
 int main(int,char *[])
 {
 
-    bu::quantity<bu::absolute<bu::SI::temperature> > q(2.0 * bu::absolute<bu::SI::temperature>());
+    bu::quantity<bu::absolute<bu::si::temperature> > q(2.0 * bu::absolute<bu::si::temperature>());
 
     q += q;
 

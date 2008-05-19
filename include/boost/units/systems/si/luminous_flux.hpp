@@ -12,20 +12,20 @@
 #define BOOST_UNITS_SI_LUMINOUS_FLUX_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/luminous_flux.hpp>
+#include <boost/units/physical_dimensions/luminous_flux.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<luminous_flux_dimension,SI::system>      luminous_flux;
+typedef unit<luminous_flux_dimension,si::system>      luminous_flux;
     
 BOOST_UNITS_STATIC_CONSTANT(lumen,luminous_flux); 
 BOOST_UNITS_STATIC_CONSTANT(lumens,luminous_flux);    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

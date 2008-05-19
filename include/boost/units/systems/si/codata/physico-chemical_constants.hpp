@@ -35,7 +35,7 @@ namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
                             
 namespace constants {
 
@@ -69,7 +69,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(b_prime,quantity<frequency_over_temperature>,5.878
 
 } // namespace constants    
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

@@ -12,19 +12,19 @@
 #define BOOST_UNITS_CGS_DYNAMIC_VISCOSITY_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/dynamic_viscosity.hpp>
+#include <boost/units/physical_dimensions/dynamic_viscosity.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<dynamic_viscosity_dimension,CGS::system>     dynamic_viscosity;
+typedef unit<dynamic_viscosity_dimension,cgs::system>     dynamic_viscosity;
     
 BOOST_UNITS_STATIC_CONSTANT(poise,dynamic_viscosity);    
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

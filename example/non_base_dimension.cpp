@@ -31,7 +31,7 @@ Output:
 #include <boost/units/conversion.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
-#include <boost/units/systems/physical_dimensions.hpp>
+#include <boost/units/physical_dimensions.hpp>
 #include <boost/units/base_unit.hpp>
 #include <boost/units/make_system.hpp>
 

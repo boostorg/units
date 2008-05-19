@@ -12,7 +12,7 @@
 #define BOOST_UNITS_CGS_HPP
 
 /// \file
-/// Includes all the CGS unit headers
+/// Includes all the cgs unit headers
 
 #include <string>
 

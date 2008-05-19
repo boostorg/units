@@ -200,11 +200,11 @@ struct f {
         return(1.0 - x + 4.0 * y);
     }
 
-    boost::units::quantity<boost::units::SI::velocity>
-    operator()(const quantity<SI::time>& x,
-               const quantity<SI::length>& y) const {
+    boost::units::quantity<boost::units::si::velocity>
+    operator()(const quantity<si::time>& x,
+               const quantity<si::length>& y) const {
         using namespace boost::units;
-        using namespace SI;
+        using namespace si;
         return(1.0 * meters / second -
                 x * meters / pow<2>(seconds) +
                 4.0 * y / seconds );
@@ -217,8 +217,8 @@ struct f::result<double,double> {
 };
 
 template<>
-struct f::result<quantity<SI::time>, quantity<SI::length> > {
-    typedef quantity<SI::velocity> type;
+struct f::result<quantity<si::time>, quantity<si::length> > {
+    typedef quantity<si::velocity> type;
 };
 
 
@@ -260,7 +260,7 @@ int main() {
         std::cout << timer.elapsed() << " seconds" << std::endl;
     }
     typedef boost::numeric::ublas::matrix<
-        boost::units::quantity<boost::units::SI::dimensionless>
+        boost::units::quantity<boost::units::si::dimensionless>
     > matrix_type;
     matrix_type ublas_resultq;
     {
@@ -301,19 +301,19 @@ int main() {
         std::cout << timer.elapsed() << " seconds" << std::endl;
     }
     std::vector<
-        boost::units::quantity<boost::units::SI::energy>
+        boost::units::quantity<boost::units::si::energy>
     >  cresultq(max_value * max_value);
     {
         std::vector<
-            boost::units::quantity<boost::units::SI::force>
+            boost::units::quantity<boost::units::si::force>
         > m1(max_value * max_value);
         std::vector<
-            boost::units::quantity<boost::units::SI::length>
+            boost::units::quantity<boost::units::si::length>
         > m2(max_value * max_value);
         std::srand(1492);
         for(int i = 0; i < max_value * max_value; ++i) {
-            m1[i] = std::rand() * boost::units::SI::newtons;
-            m2[i] = std::rand() * boost::units::SI::meters;
+            m1[i] = std::rand() * boost::units::si::newtons;
+            m2[i] = std::rand() * boost::units::si::meters;
         }
         std::cout << "tiled_matrix_multiply<quantity>("
                   << max_value << ", " << max_value << ") : ";
@@ -364,12 +364,12 @@ int main() {
     }
     {
         using namespace boost::units;
-        using namespace SI;
+        using namespace si;
         std::vector<quantity<length> > values(1000);
         std::cout << "solving y' = 1 - x + 4 * y with quantity: ";
         boost::timer timer;
         for(int i = 0; i < 1000; ++i) {
-            quantity<SI::time> x = .1 * i * seconds;
+            quantity<si::time> x = .1 * i * seconds;
             values[i] = solve_differential_equation(
                 f(),
                 0.0 * seconds,
@@ -380,7 +380,7 @@ int main() {
         std::cout << timer.elapsed() << " seconds" << std::endl;
         for(int i = 0; i < 1000; ++i) {
             double x = .1 * i;
-            quantity<SI::length> value =
+            quantity<si::length> value =
                 (1.0/4.0 * x - 3.0/16.0 + 19.0/16.0 * std::exp(4 * x)) * meters;
             if(abs(values[i] - value) > value / 1e9) {
                 std::cout << std::setprecision(15) << "i = : " << i

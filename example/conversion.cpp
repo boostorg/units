@@ -65,21 +65,21 @@ int main()
     {
     // implicit value_type conversions
     //[conversion_snippet_1
-    quantity<SI::length>     L1 = quantity<SI::length,int>(int(2.5)*SI::meters);
-    quantity<SI::length,int> L2(quantity<SI::length,double>(2.5*SI::meters));
+    quantity<si::length>     L1 = quantity<si::length,int>(int(2.5)*si::meters);
+    quantity<si::length,int> L2(quantity<si::length,double>(2.5*si::meters));
     //]
     
     //[conversion_snippet_3
-    quantity<SI::length,int> L3 = static_cast<quantity<SI::length,int> >(L1);
+    quantity<si::length,int> L3 = static_cast<quantity<si::length,int> >(L1);
     //]
     
     //[conversion_snippet_4
-    quantity<CGS::length>    L4 = static_cast<quantity<CGS::length> >(L1);
+    quantity<cgs::length>    L4 = static_cast<quantity<cgs::length> >(L1);
     //]
     
-    quantity<SI::length,int> L5(4*SI::meters),
-                             L6(5*SI::meters);
-    quantity<CGS::length>    L7(L1);
+    quantity<si::length,int> L5(4*si::meters),
+                             L6(5*si::meters);
+    quantity<cgs::length>    L7(L1);
     
     swap(L5,L6);
     
@@ -96,16 +96,16 @@ int main()
     // test explicit unit system conversion
     {
     //[conversion_snippet_5
-    quantity<SI::volume>    vs(1.0*pow<3>(SI::meter));      
-    quantity<CGS::volume>   vc(vs);
-    quantity<SI::volume>    vs2(vc);
+    quantity<si::volume>    vs(1.0*pow<3>(si::meter));      
+    quantity<cgs::volume>   vc(vs);
+    quantity<si::volume>    vs2(vc);
                         
-    quantity<SI::energy>    es(1.0*SI::joule);      
-    quantity<CGS::energy>   ec(es);
-    quantity<SI::energy>    es2(ec);
+    quantity<si::energy>    es(1.0*si::joule);      
+    quantity<cgs::energy>   ec(es);
+    quantity<si::energy>    es2(ec);
                         
-    quantity<SI::velocity>  v1 = 2.0*SI::meters/SI::second,     
-                            v2(2.0*CGS::centimeters/CGS::second);
+    quantity<si::velocity>  v1 = 2.0*si::meters/si::second,     
+                            v2(2.0*cgs::centimeters/cgs::second);
     //]
     
     sstream1 << "volume (m^3)  = " << vs << std::endl

@@ -12,17 +12,17 @@
 #define BOOST_UNITS_SI_ACTION_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/action.hpp>
+#include <boost/units/physical_dimensions/action.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<action_dimension,SI::system>    action;
+typedef unit<action_dimension,si::system>    action;
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

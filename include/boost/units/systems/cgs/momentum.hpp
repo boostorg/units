@@ -12,17 +12,17 @@
 #define BOOST_UNITS_CGS_MOMENTUM_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/momentum.hpp>
+#include <boost/units/physical_dimensions/momentum.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<momentum_dimension,CGS::system>     momentum;
+typedef unit<momentum_dimension,cgs::system>     momentum;
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

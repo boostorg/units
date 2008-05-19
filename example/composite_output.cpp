@@ -19,7 +19,7 @@ namespace units {
 
 //[composite_output_snippet_1
 
-std::ostream& operator<<(std::ostream& os, const boost::units::SI::force&) {
+std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) {
     return(os << "N");
 }
 
@@ -30,5 +30,5 @@ std::ostream& operator<<(std::ostream& os, const boost::units::SI::force&) {
 }
 
 int main() {
-    std::cout << 2.0 * boost::units::SI::newton << std::endl;
+    std::cout << 2.0 * boost::units::si::newton << std::endl;
 }

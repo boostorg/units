@@ -25,10 +25,10 @@ Output:
 #include <boost/units/absolute.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/physical_dimensions.hpp>
-#include <boost/units/systems/si/base_units/kelvin.hpp>
-#include <boost/units/systems/temperature/base_units/celsius.hpp>
-#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
+#include <boost/units/physical_dimensions.hpp>
+#include <boost/units/base_units/si/kelvin.hpp>
+#include <boost/units/base_units/temperature/celsius.hpp>
+#include <boost/units/base_units/temperature/fahrenheit.hpp>
 
 #include <iostream>
 
@@ -37,7 +37,7 @@ Output:
 #define BOOST_UNITS_CHECK_CLOSE(a, b) (BOOST_CHECK((std::abs((a) - (b)) < .0000001)))
 
 namespace bu = boost::units;
-using bu::SI::kelvin_base_unit;
+using bu::si::kelvin_base_unit;
 using bu::temperature::celsius_base_unit;
 using bu::temperature::fahrenheit_base_unit;
 

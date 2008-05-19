@@ -12,20 +12,20 @@
 #define BOOST_UNITS_CGS_PRESSURE_HPP
 
 #include <boost/units/systems/cgs/base.hpp>
-#include <boost/units/systems/physical_dimensions/pressure.hpp>
+#include <boost/units/physical_dimensions/pressure.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<pressure_dimension,CGS::system>     pressure;
+typedef unit<pressure_dimension,cgs::system>     pressure;
     
 BOOST_UNITS_STATIC_CONSTANT(barye,pressure);    
 BOOST_UNITS_STATIC_CONSTANT(baryes,pressure);   
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 

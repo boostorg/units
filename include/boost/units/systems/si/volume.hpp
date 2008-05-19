@@ -12,22 +12,22 @@
 #define BOOST_UNITS_SI_VOLUME_HPP
 
 #include <boost/units/systems/si/base.hpp>
-#include <boost/units/systems/physical_dimensions/volume.hpp>
+#include <boost/units/physical_dimensions/volume.hpp>
 
 namespace boost {
 
 namespace units { 
 
-namespace SI {
+namespace si {
 
-typedef unit<volume_dimension,SI::system>    volume;
+typedef unit<volume_dimension,si::system>    volume;
     
 BOOST_UNITS_STATIC_CONSTANT(cubic_meter,volume);    
 BOOST_UNITS_STATIC_CONSTANT(cubic_meters,volume);   
 BOOST_UNITS_STATIC_CONSTANT(cubic_metre,volume);    
 BOOST_UNITS_STATIC_CONSTANT(cubic_metres,volume);   
 
-} // namespace SI
+} // namespace si
 
 } // namespace units
 

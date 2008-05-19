@@ -13,7 +13,7 @@
 
 void foo()
 {
-    boost::units::quantity<boost::units::SI::dimensionless> d(1.0 * boost::units::SI::meters / boost::units::CGS::centimeters);
+    boost::units::quantity<boost::units::si::dimensionless> d(1.0 * boost::units::si::meters / boost::units::cgs::centimeters);
 }
 
 #include <boost/test/test_tools.hpp>

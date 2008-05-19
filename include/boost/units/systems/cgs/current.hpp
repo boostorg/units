@@ -17,14 +17,14 @@ namespace boost {
 
 namespace units { 
 
-namespace CGS {
+namespace cgs {
 
-typedef unit<current_dimension,CGS::system>   current;
+typedef unit<current_dimension,cgs::system>   current;
     
 BOOST_UNITS_STATIC_CONSTANT(ampere,current);
 BOOST_UNITS_STATIC_CONSTANT(amperes,current);
 
-} // namespace CGS
+} // namespace cgs
 
 } // namespace units
 
