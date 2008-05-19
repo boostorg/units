@@ -18,7 +18,7 @@
 #include <boost/units/static_constant.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/make_system.hpp>
-#include <boost/units/systems/angle/base_units/degree.hpp>
+#include <boost/units/base_units/angle/degree.hpp>
 
 namespace boost {
 
