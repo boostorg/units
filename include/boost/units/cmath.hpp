@@ -24,7 +24,7 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/detail/cmath_impl.hpp>
 
-//#include <boost/units/systems/si/plane_angle.hpp>
+#include <boost/units/systems/si/plane_angle.hpp>
 
 /// \file 
 /// \brief Overloads of functions in \<cmath\> for quantities
@@ -520,7 +520,6 @@ sqrt(const quantity<Unit,Y>& q)
 }
 
 // trig functions with si argument/return types
-/*
 
 /// cos of theta in radians
 template<class Y>
@@ -625,7 +624,6 @@ atan2(const Y& y,const Y& x)
 {
     return quantity<si::plane_angle,Y>(std::atan2(y,x)*si::radians);
 }
-*/
 
 } // namespace units
 
