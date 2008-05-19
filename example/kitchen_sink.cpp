@@ -154,30 +154,6 @@ namespace boost {
 
 namespace units {
 
-/*
-//[kitchen_sink_function_snippet_1
-/// sin takes a quantity and returns a dimensionless quantity
-template<class System,class Y>
-quantity<unit<dimensionless_type,System>,Y>
-sin(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
-{
-    return quantity<unit<dimensionless_type,System>,Y>(std::sin(theta.value()));
-}
-//]
-
-//[kitchen_sink_function_snippet_2
-/// asin takes a dimensionless quantity and returns a quantity
-template<class System,class Y>
-quantity<unit<plane_angle_dimension,System>,Y>
-asin(const quantity<unit<dimensionless_type,System>,Y>& val)
-{
-    typedef quantity<unit<plane_angle_dimension,System>,Y>    quantity_type;
-    
-    return quantity_type::from_value(std::asin(val.value()));
-}
-//]
-*/
-
 //[kitchen_sink_function_snippet_3
 /// the physical definition of work - computed for an arbitrary unit system 
 template<class System,class Y>
@@ -200,7 +176,7 @@ idealGasLaw(const quantity<si::pressure,Y>& P,
     using namespace boost::units::si;
     
     #if BOOST_UNITS_HAS_TYPEOF 
-	using namespace boost::units::si::constants::codata;
+	using namespace constants::codata;
     return (P*V/(R*T));
     #else
     return P*V/(8.314472*(joules/(kelvin*mole))*T);
