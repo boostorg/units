@@ -39,7 +39,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
 
@@ -52,7 +52,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha_over_m_p,quantity<dimensionless>,3.9725996
 /// alpha molar mass
 BOOST_UNITS_PHYSICAL_CONSTANT(M_alpha,quantity<mass_over_amount>,4.001506179127e-3*kilograms/mole,6.2e-14*kilograms/mole);
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

@@ -38,7 +38,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
 
@@ -60,7 +60,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(mu_B,quantity<energy_over_magnetic_flux_density>,9
 /// nuclear magneton
 BOOST_UNITS_PHYSICAL_CONSTANT(mu_N,quantity<energy_over_magnetic_flux_density>,5.05078324e-27*joules/tesla,1.3e-34*joules/tesla);
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

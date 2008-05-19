@@ -39,7 +39,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 // PHYSICO-CHEMICAL
 /// Avogadro constant
@@ -65,7 +65,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(b,quantity<length_temperature>,2.8977685e-3*meter*
 /// Wien displacement law constant : nu_max/T
 BOOST_UNITS_PHYSICAL_CONSTANT(b_prime,quantity<frequency_over_temperature>,5.878933e10*hertz/kelvin,1.0e15*hertz/kelvin);
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

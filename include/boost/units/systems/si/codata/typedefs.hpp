@@ -38,7 +38,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 typedef divide_typeof_helper<frequency,electric_potential>::type frequency_over_electric_potential;
 typedef divide_typeof_helper<electric_charge,mass>::type electric_charge_over_mass;
@@ -66,7 +66,7 @@ typedef divide_typeof_helper<
 typedef multiply_typeof_helper<energy,time>::type energy_time;
 typedef divide_typeof_helper<electric_charge,amount>::type electric_charge_over_amount;
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

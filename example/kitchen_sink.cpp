@@ -200,7 +200,8 @@ idealGasLaw(const quantity<si::pressure,Y>& P,
     using namespace boost::units::si;
     
     #if BOOST_UNITS_HAS_TYPEOF 
-    return (P*V/(constants::CODATA::R*T));
+	using namespace boost::units::si::constants::codata;
+    return (P*V/(R*T));
     #else
     return P*V/(8.314472*(joules/(kelvin*mole))*T);
     #endif // BOOST_UNITS_HAS_TYPEOF
@@ -366,7 +367,7 @@ int main()
               << "T = " << T << std::endl
               << "n = " << n << std::endl
               #if BOOST_UNITS_HAS_TYPEOF
-              << "R = " << constants::CODATA::R << std::endl
+              << "R = " << constants::codata::R << std::endl
               #else
               << "no typeof" << std::endl
               #endif // BOOST_UNITS_HAS_TYPEOF

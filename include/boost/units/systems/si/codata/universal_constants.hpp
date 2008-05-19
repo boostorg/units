@@ -39,7 +39,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
 
@@ -67,7 +67,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(l_P,quantity<length>,1.616252e-35*meters,8.1e-40*m
 /// Planck time
 BOOST_UNITS_PHYSICAL_CONSTANT(t_P,quantity<time>,5.39124e-44*seconds,2.7e-48*seconds);
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

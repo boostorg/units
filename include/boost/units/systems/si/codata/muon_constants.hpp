@@ -39,7 +39,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
 
@@ -70,7 +70,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(g_mu,quantity<dimensionless>,-2.0023318414*dimensi
 /// muon-proton magnetic moment ratio
 BOOST_UNITS_PHYSICAL_CONSTANT(mu_mu_over_mu_p,quantity<dimensionless>,-3.183345137*dimensionless(),8.5e-8*dimensionless());
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 

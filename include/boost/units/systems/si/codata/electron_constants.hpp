@@ -39,7 +39,7 @@ namespace si {
                             
 namespace constants {
 
-namespace CODATA {
+namespace codata {
 
 /// CODATA recommended values of the fundamental physical constants: NIST SP 961
 
@@ -92,7 +92,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(mu_e_over_mu_h_prime,quantity<dimensionless>,864.0
 /// electron gyromagnetic ratio
 BOOST_UNITS_PHYSICAL_CONSTANT(gamma_e,quantity<frequency_over_magnetic_flux_density>,1.760859770e11/second/tesla,4.4e3/second/tesla);
 
-} // namespace CODATA
+} // namespace codata
 
 } // namespace constants    
 
