@@ -129,6 +129,12 @@ namespace units {
 
 namespace detail {
 
+template<class Scale>
+struct is_empty_dim<scale_list_dim<Scale> > : mpl::false_ {};
+
+template<long N>
+struct is_empty_dim<scale_list_dim<scale<N, static_rational<0, 1> > > > : mpl::true_ {};
+
 template<int N>
 struct eval_scale_list_impl
 {

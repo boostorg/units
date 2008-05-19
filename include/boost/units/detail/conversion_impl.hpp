@@ -202,8 +202,8 @@ struct call_base_unit_converter_base_unit_impl<false, false>
     template<class Source, class Dest>
     struct apply
     {
-        typedef typename get_default_conversion<Source>::type new_source;
-        typedef typename get_default_conversion<Dest>::type new_dest;
+        typedef typename reduce_unit<typename get_default_conversion<Source>::type>::type new_source;
+        typedef typename reduce_unit<typename get_default_conversion<Dest>::type>::type new_dest;
         typedef call_base_unit_converter<Source, new_source> start;
         typedef detail::conversion_factor_helper<
             new_source,
@@ -274,7 +274,7 @@ struct call_base_unit_converter_impl<false>
 {
     template<class Source, class Dest>
     struct apply {
-        typedef typename get_default_conversion<Source>::type new_source;
+        typedef typename reduce_unit<typename get_default_conversion<Source>::type>::type new_source;
         typedef typename Dest::system_type::type system_list;
         typedef typename get_default_conversion_impl<mpl::size<system_list>::value>::template apply<typename mpl::begin<system_list>::type> impl;
         typedef typename impl::unit_type new_dest;

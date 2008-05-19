@@ -50,6 +50,7 @@ int test_main(int,char *[])
 {
     BOOST_UNITS_CHECK_CLOSE(bu::conversion_factor(base_unit1::unit_type(), base_unit2::unit_type()), 5000);
     BOOST_UNITS_CHECK_CLOSE(bu::conversion_factor(base_unit2::unit_type(), base_unit3::unit_type()), 0.003);
+    BOOST_UNITS_CHECK_CLOSE(bu::conversion_factor(scaled_base_unit2::unit_type(), base_unit2::unit_type()), 1000);
 
     return(0);
 }
