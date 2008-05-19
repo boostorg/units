@@ -8,22 +8,11 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_CMATH_HPP 
-#define BOOST_UNITS_CMATH_HPP
-
-#include <boost/version.hpp>
-
-#if (BOOST_VERSION <= 103500)
-	#include <boost/units/detail/cmath_boost_1_35.hpp>
-#else
+#ifndef BOOST_UNITS_CMATH_BOOST_1_35_HPP 
+#define BOOST_UNITS_CMATH_BOOST_1_35_HPP
 
 #include <cmath>
 #include <cstdlib>
-
-#include <boost/math/special_functions/fpclassify.hpp>
-#include <boost/math/special_functions/sign.hpp>
-#include <boost/math/special_functions/hypot.hpp>
-#include <boost/math/special_functions/round.hpp>
 
 #include <boost/units/dimensionless_quantity.hpp>
 #include <boost/units/pow.hpp>
@@ -55,7 +44,7 @@ inline
 bool 
 isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::isfinite;
+    using namespace detail;
     return isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -64,7 +53,7 @@ inline
 bool 
 isinf BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::isinf;
+    using namespace detail;
     return isinf BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -73,7 +62,7 @@ inline
 bool 
 isnan BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::isnan;
+    using namespace detail;
     return isnan BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -82,7 +71,7 @@ inline
 bool 
 isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::isnormal;
+    using namespace detail;
     return isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
 
@@ -151,7 +140,7 @@ inline
 quantity<Unit,Y> 
 abs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using std::abs;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -163,7 +152,7 @@ inline
 quantity<Unit,Y> 
 ceil BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using std::ceil;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -176,7 +165,7 @@ quantity<Unit,Y>
 copysign BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
          const quantity<Unit,Y>& q2)
 {
-    using boost::math::copysign;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -188,7 +177,7 @@ inline
 quantity<Unit,Y> 
 fabs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using std::fabs;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -200,7 +189,7 @@ inline
 quantity<Unit,Y> 
 floor BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using std::floor;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -273,7 +262,7 @@ inline
 int 
 fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::fpclassify;
+    using namespace detail;
 
     return fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
@@ -289,7 +278,7 @@ typename root_typeof_helper<
         static_rational<2> >::type
 hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantity<Unit,Y>& q2)
 {
-    using boost::math::hypot;
+    using ::hypot;
 
     typedef quantity<Unit,Y>    type1;
     
@@ -379,7 +368,7 @@ inline
 quantity<Unit,Y> 
 round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
-    using boost::math::round;
+    using namespace detail;
 
     typedef quantity<Unit,Y>    quantity_type;
     
@@ -388,10 +377,10 @@ round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 
 template<class Unit,class Y>
 inline 
-int 
+bool 
 signbit BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
-    using boost::math::signbit;
+    using namespace detail;
 
     return signbit BOOST_PREVENT_MACRO_SUBSTITUTION (q.value());
 }
@@ -635,6 +624,4 @@ atan2(const Y& y,const Y& x)
 
 } // namespace boost
 
-#endif // (BOOST_VERSION <= 103500)
-
-#endif // BOOST_UNITS_CMATH_HPP
+#endif // BOOST_UNITS_CMATH_BOOST_1_35_HPP
