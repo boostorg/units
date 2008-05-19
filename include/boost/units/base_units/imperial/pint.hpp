@@ -14,6 +14,7 @@
 #include <string>
 
 #include <boost/units/systems/si/volume.hpp>
+#include <boost/units/conversion.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(imperial, pint, "pint (imp.)", "pt", 4.54609e-3/8., si::volume, -303);	// exact conversion
 

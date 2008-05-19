@@ -17,6 +17,7 @@
 #include <boost/units/base_unit.hpp>
 #include <boost/units/physical_dimensions/mass.hpp>
 #include <boost/units/base_units/cgs/gram.hpp>
+#include <boost/units/conversion.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pound, "pound", "lb", 453.59237, cgs::gram_base_unit, -502);	// exact conversion
 

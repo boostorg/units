@@ -34,9 +34,9 @@ volume (m^3)  = 1 m^3
 volume (cm^3) = 1e+06 cm^3
 volume (m^3)  = 1 m^3
 
-energy (joules) = 1 m^2 kg s^-2
+energy (joules) = 1 J
 energy (ergs)   = 1e+07 cm^2 g s^-2
-energy (joules) = 1 m^2 kg s^-2
+energy (joules) = 1 J
 
 velocity (2 m/s)  = 2 m s^-1
 velocity (2 cm/s) = 0.02 m s^-1
@@ -135,9 +135,9 @@ int main()
     sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;
     sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
     sstream2  << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
+    sstream2  << "energy (joules) = 1 J" << std::endl;
     sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^-2" << std::endl;
-    sstream2  << "energy (joules) = 1 m^2 kg s^-2" << std::endl;
+    sstream2  << "energy (joules) = 1 J" << std::endl;
     sstream2  << std::endl;
     sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
     sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;

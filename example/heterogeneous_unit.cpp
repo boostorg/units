@@ -25,7 +25,7 @@ Output:
 1.5 m g
 1.5 m g^-1
 
-1 m kg s^-2
+1 N
 1 kg s^-2
 
 1 cm kg s^-2
@@ -89,7 +89,7 @@ int main()
              << "1.5 m g" << std::endl
              << "1.5 m g^-1" << std::endl
              << std::endl
-             << "1 m kg s^-2" << std::endl
+             << "1 N" << std::endl
              << "1 kg s^-2" << std::endl
              << std::endl
              << "1 cm kg s^-2" << std::endl

@@ -17,6 +17,7 @@
 #include <boost/units/base_unit.hpp>
 #include <boost/units/physical_dimensions/mass.hpp>
 #include <boost/units/base_units/cgs/gram.hpp>
+#include <boost/units/conversion.hpp>
 
 // can't define in terms of kilogram because it is a scaled_base_unit
 //BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(imperial, pound, "pound", "lb", 0.45359237, si::kilogram_base_unit, -302);	// exact conversion

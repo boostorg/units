@@ -13,6 +13,7 @@
 
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/illuminance.hpp>
+#include <ostream>
 
 namespace boost {
 
@@ -26,7 +27,7 @@ BOOST_UNITS_STATIC_CONSTANT(lux,illuminance);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::illuminance&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::illuminance&) 
 {
     return(os << "lx");
 }

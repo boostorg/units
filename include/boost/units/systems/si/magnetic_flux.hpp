@@ -13,6 +13,7 @@
 
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <ostream>
 
 namespace boost {
 
@@ -30,7 +31,7 @@ BOOST_UNITS_STATIC_CONSTANT(webers,magnetic_flux);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::magnetic_flux&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::magnetic_flux&) 
 {
     return(os << "Wb");
 }
