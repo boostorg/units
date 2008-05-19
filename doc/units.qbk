@@ -146,8 +146,7 @@ The intent and function of the above code should be obvious; the output produced
 While this library attempts to make simple dimensional computations easy to code, it is in no way
 tied to any particular unit system (SI or otherwise). Instead, it provides a highly flexible compile-time
 system for dimensional analysis, supporting arbitrary collections of base dimensions, rational 
-powers of units, and both explicit and implicit quantity conversions, controllable on a per base
-unit basis. It accomplishes all of this via template metaprogramming techniques. With 
+powers of units, and explicit quantity conversions. It accomplishes all of this via template metaprogramming techniques. With 
 modern optimizing compilers, this results in zero runtime overhead for quantity computations relative to the 
 same code without unit checking.
 
@@ -362,12 +361,11 @@ To summarize, conversions are allowed under the following conditions :
 * implicit assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
 * explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
     and if `Y` and `Z` are implicitly convertible.
-* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if every base unit of `Unit1` 
-    is implicitly convertible to the corresponding unit in `Unit2` and if `Y` and `Z` are convertible.
-* implicit assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if every base unit of `Unit1` 
-    is implicitly convertible to the corresponding unit in `Unit2` and if `Y` and `Z` are convertible.
+* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
+    reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
+* implicit assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
+  conditions as implicit conversion.
 * `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value].
-* `quantity<Unit,Y>` can be directly constructed from a value of type `Y`.
 * `quantity<Unit,Y>` can be directly constructed from `quantity<Unit,X>`.
 * `quantity<Unit1,Y>` can be directly constructed from `quantity<Unit2,X>`.
 
