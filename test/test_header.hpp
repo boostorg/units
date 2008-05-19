@@ -34,15 +34,19 @@ Output:
 #include <boost/units/base_unit.hpp>
 #include <boost/units/make_system.hpp>
 
+#include <boost/units/physical_dimensions/length.hpp>
+#include <boost/units/physical_dimensions/mass.hpp>
+#include <boost/units/physical_dimensions/time.hpp>
+
 #define BOOST_UNITS_CHECK_CLOSE(a, b) (BOOST_CHECK((std::abs((a) - (b)) < .0000001)))
 
 namespace boost {
 
 namespace units {
 
-struct length_base_dimension : boost::units::base_dimension<length_base_dimension,1> { };     ///> base dimension of length
-struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };         ///> base dimension of mass
-struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };         ///> base dimension of time
+//struct length_base_dimension : boost::units::base_dimension<length_base_dimension,1> { };     ///> base dimension of length
+//struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,2> { };         ///> base dimension of mass
+//struct time_base_dimension : boost::units::base_dimension<time_base_dimension,3> { };         ///> base dimension of time
 
 typedef length_base_dimension::dimension_type    length_dimension;
 typedef mass_base_dimension::dimension_type      mass_dimension;
