@@ -31,16 +31,16 @@ Output:
 #include <boost/test/unit_test.hpp>
 
 namespace bu = boost::units;
-namespace SI = boost::units::SI;
+namespace si = boost::units::si;
 
 BOOST_AUTO_TEST_CASE(test_floating_point) {
-    bu::quantity<SI::time> s1 = 12.5 * SI::seconds;
-    bu::quantity<SI::time> s2(SI::nano * s1);
+    bu::quantity<si::time> s1 = 12.5 * si::seconds;
+    bu::quantity<si::time> s2(si::nano * s1);
     BOOST_CHECK_CLOSE_FRACTION(1e-9 * s1.value(), s2.value(), 0.000000001);
 }
 
 BOOST_AUTO_TEST_CASE(test_output) {
     std::stringstream stream;
-    stream << SI::nano * 12.5 * SI::seconds;
+    stream << si::nano * 12.5 * si::seconds;
     BOOST_CHECK_EQUAL(stream.str(), "12.5 10^-9 s");
 }
