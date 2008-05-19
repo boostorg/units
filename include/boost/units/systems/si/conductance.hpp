@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_CONDUCTANCE_HPP
 #define BOOST_UNITS_SI_CONDUCTANCE_HPP
 
-#include <iostream>
+#include <ostream>
 #include <boost/units/io.hpp>
 
 #include <boost/units/derived_dimension.hpp>
@@ -35,7 +35,7 @@ BOOST_UNITS_STATIC_CONSTANT(mhos,conductance);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::conductance&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::conductance&) 
 {
     return(os << "S");
 }

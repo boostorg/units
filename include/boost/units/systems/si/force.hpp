@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_FORCE_HPP
 #define BOOST_UNITS_SI_FORCE_HPP
 
-#include <iostream>
+#include <ostream>
 #include <boost/units/io.hpp>
 
 #include <boost/units/systems/si/base.hpp>
@@ -30,7 +30,7 @@ BOOST_UNITS_STATIC_CONSTANT(newtons,force);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::force&) 
 {
     return(os << "N");
 }

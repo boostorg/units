@@ -11,9 +11,11 @@
 #ifndef BOOST_UNITS_SI_ILLUMINANCE_HPP
 #define BOOST_UNITS_SI_ILLUMINANCE_HPP
 
+#include <ostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/illuminance.hpp>
-#include <ostream>
 
 namespace boost {
 

@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_DOSE_EQUIVALENT_HPP
 #define BOOST_UNITS_SI_DOSE_EQUIVALENT_HPP
 
-//#include <iostream>
+//#include <ostream>
 //#include <boost/units/io.hpp>
 
 #include <boost/units/systems/si/base.hpp>
@@ -31,7 +31,7 @@ BOOST_UNITS_STATIC_CONSTANT(sieverts,dose_equivalent);
 } // namespace si
 
 // Gy and Sv are dimensionally indistinguishable
-//std::ostream& operator<<(std::ostream& os, const boost::units::si::dose_equivalent&) 
+//inline std::ostream& operator<<(std::ostream& os, const boost::units::si::dose_equivalent&) 
 //{
 //    return(os << "Sv");
 //}

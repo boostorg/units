@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_PRESSURE_HPP
 #define BOOST_UNITS_SI_PRESSURE_HPP
 
-#include <iostream>
+#include <ostream>
 #include <boost/units/io.hpp>
 
 #include <boost/units/systems/si/base.hpp>
@@ -45,7 +45,7 @@ BOOST_UNITS_STATIC_CONSTANT(pascals,pressure);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::pressure&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::pressure&) 
 {
     return(os << "Pa");
 }

@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_CATALYTIC_ACTIVITY_HPP
 #define BOOST_UNITS_SI_CATALYTIC_ACTIVITY_HPP
 
-#include <iostream>
+#include <ostream>
 #include <boost/units/io.hpp>
 
 #include <boost/units/derived_dimension.hpp>
@@ -33,7 +33,7 @@ BOOST_UNITS_STATIC_CONSTANT(katals,catalytic_activity);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::catalytic_activity&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::catalytic_activity&) 
 {
     return(os << "kat");
 }

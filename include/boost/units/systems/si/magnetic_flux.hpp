@@ -11,9 +11,11 @@
 #ifndef BOOST_UNITS_SI_MAGNETIC_FLUX_HPP
 #define BOOST_UNITS_SI_MAGNETIC_FLUX_HPP
 
+#include <ostream>
+#include <boost/units/io.hpp>
+
 #include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
-#include <ostream>
 
 namespace boost {
 

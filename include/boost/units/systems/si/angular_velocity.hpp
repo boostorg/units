@@ -11,7 +11,7 @@
 #ifndef BOOST_UNITS_SI_ANGULAR_VELOCITY_HPP
 #define BOOST_UNITS_SI_ANGULAR_VELOCITY_HPP
 
-#include <iostream>
+#include <ostream>
 #include <boost/units/io.hpp>
 
 #include <boost/units/systems/si/base.hpp>
@@ -30,7 +30,7 @@ BOOST_UNITS_STATIC_CONSTANT(radians_per_second,angular_velocity);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::angular_velocity&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::angular_velocity&) 
 {
     return(os << "rad/s");
 }
