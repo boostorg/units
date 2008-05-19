@@ -17,7 +17,7 @@
 #include <boost/units/io.hpp>
 #include <boost/units/make_system.hpp>
 #include <boost/units/static_constant.hpp>
-#include <boost/units/systems/temperature/base_units/fahrenheit.hpp>
+#include <boost/units/base_units/temperature/fahrenheit.hpp>
 
 namespace boost {
 
