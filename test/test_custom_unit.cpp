@@ -41,12 +41,18 @@ simple_unit<Mass, Length, Time> operator-(const simple_unit<Mass, Length, Time>&
 template<int Mass1, int Length1, int Time1, int Mass2, int Length2, int Time2>
 simple_unit<Mass1 + Mass2, Length1 + Length2, Time1 + Time2>
 operator*(const simple_unit<Mass1, Length1, Time1>&,
-          const simple_unit<Mass2, Length2, Time2>&) {}
+          const simple_unit<Mass2, Length2, Time2>&) 
+{
+	return simple_unit<Mass1 + Mass2, Length1 + Length2, Time1 + Time2>();
+}
 
 template<int Mass1, int Length1, int Time1, int Mass2, int Length2, int Time2>
 simple_unit<Mass1 - Mass2, Length1 - Length2, Time1 - Time2>
 operator/(const simple_unit<Mass1, Length1, Time1>&,
-          const simple_unit<Mass2, Length2, Time2>&) {}
+          const simple_unit<Mass2, Length2, Time2>&)
+{
+	return simple_unit<Mass1 - Mass2, Length1 - Length2, Time1 - Time2>();
+}
 
 int test_main(int,char *[])
 {
