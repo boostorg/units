@@ -64,6 +64,7 @@
 #include <boost/units/systems/si/surface_density.hpp>
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/systems/si/time.hpp>
+#include <boost/units/systems/si/torque.hpp>
 #include <boost/units/systems/si/velocity.hpp>
 #include <boost/units/systems/si/volume.hpp>
 #include <boost/units/systems/si/wavenumber.hpp>
