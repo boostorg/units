@@ -20,11 +20,11 @@ temperature differences.
 Output:
 @verbatim
 
-{ 32 } F
+{ 32 } °F
 { 273.15 } K
 { 273.15 } K
 { 273.15 } K
-[ 32 ] F
+[ 32 ] °F
 [ 17.7778 ] K
 [ 17.7778 ] K
 [ 17.7778 ] K
@@ -38,6 +38,7 @@ Output:
 #include <sstream>
 
 #include <boost/units/absolute.hpp>
+#include <boost/units/get_system.hpp>
 #include <boost/units/io.hpp>
 #include <boost/units/unit.hpp>
 #include <boost/units/quantity.hpp>
@@ -55,9 +56,13 @@ namespace units {
 namespace fahrenheit {
 
 //[temperature_snippet_1
-typedef make_system<boost::units::temperature::fahrenheit_base_unit>::type  system;
+// direct method
+//typedef make_system<temperature::fahrenheit_base_unit>::type  system;
+//typedef unit<temperature_dimension,system>                    temperature;
 
-typedef unit<temperature_dimension,system>                   temperature;
+// simpler method for single-unit systems
+typedef temperature::fahrenheit_base_unit::unit_type	temperature;
+typedef get_system<temperature>::type					system;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
@@ -65,19 +70,29 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // fahrenheit
 
+//template<>
+//struct is_implicitly_convertible<unit<temperature_dimension,fahrenheit::system>,
+//                                 unit<temperature_dimension,si::system> > : 
+//    public mpl::true_
+//{ };
+
+//template<>
+//struct is_implicitly_convertible<
+//    absolute< unit<temperature_dimension,fahrenheit::system> >,
+//    absolute< unit<temperature_dimension,si::system> > > : 
+//    public mpl::true_
+//{ };
+
 //[temperature_snippet_2
 template<>
-struct is_implicitly_convertible<unit<temperature_dimension,fahrenheit::system>,
-                                 unit<temperature_dimension,si::system> > : 
-    public mpl::true_
-{ };
+struct is_implicitly_convertible< 
+           fahrenheit::temperature, 
+		   si::temperature > : public mpl::true_ { };
 
 template<>
-struct is_implicitly_convertible<
-    absolute< unit<temperature_dimension,fahrenheit::system> >,
-    absolute< unit<temperature_dimension,si::system> > > : 
-    public mpl::true_
-{ };
+struct is_implicitly_convertible< 
+           absolute<fahrenheit::temperature>, 
+           absolute<si::temperature> > : public mpl::true_ { };
 //]
 
 } // namespace units
