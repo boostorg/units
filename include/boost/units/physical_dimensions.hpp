@@ -12,6 +12,13 @@
 #define BOOST_UNITS_PHYSICAL_UNITS_HPP
 
 /// \file Includes all of the physical_dimension headers.
+///
+/// \brief Physical dimensions according to the SI system
+///
+/// \detail This header includes all physical dimension headers for both base
+/// derived dimensions. Base dimensions are extended to include plane and
+/// solid angle for convenience. 
+///
 
 #include <boost/units/physical_dimensions/amount.hpp>
 #include <boost/units/physical_dimensions/current.hpp>
