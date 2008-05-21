@@ -20,7 +20,7 @@ checklibs =
 
 import testing ;
 
-#alias test_framework : $(BOOST_ROOT)/libs/test/build//boost_unit_test_framework ;
+alias test_framework : $(BOOST_ROOT)/libs/test/build//boost_unit_test_framework ;
 
 {
   test-suite units
@@ -41,7 +41,7 @@ import testing ;
     [ run test_limits.cpp : : : : ]
     [ run test_custom_unit.cpp : : : : ]
     [ run test_scaled_conversion.cpp : : : : ]
-#    [ run test_scaled_unit.cpp test_framework : : : : ]
+    [ run test_scaled_unit.cpp test_framework : : : : ]
 #    [ run check_conversion_defs.cpp $(checklibs) : : : <dependency>$(check-conversion-dependencies) : ]
     [ compile-fail fail_implicit_conversion.cpp : : ]
     [ compile-fail fail_quantity_construct.cpp : : ]

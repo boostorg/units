@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -521,7 +521,7 @@ template<class Y>
 typename dimensionless_quantity<si::system,Y>::type 
 cos(const quantity<si::plane_angle,Y>& theta)
 {
-	using std::cos;
+    using std::cos;
     return cos(theta.value());
 }
 
@@ -530,7 +530,7 @@ template<class Y>
 typename dimensionless_quantity<si::system,Y>::type 
 sin(const quantity<si::plane_angle,Y>& theta)
 {
-	using std::sin;
+    using std::sin;
     return sin(theta.value());
 }
 
@@ -539,7 +539,7 @@ template<class Y>
 typename dimensionless_quantity<si::system,Y>::type 
 tan(const quantity<si::plane_angle,Y>& theta)
 {
-	using std::tan;
+    using std::tan;
     return tan(theta.value());
 }
 
@@ -572,7 +572,7 @@ template<class Y>
 quantity<si::plane_angle,Y>
 acos(const Y& val)
 {
-	using std::acos;
+    using std::acos;
     return quantity<si::plane_angle,Y>(acos(val)*si::radians);
 }
 
@@ -581,7 +581,7 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 acos(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-	using std::acos;
+    using std::acos;
     return quantity<unit<plane_angle_dimension,System>,Y>(acos(val)*si::radians);
 }
 
@@ -590,7 +590,7 @@ template<class Y>
 quantity<si::plane_angle,Y>
 asin(const Y& val)
 {
-	using std::asin;
+    using std::asin;
     return quantity<si::plane_angle,Y>(asin(val)*si::radians);
 }
 
@@ -599,7 +599,7 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 asin(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-	using std::asin;
+    using std::asin;
     return quantity<unit<plane_angle_dimension,System>,Y>(asin(val)*si::radians);
 }
 
@@ -608,7 +608,7 @@ template<class Y>
 quantity<si::plane_angle,Y>
 atan(const Y& val)
 {
-	using std::atan;
+    using std::atan;
     return quantity<si::plane_angle,Y>(atan(val)*si::radians);
 }
 
@@ -617,7 +617,7 @@ template<class Y,class System>
 quantity<unit<plane_angle_dimension,System>,Y>
 atan(const quantity<unit<dimensionless_type,System>,Y>& val)
 {
-	using std::atan;
+    using std::atan;
     return quantity<unit<plane_angle_dimension,System>,Y>(atan(val)*si::radians);
 }
 
@@ -626,7 +626,7 @@ template<class Y>
 quantity<si::plane_angle,Y>
 atan2(const Y& y,const Y& x)
 {
-	using std::atan2;
+    using std::atan2;
     return quantity<si::plane_angle,Y>(atan2(y,x)*si::radians);
 }
 

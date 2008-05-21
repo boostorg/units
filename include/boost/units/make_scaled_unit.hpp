@@ -24,7 +24,19 @@ struct make_scaled_unit {
 
 template<class Dimension, class UnitList, class OldScale, class Scale>
 struct make_scaled_unit<unit<Dimension, heterogeneous_system<heterogeneous_system_impl<UnitList, Dimension, OldScale> > >, Scale> {
-    typedef unit<Dimension, heterogeneous_system<heterogeneous_system_impl<UnitList, Dimension, typename mpl::times<OldScale, dimension_list<Scale, dimensionless_type> >::type> > > type;
+    typedef unit<
+        Dimension,
+        heterogeneous_system<
+            heterogeneous_system_impl<
+                UnitList,
+                Dimension,
+                typename mpl::times<
+                    OldScale,
+                    dimension_list<scale_list_dim<Scale>, dimensionless_type>
+                >::type
+            >
+        >
+    > type;
 };
 
 }

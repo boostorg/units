@@ -13,38 +13,41 @@
 
 #include <boost/units/static_constant.hpp>
 
+#include <boost/units/make_scaled_unit.hpp>
+#include <boost/units/systems/si/dimensionless.hpp>
+
 namespace boost {
 
 namespace units { 
 
 namespace si {
 
-//#define BOOST_UNITS_METRIC_PREFIX(exponent, name)                                                       \
-//    typedef make_scaled_unit<dimensionless, scale<10, static_rational<exponent> > >::type name ## _type;\
-//    BOOST_UNITS_STATIC_CONSTANT(name, name ## _type)
-//
-//BOOST_UNITS_METRIC_PREFIX(-24, yocto);
-//BOOST_UNITS_METRIC_PREFIX(-21, zepto);
-//BOOST_UNITS_METRIC_PREFIX(-18, atto);
-//BOOST_UNITS_METRIC_PREFIX(-15, femto);
-//BOOST_UNITS_METRIC_PREFIX(-12, pico);
-//BOOST_UNITS_METRIC_PREFIX(-9, nano);
-//BOOST_UNITS_METRIC_PREFIX(-6, micro);
-//BOOST_UNITS_METRIC_PREFIX(-3, milli);
-//BOOST_UNITS_METRIC_PREFIX(-2, centi);
-//BOOST_UNITS_METRIC_PREFIX(-1, deci);
-//BOOST_UNITS_METRIC_PREFIX(1, deka);
-//BOOST_UNITS_METRIC_PREFIX(2, hecto);
-//BOOST_UNITS_METRIC_PREFIX(3, kilo);
-//BOOST_UNITS_METRIC_PREFIX(6, mega);
-//BOOST_UNITS_METRIC_PREFIX(9, giga);
-//BOOST_UNITS_METRIC_PREFIX(12, tera);
-//BOOST_UNITS_METRIC_PREFIX(15, peta);
-//BOOST_UNITS_METRIC_PREFIX(18, exa);
-//BOOST_UNITS_METRIC_PREFIX(21, zetta);
-//BOOST_UNITS_METRIC_PREFIX(24, yotta);
+#define BOOST_UNITS_METRIC_PREFIX(exponent, name)                                                       \
+    typedef make_scaled_unit<dimensionless, scale<10, static_rational<exponent> > >::type name ## _type;\
+    BOOST_UNITS_STATIC_CONSTANT(name, name ## _type)
 
-BOOST_UNITS_STATIC_CONSTANT(yocto,long double) = (1e-24);       ///< metric prefix for 1.0e-24
+BOOST_UNITS_METRIC_PREFIX(-24, yocto);
+BOOST_UNITS_METRIC_PREFIX(-21, zepto);
+BOOST_UNITS_METRIC_PREFIX(-18, atto);
+BOOST_UNITS_METRIC_PREFIX(-15, femto);
+BOOST_UNITS_METRIC_PREFIX(-12, pico);
+BOOST_UNITS_METRIC_PREFIX(-9, nano);
+BOOST_UNITS_METRIC_PREFIX(-6, micro);
+BOOST_UNITS_METRIC_PREFIX(-3, milli);
+BOOST_UNITS_METRIC_PREFIX(-2, centi);
+BOOST_UNITS_METRIC_PREFIX(-1, deci);
+BOOST_UNITS_METRIC_PREFIX(1, deka);
+BOOST_UNITS_METRIC_PREFIX(2, hecto);
+BOOST_UNITS_METRIC_PREFIX(3, kilo);
+BOOST_UNITS_METRIC_PREFIX(6, mega);
+BOOST_UNITS_METRIC_PREFIX(9, giga);
+BOOST_UNITS_METRIC_PREFIX(12, tera);
+BOOST_UNITS_METRIC_PREFIX(15, peta);
+BOOST_UNITS_METRIC_PREFIX(18, exa);
+BOOST_UNITS_METRIC_PREFIX(21, zetta);
+BOOST_UNITS_METRIC_PREFIX(24, yotta);
+
+/*BOOST_UNITS_STATIC_CONSTANT(yocto,long double) = (1e-24);       ///< metric prefix for 1.0e-24
 BOOST_UNITS_STATIC_CONSTANT(zepto,long double) = (1e-21);       ///< metric prefix for 1.0e-21
 BOOST_UNITS_STATIC_CONSTANT(atto,long double) = (1e-18);        ///< metric prefix for 1.0e-18
 BOOST_UNITS_STATIC_CONSTANT(femto,long double) = (1e-15);       ///< metric prefix for 1.0e-15
@@ -63,7 +66,7 @@ BOOST_UNITS_STATIC_CONSTANT(tera,long double) = (1e12);         ///< metric pref
 BOOST_UNITS_STATIC_CONSTANT(peta,long double) = (1e15);         ///< metric prefix for 1.0e+15
 BOOST_UNITS_STATIC_CONSTANT(exa,long double) = (1e18);          ///< metric prefix for 1.0e+18
 BOOST_UNITS_STATIC_CONSTANT(zetta,long double) = (1e21);        ///< metric prefix for 1.0e+21
-BOOST_UNITS_STATIC_CONSTANT(yotta,long double) = (1e24);        ///< metric prefix for 1.0e+24  
+BOOST_UNITS_STATIC_CONSTANT(yotta,long double) = (1e24);        ///< metric prefix for 1.0e+24 */ 
 
 } // namespace si
 

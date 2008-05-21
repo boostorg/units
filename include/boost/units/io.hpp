@@ -79,6 +79,9 @@ struct base_unit_info
 
 namespace detail {
 
+// This is needed so that std::string can be returned from
+// the base unit functions and wtill allow the operators
+// to work for any std::basic_ostream
 template<class T>
 const T& adapt_for_print(const T& t)
 {
@@ -150,7 +153,8 @@ struct print_scale_impl {
     template<class Begin, class Os>
     struct apply {
         static void value(Os& os) {
-            os << ' ' << mpl::deref<Begin>::type::base << '^' << mpl::deref<Begin>::type::exponent;
+            os << mpl::deref<Begin>::type::base << '^' << typename mpl::deref<Begin>::type::exponent() << ' ';
+            print_scale_impl<N - 1>::template apply<typename mpl::next<Begin>::type, Os>::value(os);
         }
     };
 };

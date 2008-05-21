@@ -395,7 +395,8 @@ struct conversion_helper<quantity<unit<D, heterogeneous_system<L1> >, T1>, quant
             detail::conversion_impl<mpl::size<typename L1::type>::value>::template apply<
                 typename mpl::begin<typename L1::type>::type,
                 homogeneous_system<L2>
-            >::value()
+            >::value() *
+            eval_scale_list<typename L1::scale>::value()
             ));
     }
 };
@@ -413,10 +414,12 @@ struct conversion_helper<quantity<unit<D, homogeneous_system<L1> >, T1>, quantit
     static destination_type convert(const quantity<unit<D, homogeneous_system<L1> >, T1>& source)
     {
         return(destination_type::from_value(source.value() /
-            detail::conversion_impl<mpl::size<typename L2::type>::value>::template apply<
+            (detail::conversion_impl<mpl::size<typename L2::type>::value>::template apply<
                 typename mpl::begin<typename L2::type>::type,
                 homogeneous_system<L1>
-            >::value()
+            >::value() *
+            eval_scale_list<typename L2::scale>::value()
+            )
             ));
     }
 };
@@ -443,13 +446,15 @@ struct conversion_helper<quantity<unit<D, heterogeneous_system<S1> >, T1>, quant
     >::type all_base_units;
     /// INTERNAL ONLY
     typedef typename detail::make_homogeneous_system<all_base_units>::type system;
+    /// INTERNAL ONLY
+    typedef typename mpl::divides<typename S1::scale, typename S2::scale>::type result_scale;
     static destination_type convert(const source_type& source)
     {
         return(destination_type::from_value(source.value() * 
             (detail::conversion_impl<mpl::size<typename S1::type>::value>::template apply<
                 typename mpl::begin<typename S1::type>::type,
                 system
-            >::value() /
+            >::value() * eval_scale_list<result_scale>::value() /
             detail::conversion_impl<mpl::size<typename S2::type>::value>::template apply<
                 typename mpl::begin<typename S2::type>::type,
                 system
@@ -487,10 +492,11 @@ struct conversion_factor_helper<unit<D, heterogeneous_system<L1> >, unit<D, homo
         typename mpl::begin<typename L1::type>::type,
         homogeneous_system<L2>
     > impl;
-    typedef typename impl::type type;
+    typedef eval_scale_list<typename L1::scale> scale;
+    typedef typename multiply_typeof_helper<typename impl::type, typename scale::type>::type type;
     static type value()
     {
-        return(impl::value());
+        return(impl::value() * scale::value());
     }
 };
 
@@ -504,10 +510,11 @@ struct conversion_factor_helper<unit<D, homogeneous_system<L1> >, unit<D, hetero
         typename mpl::begin<typename L2::type>::type,
         homogeneous_system<L1>
     > impl;
-    typedef typename impl::type type;
+    typedef eval_scale_list<typename L2::scale> scale;
+    typedef typename multiply_typeof_helper<typename impl::type, typename scale::type>::type type;
     static type value()
     {
-        return(one() / impl::value());
+        return(one() / (impl::value() * scale::value()));
     }
 };
 
@@ -536,10 +543,14 @@ struct conversion_factor_helper<unit<D, heterogeneous_system<S1> >, unit<D, hete
         typename mpl::begin<typename S2::type>::type,
         system
     > conversion2;
-    typedef typename divide_typeof_helper<typename conversion1::type, typename conversion2::type>::type type;
+    typedef eval_scale_list<typename mpl::divides<typename S1::scale, typename S2::scale>::type> scale;
+    typedef typename multiply_typeof_helper<
+        typename conversion1::type,
+        typename divide_typeof_helper<typename scale::type, typename conversion2::type>::type
+    >::type type;
     static type value()
     {
-        return(conversion1::value() / conversion2::value());
+        return(conversion1::value() * (scale::value() / conversion2::value()));
     }
 };
 

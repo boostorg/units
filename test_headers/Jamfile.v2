@@ -20,7 +20,7 @@ project test_headers :
 headers = ;
 
 rule setup ( ) {
-  for local file in [ path.glob-tree ../../../boost/units : *.hpp ] {
+  for local file in [ path.glob-tree ../../../boost/units : *.hpp : cmath_*_impl*.hpp ] {
 
     headers += $(file) ;
     result += [ compile test.cpp : <define>BOOST_UNITS_HEADER_NAME=$(file) <dependency>$(file) : [ regex.replace [ path.relative-to ../../.. $(file) ] "/" "_" ] ] ;

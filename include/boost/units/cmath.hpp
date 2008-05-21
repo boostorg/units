@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -14,7 +14,7 @@
 #include <boost/version.hpp>
 
 #if (BOOST_VERSION <= 103500)
-	#include <boost/units/detail/cmath_boost_1_35.hpp>
+    #include <boost/units/detail/cmath_boost_1_35.hpp>
 #else
 
 #include <cmath>
