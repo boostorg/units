@@ -180,7 +180,7 @@ struct root_typeof_helper<
 
 int main(void)
 {
-    using namespace boost::math;
+	using boost::math::quaternion;
     using namespace boost::units;
     using namespace boost::units::test;
 

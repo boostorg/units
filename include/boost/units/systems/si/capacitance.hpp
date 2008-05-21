@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/capacitance.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// capacitance : L^-2 M^-1 T^4 I^2
-typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,4,current_base_dimension,2>::type   capacitance_type;            
-
-typedef unit<si::capacitance_type,si::system>                                           capacitance;
+typedef unit<capacitance_type,si::system>    capacitance;
     
 BOOST_UNITS_STATIC_CONSTANT(farad,capacitance);
 BOOST_UNITS_STATIC_CONSTANT(farads,capacitance);

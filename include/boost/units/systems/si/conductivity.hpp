@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_SI_CONDUCTIVITY_HPP
 #define BOOST_UNITS_SI_CONDUCTIVITY_HPP
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/conductivity.hpp>
 
 namespace boost {
 
@@ -20,11 +20,8 @@ namespace units {
 
 namespace si {
 
-/// conductivity : L^-3 M^-1 T^3 I^2
-typedef derived_dimension<length_base_dimension,-3,mass_base_dimension,-1,time_base_dimension,3,current_base_dimension,2>::type   conductivity_type;                    
-
-typedef unit<si::conductivity_type,si::system>                                          conductivity;
-                                            
+typedef unit<conductivity_type,si::system>    conductivity;
+                                        
 } // namespace si
 
 } // namespace units

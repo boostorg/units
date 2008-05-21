@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/inductance.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// inductance : L^2 M T^-2 I^-2
-typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-2,current_base_dimension,-2>::type   inductance_type;                
-
-typedef unit<si::inductance_type,si::system>                                            inductance;
+typedef unit<inductance_type,si::system>    inductance;
     
 BOOST_UNITS_STATIC_CONSTANT(henry,inductance);  
 BOOST_UNITS_STATIC_CONSTANT(henrys,inductance); 

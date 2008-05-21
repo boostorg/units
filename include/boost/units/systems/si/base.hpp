@@ -42,8 +42,8 @@ typedef make_system<meter_base_unit,
 					kelvin_base_unit, 
 					mole_base_unit, 
 					candela_base_unit, 
-					boost::units::angle::radian_base_unit, 
-					boost::units::angle::steradian_base_unit>::type system;
+					angle::radian_base_unit, 
+					angle::steradian_base_unit>::type system;
 
 /// dimensionless si unit
 typedef unit<dimensionless_type,system>         dimensionless;

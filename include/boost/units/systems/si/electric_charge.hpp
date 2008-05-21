@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/electric_charge.hpp>
 
 namespace boost {
 
@@ -23,11 +23,8 @@ namespace units {
 
 namespace si {
 
-/// electric charge : T^1 I^1
-typedef derived_dimension<time_base_dimension,1,current_base_dimension,1>::type     electric_charge_type;        
-
-typedef unit<si::electric_charge_type,si::system>               electric_charge;
-    
+typedef unit<electric_charge_type,si::system>    electric_charge;
+   
 BOOST_UNITS_STATIC_CONSTANT(coulomb,electric_charge);   
 BOOST_UNITS_STATIC_CONSTANT(coulombs,electric_charge);  
 

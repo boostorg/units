@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/permeability.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// permeability : L M T^-2 I^-2
-typedef derived_dimension<length_base_dimension,1,mass_base_dimension,1,time_base_dimension,-2,current_base_dimension,-2>::type   permeability_type;
-
-typedef unit<si::permeability_type,si::system>                                          permeability;
+typedef unit<permeability_type,si::system>    permeability;
 
 } // namespace si
 

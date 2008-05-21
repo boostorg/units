@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_SI_RESISTIVITY_HPP
 #define BOOST_UNITS_SI_RESISTIVITY_HPP
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/resistivity.hpp>
 
 namespace boost {
 
@@ -20,10 +20,7 @@ namespace units {
 
 namespace si {
 
-/// resistivity : L^3 M T^-3 I^-2
-typedef derived_dimension<length_base_dimension,3,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-2>::type   resistivity_type;              
-
-typedef unit<si::resistivity_type,si::system>                                           resistivity;
+typedef unit<resistivity_type,si::system>    resistivity;
 
 } // namespace si
 

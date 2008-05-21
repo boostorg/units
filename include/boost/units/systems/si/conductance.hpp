@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/conductance.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// conductance : L^-2 M^-1 T^3 I^2
-typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,3,current_base_dimension,2>::type   conductance_type;                    
-
-typedef unit<si::conductance_type,si::system>                                           conductance;
+typedef unit<conductance_type,si::system>    conductance;
 
 BOOST_UNITS_STATIC_CONSTANT(siemen,conductance);    
 BOOST_UNITS_STATIC_CONSTANT(siemens,conductance);   

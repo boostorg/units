@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_SI_MAGNETIC_FIELD_INTENSITY_HPP
 #define BOOST_UNITS_SI_MAGNETIC_FIELD_INTENSITY_HPP
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/magnetic_field_intensity.hpp>
 
 namespace boost {
 
@@ -20,11 +20,8 @@ namespace units {
 
 namespace si {
 
-/// magnetic field intensity : L^-1 I
-typedef derived_dimension<length_base_dimension,-1,current_base_dimension,1>::type                          magnetic_field_intensity_type;
-
-typedef unit<si::magnetic_field_intensity_type,si::system>                              magnetic_field_intensity;
-                                            
+typedef unit<magnetic_field_intensity_type,si::system>    magnetic_field_intensity;
+											                                           
 } // namespace si
 
 } // namespace units

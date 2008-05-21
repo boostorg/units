@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/resistance.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// resistance : L^2 M T^-3 I^-2  
-typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-2>::type   resistance_type;              
-
-typedef unit<si::resistance_type,si::system>                                            resistance;
+typedef unit<resistance_type,si::system>    resistance;
 
 BOOST_UNITS_STATIC_CONSTANT(ohm,resistance);    
 BOOST_UNITS_STATIC_CONSTANT(ohms,resistance);   

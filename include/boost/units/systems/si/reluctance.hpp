@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_SI_RELUCTANCE_HPP
 #define BOOST_UNITS_SI_RELUCTANCE_HPP
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/reluctance.hpp>
 
 namespace boost {
 
@@ -20,10 +20,7 @@ namespace units {
 
 namespace si {
 
-/// reluctance : L^-2 M^-1 T^2 I^2
-typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,-1,time_base_dimension,2,current_base_dimension,2>::type   reluctance_type;
-
-typedef unit<si::reluctance_type,si::system>                                            reluctance;
+typedef unit<reluctance_type,si::system>    reluctance;
 
 } // namespace si
 

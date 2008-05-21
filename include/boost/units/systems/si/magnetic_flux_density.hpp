@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/magnetic_flux_density.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// magnetic flux density : M T^-2 I^-1
-typedef derived_dimension<mass_base_dimension,1,time_base_dimension,-2,current_base_dimension,-1>::type    magnetic_flux_density_type;        
-
-typedef unit<si::magnetic_flux_density_type,si::system>                     magnetic_flux_density;
+typedef unit<magnetic_flux_density_type,si::system>    magnetic_flux_density;
     
 BOOST_UNITS_STATIC_CONSTANT(tesla,magnetic_flux_density);   
 BOOST_UNITS_STATIC_CONSTANT(teslas,magnetic_flux_density);  

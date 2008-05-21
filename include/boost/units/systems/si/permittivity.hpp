@@ -14,8 +14,8 @@
 #include <ostream>
 #include <boost/units/io.hpp>
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/permittivity.hpp>
 
 namespace boost {
 
@@ -23,10 +23,7 @@ namespace units {
 
 namespace si {
 
-/// permittivity : L^-3 M^-1 T^4 I^2
-typedef derived_dimension<length_base_dimension,-3,mass_base_dimension,-1,time_base_dimension,4,current_base_dimension,2>::type   permittivity_type;                
-
-typedef unit<si::permittivity_type,si::system>                                          permittivity;
+typedef unit<permittivity_type,si::system>    permittivity;
 
 } // namespace si
 

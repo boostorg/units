@@ -11,8 +11,8 @@
 #ifndef BOOST_UNITS_SI_IMPEDANCE_HPP
 #define BOOST_UNITS_SI_IMPEDANCE_HPP
 
-#include <boost/units/derived_dimension.hpp>
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/physical_dimensions/impedance.hpp>
 
 namespace boost {
 
@@ -20,10 +20,7 @@ namespace units {
 
 namespace si {
 
-/// impedance : L^2 M T^-3 I^-2  
-typedef derived_dimension<length_base_dimension,2,mass_base_dimension,1,time_base_dimension,-3,current_base_dimension,-2>::type   impedance_type;              
-
-typedef unit<si::impedance_type,si::system>                                             impedance;
+typedef unit<impedance_type,si::system>    impedance;
                                             
 } // namespace si
 
