@@ -26,7 +26,7 @@ namespace cgs {
 
 struct gram_base_unit : public base_unit<gram_base_unit, mass_dimension, -8>
 {
-    static std::string name()	{ return("gram"); }
+    static std::string name()    { return("gram"); }
     static std::string symbol() { return("g"); }
 };
 

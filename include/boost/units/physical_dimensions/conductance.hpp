@@ -24,9 +24,9 @@ namespace units {
 /// derived dimension for conductance : L^-2 M^-1 T^3 I^2
 typedef derived_dimension<length_base_dimension,-2,
                           mass_base_dimension,-1,
-						  time_base_dimension,3,
-						  current_base_dimension,2>::type   conductance_type;   
-						  
+                          time_base_dimension,3,
+                          current_base_dimension,2>::type   conductance_type;   
+                          
 } // namespace units
 
 } // namespace boost

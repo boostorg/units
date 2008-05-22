@@ -61,8 +61,8 @@ namespace fahrenheit {
 //typedef unit<temperature_dimension,system>                    temperature;
 
 // simpler method for single-unit systems
-typedef temperature::fahrenheit_base_unit::unit_type	temperature;
-typedef get_system<temperature>::type					system;
+typedef temperature::fahrenheit_base_unit::unit_type    temperature;
+typedef get_system<temperature>::type                    system;
 
 BOOST_UNITS_STATIC_CONSTANT(degree,temperature);
 BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
@@ -87,7 +87,7 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 template<>
 struct is_implicitly_convertible< 
            fahrenheit::temperature, 
-		   si::temperature > : public mpl::true_ { };
+           si::temperature > : public mpl::true_ { };
 
 template<>
 struct is_implicitly_convertible< 

@@ -24,8 +24,8 @@ namespace units {
 /// derived dimension for reluctance : L^-2 M^-1 T^2 I^2
 typedef derived_dimension<length_base_dimension,-2,
                           mass_base_dimension,-1,
-						  time_base_dimension,2,
-						  current_base_dimension,2>::type   reluctance_type;            
+                          time_base_dimension,2,
+                          current_base_dimension,2>::type   reluctance_type;            
 
 } // namespace units
 

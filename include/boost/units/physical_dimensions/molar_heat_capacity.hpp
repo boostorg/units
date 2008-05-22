@@ -25,9 +25,9 @@ namespace units {
 /// derived dimension for molar heat capacity : L^2 M T^-2 Theta^-1 N^-1
 typedef derived_dimension<length_base_dimension,2,
                           mass_base_dimension,1,
-						  time_base_dimension,-2,
-						  temperature_base_dimension,-1,
-						  amount_base_dimension,-1>::type       molar_heat_capacity_dimension;                    
+                          time_base_dimension,-2,
+                          temperature_base_dimension,-1,
+                          amount_base_dimension,-1>::type       molar_heat_capacity_dimension;                    
 
 } // namespace units
 

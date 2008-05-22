@@ -19,7 +19,7 @@
 #include <boost/units/base_units/si/meter.hpp>
 #include <boost/units/conversion.hpp>
 
-BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, yard, "yard", "yd", 0.9144, si::meter_base_unit, -501);	// exact conversion
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, yard, "yard", "yd", 0.9144, si::meter_base_unit, -501);    // exact conversion
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
