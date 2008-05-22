@@ -39,5 +39,5 @@ import testing ;
 test-suite units_headers :
   $(tests)
 # this ought to catch non-inlined functions and other duplicate definitions
-  [ link include_all1 include_all2 : <include>. : include_all_headers ]
+  [ link include_all1 include_all2 main.cpp : <include>. : include_all_headers ]
   ;

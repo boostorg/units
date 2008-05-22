@@ -30,7 +30,7 @@ BOOST_UNITS_STATIC_CONSTANT(newtons_per_meter,surface_tension);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::surface_tension&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::surface_tension&) 
 {
     return(os << "N/m");
 }

@@ -30,7 +30,7 @@ BOOST_UNITS_STATIC_CONSTANT(newton_meters,torque);
 
 } // namespace si
 
-std::ostream& operator<<(std::ostream& os, const boost::units::si::torque&) 
+inline std::ostream& operator<<(std::ostream& os, const boost::units::si::torque&) 
 {
     return(os << "N m");
 }
