@@ -31,11 +31,13 @@ rule setup ( ) {
 
 tests = [ setup ] ;
 
-generate-include-all-cpp include_all : $(headers) ;
+generate-include-all-cpp include_all1 : $(headers) ;
+generate-include-all-cpp include_all2 : $(headers) ;
 
 import testing ;
 
 test-suite units_headers :
   $(tests)
-  [ compile include_all : <include>. : include_all_headers ]
+# this ought to catch non-inlined functions and other duplicate definitions
+  [ link include_all1 include_all2 : <include>. : include_all_headers ]
   ;
