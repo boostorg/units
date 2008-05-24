@@ -11,8 +11,10 @@
 #ifndef BOOST_UNITS_IO_HPP
 #define BOOST_UNITS_IO_HPP
 
+#include <cassert>
 #include <string>
 #include <iosfwd>
+#include <ios>
 
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/begin.hpp>
@@ -77,6 +79,56 @@ struct base_unit_info
     }
 };
 
+enum format_mode {
+    symbol,
+    name
+};
+
+namespace detail {
+
+template<bool>
+struct xalloc_key_holder {
+    static int value;
+    static bool initialized;
+};
+
+template<bool b>
+int xalloc_key_holder<b>::value = 0;
+template<bool b>
+bool xalloc_key_holder<b>::initialized = 0;
+
+struct xalloc_key_initializer_t {
+    xalloc_key_initializer_t() {
+        if(!xalloc_key_holder<true>::initialized) {
+            xalloc_key_holder<true>::value = std::ios_base::xalloc();
+            xalloc_key_holder<true>::initialized = true;
+        }
+    }
+};
+
+namespace {
+    xalloc_key_initializer_t xalloc_key_initializer;
+}
+
+}
+
+inline format_mode get_format(std::ios_base& ios) {
+    return(static_cast<format_mode>(ios.iword(detail::xalloc_key_holder<true>::value)));
+}
+inline void set_format(std::ios_base& ios, format_mode new_mode) {
+    ios.iword(detail::xalloc_key_holder<true>::value) = static_cast<long>(new_mode);
+}
+
+inline std::ios_base& symbol_format(std::ios_base& ios) {
+    (set_format)(ios, symbol);
+    return(ios);
+}
+
+inline std::ios_base& name_format(std::ios_base& ios) {
+    (set_format)(ios, name);
+    return(ios);
+}
+
 namespace detail {
 
 // This is needed so that std::string can be returned from
@@ -97,13 +149,25 @@ const Char* adapt_for_print(const std::basic_string<Char, Traits, Allocator>& s)
 template<class T, class Os>
 void print_base_unit(Os& os, const T&)
 {
-    os << (adapt_for_print)(base_unit_info<typename T::tag_type>::symbol()) << '^' << typename T::value_type();
+    if(units::get_format(os) == symbol) {
+        os << (adapt_for_print)(base_unit_info<typename T::tag_type>::symbol()) << '^' << typename T::value_type();
+    } else if(units::get_format(os) == name) {
+        os << (adapt_for_print)(base_unit_info<typename T::tag_type>::name()) << '^' << typename T::value_type();
+    } else {
+        assert(!"The format mode must be either name or symbol");
+    }
 }
 
 template<class Unit, class Os>
 void print_base_unit(Os& os, const heterogeneous_system_dim<Unit, static_rational<1> >&)
 {
-    os << (adapt_for_print)(base_unit_info<Unit>::symbol());
+    if(units::get_format(os) == symbol) {
+        os << (adapt_for_print)(base_unit_info<Unit>::symbol());
+    } else if(units::get_format(os) == name) {
+        os << (adapt_for_print)(base_unit_info<Unit>::name());
+    } else {
+        assert(!"The format mode must be either name or symbol");
+    }
 }
 
 template<int N>

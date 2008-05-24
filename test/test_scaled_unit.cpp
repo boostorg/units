@@ -66,3 +66,9 @@ BOOST_AUTO_TEST_CASE(test_output) {
     stream << si::nano * 12.5 * si::seconds;
     BOOST_CHECK_EQUAL(stream.str(), "12.5 10^-9 s");
 }
+
+BOOST_AUTO_TEST_CASE(test_output_name) {
+    std::stringstream stream;
+    stream << bu::name_format << si::nano * 12.5 * si::seconds;
+    BOOST_CHECK_EQUAL(stream.str(), "12.5 10^-9 second");
+}
