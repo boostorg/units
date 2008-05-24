@@ -26,7 +26,7 @@ struct is_dimension_list :
 { };
 
 template<typename Item, typename Next>
-struct is_dimension_list<dimension_list<Item, Next> > :
+struct is_dimension_list<list<Item, Next> > :
     public mpl::true_
 { };
 

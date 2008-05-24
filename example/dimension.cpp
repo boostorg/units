@@ -20,13 +20,13 @@ Output:
 @verbatim
 
 //[dimension_output
-length_dimension  = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
-mass_dimension    = dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
-time_dimension    = dimension_list<dim<time_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
-energy_dimension  = dimension_list<dim<length_base_dimension, static_rational<2l, 1l> >, dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-2l, 1l> >, dimensionless_type> > >
-LM_type      = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type> >
-L_T_type     = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
-V_type       = dimension_list<dim<length_base_dimension, static_rational<1l, 1l> >, dimension_list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
+length_dimension  = list<dim<length_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+mass_dimension    = list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+time_dimension    = list<dim<time_base_dimension, static_rational<1l, 1l> >, dimensionless_type>
+energy_dimension  = list<dim<length_base_dimension, static_rational<2l, 1l> >, list<dim<mass_base_dimension, static_rational<1l, 1l> >, list<dim<time_base_dimension, static_rational<-2l, 1l> >, dimensionless_type> > >
+LM_type      = list<dim<length_base_dimension, static_rational<1l, 1l> >, list<dim<mass_base_dimension, static_rational<1l, 1l> >, dimensionless_type> >
+L_T_type     = list<dim<length_base_dimension, static_rational<1l, 1l> >, list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
+V_type       = list<dim<length_base_dimension, static_rational<1l, 1l> >, list<dim<time_base_dimension, static_rational<-1l, 1l> >, dimensionless_type> >
 //]
 
 @endverbatim

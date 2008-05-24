@@ -32,7 +32,7 @@ struct make_scaled_unit<unit<Dimension, heterogeneous_system<heterogeneous_syste
                 Dimension,
                 typename mpl::times<
                     OldScale,
-                    dimension_list<scale_list_dim<Scale>, dimensionless_type>
+                    list<scale_list_dim<Scale>, dimensionless_type>
                 >::type
             >
         >

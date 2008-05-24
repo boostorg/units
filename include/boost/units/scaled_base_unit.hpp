@@ -59,7 +59,7 @@ struct scaled_base_unit
         dimension_type,
         heterogeneous_system<
             heterogeneous_system_impl<
-                dimension_list<
+                list<
                     heterogeneous_system_dim<scaled_base_unit,static_rational<1> >,
                     dimensionless_type
                 >,

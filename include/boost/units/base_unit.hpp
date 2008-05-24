@@ -80,7 +80,7 @@ class base_unit :
             Dim,
             heterogeneous_system<
                 heterogeneous_system_impl<
-                    dimension_list<
+                    list<
                         heterogeneous_system_dim<Derived,static_rational<1> >,
                         dimensionless_type
                     >,

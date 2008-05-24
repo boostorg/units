@@ -86,7 +86,7 @@ struct get_scale_list
 template<class S, class Scale>
 struct get_scale_list<scaled_base_unit<S, Scale> >
 {
-    typedef typename mpl::times<dimension_list<scale_list_dim<Scale>, dimensionless_type>, typename get_scale_list<S>::type>::type type;
+    typedef typename mpl::times<list<scale_list_dim<Scale>, dimensionless_type>, typename get_scale_list<S>::type>::type type;
 };
 
 /// INTERNAL ONLY

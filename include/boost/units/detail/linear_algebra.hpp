@@ -1030,7 +1030,7 @@ struct is_base_dimension_unit {
     typedef void base_dimension_type;
 };
 template<class T>
-struct is_base_dimension_unit<dimension_list<dim<T, static_rational<1> >, dimensionless_type> > {
+struct is_base_dimension_unit<list<dim<T, static_rational<1> >, dimensionless_type> > {
     typedef mpl::true_ type;
     typedef T base_dimension_type;
 };
@@ -1098,7 +1098,7 @@ struct calculate_base_unit_exponents_impl<false> {
         // pad the dimension with zeroes so it can just be a
         // list of numbers, making the multiplication easy
         // e.g. if the arguments are list<pound, foot> and
-        // dimension_list<mass,time^-2> then this step will
+        // list<mass,time^-2> then this step will
         // yield list<0,1,-2>
         typedef typename expand_dimensions<mpl::size<typename base_solutions::dimensions>::value>::template apply<
             typename mpl::begin<typename base_solutions::dimensions>::type,

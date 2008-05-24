@@ -24,7 +24,7 @@ template<typename T,typename V> struct dim;
 template<typename T> struct is_dim;
 
 struct dimensionless_type;
-template<class Item,class Next> struct dimension_list;
+template<class Item,class Next> struct list;
 template<typename Seq> struct make_dimension_list;
 
 template<class T> struct is_dimensionless;

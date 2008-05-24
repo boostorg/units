@@ -34,10 +34,10 @@ struct dimension_list_tag { };
 } // namespace detail
 
 template<class Item, class Next>
-struct dimension_list
+struct list
 {
     typedef detail::dimension_list_tag  tag;
-    typedef dimension_list              type;
+    typedef list              type;
     typedef Item                        item;
     typedef Next                        next;
     typedef typename mpl::next<typename Next::size>::type size;
@@ -83,7 +83,7 @@ struct push_front_impl<units::detail::dimension_list_tag>
     template<class L, class T>
     struct apply 
     {
-        typedef units::dimension_list<T, L> type;
+        typedef units::list<T, L> type;
     };
 };
 
@@ -111,7 +111,7 @@ struct front_impl<units::detail::dimension_list_tag>
 
 // INTERNAL ONLY
 template<class Item, class Next>
-struct deref<units::dimension_list<Item, Next> >
+struct deref<units::list<Item, Next> >
 {
     typedef Item type;
 };
@@ -124,7 +124,7 @@ struct deref<units::dimension_list<Item, Next> >
 
 #include BOOST_TYPEOF_INCREMENT_REGISTRATION_GROUP()
 
-BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::dimension_list, 2)
+BOOST_TYPEOF_REGISTER_TEMPLATE(boost::units::list, 2)
 
 #endif
 

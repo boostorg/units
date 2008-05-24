@@ -92,7 +92,7 @@ struct heterogeneous_system_dim
         Dimensions,                                                 \
         boost::units::heterogeneous_system<                         \
             boost::units::heterogeneous_system_impl<                \
-                boost::units::dimension_list<                       \
+                boost::units::list<                       \
                     boost::units::heterogeneous_system_dim<         \
                         BaseUnit,                                   \
                         boost::units::static_rational<1>            \

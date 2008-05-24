@@ -71,7 +71,7 @@ struct make_system<>
 template<class T0>
 struct make_system<T0, na, na, na, na, na, na, na, na, na>
 {
-    typedef homogeneous_system<dimension_list<T0, dimensionless_type> > type;
+    typedef homogeneous_system<list<T0, dimensionless_type> > type;
 };
 
 template<class T0, class T1>
