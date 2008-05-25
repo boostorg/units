@@ -12,6 +12,7 @@
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/io.hpp>
 #include <iostream>
+#include <sstream>
 
 namespace boost {
 
@@ -25,10 +26,43 @@ std::ostream& operator<<(std::ostream& os, const boost::units::cgs::force&) {
 
 //]
 
+template<class T>
+std::string symbol_string(const T& x)
+{
+	std::stringstream	sstr;
+	
+	sstr << symbol_format << x;
+	
+	return sstr.str();
+}
+
+template<class T>
+std::string name_string(const T& x)
+{
+	std::stringstream	sstr;
+	
+	sstr << name_format << x;
+	
+	return sstr.str();
+}
+
+template<class Y>
+std::string name_string(const quantity<cgs::force,Y>& x)
+{
+	return "dyne";
 }
 
 }
 
-int main() {
+}
+
+int main() 
+{
     std::cout << 2.0 * boost::units::cgs::dyne << std::endl;
+
+    std::cout << boost::units::symbol_format << 2.0 * boost::units::cgs::dyne << std::endl;
+    std::cout << boost::units::name_format << 2.0 * boost::units::cgs::dyne << std::endl;
+	
+	std::cout << boost::units::symbol_string(2.0*boost::units::cgs::dyne) << std::endl;
+	std::cout << boost::units::name_string(2.0*boost::units::cgs::dyne) << std::endl;
 }
