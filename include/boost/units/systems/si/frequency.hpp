@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_FREQUENCY_HPP
 #define BOOST_UNITS_SI_FREQUENCY_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/frequency.hpp>
 
@@ -28,11 +25,6 @@ typedef unit<frequency_dimension,si::system>     frequency;
 BOOST_UNITS_STATIC_CONSTANT(hertz,frequency);   
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::frequency&) 
-{
-    return(os << "Hz");
-}
 
 } // namespace units
 

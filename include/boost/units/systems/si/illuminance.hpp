@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_ILLUMINANCE_HPP
 #define BOOST_UNITS_SI_ILLUMINANCE_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/illuminance.hpp>
 
@@ -28,11 +25,6 @@ typedef unit<illuminance_dimension,si::system>      illuminance;
 BOOST_UNITS_STATIC_CONSTANT(lux,illuminance); 
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::illuminance&) 
-{
-    return(os << "lx");
-}
 
 } // namespace units
 

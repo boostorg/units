@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_PERMEABILITY_HPP
 #define BOOST_UNITS_SI_PERMEABILITY_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/permeability.hpp>
 
@@ -26,11 +23,6 @@ namespace si {
 typedef unit<permeability_type,si::system>    permeability;
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::permeability&) 
-{
-    return(os << "H/m");
-}
 
 } // namespace units
 

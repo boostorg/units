@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_RESISTANCE_HPP
 #define BOOST_UNITS_SI_RESISTANCE_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/resistance.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(ohm,resistance);
 BOOST_UNITS_STATIC_CONSTANT(ohms,resistance);   
                                             
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::resistance&) 
-{
-    return(os << "ohm");
-}
 
 } // namespace units
 

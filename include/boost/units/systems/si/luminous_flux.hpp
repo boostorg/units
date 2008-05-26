@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_LUMINOUS_FLUX_HPP
 #define BOOST_UNITS_SI_LUMINOUS_FLUX_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/luminous_flux.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(lumen,luminous_flux);
 BOOST_UNITS_STATIC_CONSTANT(lumens,luminous_flux);    
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::luminous_flux&) 
-{
-    return(os << "lm");
-}
 
 } // namespace units
 

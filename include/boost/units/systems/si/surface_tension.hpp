@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_SURFACE_TENSION_HPP
 #define BOOST_UNITS_SI_SURFACE_TENSION_HPP
 
-#include <iostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/surface_tension.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(newton_per_meter,surface_tension);
 BOOST_UNITS_STATIC_CONSTANT(newtons_per_meter,surface_tension); 
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::surface_tension&) 
-{
-    return(os << "N/m");
-}
 
 } // namespace units
 

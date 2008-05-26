@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_DYNAMIC_VISCOSITY_HPP
 #define BOOST_UNITS_SI_DYNAMIC_VISCOSITY_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/dynamic_viscosity.hpp>
 
@@ -26,11 +23,6 @@ namespace si {
 typedef unit<dynamic_viscosity_dimension,si::system>     dynamic_viscosity;
     
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::dynamic_viscosity&) 
-{
-    return(os << "Pa s");
-}
 
 } // namespace units
 

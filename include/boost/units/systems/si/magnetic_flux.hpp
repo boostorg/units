@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_MAGNETIC_FLUX_HPP
 #define BOOST_UNITS_SI_MAGNETIC_FLUX_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/magnetic_flux.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(weber,magnetic_flux);
 BOOST_UNITS_STATIC_CONSTANT(webers,magnetic_flux);  
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::magnetic_flux&) 
-{
-    return(os << "Wb");
-}
 
 } // namespace units
 

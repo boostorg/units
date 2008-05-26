@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_ELECTRIC_POTENTIAL_HPP
 #define BOOST_UNITS_SI_ELECTRIC_POTENTIAL_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/electric_potential.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(volt,electric_potential);
 BOOST_UNITS_STATIC_CONSTANT(volts,electric_potential);  
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::electric_potential&) 
-{
-    return(os << "V");
-}
 
 } // namespace units
 

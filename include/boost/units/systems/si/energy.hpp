@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_ENERGY_HPP
 #define BOOST_UNITS_SI_ENERGY_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/energy.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(joule,energy);
 BOOST_UNITS_STATIC_CONSTANT(joules,energy); 
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::energy&) 
-{
-    return(os << "J");
-}
 
 } // namespace units
 

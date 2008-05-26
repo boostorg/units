@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_INDUCTANCE_HPP
 #define BOOST_UNITS_SI_INDUCTANCE_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/inductance.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(henry,inductance);
 BOOST_UNITS_STATIC_CONSTANT(henrys,inductance); 
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::inductance&) 
-{
-    return(os << "H");
-}
 
 } // namespace units
 

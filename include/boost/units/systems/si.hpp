@@ -62,6 +62,7 @@
 #include <boost/units/systems/si/resistivity.hpp>
 #include <boost/units/systems/si/solid_angle.hpp>
 #include <boost/units/systems/si/surface_density.hpp>
+#include <boost/units/systems/si/surface_tension.hpp>
 #include <boost/units/systems/si/temperature.hpp>
 #include <boost/units/systems/si/time.hpp>
 #include <boost/units/systems/si/torque.hpp>

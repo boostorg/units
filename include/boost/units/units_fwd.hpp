@@ -53,7 +53,7 @@ template<class T,class System> struct is_quantity_of_system;
 
 template<class From,class To> struct conversion_helper;
 
-// generate string representation of unit using base_unit names or symbols, respectively
+template<class T> std::string to_string(const T&);
 template<class T> std::string name_string(const T&);
 template<class T> std::string symbol_string(const T&);
 

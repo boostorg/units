@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_POWER_HPP
 #define BOOST_UNITS_SI_POWER_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/power.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(watt,power);
 BOOST_UNITS_STATIC_CONSTANT(watts,power);   
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::power&) 
-{
-    return(os << "W");
-}
 
 } // namespace units
 

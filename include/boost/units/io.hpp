@@ -49,20 +49,34 @@ inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsign
 
 namespace units {
 
-/// Write integral-valued @c static_rational to @c std::basic_ostream.
-template<class Char, class Traits, integer_type N>
-inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N>&)
+// get string representation of arbitrary type
+template<class T> std::string to_string(const T& t)
 {
-    os << N;
-    return os;
+	std::stringstream	sstr;
+	
+	sstr << t;
+	
+	return sstr.str();
+}
+
+// get string representation of integral-valued @c static_rational
+template<integer_type N> std::string to_string(const static_rational<N>& r)
+{
+	return to_string(r.numerator());
+}
+
+// get string representation of @c static_rational
+template<integer_type N, integer_type D> std::string to_string(const static_rational<N,D>& r)
+{
+	return '(' + to_string(r.numerator()) + '/' + to_string(r.denominator()) + ')';
 }
 
 /// Write @c static_rational to @c std::basic_ostream.
 template<class Char, class Traits, integer_type N, integer_type D>
-inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N, D>&)
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N,D>& r)
 {
-    os << '(' << N << '/' << D << ')';
-    return os;
+	os << to_string(r);
+	return os;
 }
 
 /// traits template for unit names
@@ -161,160 +175,224 @@ inline std::string name_string(const T&)
 
 namespace detail {
 
-// This is needed so that std::string can be returned from
-// the base unit functions and will allow the operators
-// to work for any std::basic_ostream
 template<class T>
-const T& adapt_for_print(const T& t)
+std::string base_unit_symbol_string(const T&)
 {
-    return(t);
+	return base_unit_info<typename T::tag_type>::symbol() + '^' + to_string(typename T::value_type());
 }
 
-template<class Char, class Traits, class Allocator>
-const Char* adapt_for_print(const std::basic_string<Char, Traits, Allocator>& s)
+template<class T>	
+std::string base_unit_name_string(const T&)
 {
-    return(s.c_str());
+	return base_unit_info<typename T::tag_type>::name() + '^' + to_string(typename T::value_type());
 }
 
-template<class T, class Os>
-void print_base_unit(Os& os, const T&)
-{
-    if(units::get_format(os) == symbol) {
-        os << (adapt_for_print)(base_unit_info<typename T::tag_type>::symbol()) << '^' << typename T::value_type();
-    } else if(units::get_format(os) == name) {
-        os << (adapt_for_print)(base_unit_info<typename T::tag_type>::name()) << '^' << typename T::value_type();
-    } else {
-        assert(!"The format mode must be either name or symbol");
-    }
-}
-
-template<class Unit, class Os>
-void print_base_unit(Os& os, const heterogeneous_system_dim<Unit, static_rational<1> >&)
-{
-    if(units::get_format(os) == symbol) {
-        os << (adapt_for_print)(base_unit_info<Unit>::symbol());
-    } else if(units::get_format(os) == name) {
-        os << (adapt_for_print)(base_unit_info<Unit>::name());
-    } else {
-        assert(!"The format mode must be either name or symbol");
-    }
-}
-
+// stringify with symbols
 template<int N>
-struct print_impl
+struct symbol_string_impl
 {
-    template<class Begin, class Os>
+    template<class Begin>
     struct apply
     {
-        typedef typename print_impl<N-1>::template apply<typename mpl::next<Begin>::type, Os> next;
-        static void value(Os& os)
+        typedef typename symbol_string_impl<N-1>::template apply<typename mpl::next<Begin>::type> next;
+        static void value(std::string& str)
         {
-            (print_base_unit)(os, typename mpl::deref<Begin>::type());
-            os << ' ';
-            next::value(os);
+			str += base_unit_symbol_string(typename mpl::deref<Begin>::type()) + ' ';
+            next::value(str);
         }
     };
 };
 
 template<>
-struct print_impl<1>
+struct symbol_string_impl<1>
 {
-    template<class Begin, class Os>
+    template<class Begin>
     struct apply
     {
-        static void value(Os& os)
+        static void value(std::string& str)
         {
-            (print_base_unit)(os, typename mpl::deref<Begin>::type());
+			str += base_unit_symbol_string(typename mpl::deref<Begin>::type());
         };
     };
 };
 
 template<>
-struct print_impl<0>
+struct symbol_string_impl<0>
 {
-    template<class Begin, class Os>
+    template<class Begin>
     struct apply
     {
-        static void value(Os& os)
+        static void value(std::string& str)
         {
-            os << "dimensionless";
+			// better shorthand for dimensionless?
+            str += "dimensionless";
         }
     };
 };
 
 template<int N>
-struct print_scale_impl {
-    template<class Begin, class Os>
-    struct apply {
-        static void value(Os& os) {
-            os << mpl::deref<Begin>::type::base << '^' << typename mpl::deref<Begin>::type::exponent() << ' ';
-            print_scale_impl<N - 1>::template apply<typename mpl::next<Begin>::type, Os>::value(os);
+struct scale_symbol_string_impl 
+{
+    template<class Begin>
+    struct apply 
+	{
+        static void value(std::string& str) 
+		{
+            str += mpl::deref<Begin>::type::base::symbol() + ' ';
+            scale_symbol_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
         }
     };
 };
 
 template<>
-struct print_scale_impl<0> {
-    template<class Begin, class Os>
-    struct apply {
-        static void value(Os&) { }
+struct scale_symbol_string_impl<0>
+{
+    template<class Begin>
+    struct apply 
+	{
+        static void value(std::string&) { }
+    };
+};
+
+// stringify with names
+template<int N>
+struct name_string_impl
+{
+    template<class Begin>
+    struct apply
+    {
+        typedef typename name_string_impl<N-1>::template apply<typename mpl::next<Begin>::type> next;
+        static void value(std::string& str)
+        {
+			str += base_unit_name_string(typename mpl::deref<Begin>::type()) + ' ';
+            next::value(str);
+        }
+    };
+};
+
+template<>
+struct name_string_impl<1>
+{
+    template<class Begin>
+    struct apply
+    {
+        static void value(std::string& str)
+        {
+			str += base_unit_name_string(typename mpl::deref<Begin>::type());
+        };
+    };
+};
+
+template<>
+struct name_string_impl<0>
+{
+    template<class Begin>
+    struct apply
+    {
+        static void value(std::string& str)
+        {
+			// better shorthand for dimensionless?
+            str += "dimensionless";
+        }
+    };
+};
+
+template<int N>
+struct scale_name_string_impl 
+{
+    template<class Begin>
+    struct apply 
+	{
+        static void value(std::string& str) 
+		{
+            str += mpl::deref<Begin>::type::base::name() + ' ';
+            scale_name_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
+        }
+    };
+};
+
+template<>
+struct scale_name_string_impl<0>
+{
+    template<class Begin>
+    struct apply 
+	{
+        static void value(std::string&) { }
     };
 };
 
 } // namespace detail
 
-/// Print an @c unit as a list of base units and exponents e.g "m s^-1"
-template<class Char, class Traits, class Dimension, class System>
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>&)
+template<class Dimension,class System>
+inline std::string
+symbol_string(const unit<Dimension,System>&)
 {
-    os << typename reduce_unit<unit<Dimension, System> >::type();
-    return(os);
+    return symbol_string(typename reduce_unit<unit<Dimension, System> >::type());
+}
+
+template<class Dimension,class System>
+inline std::string
+name_string(const unit<Dimension,System>&)
+{
+    return name_string(typename reduce_unit<unit<Dimension, System> >::type());
 }
 
 /// INTERNAL ONLY
-template<class Char, class Traits, class Dimension, class System>
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, heterogeneous_system<System> >&)
+template<class Dimension,class System>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<System> >&)
 {
-    detail::print_scale_impl<mpl::size<typename System::scale>::value>::template apply<
-        typename mpl::begin<typename System::scale>::type,
-        std::basic_ostream<Char, Traits>
-    >::value(os);
-    detail::print_impl<mpl::size<typename System::type>::value>::template apply<
-        typename mpl::begin<typename System::type>::type,
-        std::basic_ostream<Char, Traits> >::value(os);
-    return(os);
+	std::string	str;
+	
+    detail::scale_symbol_string_impl<mpl::size<typename System::scale>::value>::template apply<
+        typename mpl::begin<typename System::scale>::type>::value(str);
+    detail::symbol_string_impl<mpl::size<typename System::type>::value>::template apply<
+        typename mpl::begin<typename System::type>::type>::value(str);
+    return(str);
 }
 
+template<class Dimension,class System>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<System> >&)
+{
+	std::string	str;
+	
+    detail::scale_name_string_impl<mpl::size<typename System::scale>::value>::template apply<
+        typename mpl::begin<typename System::scale>::type>::value(str);
+    detail::name_string_impl<mpl::size<typename System::type>::value>::template apply<
+        typename mpl::begin<typename System::type>::type>::value(str);
+    return(str);
+}
+
+/// Print an @c unit as a list of base units and exponents e.g "m s^-1"
+template<class Char, class Traits, class Dimension, class System>
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
+{
+//    os << typename reduce_unit<unit<Dimension, System> >::type();
+//    return(os);
+    if(units::get_format(os) == symbol) 
+	{
+        os << symbol_string(u);
+    } 
+	else if(units::get_format(os) == name) 
+	{
+        os << name_string(u);
+    } 
+	else 
+	{
+        assert(!"The format mode must be either name or symbol");
+    }
+	
+	return(os);
+}
+
+/// INTERNAL ONLY
 /// Print a @c quantity. Prints the value followed by the unit
 template<class Char, class Traits, class Unit, class T>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q)
 {
     os << q.value() << ' ' << Unit();
     return(os);
-}
-
-// quick and dirty solution - should replace guts with implementation in operator<< above to directly create string
-template<class Dimension,class System>
-inline std::string
-symbol_string(const unit<Dimension,System>& u)
-{
-	std::stringstream	sstr;
-	
-	sstr << u;
-	
-	return sstr.str();
-}
-
-// quick and dirty solution - should replace guts with implementation in operator<< above to directly create string
-template<class Dimension,class System>
-inline std::string
-name_string(const unit<Dimension,System>& u)
-{
-	std::stringstream	sstr;
-	
-	sstr << name_format << u;
-	
-	return sstr.str();
 }
 
 } // namespace units

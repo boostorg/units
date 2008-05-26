@@ -13,6 +13,9 @@
 #include <boost/units/io.hpp>
 #include <boost/units/scale.hpp>
 
+#include <boost/units/systems/si/capacitance.hpp>
+#include <boost/units/systems/si/io.hpp>
+
 #include <iostream>
 #include <sstream>
 
@@ -21,12 +24,6 @@ namespace boost {
 namespace units {
 
 //[composite_output_snippet_1
-
-std::ostream& operator<<(std::ostream& os, const boost::units::cgs::force&) {
-    return(os << "dyn");
-}
-
-//]
 
 template<>
 std::string name_string(const cgs::force&)
@@ -37,8 +34,10 @@ std::string name_string(const cgs::force&)
 template<>
 std::string symbol_string(const cgs::force&)
 {
-	return "goombah";
+	return "dyn";
 }
+
+//]
 
 }
 
@@ -60,9 +59,22 @@ int main()
 	std::cout << symbol_string(dyne) << std::endl;
 	std::cout << name_string(dyne) << std::endl;
 	
+	std::cout << symbol_string(gram*centimeter/second) << std::endl;
+	std::cout << name_string(gram*centimeter/second) << std::endl;
+	
 	std::cout << symbol_string(gram*centimeter/(second*second)) << std::endl;
 	std::cout << name_string(gram*centimeter/(second*second)) << std::endl;
 	
 	std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
 	std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
+	
+	// should work...
+//	std::cout << symbol_string(scale<10,static_rational<-9> >()*si::farad) << std::endl;
+//	std::cout << name_string(scale<10,static_rational<-9> >()*si::farad) << std::endl;
+	
+	std::cout << name_format << si::farad << std::endl;
+	std::cout << symbol_format << si::farad << std::endl;
+	
+	std::cout << name_format << 1.0*si::farad << std::endl;
+	std::cout << symbol_format << 1.0*si::farad << std::endl;
 }

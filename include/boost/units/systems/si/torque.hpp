@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_TORQUE_HPP
 #define BOOST_UNITS_SI_TORQUE_HPP
 
-#include <iostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/torque.hpp>
 
@@ -29,11 +26,6 @@ BOOST_UNITS_STATIC_CONSTANT(newton_meter,torque);
 BOOST_UNITS_STATIC_CONSTANT(newton_meters,torque); 
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::torque&) 
-{
-    return(os << "N m");
-}
 
 } // namespace units
 

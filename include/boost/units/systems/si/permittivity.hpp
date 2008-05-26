@@ -11,9 +11,6 @@
 #ifndef BOOST_UNITS_SI_PERMITTIVITY_HPP
 #define BOOST_UNITS_SI_PERMITTIVITY_HPP
 
-#include <ostream>
-#include <boost/units/io.hpp>
-
 #include <boost/units/systems/si/base.hpp>
 #include <boost/units/physical_dimensions/permittivity.hpp>
 
@@ -26,11 +23,6 @@ namespace si {
 typedef unit<permittivity_type,si::system>    permittivity;
 
 } // namespace si
-
-inline std::ostream& operator<<(std::ostream& os, const boost::units::si::permittivity&) 
-{
-    return(os << "F/m");
-}
 
 } // namespace units
 
