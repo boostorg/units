@@ -51,9 +51,7 @@ int main()
 	using boost::units::cgs::gram;
 	using boost::units::cgs::second;
 	using boost::units::cgs::dyne;
-	
-	scale<10,static_rational<-9> >	s;
-	
+		
 	si::nano*si::farad;
 	1.0*si::nano*si::farad;
 	

@@ -35,15 +35,15 @@ namespace units {
 
 namespace abstract {
 
-struct length_unit_tag : base_unit<length_unit_tag, length_dimension, -30> {};
-struct mass_unit_tag : base_unit<mass_unit_tag, mass_dimension, -29> {};
-struct time_unit_tag : base_unit<time_unit_tag, time_dimension, -28> {};
-struct current_unit_tag : base_unit<current_unit_tag, current_dimension, -27> {};
-struct temperature_unit_tag : base_unit<temperature_unit_tag, temperature_dimension, -26> {};
-struct amount_unit_tag : base_unit<amount_unit_tag, amount_dimension, -25> {};
-struct luminous_intensity_unit_tag : base_unit<luminous_intensity_unit_tag, luminous_intensity_dimension, -24> {};
-struct plane_angle_unit_tag : base_unit<plane_angle_unit_tag, plane_angle_dimension, -23> {};
-struct solid_angle_unit_tag : base_unit<solid_angle_unit_tag, solid_angle_dimension, -22> {};
+struct length_unit_tag : base_unit<length_unit_tag, length_dimension, -30> { };
+struct mass_unit_tag : base_unit<mass_unit_tag, mass_dimension, -29> { };
+struct time_unit_tag : base_unit<time_unit_tag, time_dimension, -28> { };
+struct current_unit_tag : base_unit<current_unit_tag, current_dimension, -27> { };
+struct temperature_unit_tag : base_unit<temperature_unit_tag, temperature_dimension, -26> { };
+struct amount_unit_tag : base_unit<amount_unit_tag, amount_dimension, -25> { };
+struct luminous_intensity_unit_tag : base_unit<luminous_intensity_unit_tag, luminous_intensity_dimension, -24> { };
+struct plane_angle_unit_tag : base_unit<plane_angle_unit_tag, plane_angle_dimension, -23> { };
+struct solid_angle_unit_tag : base_unit<solid_angle_unit_tag, solid_angle_dimension, -22> { };
 
 typedef make_system<
     length_unit_tag,
@@ -121,7 +121,7 @@ struct base_unit_info<abstract::luminous_intensity_unit_tag>
 template<> 
 struct base_unit_info<abstract::plane_angle_unit_tag> 
 { 
-    static std::string name()       { return "[Planar Angle]"; }
+    static std::string name()       { return "[Plane Angle]"; }
     static std::string symbol()     { return "[QP]"; }
 };
 
