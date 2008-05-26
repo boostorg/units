@@ -26,6 +26,7 @@
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/quantity.hpp>
+#include <boost/units/scale.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/unit.hpp>
 
@@ -159,32 +160,30 @@ inline std::ios_base& name_format(std::ios_base& ios)
     return(ios);
 }
 
-// by default, return result of static symbol() method for class
-template<class T>
-inline std::string symbol_string(const T&)
-{
-	return T::symbol();
-}
-
-// by default, return result of static name() method for class
-template<class T>
-inline std::string name_string(const T&)
-{
-	return T::name();
-}
-
 namespace detail {
+
+template<integer_type N, integer_type D>
+std::string exponent_string(const static_rational<N,D>& r)
+{
+	return '^' + to_string(r);
+}
+
+template<>
+inline std::string exponent_string(const static_rational<1>& r)
+{
+	return "";
+}
 
 template<class T>
 std::string base_unit_symbol_string(const T&)
 {
-	return base_unit_info<typename T::tag_type>::symbol() + '^' + to_string(typename T::value_type());
+	return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
 }
 
 template<class T>	
 std::string base_unit_name_string(const T&)
 {
-	return base_unit_info<typename T::tag_type>::name() + '^' + to_string(typename T::value_type());
+	return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
 }
 
 // stringify with symbols
@@ -238,7 +237,7 @@ struct scale_symbol_string_impl
 	{
         static void value(std::string& str) 
 		{
-            str += mpl::deref<Begin>::type::base::symbol() + ' ';
+            str += mpl::deref<Begin>::type::symbol();
             scale_symbol_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
         }
     };
@@ -305,7 +304,7 @@ struct scale_name_string_impl
 	{
         static void value(std::string& str) 
 		{
-            str += mpl::deref<Begin>::type::base::name() + ' ';
+            str += mpl::deref<Begin>::type::name();
             scale_name_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
         }
     };
@@ -368,8 +367,6 @@ name_string(const unit<Dimension, heterogeneous_system<System> >&)
 template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-//    os << typename reduce_unit<unit<Dimension, System> >::type();
-//    return(os);
     if(units::get_format(os) == symbol) 
 	{
         os << symbol_string(u);

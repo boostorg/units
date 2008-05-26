@@ -147,6 +147,7 @@ w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 #include <boost/units/io.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/codata/physico-chemical_constants.hpp>
+#include <boost/units/systems/si/io.hpp>
 
 #include "measurement.hpp"
 
@@ -421,7 +422,42 @@ int main()
               << quantity<power>(1.0*watt) << std::endl
               << quantity<pressure>(1.0*pascals) << std::endl
               << quantity<resistance>(1.0*ohm) << std::endl
-              << quantity<torque>(1.0*newton_meters) << std::endl
+              << std::endl;
+
+    std::cout << symbol_format << quantity<capacitance>(1.0*farad) << std::endl
+              << symbol_format << quantity<catalytic_activity>(1.0*katal) << std::endl
+              << symbol_format << quantity<conductance>(1.0*siemen) << std::endl
+              << symbol_format << quantity<electric_charge>(1.0*coulomb) << std::endl
+              << symbol_format << quantity<electric_potential>(1.0*volt) << std::endl
+              << symbol_format << quantity<energy>(1.0*joule) << std::endl
+              << symbol_format << quantity<force>(1.0*newton) << std::endl
+              << symbol_format << quantity<frequency>(1.0*hertz) << std::endl
+              << symbol_format << quantity<illuminance>(1.0*lux) << std::endl
+              << symbol_format << quantity<inductance>(1.0*henry) << std::endl
+              << symbol_format << quantity<luminous_flux>(1.0*lumen) << std::endl
+              << symbol_format << quantity<magnetic_flux>(1.0*weber) << std::endl
+              << symbol_format << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+              << symbol_format << quantity<power>(1.0*watt) << std::endl
+              << symbol_format << quantity<pressure>(1.0*pascals) << std::endl
+              << symbol_format << quantity<resistance>(1.0*ohm) << std::endl
+              << std::endl;
+
+    std::cout << name_format << quantity<capacitance>(1.0*farad) << std::endl
+              << name_format << quantity<catalytic_activity>(1.0*katal) << std::endl
+              << name_format << quantity<conductance>(1.0*siemen) << std::endl
+              << name_format << quantity<electric_charge>(1.0*coulomb) << std::endl
+              << name_format << quantity<electric_potential>(1.0*volt) << std::endl
+              << name_format << quantity<energy>(1.0*joule) << std::endl
+              << name_format << quantity<force>(1.0*newton) << std::endl
+              << name_format << quantity<frequency>(1.0*hertz) << std::endl
+              << name_format << quantity<illuminance>(1.0*lux) << std::endl
+              << name_format << quantity<inductance>(1.0*henry) << std::endl
+              << name_format << quantity<luminous_flux>(1.0*lumen) << std::endl
+              << name_format << quantity<magnetic_flux>(1.0*weber) << std::endl
+              << name_format << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+              << name_format << quantity<power>(1.0*watt) << std::endl
+              << name_format << quantity<pressure>(1.0*pascals) << std::endl
+              << name_format << quantity<resistance>(1.0*ohm) << std::endl
               << std::endl;
 
     sstream2 << "S1 :    2" << std::endl;
