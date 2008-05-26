@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of temperature
-struct temperature_base_dimension : boost::units::base_dimension<temperature_base_dimension,-5> { };               
+struct temperature_base_dimension : 
+    boost::units::base_dimension<temperature_base_dimension,-5> 
+{ };               
 
 } // namespace units
 

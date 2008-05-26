@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for angular velocity : T^-1 QP
-typedef derived_dimension<time_base_dimension,-1,plane_angle_base_dimension,1>::type    angular_velocity_dimension; 
+typedef derived_dimension<time_base_dimension,-1,
+                          plane_angle_base_dimension,1>::type angular_velocity_dimension; 
 
 } // namespace units
 

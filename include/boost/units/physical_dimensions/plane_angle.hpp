@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of plane angle
-struct plane_angle_base_dimension : boost::units::base_dimension<plane_angle_base_dimension,-2> { };               
+struct plane_angle_base_dimension : 
+    boost::units::base_dimension<plane_angle_base_dimension,-2> 
+{ };               
 
 } // namespace units
 

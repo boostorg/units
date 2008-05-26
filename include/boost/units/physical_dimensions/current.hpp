@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of current
-struct current_base_dimension : boost::units::base_dimension<current_base_dimension,-6> { };                       
+struct current_base_dimension : 
+    boost::units::base_dimension<current_base_dimension,-6> 
+{ };                       
 
 } // namespace units
 

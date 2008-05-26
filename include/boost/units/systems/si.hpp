@@ -24,6 +24,7 @@
 #include <boost/units/systems/si/acceleration.hpp>
 #include <boost/units/systems/si/activity.hpp>
 #include <boost/units/systems/si/amount.hpp>
+#include <boost/units/systems/si/angular_momentum.hpp>
 #include <boost/units/systems/si/angular_velocity.hpp>
 #include <boost/units/systems/si/area.hpp>
 #include <boost/units/systems/si/capacitance.hpp>
@@ -51,6 +52,7 @@
 #include <boost/units/systems/si/magnetic_flux_density.hpp>
 #include <boost/units/systems/si/mass.hpp>
 #include <boost/units/systems/si/mass_density.hpp>
+#include <boost/units/systems/si/moment_of_inertia.hpp>
 #include <boost/units/systems/si/momentum.hpp>
 #include <boost/units/systems/si/permeability.hpp>
 #include <boost/units/systems/si/permittivity.hpp>

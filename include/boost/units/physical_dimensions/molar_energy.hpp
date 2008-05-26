@@ -25,7 +25,7 @@ namespace units {
 typedef derived_dimension<length_base_dimension,2,
                           mass_base_dimension,1,
                           time_base_dimension,-2,
-                          amount_base_dimension,-1>::type       molar_energy_dimension;                    
+                          amount_base_dimension,-1>::type molar_energy_dimension;                    
 
 } // namespace units
 

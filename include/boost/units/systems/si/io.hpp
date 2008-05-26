@@ -20,10 +20,10 @@ namespace boost {
 namespace units { 
 
 // gray and sievert are indistinguishable
-//inline std::string name_string(const si::absorbed_dose&) { return "gray"; }
-//inline std::string symbol_string(const si::absorbed_dose&) { return "Gy"; }
+inline std::string name_string(const si::absorbed_dose&) { return "gray"; }
+inline std::string symbol_string(const si::absorbed_dose&) { return "Gy"; }
 
-// activity and frequency are indistinguishable
+// activity and frequency are indistinguishable - would need a "decays" base unit
 //inline std::string name_string(const si::activity&) { return "becquerel"; }
 //inline std::string symbol_string(const si::activity&) { return "Bq"; }
 

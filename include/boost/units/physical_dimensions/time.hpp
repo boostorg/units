@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of time
-struct time_base_dimension : boost::units::base_dimension<time_base_dimension,-7> { };
+struct time_base_dimension : 
+    boost::units::base_dimension<time_base_dimension,-7> 
+{ };
 
 } // namespace units
 

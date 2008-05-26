@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of solid angle
-struct solid_angle_base_dimension : boost::units::base_dimension<solid_angle_base_dimension,-1> { };               
+struct solid_angle_base_dimension : 
+    boost::units::base_dimension<solid_angle_base_dimension,-1> 
+{ };               
 
 } // namespace units
 

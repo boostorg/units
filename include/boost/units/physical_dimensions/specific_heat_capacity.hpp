@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for specific heat capacity : L^2 T^-2 Theta^-1
 typedef derived_dimension<length_base_dimension,2,
                           time_base_dimension,-2,
-                          temperature_base_dimension,-1>::type       specific_heat_capacity_dimension;                    
+                          temperature_base_dimension,-1>::type specific_heat_capacity_dimension;                    
 
 } // namespace units
 

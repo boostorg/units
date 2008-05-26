@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for absorbed dose : L^2 T^-2
-typedef derived_dimension<length_base_dimension,2,time_base_dimension,-2>::type     absorbed_dose_dimension;  
+typedef derived_dimension<length_base_dimension,2,
+                          time_base_dimension,-2>::type absorbed_dose_dimension;  
 
 } // namespace units
 

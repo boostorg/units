@@ -21,7 +21,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for surface tension : M T^-2
-typedef derived_dimension<mass_base_dimension,1,time_base_dimension,-2>::type       surface_tension_dimension;                    
+typedef derived_dimension<mass_base_dimension,1,
+                          time_base_dimension,-2>::type surface_tension_dimension;                    
 
 } // namespace units
 

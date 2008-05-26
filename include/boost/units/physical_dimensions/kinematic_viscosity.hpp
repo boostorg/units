@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for kinematic viscosity : L^2 T^-1
-typedef derived_dimension<length_base_dimension,2,time_base_dimension,-1>::type     kinematic_viscosity_dimension;
+typedef derived_dimension<length_base_dimension,2,
+                          time_base_dimension,-1>::type kinematic_viscosity_dimension;
 
 } // namespace units
 

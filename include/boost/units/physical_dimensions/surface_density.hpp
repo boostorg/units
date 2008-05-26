@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for surface density : L^-2 M
-typedef derived_dimension<length_base_dimension,-2,mass_base_dimension,1>::type     surface_density_dimension;
+typedef derived_dimension<length_base_dimension,-2,
+                          mass_base_dimension,1>::type surface_density_dimension;
 
 } // namespace units
 

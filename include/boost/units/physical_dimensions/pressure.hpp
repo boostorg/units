@@ -21,7 +21,9 @@ namespace boost {
 namespace units {
 
 /// derived dimension for pressure : L^-1 M T^-2
-typedef derived_dimension<length_base_dimension,-1,mass_base_dimension,1,time_base_dimension,-2>::type      pressure_dimension;                
+typedef derived_dimension<length_base_dimension,-1,
+                          mass_base_dimension,1,
+						  time_base_dimension,-2>::type pressure_dimension;                
 
 } // namespace units
 

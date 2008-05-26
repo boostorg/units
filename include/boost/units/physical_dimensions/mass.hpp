@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of mass
-struct mass_base_dimension : boost::units::base_dimension<mass_base_dimension,-8> { };
+struct mass_base_dimension : 
+    boost::units::base_dimension<mass_base_dimension,-8> 
+{ };
 
 } // namespace units
 

@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for dose equivalent : L^2 T^-2
-typedef derived_dimension<length_base_dimension,2,time_base_dimension,-2>::type     dose_equivalent_dimension;  
+typedef derived_dimension<length_base_dimension,2,
+                          time_base_dimension,-2>::type dose_equivalent_dimension;  
 
 } // namespace units
 

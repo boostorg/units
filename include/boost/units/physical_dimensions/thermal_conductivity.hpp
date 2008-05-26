@@ -25,7 +25,7 @@ namespace units {
 typedef derived_dimension<length_base_dimension,1,
                           mass_base_dimension,1,
                           time_base_dimension,-3,
-                          temperature_base_dimension,-1>::type       thermal_conductivity_dimension;                    
+                          temperature_base_dimension,-1>::type thermal_conductivity_dimension;                    
 
 } // namespace units
 

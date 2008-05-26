@@ -19,7 +19,7 @@ namespace boost {
 namespace units {
 
 /// derived dimension for activity : T^-1
-typedef derived_dimension<time_base_dimension,-1>::type     activity_dimension; 
+typedef derived_dimension<time_base_dimension,-1>::type activity_dimension; 
 
 } // namespace units
 

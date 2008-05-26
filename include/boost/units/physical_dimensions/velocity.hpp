@@ -20,7 +20,8 @@ namespace boost {
 namespace units {
 
 /// derived dimension for velocity : L T^-1
-typedef derived_dimension<length_base_dimension,1,time_base_dimension,-1>::type     velocity_dimension;                
+typedef derived_dimension<length_base_dimension,1,
+                          time_base_dimension,-1>::type velocity_dimension;                
 
 } // namespace units
 

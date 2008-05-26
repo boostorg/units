@@ -19,7 +19,9 @@ namespace boost {
 namespace units { 
 
 /// base dimension of length
-struct length_base_dimension : boost::units::base_dimension<length_base_dimension, -9> { }; 
+struct length_base_dimension : 
+    boost::units::base_dimension<length_base_dimension, -9> 
+{ }; 
 
 } // namespace units
 
