@@ -73,11 +73,11 @@ struct scaled_base_unit
 
     static std::string symbol()
     {
-        return(Scale::symbol_prefix() + S::symbol());
+        return(Scale::symbol() + S::symbol());
     }
     static std::string name()
     {
-        return(Scale::name_prefix() + S::name());
+        return(Scale::name() + S::name());
     }
 };
 

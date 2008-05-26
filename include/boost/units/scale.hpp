@@ -48,8 +48,8 @@ struct scale<Base, static_rational<0> >
     typedef static_rational<0> exponent;
     typedef one value_type;
     static one value() { return(one()); }
-    static std::string name_prefix() { return(std::string()); }
-    static std::string symbol_prefix() { return(std::string()); }
+    static std::string name() { return(std::string()); }
+    static std::string symbol() { return(std::string()); }
 };
 
 template<long Base>
@@ -57,20 +57,20 @@ const long scale<Base, static_rational<0> >::base;
 
 #ifndef BOOST_UNITS_DOXYGEN
 
-#define BOOST_UNITS_SCALE_SPECIALIZATION(base_,exponent_,val,name,symbol)   \
+#define BOOST_UNITS_SCALE_SPECIALIZATION(base_,exponent_,val,name_,symbol_) \
 template<>                                                                  \
 struct scale<base_, exponent_ >                                             \
 {                                                                           \
     static const long base = base_;                                         \
     typedef exponent_ exponent;                                             \
     typedef double value_type;                                              \
-    static value_type value() { return(val); }                              \
-    static std::string name_prefix() { return(#name); }                     \
-    static std::string symbol_prefix() { return(#symbol); }                 \
+    static value_type value()   { return(val); }                            \
+    static std::string name()   { return(#name_); }                         \
+    static std::string symbol() { return(#symbol_); }                       \
 }
 
-#define BOOST_UNITS_SCALE_DEF(exponent,value,name,symbol) \
-    BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent>,value, name, symbol)
+#define BOOST_UNITS_SCALE_DEF(exponent,value,name_,symbol_)                 \
+BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent>,value, name_, symbol_)
 
 BOOST_UNITS_SCALE_DEF(-24, 1e-24 ,yocto, y);
 BOOST_UNITS_SCALE_DEF(-21, 1e-21, zepto, z);
