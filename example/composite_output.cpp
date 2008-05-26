@@ -90,7 +90,7 @@ int main()
 	std::cout << symbol_string(si::farad*si::nano) << std::endl;
 	std::cout << name_string(si::farad*si::nano) << std::endl;
 	
-	// should work but doesn't
+	// doesn't work because we can't make assumptions about how user wants value() to be formatted
 //	std::cout << symbol_string(si::nano*1.0*si::farad) << std::endl;
 //	std::cout << name_string(1.0*si::nano*si::farad) << std::endl;
 
