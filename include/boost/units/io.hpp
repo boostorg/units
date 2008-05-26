@@ -163,7 +163,7 @@ inline std::ios_base& name_format(std::ios_base& ios)
 namespace detail {
 
 template<integer_type N, integer_type D>
-std::string exponent_string(const static_rational<N,D>& r)
+inline std::string exponent_string(const static_rational<N,D>& r)
 {
     return '^' + to_string(r);
 }
@@ -175,13 +175,13 @@ inline std::string exponent_string(const static_rational<1>&)
 }
 
 template<class T>
-std::string base_unit_symbol_string(const T&)
+inline std::string base_unit_symbol_string(const T&)
 {
     return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
 }
 
 template<class T>    
-std::string base_unit_name_string(const T&)
+inline std::string base_unit_name_string(const T&)
 {
     return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
 }
@@ -290,7 +290,6 @@ struct name_string_impl<0>
     {
         static void value(std::string& str)
         {
-            // better shorthand for dimensionless?
             str += "dimensionless";
         }
     };
@@ -347,6 +346,7 @@ symbol_string(const unit<Dimension, heterogeneous_system<System> >&)
         typename mpl::begin<typename System::scale>::type>::value(str);
     detail::symbol_string_impl<mpl::size<typename System::type>::value>::template apply<
         typename mpl::begin<typename System::type>::type>::value(str);
+		
     return(str);
 }
 
@@ -360,18 +360,20 @@ name_string(const unit<Dimension, heterogeneous_system<System> >&)
         typename mpl::begin<typename System::scale>::type>::value(str);
     detail::name_string_impl<mpl::size<typename System::type>::value>::template apply<
         typename mpl::begin<typename System::type>::type>::value(str);
+		
     return(str);
 }
 
 /// Print an @c unit as a list of base units and exponents e.g "m s^-1"
 template<class Char, class Traits, class Dimension, class System>
+inline 
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if(units::get_format(os) == symbol) 
+    if (units::get_format(os) == symbol) 
     {
         os << symbol_string(u);
     } 
-    else if(units::get_format(os) == name) 
+    else if (units::get_format(os) == name) 
     {
         os << name_string(u);
     } 
@@ -386,7 +388,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 /// INTERNAL ONLY
 /// Print a @c quantity. Prints the value followed by the unit
 template<class Char, class Traits, class Unit, class T>
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q)
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q)
 {
     os << q.value() << ' ' << Unit();
     return(os);
