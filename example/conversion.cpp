@@ -53,6 +53,7 @@ velocity (2 cm/s) = 0.02 m s^-1
 #include <boost/units/pow.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/si/io.hpp>
 
 using namespace boost::units;
 

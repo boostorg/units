@@ -51,6 +51,7 @@ Output:
 #include <boost/units/detail/utility.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/si/io.hpp>
 
 using namespace boost::units;
 
