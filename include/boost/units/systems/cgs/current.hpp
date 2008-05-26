@@ -21,8 +21,8 @@ namespace cgs {
 
 typedef unit<current_dimension,cgs::system>   current;
     
-BOOST_UNITS_STATIC_CONSTANT(ampere,current);
-BOOST_UNITS_STATIC_CONSTANT(amperes,current);
+BOOST_UNITS_STATIC_CONSTANT(biot,current);
+BOOST_UNITS_STATIC_CONSTANT(biots,current);
 
 } // namespace cgs
 
