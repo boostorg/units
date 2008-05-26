@@ -53,31 +53,31 @@ namespace units {
 // get string representation of arbitrary type
 template<class T> std::string to_string(const T& t)
 {
-	std::stringstream	sstr;
-	
-	sstr << t;
-	
-	return sstr.str();
+    std::stringstream sstr;
+    
+    sstr << t;
+    
+    return sstr.str();
 }
 
 // get string representation of integral-valued @c static_rational
 template<integer_type N> std::string to_string(const static_rational<N>& r)
 {
-	return to_string(r.numerator());
+    return to_string(r.numerator());
 }
 
 // get string representation of @c static_rational
 template<integer_type N, integer_type D> std::string to_string(const static_rational<N,D>& r)
 {
-	return '(' + to_string(r.numerator()) + '/' + to_string(r.denominator()) + ')';
+    return '(' + to_string(r.numerator()) + '/' + to_string(r.denominator()) + ')';
 }
 
 /// Write @c static_rational to @c std::basic_ostream.
 template<class Char, class Traits, integer_type N, integer_type D>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const static_rational<N,D>& r)
 {
-	os << to_string(r);
-	return os;
+    os << to_string(r);
+    return os;
 }
 
 /// traits template for unit names
@@ -89,7 +89,7 @@ struct base_unit_info
     {
         return(BaseUnit::name());
     }
-	
+    
     /// The symbol for the base unit (Returns BaseUnit::symbol() by default)
     static std::string symbol()
     {
@@ -121,16 +121,16 @@ bool xalloc_key_holder<b>::initialized = 0;
 struct xalloc_key_initializer_t 
 {
     xalloc_key_initializer_t() 
-	{
+    {
         if (!xalloc_key_holder<true>::initialized) 
-		{
+        {
             xalloc_key_holder<true>::value = std::ios_base::xalloc();
             xalloc_key_holder<true>::initialized = true;
         }
     }
 };
 
-namespace {
+namespace /**/ {
     
 xalloc_key_initializer_t xalloc_key_initializer;
 
@@ -165,25 +165,25 @@ namespace detail {
 template<integer_type N, integer_type D>
 std::string exponent_string(const static_rational<N,D>& r)
 {
-	return '^' + to_string(r);
+    return '^' + to_string(r);
 }
 
 template<>
-inline std::string exponent_string(const static_rational<1>& r)
+inline std::string exponent_string(const static_rational<1>&)
 {
-	return "";
+    return "";
 }
 
 template<class T>
 std::string base_unit_symbol_string(const T&)
 {
-	return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
+    return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
 }
 
-template<class T>	
+template<class T>    
 std::string base_unit_name_string(const T&)
 {
-	return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
+    return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
 }
 
 // stringify with symbols
@@ -196,7 +196,7 @@ struct symbol_string_impl
         typedef typename symbol_string_impl<N-1>::template apply<typename mpl::next<Begin>::type> next;
         static void value(std::string& str)
         {
-			str += base_unit_symbol_string(typename mpl::deref<Begin>::type()) + ' ';
+            str += base_unit_symbol_string(typename mpl::deref<Begin>::type()) + ' ';
             next::value(str);
         }
     };
@@ -210,7 +210,7 @@ struct symbol_string_impl<1>
     {
         static void value(std::string& str)
         {
-			str += base_unit_symbol_string(typename mpl::deref<Begin>::type());
+            str += base_unit_symbol_string(typename mpl::deref<Begin>::type());
         };
     };
 };
@@ -223,7 +223,7 @@ struct symbol_string_impl<0>
     {
         static void value(std::string& str)
         {
-			// better shorthand for dimensionless?
+            // better shorthand for dimensionless?
             str += "dimensionless";
         }
     };
@@ -234,9 +234,9 @@ struct scale_symbol_string_impl
 {
     template<class Begin>
     struct apply 
-	{
+    {
         static void value(std::string& str) 
-		{
+        {
             str += mpl::deref<Begin>::type::symbol();
             scale_symbol_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
         }
@@ -248,7 +248,7 @@ struct scale_symbol_string_impl<0>
 {
     template<class Begin>
     struct apply 
-	{
+    {
         static void value(std::string&) { }
     };
 };
@@ -263,7 +263,7 @@ struct name_string_impl
         typedef typename name_string_impl<N-1>::template apply<typename mpl::next<Begin>::type> next;
         static void value(std::string& str)
         {
-			str += base_unit_name_string(typename mpl::deref<Begin>::type()) + ' ';
+            str += base_unit_name_string(typename mpl::deref<Begin>::type()) + ' ';
             next::value(str);
         }
     };
@@ -277,7 +277,7 @@ struct name_string_impl<1>
     {
         static void value(std::string& str)
         {
-			str += base_unit_name_string(typename mpl::deref<Begin>::type());
+            str += base_unit_name_string(typename mpl::deref<Begin>::type());
         };
     };
 };
@@ -290,7 +290,7 @@ struct name_string_impl<0>
     {
         static void value(std::string& str)
         {
-			// better shorthand for dimensionless?
+            // better shorthand for dimensionless?
             str += "dimensionless";
         }
     };
@@ -301,9 +301,9 @@ struct scale_name_string_impl
 {
     template<class Begin>
     struct apply 
-	{
+    {
         static void value(std::string& str) 
-		{
+        {
             str += mpl::deref<Begin>::type::name();
             scale_name_string_impl<N - 1>::template apply<typename mpl::next<Begin>::type>::value(str);
         }
@@ -315,7 +315,7 @@ struct scale_name_string_impl<0>
 {
     template<class Begin>
     struct apply 
-	{
+    {
         static void value(std::string&) { }
     };
 };
@@ -341,8 +341,8 @@ template<class Dimension,class System>
 inline std::string
 symbol_string(const unit<Dimension, heterogeneous_system<System> >&)
 {
-	std::string	str;
-	
+    std::string str;
+    
     detail::scale_symbol_string_impl<mpl::size<typename System::scale>::value>::template apply<
         typename mpl::begin<typename System::scale>::type>::value(str);
     detail::symbol_string_impl<mpl::size<typename System::type>::value>::template apply<
@@ -354,8 +354,8 @@ template<class Dimension,class System>
 inline std::string
 name_string(const unit<Dimension, heterogeneous_system<System> >&)
 {
-	std::string	str;
-	
+    std::string str;
+    
     detail::scale_name_string_impl<mpl::size<typename System::scale>::value>::template apply<
         typename mpl::begin<typename System::scale>::type>::value(str);
     detail::name_string_impl<mpl::size<typename System::type>::value>::template apply<
@@ -368,19 +368,19 @@ template<class Char, class Traits, class Dimension, class System>
 std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
     if(units::get_format(os) == symbol) 
-	{
+    {
         os << symbol_string(u);
     } 
-	else if(units::get_format(os) == name) 
-	{
+    else if(units::get_format(os) == name) 
+    {
         os << name_string(u);
     } 
-	else 
-	{
+    else 
+    {
         assert(!"The format mode must be either name or symbol");
     }
-	
-	return(os);
+    
+    return(os);
 }
 
 /// INTERNAL ONLY

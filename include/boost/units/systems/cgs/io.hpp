@@ -12,8 +12,8 @@
 #define BOOST_UNITS_CGS_IO_HPP
 
 #include <boost/units/io.hpp>
-
 #include <boost/units/systems/cgs.hpp>
+#include <boost/units/physical_dimensions/electric_potential.hpp>
 
 namespace boost {
 
@@ -28,8 +28,8 @@ inline std::string symbol_string(const cgs::current&) { return "Bi"; }
 inline std::string name_string(const cgs::dynamic_viscosity&) { return "poise"; }
 inline std::string symbol_string(const cgs::dynamic_viscosity&) { return "P"; }
 
-inline std::string name_string(const cgs::electric_potential&) { return "volt"; }
-inline std::string symbol_string(const cgs::electric_potential&) { return "V"; }
+inline std::string name_string(const unit<electric_potential_type, cgs::system>&) { return "volt"; }
+inline std::string symbol_string(const unit<electric_potential_type, cgs::system>&) { return "V"; }
 
 inline std::string name_string(const cgs::energy&) { return "erg"; }
 inline std::string symbol_string(const cgs::energy&) { return "erg"; }

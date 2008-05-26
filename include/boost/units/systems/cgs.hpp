@@ -27,6 +27,7 @@
 
 #include <boost/units/systems/cgs/acceleration.hpp>
 #include <boost/units/systems/cgs/area.hpp>
+#include <boost/units/systems/cgs/current.hpp>
 #include <boost/units/systems/cgs/energy.hpp>
 #include <boost/units/systems/cgs/force.hpp>
 #include <boost/units/systems/cgs/frequency.hpp>
