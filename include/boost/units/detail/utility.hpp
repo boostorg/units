@@ -21,18 +21,17 @@
 #include <boost/cstdint.hpp>
 #include <boost/limits.hpp>
 
-#ifdef MCS_USE_BOOST_REGEX_DEMANGLING
-#include <boost/regex.hpp>
-#ifdef __GNUC__
-#define MCS_USE_DEMANGLING
+#if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
+#define BOOST_UNITS_USE_DEMANGLING
 #endif // __GNUC__
-#endif // MCS_USE_BOOST_REGEX_DEMANGLING
 
-#ifdef MCS_USE_DEMANGLING
+#ifdef BOOST_UNITS_USE_DEMANGLING
 
-#ifdef __GNUC__
+#if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
 #include <cxxabi.h>
 #endif // __GNUC__
+
+#include <boost/algorithm/string/replace.hpp>
 
 namespace boost {
 
@@ -44,7 +43,7 @@ inline
 std::string
 demangle(const char* name)
 {
-    #ifdef __GNUC__
+    #if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
     // need to demangle C++ symbols
     char*       realname;
     std::size_t len; 
@@ -54,9 +53,12 @@ demangle(const char* name)
     
     if (realname != NULL)
     {
-        const std::string   out(realname);
+        std::string   out(realname);
+		
         std::free(realname);
         
+		boost::replace_all(out,"boost::units::","");
+		
         return out;
     }
     
@@ -72,23 +74,15 @@ template<class L>
 std::string simplify_typename(const L& /*source*/)
 {
     const std::string   demangled = detail::demangle(typeid(L).name());
-    
-    #ifdef MCS_USE_BOOST_REGEX_DEMANGLING
-    boost::regex    ns_regex("boost::units::detail::|boost::units::");
-    
-    const std::string   tmp(boost::regex_replace(demangled,ns_regex,""));
-    
-    return tmp;
-    #else // MCS_USE_BOOST_REGEX_DEMANGLING
+
     return demangled;
-    #endif // MCS_USE_BOOST_REGEX_DEMANGLING
 }
 
 } // namespace units
 
 } // namespace boost
 
-#else // MCS_USE_DEMANGLING
+#else // BOOST_UNITS_USE_DEMANGLING
 
 namespace boost {
 
@@ -118,6 +112,6 @@ std::string simplify_typename(const L& source)
 // To get system-specific predefined macros:
 // gcc -arch ppc -dM -E - < /dev/null | sort 
 
-#endif // MCS_USE_DEMANGLING
+#endif // BOOST_UNITS_USE_DEMANGLING
 
 #endif // BOOST_UNITS_UTILITY_HPP

@@ -13,6 +13,8 @@
 #include <boost/units/io.hpp>
 #include <boost/units/scale.hpp>
 
+#include <boost/units/detail/utility.hpp>
+
 #include <boost/units/systems/si/capacitance.hpp>
 #include <boost/units/systems/si/io.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
@@ -73,6 +75,8 @@ int main()
 	std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
 
 	// wrong! - should output "n" and "nano", respectively
+	std::cout << simplify_typename(si::nano) << std::endl;
+	
 	std::cout << symbol_string(si::nano) << std::endl;
 	std::cout << name_string(si::nano) << std::endl;
 	
