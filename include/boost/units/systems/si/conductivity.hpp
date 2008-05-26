@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<conductivity_type,si::system>    conductivity;
+typedef unit<conductivity_dimension,si::system>    conductivity;
                                         
 } // namespace si
 

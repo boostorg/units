@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<permeability_type,si::system>    permeability;
+typedef unit<permeability_dimension,si::system>    permeability;
 
 } // namespace si
 

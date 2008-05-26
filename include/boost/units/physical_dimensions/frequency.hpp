@@ -19,7 +19,7 @@ namespace boost {
 namespace units {
 
 /// derived dimension for frequency : T^-1
-typedef derived_dimension<time_base_dimension,-1>::type     frequency_dimension;                
+typedef derived_dimension<time_base_dimension,-1>::type frequency_dimension;                
 
 } // namespace units
 

@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<magnetic_flux_density_type,si::system>    magnetic_flux_density;
+typedef unit<magnetic_flux_density_dimension,si::system>    magnetic_flux_density;
     
 BOOST_UNITS_STATIC_CONSTANT(tesla,magnetic_flux_density);   
 BOOST_UNITS_STATIC_CONSTANT(teslas,magnetic_flux_density);  

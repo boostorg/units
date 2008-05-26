@@ -25,7 +25,7 @@ namespace units {
 typedef derived_dimension<length_base_dimension,-2,
                           mass_base_dimension,-1,
                           time_base_dimension,2,
-                          current_base_dimension,2>::type   reluctance_type;            
+                          current_base_dimension,2>::type reluctance_dimension;            
 
 } // namespace units
 

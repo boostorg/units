@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<resistance_type,si::system>    resistance;
+typedef unit<resistance_dimension,si::system>    resistance;
 
 BOOST_UNITS_STATIC_CONSTANT(ohm,resistance);    
 BOOST_UNITS_STATIC_CONSTANT(ohms,resistance);   

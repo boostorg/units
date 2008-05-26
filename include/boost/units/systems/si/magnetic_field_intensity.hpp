@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<magnetic_field_intensity_type,si::system>    magnetic_field_intensity;
+typedef unit<magnetic_field_intensity_dimension,si::system>    magnetic_field_intensity;
                                                                                        
 } // namespace si
 

@@ -22,6 +22,7 @@
 
 #include <boost/units/systems/si/absorbed_dose.hpp>
 #include <boost/units/systems/si/acceleration.hpp>
+#include <boost/units/systems/si/action.hpp>
 #include <boost/units/systems/si/activity.hpp>
 #include <boost/units/systems/si/amount.hpp>
 #include <boost/units/systems/si/angular_momentum.hpp>

@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<permittivity_type,si::system>    permittivity;
+typedef unit<permittivity_dimension,si::system>    permittivity;
 
 } // namespace si
 

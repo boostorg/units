@@ -21,7 +21,7 @@ namespace units {
 
 /// derived dimension for electric charge : T^1 I^1
 typedef derived_dimension<time_base_dimension,1,
-                          current_base_dimension,1>::type     electric_charge_type;          
+                          current_base_dimension,1>::type electric_charge_dimension;          
 
 } // namespace units
 

@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<reluctance_type,si::system>    reluctance;
+typedef unit<reluctance_dimension,si::system>    reluctance;
 
 } // namespace si
 

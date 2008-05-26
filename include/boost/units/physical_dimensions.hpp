@@ -34,6 +34,7 @@
 #include <boost/units/physical_dimensions/acceleration.hpp>
 #include <boost/units/physical_dimensions/action.hpp>
 #include <boost/units/physical_dimensions/activity.hpp>
+#include <boost/units/physical_dimensions/angular_momentum.hpp>
 #include <boost/units/physical_dimensions/angular_velocity.hpp>
 #include <boost/units/physical_dimensions/area.hpp>
 #include <boost/units/physical_dimensions/capacitance.hpp>
@@ -60,6 +61,7 @@
 #include <boost/units/physical_dimensions/mass_density.hpp>
 #include <boost/units/physical_dimensions/molar_energy.hpp>
 #include <boost/units/physical_dimensions/molar_heat_capacity.hpp>
+#include <boost/units/physical_dimensions/moment_of_inertia.hpp>
 #include <boost/units/physical_dimensions/momentum.hpp>
 #include <boost/units/physical_dimensions/permeability.hpp>
 #include <boost/units/physical_dimensions/permittivity.hpp>

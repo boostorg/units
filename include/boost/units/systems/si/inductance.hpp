@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<inductance_type,si::system>    inductance;
+typedef unit<inductance_dimension,si::system>    inductance;
     
 BOOST_UNITS_STATIC_CONSTANT(henry,inductance);  
 BOOST_UNITS_STATIC_CONSTANT(henrys,inductance); 

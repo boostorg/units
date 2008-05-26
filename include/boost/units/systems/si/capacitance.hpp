@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<capacitance_type,si::system>    capacitance;
+typedef unit<capacitance_dimension,si::system>    capacitance;
     
 BOOST_UNITS_STATIC_CONSTANT(farad,capacitance);
 BOOST_UNITS_STATIC_CONSTANT(farads,capacitance);

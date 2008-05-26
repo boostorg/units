@@ -25,7 +25,7 @@ namespace units {
 typedef derived_dimension<length_base_dimension,-2,
                           mass_base_dimension,-1,
                           time_base_dimension,3,
-                          current_base_dimension,2>::type   conductance_type;   
+                          current_base_dimension,2>::type conductance_dimension;   
                           
 } // namespace units
 

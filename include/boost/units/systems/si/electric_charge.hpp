@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<electric_charge_type,si::system>    electric_charge;
+typedef unit<electric_charge_dimension,si::system>    electric_charge;
    
 BOOST_UNITS_STATIC_CONSTANT(coulomb,electric_charge);   
 BOOST_UNITS_STATIC_CONSTANT(coulombs,electric_charge);  

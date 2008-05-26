@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<impedance_type,si::system>    impedance;
+typedef unit<impedance_dimension,si::system>    impedance;
                                             
 } // namespace si
 

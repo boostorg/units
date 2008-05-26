@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<magnetic_flux_type,si::system>    magnetic_flux;
+typedef unit<magnetic_flux_dimension,si::system>    magnetic_flux;
     
 BOOST_UNITS_STATIC_CONSTANT(weber,magnetic_flux);   
 BOOST_UNITS_STATIC_CONSTANT(webers,magnetic_flux);  

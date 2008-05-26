@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<conductance_type,si::system>    conductance;
+typedef unit<conductance_dimension,si::system>    conductance;
 
 BOOST_UNITS_STATIC_CONSTANT(siemen,conductance);    
 BOOST_UNITS_STATIC_CONSTANT(siemens,conductance);   

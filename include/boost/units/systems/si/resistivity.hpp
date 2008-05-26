@@ -20,7 +20,7 @@ namespace units {
 
 namespace si {
 
-typedef unit<resistivity_type,si::system>    resistivity;
+typedef unit<resistivity_dimension,si::system>    resistivity;
 
 } // namespace si
 
