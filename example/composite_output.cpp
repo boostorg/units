@@ -11,6 +11,8 @@
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/io.hpp>
+#include <boost/units/scale.hpp>
+
 #include <iostream>
 #include <sstream>
 
@@ -26,30 +28,16 @@ std::ostream& operator<<(std::ostream& os, const boost::units::cgs::force&) {
 
 //]
 
-template<class T>
-std::string symbol_string(const T& x)
-{
-	std::stringstream	sstr;
-	
-	sstr << symbol_format << x;
-	
-	return sstr.str();
-}
-
-template<class T>
-std::string name_string(const T& x)
-{
-	std::stringstream	sstr;
-	
-	sstr << name_format << x;
-	
-	return sstr.str();
-}
-
-template<class Y>
-std::string name_string(const quantity<cgs::force,Y>& x)
+template<>
+std::string name_string(const cgs::force&)
 {
 	return "dyne";
+}
+
+template<>
+std::string symbol_string(const cgs::force&)
+{
+	return "goombah";
 }
 
 }
@@ -58,11 +46,23 @@ std::string name_string(const quantity<cgs::force,Y>& x)
 
 int main() 
 {
-    std::cout << 2.0 * boost::units::cgs::dyne << std::endl;
-
-    std::cout << boost::units::symbol_format << 2.0 * boost::units::cgs::dyne << std::endl;
-    std::cout << boost::units::name_format << 2.0 * boost::units::cgs::dyne << std::endl;
+	using namespace boost::units;
+	using boost::units::cgs::centimeter;
+	using boost::units::cgs::gram;
+	using boost::units::cgs::second;
+	using boost::units::cgs::dyne;
 	
-	std::cout << boost::units::symbol_string(2.0*boost::units::cgs::dyne) << std::endl;
-	std::cout << boost::units::name_string(2.0*boost::units::cgs::dyne) << std::endl;
+    std::cout << 2.0 * dyne << std::endl;
+
+    std::cout << symbol_format << 2.0 * dyne << std::endl;
+    std::cout << name_format << 2.0 * dyne << std::endl;
+	
+	std::cout << symbol_string(dyne) << std::endl;
+	std::cout << name_string(dyne) << std::endl;
+	
+	std::cout << symbol_string(gram*centimeter/(second*second)) << std::endl;
+	std::cout << name_string(gram*centimeter/(second*second)) << std::endl;
+	
+	std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
+	std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
 }

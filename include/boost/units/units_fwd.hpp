@@ -8,13 +8,15 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_UNITSFWD_HPP
-#define BOOST_UNITS_UNITSFWD_HPP
+#ifndef BOOST_UNITS_UNITS_FWD_HPP
+#define BOOST_UNITS_UNITS_FWD_HPP
 
 /// \file
 /// Forward declarations of library components.
 
 #ifndef BOOST_UNITS_DOXYGEN
+
+#include <string>
 
 namespace boost {
 
@@ -51,10 +53,14 @@ template<class T,class System> struct is_quantity_of_system;
 
 template<class From,class To> struct conversion_helper;
 
+// generate string representation of unit using base_unit names or symbols, respectively
+template<class T> std::string name_string(const T&);
+template<class T> std::string symbol_string(const T&);
+
 } // namespace units
 
 } // namespace boost
 
 #endif
 
-#endif // BOOST_UNITS_UNITSFWD_HPP
+#endif // BOOST_UNITS_UNITS_FWD_HPP

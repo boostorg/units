@@ -15,6 +15,7 @@
 #include <string>
 #include <iosfwd>
 #include <ios>
+#include <sstream>
 
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/begin.hpp>
@@ -22,6 +23,7 @@
 #include <boost/mpl/deref.hpp>
 #include <boost/serialization/nvp.hpp>
 
+#include <boost/units/units_fwd.hpp>
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/static_rational.hpp>
@@ -72,6 +74,7 @@ struct base_unit_info
     {
         return(BaseUnit::name());
     }
+	
     /// The symbol for the base unit (Returns BaseUnit::symbol() by default)
     static std::string symbol()
     {
@@ -79,7 +82,8 @@ struct base_unit_info
     }
 };
 
-enum format_mode {
+enum format_mode 
+{
     symbol,
     name
 };
@@ -87,19 +91,24 @@ enum format_mode {
 namespace detail {
 
 template<bool>
-struct xalloc_key_holder {
+struct xalloc_key_holder 
+{
     static int value;
     static bool initialized;
 };
 
 template<bool b>
 int xalloc_key_holder<b>::value = 0;
+
 template<bool b>
 bool xalloc_key_holder<b>::initialized = 0;
 
-struct xalloc_key_initializer_t {
-    xalloc_key_initializer_t() {
-        if(!xalloc_key_holder<true>::initialized) {
+struct xalloc_key_initializer_t 
+{
+    xalloc_key_initializer_t() 
+	{
+        if (!xalloc_key_holder<true>::initialized) 
+		{
             xalloc_key_holder<true>::value = std::ios_base::xalloc();
             xalloc_key_holder<true>::initialized = true;
         }
@@ -107,32 +116,53 @@ struct xalloc_key_initializer_t {
 };
 
 namespace {
-    xalloc_key_initializer_t xalloc_key_initializer;
-}
+    
+xalloc_key_initializer_t xalloc_key_initializer;
 
-}
+} // namespace
 
-inline format_mode get_format(std::ios_base& ios) {
+} // namespace detail
+
+inline format_mode get_format(std::ios_base& ios) 
+{
     return(static_cast<format_mode>(ios.iword(detail::xalloc_key_holder<true>::value)));
 }
-inline void set_format(std::ios_base& ios, format_mode new_mode) {
+
+inline void set_format(std::ios_base& ios, format_mode new_mode) 
+{
     ios.iword(detail::xalloc_key_holder<true>::value) = static_cast<long>(new_mode);
 }
 
-inline std::ios_base& symbol_format(std::ios_base& ios) {
+inline std::ios_base& symbol_format(std::ios_base& ios) 
+{
     (set_format)(ios, symbol);
     return(ios);
 }
 
-inline std::ios_base& name_format(std::ios_base& ios) {
+inline std::ios_base& name_format(std::ios_base& ios) 
+{
     (set_format)(ios, name);
     return(ios);
+}
+
+// by default, return result of static symbol() method for class
+template<class T>
+inline std::string symbol_string(const T&)
+{
+	return T::symbol();
+}
+
+// by default, return result of static name() method for class
+template<class T>
+inline std::string name_string(const T&)
+{
+	return T::name();
 }
 
 namespace detail {
 
 // This is needed so that std::string can be returned from
-// the base unit functions and wtill allow the operators
+// the base unit functions and will allow the operators
 // to work for any std::basic_ostream
 template<class T>
 const T& adapt_for_print(const T& t)
@@ -227,7 +257,7 @@ template<>
 struct print_scale_impl<0> {
     template<class Begin, class Os>
     struct apply {
-        static void value(Os&) {}
+        static void value(Os&) { }
     };
 };
 
@@ -261,6 +291,30 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 {
     os << q.value() << ' ' << Unit();
     return(os);
+}
+
+// quick and dirty solution - should replace guts with implementation in operator<< above to directly create string
+template<class Dimension,class System>
+inline std::string
+symbol_string(const unit<Dimension,System>& u)
+{
+	std::stringstream	sstr;
+	
+	sstr << u;
+	
+	return sstr.str();
+}
+
+// quick and dirty solution - should replace guts with implementation in operator<< above to directly create string
+template<class Dimension,class System>
+inline std::string
+name_string(const unit<Dimension,System>& u)
+{
+	std::stringstream	sstr;
+	
+	sstr << name_format << u;
+	
+	return sstr.str();
 }
 
 } // namespace units
