@@ -28,13 +28,11 @@ namespace units {
 
 //[composite_output_snippet_1
 
-template<>
 std::string name_string(const cgs::force&)
 {
 	return "dyne";
 }
 
-template<>
 std::string symbol_string(const cgs::force&)
 {
 	return "dyn";

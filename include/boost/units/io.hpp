@@ -321,6 +321,8 @@ struct scale_name_string_impl<0>
 
 } // namespace detail
 
+namespace io_impl {
+
 template<class Dimension,class System>
 inline std::string
 symbol_string(const unit<Dimension,System>&)
@@ -336,17 +338,175 @@ name_string(const unit<Dimension,System>&)
 }
 
 /// INTERNAL ONLY
-template<class Dimension,class System>
+template<class Dimension,class Units>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<System> >&)
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >&)
 {
     std::string str;
     
-    detail::scale_symbol_string_impl<mpl::size<typename System::scale>::value>::template apply<
-        typename mpl::begin<typename System::scale>::type>::value(str);
-    detail::symbol_string_impl<mpl::size<typename System::type>::value>::template apply<
-        typename mpl::begin<typename System::type>::type>::value(str);
-		
+    detail::symbol_string_impl<mpl::size<Units>::value>::template apply<
+        typename mpl::begin<Units>::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+inline std::string
+symbol_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, dimensionless_type> > >&)
+{
+    return("dimensionless");
+}
+
+/// INTERNAL ONLY
+template<class Scale>
+inline std::string
+symbol_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Units,class Scale>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    std::string without_scale = symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
+    if(without_scale == boost::units::io_impl::symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) {
+        str += "(";
+        str += without_scale;
+        str += ")";
+    } else {
+        str += without_scale;
+    }
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Unit,class UnitScale, class Scale>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
+{
+    return(symbol_string(
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    list<dim<Unit, static_rational<1> >, dimensionless_type>,
+                    Dimension,
+                    typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
+                >
+            >
+        >()));
+}
+
+/// INTERNAL ONLY
+// disambiguate
+template<class Dimension,class Unit,class UnitScale>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
+{
+    std::string str;
+    
+    detail::symbol_string_impl<mpl::size<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Units>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >&)
+{
+    std::string str;
+    
+    detail::name_string_impl<mpl::size<Units>::value>::template apply<
+        typename mpl::begin<Units>::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+inline std::string
+name_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, dimensionless_type> > >&)
+{
+    return("dimensionless");
+}
+
+/// INTERNAL ONLY
+template<class Scale>
+inline std::string
+name_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Units,class Scale>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    std::string without_scale = name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
+    if(without_scale == boost::units::io_impl::name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) {
+        str += "(";
+        str += without_scale;
+        str += ")";
+    } else {
+        str += without_scale;
+    }
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Unit,class UnitScale, class Scale>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
+{
+    return(name_string(
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    list<dim<Unit, static_rational<1> >, dimensionless_type>,
+                    Dimension,
+                    typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
+                >
+            >
+        >()));
+}
+
+/// INTERNAL ONLY
+// disambiguate
+template<class Dimension,class Unit,class UnitScale>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
+{
+    std::string str;
+    
+    detail::name_string_impl<mpl::size<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
     return(str);
 }
 
@@ -360,20 +520,24 @@ name_string(const unit<Dimension, heterogeneous_system<System> >&)
         typename mpl::begin<typename System::scale>::type>::value(str);
     detail::name_string_impl<mpl::size<typename System::type>::value>::template apply<
         typename mpl::begin<typename System::type>::type>::value(str);
-		
+
     return(str);
 }
 
+}
+
+using io_impl::symbol_string;
+using io_impl::name_string;
+
 /// Print an @c unit as a list of base units and exponents e.g "m s^-1"
 template<class Char, class Traits, class Dimension, class System>
-inline 
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
+inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if (units::get_format(os) == symbol) 
+    if(units::get_format(os) == symbol) 
     {
         os << symbol_string(u);
     } 
-    else if (units::get_format(os) == name) 
+    else if(units::get_format(os) == name) 
     {
         os << name_string(u);
     } 
