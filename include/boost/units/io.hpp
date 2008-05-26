@@ -61,15 +61,15 @@ template<class T> std::string to_string(const T& t)
 }
 
 // get string representation of integral-valued @c static_rational
-template<integer_type N> std::string to_string(const static_rational<N>& r)
+template<integer_type N> std::string to_string(const static_rational<N>&)
 {
-    return to_string(r.numerator());
+    return to_string(N);
 }
 
 // get string representation of @c static_rational
-template<integer_type N, integer_type D> std::string to_string(const static_rational<N,D>& r)
+template<integer_type N, integer_type D> std::string to_string(const static_rational<N,D>&)
 {
-    return '(' + to_string(r.numerator()) + '/' + to_string(r.denominator()) + ')';
+    return '(' + to_string(N) + '/' + to_string(D) + ')';
 }
 
 /// Write @c static_rational to @c std::basic_ostream.
