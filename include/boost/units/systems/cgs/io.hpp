@@ -12,35 +12,36 @@
 #define BOOST_UNITS_CGS_IO_HPP
 
 #include <boost/units/io.hpp>
+#include <boost/units/reduce_unit.hpp>
 #include <boost/units/systems/cgs.hpp>
 
 namespace boost {
 
 namespace units { 
 
-inline std::string name_string(const cgs::acceleration&) { return "galileo"; }
-inline std::string symbol_string(const cgs::acceleration&) { return "Gal"; }
+inline std::string name_string(const reduce_unit<cgs::acceleration>::type&) { return "galileo"; }
+inline std::string symbol_string(const reduce_unit<cgs::acceleration>::type&) { return "Gal"; }
 
-inline std::string name_string(const cgs::current&)   { return "biot"; }
-inline std::string symbol_string(const cgs::current&) { return "Bi"; }
+inline std::string name_string(const reduce_unit<cgs::current>::type&)   { return "biot"; }
+inline std::string symbol_string(const reduce_unit<cgs::current>::type&) { return "Bi"; }
 
-inline std::string name_string(const cgs::dynamic_viscosity&) { return "poise"; }
-inline std::string symbol_string(const cgs::dynamic_viscosity&) { return "P"; }
+inline std::string name_string(const reduce_unit<cgs::dynamic_viscosity>::type&) { return "poise"; }
+inline std::string symbol_string(const reduce_unit<cgs::dynamic_viscosity>::type&) { return "P"; }
 
-inline std::string name_string(const cgs::energy&) { return "erg"; }
-inline std::string symbol_string(const cgs::energy&) { return "erg"; }
+inline std::string name_string(const reduce_unit<cgs::energy>::type&) { return "erg"; }
+inline std::string symbol_string(const reduce_unit<cgs::energy>::type&) { return "erg"; }
 
-inline std::string name_string(const cgs::force&) { return "dyne"; }
-inline std::string symbol_string(const cgs::force&) { return "dyn"; }
+inline std::string name_string(const reduce_unit<cgs::force>::type&) { return "dyne"; }
+inline std::string symbol_string(const reduce_unit<cgs::force>::type&) { return "dyn"; }
 
-inline std::string name_string(const cgs::kinematic_viscosity&) { return "stoke"; }
-inline std::string symbol_string(const cgs::kinematic_viscosity&) { return "St"; }
+inline std::string name_string(const reduce_unit<cgs::kinematic_viscosity>::type&) { return "stoke"; }
+inline std::string symbol_string(const reduce_unit<cgs::kinematic_viscosity>::type&) { return "St"; }
 
-inline std::string name_string(const cgs::pressure&) { return "barye"; }
-inline std::string symbol_string(const cgs::pressure&) { return "Ba"; }
+inline std::string name_string(const reduce_unit<cgs::pressure>::type&) { return "barye"; }
+inline std::string symbol_string(const reduce_unit<cgs::pressure>::type&) { return "Ba"; }
 
-inline std::string name_string(const cgs::wavenumber&) { return "kayser"; }
-inline std::string symbol_string(const cgs::wavenumber&) { return "K"; }
+inline std::string name_string(const reduce_unit<cgs::wavenumber>::type&) { return "kayser"; }
+inline std::string symbol_string(const reduce_unit<cgs::wavenumber>::type&) { return "K"; }
 
 } // namespace units
 
