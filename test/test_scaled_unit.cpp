@@ -25,6 +25,8 @@ Output:
 
 #include <boost/units/systems/si/prefixes.hpp>
 #include <boost/units/systems/si/time.hpp>
+#include <boost/units/quantity.hpp>
+#include <boost/units/io.hpp>
 
 #include <sstream>
 

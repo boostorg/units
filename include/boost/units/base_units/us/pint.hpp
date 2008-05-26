@@ -11,9 +11,9 @@
 #ifndef BOOST_UNITS_BASE_UNITS_US_PINT_HPP_INCLUDED
 #define BOOST_UNITS_BASE_UNITS_US_PINT_HPP_INCLUDED
 
-#include <string>
-
+#include <boost/units/config.hpp>
 #include <boost/units/systems/si/volume.hpp>
+#include <boost/units/conversion.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pint, "pint (U.S.)", "pt", 0.4731765e-3, si::volume, -503);    
 

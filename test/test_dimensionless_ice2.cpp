@@ -10,6 +10,7 @@
 
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/cgs/length.hpp>
+#include <boost/units/quantity.hpp>
 
 void foo()
 {

@@ -9,6 +9,7 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 
 #include <boost/units/systems/si/base.hpp>
+#include <boost/units/quantity.hpp>
 
 void foo()
 {
