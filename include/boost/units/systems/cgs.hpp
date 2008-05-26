@@ -28,9 +28,11 @@
 #include <boost/units/systems/cgs/acceleration.hpp>
 #include <boost/units/systems/cgs/area.hpp>
 #include <boost/units/systems/cgs/current.hpp>
+#include <boost/units/systems/cgs/dynamic_viscosity.hpp>
 #include <boost/units/systems/cgs/energy.hpp>
 #include <boost/units/systems/cgs/force.hpp>
 #include <boost/units/systems/cgs/frequency.hpp>
+#include <boost/units/systems/cgs/kinematic_viscosity.hpp>
 #include <boost/units/systems/cgs/mass_density.hpp>
 #include <boost/units/systems/cgs/momentum.hpp>
 #include <boost/units/systems/cgs/power.hpp>
@@ -38,8 +40,5 @@
 #include <boost/units/systems/cgs/velocity.hpp>
 #include <boost/units/systems/cgs/volume.hpp>
 #include <boost/units/systems/cgs/wavenumber.hpp>
-
-#include <boost/units/systems/cgs/dynamic_viscosity.hpp>
-#include <boost/units/systems/cgs/kinematic_viscosity.hpp>
 
 #endif // BOOST_UNITS_CGS_HPP
