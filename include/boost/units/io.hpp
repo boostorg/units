@@ -393,16 +393,44 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 }
 
 /// INTERNAL ONLY
+template<class Dimension,class Unit,class Scale>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    str += symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Unit>
+inline std::string
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, dimensionless_type> > >&)
+{
+    std::string str;
+    
+    detail::symbol_string_impl<mpl::size<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
 template<class Dimension,class Unit,class UnitScale, class Scale>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
 {
     return(symbol_string(
         unit<
             Dimension,
             heterogeneous_system<
                 heterogeneous_system_impl<
-                    list<dim<Unit, static_rational<1> >, dimensionless_type>,
+                    list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>,
                     Dimension,
                     typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
                 >
@@ -414,12 +442,12 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 // disambiguate
 template<class Dimension,class Unit,class UnitScale>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
+symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
 {
     std::string str;
     
-    detail::symbol_string_impl<mpl::size<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
+    detail::symbol_string_impl<mpl::size<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
 
     return(str);
 }
@@ -480,16 +508,44 @@ name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl
 }
 
 /// INTERNAL ONLY
+template<class Dimension,class Unit,class Scale>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&)
+{
+    std::string str;
+    
+    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
+        typename mpl::begin<Scale>::type>::value(str);
+
+    str += name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
+
+    return(str);
+}
+
+/// INTERNAL ONLY
+template<class Dimension,class Unit>
+inline std::string
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, dimensionless_type> > >&)
+{
+    std::string str;
+    
+    detail::name_string_impl<mpl::size<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::type>::value(str);
+
+    return(str);
+}
+
+/// INTERNAL ONLY
 template<class Dimension,class Unit,class UnitScale, class Scale>
 inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
 {
     return(name_string(
         unit<
             Dimension,
             heterogeneous_system<
                 heterogeneous_system_impl<
-                    list<dim<Unit, static_rational<1> >, dimensionless_type>,
+                    list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>,
                     Dimension,
                     typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
                 >
@@ -501,12 +557,12 @@ name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl
 // disambiguate
 template<class Dimension,class Unit,class UnitScale>
 inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
+name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
 {
     std::string str;
     
-    detail::name_string_impl<mpl::size<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
+    detail::name_string_impl<mpl::size<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
+        typename mpl::begin<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
     return(str);
 }
 

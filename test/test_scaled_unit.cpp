@@ -66,11 +66,11 @@ BOOST_AUTO_TEST_CASE(test_conversion_factor) {
 BOOST_AUTO_TEST_CASE(test_output) {
     std::stringstream stream;
     stream << si::nano * 12.5 * si::seconds;
-    BOOST_CHECK_EQUAL(stream.str(), "12.5 10^-9 s");
+    BOOST_CHECK_EQUAL(stream.str(), "12.5 ns");
 }
 
 BOOST_AUTO_TEST_CASE(test_output_name) {
     std::stringstream stream;
     stream << bu::name_format << si::nano * 12.5 * si::seconds;
-    BOOST_CHECK_EQUAL(stream.str(), "12.5 10^-9 second");
+    BOOST_CHECK_EQUAL(stream.str(), "12.5 nanosecond");
 }
