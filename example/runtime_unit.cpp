@@ -39,7 +39,8 @@ int main() {
     std::string output_type("meter");
     std::string input;
     while((std::cout << ">") && (std::cin >> input)) {
-        if(input == "exit") break;
+        if(!input.empty() && input[0] == '#') std::getline(std::cin, input);
+        else if(input == "exit") break;
         else if(input == "help") {
             std::cout << "type \"exit\" to exit\n"
                 "type \"return 'unit'\" to set the return units\n"
