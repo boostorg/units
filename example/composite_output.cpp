@@ -72,8 +72,7 @@ int main()
     std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
     std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
 
-    // wrong! - should output "n" and "nano", respectively
-    std::cout << simplify_typename(si::nano) << std::endl;
+    //std::cout << simplify_typename(si::nano) << std::endl;
     
     std::cout << symbol_string(si::nano) << std::endl;
     std::cout << name_string(si::nano) << std::endl;
@@ -84,7 +83,6 @@ int main()
     std::cout << name_format << 1.0*si::farad << std::endl;
     std::cout << symbol_format << 1.0*si::farad << std::endl;
     
-    // wrong! - should output "nF" and "nanofarad", respectively
     std::cout << symbol_string(si::farad*si::nano) << std::endl;
     std::cout << name_string(si::farad*si::nano) << std::endl;
     
@@ -92,7 +90,6 @@ int main()
 //    std::cout << symbol_string(si::nano*1.0*si::farad) << std::endl;
 //    std::cout << name_string(1.0*si::nano*si::farad) << std::endl;
 
-    // wrong! - should output "n(cm g s^-1)" and "nano(centimeter gram second^-1)", respectively
     std::cout << symbol_string(si::nano*gram*centimeter/second) << std::endl;
     std::cout << name_string(si::nano*gram*centimeter/second) << std::endl;
 }
