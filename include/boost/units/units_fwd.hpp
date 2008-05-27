@@ -56,6 +56,8 @@ template<class From,class To> struct conversion_helper;
 template<class T> std::string to_string(const T&);
 template<class T> std::string name_string(const T&);
 template<class T> std::string symbol_string(const T&);
+template<class T> std::string raw_string(const T&);
+template<class T> std::string typename_string(const T&);
 
 } // namespace units
 

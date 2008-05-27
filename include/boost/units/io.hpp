@@ -29,6 +29,7 @@
 #include <boost/units/scale.hpp>
 #include <boost/units/static_rational.hpp>
 #include <boost/units/unit.hpp>
+#include <boost/units/detail/utility.hpp>
 
 namespace boost {
 
@@ -99,9 +100,10 @@ struct base_unit_info
 
 enum format_mode 
 {
-	raw,
-    symbol,
-    name
+    symbol_fmt = 0,		// default - reduces unit names to known symbols for both base and derived units
+    name_fmt,			// output full unit names for base and derived units
+	raw_fmt,			// output only symbols for base units 
+	typename_fmt		// output demangled typenames
 };
 
 namespace detail {
@@ -149,21 +151,27 @@ inline void set_format(std::ios_base& ios, format_mode new_mode)
     ios.iword(detail::xalloc_key_holder<true>::value) = static_cast<long>(new_mode);
 }
 
+inline std::ios_base& typename_format(std::ios_base& ios) 
+{
+    (set_format)(ios, typename_fmt);
+    return(ios);
+}
+
 inline std::ios_base& raw_format(std::ios_base& ios) 
 {
-    (set_format)(ios, raw);
+    (set_format)(ios, raw_fmt);
     return(ios);
 }
 
 inline std::ios_base& symbol_format(std::ios_base& ios) 
 {
-    (set_format)(ios, symbol);
+    (set_format)(ios, symbol_fmt);
     return(ios);
 }
 
 inline std::ios_base& name_format(std::ios_base& ios) 
 {
-    (set_format)(ios, name);
+    (set_format)(ios, name_fmt);
     return(ios);
 }
 
@@ -388,11 +396,15 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
         typename mpl::begin<Scale>::type>::value(str);
 
     std::string without_scale = symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
-    if(without_scale == boost::units::io_impl::symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) {
+    
+	if (without_scale == boost::units::io_impl::symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) 
+	{
         str += "(";
         str += without_scale;
         str += ")";
-    } else {
+    } 
+	else 
+	{
         str += without_scale;
     }
 
@@ -503,11 +515,15 @@ name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl
         typename mpl::begin<Scale>::type>::value(str);
 
     std::string without_scale = name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
-    if(without_scale == boost::units::io_impl::name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) {
+    
+	if (without_scale == boost::units::io_impl::name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) 
+	{
         str += "(";
         str += without_scale;
         str += ")";
-    } else {
+    } 
+	else
+	{
         str += without_scale;
     }
 
@@ -570,7 +586,8 @@ name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl
     
     detail::name_string_impl<mpl::size<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
         typename mpl::begin<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
-    return(str);
+    
+	return(str);
 }
 
 template<class Dimension,class System>
@@ -589,29 +606,45 @@ name_string(const unit<Dimension, heterogeneous_system<System> >&)
 
 } // namespace io_impl
 
+template<class Dimension,class System>
+inline std::string
+typename_string(const unit<Dimension, System>&)
+{
+	return simplify_typename(typename reduce_unit< unit<Dimension,System> >::type());
+}
+
 using io_impl::symbol_string;
 using io_impl::name_string;
 
-/// Print an @c unit as a list of base units and exponents e.g "m s^-1"
+/// Print an @c unit as a list of base units and exponents
+///
+///     for @c symbol_format this gives e.g. "m s^-1" or "J"
+///     for @c name_format this gives e.g. "meter second^-1" or "joule"
+///     for @c raw_format this gives e.g. "m s^-1" or "meter kilogram^2 second^-2"
+///     for @c typename_format this gives the typename itself (currently demangled only on GCC)
 template<class Char, class Traits, class Dimension, class System>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if (units::get_format(os) == raw) 
+    if (units::get_format(os) == typename_fmt) 
+    {
+        os << typename_string(u);
+    } 
+    else if (units::get_format(os) == raw_fmt) 
     {
 		// need to replace this with raw string
         os << symbol_string(u);
     } 
-    else if (units::get_format(os) == symbol) 
+    else if (units::get_format(os) == symbol_fmt) 
     {
         os << symbol_string(u);
     } 
-    else if (units::get_format(os) == name) 
+    else if (units::get_format(os) == name_fmt) 
     {
         os << name_string(u);
     } 
     else 
     {
-        assert(!"The format mode must be either name or symbol");
+        assert(!"The format mode must be one of: typename_format, raw_format, name_format, symbol_format");
     }
     
     return(os);
