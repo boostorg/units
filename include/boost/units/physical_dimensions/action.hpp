@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for action : L^2 M T^-1
 typedef derived_dimension<length_base_dimension,2,
                           mass_base_dimension,1,
-						  time_base_dimension,-1>::type action_dimension;
+                          time_base_dimension,-1>::type action_dimension;
 
 } // namespace units
 

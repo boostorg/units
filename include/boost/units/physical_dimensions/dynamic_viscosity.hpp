@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for dynamic viscosity : M L^-1 T^-1
 typedef derived_dimension<mass_base_dimension,1,
                           length_base_dimension,-1,
-						  time_base_dimension,-1>::type dynamic_viscosity_dimension;
+                          time_base_dimension,-1>::type dynamic_viscosity_dimension;
 
 } // namespace units
 

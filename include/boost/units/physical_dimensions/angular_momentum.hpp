@@ -24,8 +24,8 @@ namespace units {
 /// derived dimension for angular momentum : L M T^-1 QP^-1
 typedef derived_dimension<length_base_dimension,1,
                           mass_base_dimension,1,
-						  time_base_dimension,-1,
-						  plane_angle_base_dimension,-1>::type angular_momentum_dimension;                
+                          time_base_dimension,-1,
+                          plane_angle_base_dimension,-1>::type angular_momentum_dimension;                
 
 } // namespace units
 

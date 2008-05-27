@@ -35,8 +35,8 @@ struct scale
     typedef Exponent exponent;
     typedef double value_type;
     static value_type value() { return(detail::static_rational_power<Exponent>(static_cast<double>(base))); }
-	static std::string name() { return ""; };
-	static std::string symbol() { return ""; };
+    static std::string name() { return ""; };
+    static std::string symbol() { return ""; };
 };
 
 template<long Base, class Exponent>
@@ -60,13 +60,13 @@ const long scale<Base, static_rational<0> >::base;
 template<long Base,class Exponent>
 std::string symbol_string(const scale<Base,Exponent>&)
 {
-	return scale<Base,Exponent>::symbol();
+    return scale<Base,Exponent>::symbol();
 }
 
 template<long Base,class Exponent>
 std::string name_string(const scale<Base,Exponent>&)
 {
-	return scale<Base,Exponent>::name();
+    return scale<Base,Exponent>::name();
 }
 
 #ifndef BOOST_UNITS_DOXYGEN

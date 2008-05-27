@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for moment of inertia : L M QP^-2
 typedef derived_dimension<length_base_dimension,1,
                           mass_base_dimension,1,
-						  plane_angle_base_dimension,-2>::type moment_of_inertia_dimension;                
+                          plane_angle_base_dimension,-2>::type moment_of_inertia_dimension;                
 
 } // namespace units
 

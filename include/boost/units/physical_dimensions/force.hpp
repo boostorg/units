@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for force : L M T^-2
 typedef derived_dimension<length_base_dimension,1,
                           mass_base_dimension,1,
-						  time_base_dimension,-2>::type force_dimension;                    
+                          time_base_dimension,-2>::type force_dimension;                    
 
 } // namespace units
 

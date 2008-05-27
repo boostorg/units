@@ -23,7 +23,7 @@ namespace units {
 /// derived dimension for energy density : L^-1 M^1 T^-2
 typedef derived_dimension<length_base_dimension,-1,
                           mass_base_dimension,1,
-						  time_base_dimension,-2>::type energy_density_dimension;                
+                          time_base_dimension,-2>::type energy_density_dimension;                
 
 } // namespace units
 

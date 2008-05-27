@@ -30,12 +30,12 @@ namespace units {
 
 std::string name_string(const cgs::force&)
 {
-	return "dyne";
+    return "dyne";
 }
 
 std::string symbol_string(const cgs::force&)
 {
-	return "dyn";
+    return "dyn";
 }
 
 //]
@@ -46,53 +46,53 @@ std::string symbol_string(const cgs::force&)
 
 int main() 
 {
-	using namespace boost::units;
-	using boost::units::cgs::centimeter;
-	using boost::units::cgs::gram;
-	using boost::units::cgs::second;
-	using boost::units::cgs::dyne;
-		
-	si::nano*si::farad;
-	1.0*si::nano*si::farad;
-	
+    using namespace boost::units;
+    using boost::units::cgs::centimeter;
+    using boost::units::cgs::gram;
+    using boost::units::cgs::second;
+    using boost::units::cgs::dyne;
+        
+    si::nano*si::farad;
+    1.0*si::nano*si::farad;
+    
     std::cout << 2.0 * dyne << std::endl;
 
     std::cout << symbol_format << 2.0 * dyne << std::endl;
     std::cout << name_format << 2.0 * dyne << std::endl;
-	
-	std::cout << symbol_string(dyne) << std::endl;
-	std::cout << name_string(dyne) << std::endl;
-	
-	std::cout << symbol_string(gram*centimeter/second) << std::endl;
-	std::cout << name_string(gram*centimeter/second) << std::endl;
-	
-	std::cout << symbol_string(gram*centimeter/(second*second)) << std::endl;
-	std::cout << name_string(gram*centimeter/(second*second)) << std::endl;
-	
-	std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
-	std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
+    
+    std::cout << symbol_string(dyne) << std::endl;
+    std::cout << name_string(dyne) << std::endl;
+    
+    std::cout << symbol_string(gram*centimeter/second) << std::endl;
+    std::cout << name_string(gram*centimeter/second) << std::endl;
+    
+    std::cout << symbol_string(gram*centimeter/(second*second)) << std::endl;
+    std::cout << name_string(gram*centimeter/(second*second)) << std::endl;
+    
+    std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
+    std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
 
-	// wrong! - should output "n" and "nano", respectively
-	std::cout << simplify_typename(si::nano) << std::endl;
-	
-	std::cout << symbol_string(si::nano) << std::endl;
-	std::cout << name_string(si::nano) << std::endl;
-	
-	std::cout << name_format << si::farad << std::endl;
-	std::cout << symbol_format << si::farad << std::endl;
-	
-	std::cout << name_format << 1.0*si::farad << std::endl;
-	std::cout << symbol_format << 1.0*si::farad << std::endl;
-	
-	// wrong! - should output "nF" and "nanofarad", respectively
-	std::cout << symbol_string(si::farad*si::nano) << std::endl;
-	std::cout << name_string(si::farad*si::nano) << std::endl;
-	
-	// doesn't work because we can't make assumptions about how user wants value() to be formatted
-//	std::cout << symbol_string(si::nano*1.0*si::farad) << std::endl;
-//	std::cout << name_string(1.0*si::nano*si::farad) << std::endl;
+    // wrong! - should output "n" and "nano", respectively
+    std::cout << simplify_typename(si::nano) << std::endl;
+    
+    std::cout << symbol_string(si::nano) << std::endl;
+    std::cout << name_string(si::nano) << std::endl;
+    
+    std::cout << name_format << si::farad << std::endl;
+    std::cout << symbol_format << si::farad << std::endl;
+    
+    std::cout << name_format << 1.0*si::farad << std::endl;
+    std::cout << symbol_format << 1.0*si::farad << std::endl;
+    
+    // wrong! - should output "nF" and "nanofarad", respectively
+    std::cout << symbol_string(si::farad*si::nano) << std::endl;
+    std::cout << name_string(si::farad*si::nano) << std::endl;
+    
+    // doesn't work because we can't make assumptions about how user wants value() to be formatted
+//    std::cout << symbol_string(si::nano*1.0*si::farad) << std::endl;
+//    std::cout << name_string(1.0*si::nano*si::farad) << std::endl;
 
-	// wrong! - should output "n(cm g s^-1)" and "nano(centimeter gram second^-1)", respectively
-	std::cout << symbol_string(si::nano*gram*centimeter/second) << std::endl;
-	std::cout << name_string(si::nano*gram*centimeter/second) << std::endl;
+    // wrong! - should output "n(cm g s^-1)" and "nano(centimeter gram second^-1)", respectively
+    std::cout << symbol_string(si::nano*gram*centimeter/second) << std::endl;
+    std::cout << name_string(si::nano*gram*centimeter/second) << std::endl;
 }
