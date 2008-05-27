@@ -99,6 +99,7 @@ struct base_unit_info
 
 enum format_mode 
 {
+	raw,
     symbol,
     name
 };
@@ -146,6 +147,12 @@ inline format_mode get_format(std::ios_base& ios)
 inline void set_format(std::ios_base& ios, format_mode new_mode) 
 {
     ios.iword(detail::xalloc_key_holder<true>::value) = static_cast<long>(new_mode);
+}
+
+inline std::ios_base& raw_format(std::ios_base& ios) 
+{
+    (set_format)(ios, raw);
+    return(ios);
 }
 
 inline std::ios_base& symbol_format(std::ios_base& ios) 
@@ -580,7 +587,7 @@ name_string(const unit<Dimension, heterogeneous_system<System> >&)
     return(str);
 }
 
-}
+} // namespace io_impl
 
 using io_impl::symbol_string;
 using io_impl::name_string;
@@ -589,11 +596,16 @@ using io_impl::name_string;
 template<class Char, class Traits, class Dimension, class System>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if(units::get_format(os) == symbol) 
+    if (units::get_format(os) == raw) 
+    {
+		// need to replace this with raw string
+        os << symbol_string(u);
+    } 
+    else if (units::get_format(os) == symbol) 
     {
         os << symbol_string(u);
     } 
-    else if(units::get_format(os) == name) 
+    else if (units::get_format(os) == name) 
     {
         os << name_string(u);
     } 

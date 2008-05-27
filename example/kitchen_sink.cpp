@@ -23,26 +23,26 @@ Output:
 S1 :    2
 X1 :    2
 X2 :    (4/3)
-U1 :    m kg s^-2
-U2 :    m^2 kg s^-2
-Q1 :    1 m kg s^-2
-Q2 :    2 m^2 kg s^-2
+U1 :    N
+U2 :    J
+Q1 :    1 N
+Q2 :    2 J
 //]
 
 //[kitchen_sink_output_2
-U1*S1 : 2 m kg s^-2
-S1*U1 : 2 m kg s^-2
-U1/S1 : 0.5 m kg s^-2
+U1*S1 : 2 N
+S1*U1 : 2 N
+U1/S1 : 0.5 N
 S1/U1 : 2 m^-1 kg^-1 s^2
 //]
 
 //[kitchen_sink_output_3
-U1+U1 : m kg s^-2
-U1-U1 : m kg s^-2
+U1+U1 : N
+U1-U1 : N
 U1*U1 : m^2 kg^2 s^-4
 U1/U1 : dimensionless
 U1*U2 : m^3 kg^2 s^-4
-U1/U2 : m^(-1)
+U1/U2 : m^-1
 U1^X  : m^2 kg^2 s^-4
 X1vU1 : m^(1/2) kg^(1/2) s^-1
 U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)
@@ -50,9 +50,9 @@ X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
 //[kitchen_sink_output_4
-Q1*S1 : 2 m kg s^-2
-S1*Q1 : 2 m kg s^-2
-Q1/S1 : 0.5 m kg s^-2
+Q1*S1 : 2 N
+S1*Q1 : 2 N
+Q1/S1 : 0.5 N
 S1/Q1 : 2 m^-1 kg^-1 s^2
 //]
 
@@ -64,10 +64,10 @@ Q1/U1 : 1 dimensionless
 //]
 
 //[kitchen_sink_output_6
-+Q1   : 1 m kg s^-2
--Q1   : -1 m kg s^-2
-Q1+Q1 : 2 m kg s^-2
-Q1-Q1 : 0 m kg s^-2
++Q1   : 1 N
+-Q1   : -1 N
+Q1+Q1 : 2 N
+Q1-Q1 : 0 N
 Q1*Q1 : 1 m^2 kg^2 s^-4
 Q1/Q1 : 1 dimensionless
 Q1*Q2 : 2 m^3 kg^2 s^-4
@@ -79,12 +79,12 @@ X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
 //[kitchen_sink_output_7
-l1 == l2    false
-l1 != l2    true
-l1 <= l2    true
-l1 < l2     true
-l1 >= l2    false
-l1 > l2     false
+l1 == l2	false
+l1 != l2	true
+l1 <= l2	true
+l1 < l2 	true
+l1 >= l2	false
+l1 > l2 	false
 //]
 
 dimless = 1
@@ -94,18 +94,18 @@ v1 = 2 m s^-1
 //]
 
 //[kitchen_sink_output_9
-F  = 1 m kg s^-2
+F  = 1 N
 dx = 1 m
-E  = 1 m^2 kg s^-2
+E  = 1 J
 //]
 
 //[kitchen_sink_output_10
 r = 5e-07 m
-P = 101325 m^-1 kg s^-2
+P = 101325 Pa
 V = 5.23599e-19 m^3
 T = 310 K
 n = 2.05835e-17 mol
-R = 8.31447 m^2 kg s^-2 K^-1 mol^-1
+R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = 1.8e-06)
 //]
 
 //[kitchen_sink_output_11
@@ -115,10 +115,10 @@ asin(sin(theta)) = 0.375 rd
 //]
 
 //[kitchen_sink_output_12
-V   = (12.5,0) m^2 kg s^-3 A^-1
+V   = (12.5,0) V
 I   = (3,4) A
-Z   = (1.5,-2) m^2 kg s^-3 A^-2
-I*Z = (12.5,0) m^2 kg s^-3 A^-1
+Z   = (1.5,-2) Ω
+I*Z = (12.5,0) V
 //]
 
 //[kitchen_sink_output_13
@@ -130,6 +130,55 @@ x/y           = 0.666667(+/-0.149071) dimensionless
 //[kitchen_sink_output_14
 w*y^2/(u*x)^2 = 10.17(+/-3.52328) m^-1
 w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
+//]
+
+//[kitchen_sink_output_15
+m^2 kg s^-1 rad^-1
+dimensionless
+m^2 kg s^-2 rad^-1
+dimensionless
+J
+//]
+
+//[kitchen_sink_output_16
+//]
+
+//[kitchen_sink_output_17
+1 F
+1 kat
+1 S
+1 C
+1 V
+1 J
+1 N
+1 Hz
+1 lx
+1 H
+1 lm
+1 Wb
+1 T
+1 W
+1 Pa
+1 Ω
+//]
+
+//[kitchen_sink_output_18
+1 farad
+1 katal
+1 siemen
+1 coulomb
+1 volt
+1 joule
+1 newton
+1 hertz
+1 lux
+1 henry
+1 lumen
+1 weber
+1 tesla
+1 watt
+1 pascal
+1 ohm
 //]
 
 @endverbatim
@@ -194,8 +243,6 @@ int main()
     using namespace boost::units;
     using namespace boost::units::si;
 
-    std::stringstream sstream1, sstream2;
-
     {
     //[kitchen_sink_snippet_1
     /// scalar
@@ -214,7 +261,7 @@ int main()
     //]
     
     /// check scalar, unit, and quantity io
-    sstream1  << "S1 :    " << s1 << std::endl
+    std::cout << "S1 :    " << s1 << std::endl
               << "X1 :    " << x1 << std::endl
               << "X2 :    " << x2 << std::endl
               << "U1 :    " << u1 << std::endl
@@ -224,7 +271,7 @@ int main()
               << std::endl;
     
     /// check scalar-unit algebra
-    sstream1  //<< "U1+S1 : " << u1+s1 << std::endl    // illegal
+    std::cout //<< "U1+S1 : " << u1+s1 << std::endl    // illegal
               //<< "S1+U1 : " << s1+u1 << std::endl    // illegal
               //<< "U1-S1 : " << u1-s1 << std::endl    // illegal
               //<< "S1-U1 : " << s1-u1 << std::endl    // illegal
@@ -235,7 +282,7 @@ int main()
               << std::endl;
     
     /// check unit-unit algebra
-    sstream1  << "U1+U1 : " << u1+u1 << std::endl
+    std::cout << "U1+U1 : " << u1+u1 << std::endl
               << "U1-U1 : " << u1-u1 << std::endl
               << "U1*U1 : " << u1*u1 << std::endl
               << "U1/U1 : " << u1/u1 << std::endl
@@ -250,7 +297,7 @@ int main()
               << std::endl;
     
     /// check scalar-quantity algebra
-    sstream1  //<< "Q1+S1 : " << q1+s1 << std::endl    // illegal
+    std::cout //<< "Q1+S1 : " << q1+s1 << std::endl    // illegal
               //<< "S1+Q1 : " << s1+q1 << std::endl    // illegal
               //<< "Q1-S1 : " << q1-s1 << std::endl    // illegal
               //<< "S1-Q1 : " << s1-q1 << std::endl    // illegal
@@ -261,7 +308,7 @@ int main()
               << std::endl;
     
     /// check unit-quantity algebra
-    sstream1  //<< "U1+Q1 : " << u1+q1 << std::endl    // illegal
+    std::cout //<< "U1+Q1 : " << u1+q1 << std::endl    // illegal
               //<< "Q1+U1 : " << q1+u1 << std::endl    // illegal
               //<< "U1-Q1 : " << u1-q1 << std::endl    // illegal
               //<< "Q1-U1 : " << q1-u1 << std::endl    // illegal
@@ -272,7 +319,7 @@ int main()
               << std::endl;
     
     /// check quantity-quantity algebra
-    sstream1  << "+Q1   : " << +q1 << std::endl
+    std::cout << "+Q1   : " << +q1 << std::endl
               << "-Q1   : " << -q1 << std::endl
               << "Q1+Q1 : " << q1+q1 << std::endl
               << "Q1-Q1 : " << q1-q1 << std::endl
@@ -294,7 +341,7 @@ int main()
                         l2(2.0*meters);
     //]
                         
-    sstream1  << std::boolalpha
+    std::cout << std::boolalpha
               << "l1 == l2" << "\t" << (l1 == l2) << std::endl
               << "l1 != l2" << "\t" << (l1 != l2) << std::endl
               << "l1 <= l2" << "\t" << (l1 <= l2) << std::endl
@@ -308,12 +355,12 @@ int main()
     const double    dimless = (q1/q1);
     //]
     
-    sstream1 << "dimless = " << dimless << std::endl
-             << std::endl;
+    std::cout << "dimless = " << dimless << std::endl
+              << std::endl;
              
     quantity<velocity>  v1 = 2.0*meters/second;
         
-    sstream1 << "v1 = " << v1 << std::endl
+    std::cout << "v1 = " << v1 << std::endl
               << std::endl;
     
     //[kitchen_sink_snippet_4
@@ -323,7 +370,7 @@ int main()
     quantity<energy>      E(work(F,dx));
     //]
     
-    sstream1  << "F  = " << F << std::endl
+    std::cout << "F  = " << F << std::endl
               << "dx = " << dx << std::endl
               << "E  = " << E << std::endl
               << std::endl;
@@ -338,7 +385,7 @@ int main()
     quantity<amount>        n(idealGasLaw(P,V,T));
     //]
     
-    sstream1  << "r = " << r << std::endl
+    std::cout << "r = " << r << std::endl
               << "P = " << P << std::endl
               << "V = " << V << std::endl
               << "T = " << T << std::endl
@@ -358,7 +405,7 @@ int main()
     quantity<plane_angle>           thetap = asin(sin_theta);
     //]
     
-    sstream1  << "theta            = " << theta << std::endl
+    std::cout << "theta            = " << theta << std::endl
               << "sin(theta)       = " << sin_theta << std::endl
               << "asin(sin(theta)) = " << thetap << std::endl
               << std::endl;
@@ -382,7 +429,7 @@ int main()
     quantity<resistance,complex_type>         z = complex_type(1.5,-2.0)*ohms;
     //]
     
-    sstream1  << "V   = " << v << std::endl
+    std::cout << "V   = " << v << std::endl
               << "I   = " << i << std::endl
               << "Z   = " << z << std::endl
               << "I*Z = " << i*z << std::endl
@@ -398,7 +445,7 @@ int main()
         y(measurement<double>(3.0,0.6)*meters);
     //]
                                         
-    sstream1  << "x+y-w         = " << x+y-w << std::endl
+    std::cout << "x+y-w         = " << x+y-w << std::endl
               << "w*x           = " << w*x << std::endl
               << "x/y           = " << x/y << std::endl
               << "w*y^2/(u*x)^2 = " << w*y*y/pow<2>(u*x) << std::endl
@@ -406,7 +453,21 @@ int main()
               << std::endl << std::endl;
     }
     
-    std::cout << quantity<capacitance>(1.0*farad) << std::endl
+	/// check angular units
+	
+	//[kitchen_sink_snippet_9
+	std::cout << symbol_format
+	          << moment_of_inertia()*angular_velocity() << std::endl
+	          << moment_of_inertia()*angular_velocity()/angular_momentum() << std::endl
+	          << moment_of_inertia()*angular_velocity()/seconds << std::endl
+              << moment_of_inertia()*angular_velocity()/(torque()*seconds) << std::endl
+              << moment_of_inertia()*pow<2>(angular_velocity()) << std::endl
+              << std::endl;
+	//]
+	
+	//[kitchen_sink_snippet_10
+    std::cout << raw_format 
+              << quantity<capacitance>(1.0*farad) << std::endl
               << quantity<catalytic_activity>(1.0*katal) << std::endl
               << quantity<conductance>(1.0*siemen) << std::endl
               << quantity<electric_charge>(1.0*coulomb) << std::endl
@@ -423,168 +484,49 @@ int main()
               << quantity<pressure>(1.0*pascals) << std::endl
               << quantity<resistance>(1.0*ohm) << std::endl
               << std::endl;
-
-    std::cout << symbol_format << quantity<capacitance>(1.0*farad) << std::endl
-              << symbol_format << quantity<catalytic_activity>(1.0*katal) << std::endl
-              << symbol_format << quantity<conductance>(1.0*siemen) << std::endl
-              << symbol_format << quantity<electric_charge>(1.0*coulomb) << std::endl
-              << symbol_format << quantity<electric_potential>(1.0*volt) << std::endl
-              << symbol_format << quantity<energy>(1.0*joule) << std::endl
-              << symbol_format << quantity<force>(1.0*newton) << std::endl
-              << symbol_format << quantity<frequency>(1.0*hertz) << std::endl
-              << symbol_format << quantity<illuminance>(1.0*lux) << std::endl
-              << symbol_format << quantity<inductance>(1.0*henry) << std::endl
-              << symbol_format << quantity<luminous_flux>(1.0*lumen) << std::endl
-              << symbol_format << quantity<magnetic_flux>(1.0*weber) << std::endl
-              << symbol_format << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
-              << symbol_format << quantity<power>(1.0*watt) << std::endl
-              << symbol_format << quantity<pressure>(1.0*pascals) << std::endl
-              << symbol_format << quantity<resistance>(1.0*ohm) << std::endl
+    //]
+	
+	//[kitchen_sink_snippet_11
+    std::cout << symbol_format 
+              << quantity<capacitance>(1.0*farad) << std::endl
+              << quantity<catalytic_activity>(1.0*katal) << std::endl
+              << quantity<conductance>(1.0*siemen) << std::endl
+              << quantity<electric_charge>(1.0*coulomb) << std::endl
+              << quantity<electric_potential>(1.0*volt) << std::endl
+              << quantity<energy>(1.0*joule) << std::endl
+              << quantity<force>(1.0*newton) << std::endl
+              << quantity<frequency>(1.0*hertz) << std::endl
+              << quantity<illuminance>(1.0*lux) << std::endl
+              << quantity<inductance>(1.0*henry) << std::endl
+              << quantity<luminous_flux>(1.0*lumen) << std::endl
+              << quantity<magnetic_flux>(1.0*weber) << std::endl
+              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+              << quantity<power>(1.0*watt) << std::endl
+              << quantity<pressure>(1.0*pascals) << std::endl
+              << quantity<resistance>(1.0*ohm) << std::endl
               << std::endl;
-
-    std::cout << name_format << quantity<capacitance>(1.0*farad) << std::endl
-              << name_format << quantity<catalytic_activity>(1.0*katal) << std::endl
-              << name_format << quantity<conductance>(1.0*siemen) << std::endl
-              << name_format << quantity<electric_charge>(1.0*coulomb) << std::endl
-              << name_format << quantity<electric_potential>(1.0*volt) << std::endl
-              << name_format << quantity<energy>(1.0*joule) << std::endl
-              << name_format << quantity<force>(1.0*newton) << std::endl
-              << name_format << quantity<frequency>(1.0*hertz) << std::endl
-              << name_format << quantity<illuminance>(1.0*lux) << std::endl
-              << name_format << quantity<inductance>(1.0*henry) << std::endl
-              << name_format << quantity<luminous_flux>(1.0*lumen) << std::endl
-              << name_format << quantity<magnetic_flux>(1.0*weber) << std::endl
-              << name_format << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
-              << name_format << quantity<power>(1.0*watt) << std::endl
-              << name_format << quantity<pressure>(1.0*pascals) << std::endl
-              << name_format << quantity<resistance>(1.0*ohm) << std::endl
+    //]
+	
+	//[kitchen_sink_snippet_12
+    std::cout << name_format 
+              << quantity<capacitance>(1.0*farad) << std::endl
+              << quantity<catalytic_activity>(1.0*katal) << std::endl
+              << quantity<conductance>(1.0*siemen) << std::endl
+              << quantity<electric_charge>(1.0*coulomb) << std::endl
+              << quantity<electric_potential>(1.0*volt) << std::endl
+              << quantity<energy>(1.0*joule) << std::endl
+              << quantity<force>(1.0*newton) << std::endl
+              << quantity<frequency>(1.0*hertz) << std::endl
+              << quantity<illuminance>(1.0*lux) << std::endl
+              << quantity<inductance>(1.0*henry) << std::endl
+              << quantity<luminous_flux>(1.0*lumen) << std::endl
+              << quantity<magnetic_flux>(1.0*weber) << std::endl
+              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+              << quantity<power>(1.0*watt) << std::endl
+              << quantity<pressure>(1.0*pascals) << std::endl
+              << quantity<resistance>(1.0*ohm) << std::endl
               << std::endl;
+    //]
 
-    sstream2 << "S1 :    2" << std::endl;
-    sstream2 << "X1 :    2" << std::endl;
-    sstream2 << "X2 :    (4/3)" << std::endl;
-    sstream2 << "U1 :    N" << std::endl;
-    sstream2 << "U2 :    J" << std::endl;
-    sstream2 << "Q1 :    1 N" << std::endl;
-    sstream2 << "Q2 :    2 J" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "U1*S1 : 2 N" << std::endl;
-    sstream2 << "S1*U1 : 2 N" << std::endl;
-    sstream2 << "U1/S1 : 0.5 N" << std::endl;
-    sstream2 << "S1/U1 : 2 m^-1 kg^-1 s^2" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "U1+U1 : N" << std::endl;
-    sstream2 << "U1-U1 : N" << std::endl;
-    sstream2 << "U1*U1 : m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "U1/U1 : dimensionless" << std::endl;
-    sstream2 << "U1*U2 : m^3 kg^2 s^-4" << std::endl;
-    sstream2 << "U1/U2 : m^-1" << std::endl;
-    sstream2 << "U1^X  : m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "X1vU1 : m^(1/2) kg^(1/2) s^-1" << std::endl;
-    sstream2 << "U1^X2 : m^(4/3) kg^(4/3) s^(-8/3)" << std::endl;
-    sstream2 << "X2vU1 : m^(3/4) kg^(3/4) s^(-3/2)" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "Q1*S1 : 2 N" << std::endl;
-    sstream2 << "S1*Q1 : 2 N" << std::endl;
-    sstream2 << "Q1/S1 : 0.5 N" << std::endl;
-    sstream2 << "S1/Q1 : 2 m^-1 kg^-1 s^2" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "U1*Q1 : 1 m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "Q1*U1 : 1 m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "U1/Q1 : 1 dimensionless" << std::endl;
-    sstream2 << "Q1/U1 : 1 dimensionless" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "+Q1   : 1 N" << std::endl;
-    sstream2 << "-Q1   : -1 N" << std::endl;
-    sstream2 << "Q1+Q1 : 2 N" << std::endl;
-    sstream2 << "Q1-Q1 : 0 N" << std::endl;
-    sstream2 << "Q1*Q1 : 1 m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "Q1/Q1 : 1 dimensionless" << std::endl;
-    sstream2 << "Q1*Q2 : 2 m^3 kg^2 s^-4" << std::endl;
-    sstream2 << "Q1/Q2 : 0.5 m^-1" << std::endl;
-    sstream2 << "Q1^X1 : 1 m^2 kg^2 s^-4" << std::endl;
-    sstream2 << "X1vQ1 : 1 m^(1/2) kg^(1/2) s^-1" << std::endl;
-    sstream2 << "Q1^X2 : 1 m^(4/3) kg^(4/3) s^(-8/3)" << std::endl;
-    sstream2 << "X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "l1 == l2\tfalse" << std::endl;
-    sstream2 << "l1 != l2\ttrue" << std::endl;
-    sstream2 << "l1 <= l2\ttrue" << std::endl;
-    sstream2 << "l1 < l2 \ttrue" << std::endl;
-    sstream2 << "l1 >= l2\tfalse" << std::endl;
-    sstream2 << "l1 > l2 \tfalse" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "dimless = 1" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "v1 = 2 m s^-1" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "F  = 1 N" << std::endl;
-    sstream2 << "dx = 1 m" << std::endl;
-    sstream2 << "E  = 1 J" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "r = " << 5e-7 << " m" << std::endl;
-    sstream2 << "P = 101325 Pa" << std::endl;
-    sstream2 << "V = " << 5.23598666666667e-019 << " m^3" << std::endl;
-    sstream2 << "T = 310 K" << std::endl;
-    sstream2 << "n = " << 2.05834787514993e-017 << " mol" << std::endl;
-    #if BOOST_UNITS_HAS_TYPEOF
-    sstream2 << "R = 8.314472 m^2 kg s^-2 K^-1 mol^-1 (rel. unc. = "
-             << 1.8e-6 << ")" << std::endl;
-    #else
-    sstream2 << "no typeof" << std::endl;
-    #endif // BOOST_UNITS_HAS_TYPEOF
-    sstream2 << std::endl;
-    sstream2 << "theta            = " << 0.375 << " rad" << std::endl;
-    sstream2 << "sin(theta)       = " << 0.366272529086048 << " dimensionless"
-             << std::endl;
-    sstream2 << "asin(sin(theta)) = " << 0.375 << " rad" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "V   = (12.5,0) V" << std::endl;
-    sstream2 << "I   = (3,4) A" << std::endl;
-    sstream2 << "Z   = (1.5,-2) ohm" << std::endl;
-    sstream2 << "I*Z = (12.5,0) V" << std::endl;
-    sstream2 << std::endl;
-
-    sstream2 << "x+y-w         = 0.48(+/-" << 0.632771680782255 << ") m" << std::endl;
-    sstream2 << "w*x           = 9.04(+/-" << 0.904884523019374 << ") m^2" << std::endl;
-    sstream2 << "x/y           = " << 0.666666666666667 << "(+/-0.149071) dimensionless"
-             << std::endl;
-    sstream2 << "w*y^2/(u*x)^2 = 10.17(+/-" << 3.5232787286844 << ") m^-1" << std::endl;
-    sstream2 << "w/(u*x)^(1/2) = " << 3.19612265096319 << "(+/-" << 0.160430670384437 << ") dimensionless"
-             << std::endl;
-
-    sstream2 << std::endl;
-
-    std::string str1(sstream1.str());
-    std::string str2(sstream2.str());
-
-    std::cout << str1;
-    
-    if(str1 == str2) 
-    {
-        return(0);
-    } 
-    else 
-    {
-        std::cout << std::endl << str2 << std::endl;
-        
-        if(str1.size() < str2.size()) 
-        {
-            std::string::iterator iter =
-                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
-            
-            std::cout << iter - str1.begin() << std::endl;
-            std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
-        } 
-        else 
-        {
-            std::string::iterator iter =
-                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
-            
-            std::cout << iter - str2.begin() << std::endl;
-            std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
-        }
-        
-        return(-1);
-    }
+    return 0;
 }
