@@ -30,6 +30,8 @@ namespace bu = boost::units;
 template<int Mass, int Length, int Time>
 struct simple_unit {};
 
+BOOST_TYPEOF_REGISTER_TEMPLATE(simple_unit, (int)(int)(int));
+
 template<int Mass, int Length, int Time>
 simple_unit<Mass, Length, Time> operator+(const simple_unit<Mass, Length, Time>&,
                                           const simple_unit<Mass, Length, Time>&) {}
