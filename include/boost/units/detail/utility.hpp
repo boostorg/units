@@ -106,9 +106,9 @@ demangle(const char* name)
 } // namespace detail
 
 template<class L>
-std::string simplify_typename(const L& source)
+std::string simplify_typename(const L& /*source*/)
 {
-    return std::string(typeid(source).name());
+    return std::string(typeid(L).name());
 }
 
 } // namespace units
