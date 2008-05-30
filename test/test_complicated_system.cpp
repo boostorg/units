@@ -8,6 +8,11 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
+template<class T>
+struct print {
+    enum { value = false };
+};
+
 #include <boost/type_traits/is_same.hpp>
 #include <boost/mpl/assert.hpp>
 
@@ -35,14 +40,14 @@
 
 struct volt : boost::units::base_unit<volt, boost::units::electric_potential_dimension, 1> {};
 struct newton : boost::units::base_unit<newton, boost::units::force_dimension, 2> {};
-struct joule : boost::units::base_unit<joule, boost::units::electric_potential_dimension, 3> {};
+struct joule : boost::units::base_unit<joule, boost::units::energy_dimension, 3> {};
 
 typedef boost::units::make_system<volt, newton, joule>::type complicated_system;
 
 typedef boost::units::derived_dimension<
     boost::units::length_base_dimension, -1,
     boost::units::time_base_dimension, -1,
-    boost::units::current_base_dimension, 1
+    boost::units::current_base_dimension, -1
 >::type dimension;
 
 typedef boost::units::reduce_unit<boost::units::unit<dimension, complicated_system> >::type reduced;

@@ -29,6 +29,7 @@
 #include <boost/mpl/erase.hpp>
 #include <boost/mpl/front.hpp>
 #include <boost/mpl/and.hpp>
+#include <boost/mpl/assert.hpp>
 
 #include <boost/units/dim.hpp>
 #include <boost/units/dimensionless_type.hpp>
@@ -636,6 +637,9 @@ struct prepare_equations_impl<0> {
 
 template<int N>
 struct add_zeroes_impl {
+    // If you get an error here and your base units are
+    // in fact linearly independent, please report it.
+    BOOST_MPL_ASSERT_MSG((N > 0), base_units_are_probably_not_linearly_independent, (void));
     template<class T>
     struct apply {
         typedef typename mpl::push_front<

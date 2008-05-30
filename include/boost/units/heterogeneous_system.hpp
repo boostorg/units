@@ -24,6 +24,8 @@
 #include <boost/mpl/front.hpp>
 #include <boost/mpl/push_front.hpp>
 #include <boost/mpl/pop_front.hpp>
+#include <boost/mpl/assert.hpp>
+#include <boost/type_traits/is_same.hpp>
 
 #include <boost/units/config.hpp>
 #include <boost/units/static_rational.hpp>
@@ -236,6 +238,7 @@ template<class Dimensions, class System>
 struct make_heterogeneous_system
 {
     typedef typename calculate_base_unit_exponents<typename System::type, Dimensions>::type exponents;
+    BOOST_MPL_ASSERT_MSG((!boost::is_same<exponents, inconsistent>::value), the_specified_dimension_is_not_representible_in_the_given_system, (types<Dimensions, System>));
     typedef typename make_heterogeneous_system_impl<mpl::size<typename System::type>::value>::template apply<
         typename mpl::begin<typename System::type>::type,
         typename mpl::begin<exponents>::type
