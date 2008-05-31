@@ -136,6 +136,10 @@ struct conversion_helper
     }                                                                   \
     void boost_units_require_semicolon()
 
+/// INTERNAL ONLY
+/// Users should not create their units in namespace boost::units.
+/// If we want to make this public it needs to allow better control over
+/// the namespaces. --SJW.
 /// template that defines a base_unit and conversion to another dimensionally-consistent unit
 #define BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(namespace_, name_, name_string_, symbol_string_, factor, unit, id)\
 namespace boost {                                                           \
