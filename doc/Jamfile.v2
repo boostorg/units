@@ -8,12 +8,10 @@
 # http://www.boost.org/LICENSE_1_0.txt
 
 import path ;
-
 import quickbook ;
-
 using boostbook ;
-
 using doxygen ;
+import generate_base_units ;
 
 rule run_doxygen ( target : files * : name : expand ? )
 {
@@ -76,9 +74,7 @@ run_doxygen cgs_reference
 
 run_doxygen base_units_reference
   :
-    ../../../boost/units/systems/base_units.hpp
-    [ path.glob-tree ../../../boost/units/systems/other : *.hpp : detail ]
-    [ path.glob-tree ../../../boost/units/systems/base_units : *.hpp : detail ]
+    [ path.glob-tree ../../../boost/units/base_units : *.hpp : detail ]
   :
     "Base Units Reference"
   :
@@ -87,15 +83,15 @@ run_doxygen base_units_reference
 
 run_doxygen dimensions_reference
   :
-    ../../../boost/units/systems/physical_dimensions.hpp
-    [ path.glob-tree ../../../boost/units/systems/physical_dimensions : *.hpp : detail ]
+    ../../../boost/units/physical_dimensions.hpp
+    [ path.glob-tree ../../../boost/units/physical_dimensions : *.hpp : detail ]
   :
     "Dimensions Reference"
   ;
 
 run_doxygen trig_reference
   :
-    ../../../boost/units/systems/trig.hpp
+    #../../../boost/units/systems/trig.hpp
     [ path.glob-tree ../../../boost/units/systems/angle : *.hpp : detail ]
   :
     "Trigonometry and Angle System Reference"
@@ -115,10 +111,16 @@ run_doxygen abstract_reference
     "Abstract System Reference"
   ;
 
+generated-qbk base_units : [ path.glob-tree ../../../boost/units/base_units : *.hpp : detail conversions.hpp ] ;
+explicit base_units ;
+
+install base_units_install : base_units : <location>. ;
+
 boostbook standalone
   :
     units.qbk
   :
+    <dependency>base_units_install
     <dependency>units_reference
     <dependency>si_reference
     <dependency>cgs_reference

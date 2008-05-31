@@ -1003,13 +1003,20 @@ Relatively complete SI and CGS unit systems are provided in [headerref boost/uni
 
 [xinclude units_reference.xml]
 
+[xinclude dimensions_reference.xml]
 [xinclude si_reference.xml]
 [xinclude cgs_reference.xml]
-[xinclude base_units_reference.xml]
-[xinclude dimensions_reference.xml]
 [xinclude trig_reference.xml]
 [xinclude temperature_reference.xml]
 [xinclude abstract_reference.xml]
+
+[section Base Unit by Category]
+[xinclude base_units_reference.xml]
+[endsect]
+
+[section Alphabetical Listing of Base Units]
+[include base_units.qbk]
+[endsect]
 
 [endsect]
 
