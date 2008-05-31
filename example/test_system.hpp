@@ -93,10 +93,6 @@ struct meter_base_unit : base_unit<meter_base_unit, length_dimension, 1> {};
 struct kilogram_base_unit : base_unit<kilogram_base_unit, mass_dimension, 2> {};
 struct second_base_unit : base_unit<second_base_unit, time_dimension, 3> {};
 
-typedef make_system<meter_base_unit>::type      m_system;
-typedef make_system<kilogram_base_unit>::type   kg_system;
-typedef make_system<second_base_unit>::type     s_system;
-
 typedef make_system<
     meter_base_unit,
     kilogram_base_unit,
@@ -104,10 +100,6 @@ typedef make_system<
 
 /// unit typedefs
 typedef unit<dimensionless_type,mks_system>   dimensionless;
-
-//typedef unit<length_dimension,m_system>          length;
-//typedef unit<mass_dimension,kg_system>           mass;
-//typedef unit<time_dimension,s_system>            time;
 
 typedef unit<length_dimension,mks_system>        length;
 typedef unit<mass_dimension,mks_system>          mass;

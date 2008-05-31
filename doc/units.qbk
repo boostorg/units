@@ -248,28 +248,31 @@ A convenience class for composite dimensions with integer powers is also provide
 
 [section:Units Units]
 
-We define a *unit* as a composite dimension expressed in some *unit system*, where the latter is a collection of base units
-corresponding to the base dimensions that the system can represent. For example,
-length is an abstract concept that can be made concrete by associating it with a unit system. Thus, the meter is a unit
-of length in the SI system. Units are, like dimensions, purely compile-time variables with no associated value.
+We define a *unit* as a linear combination of base units.  Thus, the SI unit corresponding
+to the dimension of force is kg m s^-2, where kg, m, and s are base units.  We use the
+notion of a *unit system* such as SI to specify the mapping from a dimension to a
+particular unit so that instead of specifying the base units explicitly, we can just
+ask for the representation of a dimension in a particular system.
+
+Units are, like dimensions, purely compile-time variables with no associated value.
 Units obey the same algebra as dimensions do; the presence of the unit system serves to ensure that units having identical
 reduced dimension in different systems (like feet and meters) cannot be inadvertently mixed in computations.
 
-There are two distinct types of units that can be envisioned:
+There are two distinct types of systems that can be envisioned:
 
-* *Homogeneous units* : Units for which there is a one-to-one correspondence between base dimensions and base units 
-  are termed homogeneous. For example, the SI system has seven base dimensions and seven base units corresponding to them, 
-  so units in the SI system are homogeneous.
-* *Heterogeneous units* : Units for which there is at least one base dimension that is represented by one (or more) 
-  base units are termed heterogeneous. For example, area in 
-  m ft is a heterogeneous unit because there are two base units (meters and feet) corresponding to a single base dimension
-  (length). Essentially any unit that can be represented with rational powers can be represented as a heterogeneous unit. 
-  While one can conceptually imagine a heterogeneous system being a collection of all the base units that could be used 
-  in representing a unit, for reasons of implementation efficiency, each distinct heterogeneous unit has a unique associated
-  system. A practical example of the need for heterogeneous units, is an empirical equation used in 
-  aviation: H = (r/C)^2 where H is the radar beam height in feet and r is the radar range in nautical miles. In order to 
-  enforce dimensional correctness of this 
-  equation, the constant, C, must be expressed in nautical miles per foot^(1/2), mixing two distinct base units of length.
+* *Homogeneous systems* : Systems which hold a linearly independent set of base units which
+  can be used to represent many different dimensions. For example, the SI system has seven
+  base dimensions and seven base units corresponding to them.  It can represent any unit which
+  uses only those seven base dimensions.  Thus it is a homogeneous_system.
+* *Heterogeneous systems* : Systems which store the exponents of every base unit involved
+  are termed heterogeneous.  Some units can only be represented in this way.  For example,
+  area in m ft is intrinsically heterogeneous, because the base units of meters and feet
+  have identical dimensions.  As a result, simply storing a dimension and a set of base
+  units does not yield a unique solution.   A practical example of the need for heterogeneous
+  units, is an empirical equation used in  aviation: H = (r/C)^2 where H is the radar beam
+  height in feet and r is the radar range in nautical miles. In order to  enforce dimensional
+  correctness of this equation, the constant, C, must be expressed in nautical miles per foot^(1/2),
+  mixing two distinct base units of length.
 
 Units are implemented by the [___unit] template class defined in [headerref boost/units/unit.hpp] :
 
