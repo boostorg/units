@@ -196,14 +196,10 @@ and [$../../../units/images/form_6.png], where
 [$../../../units/images/form_8.png]
 
 Users of a dimensional analysis library should be able to specify an arbitrary list of base dimensions to 
-produce a composite dimension. This potentially includes both repeated tags and dimensionless tags. For example, 
+produce a composite dimension. This potentially includes repeated tags. For example, 
 it should be possible to express energy as [$../../../units/images/form_9.png], [$../../../units/images/form_10.png], 
 [$../../../units/images/form_11.png], or any other permutation of mass, length, and time having aggregate exponents of 
-1, 2, and -2, respectively. In addition, in some cases, multiple distinct fundamental dimensions representing the same dimension 
-measured in different unit systems may appear. We term units with multiple base units for one or more base dimensions heterogeneous,
-while those with a one-to-one relationship between base units and base dimensions are termed homogeneous. 
-For example kg (m/s) (ft/hr) is a heterogeneous unit of energy, 
-with the joule = kg m^2/s^2, being the homogeneous SI equivalent. 
+1, 2, and -2, respectively.
 In order to be able to perform computations on arbitrary sets of dimensions, 
 all composite dimensions must be reducible to an unambiguous final composite dimension, which we will refer to as a 
 *reduced dimension*, for which
@@ -213,15 +209,16 @@ all composite dimensions must be reducible to an unambiguous final composite dim
   [$../../../units/images/form_0.png] base dimensions, one for each distinct fundamental dimension, but may have fewer.
 
 In our implementation, base dimensions are associated with tag types. As we will ultimately 
-represent composite dimensions as typelists, we must provide some mechanism for 
-sorting base dimension tags in order to make it possible to convert an arbitrary composite dimension into a reduced
-dimension. The [___base_dimension] class (found in [headerref boost/units/base_dimension.hpp]) uses the curiously recurring
-template pattern (CRTP) technique to ensure that ordinals specified for base dimensions are unique across translation units:
+represent composite dimensions as typelists, we must provide some mechanism for  sorting
+base dimension tags in order to make it possible to convert an arbitrary composite dimension
+into a reduced dimension.  For this purpose, we assign a unique integer to each base dimension.
+The [___base_dimension] class (found in [headerref boost/units/base_dimension.hpp]) uses the
+curiously recurring template pattern (CRTP) technique to ensure that ordinals specified for
+base dimensions are unique:
 
     template<class Derived, long N> struct base_dimension { ... };
 
-With this, we can define the base dimensions for length, mass, and time as (noting that the specific ordering
-is not important, only the uniqueness of the ordinal values) :
+With this, we can define the base dimensions for length, mass, and time as:
 
 [import ../example/test_system.hpp]
 [test_system_snippet_1]
