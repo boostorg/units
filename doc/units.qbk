@@ -427,6 +427,9 @@ Alternately, we can use the SI length.
 Since the SI unit of length is the meter, these two
 definitions have exactly the same effect.
 
+If these conversions have been defined, then converting between
+scaled forms of these units will automatically work.
+
 The macro [___BOOST_UNITS_DEFAULT_CONVERSION] specifies a conversion
 that will be applied to a base unit when no direct conversion is
 possible.  This can be used to make arbitray conversion work
@@ -437,13 +440,6 @@ with a single specialization.
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(my_unit_tag, SI::force, double, 3.14159265358979323846);
     // make conversion to SI the default.
     BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
-
-The following are the exact rules for conversions.
-First the implementation attempts to find a direct conversion defined
-with [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] and its kin.  If there is no such
-exact conversion then it will look for a definition of some scaled
-form of the conversion.  If that also fails then it will transform
-every [___base_unit] using [___BOOST_UNITS_DEFAULT_CONVERSION] and recurse.
 
 [endsect]
 
