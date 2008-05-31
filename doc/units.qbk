@@ -387,25 +387,14 @@ natural numbers] where the operator arithmetic obeys the following rules (using 
 * [$../../../units/images/form_15.png]
 
 This library is designed to support arbitrary value type algebra for addition, subtraction, multiplication, division, and 
-rational powers and roots. For compilers that support `typeof`, the appropriate value type will be automatically deduced. 
-For compilers that do not provide language support for `typeof`, it is necessary to specialize the desired operator helper
-template classes to define the algebra. For the case of natural numbers, this would amount to something like the following 
-pseudocode:
+rational powers and roots.  It uses Boost.Typeof to deduce the result of these operators.  For compilers that
+support `typeof`, the appropriate value type will be automatically deduced.  For compilers that do not provide
+language support for `typeof` it is necessary to register all the types used.  For the case of natural numbers,
+this would amount to something like the following:
 
-    template<> struct add_typeof_helper<natural,natural>        { typedef natural type; };
-    template<> struct subtract_typeof_helper<natural,natural>   { typedef integer type; };
-    template<> struct multiply_typeof_helper<natural,natural>   { typedef natural type; };
-    template<> struct divide_typeof_helper<natural,natural>     { typedef rational type; };
-
-    typename add_typeof_helper<natural,natural>::type           operator+(natural x,natural y);
-    typename subtract_typeof_helper<natural,natural>::type      operator-(natural x,natural y);
-    typename multiply_typeof_helper<natural,natural>::type      operator*(natural x,natural y);
-    typename divide_typeof_helper<natural,natural>::type        operator/(natural x,natural y);
-
-Naturally, it is also possible to define heterogeneous operators between different value types:
-
-    template<> struct add_typeof_helper<natural,integer>        { typedef integer   type; };
-    template<> struct add_typeof_helper<integer,natural>        { typedef integer   type; };
+    BOOST_TYPEOF_REGISTER_TYPE(natural);
+    BOOST_TYPEOF_REGISTER_TYPE(integer);
+    BOOST_TYPEOF_REGISTER_TYPE(rational);
 
 [endsect]
 
