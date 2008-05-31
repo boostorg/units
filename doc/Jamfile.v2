@@ -72,14 +72,26 @@ run_doxygen cgs_reference
     "CGS System Reference"
   ;
 
-run_doxygen base_units_reference
-  :
-    [ path.glob-tree ../../../boost/units/base_units : *.hpp : detail ]
-  :
-    "Base Units Reference"
-  :
-    <doxygen:param>EXPAND_ONLY_PREDEF=NO
-  ;
+rule make_base_units_doc ( directory : name ) {
+    run_doxygen $(directory)_base_units_reference
+      :
+        [ path.glob-tree ../../../boost/units/base_units/$(directory) : *.hpp : detail conversions.hpp ]
+      :
+        "$(name) Base Units Reference"
+      ;
+}
+
+make_base_units_doc angle : Angle ;
+make_base_units_doc astronomical : Astronomical ;
+make_base_units_doc cgs : CGS ;
+make_base_units_doc imperial : Imperial ;
+make_base_units_doc metric : Metric ;
+make_base_units_doc si : SI ;
+make_base_units_doc temperature : Temperature ;
+make_base_units_doc us : US ;
+
+all_base_units_doc = angle astronomical cgs imperial metric si temperature us ;
+all_base_units_doc = $(all_base_units_doc)_base_units_reference ;
 
 run_doxygen dimensions_reference
   :
@@ -124,7 +136,7 @@ boostbook standalone
     <dependency>units_reference
     <dependency>si_reference
     <dependency>cgs_reference
-    <dependency>base_units_reference
+    <dependency>$(all_base_units_doc)
     <dependency>dimensions_reference
     <dependency>trig_reference
     <dependency>temperature_reference
