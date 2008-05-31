@@ -338,18 +338,16 @@ corresponding operator of the value type if the units permit.
 
 [section:Quantity_Construction_and_Conversion Construction and Conversion of Quantities]
 
-By default, this library is designed to emphasize safety above convenience when performing operations with dimensioned quantities.
+This library is designed to emphasize safety above convenience when performing operations with dimensioned quantities.
 Specifically, construction of quantities is required to fully specify both value and unit. Direct construction from a scalar value
 is prohibited (though the static member function [___from_value] is provided to enable 
 this functionality where it is necessary. In addition, a [___quantity_cast] to a reference allows direct access to the 
 underlying value of a [___quantity] variable. An explicit constructor is provided to enable conversion between
 dimensionally compatible quantities in different unit systems.  Implicit conversions between unit systems are
-allowed only between homogeneous units when every base unit in the source is implicitly convertible to the 
-destination system. This provides fine-grained control over implicit unit system conversions, allowing, for example,
-trivial conversions between equivalent units in different systems (such as SI seconds and CGS seconds) while simultaneously
-enabling unintentional unit system mismatches to be caught 
-at compile time and preventing precision loss and performance overhead from unintended conversions.
-Assignment follows the same rules.
+allowed only when the units reduce to being identical, allowing, for example, trivial conversions between
+equivalent units in different systems (such as SI seconds and CGS seconds) while simultaneously enabling
+unintentional unit system mismatches to be caught at compile time and preventing precision loss and
+performance overhead from unintended conversions.  Assignment follows the same rules.
 An exception is made for quantities for which the unit reduces to dimensionless; in this case, implicit conversion
 to the underlying value type is allowed via class template specialization. Quantities of different value types are implicitly 
 convertible only if the value types are themselves implicitly convertible. The [___quantity] class also defines
@@ -358,16 +356,17 @@ a `value()` member for directly accessing the underlying value.
 To summarize, conversions are allowed under the following conditions :
 
 * implicit conversion of `quantity<Unit,Y>` to `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
-* implicit assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
+* assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
 * explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
     and if `Y` and `Z` are implicitly convertible.
 * implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
     reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
-* implicit assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
+* assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
   conditions as implicit conversion.
 * `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value].
-* `quantity<Unit,Y>` can be directly constructed from `quantity<Unit,X>`.
-* `quantity<Unit1,Y>` can be directly constructed from `quantity<Unit2,X>`.
+
+Of course, any time implicit conversion is allowed, an explicit conversion is
+also legal.
 
 Because dimensionless quantities have no associated units, they behave as normal scalars, and allow implicit conversion to and from 
 the underlying value type.
