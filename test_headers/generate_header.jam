@@ -18,7 +18,7 @@ rule generate_include_all ( target : sources * : properties * ) {
 
     for local file in $(sources) {
         print.text "#include <$(file:G=)>
-" ;
+" : overwrite ;
     }
 
 }
