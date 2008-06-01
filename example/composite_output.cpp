@@ -8,6 +8,42 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
+/** 
+\file
+    
+\brief composite_output.cpp
+
+\detailed An example of textual representations of units.
+
+Output:
+@verbatim
+
+//[conversion_output_output
+2 dyn
+2 dyn
+2 dyne
+cm g s^-1
+centimeter gram second^-1
+dyn
+dyne
+n
+nano
+n
+nano
+F
+farad
+1 F
+1 farad
+nF
+nanofarad
+1 nF
+1 nanofarad
+n(cm g s^-1)
+nano(centimeter gram second^-1)
+//]
+
+@endverbatim
+**/
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/cgs.hpp>
 #include <boost/units/io.hpp>
@@ -52,44 +88,29 @@ int main()
     using boost::units::cgs::second;
     using boost::units::cgs::dyne;
         
-    si::nano*si::farad;
-    1.0*si::nano*si::farad;
-    
-    std::cout << 2.0 * dyne << std::endl;
-
-    std::cout << symbol_format << 2.0 * dyne << std::endl;
-    std::cout << name_format << 2.0 * dyne << std::endl;
-    
-    std::cout << symbol_string(dyne) << std::endl;
-    std::cout << name_string(dyne) << std::endl;
-    
-    std::cout << symbol_string(gram*centimeter/second) << std::endl;
-    std::cout << name_string(gram*centimeter/second) << std::endl;
-    
-    std::cout << symbol_string(gram*centimeter/(second*second)) << std::endl;
-    std::cout << name_string(gram*centimeter/(second*second)) << std::endl;
-    
-    std::cout << symbol_string(scale<10,static_rational<-9> >()) << std::endl;
-    std::cout << name_string(scale<10,static_rational<-9> >()) << std::endl;
-
-    //std::cout << simplify_typename(si::nano) << std::endl;
-    
-    std::cout << symbol_string(si::nano) << std::endl;
-    std::cout << name_string(si::nano) << std::endl;
-    
-    std::cout << name_format << si::farad << std::endl;
-    std::cout << symbol_format << si::farad << std::endl;
-    
-    std::cout << name_format << 1.0*si::farad << std::endl;
-    std::cout << symbol_format << 1.0*si::farad << std::endl;
-    
-    std::cout << symbol_string(si::farad*si::nano) << std::endl;
-    std::cout << name_string(si::farad*si::nano) << std::endl;
-    
-    // doesn't work because we can't make assumptions about how user wants value() to be formatted
-//    std::cout << symbol_string(si::nano*1.0*si::farad) << std::endl;
-//    std::cout << name_string(1.0*si::nano*si::farad) << std::endl;
-
-    std::cout << symbol_string(si::nano*gram*centimeter/second) << std::endl;
-    std::cout << name_string(si::nano*gram*centimeter/second) << std::endl;
+	//[composite_output_snippet_2]
+    std::cout << 2.0 * dyne << std::endl
+	          << symbol_format << 2.0 * dyne << std::endl
+			  << name_format << 2.0 * dyne << std::endl
+			  << symbol_format << gram*centimeter/second << std::endl
+			  << name_format << gram*centimeter/second << std::endl
+			  << symbol_format << gram*centimeter/(second*second) << std::endl
+			  << name_format << gram*centimeter/(second*second) << std::endl
+			  << symbol_string(scale<10,static_rational<-9> >()) << std::endl
+			  << name_string(scale<10,static_rational<-9> >()) << std::endl
+			  << symbol_format << si::nano << std::endl
+			  << name_format << si::nano << std::endl
+			  << symbol_format << si::farad << std::endl
+			  << name_format << si::farad << std::endl
+			  << symbol_format << 1.0*si::farad << std::endl
+			  << name_format << 1.0*si::farad << std::endl
+			  << symbol_format << si::farad*si::nano << std::endl
+			  << name_format << si::farad*si::nano << std::endl
+			  << symbol_format << 1.0*si::farad*si::nano << std::endl
+			  << name_format << 1.0*si::farad*si::nano << std::endl
+			  << symbol_format << si::nano*gram*centimeter/second << std::endl
+			  << name_format << si::nano*gram*centimeter/second << std::endl;
+	//]
+			  
+	return 0;
 }

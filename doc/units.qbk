@@ -1,6 +1,6 @@
 [library Boost.Units
   [quickbook 1.3]
-  [version 0.9.0]
+  [version 1.0.0]
   [authors [Schabel, Matthias C.]]
   [authors [Watanabe, Steven]]
   [copyright 2003-2008 Matthias Christian Schabel, 2007-2008 Steven Watanabe]
@@ -85,7 +85,7 @@ fairly demanding of compiler compliance to ISO standards. At present, it has bee
 compiled and tested on the following compilers/platforms :
 
 # g++ 4.0.1 on Mac OSX 10.4
-# Intel CC 9.1 and 10.0 on Mac OSX 10.4
+# Intel CC 9.1, 10.0, and 10.1 on Mac OSX 10.4
 # g++ 3.4.4, 4.2.3, and 4.3.0 on Windows XP
 # Microsoft Visual C++ 7.1, 8.0, and 9.0 on Windows XP
 # Metrowerks CodeWarrior 9.2 on Windows XP.  
@@ -302,8 +302,8 @@ to simplify variable definitions:
 
 [test_system_snippet_7]
 
-We also specialize the [___base_unit_info] class for each fundamental 
-dimension tag to provide information needed for I/O:
+If support for textual output of units is desired, we can also specialize the [___base_unit_info] class for each fundamental 
+dimension tag:
 
 [test_system_snippet_8]
 
@@ -336,43 +336,6 @@ the standard set of boolean comparison operators ( `==, !=,  <, <=, >, and >=` )
 comparison of quantities from the same unit system.  All operators simply delegate to the
 corresponding operator of the value type if the units permit.
 
-[section:Quantity_Construction_and_Conversion Construction and Conversion of Quantities]
-
-This library is designed to emphasize safety above convenience when performing operations with dimensioned quantities.
-Specifically, construction of quantities is required to fully specify both value and unit. Direct construction from a scalar value
-is prohibited (though the static member function [___from_value] is provided to enable 
-this functionality where it is necessary. In addition, a [___quantity_cast] to a reference allows direct access to the 
-underlying value of a [___quantity] variable. An explicit constructor is provided to enable conversion between
-dimensionally compatible quantities in different unit systems.  Implicit conversions between unit systems are
-allowed only when the units reduce to being identical, allowing, for example, trivial conversions between
-equivalent units in different systems (such as SI seconds and CGS seconds) while simultaneously enabling
-unintentional unit system mismatches to be caught at compile time and preventing precision loss and
-performance overhead from unintended conversions.  Assignment follows the same rules.
-An exception is made for quantities for which the unit reduces to dimensionless; in this case, implicit conversion
-to the underlying value type is allowed via class template specialization. Quantities of different value types are implicitly 
-convertible only if the value types are themselves implicitly convertible. The [___quantity] class also defines
-a `value()` member for directly accessing the underlying value.
-
-To summarize, conversions are allowed under the following conditions :
-
-* implicit conversion of `quantity<Unit,Y>` to `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
-* assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
-* explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
-    and if `Y` and `Z` are implicitly convertible.
-* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
-    reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
-* assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
-  conditions as implicit conversion.
-* `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value].
-
-Of course, any time implicit conversion is allowed, an explicit conversion is
-also legal.
-
-Because dimensionless quantities have no associated units, they behave as normal scalars, and allow implicit conversion to and from 
-the underlying value type.
-
-[endsect]
-
 [section:Heterogeneous_Operators Heterogeneous Operators]
 
 For most common value types, the result type of arithmetic operators is the same as the value type itself. For example, 
@@ -398,48 +361,96 @@ this would amount to something like the following:
 
 [endsect]
 
-[endsect]
-
 [section:Conversions Conversions]
 
-The macros needed for defining conversion can be found in
+Conversion is only meaningful for quantities as it implies the presence of at 
+least a multiplicative scale factor and, possibly, and affine linear offset.
+Macros for simplifying the definition of conversions between units can be found in
 [headerref boost/units/conversion.hpp] and [headerref boost/units/absolute.hpp]
-(for conversion offsets)
+(for affine conversions with offsets). 
 
-The macro [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] specifies the
-factor to convert from the first argument to the second.  The
+The macro [___BOOST_UNITS_DEFINE_CONVERSION_FACTOR] specifies a scale
+factor for conversion from the first unit type to the second.  The
 first argument must be a [___base_unit].  The second argument
 can be either a [___base_unit] or a [___unit].
 
-Let's declare a simple base unit.
+Let's declare a simple base unit:
 
-    struct foot_base_unit : base_unit<foot_base_unit, length_dimension, 1> {};
+    struct foot_base_unit : base_unit<foot_base_unit, length_dimension, 10> { };
 
-Now, we want to be able to convert feet to meters and vice versa.  A foot
-is 0.3048 meters so we can write the following
+Now, we want to be able to convert feet to meters and vice versa.  The foot
+is defined as exactly 0.3048 meters, so we can write the following
 
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, meter_base_unit, double, 0.3048);
 
-Alternately, we can use the SI length.
+Alternately, we could use the SI length @c typedef:
 
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, SI::length, double, 0.3048);
 
-Since the SI unit of length is the meter, these two
-definitions have exactly the same effect.
-
+Since the SI unit of length is the meter, these two definitions are equivalent.
 If these conversions have been defined, then converting between
-scaled forms of these units will automatically work.
+scaled forms of these units will also automatically work.
+
+*** insert discussion of @c is_implicitly_convertible ***
 
 The macro [___BOOST_UNITS_DEFAULT_CONVERSION] specifies a conversion
 that will be applied to a base unit when no direct conversion is
-possible.  This can be used to make arbitray conversion work
-with a single specialization.
+possible.  This can be used to make arbitrary conversions work
+with a single specialization:
 
     struct my_unit_tag : boost::units::base_unit<my_unit_tag, boost::units::force_type, 1> {};
     // define the conversion factor
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(my_unit_tag, SI::force, double, 3.14159265358979323846);
     // make conversion to SI the default.
     BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
+
+[endsect]
+
+[section:Quantity_Construction_and_Conversion Construction and Conversion of Quantities]
+
+This library is designed to emphasize safety above convenience when performing operations with dimensioned quantities.
+Specifically, construction of quantities is required to fully specify both value and unit. Direct construction from a scalar value
+is prohibited (though the static member function [___from_value] is provided to enable 
+this functionality where it is necessary. In addition, a [___quantity_cast] to a reference allows direct access to the 
+underlying value of a [___quantity] variable. An explicit constructor is provided to enable conversion between
+dimensionally compatible quantities in different unit systems.  Implicit conversions between unit systems are
+allowed only when the reduced units are identical, allowing, for example, trivial conversions between
+equivalent units in different systems (such as SI seconds and CGS seconds) while simultaneously enabling
+unintentional unit system mismatches to be caught at compile time and preventing potential loss of precision and
+performance overhead from unintended conversions.  Assignment follows the same rules.
+An exception is made for quantities for which the unit reduces to dimensionless; in this case, implicit conversion
+to the underlying value type is allowed via class template specialization. Quantities of different value types are implicitly 
+convertible only if the value types are themselves implicitly convertible. The [___quantity] class also defines
+a `value()` member for directly accessing the underlying value.
+
+To summarize, conversions are allowed under the following conditions :
+
+* implicit conversion of `quantity<Unit,Y>` to `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
+* assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
+* explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
+    and if `Y` and `Z` are implicitly convertible.
+* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
+    reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
+* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if 
+    @c is_implicitly_convertible<Unit1,Unit2> is true, *** `Unit1` and `Unit2` are dimensionally consistent ***, and `Y` and `Z` are convertible.
+* assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
+  conditions as implicit conversion.
+* `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value]. Doing so, 
+  naturally, bypasses any type-checking of the newly assigned value, so this method should be used only when absolutely necessary.
+
+Of course, any time implicit conversion is allowed, an explicit conversion is
+also legal.
+
+Because dimensionless quantities have no associated units, they behave as normal scalars, and allow implicit conversion to and from 
+the underlying value type or types that are convertible to/from that value type.
+
+[endsect]
+
+[endsect]
+
+[section:Scaled_Units Scaled Units]
+
+Need to discuss scaled units and prefixes here since they are mentioned in the next section...
 
 [endsect]
 
@@ -450,7 +461,7 @@ with a single specialization.
 ([@../../example/dimension.cpp dimension.cpp])
 
 By using MPL metafunctions and the template specializations for operations on composite dimensions
-defined in [headerref boost/units/dimension.hpp], it is possible to perform compile time arithmetic
+(defined in [headerref boost/units/dimension.hpp]) it is possible to perform compile time arithmetic
 according to the dimensional analysis rules described [link boost_units.Dimensional_Analysis above]
 to produce new composite dimensions :
 
@@ -579,13 +590,10 @@ with the resulting output :
 [kitchen_sink_output_10]
 
 Trigonometric and inverse trigonometric functions can be implemented for any unit system
-that provides an angular base dimension. These behave as one expects, with trigonometric functions
+that provides an angular base dimension. For radians, these functions are found in 
+[headerref boost/units/cmath.hpp] These behave as one expects, with trigonometric functions
 taking an angular quantity and returning a dimensionless quantity, while the inverse trigonometric functions
 take a dimensionless quantity and return an angular quantity :
-
-[kitchen_sink_function_snippet_1]
-
-[kitchen_sink_function_snippet_2]
 
 Defining a few angular quantities,
 
@@ -678,7 +686,9 @@ powers and roots, respectively:
 
 [import ../example/quaternion.cpp]
 
-[quaternion_class_snippet_1]
+[quaternion_class_snippet_1a]
+
+[quaternion_class_snippet_1b]
 
 We can now declare a [___quantity] of a `quaternion` :
 
@@ -701,7 +711,9 @@ quantities (an identical problem
 occurs with `std::complex<T>`, for the same reason). In order to compute rational powers and roots, we need to 
 specialize [___power_typeof_helper] and [___root_typeof_helper] as follows:
 
-[quaternion_class_snippet_2]
+[quaternion_class_snippet_2a]
+
+[quaternion_class_snippet_2b]
 
 giving:
 
@@ -748,7 +760,12 @@ gives
 ([@../../example/performance.cpp performance.cpp])
 
 This example provides an ad hoc performance test to verify that zero runtime overhead 
-is incurred when using [___quantity] in place of `double`. 
+is incurred when using [___quantity] in place of `double`. Note that performance 
+optimization and testing is not trivial, so some care must be taken in profiling. It 
+is also critical to have a compiler capable of optimizing the many template instantiations
+and inline calls effectively to achieve maximal performance. Zero overhead for this test
+has been verified using gcc 4.0.1, and icc 9.0, 10.0, and 10.1 on Mac OS 10.4 and 10.5, and
+using *** on ***.
 
 [endsect]
 
@@ -804,11 +821,11 @@ giving
 
 Mixed units and mixed unit conversions.
 
-First a look at the output:
+This code:
 
 [heterogeneous_unit_snippet_1]
 
-printing
+gives
 
 [heterogeneous_unit_output_1]
 
@@ -846,7 +863,9 @@ Now we can create some quantities:
 
 [temperature_snippet_3]
 
-Note the use of [___absolute] to wrap a unit.
+Note the use of [___absolute] to wrap a unit. The resulting output is:
+
+[temperature_output_1]
 
 [endsect]
 
@@ -856,8 +875,8 @@ Note the use of [___absolute] to wrap a unit.
 
 [import ../example/runtime_conversion_factor.cpp]
 
-The Units library does not require that the conversion factors
-be compile time constants.
+The Boost.Units library does not require that the conversion factors be compile time constants,
+as is demonstrated in this example:
 
 [runtime_conversion_factor_snippet_1]
 
@@ -869,8 +888,7 @@ be compile time constants.
 
 [import ../example/non_base_dimension.cpp]
 
-It is possible to define base units that do
-not have base dimensions.
+It is also possible to define base units that have derived rather than base dimensions:
 
 [non_base_dimension_snippet_1]
 
@@ -882,14 +900,36 @@ not have base dimensions.
 
 [import ../example/composite_output.cpp]
 
-You can overload the ostream operator for a unit if
-it has a special symbol, in this case Newtons.
+If a unit has a special name and/or symbol, the free functions @c name_string and
+@c symbol_string can be overloaded directly. 
+
+[composite_output_snippet_1]
+
+In this case, any unit that reduces 
+to the overloaded unit will be output with the replacement symbol. 
+
+Special names and symbols for the SI and CGS unit systems are found in 
+[headerref units/systems/si/io.hpp] and [headerref units/systems/cgs/io.hpp], 
+respectively. If these headers are not included, the output will simply follow
+default rules using the appropriate fundamental dimensions. 
+Note that neither of these functions is defined for quantities 
+because doing so would require making assumptions on how the corresponding value
+type should be formatted.
+
+Three @c ostream formatters, @c symbol_format, @c name_format, and @c typename_format
+are provided for convenience. These select the textual representation of units 
+provided by @c symbol_string or @c name_string in the first two cases, while the
+latter returns a demangled typename for debugging purposes. Formatting of scaled
+unit is also done correctly.
 
 [composite_output_snippet_1]
 
 [endsect]
 
 [section:ConversionFactor Conversion Factor]
+
+This code demonstrates the use of the @c conversion_factor free function to determine
+the scale factor between two units.
 
 ([@../../example/conversion_factor.cpp conversion_factor.cpp])
 
@@ -1017,9 +1057,8 @@ Relatively complete SI and CGS unit systems are provided in [headerref boost/uni
 
 The core header files are located in `boost/units`. Unit system headers are 
 located in `<boost/units/systems>`. There are no source files for the library
-itself; example programs demonstrating various aspects of the library can be found in 
-`boost/libs/units/example`. Programs for unit testing are provided in 
-`boost/libs/units/test`.
+itself - the library is header-only. Example programs demonstrating various aspects of the library can be found in 
+`boost/libs/units/example`. Programs for unit testing are provided in `boost/libs/units/test`.
 
 [endsect]
 
@@ -1029,19 +1068,23 @@ itself; example programs demonstrating various aspects of the library can be fou
 How does one distinguish between quantities that are physically different but have the same units (such as 
 energy and torque)?]
 
-In cases such as this, the proper way to treat this difference is to recognize that the
-underlying value types are distinct. For the particular case of energy vs. torque,
-energy is a true
+Because Boost.Units includes plane and solid angle units in the SI system, torque and energy 
+are, in fact, distinguishable (see [@http://en.wikipedia.org/wiki/SI_units torque]). 
+In addition, energy is a true
 [@http://mathworld.wolfram.com/Scalar.html scalar] quantity, while torque, despite
-having the same units as energy, is in fact a 
-[@http://mathworld.wolfram.com/Pseudovector.html pseudovector]. Thus, to properly
-treat torque quantities, a value type representing pseudovectors and encapsulating their 
-algebra would have to be implemented. Then, one would write something like this:
+having the same units as energy if plane angle is not included, is in fact a 
+[@http://mathworld.wolfram.com/Pseudovector.html pseudovector]. Thus, a value type representing pseudovectors 
+and encapsulating their algebra could also be implemented. 
 
-    quantity<energy,double>          E;
-    quantity<energy,pseudovector>    tau;
-
-naturally, a typedef for torque could also be added to make the intent more transparent.
+There are,
+however, a few SI units that are dimensionally indistinguishable within the SI system. These
+include the [@http://en.wikipedia.org/wiki/Becquerel becquerel], which has units identical to
+frequency (Hz), and the [@http://en.wikipedia.org/wiki/Sievert sievert], which is degenerate
+with the [@http://en.wikipedia.org/wiki/Gray_%28unit%29 gray]. In cases such as this, 
+the proper way to treat this difference is to recognize that expanding the set of base dimensions
+can provide disambiguation.  For example, adding a base dimension for radioactive decays would 
+allow the becquerel to be written as decays/second, differentiating it from the signature of hertz,
+which is simply 1/second.
 
 [endsect]
 
@@ -1072,14 +1115,46 @@ we need homogeneous systems.
 
 This only breaks generic code--which ought to break anyway.  The only
 literal value that ought to be converted to a quantity by generic code
-is zero, which can be handled by the default constructor.
+is zero, which should be handled by the default constructor. In addition,
+consider the search and replace problem allowing this poses:
+
+	quantity<si::length>    q(1.0);
+	
+Here, the intent is clear - we want a length of one in the SI system, which is one meter. However,
+imagine some well-intentioned coder attempting to reuse this code, but to have it perform the
+calculations in the CGS unit system instead. After searching for @c si:: and replacing it with @c cgs:: ,
+we have:
+
+	quantity<cgs::length>	q(1.0);
+	
+Unfortunately, the meaning of this statement has suddenly changed from one meter to one centimeter. In
+contrast, as implemented, we begin with:
+
+	quantity<si::length>	q(1.0*si::meter);
+	
+and, after search and replace:
+
+	quantity<cgs::length>	q(1.0*cgs::meter);
+	
+which gives us an error. Even if the code has a @using namespace boost::units::si; declaration, the latter
+is still safe, with:
+
+	using namespace boost::units::si;
+	quantity<length>	q(1.0*meter);
+	
+going to
+
+	using namespace boost::units::cgs;
+	quantity<length>	q(1.0*meter);
+	
+The latter will involve an explicit conversion from meters to centimeters, but the value remains correct.
 
 [endsect]
 
 [section:ExplicitConversions Why are conversions explicit by default?]
 
-Safety.  Implicit conversions are dangerous and should
-not occur without a good reason.
+Safety and the potential for unintended conversions leading to precision loss and hidden performance costs.
+Options are provided for forcing implicit conversions between specific units to be allowed.
 
 [endsect]
 
@@ -1115,14 +1190,17 @@ the design and implementation of this library.
 
  Any help in the following areas would be much appreciated:
 
-* testing on compilers other than gcc 4.0.1 under Mac OSX, and 
-  MSVC 8.0, Metrowerks CodeWarrior 9.2, MSVC 7.1, and gcc 3.4.4 under Windows
+* testing on other compilers and operating systems
 * performance testing on various architectures
-* tutorials on getting started and implementing new unit systems
+* tutorials 
 
 [endsect]
 
 [section:ReleaseNotes Release Notes]
+
+1.0.0 (June 1, 2008) :
+
+* 
 
 0.7.1 (March 14, 2007) :
 

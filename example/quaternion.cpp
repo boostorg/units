@@ -63,7 +63,7 @@ namespace boost {
 
 namespace units {
 
-//[quaternion_class_snippet_1
+//[quaternion_class_snippet_1a
 /// specialize power typeof helper
 template<class Y,long N,long D> 
 struct power_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
@@ -80,7 +80,9 @@ struct power_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
         return boost::math::pow(x,static_cast<int>(N));
     }
 };
+//]
 
+//[quaternion_class_snippet_1b
 /// specialize root typeof helper
 template<class Y,long N,long D> 
 struct root_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
@@ -99,7 +101,7 @@ struct root_typeof_helper<boost::math::quaternion<Y>,static_rational<N,D> >
 };
 //]
 
-//[quaternion_class_snippet_2
+//[quaternion_class_snippet_2a
 /// specialize power typeof helper for quaternion<quantity<Unit,Y> >
 template<class Unit,long N,long D,class Y> 
 struct power_typeof_helper<
@@ -134,7 +136,9 @@ struct power_typeof_helper<
                     quantity_type::from_value(tmp.R_component_4()));
     }
 };
+//]
 
+//[quaternion_class_snippet_2b
 /// specialize root typeof helper for quaternion<quantity<Unit,Y> >
 template<class Unit,long N,long D,class Y> 
 struct root_typeof_helper<
