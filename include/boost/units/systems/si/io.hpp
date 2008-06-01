@@ -78,7 +78,7 @@ inline std::string name_string(const reduce_unit<si::pressure>::type&) { return 
 inline std::string symbol_string(const reduce_unit<si::pressure>::type&) { return "Pa"; }
 
 inline std::string name_string(const reduce_unit<si::resistance>::type&) { return "ohm"; }
-inline std::string symbol_string(const reduce_unit<si::resistance>::type&) { return "Ω"; }
+inline std::string symbol_string(const reduce_unit<si::resistance>::type&) { return "Ohm"; }
 
 
 } // namespace units
