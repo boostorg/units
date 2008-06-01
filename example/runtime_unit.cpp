@@ -32,20 +32,17 @@ quantity<si::length> calculate(const quantity<si::length>& t)
     return(boost::units::hypot(t, 2.0 * si::meters));
 }
 
-// enter "return meter", then 3.4 centimeter 
-// -> gives 2.00029 meter as output?
-
 int main() 
 {
     known_units["meter"] = 1.0 * si::meters;
-    known_units["centimeter"] = .01 * si::meters;;
+    known_units["centimeter"] = .01 * si::meters;
     known_units["foot"] =
         conversion_factor(foot_base_unit::unit_type(), si::meter) * si::meter;
         
     std::string output_type("meter");
     std::string input;
     
-    while((std::cout << ">") && (std::cin >> input)) 
+    while((std::cout << "> ") && (std::cin >> input)) 
     {
         if(!input.empty() && input[0] == '#') 
         {
