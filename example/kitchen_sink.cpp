@@ -133,17 +133,12 @@ w/(u*x)^(1/2) = 3.19612(+/-0.160431) dimensionless
 //]
 
 //[kitchen_sink_output_15
-m^2 kg s^-1 rad^-1
-dimensionless
-m^2 kg s^-2 rad^-1
-dimensionless
-J
+I*w   = m^2 kg s^-1 rad^-1
+I*w/L = dimensionless
+I*w^2 = J
 //]
 
 //[kitchen_sink_output_16
-//]
-
-//[kitchen_sink_output_17
 1 F
 1 kat
 1 S
@@ -159,7 +154,7 @@ J
 1 T
 1 W
 1 Pa
-1 Ω
+1 Ohm
 //]
 
 //[kitchen_sink_output_18
@@ -187,8 +182,6 @@ J
 #include <cmath>
 #include <complex>
 #include <iostream>
-#include <algorithm>
-#include <sstream>
 
 #include <boost/typeof/std/complex.hpp>
 
@@ -453,58 +446,56 @@ int main()
               << std::endl << std::endl;
     }
     
-	/// check angular units
+	/// check moment of inertia/angular momentum/rotational energy
 	
 	//[kitchen_sink_snippet_9
 	std::cout << symbol_format
-	          << moment_of_inertia()*angular_velocity() << std::endl
-	          << moment_of_inertia()*angular_velocity()/angular_momentum() << std::endl
-	          << moment_of_inertia()*angular_velocity()/seconds << std::endl
-              << moment_of_inertia()*angular_velocity()/(torque()*seconds) << std::endl
-              << moment_of_inertia()*pow<2>(angular_velocity()) << std::endl
+	          << "I*w   = " << moment_of_inertia()*angular_velocity() << std::endl
+	          << "I*w/L = " << moment_of_inertia()*angular_velocity()/angular_momentum() << std::endl
+	          << "I*w^2 = " << moment_of_inertia()*pow<2>(angular_velocity()) << std::endl
               << std::endl;
 	//]
 	
 	//[kitchen_sink_snippet_10
-    std::cout << typename_format 
-              << quantity<capacitance>(1.0*farad) << std::endl
-              << quantity<catalytic_activity>(1.0*katal) << std::endl
-              << quantity<conductance>(1.0*siemen) << std::endl
-              << quantity<electric_charge>(1.0*coulomb) << std::endl
-              << quantity<electric_potential>(1.0*volt) << std::endl
-              << quantity<energy>(1.0*joule) << std::endl
-              << quantity<force>(1.0*newton) << std::endl
-              << quantity<frequency>(1.0*hertz) << std::endl
-              << quantity<illuminance>(1.0*lux) << std::endl
-              << quantity<inductance>(1.0*henry) << std::endl
-              << quantity<luminous_flux>(1.0*lumen) << std::endl
-              << quantity<magnetic_flux>(1.0*weber) << std::endl
-              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
-              << quantity<power>(1.0*watt) << std::endl
-              << quantity<pressure>(1.0*pascals) << std::endl
-              << quantity<resistance>(1.0*ohm) << std::endl
-              << std::endl;
+//    std::cout << typename_format 
+//              << quantity<capacitance>(1.0*farad) << std::endl
+//              << quantity<catalytic_activity>(1.0*katal) << std::endl
+//              << quantity<conductance>(1.0*siemen) << std::endl
+//              << quantity<electric_charge>(1.0*coulomb) << std::endl
+//              << quantity<electric_potential>(1.0*volt) << std::endl
+//              << quantity<energy>(1.0*joule) << std::endl
+//              << quantity<force>(1.0*newton) << std::endl
+//              << quantity<frequency>(1.0*hertz) << std::endl
+//              << quantity<illuminance>(1.0*lux) << std::endl
+//              << quantity<inductance>(1.0*henry) << std::endl
+//              << quantity<luminous_flux>(1.0*lumen) << std::endl
+//              << quantity<magnetic_flux>(1.0*weber) << std::endl
+//              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+//              << quantity<power>(1.0*watt) << std::endl
+//              << quantity<pressure>(1.0*pascals) << std::endl
+//              << quantity<resistance>(1.0*ohm) << std::endl
+//              << std::endl;
     //]
 	
 	//[kitchen_sink_snippet_11
-    std::cout << raw_format 
-              << quantity<capacitance>(1.0*farad) << std::endl
-              << quantity<catalytic_activity>(1.0*katal) << std::endl
-              << quantity<conductance>(1.0*siemen) << std::endl
-              << quantity<electric_charge>(1.0*coulomb) << std::endl
-              << quantity<electric_potential>(1.0*volt) << std::endl
-              << quantity<energy>(1.0*joule) << std::endl
-              << quantity<force>(1.0*newton) << std::endl
-              << quantity<frequency>(1.0*hertz) << std::endl
-              << quantity<illuminance>(1.0*lux) << std::endl
-              << quantity<inductance>(1.0*henry) << std::endl
-              << quantity<luminous_flux>(1.0*lumen) << std::endl
-              << quantity<magnetic_flux>(1.0*weber) << std::endl
-              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
-              << quantity<power>(1.0*watt) << std::endl
-              << quantity<pressure>(1.0*pascals) << std::endl
-              << quantity<resistance>(1.0*ohm) << std::endl
-              << std::endl;
+//    std::cout << raw_format 
+//              << quantity<capacitance>(1.0*farad) << std::endl
+//              << quantity<catalytic_activity>(1.0*katal) << std::endl
+//              << quantity<conductance>(1.0*siemen) << std::endl
+//              << quantity<electric_charge>(1.0*coulomb) << std::endl
+//              << quantity<electric_potential>(1.0*volt) << std::endl
+//              << quantity<energy>(1.0*joule) << std::endl
+//              << quantity<force>(1.0*newton) << std::endl
+//              << quantity<frequency>(1.0*hertz) << std::endl
+//              << quantity<illuminance>(1.0*lux) << std::endl
+//              << quantity<inductance>(1.0*henry) << std::endl
+//              << quantity<luminous_flux>(1.0*lumen) << std::endl
+//              << quantity<magnetic_flux>(1.0*weber) << std::endl
+//              << quantity<magnetic_flux_density>(1.0*tesla) << std::endl
+//              << quantity<power>(1.0*watt) << std::endl
+//              << quantity<pressure>(1.0*pascals) << std::endl
+//              << quantity<resistance>(1.0*ohm) << std::endl
+//              << std::endl;
     //]
 	
 	//[kitchen_sink_snippet_12

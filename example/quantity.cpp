@@ -54,8 +54,6 @@ L^(3/2)                           = (2,11) m^(3/2)
 
 #include <complex>
 #include <iostream>
-#include <sstream>
-#include <algorithm>
 
 #include <boost/mpl/list.hpp>
 
@@ -72,15 +70,13 @@ int main(void)
     using namespace boost::units;
     using namespace boost::units::test;
 
-    std::stringstream sstream1, sstream2;
-    
     {
     //[quantity_snippet_1
     quantity<length> L = 2.0*meters;                     // quantity of length
     quantity<energy> E = kilograms*pow<2>(L/seconds);    // quantity of energy
     //]
     
-    sstream1  << "L                                 = " << L << std::endl
+    std::cout << "L                                 = " << L << std::endl
               << "L+L                               = " << L+L << std::endl
               << "L-L                               = " << L-L << std::endl
               << "L*L                               = " << L*L << std::endl
@@ -107,7 +103,7 @@ int main(void)
     quantity<energy,std::complex<double> > E(kilograms*pow<2>(L/seconds));
     //]
     
-    sstream1  << "L                                 = " << L << std::endl
+    std::cout << "L                                 = " << L << std::endl
               << "L+L                               = " << L+L << std::endl
               << "L-L                               = " << L-L << std::endl
               << "L*L                               = " << L*L << std::endl
@@ -128,63 +124,5 @@ int main(void)
               << std::endl;
     }
 
-    sstream2  << "L                                 = 2 m\n"
-              << "L+L                               = 4 m\n"
-              << "L-L                               = 0 m\n"
-              << "L*L                               = 4 m^2\n"
-              << "L/L                               = 1 dimensionless\n"
-              << "L*meter                           = 2 m^2\n"
-              << "kilograms*(L/seconds)*(L/seconds) = 4 m^2 kg s^-2\n"
-              << "kilograms*(L/seconds)^2           = 4 m^2 kg s^-2\n"
-              << "L^3                               = 8 m^3\n"
-              << "L^(3/2)                           = " << 2.82842712474619 << " m^(3/2)\n"
-              << "2vL                               = " << 1.4142135623731 << " m^(1/2)\n"
-              << "(3/2)vL                           = " << 1.5874010519682 << " m^(2/3)\n"
-              << std::endl
-              << "L                                 = (3,4) m\n"
-              << "L+L                               = (6,8) m\n"
-              << "L-L                               = (0,0) m\n"
-              << "L*L                               = (-7,24) m^2\n"
-              << "L/L                               = (1,0) dimensionless\n"
-              << "L*meter                           = (3,4) m^2\n"
-              << "kilograms*(L/seconds)*(L/seconds) = (-7,24) m^2 kg s^-2\n"
-              << "kilograms*(L/seconds)^2           = (-7,24) m^2 kg s^-2\n"
-              << "L^3                               = (-117,44) m^3\n"
-              << "L^(3/2)                           = (2,11) m^(3/2)\n"
-              << "2vL                               = (2,1) m^(1/2)\n"
-              << "(3/2)vL                           = (" << 2.3828547125173 << "," << 1.69466313833091 << ") m^(2/3)\n"
-              << std::endl;
-
-    std::string str1(sstream1.str());
-    std::string str2(sstream2.str());
-
-    std::cout << str1;
-    
-    if(str1 == str2) 
-    {
-        return(0);
-    } 
-    else 
-    {
-        std::cout << std::endl << str2 << std::endl;
-        
-        if(str1.size() < str2.size()) 
-        {
-            std::string::iterator iter =
-                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
-            
-            std::cout << iter - str1.begin() << std::endl;
-            std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
-        } 
-        else 
-        {
-            std::string::iterator iter =
-                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
-            
-            std::cout << iter - str2.begin() << std::endl;
-            std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
-        }
-        
-        return(-1);
-    }
+    return 0;
 }

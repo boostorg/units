@@ -35,7 +35,6 @@ V_type       = list<dim<length_base_dimension, static_rational<1l, 1l> >, list<d
 // undefine this if you don't want to demangle symbols
 // need to link with libboost_regex to get demangling functionality
 #define MCS_USE_DEMANGLING
-//#define MCS_USE_BOOST_REGEX_DEMANGLING
 
 #include <boost/type_traits/is_same.hpp>
 
@@ -82,7 +81,7 @@ int main(void)
               << simplify_typename(time_dimension()) << std::endl
               << "energy_dimension  = "
               << simplify_typename(energy_dimension()) << std::endl;
-    
+                  
     //[dimension_snippet_1
     typedef mpl::times<length_dimension,mass_dimension>::type   LM_type;
     typedef mpl::divides<length_dimension,time_dimension>::type L_T_type;

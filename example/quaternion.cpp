@@ -41,8 +41,6 @@ L^3     = (-104 m^3,102 m^3,68 m^3,34 m^3)
 **/
 
 #include <iostream>
-#include <sstream>
-#include <algorithm>
 
 #include <boost/math/quaternion.hpp>
 #include <boost/mpl/list.hpp>
@@ -52,7 +50,6 @@ L^3     = (-104 m^3,102 m^3,68 m^3,34 m^3)
 #include <boost/units/io.hpp>
 
 #include "test_system.hpp"
-
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
@@ -184,8 +181,6 @@ int main(void)
     using namespace boost::units;
     using namespace boost::units::test;
     using boost::units::pow;
-
-    std::stringstream sstream1, sstream2;
     
     {
     //[quaternion_snippet_1
@@ -194,13 +189,13 @@ int main(void)
     length_dimension    L(quaternion<double>(4.0,3.0,2.0,1.0)*meters);
     //]
     
-    sstream1  << "+L      = " << +L << std::endl
+    std::cout << "+L      = " << +L << std::endl
               << "-L      = " << -L << std::endl
               << "L+L     = " << L+L << std::endl
               << "L-L     = " << L-L << std::endl
               << "L*L     = " << L*L << std::endl
               << "L/L     = " << L/L << std::endl
-              << "L^3     = " << boost::units::pow<3>(L) << std::endl
+              << "L^3     = " << pow<3>(L) << std::endl
 //              << "L^(3/2) = " << pow< static_rational<3,2> >(L) << std::endl
 //              << "3vL     = " << root<3>(L) << std::endl
 //              << "(3/2)vL = " << root< static_rational<3,2> >(L) << std::endl
@@ -214,64 +209,18 @@ int main(void)
     length_dimension    L(4.0*meters,3.0*meters,2.0*meters,1.0*meters);
     //]
     
-    sstream1  << "+L      = " << +L << std::endl
+    std::cout << "+L      = " << +L << std::endl
               << "-L      = " << -L << std::endl
               << "L+L     = " << L+L << std::endl
               << "L-L     = " << L-L << std::endl
 //              << "L*L     = " << L*L << std::endl
 //              << "L/L     = " << L/L << std::endl
-              << "L^3     = " << boost::units::pow<3>(L) << std::endl
+              << "L^3     = " << pow<3>(L) << std::endl
 //              << "L^(3/2) = " << pow< static_rational<3,2> >(L) << std::endl
 //              << "3vL     = " << root<3>(L) << std::endl
 //              << "(3/2)vL = " << root< static_rational<3,2> >(L) << std::endl
               << std::endl;
     }
 
-    sstream2 << "+L      = (4,3,2,1) m" << std::endl;
-    sstream2 << "-L      = (-4,-3,-2,-1) m" << std::endl;
-    sstream2 << "L+L     = (8,6,4,2) m" << std::endl;
-    sstream2 << "L-L     = (0,0,0,0) m" << std::endl;
-    sstream2 << "L*L     = (2,24,16,8) m^2" << std::endl;
-    sstream2 << "L/L     = (1,0,0,0) dimensionless" << std::endl;
-    sstream2 << "L^3     = (-104,102,68,34) m^3" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "+L      = (4 m,3 m,2 m,1 m)" << std::endl;
-    sstream2 << "-L      = (-4 m,-3 m,-2 m,-1 m)" << std::endl;
-    sstream2 << "L+L     = (8 m,6 m,4 m,2 m)" << std::endl;
-    sstream2 << "L-L     = (0 m,0 m,0 m,0 m)" << std::endl;
-    sstream2 << "L^3     = (-104 m^3,102 m^3,68 m^3,34 m^3)" << std::endl;
-    sstream2 << std::endl;
-
-    std::string str1(sstream1.str());
-    std::string str2(sstream2.str());
-
-    std::cout << str1;
-    
-    if(str1 == str2) 
-    {
-        return(0);
-    } 
-    else 
-    {
-        std::cout << std::endl << str2 << std::endl;
-        
-        if(str1.size() < str2.size()) 
-        {
-            std::string::iterator iter =
-                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
-            
-            std::cout << iter - str1.begin() << std::endl;
-            std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
-        } 
-        else 
-        {
-            std::string::iterator iter =
-                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
-            
-            std::cout << iter - str2.begin() << std::endl;
-            std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
-        }
-        
-        return(-1);
-    }
+    return 0;
 }

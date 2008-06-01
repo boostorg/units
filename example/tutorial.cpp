@@ -20,14 +20,14 @@ Output:
 @verbatim
 
 //[tutorial_output
-F  = 2 m kg s^(-2)
+F  = 2 N
 dx = 2 m
-E  = 4 m^2 kg s^(-2)
+E  = 4 J
 
-V   = (12.5,0) m^2 kg s^(-3) A^(-1)
+V   = (12.5,0) V
 I   = (3,4) A
-Z   = (1.5,-2) m^2 kg s^(-3) A^(-2)
-I*Z = (12.5,0) m^2 kg s^(-3) A^(-1)
+Z   = (1.5,-2) Ohm
+I*Z = (12.5,0) V
 I*Z == V? true
 //]
 
@@ -40,13 +40,13 @@ I*Z == V? true
 
 #include <boost/typeof/std/complex.hpp>
 
-#include <boost/units/io.hpp>
 #include <boost/units/systems/si/energy.hpp>
 #include <boost/units/systems/si/force.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/electric_potential.hpp>
 #include <boost/units/systems/si/current.hpp>
 #include <boost/units/systems/si/resistance.hpp>
+#include <boost/units/systems/si/io.hpp>
 
 using namespace boost::units;
 using namespace boost::units::si;

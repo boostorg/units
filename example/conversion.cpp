@@ -35,7 +35,7 @@ volume (cm^3) = 1e+06 cm^3
 volume (m^3)  = 1 m^3
 
 energy (joules) = 1 J
-energy (ergs)   = 1e+07 cm^2 g s^-2
+energy (ergs)   = 1e+07 erg
 energy (joules) = 1 J
 
 velocity (2 m/s)  = 2 m s^-1
@@ -46,12 +46,11 @@ velocity (2 cm/s) = 0.02 m s^-1
 **/
 
 #include <iostream>
-#include <sstream>
-#include <algorithm>
 
 #include <boost/units/io.hpp>
 #include <boost/units/pow.hpp>
 #include <boost/units/systems/cgs.hpp>
+#include <boost/units/systems/cgs/io.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/io.hpp>
 
@@ -59,9 +58,6 @@ using namespace boost::units;
 
 int main()
 {
-
-    std::stringstream sstream1, sstream2;
-
     // test quantity_cast
     {
     // implicit value_type conversions
@@ -84,7 +80,7 @@ int main()
     
     swap(L5,L6);
     
-    sstream1  << "L1 = " << L1 << std::endl
+    std::cout << "L1 = " << L1 << std::endl
               << "L2 = " << L2 << std::endl
               << "L3 = " << L3 << std::endl
               << "L4 = " << L4 << std::endl
@@ -109,71 +105,20 @@ int main()
                             v2(2.0*cgs::centimeters/cgs::second);
     //]
     
-    sstream1 << "volume (m^3)  = " << vs << std::endl
-             << "volume (cm^3) = " << vc << std::endl
-             << "volume (m^3)  = " << vs2 << std::endl
-             << std::endl;
+    std::cout << "volume (m^3)  = " << vs << std::endl
+              << "volume (cm^3) = " << vc << std::endl
+              << "volume (m^3)  = " << vs2 << std::endl
+              << std::endl;
             
-    sstream1 << "energy (joules) = " << es << std::endl
-             << "energy (ergs)   = " << ec << std::endl
-             << "energy (joules) = " << es2 << std::endl
-             << std::endl;
+    std::cout << "energy (joules) = " << es << std::endl
+              << "energy (ergs)   = " << ec << std::endl
+              << "energy (joules) = " << es2 << std::endl
+              << std::endl;
             
-    sstream1 << "velocity (2 m/s)  = " << v1 << std::endl
-             << "velocity (2 cm/s) = " << v2 << std::endl
-             << std::endl;
+    std::cout << "velocity (2 m/s)  = " << v1 << std::endl
+              << "velocity (2 cm/s) = " << v2 << std::endl
+              << std::endl;
     }
-    
-    sstream2  << "L1 = 2 m" << std::endl;
-    sstream2  << "L2 = 2 m" << std::endl;
-    sstream2  << "L3 = 2 m" << std::endl;
-    sstream2  << "L4 = 200 cm" << std::endl;
-    sstream2  << "L5 = 5 m" << std::endl;
-    sstream2  << "L6 = 4 m" << std::endl;
-    sstream2  << "L7 = 200 cm" << std::endl;
-    sstream2  << std::endl;
-    sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
-    sstream2  << "volume (cm^3) = " << 1e6 << " cm^3" << std::endl;
-    sstream2  << "volume (m^3)  = 1 m^3" << std::endl;
-    sstream2  << std::endl;
-    sstream2  << "energy (joules) = 1 J" << std::endl;
-    sstream2  << "energy (ergs)   = " << 1e7 << " cm^2 g s^-2" << std::endl;
-    sstream2  << "energy (joules) = 1 J" << std::endl;
-    sstream2  << std::endl;
-    sstream2  << "velocity (2 m/s)  = 2 m s^-1" << std::endl;
-    sstream2  << "velocity (2 cm/s) = 0.02 m s^-1" << std::endl;
-    sstream2  << std::endl;
 
-    std::string str1(sstream1.str());
-    std::string str2(sstream2.str());
-
-    std::cout << str1;
-    
-    if(str1 == str2) 
-    {
-        return(0);
-    } 
-    else 
-    {
-        std::cout << std::endl << str2 << std::endl;
-        
-        if(str1.size() < str2.size()) 
-        {
-            std::string::iterator iter =
-                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
-            
-            std::cout << iter - str1.begin() << std::endl;
-            std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
-        } 
-        else 
-        {
-            std::string::iterator iter =
-                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
-            
-            std::cout << iter - str2.begin() << std::endl;
-            std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
-        }
-        
-        return(-1);
-    }
+    return 0;
 }

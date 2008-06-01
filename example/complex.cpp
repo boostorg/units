@@ -51,8 +51,6 @@ L^(3/2) = 2.56713 m^(3/2) + 2.14247 m^(3/2) i
 #include <cmath>
 #include <complex>
 #include <iostream>
-#include <sstream>
-#include <algorithm>
 
 #include <boost/mpl/list.hpp>
 
@@ -98,17 +96,20 @@ class complex
             r_ += val;
             return *this;
         }
+        
         this_type& operator-=(const T& val)
         {
             r_ -= val;
             return *this;
         }
+        
         this_type& operator*=(const T& val)
         {
             r_ *= val;
             i_ *= val;
             return *this;
         }
+        
         this_type& operator/=(const T& val)
         {
             r_ /= val;
@@ -122,17 +123,20 @@ class complex
             i_ += source.i_;
             return *this;
         }
+        
         this_type& operator-=(const this_type& source)
         {
             r_ -= source.r_;
             i_ -= source.i_;
             return *this;
         }
+        
         this_type& operator*=(const this_type& source)
         {
             *this = *this * source;
             return *this;
         }
+        
         this_type& operator/=(const this_type& source)
         {
             *this = *this / source;
@@ -367,8 +371,6 @@ int main(void)
     using namespace boost::math;
     using namespace boost::units;
     using namespace boost::units::test;
-
-    std::stringstream sstream1, sstream2;
     
     {
     //[complex_snippet_1
@@ -377,7 +379,7 @@ int main(void)
     length_dimension    L(complex<double>(2.0,1.0)*meters);
     //]
     
-    sstream1  << "+L      = " << +L << std::endl
+    std::cout << "+L      = " << +L << std::endl
               << "-L      = " << -L << std::endl
               << "L+L     = " << L+L << std::endl
               << "L-L     = " << L-L << std::endl
@@ -397,7 +399,7 @@ int main(void)
     length_dimension    L(2.0*meters,1.0*meters);
     //]
     
-    sstream1  << "+L      = " << +L << std::endl
+    std::cout << "+L      = " << +L << std::endl
               << "-L      = " << -L << std::endl
               << "L+L     = " << L+L << std::endl
               << "L-L     = " << L-L << std::endl
@@ -410,63 +412,5 @@ int main(void)
               << std::endl;
     }
 
-
-// Expected output:
-
-
-    sstream2 << "+L      = 2 + 1 i m" << std::endl;
-    sstream2 << "-L      = -2 + -1 i m" << std::endl;
-    sstream2 << "L+L     = 4 + 2 i m" << std::endl;
-    sstream2 << "L-L     = 0 + 0 i m" << std::endl;
-    sstream2 << "L*L     = 3 + 4 i m^2" << std::endl;
-    sstream2 << "L/L     = 1 + 0 i dimensionless" << std::endl;
-    sstream2 << "L^3     = 2 + 11 i m^3" << std::endl;
-    sstream2 << "L^(3/2) = 2.56713 + " << 2.14246818967038 << " i m^(3/2)" << std::endl;
-    sstream2 << "3vL     = 1.29207 + 0.201294 i m^(1/3)" << std::endl;
-    sstream2 << "(3/2)vL = " << 1.62893714592218 <<  " + " << 0.520174502304546 << " i m^(2/3)" << std::endl;
-    sstream2 << std::endl;
-    sstream2 << "+L      = 2 m + 1 m i" << std::endl;
-    sstream2 << "-L      = -2 m + -1 m i" << std::endl;
-    sstream2 << "L+L     = 4 m + 2 m i" << std::endl;
-    sstream2 << "L-L     = 0 m + 0 m i" << std::endl;
-    sstream2 << "L*L     = 3 m^2 + 4 m^2 i" << std::endl;
-    sstream2 << "L/L     = 1 dimensionless + 0 dimensionless i" << std::endl;
-    sstream2 << "L^3     = 2 m^3 + 11 m^3 i" << std::endl;
-    sstream2 << "L^(3/2) = 2.56713 m^(3/2) + " << 2.14246818967038 << " m^(3/2) i" << std::endl;
-    sstream2 << "3vL     = 1.29207 m^(1/3) + 0.201294 m^(1/3) i" << std::endl;
-    sstream2 << "(3/2)vL = " << 1.62893714592218 << " m^(2/3) + " << 0.520174502304546 << " m^(2/3) i" << std::endl;
-    sstream2 << std::endl;
-
-    std::string str1(sstream1.str());
-    std::string str2(sstream2.str());
-
-    std::cout << str1;
-    
-    if(str1 == str2) 
-    {
-        return(0);
-    } 
-    else 
-    {
-        std::cout << std::endl << str2 << std::endl;
-        
-        if(str1.size() < str2.size()) 
-        {
-            std::string::iterator iter =
-                std::mismatch(str1.begin(), str1.end(), str2.begin()).first;
-            
-            std::cout << iter - str1.begin() << std::endl;
-            std::cout << std::count(str1.begin(), iter, '\n') << std::endl;
-        } 
-        else 
-        {
-            std::string::iterator iter =
-                std::mismatch(str2.begin(), str2.end(), str1.begin()).first;
-            
-            std::cout << iter - str2.begin() << std::endl;
-            std::cout << std::count(str2.begin(), iter, '\n') << std::endl;
-        }
-        
-        return(-1);
-    }
+    return 0;
 }
