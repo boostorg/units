@@ -636,7 +636,15 @@ typename_string(const unit<Dimension, System>&)
 	return simplify_typename(typename reduce_unit< unit<Dimension,System> >::type());
 }
 
-using io_impl::symbol_string;
+template<class Dimension,class System>
+inline std::string
+symbol_string(const unit<Dimension, System>&)
+{
+    using io_impl::symbol_string;
+	return symbol_string(unit<Dimension,System>());
+}
+
+//using io_impl::symbol_string;
 using io_impl::name_string;
 
 /// Print an @c unit as a list of base units and exponents
@@ -654,8 +662,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
     } 
     else if (units::get_format(os) == raw_fmt) 
     {
-		// need to replace this with raw string
-        os << symbol_string(u);
+        os << io_impl::symbol_string(u);
     } 
     else if (units::get_format(os) == symbol_fmt) 
     {
