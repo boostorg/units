@@ -34,6 +34,7 @@
 #include <boost/units/physical_dimensions/acceleration.hpp>
 #include <boost/units/physical_dimensions/action.hpp>
 #include <boost/units/physical_dimensions/activity.hpp>
+#include <boost/units/physical_dimensions/angular_acceleration.hpp>
 #include <boost/units/physical_dimensions/angular_momentum.hpp>
 #include <boost/units/physical_dimensions/angular_velocity.hpp>
 #include <boost/units/physical_dimensions/area.hpp>

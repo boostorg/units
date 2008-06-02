@@ -25,6 +25,7 @@
 #include <boost/units/systems/si/action.hpp>
 #include <boost/units/systems/si/activity.hpp>
 #include <boost/units/systems/si/amount.hpp>
+#include <boost/units/systems/si/angular_acceleration.hpp>
 #include <boost/units/systems/si/angular_momentum.hpp>
 #include <boost/units/systems/si/angular_velocity.hpp>
 #include <boost/units/systems/si/area.hpp>
