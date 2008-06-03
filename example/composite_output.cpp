@@ -88,29 +88,29 @@ int main()
     using boost::units::cgs::second;
     using boost::units::cgs::dyne;
         
-	//[composite_output_snippet_2]
+    //[composite_output_snippet_2]
     std::cout << 2.0 * dyne << std::endl
-	          << symbol_format << 2.0 * dyne << std::endl
-			  << name_format << 2.0 * dyne << std::endl
-			  << symbol_format << gram*centimeter/second << std::endl
-			  << name_format << gram*centimeter/second << std::endl
-			  << symbol_format << gram*centimeter/(second*second) << std::endl
-			  << name_format << gram*centimeter/(second*second) << std::endl
-			  << symbol_string(scale<10,static_rational<-9> >()) << std::endl
-			  << name_string(scale<10,static_rational<-9> >()) << std::endl
-			  << symbol_format << si::nano << std::endl
-			  << name_format << si::nano << std::endl
-			  << symbol_format << si::farad << std::endl
-			  << name_format << si::farad << std::endl
-			  << symbol_format << 1.0*si::farad << std::endl
-			  << name_format << 1.0*si::farad << std::endl
-			  << symbol_format << si::farad*si::nano << std::endl
-			  << name_format << si::farad*si::nano << std::endl
-			  << symbol_format << 1.0*si::farad*si::nano << std::endl
-			  << name_format << 1.0*si::farad*si::nano << std::endl
-			  << symbol_format << si::nano*gram*centimeter/second << std::endl
-			  << name_format << si::nano*gram*centimeter/second << std::endl;
-	//]
-			  
-	return 0;
+              << symbol_format << 2.0 * dyne << std::endl
+              << name_format << 2.0 * dyne << std::endl
+              << symbol_format << gram*centimeter/second << std::endl
+              << name_format << gram*centimeter/second << std::endl
+              << symbol_format << gram*centimeter/(second*second) << std::endl
+              << name_format << gram*centimeter/(second*second) << std::endl
+              << symbol_string(scale<10,static_rational<-9> >()) << std::endl
+              << name_string(scale<10,static_rational<-9> >()) << std::endl
+              << symbol_format << si::nano << std::endl
+              << name_format << si::nano << std::endl
+              << symbol_format << si::farad << std::endl
+              << name_format << si::farad << std::endl
+              << symbol_format << 1.0*si::farad << std::endl
+              << name_format << 1.0*si::farad << std::endl
+              << symbol_format << si::farad*si::nano << std::endl
+              << name_format << si::farad*si::nano << std::endl
+              << symbol_format << 1.0*si::farad*si::nano << std::endl
+              << name_format << 1.0*si::farad*si::nano << std::endl
+              << symbol_format << si::nano*gram*centimeter/second << std::endl
+              << name_format << si::nano*gram*centimeter/second << std::endl;
+    //]
+              
+    return 0;
 }

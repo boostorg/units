@@ -100,10 +100,10 @@ struct base_unit_info
 
 enum format_mode 
 {
-    symbol_fmt = 0,		// default - reduces unit names to known symbols for both base and derived units
-    name_fmt,			// output full unit names for base and derived units
-	raw_fmt,			// output only symbols for base units 
-	typename_fmt		// output demangled typenames
+    symbol_fmt = 0,     // default - reduces unit names to known symbols for both base and derived units
+    name_fmt,           // output full unit names for base and derived units
+    raw_fmt,            // output only symbols for base units 
+    typename_fmt        // output demangled typenames
 };
 
 namespace detail {

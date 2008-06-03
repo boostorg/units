@@ -79,12 +79,12 @@ X2vQ1 : 1 m^(3/4) kg^(3/4) s^(-3/2)
 //]
 
 //[kitchen_sink_output_7
-l1 == l2	false
-l1 != l2	true
-l1 <= l2	true
-l1 < l2 	true
-l1 >= l2	false
-l1 > l2 	false
+l1 == l2    false
+l1 != l2    true
+l1 <= l2    true
+l1 < l2     true
+l1 >= l2    false
+l1 > l2     false
 //]
 
 dimless = 1
@@ -446,17 +446,17 @@ int main()
               << std::endl << std::endl;
     }
     
-	/// check moment of inertia/angular momentum/rotational energy
-	
-	//[kitchen_sink_snippet_9
-	std::cout << symbol_format
-	          << "I*w   = " << moment_of_inertia()*angular_velocity() << std::endl
-	          << "I*w/L = " << moment_of_inertia()*angular_velocity()/angular_momentum() << std::endl
-	          << "I*w^2 = " << moment_of_inertia()*pow<2>(angular_velocity()) << std::endl
+    /// check moment of inertia/angular momentum/rotational energy
+    
+    //[kitchen_sink_snippet_9
+    std::cout << symbol_format
+              << "I*w   = " << moment_of_inertia()*angular_velocity() << std::endl
+              << "I*w/L = " << moment_of_inertia()*angular_velocity()/angular_momentum() << std::endl
+              << "I*w^2 = " << moment_of_inertia()*pow<2>(angular_velocity()) << std::endl
               << std::endl;
-	//]
-	
-	//[kitchen_sink_snippet_10
+    //]
+    
+    //[kitchen_sink_snippet_10
 //    std::cout << typename_format 
 //              << quantity<capacitance>(1.0*farad) << std::endl
 //              << quantity<catalytic_activity>(1.0*katal) << std::endl
@@ -476,8 +476,8 @@ int main()
 //              << quantity<resistance>(1.0*ohm) << std::endl
 //              << std::endl;
     //]
-	
-	//[kitchen_sink_snippet_11
+    
+    //[kitchen_sink_snippet_11
 //    std::cout << raw_format 
 //              << quantity<capacitance>(1.0*farad) << std::endl
 //              << quantity<catalytic_activity>(1.0*katal) << std::endl
@@ -497,8 +497,8 @@ int main()
 //              << quantity<resistance>(1.0*ohm) << std::endl
 //              << std::endl;
     //]
-	
-	//[kitchen_sink_snippet_12
+    
+    //[kitchen_sink_snippet_12
     std::cout << symbol_format 
               << quantity<capacitance>(1.0*farad) << std::endl
               << quantity<catalytic_activity>(1.0*katal) << std::endl
@@ -518,8 +518,8 @@ int main()
               << quantity<resistance>(1.0*ohm) << std::endl
               << std::endl;
     //]
-	
-	//[kitchen_sink_snippet_13
+    
+    //[kitchen_sink_snippet_13
     std::cout << name_format 
               << quantity<capacitance>(1.0*farad) << std::endl
               << quantity<catalytic_activity>(1.0*katal) << std::endl
