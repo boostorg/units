@@ -383,7 +383,7 @@ is defined as exactly 0.3048 meters, so we can write the following
 
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, meter_base_unit, double, 0.3048);
 
-Alternately, we could use the SI length @c typedef:
+Alternately, we could use the SI length `typedef`:
 
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(foot_base_unit, SI::length, double, 0.3048);
 
@@ -391,7 +391,7 @@ Since the SI unit of length is the meter, these two definitions are equivalent.
 If these conversions have been defined, then converting between
 scaled forms of these units will also automatically work.
 
-*** insert discussion of @c is_implicitly_convertible ***
+*** insert discussion of `is_implicitly_convertible` ***
 
 The macro [___BOOST_UNITS_DEFAULT_CONVERSION] specifies a conversion
 that will be applied to a base unit when no direct conversion is
@@ -432,7 +432,7 @@ To summarize, conversions are allowed under the following conditions :
 * implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
     reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
 * implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if 
-    @c is_implicitly_convertible<Unit1,Unit2> is true, *** `Unit1` and `Unit2` are dimensionally consistent ***, and `Y` and `Z` are convertible.
+    `is_implicitly_convertible<Unit1,Unit2>` is true, *** `Unit1` and `Unit2` are dimensionally consistent ***, and `Y` and `Z` are convertible.
 * assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
   conditions as implicit conversion.
 * `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value]. Doing so, 
@@ -900,8 +900,8 @@ It is also possible to define base units that have derived rather than base dime
 
 [import ../example/composite_output.cpp]
 
-If a unit has a special name and/or symbol, the free functions @c name_string and
-@c symbol_string can be overloaded directly. 
+If a unit has a special name and/or symbol, the free functions `name_string` and
+`symbol_string` can be overloaded directly. 
 
 [composite_output_snippet_1]
 
@@ -909,26 +909,24 @@ In this case, any unit that reduces
 to the overloaded unit will be output with the replacement symbol. 
 
 Special names and symbols for the SI and CGS unit systems are found in 
-[headerref units/systems/si/io.hpp] and [headerref units/systems/cgs/io.hpp], 
+[headerref boost/units/systems/si/io.hpp] and [headerref boost/units/systems/cgs/io.hpp], 
 respectively. If these headers are not included, the output will simply follow
 default rules using the appropriate fundamental dimensions. 
 Note that neither of these functions is defined for quantities 
 because doing so would require making assumptions on how the corresponding value
 type should be formatted.
 
-Three @c ostream formatters, @c symbol_format, @c name_format, and @c typename_format
+Three `ostream` formatters, `symbol_format`, `name_format`, and `typename_format`
 are provided for convenience. These select the textual representation of units 
-provided by @c symbol_string or @c name_string in the first two cases, while the
+provided by `symbol_string` or `name_string` in the first two cases, while the
 latter returns a demangled typename for debugging purposes. Formatting of scaled
 unit is also done correctly.
-
-[composite_output_snippet_1]
 
 [endsect]
 
 [section:ConversionFactor Conversion Factor]
 
-This code demonstrates the use of the @c conversion_factor free function to determine
+This code demonstrates the use of the `conversion_factor` free function to determine
 the scale factor between two units.
 
 ([@../../example/conversion_factor.cpp conversion_factor.cpp])
@@ -1122,7 +1120,7 @@ consider the search and replace problem allowing this poses:
 	
 Here, the intent is clear - we want a length of one in the SI system, which is one meter. However,
 imagine some well-intentioned coder attempting to reuse this code, but to have it perform the
-calculations in the CGS unit system instead. After searching for @c si:: and replacing it with @c cgs:: ,
+calculations in the CGS unit system instead. After searching for `si::` and replacing it with `cgs::` ,
 we have:
 
 	quantity<cgs::length>	q(1.0);
