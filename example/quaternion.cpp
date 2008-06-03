@@ -199,7 +199,9 @@ int main(void)
               << "L-L     = " << L-L << std::endl
               << "L*L     = " << L*L << std::endl
               << "L/L     = " << L/L << std::endl
-              << "L^3     = " << pow<3>(L) << std::endl
+              // unfortunately, without qualification msvc still
+              // finds boost::math::pow by ADL.
+              << "L^3     = " << boost::units::pow<3>(L) << std::endl
 //              << "L^(3/2) = " << pow< static_rational<3,2> >(L) << std::endl
 //              << "3vL     = " << root<3>(L) << std::endl
 //              << "(3/2)vL = " << root< static_rational<3,2> >(L) << std::endl
@@ -219,7 +221,7 @@ int main(void)
               << "L-L     = " << L-L << std::endl
 //              << "L*L     = " << L*L << std::endl
 //              << "L/L     = " << L/L << std::endl
-              << "L^3     = " << pow<3>(L) << std::endl
+              << "L^3     = " << boost::units::pow<3>(L) << std::endl
 //              << "L^(3/2) = " << pow< static_rational<3,2> >(L) << std::endl
 //              << "3vL     = " << root<3>(L) << std::endl
 //              << "(3/2)vL = " << root< static_rational<3,2> >(L) << std::endl
