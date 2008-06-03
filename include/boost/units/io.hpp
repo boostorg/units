@@ -336,44 +336,35 @@ struct scale_name_string_impl<0>
 
 } // namespace detail
 
-namespace io_impl {
+namespace detail {
 
 // These two overloads of symbol_string and name_string will
 // will pick up homogeneous_systems.  They simply call the
 // appropriate function with a heterogeneous_system.
-template<class Dimension,class System>
+template<class Dimension,class System, class SubFormatter>
 inline std::string
-symbol_string(const unit<Dimension,System>&)
+to_string_impl(const unit<Dimension,System>&, SubFormatter f)
 {
-    return symbol_string(typename reduce_unit<unit<Dimension, System> >::type());
-}
-
-template<class Dimension,class System>
-inline std::string
-name_string(const unit<Dimension,System>&)
-{
-    return name_string(typename reduce_unit<unit<Dimension, System> >::type());
+    return f(typename reduce_unit<unit<Dimension, System> >::type());
 }
 
 /// INTERNAL ONLY
 // this overload picks up heterogeneous units that are not scaled.
-template<class Dimension,class Units>
+template<class Dimension,class Units, class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::symbol_string_impl<mpl::size<Units>::value>::template apply<
-        typename mpl::begin<Units>::type>::value(str);
-
+    f.template append_units_to<Units>(str);
     return(str);
 }
 
 // This overload is a special case for heterogeneous_system which
 // is really unitless
 /// INTERNAL ONLY
+template<class Subformatter>
 inline std::string
-symbol_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, dimensionless_type> > >&)
+to_string_impl(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, dimensionless_type> > >&, Subformatter)
 {
     return("dimensionless");
 }
@@ -381,39 +372,35 @@ symbol_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_
 // this overload deals with heterogeneous_systems which are unitless
 // but scaled.
 /// INTERNAL ONLY
-template<class Scale>
+template<class Scale, class Subformatter>
 inline std::string
-symbol_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, Scale> > >&)
+to_string_impl(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, Scale> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
-
+    f.template append_scale_to<Scale>(str);
     return(str);
 }
 
 // this overload deals with scaled units.
 /// INTERNAL ONLY
-template<class Dimension,class Units,class Scale>
+template<class Dimension,class Units,class Scale, class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
 
-    std::string without_scale = symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
+    f.template append_scale_to<Scale>(str);
+
+    std::string without_scale = f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
     
-	if (without_scale == boost::units::io_impl::symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) 
-	{
+    if (f.is_default_string(without_scale, unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >()))
+    {
         str += "(";
         str += without_scale;
         str += ")";
     } 
-	else 
-	{
+    else 
+    {
         str += without_scale;
     }
 
@@ -424,16 +411,14 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 // raised to the first power.  It causes si::nano * si::meters to not
 // put parentheses around the meters.  i.e. nm rather than n(m)
 /// INTERNAL ONLY
-template<class Dimension,class Unit,class Scale>
+template<class Dimension,class Unit,class Scale, class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
 
-    str += symbol_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
+    f.template append_scale_to<Scale>(str);
+    str += f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
 
     return(str);
 }
@@ -443,15 +428,12 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 // base unit raised to the first power.  It is treated the
 // same as any other unscaled unit.
 /// INTERNAL ONLY
-template<class Dimension,class Unit>
+template<class Dimension,class Unit,class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, dimensionless_type> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, dimensionless_type> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::symbol_string_impl<mpl::size<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::type>::value(str);
-
+    f.template append_units_to<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >(str);
     return(str);
 }
 
@@ -462,11 +444,11 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 // si::milli * si::kilograms will print g rather than mkg
 //
 /// INTERNAL ONLY
-template<class Dimension,class Unit,class UnitScale, class Scale>
+template<class Dimension,class Unit,class UnitScale, class Scale, class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&, Subformatter f)
 {
-    return(symbol_string(
+    return(f(
         unit<
             Dimension,
             heterogeneous_system<
@@ -482,170 +464,101 @@ symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_im
 // this overload disambuguates between the overload for an unscaled unit
 // and the overload for a scaled base unit raised to the first power.
 /// INTERNAL ONLY
-template<class Dimension,class Unit,class UnitScale>
+template<class Dimension,class Unit,class UnitScale,class Subformatter>
 inline std::string
-symbol_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
+to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&, Subformatter f)
 {
     std::string str;
-    
-    detail::symbol_string_impl<mpl::size<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
-
+    f.template append_units_to<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >(str);
     return(str);
 }
 
-/// INTERNAL ONLY
-template<class Dimension,class Units>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >&)
-{
-    std::string str;
-    
-    detail::name_string_impl<mpl::size<Units>::value>::template apply<
-        typename mpl::begin<Units>::type>::value(str);
-
-    return(str);
-}
-
-/// INTERNAL ONLY
-inline std::string
-name_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, dimensionless_type> > >&)
-{
-    return("dimensionless");
-}
-
-/// INTERNAL ONLY
-template<class Scale>
-inline std::string
-name_string(const unit<dimensionless_type, heterogeneous_system<heterogeneous_system_impl<dimensionless_type, dimensionless_type, Scale> > >&)
-{
-    std::string str;
-    
-    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
-
-    return(str);
-}
-
-/// INTERNAL ONLY
-template<class Dimension,class Units,class Scale>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&)
-{
-    std::string str;
-    
-    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
-
-    std::string without_scale = name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
-    
-	if (without_scale == boost::units::io_impl::name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >())) 
-	{
-        str += "(";
-        str += without_scale;
-        str += ")";
-    } 
-	else
-	{
-        str += without_scale;
+struct format_raw_symbol_impl {
+    template<class Units>
+    void append_units_to(std::string& str) {
+        detail::symbol_string_impl<mpl::size<Units>::value>::template apply<
+            typename mpl::begin<Units>::type>::value(str);
     }
+    template<class Scale>
+    void append_scale_to(std::string& str) {
+        detail::scale_symbol_string_impl<mpl::size<Scale>::value>::template apply<
+            typename mpl::begin<Scale>::type>::value(str);
+    }
+    template<class Unit>
+    std::string operator()(const Unit& unit) {
+        return(to_string_impl(unit, *this));
+    }
+    template<class Unit>
+    bool is_default_string(const std::string&, const Unit&) {
+        return(true);
+    }
+};
 
-    return(str);
-}
+struct format_symbol_impl : format_raw_symbol_impl {
+    template<class Unit>
+    std::string operator()(const Unit& unit) {
+        return(symbol_string(unit));
+    }
+    template<class Unit>
+    bool is_default_string(const std::string& str, const Unit& unit) {
+        return(str == to_string_impl(unit, format_raw_symbol_impl()));
+    }
+};
 
-/// INTERNAL ONLY
-template<class Dimension,class Unit,class Scale>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&)
-{
-    std::string str;
-    
-    detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
-        typename mpl::begin<Scale>::type>::value(str);
+struct format_raw_name_impl {
+    template<class Units>
+    void append_units_to(std::string& str) {
+        detail::name_string_impl<mpl::size<Units>::value>::template apply<
+            typename mpl::begin<Units>::type>::value(str);
+    }
+    template<class Scale>
+    void append_scale_to(std::string& str) {
+        detail::scale_name_string_impl<mpl::size<Scale>::value>::template apply<
+            typename mpl::begin<Scale>::type>::value(str);
+    }
+    template<class Unit>
+    std::string operator()(const Unit& unit) {
+        return(to_string_impl(unit, *this));
+    }
+    template<class Unit>
+    bool is_default_string(const std::string&, const Unit&) {
+        return(true);
+    }
+};
 
-    str += name_string(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
+struct format_name_impl : format_raw_name_impl {
+    template<class Unit>
+    std::string operator()(const Unit& unit) {
+        return(name_string(unit));
+    }
+    template<class Unit>
+    bool is_default_string(const std::string& str, const Unit& unit) {
+        return(str == to_string_impl(unit, format_raw_name_impl()));
+    }
+};
 
-    return(str);
-}
-
-/// INTERNAL ONLY
-template<class Dimension,class Unit>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, dimensionless_type> > >&)
-{
-    std::string str;
-    
-    detail::name_string_impl<mpl::size<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type> >::type>::value(str);
-
-    return(str);
-}
-
-/// INTERNAL ONLY
-template<class Dimension,class Unit,class UnitScale, class Scale>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&)
-{
-    return(name_string(
-        unit<
-            Dimension,
-            heterogeneous_system<
-                heterogeneous_system_impl<
-                    list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>,
-                    Dimension,
-                    typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
-                >
-            >
-        >()));
-}
-
-/// INTERNAL ONLY
-// disambiguate
-template<class Dimension,class Unit,class UnitScale>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&)
-{
-    std::string str;
-    
-    detail::name_string_impl<mpl::size<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::value>::template apply<
-        typename mpl::begin<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >::type>::value(str);
-    
-	return(str);
-}
-
-template<class Dimension,class System>
-inline std::string
-name_string(const unit<Dimension, heterogeneous_system<System> >&)
-{
-    std::string str;
-    
-    detail::scale_name_string_impl<mpl::size<typename System::scale>::value>::template apply<
-        typename mpl::begin<typename System::scale>::type>::value(str);
-    detail::name_string_impl<mpl::size<typename System::type>::value>::template apply<
-        typename mpl::begin<typename System::type>::type>::value(str);
-
-    return(str);
-}
-
-} // namespace io_impl
+} // namespace detail
 
 template<class Dimension,class System>
 inline std::string
 typename_string(const unit<Dimension, System>&)
 {
-	return simplify_typename(typename reduce_unit< unit<Dimension,System> >::type());
+    return simplify_typename(typename reduce_unit< unit<Dimension,System> >::type());
 }
 
 template<class Dimension,class System>
 inline std::string
 symbol_string(const unit<Dimension, System>&)
 {
-    using io_impl::symbol_string;
-	return symbol_string(unit<Dimension,System>());
+    return detail::to_string_impl(unit<Dimension,System>(), detail::format_symbol_impl());
 }
 
-//using io_impl::symbol_string;
-using io_impl::name_string;
+template<class Dimension,class System>
+inline std::string
+name_string(const unit<Dimension, System>&)
+{
+    return detail::to_string_impl(unit<Dimension,System>(), detail::format_name_impl());
+}
 
 /// Print an @c unit as a list of base units and exponents
 ///
@@ -662,7 +575,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
     } 
     else if (units::get_format(os) == raw_fmt) 
     {
-        os << io_impl::symbol_string(u);
+        os << detail::to_string_impl(u, detail::format_raw_symbol_impl());
     } 
     else if (units::get_format(os) == symbol_fmt) 
     {
