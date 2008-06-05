@@ -800,7 +800,7 @@ optimization and testing is not trivial, so some care must be taken in profiling
 is also critical to have a compiler capable of optimizing the many template instantiations
 and inline calls effectively to achieve maximal performance. Zero overhead for this test
 has been verified using gcc 4.0.1, and icc 9.0, 10.0, and 10.1 on Mac OS 10.4 and 10.5, and
-using *** on ***.
+using msvc 8.0 on Windows XP.
 
 [endsect]
 
@@ -889,10 +889,6 @@ measurement of temperature difference. This is accomplished by using the [___abs
 First we define a system using the predefined fahrenheit base unit:
 
 [temperature_snippet_1]
-
-For convenience we make conversions implicit:
-
-[temperature_snippet_2]
 
 Now we can create some quantities:
 
