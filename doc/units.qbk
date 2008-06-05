@@ -28,6 +28,7 @@
 [def __base_unit [classref boost::units::base_unit base_unit]]
 [def __base_dimension [classref boost::units::base_dimension base_dimension]]
 [def __scaled_base_unit [classref boost::units::scaled_base_unit base_unit]]
+[def __make_scaled_unit [classref boost::units::make_scaled_unit make_scaled_unit]]
 
 [def __unary_plus_typeof_helper [classref boost::units::unary_plus_typeof_helper unary_plus_typeof_helper]]
 [def __unary_minus_typeof_helper [classref boost::units::unary_minus_typeof_helper unary_minus_typeof_helper]]
@@ -284,6 +285,8 @@ possible to provide overloads for `std::pow` that function correctly for [___uni
 free functions [___pow] and [___root] that are templated on integer and [___static_rational] values and can take as an argument 
 any type for which the utility classes [___power_typeof_helper] and [___root_typeof_helper] have been defined.
 
+[section Base Units]
+
 Base units are defined much like base dimensions.
 
     template<class Derived, class Dimensions, long N> struct base_unit { ... };
@@ -312,6 +315,48 @@ allowing for internationalization through a facet/locale-type mechanism.
 The `name()` and `symbol()` methods of [___base_unit_info] provide full and short names for the base unit. With these definitions, 
 we have the rudimentary beginnings of our unit system, which can be used to determine reduced dimensions for arbitrary 
 unit calculations.
+
+[endsect]
+
+[section Scaled Base Units]
+
+Now, it is also possible to define a base unit as being a multiple of
+another base unit.  For example, the way that `kilogram_base_unit` is
+actually defined by the library is along the following lines
+
+    struct gram_base_unit : boost::units::base_unit<gram_base_unit, mass_dimension, 1> {};
+    typedef scaled_base_unit<gram_base_unit, scale<10, static_rational<3> > > kilogram_base_unit;
+
+This basically defines a kilogram as being 10^3 times a gram.
+
+There are several advantages to this approach.
+
+* It reflects the real meaning of these units better than treating them as independent units.
+* If a conversion is defined between grams or kilograms and some other units,
+  it will automatically work for both kilograms and grams, with only one specialization.
+* Similarly, if the symbol for grams is defined as "g", then the symbol for kilograms
+  will be "kg" without any extra effort.
+
+[endsect]
+
+[section Scaled Units]
+
+We can also scale a [___unit] as a whole, rather than scaling the individual
+base units which comprise it.  For this purpose, we use the metafunction
+[___make_scaled_unit].  The main motivation for this feature is the metric
+prefixes defined in [headerref boost/units/systems/si/prefixes.hpp].
+
+A simple example of its usage would be.
+
+    typedef make_scaled_unit<si::time, scale<10, static_rational<-9> > >::type nanosecond;
+
+nanosecond is a specialization of [___unit], and can be
+used in a quantity normally.
+
+    quantity<nanosecond> t(1.0 * si::seconds);
+    std::cout << t << std::endl;    // prints 1e9 ns
+
+[endsect]
 
 [endsect]
 
@@ -445,12 +490,6 @@ Because dimensionless quantities have no associated units, they behave as normal
 the underlying value type or types that are convertible to/from that value type.
 
 [endsect]
-
-[endsect]
-
-[section:Scaled_Units Scaled Units]
-
-Need to discuss scaled units and prefixes here since they are mentioned in the next section...
 
 [endsect]
 
