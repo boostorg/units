@@ -24,9 +24,7 @@ Output:
 { 32 } °F
 { 273.15 } K
 { 273.15 } K
-{ 273.15 } K
 [ 32 ] °F
-[ 17.7778 ] K
 [ 17.7778 ] K
 [ 17.7778 ] K
 //]
@@ -65,18 +63,6 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 
 } // fahrenheit
 
-//[temperature_snippet_2
-template<>
-struct is_implicitly_convertible< 
-           fahrenheit::temperature, 
-           si::temperature > : public mpl::true_ { };
-
-template<>
-struct is_implicitly_convertible< 
-           absolute<fahrenheit::temperature>, 
-           absolute<si::temperature> > : public mpl::true_ { };
-//]
-
 } // namespace units
 
 } // namespace boost
@@ -90,9 +76,7 @@ int main()
         32.0*fahrenheit::degrees);
     
     quantity<absolute<si::temperature> >            T2p(T1p);
-    quantity<absolute<si::temperature> >            T3p = T1p;
     quantity<si::temperature>                       T2v(T1v);
-    quantity<si::temperature>                       T3v = T1v;
     //]
 
     typedef conversion_helper<
@@ -105,11 +89,9 @@ int main()
     std::cout << T1p << std::endl
               << absolute_conv_type::convert(T1p) << std::endl
               << T2p << std::endl
-              << T3p << std::endl
               << T1v << std::endl
               << relative_conv_type::convert(T1v) << std::endl
               << T2v << std::endl
-              << T3v << std::endl
               << std::endl;
 
     return 0;

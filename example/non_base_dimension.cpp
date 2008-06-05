@@ -56,18 +56,6 @@ typedef unit<volume_dimension,us> us_gallon;
 
 //]
 
-template<>
-struct is_implicitly_convertible<unit<volume_dimension,imperial>,
-                                 unit<volume_dimension,us> > :
-    public mpl::true_
-{ };
-
-template<>
-struct is_implicitly_convertible<unit<volume_dimension,us>,
-                                 unit<volume_dimension,imperial> > :
-    public mpl::true_
-{ };
-
 } // namespace units
 
 } // namespace boost
@@ -83,11 +71,8 @@ int main(void)
     quantity<imperial_gallon>   ig1(1.0*imperial_gallon());
     quantity<us_gallon>         ug1(1.0*us_gallon());
     
-    quantity<imperial_gallon>   ig2;
-    quantity<us_gallon>         ug2;
-    
-    ig2 = ug1;
-    ug2 = ig1;
+    quantity<imperial_gallon>   ig2(ug1);
+    quantity<us_gallon>         ug2(ig1);
     
     return 0;
 }

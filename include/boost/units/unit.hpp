@@ -81,6 +81,7 @@ struct reduce_unit<unit<Dim, System> >
     > type;
 };
 
+/// INTERNAL ONLY
 template<class S1,class S2> 
 struct is_implicitly_convertible :
     boost::is_same<typename reduce_unit<S1>::type, typename reduce_unit<S2>::type>

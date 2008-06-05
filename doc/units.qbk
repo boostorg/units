@@ -436,8 +436,6 @@ Since the SI unit of length is the meter, these two definitions are equivalent.
 If these conversions have been defined, then converting between
 scaled forms of these units will also automatically work.
 
-*** insert discussion of `is_implicitly_convertible` ***
-
 The macro [___BOOST_UNITS_DEFAULT_CONVERSION] specifies a conversion
 that will be applied to a base unit when no direct conversion is
 possible.  This can be used to make arbitrary conversions work
@@ -476,8 +474,6 @@ To summarize, conversions are allowed under the following conditions :
     and if `Y` and `Z` are implicitly convertible.
 * implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
     reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
-* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if 
-    `is_implicitly_convertible<Unit1,Unit2>` is true, *** `Unit1` and `Unit2` are dimensionally consistent ***, and `Y` and `Z` are convertible.
 * assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
   conditions as implicit conversion.
 * `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value]. Doing so, 
@@ -1044,8 +1040,6 @@ Relatively complete SI and CGS unit systems are provided in [headerref boost/uni
     template<class Dim,class System> struct is_unit< unit<Dim,System> >;
     template<class Dim,class System> struct is_unit_of_system< unit<Dim,System>,System >;
     template<class Dim,class System> struct is_unit_of_dimension< unit<Dim,System>,Dim >;
-    template<class Tag,class System1,class System2> struct base_unit_is_implicitly_convertible;
-    template<class S1,class D1,class S2,class D2> struct is_implicitly_convertible< unit<D1,S1>,unit<D2,S2> >;
 
     template<class Unit,class Y> struct is_quantity< quantity<Unit,Y> >;
     template<class Dim,class System,class Y> struct is_quantity_of_system< quantity<unit<Dim,System>,Y>,System >;

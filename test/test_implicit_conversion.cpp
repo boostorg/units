@@ -27,8 +27,6 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
-//#include <boost/units/systems/conversions/convert_si_to_cgs.hpp>
-//#include <boost/units/systems/conversions/convert_cgs_to_si.hpp>
 
 namespace bu = boost::units;
 
