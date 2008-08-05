@@ -8,7 +8,7 @@
 # http://www.boost.org/LICENSE_1_0.txt
 
 project units_test :
-    requirements <include>$(BOOST_ROOT) <include>../../.. <warnings>all <toolset>msvc:<asynch-exceptions>on
+    requirements <include>$(BOOST_ROOT) <include>../../.. <toolset>msvc:<asynch-exceptions>on
 ;
 
 check-conversion-dependencies = [ path.glob-tree ../../../boost/units/systems/base_units : *.hpp ] ;
@@ -32,6 +32,7 @@ alias test_framework : $(BOOST_ROOT)/libs/test/build//boost_unit_test_framework 
     [ compile test_dimensionless_ice2.cpp : : ]
     [ compile test_mixed_value_types.cpp : : ]
     [ compile test_complicated_system.cpp : : ]
+    [ compile test_reduce_unit.cpp ]
     [ run test_dimensionless_quantity.cpp : : : : ]
     [ run test_implicit_conversion.cpp : : : : ]
     [ run test_quantity.cpp : : : : ]
@@ -44,6 +45,7 @@ alias test_framework : $(BOOST_ROOT)/libs/test/build//boost_unit_test_framework 
     [ run test_limits.cpp : : : : ]
     [ run test_custom_unit.cpp : : : : ]
     [ run test_scaled_conversion.cpp : : : : ]
+    [ run test_lambda.cpp : : : : ]
     [ run test_scaled_unit.cpp test_framework : : : : ]
 #    [ run check_conversion_defs.cpp $(checklibs) : : : <dependency>$(check-conversion-dependencies) : ]
     [ compile-fail fail_implicit_conversion.cpp : : ]

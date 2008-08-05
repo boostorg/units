@@ -11,7 +11,11 @@ import path ;
 import quickbook ;
 using boostbook ;
 using doxygen ;
-import generate_base_units ;
+import print ;
+import regex ;
+import sequence ;
+
+path-constant here : . ;
 
 rule run_doxygen ( target : files * : name : expand ? )
 {
@@ -30,7 +34,7 @@ doxygen $(target)
                                    \"BOOST_UNITS_TYPEOF(a)=typeof(a)\" \\
                                    \"BOOST_PREVENT_MACRO_SUBSTITUTION=\" \\
                                    \"BOOST_UNITS_HAS_TYPEOF=1\" \\
-                                   \"BOOST_UNITS_NON_SI_UNIT(namespace_, name_, symbol_, factor, other_unit, id)= \\
+                                   \"BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(namespace_, name_, name_string, symbol_, factor, other_unit, id)= \\
                                    namespace boost { namespace units { namespace namespace_ { \\
                                      struct name_ ## _base_unit : boost::units::base_unit<name_ ## _base_unit, other_unit::dimension_type, id> { \\
                                        static const char* name(); \\
@@ -51,23 +55,23 @@ doxygen $(target)
 
 run_doxygen units_reference
   :
-    [ glob ../../../boost/units/*.hpp ]
+    [ glob $(here)/../../../boost/units/*.hpp ]
   :
     "Units Reference"
   ;
 
 run_doxygen si_reference
   :
-    ../../../boost/units/systems/si.hpp
-    [ path.glob-tree ../../../boost/units/systems/si : *.hpp : detail ]
+    $(here)/../../../boost/units/systems/si.hpp
+    [ path.glob-tree $(here)/../../../boost/units/systems/si : *.hpp : detail ]
   :
     "SI System Reference"
   ;
 
 run_doxygen cgs_reference
   :
-    ../../../boost/units/systems/cgs.hpp
-    [ path.glob-tree ../../../boost/units/systems/cgs : *.hpp : detail ]
+    $(here)/../../../boost/units/systems/cgs.hpp
+    [ path.glob-tree $(here)/../../../boost/units/systems/cgs : *.hpp : detail ]
   :
     "CGS System Reference"
   ;
@@ -75,7 +79,7 @@ run_doxygen cgs_reference
 rule make_base_units_doc ( directory : name ) {
     run_doxygen $(directory)_base_units_reference
       :
-        [ path.glob-tree ../../../boost/units/base_units/$(directory) : *.hpp : detail conversions.hpp ]
+        [ path.glob-tree $(here)/../../../boost/units/base_units/$(directory) : *.hpp : detail conversions.hpp ]
       :
         "$(name) Base Units Reference"
       ;
@@ -95,8 +99,8 @@ all_base_units_doc = $(all_base_units_doc)_base_units_reference ;
 
 run_doxygen dimensions_reference
   :
-    ../../../boost/units/physical_dimensions.hpp
-    [ path.glob-tree ../../../boost/units/physical_dimensions : *.hpp : detail ]
+    $(here)/../../../boost/units/physical_dimensions.hpp
+    [ path.glob-tree $(here)/../../../boost/units/physical_dimensions : *.hpp : detail ]
   :
     "Dimensions Reference"
   ;
@@ -104,31 +108,68 @@ run_doxygen dimensions_reference
 run_doxygen trig_reference
   :
     #../../../boost/units/systems/trig.hpp
-    [ path.glob-tree ../../../boost/units/systems/angle : *.hpp : detail ]
+    [ path.glob-tree $(here)/../../../boost/units/systems/angle : *.hpp : detail ]
   :
     "Trigonometry and Angle System Reference"
   ;
 
 run_doxygen temperature_reference
   :
-    [ path.glob-tree ../../../boost/units/systems/temperature : *.hpp : detail ]
+    [ path.glob-tree $(here)/../../../boost/units/systems/temperature : *.hpp : detail ]
   :
     "Temperature System Reference"
   ;
 
 run_doxygen abstract_reference
   :
-    ../../../boost/units/systems/abstract.hpp
+    $(here)/../../../boost/units/systems/abstract.hpp
   :
     "Abstract System Reference"
   ;
 
-generated-qbk base_units : [ path.glob-tree ../../../boost/units/base_units : *.hpp : detail conversions.hpp ] ;
+rule less ( a b ) {
+    if [ path.basename $(a) ]  < [ path.basename $(b) ]  {
+        return true ;
+    }
+}
+
+rule generate-qbk ( target : sources * : properties * ) {
+    print.output $(target) ;
+    local as-path = [ sequence.transform path.make : $(sources:G=) ] ;
+    local known = ;
+    local duplicated = ;
+    for local file in $(as-path) {
+        local base = [ path.basename $(file) ] ;
+        if $(base) in $(known) {
+            if ! $(base) in $(duplicated) {
+                duplicated += $(base) ;
+            }
+        } else {
+            known += $(base) ;
+        }
+    }
+    for local file in [ sequence.insertion-sort $(as-path) : less ] {
+        local output_filename = [ path.relative-to [ path.make $(here)/../../.. ] $(file) ] ;
+        local base_filename = [ path.basename $(file) ] ;
+        local base_unit = [ regex.replace $(base_filename) "\\.hpp" "" ] ;
+        if $(base_filename) in $(duplicated) {
+            # tack the directory name onto the end
+            local dir-name = [ path.basename [ path.parent $(file) ] ] ;
+            base_unit = "$(base_unit) ($(dir-name))" ;
+        }
+# this looks better, but it won't work until my boostbook patch for
+# annotation.xsl gets applied.
+#        print.text "[headerref $(output_filename) $(base_unit)]\\n" : overwrite ;
+        print.text "[headerref $(output_filename)]\\n" : overwrite ;
+    }
+}
+
+make base_units.qbk : [ path.glob-tree $(here)/../../../boost/units/base_units : *.hpp : detail conversions.hpp ] : @generate-qbk ;
 explicit base_units ;
 
-install base_units_install : base_units : <location>. ;
+install base_units_install : base_units.qbk : <location>. ;
 
-boostbook standalone
+xml units
   :
     units.qbk
   :
@@ -141,6 +182,12 @@ boostbook standalone
     <dependency>trig_reference
     <dependency>temperature_reference
     <dependency>abstract_reference
+;
+
+boostbook standalone
+  :
+    units
+  :
     <xsl:param>toc.max.depth=1
     <xsl:param>toc.section.depth=8
     <xsl:param>chunk.section.depth=8

@@ -17,7 +17,7 @@ namespace boost {
 
 namespace units {
 
-struct one { };
+struct one { one() {} };
 
 template<class T>
 struct multiply_typeof_helper<one, T>
@@ -51,7 +51,8 @@ inline T operator*(const T& t, const one&)
 
 inline one operator*(const one&, const one&)
 {
-    return(one());
+    one result;
+    return(result);
 }
 
 template<class T>
@@ -86,7 +87,8 @@ inline T operator/(const one&, const T& t)
 
 inline one operator/(const one&, const one&)
 {
-    return(one());
+    one result;
+    return(result);
 }
 
 } // namespace units
