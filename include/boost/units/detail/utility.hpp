@@ -21,7 +21,7 @@
 #include <boost/cstdint.hpp>
 #include <boost/limits.hpp>
 
-#if defined(__GNUC__) && defined(__cplusplus) && (__GNUC__ >= 3) && !defined(_RWSTD_VER)
+#if (__GNUC__ && __cplusplus && __GNUC__ >= 3)
 #define BOOST_UNITS_USE_DEMANGLING
 #endif // __GNUC__
 

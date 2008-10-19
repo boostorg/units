@@ -19,7 +19,7 @@ namespace units {
 
 namespace detail {
 
-struct no { no() {} char dummy; };
+typedef char no;
 struct yes { no dummy[2]; };
 
 template<bool> struct ordinal_has_already_been_defined;
@@ -39,13 +39,13 @@ struct ordinal_has_already_been_defined<false>  { typedef void type; };
 template<class T>
 detail::no 
 boost_units_is_registered(const T&) 
-{ detail::no result; return(result); }
+{ return(detail::no()); }
 
 /// INTERNAL ONLY
 template<class T>
 detail::no 
 boost_units_unit_is_registered(const T&) 
-{ detail::no result; return(result); }
+{ return(detail::no()); }
 
 } // namespace units
 

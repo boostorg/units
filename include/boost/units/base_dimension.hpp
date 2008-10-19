@@ -77,13 +77,13 @@ class base_dimension :
         /// INTERNAL ONLY
         friend detail::yes 
         boost_units_is_registered(const units::base_dimension_ordinal<N>&) 
-        { detail::yes result; return(result); }
+        { return(detail::yes()); }
         
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
         friend detail::yes 
         boost_units_is_registered(const units::base_dimension_pair<Derived, N>&) 
-        { detail::yes result; return(result); }
+        { return(detail::yes()); }
 };
 
 } // namespace units

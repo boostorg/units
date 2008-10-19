@@ -91,7 +91,6 @@ class quantity
         // base units are not the same as units.
         BOOST_MPL_ASSERT_NOT((detail::is_base_unit<Unit>));
         enum { force_instantiation_of_unit = sizeof(Unit) };
-        typedef void (quantity::*unspecified_null_pointer_constant_type)(int*******);
     public:
         typedef quantity<Unit,Y>                        this_type;
         
@@ -99,11 +98,6 @@ class quantity
         typedef Unit        unit_type;
  
         quantity() : val_() 
-        { 
-            BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
-        }
-
-        quantity(unspecified_null_pointer_constant_type) : val_() 
         { 
             BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(this_type, Y);
         }
@@ -281,10 +275,10 @@ class quantity
         this_type& operator/=(const value_type& source) { val_ /= source; return *this; }
     
         /// Construct quantity directly from @c value_type (potentially dangerous).
-        static this_type from_value(const value_type& val)  { return this_type(val, 0); }
+        static this_type from_value(const value_type& val)  { return this_type(val); }
 
     protected:
-        explicit quantity(const value_type& val, int) : val_(val) { }
+        explicit quantity(const value_type& val) : val_(val) { }
         
     private:
         value_type    val_;
