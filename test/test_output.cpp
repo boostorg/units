@@ -44,7 +44,7 @@ struct meter_base_unit : boost::units::base_unit<meter_base_unit, boost::units::
     static const char* symbol() { return("m"); }
 };
 
-struct second_base_unit : boost::units::base_unit<meter_base_unit, boost::units::time_dimension, 2> {
+struct second_base_unit : boost::units::base_unit<second_base_unit, boost::units::time_dimension, 2> {
     static const char* name() { return("second"); }
     static const char* symbol() { return("s"); }
 };

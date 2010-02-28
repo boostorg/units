@@ -200,7 +200,7 @@ struct determine_extra_equations_skip_zeros_impl<true, false> {
             RemainingRows == 2  // the next one will be the last.
         >::template apply<
             typename RowsBegin::next,
-            RemainingRows - 1,
+            (RemainingRows - 1),
             CurrentColumn,
             TotalColumns,
             Result

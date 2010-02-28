@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2007-2008 Steven Watanabe
+// Copyright (C) 2007-2010 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -12,19 +12,17 @@
 #define BOOST_UNITS_IO_HPP
 
 #include <cassert>
+#include <cmath>
 #include <string>
 #include <iosfwd>
 #include <ios>
 #include <sstream>
 
-#include <boost/mpl/size.hpp>
-#include <boost/mpl/begin.hpp>
-#include <boost/mpl/next.hpp>
-#include <boost/mpl/deref.hpp>
 #include <boost/serialization/nvp.hpp>
 
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/heterogeneous_system.hpp>
+#include <boost/units/make_scaled_unit.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/static_rational.hpp>
@@ -85,6 +83,8 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
 template<class BaseUnit>
 struct base_unit_info
 {
+    /// INTERNAL ONLY
+    typedef void base_unit_info_primary_template;
     /// The full name of the unit (returns BaseUnit::name() by default)
     static std::string name()
     {
@@ -103,7 +103,16 @@ enum format_mode
     symbol_fmt = 0,     // default - reduces unit names to known symbols for both base and derived units
     name_fmt,           // output full unit names for base and derived units
     raw_fmt,            // output only symbols for base units 
-    typename_fmt        // output demangled typenames
+    typename_fmt,       // output demangled typenames
+    fmt_mask = 3
+};
+
+enum autoprefix_mode
+{
+    autoprefix_none = 0,
+    autoprefix_engineering = 4,
+    autoprefix_binary = 8,
+    autoprefix_mask = 12
 };
 
 namespace detail {
@@ -141,14 +150,26 @@ xalloc_key_initializer_t xalloc_key_initializer;
 
 } // namespace detail
 
-inline format_mode get_format(std::ios_base& ios) 
+inline int get_flags(std::ios_base& ios, int mask) 
 {
-    return(static_cast<format_mode>(ios.iword(detail::xalloc_key_holder<true>::value)));
+    return(ios.iword(detail::xalloc_key_holder<true>::value) & mask);
 }
 
-inline void set_format(std::ios_base& ios, format_mode new_mode) 
+inline void set_flags(std::ios_base& ios, int new_flags, int mask) 
 {
-    ios.iword(detail::xalloc_key_holder<true>::value) = static_cast<long>(new_mode);
+    assert((~mask & new_flags) == 0);
+    long& flags = ios.iword(detail::xalloc_key_holder<true>::value);
+    flags = (flags & ~mask) | static_cast<long>(new_flags);
+}
+
+inline format_mode get_format(std::ios_base& ios) 
+{
+    return(static_cast<format_mode>((get_flags)(ios, fmt_mask)));
+}
+
+inline void set_format(std::ios_base& ios, format_mode new_mode)
+{
+    (set_flags)(ios, new_mode, fmt_mask);
 }
 
 inline std::ios_base& typename_format(std::ios_base& ios) 
@@ -173,6 +194,34 @@ inline std::ios_base& name_format(std::ios_base& ios)
 {
     (set_format)(ios, name_fmt);
     return(ios);
+}
+
+inline autoprefix_mode get_autoprefix(std::ios_base& ios)
+{
+    return static_cast<autoprefix_mode>((get_flags)(ios, autoprefix_mask));
+}
+
+inline void set_autoprefix(std::ios_base& ios, autoprefix_mode new_mode)
+{
+    (set_flags)(ios, new_mode, autoprefix_mask);
+}
+
+inline std::ios_base& no_prefix(std::ios_base& ios)
+{
+    (set_autoprefix)(ios, autoprefix_none);
+    return ios;
+}
+
+inline std::ios_base& engineering_prefix(std::ios_base& ios)
+{
+    (set_autoprefix)(ios, autoprefix_engineering);
+    return ios;
+}
+
+inline std::ios_base& binary_prefix(std::ios_base& ios)
+{
+    (set_autoprefix)(ios, autoprefix_binary);
+    return ios;
 }
 
 namespace detail {
@@ -441,12 +490,27 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
 // this overload catches scaled units that have a single scaled base unit
 // raised to the first power.  It moves that scaling on the base unit
 // to the unit level scaling and recurses.  By doing this we make sure that
-// si::milli * si::kilograms will print g rather than mkg
+// si::milli * si::kilograms will print g rather than mkg.
+//
+// This transformation will not be applied if base_unit_info is specialized
+// for the scaled base unit.
 //
 /// INTERNAL ONLY
 template<class Dimension,class Unit,class UnitScale, class Scale, class Subformatter>
 inline std::string
-to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, Scale> > >&, Subformatter f)
+to_string_impl(
+    const unit<
+        Dimension,
+        heterogeneous_system<
+            heterogeneous_system_impl<
+                list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>,
+                Dimension,
+                Scale
+            >
+        >
+    >&,
+    Subformatter f,
+    typename base_unit_info<scaled_base_unit<Unit, UnitScale> >::base_unit_info_primary_template* = 0)
 {
     return(f(
         unit<
@@ -455,7 +519,7 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
                 heterogeneous_system_impl<
                     list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>,
                     Dimension,
-                    typename mpl::times<Scale, list<UnitScale, dimensionless_type> >::type
+                    typename mpl::times<Scale, list<scale_list_dim<UnitScale>, dimensionless_type> >::type
                 >
             >
         >()));
@@ -466,7 +530,19 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
 /// INTERNAL ONLY
 template<class Dimension,class Unit,class UnitScale,class Subformatter>
 inline std::string
-to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >&, Subformatter f)
+to_string_impl(
+    const unit<
+        Dimension,
+        heterogeneous_system<
+            heterogeneous_system_impl<
+                list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type>,
+                Dimension,
+                dimensionless_type
+            >
+        >
+    >&,
+    Subformatter f,
+    typename base_unit_info<scaled_base_unit<Unit, UnitScale> >::base_unit_info_primary_template* = 0)
 {
     std::string str;
     f.template append_units_to<list<heterogeneous_system_dim<scaled_base_unit<Unit, UnitScale>, static_rational<1> >, dimensionless_type> >(str);
@@ -483,8 +559,8 @@ struct format_raw_symbol_impl {
         detail::scale_symbol_string_impl<Scale::size::value>::template apply<Scale>::value(str);
     }
     template<class Unit>
-    std::string operator()(const Unit& unit) {
-        return(to_string_impl(unit, *this));
+    std::string operator()(const Unit& u) {
+        return(to_string_impl(u, *this));
     }
     template<class Unit>
     bool is_default_string(const std::string&, const Unit&) {
@@ -494,12 +570,12 @@ struct format_raw_symbol_impl {
 
 struct format_symbol_impl : format_raw_symbol_impl {
     template<class Unit>
-    std::string operator()(const Unit& unit) {
-        return(symbol_string(unit));
+    std::string operator()(const Unit& u) {
+        return(symbol_string(u));
     }
     template<class Unit>
-    bool is_default_string(const std::string& str, const Unit& unit) {
-        return(str == to_string_impl(unit, format_raw_symbol_impl()));
+    bool is_default_string(const std::string& str, const Unit& u) {
+        return(str == to_string_impl(u, format_raw_symbol_impl()));
     }
 };
 
@@ -513,8 +589,8 @@ struct format_raw_name_impl {
         detail::scale_name_string_impl<Scale::size::value>::template apply<Scale>::value(str);
     }
     template<class Unit>
-    std::string operator()(const Unit& unit) {
-        return(to_string_impl(unit, *this));
+    std::string operator()(const Unit& u) {
+        return(to_string_impl(u, *this));
     }
     template<class Unit>
     bool is_default_string(const std::string&, const Unit&) {
@@ -524,27 +600,243 @@ struct format_raw_name_impl {
 
 struct format_name_impl : format_raw_name_impl {
     template<class Unit>
-    std::string operator()(const Unit& unit) {
-        return(name_string(unit));
+    std::string operator()(const Unit& u) {
+        return(name_string(u));
     }
     template<class Unit>
-    bool is_default_string(const std::string& str, const Unit& unit) {
-        return(str == to_string_impl(unit, format_raw_name_impl()));
+    bool is_default_string(const std::string& str, const Unit& u) {
+        return(str == to_string_impl(u, format_raw_name_impl()));
     }
 };
 
 template<class Char, class Traits>
-inline void do_print(std::basic_ostream<Char, Traits>& os, const std::string& s) {
+inline void do_print(std::basic_ostream<Char, Traits>& os, const std::string& s)
+{
     os << s.c_str();
 }
 
-inline void do_print(std::ostream& os, const std::string& s) {
+inline void do_print(std::ostream& os, const std::string& s)
+{
     os << s;
 }
 
 template<class Char, class Traits>
-inline void do_print(std::basic_ostream<Char, Traits>& os, const char* s) {
+inline void do_print(std::basic_ostream<Char, Traits>& os, const char* s)
+{
     os << s;
+}
+
+// code for automatically applying the appropriate prefixes.
+
+template<class End, class Prev, class T, class F, class TooLarge>
+void find_matching_scale_impl(End, End, Prev, T, F, TooLarge l)
+{
+    l();
+}
+
+template<class Begin, class End, class Prev, class T, class F, class TooLarge>
+void find_matching_scale_impl(Begin, End end, Prev prev, T t, F f, TooLarge l)
+{
+    using std::abs;
+    if(Begin::item::value() > abs(t)) {
+        f(prev, t);
+    } else {
+        detail::find_matching_scale_impl(
+            typename Begin::next(),
+            end,
+            typename Begin::item(),
+            t,
+            f,
+            l
+        );
+    }
+}
+
+template<class End, class T, class F, class Default>
+void find_matching_scale_i(End, End, T, F, Default d)
+{
+    d();
+}
+
+template<class Begin, class End, class T, class F, class Default>
+void find_matching_scale_i(Begin, End end, T t, F f, Default d)
+{
+    using std::abs;
+    if(Begin::item::value() > abs(t)) {
+        d();
+    } else {
+        detail::find_matching_scale_impl(typename Begin::next(), end, typename Begin::item(), t, f, d);
+    }
+}
+
+template<class Scales, class T, class F, class Default>
+void find_matching_scale(T t, F f, Default d)
+{
+    detail::find_matching_scale_i(Scales(), dimensionless_type(), t, f, d);
+}
+
+typedef list<scale<10, static_rational<-24> >,
+        list<scale<10, static_rational<-21> >,
+        list<scale<10, static_rational<-18> >,
+        list<scale<10, static_rational<-15> >,
+        list<scale<10, static_rational<-12> >,
+        list<scale<10, static_rational<-9> >,
+        list<scale<10, static_rational<-6> >,
+        list<scale<10, static_rational<-3> >,
+        list<scale<10, static_rational<0> >,
+        list<scale<10, static_rational<3> >,
+        list<scale<10, static_rational<6> >,
+        list<scale<10, static_rational<9> >,
+        list<scale<10, static_rational<12> >,
+        list<scale<10, static_rational<15> >,
+        list<scale<10, static_rational<18> >,
+        list<scale<10, static_rational<21> >,
+        list<scale<10, static_rational<24> >,
+        list<scale<10, static_rational<27> >,
+        dimensionless_type> > > > > > > > > > > > > > > > > > engineering_prefixes;
+
+typedef list<scale<2, static_rational<10> >,
+        list<scale<2, static_rational<20> >,
+        list<scale<2, static_rational<30> >,
+        list<scale<2, static_rational<40> >,
+        list<scale<2, static_rational<50> >,
+        list<scale<2, static_rational<60> >,
+        list<scale<2, static_rational<70> >,
+        dimensionless_type> > > > > > > binary_prefixes;
+
+template<class Os, class Quantity>
+struct print_default_t {
+    typedef void result_type;
+    void operator()() const
+    {
+        *os << q->value() << ' ' << typename Quantity::unit_type();
+    }
+    Os* os;
+    const Quantity* q;
+};
+
+template<class Os, class Quantity>
+print_default_t<Os, Quantity> print_default(Os& os, const Quantity& q)
+{
+    print_default_t<Os, Quantity> result = { &os, &q };
+    return result;
+}
+
+template<class Os, class Unit>
+struct print_scaled_t {
+    typedef void result_type;
+    template<class Prefix, class T>
+    void operator()(Prefix, const T& t) const
+    {
+        *os << t / Prefix::value() << ' ' << typename make_scaled_unit<Unit, Prefix>::type();
+    }
+    Os* os;
+};
+
+template<class Unit, class Os>
+print_scaled_t<Os, Unit> print_scaled(Os& os)
+{
+    print_scaled_t<Os, Unit> result = { &os };
+    return result;
+}
+
+template<class Prefixes, class CharT, class Traits, class Unit, class T, class F>
+void do_print_prefixed_impl(std::basic_ostream<CharT, Traits>& os, const quantity<Unit, T>& q, F default_)
+{
+    detail::find_matching_scale<Prefixes>(q.value(), detail::print_scaled<Unit>(os), default_);
+}
+
+// handle units like si::kilograms that have a scale embedded in the
+// base unit.  This overload is disabled if the scaled base unit has
+// a user-defined string representation.
+template<class Prefixes, class CharT, class Traits, class Dimension, class BaseUnit, class BaseScale, class Scale, class T>
+typename base_unit_info<
+    scaled_base_unit<BaseUnit, Scale>
+>::base_unit_info_primary_template
+do_print_prefixed(
+    std::basic_ostream<CharT, Traits>& os,
+    const quantity<
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    list<
+                        heterogeneous_system_dim<
+                            scaled_base_unit<BaseUnit, BaseScale>,
+                            static_rational<1>
+                        >,
+                        dimensionless_type
+                    >,
+                    Dimension,
+                    Scale
+                >
+            >
+        >,
+        T
+    >& q)
+{
+    quantity<
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    list<
+                        heterogeneous_system_dim<BaseUnit, static_rational<1> >,
+                        dimensionless_type
+                    >,
+                    Dimension,
+                    dimensionless_type
+                >
+            >
+        >,
+        T
+    > unscaled(q);
+    detail::do_print_prefixed_impl<Prefixes>(os, unscaled, detail::print_default(os, q));
+}
+
+template<class Prefixes, class CharT, class Traits, class Dimension, class L, class Scale, class T>
+void do_print_prefixed(
+    std::basic_ostream<CharT, Traits>& os,
+    const quantity<
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    L,
+                    Dimension,
+                    Scale
+                >
+            >
+        >,
+        T
+    >& q)
+{
+    quantity<
+        unit<
+            Dimension,
+            heterogeneous_system<
+                heterogeneous_system_impl<
+                    L,
+                    Dimension,
+                    dimensionless_type
+                >
+            >
+        >,
+        T
+    > unscaled(q);
+    detail::do_print_prefixed_impl<Prefixes>(os, unscaled, detail::print_default(os, q));
+}
+
+template<class Prefixes, class CharT, class Traits, class Dimension, class System, class T>
+void do_print_prefixed(std::basic_ostream<CharT, Traits>& os, const quantity<unit<Dimension, System>, T>& q)
+{
+    detail::do_print_prefixed<Prefixes>(os, quantity<unit<Dimension, typename make_heterogeneous_system<Dimension, System>::type>, T>(q));
+}
+
+template<class Prefixes, class CharT, class Traits, class Unit, class T>
+void do_print_prefixed(std::basic_ostream<CharT, Traits>& os, const quantity<Unit, T>& q)
+{
+    detail::print_default(os, q)();
 }
 
 } // namespace detail
@@ -581,7 +873,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
 {
     if (units::get_format(os) == typename_fmt) 
     {
-        detail::do_print(os , typename_string(u));
+        detail::do_print(os, typename_string(u));
     }
     else if (units::get_format(os) == raw_fmt) 
     {
@@ -603,12 +895,29 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
     return(os);
 }
 
-/// INTERNAL ONLY
 /// Print a @c quantity. Prints the value followed by the unit
+/// If the engineering_prefix, or binary_prefix is set, tries
+/// to scale the value appropriately.
+/// For example, it might print 12.345 km instead of 12345 m.
 template<class Char, class Traits, class Unit, class T>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const quantity<Unit, T>& q)
 {
-    os << q.value() << ' ' << Unit();
+    if (units::get_autoprefix(os) == autoprefix_none)
+    {
+        os << q.value() << ' ' << Unit();
+    }
+    else if (units::get_autoprefix(os) == autoprefix_engineering)
+    {
+        detail::do_print_prefixed<detail::engineering_prefixes>(os, q);
+    }
+    else if (units::get_autoprefix(os) == autoprefix_binary)
+    {
+        detail::do_print_prefixed<detail::binary_prefixes>(os, q);
+    }
+    else
+    {
+        assert(!"Autoprefixing must be one of: no_prefix, engineering_prefix, binary_prefix");
+    }
     return(os);
 }
 
