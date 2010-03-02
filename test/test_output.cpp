@@ -249,3 +249,8 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name) {
 #undef FORMATTERS
 }
 
+BOOST_AUTO_TEST_CASE(test_output_prefixed) {
+#define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix
+    BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
+#undef FORMATTERS
+}

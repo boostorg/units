@@ -38,6 +38,8 @@ template<class Y> class absolute;
 
 template<class Dim,class System, class Enable=void> class unit;
 
+template<long Base, class Exponent> struct scale;
+
 template<class BaseUnitTag> struct base_unit_info;
 template<class System> struct dimensionless_unit;
 template<class T> struct is_unit;
