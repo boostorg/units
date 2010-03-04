@@ -35,6 +35,7 @@ Test unit and quantity printing
 
 #include <sstream>
 #include <boost/config.hpp>
+#include <limits>
 
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
@@ -249,8 +250,43 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_prefixed) {
-#define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix
+BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name) {
+#define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix 
+  // Single base unit like meter.
+    BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
+    BOOST_UNITS_TEST_OUTPUT(1500.0*meter_base_unit::unit_type(), "1.5 kilometer");
+    BOOST_UNITS_TEST_OUTPUT(1.5e7*meter_base_unit::unit_type(), "15 megameter");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-3*meter_base_unit::unit_type(), "1.5 millimeter");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-9*meter_base_unit::unit_type(), "1.5 nanometer");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-8*meter_base_unit::unit_type(), "15 nanometer");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-10*meter_base_unit::unit_type(), "150 picometer");
+  // Too small or large for a multiple name.
+    BOOST_UNITS_TEST_OUTPUT(9.99999e-25 * meter_base_unit::unit_type(), "9.99999e-025 meter"); // Just too small for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1e+28 * meter_base_unit::unit_type(), "1e+028 meter"); // Just too large for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1.5e-25 * meter_base_unit::unit_type(), "1.5e-025 meter"); // Too small for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1.5e+28 * meter_base_unit::unit_type(), "1.5e+028 meter"); // Too large for multiple.
+  // 
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::max()*meter_base_unit::unit_type(), "3.40282e+038 meter");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::min()*meter_base_unit::unit_type(), "1.17549e-038 meter");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::max()*meter_base_unit::unit_type(), "1.79769e+308 meter");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::min()*meter_base_unit::unit_type(), "2.22507e-308 meter");
+
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 kilometer");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_velocity1(), "1.5 kilo(meter second^-1)");
+    BOOST_UNITS_TEST_OUTPUT(1.5*millisecond_base_unit::unit_type(), "1.5 millisecond");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_time(), "1.5 millisecond");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_velocity2(), "1.5 meter millisecond^-1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*area(), "1.5 meter^2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_area(), "1.5 kilo(meter^2)");
+    BOOST_UNITS_TEST_OUTPUT(1.5*double_scaled_length(), "1.536 megameter"); // 1.5 * 2^10 = 1.5 * 1024 = 1.536
+    BOOST_UNITS_TEST_OUTPUT(1.5*double_scaled_length2(), "1.5 kiloscaled_meter");
+    BOOST_UNITS_TEST_OUTPUT(1.5*custom1(), "1.5 custom1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*custom2(), "1.5 custom2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom1(), "1.5 kilocustom1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom2(), "1.5 kilocustom2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*boost::units::absolute<meter_base_unit::unit_type>(), "1.5 absolute meter");
 #undef FORMATTERS
 }
+
+
