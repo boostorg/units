@@ -2,18 +2,19 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2009 Steven Watanabe
+// Copyright Paul A. Bristow 2010
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
 /** 
-\file
+\file test_output.cpp
     
-\brief test_output.cpp
-
-\detailed
+\brief 
 Test unit and quantity printing
+\detailed
+Test for output from various units, name, symbol and raw formats, and automatic prefixing in engineering and binary units.
 
 **/
 
@@ -48,6 +49,11 @@ struct meter_base_unit : boost::units::base_unit<meter_base_unit, boost::units::
 struct second_base_unit : boost::units::base_unit<second_base_unit, boost::units::time_dimension, 2> {
     static const char* name() { return("second"); }
     static const char* symbol() { return("s"); }
+};
+
+struct byte_base_unit : boost::units::base_unit<byte_base_unit, boost::units::dimensionless_type, 3> {
+    static const char* name() { return("byte"); }
+    static const char* symbol() { return("b"); }
 };
 
 typedef boost::units::make_system<meter_base_unit, second_base_unit>::type my_system;
@@ -250,7 +256,8 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name) {
+BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
+{ // Engineering autoprefix.
 #define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix 
   // Single base unit like meter.
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
@@ -265,11 +272,20 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name) {
     BOOST_UNITS_TEST_OUTPUT(1e+28 * meter_base_unit::unit_type(), "1e+028 meter"); // Just too large for multiple.
     BOOST_UNITS_TEST_OUTPUT(1.5e-25 * meter_base_unit::unit_type(), "1.5e-025 meter"); // Too small for multiple.
     BOOST_UNITS_TEST_OUTPUT(1.5e+28 * meter_base_unit::unit_type(), "1.5e+028 meter"); // Too large for multiple.
-  // 
+  // Too 'biggest or too smallest'.
     BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::max()*meter_base_unit::unit_type(), "3.40282e+038 meter");
     BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::min()*meter_base_unit::unit_type(), "1.17549e-038 meter");
     BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::max()*meter_base_unit::unit_type(), "1.79769e+308 meter");
     BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::min()*meter_base_unit::unit_type(), "2.22507e-308 meter");
+   // Infinity and NaN
+#ifdef _MSC_VER
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "1.#INF meter");
+    BOOST_UNITS_TEST_OUTPUT(-std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "-1.#INF meter");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "1.#QNAN meter");
+    BOOST_UNITS_TEST_OUTPUT(-std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "-1.#IND meter");
+
+    // TODO infinity on other platforms?
+#endif
 
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 kilometer");
@@ -289,4 +305,83 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name) {
 #undef FORMATTERS
 }
 
+BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol) {
+#define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix 
+  // Single base unit like m.
+    BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
+    BOOST_UNITS_TEST_OUTPUT(1500.0*meter_base_unit::unit_type(), "1.5 km");
+    BOOST_UNITS_TEST_OUTPUT(1.5e7*meter_base_unit::unit_type(), "15 Mm");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-3*meter_base_unit::unit_type(), "1.5 mm");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-9*meter_base_unit::unit_type(), "1.5 nm");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-8*meter_base_unit::unit_type(), "15 nm");
+    BOOST_UNITS_TEST_OUTPUT(1.5e-10*meter_base_unit::unit_type(), "150 pm");
+  // Too small or large for a multiple name.
+    BOOST_UNITS_TEST_OUTPUT(9.99999e-25 * meter_base_unit::unit_type(), "9.99999e-025 m"); // Just too small for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1e+28 * meter_base_unit::unit_type(), "1e+028 m"); // Just too large for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1.5e-25 * meter_base_unit::unit_type(), "1.5e-025 m"); // Too small for multiple.
+    BOOST_UNITS_TEST_OUTPUT(1.5e+28 * meter_base_unit::unit_type(), "1.5e+028 m"); // Too large for multiple.
+  // 
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::max()*meter_base_unit::unit_type(), "3.40282e+038 m");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<float>::min()*meter_base_unit::unit_type(), "1.17549e-038 m");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::max()*meter_base_unit::unit_type(), "1.79769e+308 m");
+    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::min()*meter_base_unit::unit_type(), "2.22507e-308 m");
 
+    BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 m s^-1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 km");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_velocity1(), "1.5 k(m s^-1)");
+    BOOST_UNITS_TEST_OUTPUT(1.5*millisecond_base_unit::unit_type(), "1.5 ms");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_time(), "1.5 ms");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_velocity2(), "1.5 m ms^-1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*area(), "1.5 m^2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_area(), "1.5 k(m^2)");
+    BOOST_UNITS_TEST_OUTPUT(1.5*double_scaled_length(), "1.536 Mm"); // 1.5 * 2^10 = 1.5 * 1024 = 1.536
+    BOOST_UNITS_TEST_OUTPUT(1.5*double_scaled_length2(), "1.5 kscm");
+    BOOST_UNITS_TEST_OUTPUT(1.5*custom1(), "1.5 c1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*custom2(), "1.5 c2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom1(), "1.5 kc1");
+    BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom2(), "1.5 kc2");
+    BOOST_UNITS_TEST_OUTPUT(1.5*boost::units::absolute<meter_base_unit::unit_type>(), "1.5 absolute m");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol)
+{ // Binary prefix with symbol.
+#define FORMATTERS << boost::units::symbol_format << boost::units::binary_prefix
+    BOOST_UNITS_TEST_OUTPUT(1024 * byte_base_unit::unit_type(), "1 Kib");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name)
+{ // Binary prefix with name.
+#define FORMATTERS << boost::units::name_format << boost::units::binary_prefix
+    BOOST_UNITS_TEST_OUTPUT(2048  *byte_base_unit::unit_type(), "2 kibibyte");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_quantity_name_duplicate)
+{ // Ensure that if more than one format specified, only the last is used.
+#define FORMATTERS << boost::units::symbol_format << boost::units::name_format
+    BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_quantity_symbol_duplicate)
+{ // Ensure that if more than one format specified, only the last is used.
+#define FORMATTERS << boost::units::name_format << boost::units::symbol_format 
+    BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name_duplicate)
+{ // Ensure that if more than one auto prefix specified, only the last is used.
+#define FORMATTERS << boost::units::name_format << boost::units::binary_prefix << boost::units::engineering_prefix
+    BOOST_UNITS_TEST_OUTPUT(2048 * byte_base_unit::unit_type(), "2.048 kilobyte");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol_duplicate)
+{ // Ensure that if more than one auto prefix specified, only the last is used.
+#define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix << boost::units::binary_prefix
+    BOOST_UNITS_TEST_OUTPUT(2048 * byte_base_unit::unit_type(), "2 Kib");
+#undef FORMATTERS
+}
