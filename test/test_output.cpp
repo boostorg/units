@@ -127,7 +127,8 @@ typedef boost::units::make_scaled_unit<custom2, boost::units::scale<10, boost::u
 
 #endif
 
-BOOST_AUTO_TEST_CASE(test_output_unit_symbol) {
+BOOST_AUTO_TEST_CASE(test_output_unit_symbol)
+{  // base units using default symbol_format (no format specified) and no auto prefixing.
 #define FORMATTERS
     BOOST_UNITS_TEST_OUTPUT(meter_base_unit::unit_type(), "m");
     BOOST_UNITS_TEST_OUTPUT(velocity(), "m s^-1");
@@ -148,7 +149,8 @@ BOOST_AUTO_TEST_CASE(test_output_unit_symbol) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_unit_raw) {
+BOOST_AUTO_TEST_CASE(test_output_unit_raw)
+{  // raw format specified
 #define FORMATTERS << boost::units::raw_format
     BOOST_UNITS_TEST_OUTPUT(meter_base_unit::unit_type(), "m");
     BOOST_UNITS_TEST_OUTPUT(velocity(), "m s^-1");
@@ -170,7 +172,8 @@ BOOST_AUTO_TEST_CASE(test_output_unit_raw) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_unit_name) {
+BOOST_AUTO_TEST_CASE(test_output_unit_name)
+{  // name format specified.
 #define FORMATTERS << boost::units::name_format
     BOOST_UNITS_TEST_OUTPUT(meter_base_unit::unit_type(), "meter");
     BOOST_UNITS_TEST_OUTPUT(velocity(), "meter second^-1");
@@ -192,7 +195,8 @@ BOOST_AUTO_TEST_CASE(test_output_unit_name) {
 }
 
 
-BOOST_AUTO_TEST_CASE(test_output_quantity_symbol) {
+BOOST_AUTO_TEST_CASE(test_output_quantity_symbol)
+{ // quantity symbols using default format.
 #define FORMATTERS
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 m s^-1");
@@ -213,7 +217,8 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_symbol) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_quantity_raw) {
+BOOST_AUTO_TEST_CASE(test_output_quantity_raw)
+{ // quantity symbols using raw format.
 #define FORMATTERS << boost::units::raw_format
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 m s^-1");
@@ -235,7 +240,8 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_raw) {
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_quantity_name) {
+BOOST_AUTO_TEST_CASE(test_output_quantity_name)
+{ // // quantity symbols using name format.
 #define FORMATTERS << boost::units::name_format
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
@@ -257,7 +263,7 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name) {
 }
 
 BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
-{ // Engineering autoprefix.
+{ // Engineering autoprefix, with name format.
 #define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix 
   // Single base unit like meter.
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
@@ -283,10 +289,9 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
     BOOST_UNITS_TEST_OUTPUT(-std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "-1.#INF meter");
     BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "1.#QNAN meter");
     BOOST_UNITS_TEST_OUTPUT(-std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "-1.#IND meter");
-
+#elif
     // TODO infinity on other platforms?
 #endif
-
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 kilometer");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_velocity1(), "1.5 kilo(meter second^-1)");
@@ -305,7 +310,8 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
 #undef FORMATTERS
 }
 
-BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol) {
+BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol)
+{ // Engineering autoprefix, with symbol format.
 #define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix 
   // Single base unit like m.
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
@@ -345,19 +351,34 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol) {
 }
 
 BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol)
-{ // Binary prefix with symbol.
+{ // Binary prefix with symbol format.
 #define FORMATTERS << boost::units::symbol_format << boost::units::binary_prefix
     BOOST_UNITS_TEST_OUTPUT(1024 * byte_base_unit::unit_type(), "1 Kib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 20) * byte_base_unit::unit_type(), "1 Mib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 30) * byte_base_unit::unit_type(), "1 Gib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 40) * byte_base_unit::unit_type(), "1 Tib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 50) * byte_base_unit::unit_type(), "1 Pib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 60) * byte_base_unit::unit_type(), "1 Eib");
 #undef FORMATTERS
 }
 
 BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name)
-{ // Binary prefix with name.
+{ // Binary prefix with name format.
+  // http://physics.nist.gov/cuu/Units/binary.html
+  // 1998 the International Electrotechnical Commission (IEC) approved 
+  // IEC 60027-2, Second edition, 2000-11, Letter symbols to be used in electrical technology
+  // - Part 2: Telecommunications and electronics.
 #define FORMATTERS << boost::units::name_format << boost::units::binary_prefix
     BOOST_UNITS_TEST_OUTPUT(2048  *byte_base_unit::unit_type(), "2 kibibyte");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 32) *byte_base_unit::unit_type(), "4 gibibyte");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 41) *byte_base_unit::unit_type(), "2 tebibyte"); // http://en.wikipedia.org/wiki/Tebibyte
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 50) *byte_base_unit::unit_type(), "1 pebibyte"); 
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 60) *byte_base_unit::unit_type(), "1 exbibyte");
 #undef FORMATTERS
 }
 
+// Tests on using more than one format or prefix - only the last specified should be used.
+// (This may indicate a programming mistake, but it is ignored).
 BOOST_AUTO_TEST_CASE(test_output_quantity_name_duplicate)
 { // Ensure that if more than one format specified, only the last is used.
 #define FORMATTERS << boost::units::symbol_format << boost::units::name_format
