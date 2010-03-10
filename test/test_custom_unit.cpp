@@ -13,7 +13,7 @@
     
 \brief test_custom_unit.cpp
 
-\detailed
+\details
 Make sure that a minimal + - * / unit class is fully functional.
 
 Output:

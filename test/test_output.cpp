@@ -13,9 +13,8 @@
     
 \brief 
 Test unit and quantity printing
-\detailed
-Test for output from various units, name, symbol and raw formats, and automatic prefixing in engineering and binary units.
-
+\details
+Tests for output from various units, name, symbol and raw formats, and automatic prefixing in engineering and binary units.
 **/
 
 #include <boost/units/quantity.hpp>
@@ -214,6 +213,8 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_symbol)
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom1(), "1.5 kc1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom2(), "1.5 kc2");
     BOOST_UNITS_TEST_OUTPUT(1.5*boost::units::absolute<meter_base_unit::unit_type>(), "1.5 absolute m");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 10) * byte_base_unit::unit_type(), "1024 b");
+
 #undef FORMATTERS
 }
 
@@ -273,6 +274,8 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
     BOOST_UNITS_TEST_OUTPUT(1.5e-9*meter_base_unit::unit_type(), "1.5 nanometer");
     BOOST_UNITS_TEST_OUTPUT(1.5e-8*meter_base_unit::unit_type(), "15 nanometer");
     BOOST_UNITS_TEST_OUTPUT(1.5e-10*meter_base_unit::unit_type(), "150 picometer");
+    BOOST_UNITS_TEST_OUTPUT(0.0000000012345 * meter_base_unit::unit_type(), "1.2345 nanometer");
+
   // Too small or large for a multiple name.
     BOOST_UNITS_TEST_OUTPUT(9.99999e-25 * meter_base_unit::unit_type(), "9.99999e-025 meter"); // Just too small for multiple.
     BOOST_UNITS_TEST_OUTPUT(1e+28 * meter_base_unit::unit_type(), "1e+028 meter"); // Just too large for multiple.
@@ -307,6 +310,7 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom1(), "1.5 kilocustom1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom2(), "1.5 kilocustom2");
     BOOST_UNITS_TEST_OUTPUT(1.5*boost::units::absolute<meter_base_unit::unit_type>(), "1.5 absolute meter");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 10) * byte_base_unit::unit_type(), "1.024 kilobyte");
 
     BOOST_UNITS_TEST_OUTPUT(1.5, "1.5"); // scalar.
     BOOST_UNITS_TEST_OUTPUT(1567., "1567"); // scalars are *not* autoprefixed.
@@ -354,6 +358,8 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol)
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom1(), "1.5 kc1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_custom2(), "1.5 kc2");
     BOOST_UNITS_TEST_OUTPUT(1.5*boost::units::absolute<meter_base_unit::unit_type>(), "1.5 absolute m");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 10) * byte_base_unit::unit_type(), "1.024 kb");
+
 #undef FORMATTERS
 }
 
@@ -380,7 +386,7 @@ BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name)
   // IEC 60027-2, Second edition, 2000-11, Letter symbols to be used in electrical technology
   // - Part 2: Telecommunications and electronics.
 #define FORMATTERS << boost::units::name_format << boost::units::binary_prefix
-    BOOST_UNITS_TEST_OUTPUT(2048  *byte_base_unit::unit_type(), "2 kibibyte");
+    BOOST_UNITS_TEST_OUTPUT(2048  * byte_base_unit::unit_type(), "2 kibibyte");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 32) *byte_base_unit::unit_type(), "4 gibibyte");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 41) *byte_base_unit::unit_type(), "2 tebibyte"); // http://en.wikipedia.org/wiki/Tebibyte
     BOOST_UNITS_TEST_OUTPUT(pow(2., 50) *byte_base_unit::unit_type(), "1 pebibyte"); 
