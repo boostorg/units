@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2008 Steven Watanabe
+// Copyright (C) 2010 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -84,6 +84,27 @@
     ///INTERNAL ONLY
     #define BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(a, b) ((void)0)
 #endif
+
+// Create a Doxygen main page that will only appear if standalone Doxygen documentation
+// is produced using the Doxywizard GUI using information in the /doc/doxygen/doxyfile.
+
+/*! \mainpage Boost.Units
+
+A C++ library for zero-overhead dimensional analysis and 
+unit and quantity manipulation and conversion.
+
+Copyright (C) 2003-2008 Matthias Christian Schabel
+Copyright (C) 2010 Steven Watanabe
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org//LICENSE_1_0.txt)
+
+This is a standalone index produced by the Doxygen Doxywizard GUI using information in the units/doc/doxygen/doxyfile.
+
+A full index that includes the full documentation and tutorial is at
+http://www.boost.org/doc/libs/1_42_0/doc/html//boost_units.html.
+
+*/ // end mainpage
 
 #ifdef BOOST_UNITS_DOXYGEN
 

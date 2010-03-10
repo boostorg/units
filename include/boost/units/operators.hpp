@@ -16,24 +16,23 @@
 
 #include <boost/units/config.hpp>
 
-/// \file 
+/// \file operators.hpp
 /// \brief Compile time operators and typeof helper classes.
 ///
-/// \detailed 
+/// \details 
 /// These operators declare the compile-time operators needed to support dimensional
-/// analysis algebra.  They require the use of Boost.Typeof.
+/// analysis algebra.  They require the use of Boost.Typeof, emulation or native.
 /// Typeof helper classes define result type for heterogeneous operators on value types. 
 /// These must be defined through specialization for powers and roots.
 
 namespace boost {
-
 namespace units {
 
 #if BOOST_UNITS_HAS_TYPEOF
 
 #ifndef BOOST_UNITS_DOXYGEN
 
-// to avoid need for default constructor and eliminate divide by zero errors
+// to avoid need for default constructor and eliminate divide by zero errors.
 namespace typeof_ {
 
 /// INTERNAL ONLY

@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2007-2008 Steven Watanabe
+// Copyright (C) 2007-2010 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -21,22 +21,19 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/detail/dim_impl.hpp>
 
-/// \file 
+/// \file dim.hpp
 /// \brief Handling of fundamental dimension/exponent pairs.
 
 namespace boost {
-
 namespace units {
-
-namespace detail {
-
-struct dim_tag { };
-
+namespace detail
+{
+ struct dim_tag { };
 }
 
 /// \brief Dimension tag/exponent pair for a single fundamental dimension.
 ///
-/// \detailed 
+/// \details 
 /// The dim class represents a single dimension tag/dimension exponent pair.
 /// That is, @c dim<tag_type,value_type> is a pair where @c tag_type represents the
 /// fundamental dimension being represented and @c value_type represents the 

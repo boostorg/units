@@ -2,7 +2,7 @@
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2007-2008 Steven Watanabe
+// Copyright (C) 2007-2010 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -27,10 +27,10 @@
 
 #include <boost/units/systems/si/plane_angle.hpp>
 
-/// \file 
+/// \file cmath.hpp
 /// \brief Overloads of functions in \<cmath\> for quantities
 ///
-/// \detailed Only functions for which a dimensionally-correct result type  
+/// \details Only functions for which a dimensionally-correct result type  
 /// can be determined are overloaded. All functions work with dimensionless
 /// quantities.
 
@@ -38,8 +38,8 @@
 // some <cmath> functions as macros; it is used for all functions even though it
 // isn't necessary -- I didn't want to think :)
 //
-// the form using namespace detail; return(f(x)); is used
-// to enable ADL for UDTs
+// the form \code using namespace detail; return(f(x)); \endcode is used
+// to enable ADL for UDTs.
 
 namespace boost {
 
