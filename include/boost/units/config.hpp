@@ -106,13 +106,14 @@ http://www.boost.org/doc/libs/1_42_0/doc/html//boost_units.html.
 
 */ // end mainpage
 
+/// Defined in jamfile.v2 line 30 during buildof documentation.
 #ifdef BOOST_UNITS_DOXYGEN
 
 /// If defined will trigger a static assertion if quantity<Unit, T>
 /// is not layout compatible with T
 #define BOOST_UNITS_REQUIRE_LAYOUT_COMPATIBILITY
 
-/// If defined will diasable a preprocessor check that the
+/// If defined will disable a preprocessor check that the
 /// compiler is able to handle the library.
 #define BOOST_UNITS_NO_COMPILER_CHECK
 
