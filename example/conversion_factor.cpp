@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,12 +8,12 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-/** 
+/**
 \file
-    
+
 \brief conversion_factor.cpp
 
-\detailed An example of using conversion_factor.
+\details An example of using conversion_factor.
 
 Output:
 @verbatim
@@ -49,7 +49,7 @@ int main()
     using namespace boost::units;
 
     //[conversion_factor_snippet_1
-    
+
     double dyne_to_newton =
         conversion_factor(cgs::dyne,si::newton);
     std::cout << dyne_to_newton << std::endl;
@@ -69,7 +69,7 @@ int main()
     double acceleration_conversion =
         conversion_factor(cgs::gal,si::meter_per_second_squared);
     std::cout << acceleration_conversion << std::endl;
-    
+
     //]
 
     return 0;

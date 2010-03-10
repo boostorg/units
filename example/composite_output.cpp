@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,12 +8,12 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-/** 
+/**
 \file
-    
+
 \brief composite_output.cpp
 
-\detailed An example of textual representations of units.
+\details An example of textual representations of units.
 
 Output:
 @verbatim
@@ -80,14 +80,14 @@ std::string symbol_string(const cgs::force&)
 
 }
 
-int main() 
+int main()
 {
     using namespace boost::units;
     using boost::units::cgs::centimeter;
     using boost::units::cgs::gram;
     using boost::units::cgs::second;
     using boost::units::cgs::dyne;
-        
+
     //[composite_output_snippet_2]
     std::cout << 2.0 * dyne << std::endl
               << symbol_format << 2.0 * dyne << std::endl
@@ -111,6 +111,6 @@ int main()
               << symbol_format << si::nano*gram*centimeter/second << std::endl
               << name_format << si::nano*gram*centimeter/second << std::endl;
     //]
-              
+
     return 0;
 }

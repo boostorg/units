@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,12 +8,12 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-/** 
+/**
 \file
-    
+
 \brief dimension.cpp
 
-\detailed
+\details
 Test dimension list manipulation.
 
 Output:
@@ -44,7 +44,7 @@ V_type       = list<dim<length_base_dimension, static_rational<1l, 1l> >, list<d
 namespace mpl = boost::mpl;
 
 int main(void)
-{   
+{
     using namespace boost::units;
 
     BOOST_MPL_ASSERT((boost::is_same<
@@ -61,7 +61,7 @@ int main(void)
             dim<mass_base_dimension, static_rational<1L, 1L> >
         >::type
     >));
-    BOOST_MPL_ASSERT((boost::is_same<energy_dimension, 
+    BOOST_MPL_ASSERT((boost::is_same<energy_dimension,
         mpl::push_front<
         mpl::push_front<
         mpl::push_front<
@@ -69,7 +69,7 @@ int main(void)
         dim<time_base_dimension, static_rational<-2L, 1L> > >::type,
         dim<mass_base_dimension, static_rational<1L, 1L> > >::type,
         dim<length_base_dimension, static_rational<2L, 1L> > >::type>));
-                              
+
     std::cout << "length_dimension  = "
               << simplify_typename(length_dimension()) << std::endl
               << "mass_dimension    = "
@@ -78,7 +78,7 @@ int main(void)
               << simplify_typename(time_dimension()) << std::endl
               << "energy_dimension  = "
               << simplify_typename(energy_dimension()) << std::endl;
-                  
+
     //[dimension_snippet_1
     typedef mpl::times<length_dimension,mass_dimension>::type   LM_type;
     typedef mpl::divides<length_dimension,time_dimension>::type L_T_type;
@@ -87,31 +87,31 @@ int main(void)
         static_rational<2>
     >::type    V_type;
     //]
-    
-    BOOST_MPL_ASSERT((boost::is_same<LM_type, 
+
+    BOOST_MPL_ASSERT((boost::is_same<LM_type,
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
         dim<mass_base_dimension, static_rational<1L, 1L> > >::type,
         dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
 
-    BOOST_MPL_ASSERT((boost::is_same<L_T_type, 
+    BOOST_MPL_ASSERT((boost::is_same<L_T_type,
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
         dim<time_base_dimension, static_rational<-1L, 1L> > >::type,
         dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
 
-    BOOST_MPL_ASSERT((boost::is_same<V_type, 
+    BOOST_MPL_ASSERT((boost::is_same<V_type,
         mpl::push_front<
         mpl::push_front<
         dimensionless_type,
         dim<time_base_dimension, static_rational<-1L, 1L> > >::type,
         dim<length_base_dimension, static_rational<1L, 1L> > >::type>));
-    
+
     std::cout << "LM_type      = " << simplify_typename(LM_type()) << std::endl
               << "L_T_type     = " << simplify_typename(L_T_type()) << std::endl
               << "V_type       = " << simplify_typename(V_type()) << std::endl;
-              
+
     return 0;
 }
