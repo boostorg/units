@@ -620,9 +620,9 @@ to `std::complex<double>` and performing the appropriate dimensional analysis :
 
 [endsect]
 
-[section:KitchenSinkExample Kitchen Sink Example]
+[section:KitchenSinkExample Kitchen Sink Example using SI units]
 
-([@../../example/kitchen_sink.cpp kitchen_sink.cpp])
+([@../../libs/units/example/kitchen_sink.cpp kitchen_sink.cpp])
 
 This example provides a fairly extensive set of tests covering most of the [___quantity] functionality.
 It uses the SI unit system defined in [headerref boost/units/systems/si.hpp].
