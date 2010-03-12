@@ -639,51 +639,51 @@ inline void do_print(std::basic_ostream<Char, Traits>& os, const char* s)
 
 // For automatically applying the appropriate prefixes.
 
-template<class End, class Prev, class T, class F, class TooLarge>
-void find_matching_scale_impl(End, End, Prev, T, F, TooLarge l)
+template<class End, class Prev, class T, class F>
+bool find_matching_scale_impl(End, End, Prev, T, F)
 {
-    l();
+    return false;
 }
 
-template<class Begin, class End, class Prev, class T, class F, class TooLarge>
-void find_matching_scale_impl(Begin, End end, Prev prev, T t, F f, TooLarge l)
+template<class Begin, class End, class Prev, class T, class F>
+bool find_matching_scale_impl(Begin, End end, Prev prev, T t, F f)
 {
     using std::abs;
     if(Begin::item::value() > abs(t)) {
         f(prev, t);
+        return true;
     } else {
-        detail::find_matching_scale_impl(
+        return detail::find_matching_scale_impl(
             typename Begin::next(),
             end,
             typename Begin::item(),
             t,
-            f,
-            l
+            f
         );
     }
 }
 
-template<class End, class T, class F, class Default>
-void find_matching_scale_i(End, End, T, F, Default d)
+template<class End, class T, class F>
+bool find_matching_scale_i(End, End, T, F)
 {
-    d();
+    return false;
 }
 
-template<class Begin, class End, class T, class F, class Default>
-void find_matching_scale_i(Begin, End end, T t, F f, Default d)
+template<class Begin, class End, class T, class F>
+bool find_matching_scale_i(Begin, End end, T t, F f)
 {
     using std::abs;
     if(Begin::item::value() > abs(t)) {
-        d();
+        return false;
     } else {
-        detail::find_matching_scale_impl(typename Begin::next(), end, typename Begin::item(), t, f, d);
+        return detail::find_matching_scale_impl(typename Begin::next(), end, typename Begin::item(), t, f);
     }
 }
 
-template<class Scales, class T, class F, class Default>
-void find_matching_scale(T t, F f, Default d)
+template<class Scales, class T, class F>
+bool find_matching_scale(T t, F f)
 {
-    detail::find_matching_scale_i(Scales(), dimensionless_type(), t, f, d);
+    return detail::find_matching_scale_i(Scales(), dimensionless_type(), t, f);
 }
 
 typedef list<scale<10, static_rational<-24> >,
@@ -733,28 +733,91 @@ print_default_t<Os, Quantity> print_default(Os& os, const Quantity& q)
     return result;
 }
 
-template<class Os, class Unit>
-struct print_scaled_t {
+template<class Os>
+struct print_scale_t {
     typedef void result_type;
     template<class Prefix, class T>
     void operator()(Prefix, const T& t) const
     {
-        *os << t / Prefix::value() << ' ' << typename make_scaled_unit<Unit, Prefix>::type();
+        *prefixed = true;
+        *os << t / Prefix::value() << ' ';
+        switch(units::get_format(*os)) {
+            case name_fmt: do_print(*os, Prefix::name()); break;
+            case raw_fmt:
+            case symbol_fmt: do_print(*os, Prefix::symbol()); break;
+            case typename_fmt: do_print(*os, units::simplify_typename(Prefix())); *os << ' '; break;
+        }
+    }
+    template<long N, class T>
+    void operator()(scale<N, static_rational<0> >, const T& t) const
+    {
+        *prefixed = false;
+        *os << t << ' ';
     }
     Os* os;
+    bool* prefixed;
 };
 
-template<class Unit, class Os>
-print_scaled_t<Os, Unit> print_scaled(Os& os)
+template<class Os>
+print_scale_t<Os> print_scale(Os& os, bool& prefixed)
 {
-    print_scaled_t<Os, Unit> result = { &os };
+    print_scale_t<Os> result = { &os, &prefixed };
     return result;
+}
+
+// puts parentheses around a unit
+/// INTERNAL ONLY
+template<class Dimension,class Units,class Scale, class Subformatter>
+inline std::string
+maybe_parenthesize(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, Scale> > >&, Subformatter f)
+{
+    std::string str;
+
+    std::string without_scale = f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
+    
+    if (f.is_default_string(without_scale, unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >()))
+    {
+        str += "(";
+        str += without_scale;
+        str += ")";
+    } 
+    else 
+    {
+        str += without_scale;
+    }
+
+    return(str);
+}
+
+// This overload catches scaled units that have a single base unit
+// raised to the first power.  It causes si::nano * si::meters to not
+// put parentheses around the meters.  i.e. nm rather than n(m)
+/// INTERNAL ONLY
+template<class Dimension,class Unit,class Scale, class Subformatter>
+inline std::string
+maybe_parenthesize(const unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >,dimensionless_type>, Dimension, Scale> > >&, Subformatter f)
+{
+    return f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<list<heterogeneous_system_dim<Unit, static_rational<1> >, dimensionless_type>, Dimension, dimensionless_type> > >());
 }
 
 template<class Prefixes, class CharT, class Traits, class Unit, class T, class F>
 void do_print_prefixed_impl(std::basic_ostream<CharT, Traits>& os, const quantity<Unit, T>& q, F default_)
 {
-    detail::find_matching_scale<Prefixes>(q.value(), detail::print_scaled<Unit>(os), default_);
+    bool prefixed;
+    if(detail::find_matching_scale<Prefixes>(q.value(), detail::print_scale(os, prefixed))) {
+        if(prefixed) {
+            switch(units::get_format(os)) {
+                case symbol_fmt: do_print(os, maybe_parenthesize(Unit(), format_symbol_impl())); break;
+                case raw_fmt: do_print(os, maybe_parenthesize(Unit(), format_raw_symbol_impl())); break;
+                case name_fmt: do_print(os, maybe_parenthesize(Unit(), format_name_impl())); break;
+                case typename_fmt: do_print(os, simplify_typename(Unit())); break;
+            }
+        } else {
+            os << Unit();
+        }
+    } else {
+        default_();
+    }
 }
 
 // Handle units like si::kilograms that have a scale embedded in the
