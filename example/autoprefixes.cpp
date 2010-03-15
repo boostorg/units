@@ -58,6 +58,18 @@ struct byte_base_unit : boost::units::base_unit<byte_base_unit, boost::units::di
   static const char* symbol() { return("b"); }
 };
 
+struct thing_base_unit : boost::units::base_unit<thing_base_unit, boost::units::dimensionless_type, 4>
+{
+  static const char* name() { return("thing"); }
+  static const char* symbol() { return(""); }
+};
+
+struct euro_base_unit : boost::units::base_unit<euro_base_unit, boost::units::dimensionless_type, 5>
+{
+  static const char* name() { return("EUR"); }
+  static const char* symbol() { return("€"); }
+};
+
 int main()
 {
   using std::cout;
@@ -88,7 +100,7 @@ int main()
 
   quantity<byte_base_unit::unit_type> b = 2048. * byte_base_unit::unit_type();
   cout << engineering_prefix << b << endl;  // 2.048 kb
-  cout << symbol_format << binary_prefix << b << endl; //  "2 kib" 
+  cout << symbol_format << binary_prefix << b << endl; //  "2 Kib" 
   //] [/autoprefixes_snippet_2]
 
   // Note that scalar dimensionless values are *not* prefixed automatically by the engineering_prefix or binary_prefix iostream manipulators.
@@ -118,7 +130,19 @@ int main()
   cout << boost::units::get_autoprefix(cout) << endl; // 8 is `autoprefix_binary` from `enum autoprefix_mode`.
   cout << boost::units::get_format(cout) << endl; // 1 is `name_fmt` from `enum format_mode`.
   //] [/autoprefixes_snippet_6]
+
+
+  quantity<thing_base_unit::unit_type> t = 2048. * thing_base_unit::unit_type();
+  cout << name_format << engineering_prefix << t << endl;  // 2.048 kilothing
+  cout << symbol_format << engineering_prefix << t << endl;  // 2.048 k
  
+  cout  << binary_prefix << t << endl; //  "2 Ki" 
+
+  quantity<euro_base_unit::unit_type> ce = 2048. * euro_base_unit::unit_type();
+  cout << name_format << engineering_prefix << ce << endl;  // 2.048 kiloEUR
+  cout << symbol_format << engineering_prefix << ce << endl;  // 2.048 k€
+
+
     return 0;
 } // int main()
 
