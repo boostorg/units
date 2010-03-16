@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,15 +11,12 @@
 #ifndef BOOST_UNITS_PHYSICAL_UNITS_HPP
 #define BOOST_UNITS_PHYSICAL_UNITS_HPP
 
-/// \file 
-
-/// \brief Physical dimensions according to the SI system.
 ///
+/// \file
+/// \brief Physical dimensions according to the SI system.
 /// \details This header includes all physical dimension headers for both base
-/// derived dimensions.
-
-/// Base dimensions are extended to include plane and solid angle as separate dimensions
-/// to reduce the risk of confusion between the dimensions. 
+///   and derived dimensions.
+///
 
 // Include all of the physical_dimension headers.
 
@@ -32,7 +29,7 @@
 #include <boost/units/physical_dimensions/temperature.hpp>
 #include <boost/units/physical_dimensions/time.hpp>
 
-// Base dimensions are extended to include plane and solid angle for convenience. 
+// Base dimensions are extended to include plane and solid angle for convenience.
 #include <boost/units/physical_dimensions/plane_angle.hpp>
 #include <boost/units/physical_dimensions/solid_angle.hpp>
 

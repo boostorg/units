@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,6 +11,11 @@
 #ifndef BOOST_UNITS_CONVERSION_HPP
 #define BOOST_UNITS_CONVERSION_HPP
 
+///
+/// \file
+/// \brief Template for defining conversions between quantities.
+///
+
 #include <boost/units/detail/conversion_impl.hpp>
 
 namespace boost {
@@ -22,6 +27,7 @@ struct conversion_helper;
 
 #ifdef BOOST_UNITS_DOXYGEN
 
+/// \details
 /// Template for defining conversions between
 /// quantities.  This template should be specialized
 /// for every quantity that allows conversions.

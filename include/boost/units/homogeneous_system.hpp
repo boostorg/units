@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -10,6 +10,15 @@
 
 #ifndef BOOST_UNITS_HOMOGENEOUS_SYSTEM_HPP_INCLUDED
 #define BOOST_UNITS_HOMOGENEOUS_SYSTEM_HPP_INCLUDED
+
+///
+/// \file
+/// \brief Homogeneous systems.
+/// \details A system that can uniquely represent any unit
+///   which can be composed from a linearly independent set
+///   of base units.  It is safe to rebind a unit with
+///   such a system to different dimensions.
+///
 
 #include <boost/mpl/bool.hpp>
 
@@ -29,11 +38,7 @@ namespace boost {
 
 namespace units {
 
-/// A system that can uniquely represent any unit
-/// which can be composed from a linearly independent set
-/// of base units.  It is safe to rebind a unit with
-/// such a system to different dimensions.
-///
+
 /// Do not construct this template directly.  Use
 /// make_system instead.
 template<class L>

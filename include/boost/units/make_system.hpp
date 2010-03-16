@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -10,6 +10,18 @@
 
 #ifndef BOOST_UNITS_MAKE_SYSTEM_HPP
 #define BOOST_UNITS_MAKE_SYSTEM_HPP
+
+///
+/// \file
+/// \brief Metafunction returning a homogeneous system that can
+///    represent any combination of the base units.
+/// \details
+/// Metafunction make_system returning a homogeneous system that can
+/// represent any combination of the base units.  There must
+/// be no way to represent any of the base units in terms
+/// of the others.  make_system<foot_base_unit, meter_base_unit>::type
+/// is not allowed, for example.
+///
 
 #include <boost/units/config.hpp>
 #include <boost/units/dimensionless_type.hpp>
@@ -29,7 +41,7 @@ struct unspecified {};
 
 }
 
-/// Metafunction returning a homogeneous system that can
+/// Metafunction make_system returning a homogeneous system that can
 /// represent any combination of the base units.  There must
 /// be no way to represent any of the base units in terms
 /// of the others.  make_system<foot_base_unit, meter_base_unit>::type

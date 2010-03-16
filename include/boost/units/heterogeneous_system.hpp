@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -10,6 +10,13 @@
 
 #ifndef BOOST_UNITS_HETEROGENEOUS_SYSTEM_HPP
 #define BOOST_UNITS_HETEROGENEOUS_SYSTEM_HPP
+
+///
+/// \file
+/// \brief A heterogeneous system is a sorted list of base unit/exponent pairs.
+/// \details As long as we don't need to convert heterogeneous systems
+///   directly everything is cool.
+///
 
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/plus.hpp>
@@ -45,7 +52,7 @@ namespace detail {
 // A normal system is a sorted list of base units.
 // A heterogeneous system is a sorted list of base unit/exponent pairs.
 // As long as we don't need to convert heterogeneous systems
-// directly everything is cool
+// directly everything is cool.
 
 template<class T>
 struct is_zero : mpl::false_ {};

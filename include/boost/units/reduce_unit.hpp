@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -10,6 +10,11 @@
 
 #ifndef BOOST_UNITS_REDUCE_UNIT_HPP_INCLUDED
 #define BOOST_UNITS_REDUCE_UNIT_HPP_INCLUDED
+
+///
+/// \file
+/// \brief Returns a unique type for every unit.
+///
 
 namespace boost {
 namespace units {

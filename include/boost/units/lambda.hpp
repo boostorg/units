@@ -13,7 +13,6 @@
 #ifndef BOOST_UNITS_LAMBDA_HPP
 #define BOOST_UNITS_LAMBDA_HPP
 
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// \file lambda.hpp
@@ -25,7 +24,7 @@
 /// \author Torsten Maehne
 /// \date   2008-06-16
 ///
-/// Boost.Lambda's return type deduction system is extented to make
+/// \details Boost.Lambda's return type deduction system is extented to make
 /// use of Boost.Units' typeof_helper trait classes for Boost.Units'
 /// quantity, absolute, and unit template classes.
 ///
@@ -519,7 +518,7 @@ namespace lambda {
 } // namespace lambda
 
 namespace units {
-    
+
     template<typename System, typename Dim, typename Arg>
     struct multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::absolute<boost::units::unit<Dim, System> > > {
         typedef boost::lambda::lambda_functor<
@@ -561,7 +560,7 @@ namespace lambda {
 } // namespace lambda
 
 namespace units {
-    
+
     template<typename System, typename Dim, typename Arg>
     struct multiply_typeof_helper<boost::units::absolute<boost::units::unit<Dim, System> >, boost::lambda::lambda_functor<Arg> > {
         typedef boost::lambda::lambda_functor<
