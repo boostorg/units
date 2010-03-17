@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -10,12 +10,6 @@
 
 #ifndef BOOST_UNITS_UNIT_HPP
 #define BOOST_UNITS_UNIT_HPP
-
-///
-/// \file
-/// \brief unit classes and functions.
-/// \details unit representing a model-dependent unit with no associated value for dimensional analysis.
-///
 
 #include <boost/static_assert.hpp>
 #include <boost/mpl/bool.hpp>
@@ -34,24 +28,26 @@
 
 namespace boost {
 
-namespace units { //! \namespace boost::units::detail \brief unit classes and functions implementation details (not recommended for normal use).
+namespace units { 
 
+/// class representing a model-dependent unit with no associated value
+
+/// (e.g. meters, Kelvin, feet, etc...)
 template<class Dim,class System, class Enable>
 class unit
-{ /// \brief unit representing a model-dependent unit with no associated value.
-  /// \details (for example: meters, Kelvin, feet, etc...).  Can be used for dimensional analysis.
+{
     public:
         typedef unit<Dim, System>   unit_type;
         typedef unit<Dim,System>    this_type;
-        typedef Dim                 dimension_type;
+        typedef Dim                 dimension_type; 
         typedef System              system_type;
-
+        
         unit() { }
         unit(const this_type&) { }
-        //~unit() { }
-
+        //~unit() { }  
+       
         this_type& operator=(const this_type&) { }
-
+        
         // sun will ignore errors resulting from templates
         // instantiated in the return type of a function.
         // Make sure that we get an error anyway by putting.
@@ -98,7 +94,7 @@ struct reduce_unit<unit<Dim, System> >
 };
 
 /// INTERNAL ONLY
-template<class S1,class S2>
+template<class S1,class S2> 
 struct is_implicitly_convertible :
     boost::is_same<typename reduce_unit<S1>::type, typename reduce_unit<S2>::type>
 { };
@@ -304,25 +300,25 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 };
 
 /// raise unit to a @c static_rational power
-template<class Dim,class System,long N,long D>
-struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >
-{
-    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,typename static_power<System, static_rational<N,D> >::type>     type;
-
-    static type value(const unit<Dim,System>&)
-    {
+template<class Dim,class System,long N,long D> 
+struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
+{ 
+    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,typename static_power<System, static_rational<N,D> >::type>     type; 
+    
+    static type value(const unit<Dim,System>&)  
+    { 
         return type();
     }
 };
 
 /// take the @c static_rational root of a unit
-template<class Dim,class System,long N,long D>
-struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >
-{
-    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,typename static_root<System, static_rational<N,D> >::type>      type;
-
-    static type value(const unit<Dim,System>&)
-    {
+template<class Dim,class System,long N,long D> 
+struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
+{ 
+    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,typename static_root<System, static_rational<N,D> >::type>      type; 
+    
+    static type value(const unit<Dim,System>&)  
+    { 
         return type();
     }
 };
@@ -331,9 +327,9 @@ struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >
 template<class Dim,class System>
 typename unary_plus_typeof_helper< unit<Dim,System> >::type
 operator+(const unit<Dim,System>&)
-{
+{ 
     typedef typename unary_plus_typeof_helper< unit<Dim,System> >::type type;
-
+    
     return type();
 }
 
@@ -341,9 +337,9 @@ operator+(const unit<Dim,System>&)
 template<class Dim,class System>
 typename unary_minus_typeof_helper< unit<Dim,System> >::type
 operator-(const unit<Dim,System>&)
-{
+{ 
     typedef typename unary_minus_typeof_helper< unit<Dim,System> >::type    type;
-
+    
     return type();
 }
 
@@ -357,11 +353,11 @@ typename add_typeof_helper< unit<Dim1,System1>,
 operator+(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     BOOST_STATIC_ASSERT((boost::is_same<System1,System2>::value == true));
-
+    
     typedef System1                                                     system_type;
     typedef typename add_typeof_helper< unit<Dim1,system_type>,
                                         unit<Dim2,system_type> >::type  type;
-
+    
     return type();
 }
 
@@ -375,11 +371,11 @@ typename subtract_typeof_helper< unit<Dim1,System1>,
 operator-(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     BOOST_STATIC_ASSERT((boost::is_same<System1,System2>::value == true));
-
+    
     typedef System1                                                         system_type;
     typedef typename subtract_typeof_helper< unit<Dim1,system_type>,
                                              unit<Dim2,system_type> >::type type;
-
+    
     return type();
 }
 
@@ -394,7 +390,7 @@ operator*(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     typedef typename multiply_typeof_helper< unit<Dim1,System1>,
                                              unit<Dim2,System2> >::type type;
-
+    
     return type();
 }
 
@@ -409,7 +405,7 @@ operator/(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     typedef typename divide_typeof_helper< unit<Dim1,System1>,
                                            unit<Dim2,System2> >::type   type;
-
+    
     return type();
 }
 
@@ -419,7 +415,7 @@ template<class Dim1,
          class System1,
          class System2>
 inline
-bool
+bool 
 operator==(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     return boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;
@@ -431,7 +427,7 @@ template<class Dim1,
          class System1,
          class System2>
 inline
-bool
+bool 
 operator!=(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     return !boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;

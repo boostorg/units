@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,10 +11,8 @@
 #ifndef BOOST_UNITS_GET_SYSTEM_HPP
 #define BOOST_UNITS_GET_SYSTEM_HPP
 
-///
 /// \file
 /// \brief Get the system of a unit, absolute unit or quantity.
-///
 
 #include <boost/units/units_fwd.hpp>
 

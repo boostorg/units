@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -15,7 +15,6 @@
 /// \file
 /// \brief 10^3 Engineering & 2^10 binary scaling factors for autoprefixing.
 /// \details
-/// \author Steven Watanabe
 ///
 
 #include <string>
@@ -33,7 +32,7 @@ namespace units {
 template<class S, class Scale>
 struct scaled_base_unit;
 
-/// scale class representing a scaling factor such as 10^3
+/// class representing a scaling factor such as 10^3
 /// The exponent must be a static rational.
 template<long Base, class Exponent>
 struct scale

@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,11 +8,9 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-///
 /// \file
 /// \brief base unit (meter, kg, sec...).
 /// \details base unit definition registration.
-///
 
 #ifndef BOOST_UNITS_BASE_UNIT_HPP
 #define BOOST_UNITS_BASE_UNIT_HPP
@@ -66,8 +64,8 @@ template<class Derived,
          >::type
 #endif
 >
-class base_unit :
-    public ordinal<N>
+class base_unit : 
+    public ordinal<N> 
 {
     public:
         /// INTERNAL ONLY
@@ -102,14 +100,14 @@ class base_unit :
     private:
         /// Register this ordinal
         /// INTERNAL ONLY
-        friend detail::yes
-        boost_units_unit_is_registered(const units::base_unit_ordinal<N>&)
+        friend detail::yes 
+        boost_units_unit_is_registered(const units::base_unit_ordinal<N>&) 
         { detail::yes result; return(result); }
-
+        
         /// But make sure we can identify the current instantiation!
         /// INTERNAL ONLY
-        friend detail::yes
-        boost_units_unit_is_registered(const units::base_unit_pair<Derived, N>&)
+        friend detail::yes 
+        boost_units_unit_is_registered(const units::base_unit_pair<Derived, N>&) 
         { detail::yes result; return(result); }
 };
 

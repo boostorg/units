@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,12 +11,26 @@
 #ifndef BOOST_UNITS_DIMENSION_HPP
 #define BOOST_UNITS_DIMENSION_HPP
 
-///
-/// \file
+#include <boost/static_assert.hpp>
+
+#include <boost/type_traits/is_same.hpp>
+
+#include <boost/mpl/arithmetic.hpp>
+
+#include <boost/units/static_rational.hpp>
+#include <boost/units/detail/dimension_list.hpp>
+#include <boost/units/detail/dimension_impl.hpp>
+
+/// \file 
 /// \brief Core metaprogramming utilities for compile-time dimensional analysis.
-/// \details Reduce dimension list to cardinal form. This algorithm collapses duplicate
+
+namespace boost {
+
+namespace units {
+
+/// Reduce dimension list to cardinal form. This algorithm collapses duplicate
 /// base dimension tags and sorts the resulting list by the tag ordinal value.
-/// Dimension lists that resolve to the same dimension are guaranteed to be
+/// Dimension lists that resolve to the same dimension are guaranteed to be  
 /// represented by an identical type.
 ///
 /// The argument should be an MPL forward sequence containing instances
@@ -36,22 +50,6 @@
 ///         the exponents of the dimension by the static_rational.
 ///    - @c static_root takes a dimension and a static_rational and divides all
 ///         the exponents of the dimension by the static_rational.
-///
-
-#include <boost/static_assert.hpp>
-
-#include <boost/type_traits/is_same.hpp>
-
-#include <boost/mpl/arithmetic.hpp>
-
-#include <boost/units/static_rational.hpp>
-#include <boost/units/detail/dimension_list.hpp>
-#include <boost/units/detail/dimension_impl.hpp>
-
-namespace boost {
-
-namespace units {
-
 template<typename Seq>
 struct make_dimension_list
 {
@@ -59,23 +57,23 @@ struct make_dimension_list
 };
 
 /// Raise a dimension list to a scalar power.
-template<typename DL,typename Ex>
+template<typename DL,typename Ex> 
 struct static_power
 {
     typedef typename detail::static_power_impl<DL::size::value>::template apply<
         DL,
         Ex
-    >::type type;
+    >::type type;    
 };
 
 /// Take a scalar root of a dimension list.
-template<typename DL,typename Rt>
+template<typename DL,typename Rt> 
 struct static_root
 {
     typedef typename detail::static_root_impl<DL::size::value>::template apply<
         DL,
         Rt
-    >::type type;
+    >::type type;    
 };
 
 } // namespace units

@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,11 +11,6 @@
 #ifndef BOOST_UNITS_DERIVED_DIMENSION_HPP
 #define BOOST_UNITS_DERIVED_DIMENSION_HPP
 
-///
-/// \file
-/// \brief Utility classes for defining composite and derived dimensions with integer powers.
-/// \details
-///
 #include <boost/units/dim.hpp>
 #include <boost/units/dimension.hpp>
 #include <boost/units/static_rational.hpp>
@@ -40,7 +35,7 @@ struct derived_dimension
 #ifdef BOOST_UNITS_DOXYGEN
     typedef detail::unspecified type;
 #else
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >,
@@ -64,7 +59,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >, dimensionless_type > >::type type;
 };
 
@@ -81,7 +76,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >, dimensionless_type > > >::type type;
 };
@@ -100,7 +95,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >, dimensionless_type > > > >::type type;
@@ -121,7 +116,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >,
@@ -144,7 +139,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >,
@@ -169,7 +164,7 @@ struct derived_dimension<
     dimensionless_type,0,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >,
@@ -196,7 +191,7 @@ struct derived_dimension<
     DT7, E7,
     dimensionless_type,0>
 {
-    typedef typename
+    typedef typename 
     make_dimension_list< list< dim< DT1,static_rational<E1> >,
                          list< dim< DT2,static_rational<E2> >,
                          list< dim< DT3,static_rational<E3> >,
@@ -208,6 +203,6 @@ struct derived_dimension<
 
 } // namespace units
 
-} // namespace boost
+} // namespace boost                                                                   
 
 #endif // BOOST_UNITS_DERIVED_DIMENSION_HPP

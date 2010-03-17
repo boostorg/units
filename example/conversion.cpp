@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,9 +8,9 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-/**
+/** 
 \file
-
+    
 \brief conversion.cpp
 
 \details
@@ -65,21 +65,21 @@ int main()
     quantity<si::length>     L1 = quantity<si::length,int>(int(2.5)*si::meters);
     quantity<si::length,int> L2(quantity<si::length,double>(2.5*si::meters));
     //]
-
+    
     //[conversion_snippet_3
     quantity<si::length,int> L3 = static_cast<quantity<si::length,int> >(L1);
     //]
-
+    
     //[conversion_snippet_4
     quantity<cgs::length>    L4 = static_cast<quantity<cgs::length> >(L1);
     //]
-
+    
     quantity<si::length,int> L5(4*si::meters),
                              L6(5*si::meters);
     quantity<cgs::length>    L7(L1);
-
+    
     swap(L5,L6);
-
+    
     std::cout << "L1 = " << L1 << std::endl
               << "L2 = " << L2 << std::endl
               << "L3 = " << L3 << std::endl
@@ -89,32 +89,32 @@ int main()
               << "L7 = " << L7 << std::endl
               << std::endl;
     }
-
+    
     // test explicit unit system conversion
     {
     //[conversion_snippet_5
-    quantity<si::volume>    vs(1.0*pow<3>(si::meter));
+    quantity<si::volume>    vs(1.0*pow<3>(si::meter));      
     quantity<cgs::volume>   vc(vs);
     quantity<si::volume>    vs2(vc);
-
-    quantity<si::energy>    es(1.0*si::joule);
+                        
+    quantity<si::energy>    es(1.0*si::joule);      
     quantity<cgs::energy>   ec(es);
     quantity<si::energy>    es2(ec);
-
-    quantity<si::velocity>  v1 = 2.0*si::meters/si::second,
+                        
+    quantity<si::velocity>  v1 = 2.0*si::meters/si::second,     
                             v2(2.0*cgs::centimeters/cgs::second);
     //]
-
+    
     std::cout << "volume (m^3)  = " << vs << std::endl
               << "volume (cm^3) = " << vc << std::endl
               << "volume (m^3)  = " << vs2 << std::endl
               << std::endl;
-
+            
     std::cout << "energy (joules) = " << es << std::endl
               << "energy (ergs)   = " << ec << std::endl
               << "energy (joules) = " << es2 << std::endl
               << std::endl;
-
+            
     std::cout << "velocity (2 m/s)  = " << v1 << std::endl
               << "velocity (2 cm/s) = " << v2 << std::endl
               << std::endl;

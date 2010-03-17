@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -11,13 +11,11 @@
 #ifndef BOOST_UNITS_IO_HPP
 #define BOOST_UNITS_IO_HPP
 
-///
 /// \file
 /// \brief Stream input and output for rationals, units and quantities.
 /// \details Functions and manipulators for output and input of units and quantities.
 ///   symbol and name format, and engineering and binary autoprefix.
 ///   Serialisation output is also supported.
-///
 
 #include <cassert>
 #include <cmath>
@@ -39,8 +37,7 @@
 
 namespace boost {
 
-namespace serialization
-{ /// \namespace serialization for classes providing support for Boost Serialization library.
+namespace serialization {
 
 /// Boost Serialization library support for units.
 template<class Archive,class System,class Dim>
@@ -53,16 +50,18 @@ inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsign
 {
     ar & boost::serialization::make_nvp("value", units::quantity_cast<Y&>(q));
 }
-
+        
 } // namespace serialization
 
 namespace units {
 
-/// get string representation of arbitrary type.
+// get string representation of arbitrary type.
 template<class T> std::string to_string(const T& t)
 {
     std::stringstream sstr;
+    
     sstr << t;
+    
     return sstr.str();
 }
 
@@ -92,22 +91,21 @@ struct base_unit_info
 {
     /// INTERNAL ONLY
     typedef void base_unit_info_primary_template;
-    /// The full name of the unit ( by default)
+    /// The full name of the unit (returns BaseUnit::name() by default)
     static std::string name()
     {
-        return(BaseUnit::name()); /// \returns BaseUnit::name(), for example "meter"
+        return(BaseUnit::name());
     }
-
-    /// The symbol for the base unit.
-
+    /// The symbol for the base unit (Returns BaseUnit::symbol() by default)
     static std::string symbol()
     {
         return(BaseUnit::symbol());  ///  \returns BaseUnit::symbol(), for example "m"
     }
 };
 
+/// \enum format_mode format of output of units, for example "m" or "meter".
 enum format_mode
-{ /// \enum format_mode format of output of units, for example "m" or "meter".
+{
     symbol_fmt = 0,     /// default - reduces unit names to known symbols for both base and derived units.
     name_fmt = 1,           /// output full unit names for base and derived units, for example "meter".
     raw_fmt = 2,            /// output only symbols for base units (but not derived units), for example "m".
@@ -115,8 +113,9 @@ enum format_mode
     fmt_mask = 3 /// Bits used for format.
 };
 
+/// \enum autoprefix_mode automatic scaling and prefix (controlled by value of quantity) a, if any,
 enum autoprefix_mode
-{ /// \enum autoprefix_mode automatic scaling and prefix (controlled by value of quantity) a, if any,
+{
     autoprefix_none = 0, /// No automatic prefix.
     autoprefix_engineering = 4, /// Scale and prefix with 10^3 multiples, 1234.5 m output as 1.2345 km.
     autoprefix_binary = 8, /// Scale and prefix with 2^10 (1024) multiples, 1024 as 1 kb.
@@ -126,7 +125,7 @@ enum autoprefix_mode
 namespace detail {
 
 template<bool>
-struct xalloc_key_holder
+struct xalloc_key_holder 
 {
     static int value;
     static bool initialized;
@@ -138,11 +137,11 @@ int xalloc_key_holder<b>::value = 0;
 template<bool b>
 bool xalloc_key_holder<b>::initialized = 0;
 
-struct xalloc_key_initializer_t
+struct xalloc_key_initializer_t 
 {
-    xalloc_key_initializer_t()
+    xalloc_key_initializer_t() 
     {
-        if (!xalloc_key_holder<true>::initialized)
+        if (!xalloc_key_holder<true>::initialized) 
         {
             xalloc_key_holder<true>::value = std::ios_base::xalloc();
             xalloc_key_holder<true>::initialized = true;
@@ -151,105 +150,122 @@ struct xalloc_key_initializer_t
 };
 
 namespace /**/ {
-
+    
 xalloc_key_initializer_t xalloc_key_initializer;
 
 } // namespace
 
 } // namespace detail
 
-inline int get_flags(std::ios_base& ios, int mask)
-{ /// \return flags controlling output.
+/// \return flags controlling output.
+inline int get_flags(std::ios_base& ios, int mask) 
+{
     return(ios.iword(detail::xalloc_key_holder<true>::value) & mask);
 }
 
-inline void set_flags(std::ios_base& ios, int new_flags, int mask)
-{ /// Set new flags controlling output format.
-  /// \return previous flags.
-
+/// Set new flags controlling output format.
+/// \return previous flags.
+inline void set_flags(std::ios_base& ios, int new_flags, int mask) 
+{
     assert((~mask & new_flags) == 0);
     long& flags = ios.iword(detail::xalloc_key_holder<true>::value);
     flags = (flags & ~mask) | static_cast<long>(new_flags);
 }
 
-inline format_mode get_format(std::ios_base& ios)
-{ /// \return flags controlling output format.
+/// \return flags controlling output format.
+inline format_mode get_format(std::ios_base& ios) 
+{
     return(static_cast<format_mode>((get_flags)(ios, fmt_mask)));
 }
 
-inline void set_format(std::ios_base& ios, format_mode new_mode)
-{ /// Set new flags controlling output format.
-     (set_flags)(ios, new_mode, fmt_mask);
+/// Set new flags controlling output format.
+inline void set_format(std::ios_base& ios, format_mode new_mode) 
+{
+    (set_flags)(ios, new_mode, fmt_mask);
 }
 
-inline std::ios_base& typename_format(std::ios_base& ios)
-{ /// Set new flags for type_name output format.
- /// \return previous format flags.
+/// Set new flags for type_name output format.
+/// \return previous format flags.
+inline std::ios_base& typename_format(std::ios_base& ios) 
+{
     (set_format)(ios, typename_fmt);
     return(ios);
 }
 
-inline std::ios_base& raw_format(std::ios_base& ios)
-{ /// set new flag for raw format output, for example "m".
-     (set_format)(ios, raw_fmt); /// \return previous format flags.
+/// set new flag for raw format output, for example "m".
+/// \return previous format flags.
+inline std::ios_base& raw_format(std::ios_base& ios) 
+{
+    (set_format)(ios, raw_fmt);
     return(ios);
 }
 
-inline std::ios_base& symbol_format(std::ios_base& ios)
-{ // set new format flag for symbol output, for example "m".
-    (set_format)(ios, symbol_fmt);  /// \return previous format flags.
+// set new format flag for symbol output, for example "m".
+/// \return previous format flags.
+inline std::ios_base& symbol_format(std::ios_base& ios) 
+{
+    (set_format)(ios, symbol_fmt);
     return(ios);
 }
 
-inline std::ios_base& name_format(std::ios_base& ios)
-{ /// set new format for name output, for example "meter".
+/// set new format for name output, for example "meter".
+/// \return previous format flags.
+inline std::ios_base& name_format(std::ios_base& ios) 
+{
     (set_format)(ios, name_fmt);
-    return(ios);  /// \return previous format flags.
+    return(ios);
 }
 
+/// get autoprefix flags for output.
 inline autoprefix_mode get_autoprefix(std::ios_base& ios)
-{ /// get autoprefix flags for output.
-
+{
     return static_cast<autoprefix_mode>((get_flags)(ios, autoprefix_mask));
 }
 
+/// Get format for output.
 inline void set_autoprefix(std::ios_base& ios, autoprefix_mode new_mode)
-{  /// Get format for output.
+{
     (set_flags)(ios, new_mode, autoprefix_mask);
 }
 
+/// Clear autoprefix flags.
+/// \return previous prefix flags.
 inline std::ios_base& no_prefix(std::ios_base& ios)
-{  /// Clear autoprefix flags.
-
+{
     (set_autoprefix)(ios, autoprefix_none);
-    return ios; /// \return previous prefix flags.
+    return ios;
 }
 
+/// Set flag for engineering prefix, so 1234.5 m displays as "1.2345 km".
+/// \return previous prefix flags.
 inline std::ios_base& engineering_prefix(std::ios_base& ios)
-{  /// Set flag for engineering prefix, so 1234.5 m displays as "1.2345 km".
-
+{
     (set_autoprefix)(ios, autoprefix_engineering);
-    return ios; /// \return previous prefix flags.
+    return ios;
 }
 
+/// Set flag for binary prefix, so 1024 byte displays as "1 Kib".
+/// \return previous prefix flags.
 inline std::ios_base& binary_prefix(std::ios_base& ios)
-{ /// Set flag for binary prefix, so 1024 byte displays as "1 Kib".
+{
     (set_autoprefix)(ios, autoprefix_binary);
-    return ios;   /// \return previous prefix flags.
+    return ios;
 }
 
 namespace detail {
 
+/// \return exponent string like "^1/2".
 template<integer_type N, integer_type D>
 inline std::string exponent_string(const static_rational<N,D>& r)
 {
-    return '^' + to_string(r); ///\return exponent string like "^1/2".
+    return '^' + to_string(r);
 }
 
+/// \return empty exponent string for integer rational like 2.
 template<>
 inline std::string exponent_string(const static_rational<1>&)
 {
-    return ""; ///\return empty exponent string for integer rational like 2.
+    return "";
 }
 
 template<class T>
@@ -258,7 +274,7 @@ inline std::string base_unit_symbol_string(const T&)
     return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
 }
 
-template<class T>
+template<class T>    
 inline std::string base_unit_name_string(const T&)
 {
     return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
@@ -302,18 +318,18 @@ struct symbol_string_impl<0>
         static void value(std::string& str)
         {
             // better shorthand for dimensionless?
-            str += "dimensionless"; /// \return appended "dimensionless".
+            str += "dimensionless";
         }
     };
 };
 
 template<int N>
-struct scale_symbol_string_impl
+struct scale_symbol_string_impl 
 {
     template<class Begin>
-    struct apply
+    struct apply 
     {
-        static void value(std::string& str)
+        static void value(std::string& str) 
         {
             str += Begin::item::symbol();
             scale_symbol_string_impl<N - 1>::template apply<typename Begin::next>::value(str);
@@ -325,7 +341,7 @@ template<>
 struct scale_symbol_string_impl<0>
 {
     template<class Begin>
-    struct apply
+    struct apply 
     {
         static void value(std::string&) { }
     };
@@ -374,12 +390,12 @@ struct name_string_impl<0>
 };
 
 template<int N>
-struct scale_name_string_impl
+struct scale_name_string_impl 
 {
     template<class Begin>
-    struct apply
+    struct apply 
     {
-        static void value(std::string& str)
+        static void value(std::string& str) 
         {
             str += Begin::item::name();
             scale_name_string_impl<N - 1>::template apply<typename Begin::next>::value(str);
@@ -391,7 +407,7 @@ template<>
 struct scale_name_string_impl<0>
 {
     template<class Begin>
-    struct apply
+    struct apply 
     {
         static void value(std::string&) { }
     };
@@ -455,14 +471,14 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
     f.template append_scale_to<Scale>(str);
 
     std::string without_scale = f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
-
+    
     if (f.is_default_string(without_scale, unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >()))
     {
         str += "(";
         str += without_scale;
         str += ")";
-    }
-    else
+    } 
+    else 
     {
         str += without_scale;
     }
@@ -947,27 +963,27 @@ name_string(const unit<Dimension, System>&)
 template<class Char, class Traits, class Dimension, class System>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if (units::get_format(os) == typename_fmt)
+    if (units::get_format(os) == typename_fmt) 
     {
         detail::do_print(os, typename_string(u));
     }
-    else if (units::get_format(os) == raw_fmt)
+    else if (units::get_format(os) == raw_fmt) 
     {
         detail::do_print(os, detail::to_string_impl(u, detail::format_raw_symbol_impl()));
     }
-    else if (units::get_format(os) == symbol_fmt)
+    else if (units::get_format(os) == symbol_fmt) 
     {
         detail::do_print(os, symbol_string(u));
     }
-    else if (units::get_format(os) == name_fmt)
+    else if (units::get_format(os) == name_fmt) 
     {
         detail::do_print(os, name_string(u));
     }
-    else
+    else 
     {
         assert(!"The format mode must be one of: typename_format, raw_format, name_format, symbol_format");
     }
-
+    
     return(os);
 }
 

@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -8,7 +8,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_UNITS_OPERATORS_HPP
+#ifndef BOOST_UNITS_OPERATORS_HPP 
 #define BOOST_UNITS_OPERATORS_HPP
 
 
@@ -46,37 +46,37 @@ template<class T> T make();
 
 #if (BOOST_UNITS_HAS_BOOST_TYPEOF)
 
-template<typename X> struct unary_plus_typeof_helper
+template<typename X> struct unary_plus_typeof_helper            
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (+typeof_::make<X>()))
     typedef typename nested::type type;
 };
 
-template<typename X> struct unary_minus_typeof_helper
+template<typename X> struct unary_minus_typeof_helper           
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (-typeof_::make<X>()))
     typedef typename nested::type type;
 };
 
-template<typename X,typename Y> struct add_typeof_helper
+template<typename X,typename Y> struct add_typeof_helper        
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (typeof_::make<X>()+typeof_::make<Y>()))
     typedef typename nested::type type;
 };
 
-template<typename X,typename Y> struct subtract_typeof_helper
+template<typename X,typename Y> struct subtract_typeof_helper   
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (typeof_::make<X>()-typeof_::make<Y>()))
     typedef typename nested::type type;
 };
 
-template<typename X,typename Y> struct multiply_typeof_helper
+template<typename X,typename Y> struct multiply_typeof_helper   
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (typeof_::make<X>()*typeof_::make<Y>()))
     typedef typename nested::type type;
 };
 
-template<typename X,typename Y> struct divide_typeof_helper
+template<typename X,typename Y> struct divide_typeof_helper     
 {
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(nested, (typeof_::make<X>()/typeof_::make<Y>()))
     typedef typename nested::type type;

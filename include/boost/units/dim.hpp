@@ -1,8 +1,8 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
-// Copyright (C) 2007-2010 Steven Watanabe
+// Copyright (C) 2007-2008 Steven Watanabe
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -11,13 +11,36 @@
 #ifndef BOOST_UNITS_DIM_HPP
 #define BOOST_UNITS_DIM_HPP
 
+#include <boost/static_assert.hpp>
+
+#include <boost/type_traits/is_same.hpp>
+
+#include <boost/mpl/arithmetic.hpp>
+
+#include <boost/units/config.hpp>
+#include <boost/units/static_rational.hpp>
+#include <boost/units/detail/dim_impl.hpp>
+
+/// \file dim.hpp
+/// \brief Handling of fundamental dimension/exponent pairs.
+
+namespace boost {
+
+namespace units {
+
+namespace detail {
+
+struct dim_tag { };
+
+}
+
+/// \brief Dimension tag/exponent pair for a single fundamental dimension.
 ///
-/// \file
-/// \brief  Handling of fundamental dimension/exponent pairs.
-/// \details The dim class represents a single dimension tag/dimension exponent pair.
+/// \details 
+/// The dim class represents a single dimension tag/dimension exponent pair.
 /// That is, @c dim<tag_type,value_type> is a pair where @c tag_type represents the
-/// fundamental dimension being represented and @c value_type represents the
-/// exponent of that fundamental dimension as a @c static_rational. @c tag_type must
+/// fundamental dimension being represented and @c value_type represents the 
+/// exponent of that fundamental dimension as a @c static_rational. @c tag_type must 
 /// be a derived from a specialization of @c base_dimension.
 /// Specialization of the following Boost.MPL metafunctions are provided
 ///
@@ -34,26 +57,7 @@
 ///     - @c mpl::divides for a @c static_rational and a @c dim in either order
 ///
 /// These metafunctions likewise operate on the exponent only.
-///
-
-#include <boost/static_assert.hpp>
-
-#include <boost/type_traits/is_same.hpp>
-
-#include <boost/mpl/arithmetic.hpp>
-
-#include <boost/units/config.hpp>
-#include <boost/units/static_rational.hpp>
-#include <boost/units/detail/dim_impl.hpp>
-
-namespace boost {
-namespace units {
-namespace detail
-{
- struct dim_tag { };
-}
-
-template<typename T,typename V>
+template<typename T,typename V> 
 struct dim
 {
     typedef dim             type;
@@ -80,7 +84,7 @@ namespace boost {
 
 namespace mpl {
 
-/// define MPL operators acting on dim<T,V>
+// define MPL operators acting on dim<T,V>
 
 template<>
 struct plus_impl<boost::units::detail::dim_tag,boost::units::detail::dim_tag>

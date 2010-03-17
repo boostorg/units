@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -25,7 +25,7 @@ namespace boost {
 namespace units {
 
 /// Check that a type is a valid @c dim.
-template<typename T>
+template<typename T> 
 struct is_dim :
     public mpl::false_
 { };

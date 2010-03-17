@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -16,6 +16,7 @@
 
 #ifndef BOOST_UNITS_ABSOLUTE_HPP
 #define BOOST_UNITS_ABSOLUTE_HPP
+
 #include <iosfwd>
 
 #include <boost/units/detail/absolute_impl.hpp>
@@ -25,7 +26,7 @@ namespace boost {
 namespace units {
 
 /// A wrapper to represent absolute units (points rather than vectors).  Intended
-/// originally for temperatures, this class implements operators for absolute units
+/// originally for temperatures, this class implements operators for absolute units 
 /// so that addition of a relative unit to an absolute unit results in another
 /// absolute unit : absolute<T> +/- T -> absolute<T> and subtraction of one absolute
 /// unit from another results in a relative unit : absolute<T> - absolute<T> -> T.
@@ -35,18 +36,18 @@ class absolute
     public:
         typedef absolute<Y>     this_type;
         typedef Y               value_type;
-
+        
         absolute() : val_() { }
         absolute(const value_type& val) : val_(val) { }
         absolute(const this_type& source) : val_(source.val_) { }
-
+   
         this_type& operator=(const this_type& source)           { val_ = source.val_; return *this; }
-
+        
         const value_type& value() const                         { return val_; }
-
+        
         const this_type& operator+=(const value_type& val)      { val_ += val; return *this; }
         const this_type& operator-=(const value_type& val)      { val_ -= val; return *this; }
-
+        
     private:
         value_type   val_;
 };
@@ -99,7 +100,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 {
 
     os << "absolute " << aval.value();
-
+    
     return os;
 }
 
@@ -126,7 +127,7 @@ namespace units {
 /// @endcode
 /// @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR is also necessary to
 /// specify the conversion factor.  Like @c BOOST_UNITS_DEFINE_CONVERSION_FACTOR
-/// this macro defines both forward and reverse conversions so
+/// this macro defines both forward and reverse conversions so 
 /// defining, e.g., the conversion from celsius to fahrenheit as above will also
 /// define the inverse conversion from fahrenheit to celsius.
 #define BOOST_UNITS_DEFINE_CONVERSION_OFFSET(From, To, type_, value_)   \
