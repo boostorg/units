@@ -365,60 +365,6 @@ nanosecond is a specialization of [___unit], and can be used in a quantity norma
 
 [endsect] [/section Scaled Units]
 
-[section:autoscale Automatically Scaled Units]
-
-It is often desirable to scale a [___unit] automatically, depending on its value,
-to keep the integral part in a limited range, usually between 1 and 999.
-
-For example, using [@http://en.wikipedia.org/wiki/Engineering_notation engineering notation prefixes],
-
- "1234.5 m" is more helpfully displayed as "1.234 km"
- "0.000000001234 m" is more clearly displayed as "1.2345 nanometer".
-
-The iostream manipulators `engineering_prefixes` or `binary_prefixes` make this easy.
-
-[import ../example/autoprefixes.cpp]
-
-[autoprefixes_snippet_1]
-
-(The complete set of [@http://physics.nist.gov/cuu/Units/prefixes.html engineering and scientific multiples]
-is not used (not centi or deci for example), but only powers of ten that are multiples of three, 10^3).
-
-Similarly, the equivalent [@http://en.wikipedia.org/wiki/Binary_prefixes binary prefixes]
-used for displaying computing kilobytes, megabytes, gigabytes...
-
-These are the 2^10 = 1024, 2^20 = 1 048 576, 2^30 ... multiples.
-
-(See also [@http://physics.nist.gov/cuu/Units/binary.html Prefixes for binary multiples]
-
-This scale is specified in IEC 60027-2, Second edition, 2000-11,
-Letter symbols to be used in electrical technology -
-Part 2: Telecommunications and electronics).
-
-[autoprefixes_snippet_2]
-
-But note that scalar dimensionless values, like int, float and double,
-are *not* prefixed automatically by the engineering_prefix or binary_prefix iostream manipulators.
-
-[autoprefixes_snippet_3]
-
-You can output the name or symbol of a unit (rather than the most common quantity of a unit).
-
-[autoprefixes_snippet_4]
-
-Note too that all the formatting flags are persistent,
-so that if you set engineering_prefix, then it applies to all future outputs,
-until you select binary_prefix, or explicitly switch autoprefix off.
-You can specify no prefix (the default of course) in two ways:
-
-[autoprefixes_snippet_5]
-
-And you can get the format flags for diagnosing problems.
-
-[autoprefixes_snippet_6]
-
-[endsect] [/section:autoscale Automatically Scaled Units]
-
 [endsect] [/section:Units Units]
 
 [section:Quantities Quantities]
@@ -1016,6 +962,60 @@ latter returns a demangled typename for debugging purposes. Formatting of scaled
 unit is also done correctly.
 
 [endsect]
+
+[section:autoscale Automatically Scaled Units]
+
+It is often desirable to scale a [___unit] automatically, depending on its value,
+to keep the integral part in a limited range, usually between 1 and 999.
+
+For example, using [@http://en.wikipedia.org/wiki/Engineering_notation engineering notation prefixes],
+
+ "1234.5 m" is more helpfully displayed as "1.234 km"
+ "0.000000001234 m" is more clearly displayed as "1.2345 nanometer".
+
+The iostream manipulators `engineering_prefixes` or `binary_prefixes` make this easy.
+
+[import ../example/autoprefixes.cpp]
+
+[autoprefixes_snippet_1]
+
+(The complete set of [@http://physics.nist.gov/cuu/Units/prefixes.html engineering and scientific multiples]
+is not used (not centi or deci for example), but only powers of ten that are multiples of three, 10^3).
+
+Similarly, the equivalent [@http://en.wikipedia.org/wiki/Binary_prefixes binary prefixes]
+used for displaying computing kilobytes, megabytes, gigabytes...
+
+These are the 2^10 = 1024, 2^20 = 1 048 576, 2^30 ... multiples.
+
+(See also [@http://physics.nist.gov/cuu/Units/binary.html Prefixes for binary multiples]
+
+This scale is specified in IEC 60027-2, Second edition, 2000-11,
+Letter symbols to be used in electrical technology -
+Part 2: Telecommunications and electronics).
+
+[autoprefixes_snippet_2]
+
+But note that scalar dimensionless values, like int, float and double,
+are *not* prefixed automatically by the engineering_prefix or binary_prefix iostream manipulators.
+
+[autoprefixes_snippet_3]
+
+You can output the name or symbol of a unit (rather than the most common quantity of a unit).
+
+[autoprefixes_snippet_4]
+
+Note too that all the formatting flags are persistent,
+so that if you set engineering_prefix, then it applies to all future outputs,
+until you select binary_prefix, or explicitly switch autoprefix off.
+You can specify no prefix (the default of course) in two ways:
+
+[autoprefixes_snippet_5]
+
+And you can get the format flags for diagnosing problems.
+
+[autoprefixes_snippet_6]
+
+[endsect] [/section:autoscale Automatically Scaled Units]
 
 [section:ConversionFactor Conversion Factor]
 
