@@ -41,13 +41,13 @@ class unit
         typedef unit<Dim,System>    this_type;
         typedef Dim                 dimension_type; 
         typedef System              system_type;
-        
-        unit() { }
-        unit(const this_type&) { }
-        //~unit() { }  
-       
-        this_type& operator=(const this_type&) { return *this; }
-        
+
+        BOOST_CONSTEXPR unit() { }
+        BOOST_CONSTEXPR unit(const this_type&) { }
+        //~unit() { }
+
+        BOOST_CONSTEXPR this_type& operator=(const this_type&) { return *this; }
+
         // sun will ignore errors resulting from templates
         // instantiated in the return type of a function.
         // Make sure that we get an error anyway by putting.
@@ -300,46 +300,48 @@ struct divide_typeof_helper< unit<Dim1,heterogeneous_system<System1> >,
 };
 
 /// raise unit to a @c static_rational power
-template<class Dim,class System,long N,long D> 
-struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
-{ 
-    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,typename static_power<System, static_rational<N,D> >::type>     type; 
-    
-    static type value(const unit<Dim,System>&)  
-    { 
+template<class Dim,class System,long N,long D>
+struct power_typeof_helper<unit<Dim,System>,static_rational<N,D> >
+{
+    typedef unit<typename static_power<Dim,static_rational<N,D> >::type,
+                 typename static_power<System, static_rational<N,D> >::type> type;
+
+    static BOOST_CONSTEXPR type value(const unit<Dim,System>&)
+    {
         return type();
     }
 };
 
 /// take the @c static_rational root of a unit
-template<class Dim,class System,long N,long D> 
-struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >                
-{ 
-    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,typename static_root<System, static_rational<N,D> >::type>      type; 
-    
-    static type value(const unit<Dim,System>&)  
-    { 
+template<class Dim,class System,long N,long D>
+struct root_typeof_helper<unit<Dim,System>,static_rational<N,D> >
+{
+    typedef unit<typename static_root<Dim,static_rational<N,D> >::type,
+                 typename static_root<System, static_rational<N,D> >::type> type;
+
+    static BOOST_CONSTEXPR type value(const unit<Dim,System>&)
+    {
         return type();
     }
 };
 
 /// unit runtime unary plus
 template<class Dim,class System>
+BOOST_CONSTEXPR
 typename unary_plus_typeof_helper< unit<Dim,System> >::type
 operator+(const unit<Dim,System>&)
-{ 
+{
     typedef typename unary_plus_typeof_helper< unit<Dim,System> >::type type;
-    
     return type();
 }
 
 /// unit runtime unary minus
 template<class Dim,class System>
+BOOST_CONSTEXPR
 typename unary_minus_typeof_helper< unit<Dim,System> >::type
 operator-(const unit<Dim,System>&)
-{ 
-    typedef typename unary_minus_typeof_helper< unit<Dim,System> >::type    type;
-    
+{
+    typedef typename unary_minus_typeof_helper< unit<Dim,System> >::type type;
     return type();
 }
 
@@ -348,16 +350,15 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
+BOOST_CONSTEXPR
 typename add_typeof_helper< unit<Dim1,System1>,
                             unit<Dim2,System2> >::type
 operator+(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     BOOST_STATIC_ASSERT((boost::is_same<System1,System2>::value == true));
-    
-    typedef System1                                                     system_type;
+    typedef System1                                                    system_type;
     typedef typename add_typeof_helper< unit<Dim1,system_type>,
-                                        unit<Dim2,system_type> >::type  type;
-    
+                                        unit<Dim2,system_type> >::type type;
     return type();
 }
 
@@ -366,16 +367,15 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
+BOOST_CONSTEXPR
 typename subtract_typeof_helper< unit<Dim1,System1>,
                                  unit<Dim2,System2> >::type
 operator-(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     BOOST_STATIC_ASSERT((boost::is_same<System1,System2>::value == true));
-    
     typedef System1                                                         system_type;
     typedef typename subtract_typeof_helper< unit<Dim1,system_type>,
                                              unit<Dim2,system_type> >::type type;
-    
     return type();
 }
 
@@ -384,13 +384,13 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
+BOOST_CONSTEXPR
 typename multiply_typeof_helper< unit<Dim1,System1>,
                                  unit<Dim2,System2> >::type
 operator*(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     typedef typename multiply_typeof_helper< unit<Dim1,System1>,
                                              unit<Dim2,System2> >::type type;
-    
     return type();
 }
 
@@ -399,13 +399,13 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
+BOOST_CONSTEXPR
 typename divide_typeof_helper< unit<Dim1,System1>,
                                unit<Dim2,System2> >::type
 operator/(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
     typedef typename divide_typeof_helper< unit<Dim1,System1>,
                                            unit<Dim2,System2> >::type   type;
-    
     return type();
 }
 
@@ -414,11 +414,12 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
-inline
-bool 
+inline BOOST_CONSTEXPR
+bool
 operator==(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
-    return boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;
+    return boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type,
+                          typename reduce_unit<unit<Dim2,System2> >::type>::value;
 }
 
 /// unit runtime @c operator!=
@@ -426,11 +427,12 @@ template<class Dim1,
          class Dim2,
          class System1,
          class System2>
-inline
-bool 
+inline BOOST_CONSTEXPR
+bool
 operator!=(const unit<Dim1,System1>&,const unit<Dim2,System2>&)
 {
-    return !boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type, typename reduce_unit<unit<Dim2,System2> >::type>::value;
+    return !boost::is_same<typename reduce_unit<unit<Dim1,System1> >::type,
+                           typename reduce_unit<unit<Dim2,System2> >::type>::value;
 }
 
 } // namespace units
