@@ -182,17 +182,12 @@ BOOST_AUTO_TEST_CASE(test_info_prefixes) {
     BOOST_CHECK_EQUAL(q60.value(), 1152921504606846976LL);
 
     using boost::multiprecision::int128_t;
-    // using namespace boost::multiprecision::literals; // necessary if using user-defined literals
 
     quantity<info, int128_t> q70(1LL * zebi * byte);
     BOOST_CHECK_EQUAL(q70.value(), int128_t("1180591620717411303424"));
-    // or equivalent C++11
-    //BOOST_CHECK_EQUAL(q70.value(), 1180591620717411303424_cppi128);
 
     quantity<info, int128_t> q80(1LL * yobi * byte);
     BOOST_CHECK_EQUAL(q80.value(), int128_t("1208925819614629174706176"));
-    // or equivalent C++11
-    // BOOST_CHECK_EQUAL(q80.value(), 1208925819614629174706176_cppi128);
 
     // sanity check: si prefixes should also operate
     quantity<info, long long> q1e3(1LL * si::kilo * byte);
