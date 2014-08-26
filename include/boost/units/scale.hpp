@@ -94,7 +94,7 @@ struct scale<base_, exponent_ >                                              \
 #define BOOST_UNITS_SCALE_DEF(exponent_,value_,name_,symbol_)                 \
 BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent_>,value_, name_, symbol_)
 
-BOOST_UNITS_SCALE_DEF(-24, 1e-24 ,yocto, y);
+BOOST_UNITS_SCALE_DEF(-24, 1e-24, yocto, y);
 BOOST_UNITS_SCALE_DEF(-21, 1e-21, zepto, z);
 BOOST_UNITS_SCALE_DEF(-18, 1e-18, atto, a);
 BOOST_UNITS_SCALE_DEF(-15, 1e-15, femto, f);
