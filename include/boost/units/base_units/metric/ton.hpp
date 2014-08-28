@@ -29,8 +29,8 @@ typedef scaled_base_unit<boost::units::si::kilogram_base_unit, scale<1000, stati
 
 template<>
 struct base_unit_info<metric::ton_base_unit> {
-    static const char* name()   { return("metric ton"); }
-    static const char* symbol() { return("t"); }
+    BOOST_STATIC_CONSTEXPR const char* name()   { return("metric ton"); }
+    BOOST_STATIC_CONSTEXPR const char* symbol() { return("t"); }
 };
 
 }

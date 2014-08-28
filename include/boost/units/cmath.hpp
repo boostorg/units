@@ -46,7 +46,7 @@ namespace boost {
 namespace units { 
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -55,7 +55,7 @@ isfinite BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isinf BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -64,7 +64,7 @@ isinf BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline
+inline BOOST_CONSTEXPR
 bool 
 isnan BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -73,7 +73,7 @@ isnan BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -82,7 +82,7 @@ isnormal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isgreater BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                             const quantity<Unit,Y>& q2)
@@ -92,7 +92,7 @@ isgreater BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isgreaterequal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                                  const quantity<Unit,Y>& q2)
@@ -102,7 +102,7 @@ isgreaterequal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isless BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                          const quantity<Unit,Y>& q2)
@@ -112,7 +112,7 @@ isless BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 islessequal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                               const quantity<Unit,Y>& q2)
@@ -122,7 +122,7 @@ islessequal BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 islessgreater BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                                 const quantity<Unit,Y>& q2)
@@ -132,7 +132,7 @@ islessgreater BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 bool 
 isunordered BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                               const quantity<Unit,Y>& q2)
@@ -142,7 +142,7 @@ isunordered BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 abs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -154,7 +154,7 @@ abs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 ceil BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -166,7 +166,7 @@ ceil BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 copysign BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
          const quantity<Unit,Y>& q2)
@@ -179,7 +179,7 @@ copysign BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 fabs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -191,7 +191,7 @@ fabs BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 floor BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -203,7 +203,7 @@ floor BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 fdim BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                        const quantity<Unit,Y>& q2)
@@ -218,7 +218,7 @@ fdim BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 #if 0
 
 template<class Unit1,class Unit2,class Unit3,class Y>
-inline 
+inline BOOST_CONSTEXPR
 typename add_typeof_helper<
     typename multiply_typeof_helper<quantity<Unit1,Y>,
                                     quantity<Unit2,Y> >::type,
@@ -242,7 +242,7 @@ fma BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit1,Y>& q1,
 #endif
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 fmax BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                        const quantity<Unit,Y>& q2)
@@ -255,7 +255,7 @@ fmax BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 fmin BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                        const quantity<Unit,Y>& q2)
@@ -268,7 +268,7 @@ fmin BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 int 
 fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -278,7 +278,7 @@ fpclassify BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 typename root_typeof_helper<
     typename add_typeof_helper<
         typename power_typeof_helper<quantity<Unit,Y>,
@@ -328,7 +328,7 @@ hypot BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,const quantit
 #if 0
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 nearbyint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -342,7 +342,7 @@ nearbyint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 #endif
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> nextafter BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                                              const quantity<Unit,Y>& q2)
 {
@@ -353,7 +353,7 @@ quantity<Unit,Y> nextafter BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit
     return quantity_type::from_value(nextafter BOOST_PREVENT_MACRO_SUBSTITUTION (q1.value(),q2.value()));
 }
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> nexttoward BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
                                                               const quantity<Unit,Y>& q2)
 {
@@ -370,7 +370,7 @@ quantity<Unit,Y> nexttoward BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Uni
 #if 0
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 rint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -384,7 +384,7 @@ rint BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 #endif
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -396,7 +396,7 @@ round BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 int 
 signbit BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 { 
@@ -406,7 +406,7 @@ signbit BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 quantity<Unit,Y> 
 trunc BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 {
@@ -418,7 +418,7 @@ trunc BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q)
 }
 
 template<class Unit,class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<Unit, Y>
 fmod(const quantity<Unit,Y>& q1, const quantity<Unit,Y>& q2)
 {
@@ -430,7 +430,7 @@ fmod(const quantity<Unit,Y>& q1, const quantity<Unit,Y>& q2)
 }
 
 template<class Unit, class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<Unit, Y>
 modf(const quantity<Unit, Y>& q1, quantity<Unit, Y>* q2)
 {
@@ -442,7 +442,7 @@ modf(const quantity<Unit, Y>& q1, quantity<Unit, Y>* q2)
 }
 
 template<class Unit, class Y, class Int>
-inline
+inline BOOST_CONSTEXPR
 quantity<Unit, Y>
 frexp(const quantity<Unit, Y>& q,Int* ex)
 {
@@ -456,7 +456,7 @@ frexp(const quantity<Unit, Y>& q,Int* ex)
 /// For non-dimensionless quantities, integral and rational powers 
 /// and roots can be computed by @c pow<Ex> and @c root<Rt> respectively.
 template<class S, class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
 pow(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q1,
     const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q2)
@@ -469,7 +469,7 @@ pow(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q1,
 }
 
 template<class S, class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
 exp(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
@@ -481,7 +481,7 @@ exp(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 }
 
 template<class Unit, class Y, class Int>
-inline
+inline BOOST_CONSTEXPR
 quantity<Unit, Y>
 ldexp(const quantity<Unit, Y>& q,const Int& ex)
 {
@@ -493,7 +493,7 @@ ldexp(const quantity<Unit, Y>& q,const Int& ex)
 }
 
 template<class S, class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
 log(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
@@ -505,7 +505,7 @@ log(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 }
 
 template<class S, class Y>
-inline
+inline BOOST_CONSTEXPR
 quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>
 log10(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 {
@@ -517,7 +517,7 @@ log10(const quantity<BOOST_UNITS_DIMENSIONLESS_UNIT(S), Y>& q)
 }
 
 template<class Unit,class Y>
-inline 
+inline BOOST_CONSTEXPR
 typename root_typeof_helper<
                             quantity<Unit,Y>,
                             static_rational<2>
@@ -546,6 +546,7 @@ namespace units {
 
 /// cos of theta in radians
 template<class Y>
+BOOST_CONSTEXPR
 typename dimensionless_quantity<si::system,Y>::type 
 cos(const quantity<si::plane_angle,Y>& theta)
 {
@@ -555,6 +556,7 @@ cos(const quantity<si::plane_angle,Y>& theta)
 
 /// sin of theta in radians
 template<class Y>
+BOOST_CONSTEXPR
 typename dimensionless_quantity<si::system,Y>::type 
 sin(const quantity<si::plane_angle,Y>& theta)
 {
@@ -564,6 +566,7 @@ sin(const quantity<si::plane_angle,Y>& theta)
 
 /// tan of theta in radians
 template<class Y>
+BOOST_CONSTEXPR
 typename dimensionless_quantity<si::system,Y>::type 
 tan(const quantity<si::plane_angle,Y>& theta)
 {
@@ -573,6 +576,7 @@ tan(const quantity<si::plane_angle,Y>& theta)
 
 /// cos of theta in other angular units 
 template<class System,class Y>
+BOOST_CONSTEXPR
 typename dimensionless_quantity<System,Y>::type 
 cos(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
@@ -581,6 +585,7 @@ cos(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 
 /// sin of theta in other angular units 
 template<class System,class Y>
+BOOST_CONSTEXPR
 typename dimensionless_quantity<System,Y>::type 
 sin(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
@@ -597,6 +602,7 @@ tan(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 
 /// acos of dimensionless quantity returning angle in same system
 template<class Y,class System>
+BOOST_CONSTEXPR
 quantity<unit<plane_angle_dimension, homogeneous_system<System> >,Y>
 acos(const quantity<unit<dimensionless_type, homogeneous_system<System> >,Y>& val)
 {
@@ -606,6 +612,7 @@ acos(const quantity<unit<dimensionless_type, homogeneous_system<System> >,Y>& va
 
 /// acos of dimensionless quantity returning angle in radians
 template<class Y>
+BOOST_CONSTEXPR
 quantity<angle::radian_base_unit::unit_type,Y>
 acos(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>,Y>& val)
 {
@@ -615,6 +622,7 @@ acos(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>
 
 /// asin of dimensionless quantity returning angle in same system
 template<class Y,class System>
+BOOST_CONSTEXPR
 quantity<unit<plane_angle_dimension, homogeneous_system<System> >,Y>
 asin(const quantity<unit<dimensionless_type, homogeneous_system<System> >,Y>& val)
 {
@@ -624,6 +632,7 @@ asin(const quantity<unit<dimensionless_type, homogeneous_system<System> >,Y>& va
 
 /// asin of dimensionless quantity returning angle in radians
 template<class Y>
+BOOST_CONSTEXPR
 quantity<angle::radian_base_unit::unit_type,Y>
 asin(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>,Y>& val)
 {
@@ -633,6 +642,7 @@ asin(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>
 
 /// atan of dimensionless quantity returning angle in same system
 template<class Y,class System>
+BOOST_CONSTEXPR
 quantity<unit<plane_angle_dimension, homogeneous_system<System> >,Y>
 atan(const quantity<unit<dimensionless_type, homogeneous_system<System> >, Y>& val)
 {
@@ -642,6 +652,7 @@ atan(const quantity<unit<dimensionless_type, homogeneous_system<System> >, Y>& v
 
 /// atan of dimensionless quantity returning angle in radians
 template<class Y>
+BOOST_CONSTEXPR
 quantity<angle::radian_base_unit::unit_type,Y>
 atan(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>, Y>& val)
 {
@@ -651,6 +662,7 @@ atan(const quantity<unit<dimensionless_type, heterogeneous_dimensionless_system>
 
 /// atan2 of @c value_type returning angle in radians
 template<class Y, class Dimension, class System>
+BOOST_CONSTEXPR
 quantity<unit<plane_angle_dimension, homogeneous_system<System> >, Y>
 atan2(const quantity<unit<Dimension, homogeneous_system<System> >, Y>& y,
       const quantity<unit<Dimension, homogeneous_system<System> >, Y>& x)
@@ -661,6 +673,7 @@ atan2(const quantity<unit<Dimension, homogeneous_system<System> >, Y>& y,
 
 /// atan2 of @c value_type returning angle in radians
 template<class Y, class Dimension, class System>
+BOOST_CONSTEXPR
 quantity<angle::radian_base_unit::unit_type,Y>
 atan2(const quantity<unit<Dimension, heterogeneous_system<System> >, Y>& y,
       const quantity<unit<Dimension, heterogeneous_system<System> >, Y>& x)

@@ -143,7 +143,7 @@ struct eval_scale_list_impl
     {
         typedef typename eval_scale_list_impl<N-1>::template apply<typename Begin::next> next_iteration;
         typedef typename multiply_typeof_helper<typename next_iteration::type, typename Begin::item::value_type>::type type;
-        static type value()
+        BOOST_STATIC_CONSTEXPR type value()
         {
             return(next_iteration::value() * Begin::item::value());
         }
@@ -157,7 +157,7 @@ struct eval_scale_list_impl<0>
     struct apply
     {
         typedef one type;
-        static one value()
+        BOOST_STATIC_CONSTEXPR one value()
         {
             one result;
             return(result);

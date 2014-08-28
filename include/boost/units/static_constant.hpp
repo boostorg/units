@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -15,6 +15,28 @@
 
 /// A convenience macro that allows definition of static
 /// constants in headers in an ODR-safe way.
+#ifndef BOOST_NO_CXX11_CONSTEXPR
+
+#define BOOST_UNITS_STATIC_CONSTANT(name, type)             \
+template<bool b>                                            \
+struct name##_instance_t                                    \
+{                                                           \
+    BOOST_STATIC_CONSTEXPR const type instance {};          \
+};                                                          \
+template<bool b>                                            \
+BOOST_CONSTEXPR const type name##_instance_t<b>::instance;  \
+                                                            \
+namespace                                                   \
+{                                                           \
+    BOOST_STATIC_CONSTEXPR type const& name = name##_instance_t<true>::instance;   \
+}                                                           
+
+
+#else
+
+template<bool b>                             \
+const type name##_instance_t<b>::instance
+
 #define BOOST_UNITS_STATIC_CONSTANT(name, type)             \
 template<bool b>                                            \
 struct name##_instance_t                                    \
@@ -30,8 +52,11 @@ namespace                                                   \
 template<bool b>                                            \
 const type name##_instance_t<b>::instance
 
-/// A convenience macro for static constants with auto 
-/// type deduction. 
+
+#endif
+
+/// A convenience macro for static constants with auto
+/// type deduction.
 #if BOOST_UNITS_HAS_TYPEOF
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF

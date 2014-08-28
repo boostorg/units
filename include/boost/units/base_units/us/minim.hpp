@@ -28,8 +28,8 @@ typedef scaled_base_unit<pint_base_unit, scale<7680, static_rational<-1> > > min
 
 template<>
 struct base_unit_info<us::minim_base_unit> {
-    static const char* name()   { return("minim (U.S.)"); }
-    static const char* symbol() { return("minim"); }
+    BOOST_STATIC_CONSTEXPR const char* name()   { return("minim (U.S.)"); }
+    BOOST_STATIC_CONSTEXPR const char* symbol() { return("minim"); }
 };
 
 } // namespace units

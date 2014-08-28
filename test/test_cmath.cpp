@@ -109,9 +109,7 @@ int test_main(int,char *[])
     const bu::quantity<bu::area>    A1(4.0*bu::square_meters),
                                     A2(L1*L2+A1);
 
-#if 0
-    BOOST_CHECK((bu::fma)(L1,L2,A1) == A2);
-#endif
+    BOOST_CHECK((L1*L2+A1) == A2);
        
     BOOST_CHECK((bu::fmax)(E4,E5) == E5);
     BOOST_CHECK((bu::fmin)(E4,E5) == E4);

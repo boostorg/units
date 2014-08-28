@@ -28,8 +28,8 @@ typedef scaled_base_unit<pound_base_unit, scale<2240, static_rational<1> > > ton
 
 template<>
 struct base_unit_info<imperial::ton_base_unit> {
-    static const char* name()   { return("long ton"); }
-    static const char* symbol() { return("t"); }
+    BOOST_STATIC_CONSTEXPR const char* name()   { return("long ton"); }
+    BOOST_STATIC_CONSTEXPR const char* symbol() { return("t"); }
 };
 
 } // namespace units

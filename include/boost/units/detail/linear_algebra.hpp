@@ -598,8 +598,8 @@ struct set_insert<false> {
 
 template<class Set, class T>
 struct has_key {
-    static const long size = sizeof(Set::lookup((wrap<T>*)0));
-    static const bool value = (size == sizeof(set_yes));
+    BOOST_STATIC_CONSTEXPR const long size = sizeof(Set::lookup((wrap<T>*)0));
+    BOOST_STATIC_CONSTEXPR const bool value = (size == sizeof(set_yes));
 };
 
 template<int N>
@@ -977,7 +977,7 @@ struct is_simple_system_impl {
                 typename test::base_dimension_type
             >
         > type;
-        static const bool value = (type::value);
+        BOOST_STATIC_CONSTEXPR const bool value = (type::value);
     };
 };
 
@@ -1001,7 +1001,7 @@ struct is_simple_system {
             typename test::base_dimension_type
         >
     >::type type;
-    static const bool value = type::value;
+    BOOST_STATIC_CONSTEXPR const bool value = type::value;
 };
 
 template<bool>

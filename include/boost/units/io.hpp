@@ -689,6 +689,7 @@ typename autoprefix_norm_impl<T>::type autoprefix_norm(const T& arg)
 namespace detail {
 
 template<class End, class Prev, class T, class F>
+BOOST_CONSTEXPR
 bool find_matching_scale_impl(End, End, Prev, T, double, F)
 {
     return false;
@@ -713,12 +714,14 @@ bool find_matching_scale_impl(Begin, End end, Prev prev, T t, double x, F f)
 }
 
 template<class End, class T, class F>
+BOOST_CONSTEXPR
 bool find_matching_scale_i(End, End, T, double, F)
 {
     return false;
 }
 
 template<class Begin, class End, class T, class F>
+BOOST_CONSTEXPR
 bool find_matching_scale_i(Begin, End end, T t, double x, F f)
 {
     if(Begin::item::value() > x) {
@@ -729,6 +732,7 @@ bool find_matching_scale_i(Begin, End end, T t, double x, F f)
 }
 
 template<class Scales, class T, class F>
+BOOST_CONSTEXPR
 bool find_matching_scale(T t, double x, F f)
 {
     return detail::find_matching_scale_i(Scales(), dimensionless_type(), t, x, f);
