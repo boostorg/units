@@ -14,6 +14,7 @@
 void foo()
 {
     boost::units::quantity<boost::units::si::dimensionless> d = boost::units::quantity< boost::units::si::dimensionless >();
+    (void) d;
 }
 
 #include <boost/test/test_tools.hpp>
