@@ -29,7 +29,7 @@ demangle(const char* name)
 
     const std::string::size_type prefix_len = sizeof("boost::units::") - 1;
     std::string::size_type i = 0;
-    while (true)
+    for (;;)
     {
         std::string::size_type pos = demangled.find("boost::units::", i, prefix_len);
         if (pos == std::string::npos)
