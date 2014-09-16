@@ -35,6 +35,7 @@ Tests for output from various units, name, symbol and raw formats, and automatic
 
 #include <boost/regex.hpp>
 
+#include <iostream>
 #include <sstream>
 #include <boost/config.hpp>
 #include <limits>
@@ -132,6 +133,18 @@ typedef boost::units::make_scaled_unit<custom2, boost::units::scale<10, boost::u
     BOOST_CHECK(boost::regex_match(ss.str(), r));           \
 }
 
+#define BOOST_UNITS_TEST_OUTPUT_DISPLAY(v)                  \
+{                                                           \
+    std::ostringstream ss;                                  \
+    ss FORMATTERS << v;                                     \
+    std::cout << #v << ": " << ss.str() << std::endl;       \
+}                                                           \
+{                                                           \
+    std::wostringstream ss;                                 \
+    ss FORMATTERS << v;                                     \
+    std::wcout << #v << ": " << ss.str() << std::endl;      \
+}
+
 #else
 
 #define BOOST_UNITS_TEST_OUTPUT(v, expected)                \
@@ -148,6 +161,13 @@ typedef boost::units::make_scaled_unit<custom2, boost::units::scale<10, boost::u
     boost::regex r(expected);                               \
     BOOST_CHECK_MESSAGE(boost::regex_match(ss.str(), r),    \
         ss.str() + " does not match " + expected);          \
+}
+
+#define BOOST_UNITS_TEST_OUTPUT_DISPLAY(v)                  \
+{                                                           \
+    std::ostringstream ss;                                  \
+    ss FORMATTERS << v;                                     \
+    std::cout << #v << ": " << ss.str() << std::endl;       \
 }
 
 #endif
@@ -446,5 +466,28 @@ BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol_duplicate)
 { // Ensure that if more than one auto prefix specified, only the last is used.
 #define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix << boost::units::binary_prefix
     BOOST_UNITS_TEST_OUTPUT(2048 * byte_base_unit::unit_type(), "2 Kib");
+#undef FORMATTERS
+}
+
+BOOST_AUTO_TEST_CASE(test_output_typename_format)
+{  // Displays typename formatting result. The test doesn't check the formatting result
+   // and thus doesn't fail because the formatting result is platform-dependent.
+#define FORMATTERS << boost::units::typename_format
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(meter_base_unit::unit_type());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(velocity());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_length());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_velocity1());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(millisecond_base_unit::unit_type());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_time());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_velocity2());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(area());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_area());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(double_scaled_length());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(double_scaled_length2());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(custom1());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(custom2());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_custom1());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(scaled_custom2());
+    BOOST_UNITS_TEST_OUTPUT_DISPLAY(boost::units::absolute<meter_base_unit::unit_type>());
 #undef FORMATTERS
 }
