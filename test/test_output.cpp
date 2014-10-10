@@ -415,6 +415,8 @@ BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol)
     BOOST_UNITS_TEST_OUTPUT(pow(2., 40) * byte_base_unit::unit_type(), "1 Tib");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 50) * byte_base_unit::unit_type(), "1 Pib");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 60) * byte_base_unit::unit_type(), "1 Eib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 70) * byte_base_unit::unit_type(), "1 Zib");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 80) * byte_base_unit::unit_type(), "1 Yib");
     BOOST_UNITS_TEST_OUTPUT(42, "42"); // integer scalar.
     BOOST_UNITS_TEST_OUTPUT(-42, "-42"); // integer scalar.
     BOOST_UNITS_TEST_OUTPUT(1567, "1567"); // scalars are *not* autoprefixed.
@@ -428,12 +430,16 @@ BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name)
   // 1998 the International Electrotechnical Commission (IEC) approved 
   // IEC 60027-2, Second edition, 2000-11, Letter symbols to be used in electrical technology
   // - Part 2: Telecommunications and electronics.
+  // IEC 80000-13:2008, Quantities and units
+  // – Part 13: Information science and technology
 #define FORMATTERS << boost::units::name_format << boost::units::binary_prefix
     BOOST_UNITS_TEST_OUTPUT(2048  * byte_base_unit::unit_type(), "2 kibibyte");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 32) *byte_base_unit::unit_type(), "4 gibibyte");
     BOOST_UNITS_TEST_OUTPUT(pow(2., 41) *byte_base_unit::unit_type(), "2 tebibyte"); // http://en.wikipedia.org/wiki/Tebibyte
     BOOST_UNITS_TEST_OUTPUT(pow(2., 50) *byte_base_unit::unit_type(), "1 pebibyte"); 
     BOOST_UNITS_TEST_OUTPUT(pow(2., 60) *byte_base_unit::unit_type(), "1 exbibyte");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 70) *byte_base_unit::unit_type(), "1 zebibyte");
+    BOOST_UNITS_TEST_OUTPUT(pow(2., 80) *byte_base_unit::unit_type(), "1 yobibyte");
     BOOST_UNITS_TEST_OUTPUT(2048, "2048"); // scalars are *not* autoprefixed.
     BOOST_UNITS_TEST_OUTPUT(-4096, "-4096"); // scalars are *not* autoprefixed.
 #undef FORMATTERS
