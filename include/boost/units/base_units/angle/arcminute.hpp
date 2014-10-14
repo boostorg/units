@@ -26,8 +26,8 @@ typedef scaled_base_unit<degree_base_unit, scale<60, static_rational<-1> > >  ar
 
 template<>
 struct base_unit_info<angle::arcminute_base_unit> {
-    static const char* name()   { return("arcminute"); }
-    static const char* symbol() { return("'"); }
+    BOOST_STATIC_CONSTEXPR const char* name()   { return("arcminute"); }
+    BOOST_STATIC_CONSTEXPR const char* symbol() { return("'"); }
 };
 
 }

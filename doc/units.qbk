@@ -1062,6 +1062,15 @@ Boost.Lambda library.
 
 [endsect]
 
+[section:constexpr Constexpr support]
+
+The [section:RadarBeamHeightExample Radar Beam Height] example demonstrates how
+to use Boost.Units data types within constant expressions. On compilers with
+support for C++11's constexpr the result is computed at compile time. This is
+verified on compilers with C++11's static_assert.
+
+[endsect]
+
 [endsect]
 
 [section:Utilities Utilities]

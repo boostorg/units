@@ -69,7 +69,7 @@ namespace units {
     /// unit<Dim, System> * lambda_functor<Arg>
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename multiply_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename multiply_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type
     operator*(const boost::units::unit<Dim, System>& a,
               const boost::lambda::lambda_functor<Arg>& b) {
         return typename multiply_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type::inherited
@@ -110,7 +110,7 @@ namespace units {
     /// unit<Dim, System> / lambda_functor<Arg>
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename divide_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename divide_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type
     operator/(const boost::units::unit<Dim, System>& a,
               const boost::lambda::lambda_functor<Arg>& b) {
         return typename divide_typeof_helper<boost::units::unit<Dim, System>, boost::lambda::lambda_functor<Arg> >::type::inherited
@@ -151,7 +151,7 @@ namespace units {
     /// lambda_functor<Arg> * unit<Dim, System>
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type
     operator*(const boost::lambda::lambda_functor<Arg>& a,
               const boost::units::unit<Dim, System>& b) {
         return typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type::inherited
@@ -192,7 +192,7 @@ namespace units {
     /// lambda_functor<Arg> / unit<Dim, System>
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename divide_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename divide_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type
     operator/(const boost::lambda::lambda_functor<Arg>& a,
               const boost::units::unit<Dim, System>& b) {
         return typename divide_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::unit<Dim, System> >::type::inherited
@@ -535,7 +535,7 @@ namespace units {
     /// lambda_functor<Arg> * absolute<unit<Dim, System> >
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::absolute<boost::units::unit<Dim, System> > >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::absolute<boost::units::unit<Dim, System> > >::type
     operator*(const boost::lambda::lambda_functor<Arg>& a,
               const boost::units::absolute<boost::units::unit<Dim, System> >& b) {
         return typename multiply_typeof_helper<boost::lambda::lambda_functor<Arg>, boost::units::absolute<boost::units::unit<Dim, System> > >::type::inherited
@@ -577,7 +577,7 @@ namespace units {
     /// absolute<unit<Dim, System> > * lambda_functor<Arg>
     /// based on \<boost/lambda/detail/operators.hpp\>.
     template<typename System, typename Dim, typename Arg>
-    inline const typename multiply_typeof_helper<boost::units::absolute<boost::units::unit<Dim, System> >, boost::lambda::lambda_functor<Arg> >::type
+    inline BOOST_CONSTEXPR_OR_CONST typename multiply_typeof_helper<boost::units::absolute<boost::units::unit<Dim, System> >, boost::lambda::lambda_functor<Arg> >::type
     operator*(const boost::units::absolute<boost::units::unit<Dim, System> >& a,
               const boost::lambda::lambda_functor<Arg>& b) {
         return typename multiply_typeof_helper<boost::units::absolute<boost::units::unit<Dim, System> >, boost::lambda::lambda_functor<Arg> >::type::inherited
