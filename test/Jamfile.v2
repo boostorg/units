@@ -54,6 +54,7 @@ run test_lambda.cpp ;
 run test_scaled_unit.cpp test_framework ;
 run test_output.cpp test_framework /boost//regex : : : <test-info>always_show_run_output ;
 run test_trig.cpp test_framework ;
+run test_information_units.cpp test_framework ;
 
 compile-fail fail_implicit_conversion.cpp ;
 compile-fail fail_quantity_construct.cpp ;
