@@ -1,4 +1,5 @@
-#![Boost.Units]
+Boost.Units
+===========
 
 Boost.Units, part of collection of the [Boost C++ Libraries](http://github.com/boostorg), 
 implements dimensional analysis in a general and extensible manner, 
