@@ -91,12 +91,13 @@ make_base_units_doc angle : Angle ;
 make_base_units_doc astronomical : Astronomical ;
 make_base_units_doc cgs : CGS ;
 make_base_units_doc imperial : Imperial ;
+make_base_units_doc information : Information ;
 make_base_units_doc metric : Metric ;
 make_base_units_doc si : SI ;
 make_base_units_doc temperature : Temperature ;
 make_base_units_doc us : US ;
 
-all_base_units_doc = angle astronomical cgs imperial metric si temperature us ;
+all_base_units_doc = angle astronomical cgs imperial information metric si temperature us ;
 all_base_units_doc = $(all_base_units_doc)_base_units_reference ;
 
 run_doxygen dimensions_reference
