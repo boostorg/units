@@ -177,7 +177,7 @@ rule generate-qbk ( target : sources * : properties * )
             local dir-name = [ path.basename [ path.parent $(file) ] ] ;
             base_unit = "$(base_unit) ($(dir-name))" ;
         }
-        print.text "[headerref $(output_filename) $(base_unit)]\\n" : overwrite ;
+        print.text "[headerref $(output_filename) $(base_unit)][br]" : overwrite ;
     }
 }
 
