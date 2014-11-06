@@ -125,6 +125,7 @@ run_doxygen temperature_reference
 
 run_doxygen information_reference
   :
+    $(here)/../../../boost/units/systems/information.hpp
     [ path.glob-tree $(here)/../../../boost/units/systems/information : *.hpp : detail prefixes.hpp ]
   :
     "Information System Reference"
