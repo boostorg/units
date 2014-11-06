@@ -123,6 +123,13 @@ run_doxygen temperature_reference
     "Temperature System Reference"
   ;
 
+run_doxygen information_reference
+  :
+    [ path.glob-tree $(here)/../../../boost/units/systems/information : *.hpp : detail prefixes.hpp ]
+  :
+    "Information System Reference"
+  ;
+
 run_doxygen abstract_reference
   :
     $(here)/../../../boost/units/systems/abstract.hpp
@@ -190,6 +197,7 @@ xml units
     <dependency>dimensions_reference
     <dependency>trig_reference
     <dependency>temperature_reference
+    <dependency>information_reference
     <dependency>abstract_reference
 ;
 
