@@ -17,7 +17,6 @@ warning-compilers =
 project boost/units/test :
     requirements
         <implicit-dependency>/boost//headers
-        <include>../../..
         <toolset>msvc:<asynch-exceptions>on
         $(warning-compilers):$(warning-options)
         # This warning comes from the test library.
