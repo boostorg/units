@@ -36,6 +36,7 @@
 #include <boost/units/systems/si/current.hpp>
 #include <boost/units/systems/si/dimensionless.hpp>
 #include <boost/units/systems/si/dose_equivalent.hpp>
+#include <boost/units/systems/si/drag_factor.hpp>
 #include <boost/units/systems/si/dynamic_viscosity.hpp>
 #include <boost/units/systems/si/electric_charge.hpp>
 #include <boost/units/systems/si/electric_potential.hpp>
