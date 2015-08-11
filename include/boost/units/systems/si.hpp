@@ -66,6 +66,7 @@
 #include <boost/units/systems/si/resistance.hpp>
 #include <boost/units/systems/si/resistivity.hpp>
 #include <boost/units/systems/si/solid_angle.hpp>
+#include <boost/units/systems/si/specific_gas_constant.hpp>
 #include <boost/units/systems/si/surface_density.hpp>
 #include <boost/units/systems/si/surface_tension.hpp>
 #include <boost/units/systems/si/temperature.hpp>
