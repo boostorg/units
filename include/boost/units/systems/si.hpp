@@ -54,6 +54,7 @@
 #include <boost/units/systems/si/magnetic_flux_density.hpp>
 #include <boost/units/systems/si/mass.hpp>
 #include <boost/units/systems/si/mass_density.hpp>
+#include <boost/units/systems/si/molar_mass.hpp>
 #include <boost/units/systems/si/moment_of_inertia.hpp>
 #include <boost/units/systems/si/momentum.hpp>
 #include <boost/units/systems/si/permeability.hpp>
