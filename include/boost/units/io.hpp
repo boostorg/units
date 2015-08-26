@@ -24,6 +24,7 @@
 #include <ios>
 #include <sstream>
 
+#include <boost/assert.hpp>
 #include <boost/serialization/nvp.hpp>
 
 #include <boost/units/units_fwd.hpp>
@@ -166,7 +167,7 @@ inline long get_flags(std::ios_base& ios, long mask)
 /// Set new flags controlling output format.
 inline void set_flags(std::ios_base& ios, long new_flags, long mask) 
 {
-    assert((~mask & new_flags) == 0);
+    BOOST_ASSERT((~mask & new_flags) == 0);
     long& flags = ios.iword(detail::xalloc_key_holder<true>::value);
     flags = (flags & ~mask) | new_flags;
 }
@@ -1028,7 +1029,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
     }
     else 
     {
-        assert(!"The format mode must be one of: typename_format, raw_format, name_format, symbol_format");
+        BOOST_ASSERT_MSG(false, "The format mode must be one of: typename_format, raw_format, name_format, symbol_format");
     }
     
     return(os);
@@ -1057,7 +1058,7 @@ inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Tra
     }
     else
     {
-        assert(!"Autoprefixing must be one of: no_prefix, engineering_prefix, binary_prefix");
+        BOOST_ASSERT_MSG(false, "Autoprefixing must be one of: no_prefix, engineering_prefix, binary_prefix");
     }
     return(os);
 }
