@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -51,7 +51,7 @@ inline void serialize(Archive& ar,boost::units::quantity<Unit,Y>& q,const unsign
 {
     ar & boost::serialization::make_nvp("value", units::quantity_cast<Y&>(q));
 }
-        
+
 } // namespace serialization
 
 namespace units {
@@ -60,9 +60,9 @@ namespace units {
 template<class T> std::string to_string(const T& t)
 {
     std::stringstream sstr;
-    
+
     sstr << t;
-    
+
     return sstr.str();
 }
 
@@ -126,7 +126,7 @@ enum autoprefix_mode
 namespace detail {
 
 template<bool>
-struct xalloc_key_holder 
+struct xalloc_key_holder
 {
     static int value;
     static bool initialized;
@@ -138,11 +138,11 @@ int xalloc_key_holder<b>::value = 0;
 template<bool b>
 bool xalloc_key_holder<b>::initialized = 0;
 
-struct xalloc_key_initializer_t 
+struct xalloc_key_initializer_t
 {
-    xalloc_key_initializer_t() 
+    xalloc_key_initializer_t()
     {
-        if (!xalloc_key_holder<true>::initialized) 
+        if (!xalloc_key_holder<true>::initialized)
         {
             xalloc_key_holder<true>::value = std::ios_base::xalloc();
             xalloc_key_holder<true>::initialized = true;
@@ -151,7 +151,7 @@ struct xalloc_key_initializer_t
 };
 
 namespace /**/ {
-    
+
 xalloc_key_initializer_t xalloc_key_initializer;
 
 } // namespace
@@ -159,13 +159,13 @@ xalloc_key_initializer_t xalloc_key_initializer;
 } // namespace detail
 
 /// returns flags controlling output.
-inline long get_flags(std::ios_base& ios, long mask) 
+inline long get_flags(std::ios_base& ios, long mask)
 {
     return(ios.iword(detail::xalloc_key_holder<true>::value) & mask);
 }
 
 /// Set new flags controlling output format.
-inline void set_flags(std::ios_base& ios, long new_flags, long mask) 
+inline void set_flags(std::ios_base& ios, long new_flags, long mask)
 {
     BOOST_ASSERT((~mask & new_flags) == 0);
     long& flags = ios.iword(detail::xalloc_key_holder<true>::value);
@@ -173,40 +173,40 @@ inline void set_flags(std::ios_base& ios, long new_flags, long mask)
 }
 
 /// returns flags controlling output format.
-inline format_mode get_format(std::ios_base& ios) 
+inline format_mode get_format(std::ios_base& ios)
 {
     return(static_cast<format_mode>((get_flags)(ios, fmt_mask)));
 }
 
 /// Set new flags controlling output format.
-inline void set_format(std::ios_base& ios, format_mode new_mode) 
+inline void set_format(std::ios_base& ios, format_mode new_mode)
 {
     (set_flags)(ios, new_mode, fmt_mask);
 }
 
 /// Set new flags for type_name output format.
-inline std::ios_base& typename_format(std::ios_base& ios) 
+inline std::ios_base& typename_format(std::ios_base& ios)
 {
     (set_format)(ios, typename_fmt);
     return(ios);
 }
 
 /// set new flag for raw format output, for example "m".
-inline std::ios_base& raw_format(std::ios_base& ios) 
+inline std::ios_base& raw_format(std::ios_base& ios)
 {
     (set_format)(ios, raw_fmt);
     return(ios);
 }
 
 /// set new format flag for symbol output, for example "m".
-inline std::ios_base& symbol_format(std::ios_base& ios) 
+inline std::ios_base& symbol_format(std::ios_base& ios)
 {
     (set_format)(ios, symbol_fmt);
     return(ios);
 }
 
 /// set new format for name output, for example "meter".
-inline std::ios_base& name_format(std::ios_base& ios) 
+inline std::ios_base& name_format(std::ios_base& ios)
 {
     (set_format)(ios, name_fmt);
     return(ios);
@@ -267,7 +267,7 @@ inline std::string base_unit_symbol_string(const T&)
     return base_unit_info<typename T::tag_type>::symbol() + exponent_string(typename T::value_type());
 }
 
-template<class T>    
+template<class T>
 inline std::string base_unit_name_string(const T&)
 {
     return base_unit_info<typename T::tag_type>::name() + exponent_string(typename T::value_type());
@@ -317,12 +317,12 @@ struct symbol_string_impl<0>
 };
 
 template<int N>
-struct scale_symbol_string_impl 
+struct scale_symbol_string_impl
 {
     template<class Begin>
-    struct apply 
+    struct apply
     {
-        static void value(std::string& str) 
+        static void value(std::string& str)
         {
             str += Begin::item::symbol();
             scale_symbol_string_impl<N - 1>::template apply<typename Begin::next>::value(str);
@@ -334,7 +334,7 @@ template<>
 struct scale_symbol_string_impl<0>
 {
     template<class Begin>
-    struct apply 
+    struct apply
     {
         static void value(std::string&) { }
     };
@@ -383,12 +383,12 @@ struct name_string_impl<0>
 };
 
 template<int N>
-struct scale_name_string_impl 
+struct scale_name_string_impl
 {
     template<class Begin>
-    struct apply 
+    struct apply
     {
-        static void value(std::string& str) 
+        static void value(std::string& str)
         {
             str += Begin::item::name();
             scale_name_string_impl<N - 1>::template apply<typename Begin::next>::value(str);
@@ -400,7 +400,7 @@ template<>
 struct scale_name_string_impl<0>
 {
     template<class Begin>
-    struct apply 
+    struct apply
     {
         static void value(std::string&) { }
     };
@@ -464,14 +464,14 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
     f.template append_scale_to<Scale>(str);
 
     std::string without_scale = f(unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >());
-    
+
     if (f.is_default_string(without_scale, unit<Dimension, heterogeneous_system<heterogeneous_system_impl<Units, Dimension, dimensionless_type> > >()))
     {
         str += "(";
         str += without_scale;
         str += ")";
-    } 
-    else 
+    }
+    else
     {
         str += without_scale;
     }
@@ -1011,27 +1011,27 @@ name_string(const unit<Dimension, System>&)
 template<class Char, class Traits, class Dimension, class System>
 inline std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const unit<Dimension, System>& u)
 {
-    if (units::get_format(os) == typename_fmt) 
+    if (units::get_format(os) == typename_fmt)
     {
         detail::do_print(os, typename_string(u));
     }
-    else if (units::get_format(os) == raw_fmt) 
+    else if (units::get_format(os) == raw_fmt)
     {
         detail::do_print(os, detail::to_string_impl(u, detail::format_raw_symbol_impl()));
     }
-    else if (units::get_format(os) == symbol_fmt) 
+    else if (units::get_format(os) == symbol_fmt)
     {
         detail::do_print(os, symbol_string(u));
     }
-    else if (units::get_format(os) == name_fmt) 
+    else if (units::get_format(os) == name_fmt)
     {
         detail::do_print(os, name_string(u));
     }
-    else 
+    else
     {
         BOOST_ASSERT_MSG(false, "The format mode must be one of: typename_format, raw_format, name_format, symbol_format");
     }
-    
+
     return(os);
 }
 
