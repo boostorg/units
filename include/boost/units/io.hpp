@@ -297,7 +297,7 @@ struct symbol_string_impl<1>
         static void value(std::string& str)
         {
             str += base_unit_symbol_string(typename Begin::item());
-        };
+        }
     };
 };
 
@@ -364,7 +364,7 @@ struct name_string_impl<1>
         static void value(std::string& str)
         {
             str += base_unit_name_string(typename Begin::item());
-        };
+        }
     };
 };
 
