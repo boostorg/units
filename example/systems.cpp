@@ -28,7 +28,7 @@ namespace units {                                                               
 namespace namespace_ {                                                                       \
 typedef make_system<unit_name_ ## _base_unit>::type    unit_name_ ## system_;                \
 typedef unit<dimension_ ## _dimension,unit_name_ ## system_> unit_name_ ## _ ## dimension_;  \
-static const unit_name_ ## _ ## dimension_    unit_name_ ## s;                               \
+BOOST_STATIC_CONSTEXPR unit_name_ ## _ ## dimension_    unit_name_ ## s;                     \
 }                                                                                            \
 }                                                                                            \
 }                                                                                            \
@@ -238,12 +238,12 @@ int main(void)
         
         std::cout << "Testing angle base units..." << std::endl;
         
-        quantity<arcsecond_plane_angle>        as(1.0*arcseconds);
-        quantity<arcminute_plane_angle>        am(1.0*arcminutes);
-        quantity<degree_plane_angle>        d(1.0*degrees);
-        quantity<gradian_plane_angle>        g(1.0*gradians);
-        quantity<radian_plane_angle>        r(1.0*radians);
-        quantity<revolution_plane_angle>    rev(1.0*revolutions);
+        BOOST_CONSTEXPR_OR_CONST quantity<arcsecond_plane_angle>        as(1.0*arcseconds);
+        BOOST_CONSTEXPR_OR_CONST quantity<arcminute_plane_angle>        am(1.0*arcminutes);
+        BOOST_CONSTEXPR_OR_CONST quantity<degree_plane_angle>        d(1.0*degrees);
+        BOOST_CONSTEXPR_OR_CONST quantity<gradian_plane_angle>        g(1.0*gradians);
+        BOOST_CONSTEXPR_OR_CONST quantity<radian_plane_angle>        r(1.0*radians);
+        BOOST_CONSTEXPR_OR_CONST quantity<revolution_plane_angle>    rev(1.0*revolutions);
         
         std::cout << as << " = " << quantity<si::plane_angle>(as) << std::endl
                   << am << " = " << quantity<si::plane_angle>(am) << std::endl
@@ -286,7 +286,7 @@ int main(void)
                   << rev << " = " << quantity<revolution_plane_angle>(rev) << std::endl
                   << std::endl;
                   
-        quantity<steradian_solid_angle>        sa1(1.0*steradians);
+        BOOST_CONSTEXPR_OR_CONST quantity<steradian_solid_angle>        sa1(1.0*steradians);
         
         std::cout << sa1 << std::endl
                   << std::endl;
@@ -297,13 +297,13 @@ int main(void)
 
         std::cout << "Testing astronomical base units..." << std::endl;
         
-        quantity<light_second_length>        ls(1.0*light_seconds);
-        quantity<light_minute_length>        lm(1.0*light_minutes);
-        quantity<astronomical_unit_length>    au(1.0*astronomical_units);
-        quantity<light_hour_length>            lh(1.0*light_hours);
-        quantity<light_day_length>            ld(1.0*light_days);
-        quantity<light_year_length>            ly(1.0*light_years);
-        quantity<parsec_length>                ps(1.0*parsecs);
+        BOOST_CONSTEXPR_OR_CONST quantity<light_second_length>        ls(1.0*light_seconds);
+        BOOST_CONSTEXPR_OR_CONST quantity<light_minute_length>        lm(1.0*light_minutes);
+        BOOST_CONSTEXPR_OR_CONST quantity<astronomical_unit_length>    au(1.0*astronomical_units);
+        BOOST_CONSTEXPR_OR_CONST quantity<light_hour_length>            lh(1.0*light_hours);
+        BOOST_CONSTEXPR_OR_CONST quantity<light_day_length>            ld(1.0*light_days);
+        BOOST_CONSTEXPR_OR_CONST quantity<light_year_length>            ly(1.0*light_years);
+        BOOST_CONSTEXPR_OR_CONST quantity<parsec_length>                ps(1.0*parsecs);
         
         std::cout << ls << " = " << quantity<si::length>(ls) << std::endl
                   << lm << " = " << quantity<si::length>(lm) << std::endl
@@ -363,13 +363,13 @@ int main(void)
         
         std::cout << "Testing imperial base units..." << std::endl;
         
-        quantity<thou_length>            iml1(1.0*thous);
-        quantity<inch_length>            iml2(1.0*inchs);
-        quantity<foot_length>            iml3(1.0*foots);
-        quantity<yard_length>            iml4(1.0*yards);
-        quantity<furlong_length>        iml5(1.0*furlongs);
-        quantity<mile_length>            iml6(1.0*miles);
-        quantity<league_length>            iml7(1.0*leagues);
+        BOOST_CONSTEXPR_OR_CONST quantity<thou_length>            iml1(1.0*thous);
+        BOOST_CONSTEXPR_OR_CONST quantity<inch_length>            iml2(1.0*inchs);
+        BOOST_CONSTEXPR_OR_CONST quantity<foot_length>            iml3(1.0*foots);
+        BOOST_CONSTEXPR_OR_CONST quantity<yard_length>            iml4(1.0*yards);
+        BOOST_CONSTEXPR_OR_CONST quantity<furlong_length>        iml5(1.0*furlongs);
+        BOOST_CONSTEXPR_OR_CONST quantity<mile_length>            iml6(1.0*miles);
+        BOOST_CONSTEXPR_OR_CONST quantity<league_length>            iml7(1.0*leagues);
         
         std::cout << iml1 << " = " << quantity<si::length>(iml1) << std::endl
                   << iml2 << " = " << quantity<si::length>(iml2) << std::endl
@@ -451,14 +451,14 @@ int main(void)
                   << iml7 << " = " << quantity<league_length>(iml7) << std::endl
                   << std::endl;
                   
-        quantity<grain_mass>            imm1(1.0*grains);
-        quantity<drachm_mass>            imm2(1.0*drachms);
-        quantity<ounce_mass>            imm3(1.0*ounces);
-        quantity<pound_mass>            imm4(1.0*pounds);
-        quantity<stone_mass>            imm5(1.0*stones);
-        quantity<quarter_mass>            imm6(1.0*quarters);
-        quantity<hundredweight_mass>    imm7(1.0*hundredweights);
-        quantity<ton_mass>                imm8(1.0*tons);
+        BOOST_CONSTEXPR_OR_CONST quantity<grain_mass>            imm1(1.0*grains);
+        BOOST_CONSTEXPR_OR_CONST quantity<drachm_mass>            imm2(1.0*drachms);
+        BOOST_CONSTEXPR_OR_CONST quantity<ounce_mass>            imm3(1.0*ounces);
+        BOOST_CONSTEXPR_OR_CONST quantity<pound_mass>            imm4(1.0*pounds);
+        BOOST_CONSTEXPR_OR_CONST quantity<stone_mass>            imm5(1.0*stones);
+        BOOST_CONSTEXPR_OR_CONST quantity<quarter_mass>            imm6(1.0*quarters);
+        BOOST_CONSTEXPR_OR_CONST quantity<hundredweight_mass>    imm7(1.0*hundredweights);
+        BOOST_CONSTEXPR_OR_CONST quantity<ton_mass>                imm8(1.0*tons);
 
         std::cout << imm1 << " = " << quantity<si::mass>(imm1) << std::endl
                   << imm2 << " = " << quantity<si::mass>(imm2) << std::endl
@@ -559,11 +559,11 @@ int main(void)
                   << imm8 << " = " << quantity<ton_mass>(imm8) << std::endl
                   << std::endl;
                   
-        quantity<fluid_ounce_volume>    imv1(1.0*fluid_ounces);
-        quantity<gill_volume>            imv2(1.0*gills);
-        quantity<pint_volume>            imv3(1.0*pints);
-        quantity<quart_volume>            imv4(1.0*quarts);
-        quantity<gallon_volume>            imv5(1.0*gallons);
+        BOOST_CONSTEXPR_OR_CONST quantity<fluid_ounce_volume>    imv1(1.0*fluid_ounces);
+        BOOST_CONSTEXPR_OR_CONST quantity<gill_volume>            imv2(1.0*gills);
+        BOOST_CONSTEXPR_OR_CONST quantity<pint_volume>            imv3(1.0*pints);
+        BOOST_CONSTEXPR_OR_CONST quantity<quart_volume>            imv4(1.0*quarts);
+        BOOST_CONSTEXPR_OR_CONST quantity<gallon_volume>            imv5(1.0*gallons);
         
         std::cout << imv1 << " = " << quantity<si::volume>(imv1) << std::endl
                   << imv2 << " = " << quantity<si::volume>(imv2) << std::endl
@@ -619,10 +619,10 @@ int main(void)
         
         std::cout << "Testing metric base units..." << std::endl;
         
-        quantity<fermi_length>            ml1(1.0*fermis);
-        quantity<angstrom_length>        ml2(1.0*angstroms);
-        quantity<micron_length>            ml3(1.0*microns);
-        quantity<nautical_mile_length>    ml4(1.0*nautical_miles);
+        BOOST_CONSTEXPR_OR_CONST quantity<fermi_length>            ml1(1.0*fermis);
+        BOOST_CONSTEXPR_OR_CONST quantity<angstrom_length>        ml2(1.0*angstroms);
+        BOOST_CONSTEXPR_OR_CONST quantity<micron_length>            ml3(1.0*microns);
+        BOOST_CONSTEXPR_OR_CONST quantity<nautical_mile_length>    ml4(1.0*nautical_miles);
     
         std::cout << ml1 << " = " << quantity<si::length>(ml1) << std::endl
                   << ml2 << " = " << quantity<si::length>(ml2) << std::endl
@@ -659,16 +659,16 @@ int main(void)
                   << ml4 << " = " << quantity<nautical_mile_length>(ml4) << std::endl
                   << std::endl;
 
-        quantity<ton_mass>    mm1(1.0*tons);
+        BOOST_CONSTEXPR_OR_CONST quantity<ton_mass>    mm1(1.0*tons);
         
         std::cout << mm1 << " = " << quantity<cgs::mass>(mm1) << std::endl
                   //<< quantity<si::mass>(mm1) << std::endl    // this should work... 
                   << std::endl;
                   
-        quantity<minute_time>    mt1(1.0*minutes);
-        quantity<hour_time>        mt2(1.0*hours);
-        quantity<day_time>        mt3(1.0*days);
-        quantity<year_time>        mt4(1.0*years);
+        BOOST_CONSTEXPR_OR_CONST quantity<minute_time>    mt1(1.0*minutes);
+        BOOST_CONSTEXPR_OR_CONST quantity<hour_time>        mt2(1.0*hours);
+        BOOST_CONSTEXPR_OR_CONST quantity<day_time>        mt3(1.0*days);
+        BOOST_CONSTEXPR_OR_CONST quantity<year_time>        mt4(1.0*years);
         
         std::cout << mt1 << " = " << quantity<si::time>(mt1) << std::endl
                   << mt2 << " = " << quantity<si::time>(mt2) << std::endl
@@ -705,14 +705,14 @@ int main(void)
                   << mt4 << " = " << quantity<year_time>(mt4) << std::endl
                   << std::endl;
                           
-        quantity<knot_velocity>    ms1(1.0*knots);
+        BOOST_CONSTEXPR_OR_CONST quantity<knot_velocity>    ms1(1.0*knots);
         
         std::cout << ms1 << " = " << quantity<si::velocity>(ms1) << std::endl
                   << std::endl;
                   
-        quantity<barn_area>        ma1(1.0*barns);
-        quantity<are_area>        ma2(1.0*ares);
-        quantity<hectare_area>    ma3(1.0*hectares);
+        BOOST_CONSTEXPR_OR_CONST quantity<barn_area>        ma1(1.0*barns);
+        BOOST_CONSTEXPR_OR_CONST quantity<are_area>        ma2(1.0*ares);
+        BOOST_CONSTEXPR_OR_CONST quantity<hectare_area>    ma3(1.0*hectares);
         
         std::cout << ma1 << " = " << quantity<si::area>(ma1) << std::endl
                   << ma2 << " = " << quantity<si::area>(ma2) << std::endl
@@ -738,15 +738,15 @@ int main(void)
                   << ma3 << " = " << quantity<hectare_area>(ma3) << std::endl
                   << std::endl;
         
-        quantity<liter_volume>    mv1(1.0*liters);
+        BOOST_CONSTEXPR_OR_CONST quantity<liter_volume>    mv1(1.0*liters);
         
         std::cout << mv1 << " = " << quantity<si::volume>(mv1) << std::endl
                   << std::endl;
         
-        quantity<mmHg_pressure>            mp1(1.0*mmHgs);
-        quantity<torr_pressure>            mp2(1.0*torrs);
-        quantity<bar_pressure>            mp3(1.0*bars);
-        quantity<atmosphere_pressure>    mp4(1.0*atmospheres);
+        BOOST_CONSTEXPR_OR_CONST quantity<mmHg_pressure>            mp1(1.0*mmHgs);
+        BOOST_CONSTEXPR_OR_CONST quantity<torr_pressure>            mp2(1.0*torrs);
+        BOOST_CONSTEXPR_OR_CONST quantity<bar_pressure>            mp3(1.0*bars);
+        BOOST_CONSTEXPR_OR_CONST quantity<atmosphere_pressure>    mp4(1.0*atmospheres);
         
         std::cout << mp1 << " = " << quantity<si::pressure>(mp1) << std::endl
                   << mp2 << " = " << quantity<si::pressure>(mp2) << std::endl
@@ -789,11 +789,11 @@ int main(void)
         
         std::cout << "Testing U.S. customary base units..." << std::endl;
         
-        quantity<mil_length>            iml1(1.0*mils);
-        quantity<inch_length>            iml2(1.0*inchs);
-        quantity<foot_length>            iml3(1.0*foots);
-        quantity<yard_length>            iml4(1.0*yards);
-        quantity<mile_length>            iml5(1.0*miles);
+        BOOST_CONSTEXPR_OR_CONST quantity<mil_length>            iml1(1.0*mils);
+        BOOST_CONSTEXPR_OR_CONST quantity<inch_length>            iml2(1.0*inchs);
+        BOOST_CONSTEXPR_OR_CONST quantity<foot_length>            iml3(1.0*foots);
+        BOOST_CONSTEXPR_OR_CONST quantity<yard_length>            iml4(1.0*yards);
+        BOOST_CONSTEXPR_OR_CONST quantity<mile_length>            iml5(1.0*miles);
         
         std::cout << iml1 << " = " << quantity<si::length>(iml1) << std::endl
                   << iml2 << " = " << quantity<si::length>(iml2) << std::endl
@@ -843,12 +843,12 @@ int main(void)
                   << iml5 << " = " << quantity<mile_length>(iml5) << std::endl
                   << std::endl;
 
-        quantity<grain_mass>            imm1(1.0*grains);
-        quantity<dram_mass>                imm2(1.0*drams);
-        quantity<ounce_mass>            imm3(1.0*ounces);
-        quantity<pound_mass>            imm4(1.0*pounds);
-        quantity<hundredweight_mass>    imm5(1.0*hundredweights);
-        quantity<ton_mass>                imm6(1.0*tons);
+        BOOST_CONSTEXPR_OR_CONST quantity<grain_mass>            imm1(1.0*grains);
+        BOOST_CONSTEXPR_OR_CONST quantity<dram_mass>                imm2(1.0*drams);
+        BOOST_CONSTEXPR_OR_CONST quantity<ounce_mass>            imm3(1.0*ounces);
+        BOOST_CONSTEXPR_OR_CONST quantity<pound_mass>            imm4(1.0*pounds);
+        BOOST_CONSTEXPR_OR_CONST quantity<hundredweight_mass>    imm5(1.0*hundredweights);
+        BOOST_CONSTEXPR_OR_CONST quantity<ton_mass>                imm6(1.0*tons);
 
         std::cout << imm1 << " = " << quantity<si::mass>(imm1) << std::endl
                   << imm2 << " = " << quantity<si::mass>(imm2) << std::endl
@@ -913,16 +913,16 @@ int main(void)
                   << imm6 << " = " << quantity<ton_mass>(imm6) << std::endl
                   << std::endl;
                   
-        quantity<minim_volume>            imv1(1.0*minims);
-        quantity<fluid_dram_volume>        imv2(1.0*fluid_drams);
-        quantity<teaspoon_volume>        imv3(1.0*teaspoons);
-        quantity<tablespoon_volume>        imv4(1.0*tablespoons);
-        quantity<fluid_ounce_volume>    imv5(1.0*fluid_ounces);
-        quantity<gill_volume>            imv6(1.0*gills);
-        quantity<cup_volume>            imv7(1.0*cups);
-        quantity<pint_volume>            imv8(1.0*pints);
-        quantity<quart_volume>            imv9(1.0*quarts);
-        quantity<gallon_volume>            imv10(1.0*gallons);
+        BOOST_CONSTEXPR_OR_CONST quantity<minim_volume>            imv1(1.0*minims);
+        BOOST_CONSTEXPR_OR_CONST quantity<fluid_dram_volume>        imv2(1.0*fluid_drams);
+        BOOST_CONSTEXPR_OR_CONST quantity<teaspoon_volume>        imv3(1.0*teaspoons);
+        BOOST_CONSTEXPR_OR_CONST quantity<tablespoon_volume>        imv4(1.0*tablespoons);
+        BOOST_CONSTEXPR_OR_CONST quantity<fluid_ounce_volume>    imv5(1.0*fluid_ounces);
+        BOOST_CONSTEXPR_OR_CONST quantity<gill_volume>            imv6(1.0*gills);
+        BOOST_CONSTEXPR_OR_CONST quantity<cup_volume>            imv7(1.0*cups);
+        BOOST_CONSTEXPR_OR_CONST quantity<pint_volume>            imv8(1.0*pints);
+        BOOST_CONSTEXPR_OR_CONST quantity<quart_volume>            imv9(1.0*quarts);
+        BOOST_CONSTEXPR_OR_CONST quantity<gallon_volume>            imv10(1.0*gallons);
         
         std::cout << imv1 << " = " << quantity<si::volume>(imv1) << std::endl
                   << imv2 << " = " << quantity<si::volume>(imv2) << std::endl

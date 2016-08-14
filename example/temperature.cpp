@@ -70,13 +70,13 @@ BOOST_UNITS_STATIC_CONSTANT(degrees,temperature);
 int main()
 {
     //[temperature_snippet_3
-    quantity<absolute<fahrenheit::temperature> >    T1p(
+    BOOST_CONSTEXPR_OR_CONST quantity<absolute<fahrenheit::temperature> >   T1p(
         32.0*absolute<fahrenheit::temperature>());
-    quantity<fahrenheit::temperature>               T1v(
+    BOOST_CONSTEXPR_OR_CONST quantity<fahrenheit::temperature>              T1v(
         32.0*fahrenheit::degrees);
     
-    quantity<absolute<si::temperature> >            T2p(T1p);
-    quantity<si::temperature>                       T2v(T1v);
+    BOOST_CONSTEXPR_OR_CONST quantity<absolute<si::temperature> >           T2p(T1p);
+    BOOST_CONSTEXPR_OR_CONST quantity<si::temperature>                      T2v(T1v);
     //]
 
     typedef conversion_helper<
