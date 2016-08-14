@@ -44,18 +44,18 @@ Tests for output from various units, name, symbol and raw formats, and automatic
 #include <boost/test/unit_test.hpp>
 
 struct meter_base_unit : boost::units::base_unit<meter_base_unit, boost::units::length_dimension, 1> {
-    static const char* name() { return("meter"); }
-    static const char* symbol() { return("m"); }
+    static BOOST_CONSTEXPR const char* name() { return("meter"); }
+    static BOOST_CONSTEXPR const char* symbol() { return("m"); }
 };
 
 struct second_base_unit : boost::units::base_unit<second_base_unit, boost::units::time_dimension, 2> {
-    static const char* name() { return("second"); }
-    static const char* symbol() { return("s"); }
+    static BOOST_CONSTEXPR const char* name() { return("second"); }
+    static BOOST_CONSTEXPR const char* symbol() { return("s"); }
 };
 
 struct byte_base_unit : boost::units::base_unit<byte_base_unit, boost::units::dimensionless_type, 3> {
-    static const char* name() { return("byte"); }
-    static const char* symbol() { return("b"); }
+    static BOOST_CONSTEXPR const char* name() { return("byte"); }
+    static BOOST_CONSTEXPR const char* symbol() { return("b"); }
 };
 
 typedef boost::units::make_system<meter_base_unit, second_base_unit>::type my_system;
@@ -83,8 +83,8 @@ namespace boost {
 namespace units {
 template<>
 struct base_unit_info<scaled_length_base_unit> {
-    static const char* symbol() { return("scm"); }
-    static const char* name() { return("scaled_meter"); }
+    static BOOST_CONSTEXPR const char* symbol() { return("scm"); }
+    static BOOST_CONSTEXPR const char* name() { return("scaled_meter"); }
 };
 }
 }
@@ -98,8 +98,8 @@ std::string symbol_string(const custom1&) { return("c1"); }
 
 typedef boost::units::reduce_unit<boost::units::unit<boost::units::acceleration_dimension, my_system> >::type custom2;
 
-const char* name_string(const custom2&) { return("custom2"); }
-const char* symbol_string(const custom2&) { return("c2"); }
+BOOST_CONSTEXPR const char* name_string(const custom2&) { return("custom2"); }
+BOOST_CONSTEXPR const char* symbol_string(const custom2&) { return("c2"); }
 
 typedef boost::units::make_scaled_unit<custom1, boost::units::scale<10, boost::units::static_rational<3> > >::type scaled_custom1;
 typedef boost::units::make_scaled_unit<custom2, boost::units::scale<10, boost::units::static_rational<3> > >::type scaled_custom2;

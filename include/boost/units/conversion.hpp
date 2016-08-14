@@ -158,8 +158,8 @@ namespace units {                                                           \
 namespace namespace_ {                                                      \
 struct name_ ## _base_unit                                                  \
   : base_unit<name_ ## _base_unit, unit::dimension_type, id> {              \
-    static const char* name() { return(name_string_); }                     \
-    static const char* symbol() { return(symbol_string_); }                 \
+    static BOOST_CONSTEXPR const char* name() { return(name_string_); }     \
+    static BOOST_CONSTEXPR const char* symbol() { return(symbol_string_); } \
 };                                                                          \
 }                                                                           \
 }                                                                           \

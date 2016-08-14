@@ -54,20 +54,20 @@ meter
 
 struct byte_base_unit : boost::units::base_unit<byte_base_unit, boost::units::dimensionless_type, 3>
 {
-  static const char* name() { return("byte"); }
-  static const char* symbol() { return("b"); }
+  static BOOST_CONSTEXPR const char* name() { return("byte"); }
+  static BOOST_CONSTEXPR const char* symbol() { return("b"); }
 };
 
 struct thing_base_unit : boost::units::base_unit<thing_base_unit, boost::units::dimensionless_type, 4>
 {
-  static const char* name() { return("thing"); }
-  static const char* symbol() { return(""); }
+  static BOOST_CONSTEXPR const char* name() { return("thing"); }
+  static BOOST_CONSTEXPR const char* symbol() { return(""); }
 };
 
 struct euro_base_unit : boost::units::base_unit<euro_base_unit, boost::units::dimensionless_type, 5>
 {
-  static const char* name() { return("EUR"); }
-  static const char* symbol() { return("€"); }
+  static BOOST_CONSTEXPR const char* name() { return("EUR"); }
+  static BOOST_CONSTEXPR const char* symbol() { return("€"); }
 };
 
 int main()
