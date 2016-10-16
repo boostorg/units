@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2009 Steven Watanabe
@@ -8,10 +8,10 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-/** 
+/**
 \file test_output.cpp
-    
-\brief 
+
+\brief
 Test unit and quantity printing
 \details
 Tests for output from various units, name, symbol and raw formats, and automatic prefixing in engineering and binary units.
@@ -311,7 +311,7 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name)
 
 BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
 { // Engineering autoprefix, with name format.
-#define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix 
+#define FORMATTERS << boost::units::name_format << boost::units::engineering_prefix
   // Single base unit like meter.
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 meter");
     BOOST_UNITS_TEST_OUTPUT(1500.0*meter_base_unit::unit_type(), "1.5 kilometer");
@@ -328,15 +328,15 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
     BOOST_UNITS_TEST_OUTPUT_REGEX(1.5e-25 * meter_base_unit::unit_type(), "1\\.5e-0?25 meter"); // Too small for multiple.
     BOOST_UNITS_TEST_OUTPUT_REGEX(1.5e+28 * meter_base_unit::unit_type(), "1\\.5e\\+0?28 meter"); // Too large for multiple.
   // Too 'biggest or too smallest'.
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::max()*meter_base_unit::unit_type(), "3\\.40282e\\+0?38 meter");
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::min()*meter_base_unit::unit_type(), "1\\.17549e-0?38 meter");
-    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::max()*meter_base_unit::unit_type(), "1.79769e+308 meter");
-    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::min()*meter_base_unit::unit_type(), "2.22507e-308 meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX((std::numeric_limits<float>::max)()*meter_base_unit::unit_type(), "3\\.40282e\\+0?38 meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX((std::numeric_limits<float>::min)()*meter_base_unit::unit_type(), "1\\.17549e-0?38 meter");
+    BOOST_UNITS_TEST_OUTPUT((std::numeric_limits<double>::max)()*meter_base_unit::unit_type(), "1.79769e+308 meter");
+    BOOST_UNITS_TEST_OUTPUT((std::numeric_limits<double>::min)()*meter_base_unit::unit_type(), "2.22507e-308 meter");
    // Infinity and NaN
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "(1\\.#INF|inf|INF) meter");
-    BOOST_UNITS_TEST_OUTPUT_REGEX(-std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "-(1\\.#INF|inf|INF) meter");
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "(1\\.#QNAN|nan|NaNQ) meter");
-    BOOST_UNITS_TEST_OUTPUT_REGEX(-std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "-?(1\\.#IND|nan|nan\\(ind\\)|NaNQ) meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "(1\\.#INF|inf|INF|Inf) meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX(-std::numeric_limits<float>::infinity()*meter_base_unit::unit_type(), "-(1\\.#INF|inf|INF|Inf) meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "(1\\.#QNAN|nan|NaNQ|NaN) meter");
+    BOOST_UNITS_TEST_OUTPUT_REGEX(-std::numeric_limits<double>::quiet_NaN()*meter_base_unit::unit_type(), "-?(1\\.#IND|nan|nan\\(ind\\)|NaNQ|NaN) meter");
 
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 meter second^-1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 kilometer");
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_name)
 
 BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol)
 { // Engineering autoprefix, with symbol format.
-#define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix 
+#define FORMATTERS << boost::units::symbol_format << boost::units::engineering_prefix
   // Single base unit like m.
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
     BOOST_UNITS_TEST_OUTPUT(1500.0*meter_base_unit::unit_type(), "1.5 km");
@@ -380,11 +380,11 @@ BOOST_AUTO_TEST_CASE(test_output_autoprefixed_quantity_symbol)
     BOOST_UNITS_TEST_OUTPUT_REGEX(1e+28 * meter_base_unit::unit_type(), "1e\\+0?28 m"); // Just too large for multiple.
     BOOST_UNITS_TEST_OUTPUT_REGEX(1.5e-25 * meter_base_unit::unit_type(), "1\\.5e-0?25 m"); // Too small for multiple.
     BOOST_UNITS_TEST_OUTPUT_REGEX(1.5e+28 * meter_base_unit::unit_type(), "1\\.5e\\+0?28 m"); // Too large for multiple.
-  // 
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::max()*meter_base_unit::unit_type(), "3\\.40282e\\+0?38 m");
-    BOOST_UNITS_TEST_OUTPUT_REGEX(std::numeric_limits<float>::min()*meter_base_unit::unit_type(), "1\\.17549e-0?38 m");
-    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::max()*meter_base_unit::unit_type(), "1.79769e+308 m");
-    BOOST_UNITS_TEST_OUTPUT(std::numeric_limits<double>::min()*meter_base_unit::unit_type(), "2.22507e-308 m");
+  //
+    BOOST_UNITS_TEST_OUTPUT_REGEX((std::numeric_limits<float>::max)()*meter_base_unit::unit_type(), "3\\.40282e\\+0?38 m");
+    BOOST_UNITS_TEST_OUTPUT_REGEX((std::numeric_limits<float>::min)()*meter_base_unit::unit_type(), "1\\.17549e-0?38 m");
+    BOOST_UNITS_TEST_OUTPUT((std::numeric_limits<double>::max)()*meter_base_unit::unit_type(), "1.79769e+308 m");
+    BOOST_UNITS_TEST_OUTPUT((std::numeric_limits<double>::min)()*meter_base_unit::unit_type(), "2.22507e-308 m");
 
     BOOST_UNITS_TEST_OUTPUT(1.5*velocity(), "1.5 m s^-1");
     BOOST_UNITS_TEST_OUTPUT(1.5*scaled_length(), "1.5 km");
@@ -427,16 +427,16 @@ BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_symbol)
 BOOST_AUTO_TEST_CASE(test_output_auto_binary_prefixed_quantity_name)
 { // Binary prefix with name format.
   // http://physics.nist.gov/cuu/Units/binary.html
-  // 1998 the International Electrotechnical Commission (IEC) approved 
+  // 1998 the International Electrotechnical Commission (IEC) approved
   // IEC 60027-2, Second edition, 2000-11, Letter symbols to be used in electrical technology
   // - Part 2: Telecommunications and electronics.
   // IEC 80000-13:2008, Quantities and units
-  // – Part 13: Information science and technology
+  // - Part 13: Information science and technology
 #define FORMATTERS << boost::units::name_format << boost::units::binary_prefix
     BOOST_UNITS_TEST_OUTPUT(2048  * byte_base_unit::unit_type(), "2 kibibyte");
     BOOST_UNITS_TEST_OUTPUT(std::pow(2., 32) *byte_base_unit::unit_type(), "4 gibibyte");
     BOOST_UNITS_TEST_OUTPUT(std::pow(2., 41) *byte_base_unit::unit_type(), "2 tebibyte"); // http://en.wikipedia.org/wiki/Tebibyte
-    BOOST_UNITS_TEST_OUTPUT(std::pow(2., 50) *byte_base_unit::unit_type(), "1 pebibyte"); 
+    BOOST_UNITS_TEST_OUTPUT(std::pow(2., 50) *byte_base_unit::unit_type(), "1 pebibyte");
     BOOST_UNITS_TEST_OUTPUT(std::pow(2., 60) *byte_base_unit::unit_type(), "1 exbibyte");
     BOOST_UNITS_TEST_OUTPUT(std::pow(2., 70) *byte_base_unit::unit_type(), "1 zebibyte");
     BOOST_UNITS_TEST_OUTPUT(std::pow(2., 80) *byte_base_unit::unit_type(), "1 yobibyte");
@@ -456,7 +456,7 @@ BOOST_AUTO_TEST_CASE(test_output_quantity_name_duplicate)
 
 BOOST_AUTO_TEST_CASE(test_output_quantity_symbol_duplicate)
 { // Ensure that if more than one format specified, only the last is used.
-#define FORMATTERS << boost::units::name_format << boost::units::symbol_format 
+#define FORMATTERS << boost::units::name_format << boost::units::symbol_format
     BOOST_UNITS_TEST_OUTPUT(1.5*meter_base_unit::unit_type(), "1.5 m");
 #undef FORMATTERS
 }
