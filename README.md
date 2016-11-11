@@ -17,6 +17,14 @@ facilitating the use of this library to provide dimension checking in performanc
 * **test_headers** - unit tests for self containment of headers
 * **tutorial** - tutorial
 
+### Test results
+
+@       | Travis      | AppVeyor
+--------|-------------|---------
+master  | [![Build Status](https://travis-ci.org/boostorg/units.svg?branch=master)](https://travis-ci.org/boostorg/units) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/boostorg/units?branch=master&svg=true)](https://ci.appveyor.com/project/boostorg/units)
+develop | [![Build Status](https://travis-ci.org/boostorg/units.svg)](https://travis-ci.org/boostorg/units) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/boostorg/units?svg=true)](https://ci.appveyor.com/project/boostorg/units)
+
+
 ### More information
 
 * [Documentation](http://boost.org/libs/units)
