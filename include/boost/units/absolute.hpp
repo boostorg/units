@@ -25,63 +25,72 @@ namespace boost {
 
 namespace units {
 
-/// A wrapper to represent absolute units (points rather than vectors).  Intended
-/// originally for temperatures, this class implements operators for absolute units 
-/// so that addition of a relative unit to an absolute unit results in another
-/// absolute unit : absolute<T> +/- T -> absolute<T> and subtraction of one absolute
-/// unit from another results in a relative unit : absolute<T> - absolute<T> -> T.
+/// A wrapper to represent absolute units (points rather than vectors).
+/// Intended originally for temperatures, this class implements operators for
+/// absolute units so that addition of a relative unit to an absolute unit
+/// results in another absolute unit : absolute<T> +/- T -> absolute<T> and
+/// subtraction of one absolute unit from another results in a relative unit :
+/// absolute<T> - absolute<T> -> T.
 template<class Y>
 class absolute
 {
     public:
         typedef absolute<Y>     this_type;
         typedef Y               value_type;
-        
-        absolute() : val_() { }
-        absolute(const value_type& val) : val_(val) { }
-        absolute(const this_type& source) : val_(source.val_) { }
-   
-        this_type& operator=(const this_type& source)           { val_ = source.val_; return *this; }
-        
-        const value_type& value() const                         { return val_; }
-        
-        const this_type& operator+=(const value_type& val)      { val_ += val; return *this; }
-        const this_type& operator-=(const value_type& val)      { val_ -= val; return *this; }
-        
+
+        BOOST_CONSTEXPR absolute() : val_() {}
+        BOOST_CONSTEXPR absolute(const value_type& val) : val_(val) {}
+        BOOST_CONSTEXPR absolute(const this_type& source) : val_(source.val_) {}
+
+        BOOST_CONSTEXPR this_type& operator=(const this_type& source)
+        { val_ = source.val_; return *this; }
+
+        BOOST_CONSTEXPR const value_type& value() const { return val_; }
+
+        BOOST_CONSTEXPR const this_type& operator+=(const value_type& val) {
+          val_ += val;
+          return *this;
+        }
+        BOOST_CONSTEXPR const this_type& operator-=(const value_type& val) {
+          val_ -= val;
+          return *this;
+        }
+
     private:
         value_type   val_;
 };
 
 /// add a relative value to an absolute one
 template<class Y>
-absolute<Y> operator+(const absolute<Y>& aval,const Y& rval)
+BOOST_CONSTEXPR absolute<Y> operator+(const absolute<Y>& aval,const Y& rval)
 {
     return absolute<Y>(aval.value()+rval);
 }
 
 /// add a relative value to an absolute one
 template<class Y>
-absolute<Y> operator+(const Y& rval,const absolute<Y>& aval)
+BOOST_CONSTEXPR absolute<Y> operator+(const Y& rval,const absolute<Y>& aval)
 {
     return absolute<Y>(aval.value()+rval);
 }
 
 /// subtract a relative value from an absolute one
 template<class Y>
-absolute<Y> operator-(const absolute<Y>& aval,const Y& rval)
+BOOST_CONSTEXPR absolute<Y> operator-(const absolute<Y>& aval,const Y& rval)
 {
     return absolute<Y>(aval.value()-rval);
 }
 
 /// subtracting two absolutes gives a difference
 template<class Y>
-Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
+BOOST_CONSTEXPR Y operator-(const absolute<Y>& aval1,const absolute<Y>& aval2)
 {
     return Y(aval1.value()-aval2.value());
 }
 
 /// creates a quantity from an absolute unit and a raw value
 template<class D, class S, class T>
+BOOST_CONSTEXPR
 quantity<absolute<unit<D, S> >, T> operator*(const T& t, const absolute<unit<D, S> >&)
 {
     return(quantity<absolute<unit<D, S> >, T>::from_value(t));
@@ -89,6 +98,7 @@ quantity<absolute<unit<D, S> >, T> operator*(const T& t, const absolute<unit<D, 
 
 /// creates a quantity from an absolute unit and a raw value
 template<class D, class S, class T>
+BOOST_CONSTEXPR
 quantity<absolute<unit<D, S> >, T> operator*(const absolute<unit<D, S> >&, const T& t)
 {
     return(quantity<absolute<unit<D, S> >, T>::from_value(t));
@@ -96,11 +106,11 @@ quantity<absolute<unit<D, S> >, T> operator*(const absolute<unit<D, S> >&, const
 
 /// Print an absolute unit
 template<class Char, class Traits, class Y>
-std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,const absolute<Y>& aval)
+std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os,
+                                             const absolute<Y>& aval)
 {
 
     os << "absolute " << aval.value();
-    
     return os;
 }
 
