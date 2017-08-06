@@ -28,47 +28,30 @@ matrix:
   exclude:
     - env: TRAVIS_EMPTY_JOB_WORKAROUND=true
   include:
-    - env: TOOLSET=clang-3.4
+    - env: TOOLSET=clang-3.9
       os: linux
-      dist: precise
-    - env: TOOLSET=clang-3.5
+    - env: TOOLSET=clang-4.0
       os: linux
-      dist: precise
     - env: TOOLSET=clang-3.6
       os: linux
-      dist: precise
     - env: TOOLSET=gcc-4.7
       os: linux
-      dist: precise
     - env: TOOLSET=gcc-4.8
       os: linux
-      dist: precise
     - env: TOOLSET=gcc-4.9
       os: linux
-      dist: precise
     - env: TOOLSET=gcc-5.1
       os: linux
-      dist: precise
-    - env: TOOLSET=xcode-6.1
+    - env: TOOLSET=gcc-6
+      os: linux
+    - env: TOOLSET=gcc-7
+      os: linux
+    - env: TOOLSET=xcode-7.3
       os: osx
-    - env: TOOLSET=xcode-6.2
+      osx_image: xcode7.3
+    - env: TOOLSET=xcode-8.3
       os: osx
-      osx_image: beta-xcode6.2
-    - env: TOOLSET=xcode-6.3
-      os: osx
-      osx_image: beta-xcode6.3
-    - env: TOOLSET=xcode-6.4
-      os: osx
-      osx_image: xcode6.4
-    - env: TOOLSET=xcode-7.0
-      os: osx
-      osx_image: xcode7
-    - env: TOOLSET=xcode-7.1
-      os: osx
-      osx_image: xcode7.1
-    - env: TOOLSET=xcode-7.2
-      os: osx
-      osx_image: xcode7.2
+      osx_image: xcode8.3
 
 before_install:
   # Fetch the scripts to do the actual building/testing.
