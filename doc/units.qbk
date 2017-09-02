@@ -86,24 +86,9 @@ of adding new units and unit conversions are provided in the examples.
 
 In order to enable complex compile-time dimensional analysis calculations with no runtime overhead,
 Boost.Units relies heavily on the [___boost_mpl] (MPL) and on template metaprogramming techniques, and is, as a consequence, 
-fairly demanding of compiler compliance to ISO standards. At present, it has been successfully
-compiled and tested on the following compilers/platforms :
-
-# g++ 4.0.1 on Mac OSX 10.4
-# Intel CC 9.1, 10.0, and 10.1 on Mac OSX 10.4
-# g++ 3.4.4, 4.2.3, and 4.3.0 on Windows XP
-# Microsoft Visual C++ 7.1, 8.0, and 9.0 on Windows XP
-# Comeau 4.3.10.1 beta2 on Windows XP
-# Metrowerks CodeWarrior 9.2 on Windows XP.  
-# Sun CC 5.9 on Solaris and Linux
-
-The following compilers/platforms are known *not* to work :
-
-# g++ 3.3.x
-# Microsoft Visual C++ 6.0 on Windows XP
-# Microsoft Visual C++ 7.0 on Windows XP
-# Metrowerks CodeWarrior 8.0 on Windows XP.
-# All versions of Borland.
+fairly demanding of compiler compliance to ISO standards. For a list of compatible compilers
+see the relevant release notes, such as the
+[@http://www.boost.org/users/history/version_1_65_0.html Compilers Tested section of Version 1.65.0].
 
 [endsect]
 
