@@ -27,6 +27,7 @@ project boost/units/test :
 
 alias test_framework : /boost//unit_test_framework/<warnings-as-errors>off ;
 
+compile test_heterogenous_comparison.cpp ;
 compile test_predicates.cpp ;
 compile test_negative_denominator.cpp ;
 compile test_dimensionless_ice1.cpp ;

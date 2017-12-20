@@ -1176,75 +1176,99 @@ operator/(const quantity<Unit1,X>& lhs,
 }
 
 /// runtime operator==
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator==(const quantity<Unit,X>& val1,
-           const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator==(const quantity<Unit1,X>& val1,
+           const quantity<Unit2,Y>& val2)
 {
-    return val1.value() == val2.value();
+    return val1.value() == quantity<Unit1, Y>(val2).value();
 }
 
 /// runtime operator!=
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator!=(const quantity<Unit,X>& val1,
-           const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator!=(const quantity<Unit1,X>& val1,
+           const quantity<Unit2,Y>& val2)
 {
-    return val1.value() != val2.value();
+    return val1.value() != quantity<Unit1, Y>(val2).value();
 }
 
 /// runtime operator<
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator<(const quantity<Unit,X>& val1,
-          const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator<(const quantity<Unit1,X>& val1,
+          const quantity<Unit2,Y>& val2)
 {
-    return val1.value() < val2.value();
+    return val1.value() < quantity<Unit1, Y>(val2).value();
 }
 
 /// runtime operator<=
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator<=(const quantity<Unit,X>& val1,
-           const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator<=(const quantity<Unit1,X>& val1,
+           const quantity<Unit2,Y>& val2)
 {
-    return val1.value() <= val2.value();
+    return val1.value() <= quantity<Unit1, Y>(val2).value();
 }
 
 /// runtime operator>
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator>(const quantity<Unit,X>& val1,
-          const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator>(const quantity<Unit1,X>& val1,
+          const quantity<Unit2,Y>& val2)
 {
-    return val1.value() > val2.value();
+    return val1.value() > quantity<Unit1, Y>(val2).value();
 }
 
 /// runtime operator>=
-template<class Unit,
+template<class Unit1,
+         class Unit2,
          class X,
          class Y>
 inline
-bool 
-operator>=(const quantity<Unit,X>& val1,
-           const quantity<Unit,Y>& val2)
+typename boost::enable_if<
+    typename is_implicitly_convertible<Unit1, Unit2>::type,
+    bool
+>::type
+operator>=(const quantity<Unit1,X>& val1,
+           const quantity<Unit2,Y>& val2)
 {
-    return val1.value() >= val2.value();
+    return val1.value() >= quantity<Unit1, Y>(val2).value();
 }
 
 } // namespace units
