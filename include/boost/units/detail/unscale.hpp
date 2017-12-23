@@ -225,6 +225,22 @@ struct times_impl<boost::units::scale_dim_tag, boost::units::detail::static_rati
     };
 };
 
+/// INTERNAL ONLY
+template<>
+struct divides_impl<boost::units::scale_dim_tag, boost::units::detail::static_rational_tag>
+{
+    template<class T0, class T1>
+    struct apply
+    {
+        typedef boost::units::scale_list_dim<
+            boost::units::scale<
+                (T0::base),
+                typename mpl::divides<typename T0::exponent, T1>::type
+            >
+        > type;
+    };
+};
+
 } // namespace mpl
 
 #endif
