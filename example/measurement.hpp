@@ -26,7 +26,7 @@ namespace units {
 namespace sqr_namespace /**/ {
 
 template<class Y>
-BOOST_CONSTEXPR
+constexpr
 Y sqr(Y val)
 { return val*val; }
 
@@ -41,20 +41,20 @@ class measurement
         typedef measurement<Y>                  this_type;
         typedef Y                               value_type;
         
-        BOOST_CONSTEXPR measurement(const value_type& val = value_type(),
+        constexpr measurement(const value_type& val = value_type(),
                     const value_type& err = value_type()) : 
             value_(val),
             uncertainty_(std::abs(err)) 
         { }
         
-        BOOST_CONSTEXPR measurement(const this_type& source) : 
+        constexpr measurement(const this_type& source) : 
             value_(source.value_),
             uncertainty_(source.uncertainty_) 
         { }
         
         //~measurement() { }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator=(const this_type& source)
+        constexpr this_type& operator=(const this_type& source)
         {
             if (this == &source) return *this;
             
@@ -64,43 +64,43 @@ class measurement
             return *this;
         }
         
-        BOOST_CONSTEXPR operator value_type() const    { return value_; }
+        constexpr operator value_type() const    { return value_; }
         
-        BOOST_CONSTEXPR value_type value() const       { return value_; }
-        BOOST_CONSTEXPR value_type uncertainty() const { return uncertainty_; }
-        BOOST_CONSTEXPR value_type lower_bound() const { return value_-uncertainty_; }
-        BOOST_CONSTEXPR value_type upper_bound() const { return value_+uncertainty_; }
+        constexpr value_type value() const       { return value_; }
+        constexpr value_type uncertainty() const { return uncertainty_; }
+        constexpr value_type lower_bound() const { return value_-uncertainty_; }
+        constexpr value_type upper_bound() const { return value_+uncertainty_; }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator+=(const value_type& val)            
+        constexpr this_type& operator+=(const value_type& val)            
         { 
             value_ += val; 
             return *this; 
         }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator-=(const value_type& val)            
+        constexpr this_type& operator-=(const value_type& val)            
         { 
             value_ -= val; 
             return *this; 
         }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator*=(const value_type& val)            
+        constexpr this_type& operator*=(const value_type& val)            
         { 
             value_ *= val; 
             uncertainty_ *= val; 
             return *this; 
         }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator/=(const value_type& val)            
+        constexpr this_type& operator/=(const value_type& val)            
         { 
             value_ /= val; 
             uncertainty_ /= val; 
             return *this; 
         }
         
-        BOOST_CXX14_CONSTEXPR this_type& operator+=(const this_type& /*source*/);
-        BOOST_CXX14_CONSTEXPR this_type& operator-=(const this_type& /*source*/);        
-        BOOST_CXX14_CONSTEXPR this_type& operator*=(const this_type& /*source*/);        
-        BOOST_CXX14_CONSTEXPR this_type& operator/=(const this_type& /*source*/);
+        constexpr this_type& operator+=(const this_type& /*source*/);
+        constexpr this_type& operator-=(const this_type& /*source*/);        
+        constexpr this_type& operator*=(const this_type& /*source*/);        
+        constexpr this_type& operator/=(const this_type& /*source*/);
 
     private:
         value_type          value_,
@@ -123,7 +123,7 @@ namespace units {
 
 template<class Y>
 inline
-BOOST_CXX14_CONSTEXPR
+constexpr
 measurement<Y>&
 measurement<Y>::operator+=(const this_type& source)
 {
@@ -135,7 +135,7 @@ measurement<Y>::operator+=(const this_type& source)
 
 template<class Y>
 inline
-BOOST_CXX14_CONSTEXPR
+constexpr
 measurement<Y>&
 measurement<Y>::operator-=(const this_type& source)
 {
@@ -147,7 +147,7 @@ measurement<Y>::operator-=(const this_type& source)
 
 template<class Y>
 inline
-BOOST_CXX14_CONSTEXPR
+constexpr
 measurement<Y>&
 measurement<Y>::operator*=(const this_type& source)
 {
@@ -161,7 +161,7 @@ measurement<Y>::operator*=(const this_type& source)
 
 template<class Y>
 inline
-BOOST_CXX14_CONSTEXPR
+constexpr
 measurement<Y>&
 measurement<Y>::operator/=(const this_type& source)
 {
@@ -176,7 +176,7 @@ measurement<Y>::operator/=(const this_type& source)
 // value_type op measurement
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator+(Y lhs,const measurement<Y>& rhs)
 {
@@ -185,7 +185,7 @@ operator+(Y lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator-(Y lhs,const measurement<Y>& rhs)
 {
@@ -194,7 +194,7 @@ operator-(Y lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator*(Y lhs,const measurement<Y>& rhs)
 {
@@ -203,7 +203,7 @@ operator*(Y lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator/(Y lhs,const measurement<Y>& rhs)
 {
@@ -213,7 +213,7 @@ operator/(Y lhs,const measurement<Y>& rhs)
 // measurement op value_type
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator+(const measurement<Y>& lhs,Y rhs)
 {
@@ -222,7 +222,7 @@ operator+(const measurement<Y>& lhs,Y rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator-(const measurement<Y>& lhs,Y rhs)
 {
@@ -231,7 +231,7 @@ operator-(const measurement<Y>& lhs,Y rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator*(const measurement<Y>& lhs,Y rhs)
 {
@@ -240,7 +240,7 @@ operator*(const measurement<Y>& lhs,Y rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator/(const measurement<Y>& lhs,Y rhs)
 {
@@ -250,7 +250,7 @@ operator/(const measurement<Y>& lhs,Y rhs)
 // measurement op measurement
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator+(const measurement<Y>& lhs,const measurement<Y>& rhs)
 {
@@ -259,7 +259,7 @@ operator+(const measurement<Y>& lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator-(const measurement<Y>& lhs,const measurement<Y>& rhs)
 {
@@ -268,7 +268,7 @@ operator-(const measurement<Y>& lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator*(const measurement<Y>& lhs,const measurement<Y>& rhs)
 {
@@ -277,7 +277,7 @@ operator*(const measurement<Y>& lhs,const measurement<Y>& rhs)
 
 template<class Y>
 inline
-BOOST_CONSTEXPR
+constexpr
 measurement<Y>
 operator/(const measurement<Y>& lhs,const measurement<Y>& rhs)
 {
@@ -292,7 +292,7 @@ struct power_typeof_helper<measurement<Y>,static_rational<N,D> >
         typename power_typeof_helper<Y,static_rational<N,D> >::type
     > type; 
     
-    static BOOST_CXX14_CONSTEXPR type value(const measurement<Y>& x)  
+    static constexpr type value(const measurement<Y>& x)  
     { 
         const static_rational<N,D>  rat;
 
@@ -312,7 +312,7 @@ struct root_typeof_helper<measurement<Y>,static_rational<N,D> >
         typename root_typeof_helper<Y,static_rational<N,D> >::type
     > type; 
     
-    static BOOST_CXX14_CONSTEXPR type value(const measurement<Y>& x)  
+    static constexpr type value(const measurement<Y>& x)  
     { 
         const static_rational<N,D>  rat;
 

@@ -60,7 +60,7 @@ using namespace bu::information;
 // must be a unit of information.  Conversion to the requested return unit is 
 // accomplished automatically by the boost::units library.
 template <typename Sys>
-BOOST_CONSTEXPR
+constexpr
 quantity<bu::unit<bu::information_dimension, Sys> > 
 bernoulli_entropy(double p, const bu::unit<bu::information_dimension, Sys>&) {
     typedef bu::unit<bu::information_dimension, Sys> requested_unit;
@@ -69,15 +69,15 @@ bernoulli_entropy(double p, const bu::unit<bu::information_dimension, Sys>&) {
 
 int main(int argc, char** argv) {
     // a quantity of information (default in units of bytes) 
-    BOOST_CONSTEXPR_OR_CONST quantity<info> nbytes(1 * si::giga * bit);
+    quantity<info> nbytes(1 * si::giga * bit);
     cout << "bytes= " << nbytes << endl;
 
     // a quantity of information, stored as bits
-    BOOST_CONSTEXPR_OR_CONST quantity<hu::bit::info> nbits(1 * si::mega * byte);
+    quantity<hu::bit::info> nbits(1 * si::mega * byte);
     cout << "bits= " << nbits << endl;
 
     // a quantity of information, stored as nats
-    BOOST_CONSTEXPR_OR_CONST quantity<hu::nat::info> nnats(2 * si::kilo * hartleys);
+    quantity<hu::nat::info> nnats(2 * si::kilo * hartleys);
     cout << "nats= " << nnats << endl;
 
     // how many bytes are in a kibi-byte?

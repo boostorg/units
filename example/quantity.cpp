@@ -72,8 +72,8 @@ int main(void)
 
     {
     //[quantity_snippet_1
-    BOOST_CONSTEXPR_OR_CONST quantity<length> L = 2.0*meters;                     // quantity of length
-    BOOST_CONSTEXPR_OR_CONST quantity<energy> E = kilograms*pow<2>(L/seconds);    // quantity of energy
+    quantity<length> L = 2.0*meters;                     // quantity of length
+    quantity<energy> E = kilograms*pow<2>(L/seconds);    // quantity of energy
     //]
     
     std::cout << "L                                 = " << L << std::endl
@@ -99,8 +99,8 @@ int main(void)
     
     {
     //[quantity_snippet_2
-    const quantity<length,std::complex<double> > L(std::complex<double>(3.0,4.0)*meters);
-    const quantity<energy,std::complex<double> > E(kilograms*pow<2>(L/seconds));
+    quantity<length,std::complex<double> > L(std::complex<double>(3.0,4.0)*meters);
+    quantity<energy,std::complex<double> > E(kilograms*pow<2>(L/seconds));
     //]
     
     std::cout << "L                                 = " << L << std::endl

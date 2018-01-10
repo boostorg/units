@@ -11,7 +11,6 @@
 #ifndef BOOST_UNITS_POW_HPP 
 #define BOOST_UNITS_POW_HPP
 
-#include <boost/math_fwd.hpp>
 #include <boost/type_traits/is_integral.hpp>
 
 #include <boost/units/operators.hpp>
