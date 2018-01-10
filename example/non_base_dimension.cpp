@@ -68,11 +68,11 @@ using namespace boost::units;
 
 int main(void)
 {
-    quantity<imperial_gallon>   ig1(1.0*imperial_gallon());
-    quantity<us_gallon>         ug1(1.0*us_gallon());
+    BOOST_CONSTEXPR_OR_CONST quantity<imperial_gallon>   ig1(1.0*imperial_gallon());
+    BOOST_CONSTEXPR_OR_CONST quantity<us_gallon>         ug1(1.0*us_gallon());
     
-    quantity<imperial_gallon>   ig2(ug1);
-    quantity<us_gallon>         ug2(ig1);
+    BOOST_CONSTEXPR_OR_CONST quantity<imperial_gallon>   ig2(ug1);
+    BOOST_CONSTEXPR_OR_CONST quantity<us_gallon>         ug2(ig1);
     
     return 0;
 }

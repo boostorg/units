@@ -200,6 +200,7 @@ namespace units {
 //[kitchen_sink_function_snippet_3
 /// the physical definition of work - computed for an arbitrary unit system 
 template<class System,class Y>
+BOOST_CONSTEXPR
 quantity<unit<energy_dimension,System>,Y> 
 work(quantity<unit<force_dimension,System>,Y> F,
      quantity<unit<length_dimension,System>,Y> dx)
@@ -211,6 +212,7 @@ work(quantity<unit<force_dimension,System>,Y> F,
 //[kitchen_sink_function_snippet_4
 /// the ideal gas law in si units
 template<class Y>
+BOOST_CONSTEXPR
 quantity<si::amount,Y> 
 idealGasLaw(const quantity<si::pressure,Y>& P,
             const quantity<si::volume,Y>& V,
@@ -235,18 +237,18 @@ int main()
     {
     //[kitchen_sink_snippet_1
     /// scalar
-    const double    s1 = 2;
+    BOOST_CONSTEXPR_OR_CONST double     s1 = 2;
     
-    const long                  x1 = 2;
-    const static_rational<4,3>  x2;
+    BOOST_CONSTEXPR_OR_CONST long                   x1 = 2;
+    BOOST_CONSTEXPR_OR_CONST static_rational<4,3>   x2;
     
     /// define some units
-    force       u1 = newton;
-    energy      u2 = joule;
+    BOOST_CONSTEXPR_OR_CONST force      u1 = newton;
+    BOOST_CONSTEXPR_OR_CONST energy     u2 = joule;
     
     /// define some quantities
-    quantity<force>      q1(1.0*u1);
-    quantity<energy>     q2(2.0*u2);
+    BOOST_CONSTEXPR_OR_CONST quantity<force>        q1(1.0*u1);
+    BOOST_CONSTEXPR_OR_CONST quantity<energy>       q2(2.0*u2);
     //]
     
     /// check scalar, unit, and quantity io
@@ -326,8 +328,8 @@ int main()
     
     //[kitchen_sink_snippet_2
     /// check comparison tests
-    quantity<length>    l1(1.0*meter),
-                        l2(2.0*meters);
+    BOOST_CONSTEXPR_OR_CONST quantity<length>   l1(1.0*meter),
+                                                l2(2.0*meters);
     //]
                         
     std::cout << std::boolalpha
@@ -341,22 +343,22 @@ int main()
     
     //[kitchen_sink_snippet_3
     /// check implicit unit conversion from dimensionless to value_type  
-    const double    dimless = (q1/q1);
+    BOOST_CONSTEXPR_OR_CONST double    dimless = (q1/q1);
     //]
     
     std::cout << "dimless = " << dimless << std::endl
               << std::endl;
              
-    quantity<velocity>  v1 = 2.0*meters/second;
+    BOOST_CONSTEXPR_OR_CONST quantity<velocity> v1 = 2.0*meters/second;
         
     std::cout << "v1 = " << v1 << std::endl
               << std::endl;
     
     //[kitchen_sink_snippet_4
     /// test calcuation of work
-    quantity<force>       F(1.0*newton);
-    quantity<length>      dx(1.0*meter);
-    quantity<energy>      E(work(F,dx));
+    BOOST_CONSTEXPR_OR_CONST quantity<force>    F(1.0*newton);
+    BOOST_CONSTEXPR_OR_CONST quantity<length>   dx(1.0*meter);
+    BOOST_CONSTEXPR_OR_CONST quantity<energy>   E(work(F,dx));
     //]
     
     std::cout << "F  = " << F << std::endl
@@ -367,11 +369,11 @@ int main()
     {
     //[kitchen_sink_snippet_5
     /// test ideal gas law
-    quantity<temperature>   T = (273.+37.)*kelvin;
-    quantity<pressure>      P = 1.01325e5*pascals;
-    quantity<length>        r = 0.5e-6*meters;
-    quantity<volume>        V = (4.0/3.0)*3.141592*pow<3>(r);
-    quantity<amount>        n(idealGasLaw(P,V,T));
+    BOOST_CONSTEXPR_OR_CONST quantity<temperature>  T = (273.+37.)*kelvin;
+    BOOST_CONSTEXPR_OR_CONST quantity<pressure>     P = 1.01325e5*pascals;
+    BOOST_CONSTEXPR_OR_CONST quantity<length>       r = 0.5e-6*meters;
+    BOOST_CONSTEXPR_OR_CONST quantity<volume>       V = (4.0/3.0)*3.141592*pow<3>(r);
+    BOOST_CONSTEXPR_OR_CONST quantity<amount>       n(idealGasLaw(P,V,T));
     //]
     
     std::cout << "r = " << r << std::endl
@@ -389,9 +391,9 @@ int main()
     
     //[kitchen_sink_snippet_6
     /// test trig stuff
-    quantity<plane_angle>           theta = 0.375*radians;
-    quantity<dimensionless>         sin_theta = sin(theta);
-    quantity<plane_angle>           thetap = asin(sin_theta);
+    BOOST_CONSTEXPR_OR_CONST quantity<plane_angle>      theta = 0.375*radians;
+    const quantity<dimensionless>                       sin_theta = sin(theta);
+    const quantity<plane_angle>                         thetap = asin(sin_theta);
     //]
     
     std::cout << "theta            = " << theta << std::endl
@@ -413,9 +415,9 @@ int main()
     typedef std::complex<double>    complex_type;
     
     //[kitchen_sink_snippet_7
-    quantity<electric_potential,complex_type> v = complex_type(12.5,0.0)*volts;
-    quantity<current,complex_type>            i = complex_type(3.0,4.0)*amperes;
-    quantity<resistance,complex_type>         z = complex_type(1.5,-2.0)*ohms;
+    BOOST_CONSTEXPR_OR_CONST quantity<electric_potential,complex_type> v = complex_type(12.5,0.0)*volts;
+    BOOST_CONSTEXPR_OR_CONST quantity<current,complex_type>            i = complex_type(3.0,4.0)*amperes;
+    BOOST_CONSTEXPR_OR_CONST quantity<resistance,complex_type>         z = complex_type(1.5,-2.0)*ohms;
     //]
     
     std::cout << "V   = " << v << std::endl
@@ -427,7 +429,7 @@ int main()
     /// check quantities using user-defined type encapsulating error propagation
 
     //[kitchen_sink_snippet_8
-    quantity<length,measurement<double> >
+    BOOST_CONSTEXPR_OR_CONST quantity<length,measurement<double> >
         u(measurement<double>(1.0,0.0)*meters),
         w(measurement<double>(4.52,0.02)*meters),
         x(measurement<double>(2.0,0.2)*meters),

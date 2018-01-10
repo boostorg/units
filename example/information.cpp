@@ -37,6 +37,7 @@ entropy in bytes= 0.125 B
 #include <iostream>
 using std::cout;
 using std::endl;
+using std::log;
 
 #include <boost/units/quantity.hpp>
 #include <boost/units/io.hpp>
@@ -59,6 +60,7 @@ using namespace bu::information;
 // must be a unit of information.  Conversion to the requested return unit is 
 // accomplished automatically by the boost::units library.
 template <typename Sys>
+BOOST_CONSTEXPR
 quantity<bu::unit<bu::information_dimension, Sys> > 
 bernoulli_entropy(double p, const bu::unit<bu::information_dimension, Sys>&) {
     typedef bu::unit<bu::information_dimension, Sys> requested_unit;
@@ -67,15 +69,15 @@ bernoulli_entropy(double p, const bu::unit<bu::information_dimension, Sys>&) {
 
 int main(int argc, char** argv) {
     // a quantity of information (default in units of bytes) 
-    quantity<info> nbytes(1 * si::giga * bit);
+    BOOST_CONSTEXPR_OR_CONST quantity<info> nbytes(1 * si::giga * bit);
     cout << "bytes= " << nbytes << endl;
 
     // a quantity of information, stored as bits
-    quantity<hu::bit::info> nbits(1 * si::mega * byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<hu::bit::info> nbits(1 * si::mega * byte);
     cout << "bits= " << nbits << endl;
 
     // a quantity of information, stored as nats
-    quantity<hu::nat::info> nnats(2 * si::kilo * hartleys);
+    BOOST_CONSTEXPR_OR_CONST quantity<hu::nat::info> nnats(2 * si::kilo * hartleys);
     cout << "nats= " << nnats << endl;
 
     // how many bytes are in a kibi-byte?

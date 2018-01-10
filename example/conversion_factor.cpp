@@ -50,23 +50,23 @@ int main()
 
     //[conversion_factor_snippet_1
     
-    double dyne_to_newton =
+    BOOST_CONSTEXPR_OR_CONST double dyne_to_newton =
         conversion_factor(cgs::dyne,si::newton);
     std::cout << dyne_to_newton << std::endl;
 
-    double force_over_mass_conversion =
+    BOOST_CONSTEXPR_OR_CONST double force_over_mass_conversion =
         conversion_factor(si::newton/si::kilogram,cgs::dyne/cgs::gram);
     std::cout << force_over_mass_conversion << std::endl;
 
-    double momentum_conversion =
+    BOOST_CONSTEXPR_OR_CONST double momentum_conversion =
         conversion_factor(cgs::momentum(),si::momentum());
     std::cout << momentum_conversion << std::endl;
 
-    double momentum_over_mass_conversion =
+    BOOST_CONSTEXPR_OR_CONST double momentum_over_mass_conversion =
         conversion_factor(si::momentum()/si::mass(),cgs::momentum()/cgs::gram);
     std::cout << momentum_over_mass_conversion << std::endl;
 
-    double acceleration_conversion =
+    BOOST_CONSTEXPR_OR_CONST double acceleration_conversion =
         conversion_factor(cgs::gal,si::meter_per_second_squared);
     std::cout << acceleration_conversion << std::endl;
     

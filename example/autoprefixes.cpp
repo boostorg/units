@@ -54,20 +54,20 @@ meter
 
 struct byte_base_unit : boost::units::base_unit<byte_base_unit, boost::units::dimensionless_type, 3>
 {
-  static const char* name() { return("byte"); }
-  static const char* symbol() { return("b"); }
+  static BOOST_CONSTEXPR const char* name() { return("byte"); }
+  static BOOST_CONSTEXPR const char* symbol() { return("b"); }
 };
 
 struct thing_base_unit : boost::units::base_unit<thing_base_unit, boost::units::dimensionless_type, 4>
 {
-  static const char* name() { return("thing"); }
-  static const char* symbol() { return(""); }
+  static BOOST_CONSTEXPR const char* name() { return("thing"); }
+  static BOOST_CONSTEXPR const char* symbol() { return(""); }
 };
 
 struct euro_base_unit : boost::units::base_unit<euro_base_unit, boost::units::dimensionless_type, 5>
 {
-  static const char* name() { return("EUR"); }
-  static const char* symbol() { return("€"); }
+  static BOOST_CONSTEXPR const char* name() { return("EUR"); }
+  static BOOST_CONSTEXPR const char* symbol() { return("€"); }
 };
 
 int main()
@@ -105,8 +105,8 @@ int main()
 
   // Note that scalar dimensionless values are *not* prefixed automatically by the engineering_prefix or binary_prefix iostream manipulators.
   //[autoprefixes_snippet_3
-  const double s1 = 2345.6;
-  const long x1 = 23456;
+  BOOST_CONSTEXPR_OR_CONST double s1 = 2345.6;
+  BOOST_CONSTEXPR_OR_CONST long x1 = 23456;
   cout << engineering_prefix << s1 << endl; // 2345.6
   cout << engineering_prefix << x1 << endl; // 23456
 
@@ -115,7 +115,7 @@ int main()
   //] [/autoprefixes_snippet_3]
 
   //[autoprefixes_snippet_4
-  const length L; // A unit of length (but not a quantity of length).
+  BOOST_CONSTEXPR_OR_CONST length L; // A unit of length (but not a quantity of length).
   cout << L << endl; // Default length unit is meter,
   // but default is symbol format so output is just "m".
   cout << name_format << L << endl; // default length name is "meter".

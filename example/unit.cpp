@@ -48,11 +48,11 @@ int main()
     using namespace boost::units::test;
 
     //[unit_snippet_1
-    const length                    L;
-    const mass                      M;
+    BOOST_CONSTEXPR_OR_CONST length                     L;
+    BOOST_CONSTEXPR_OR_CONST mass                       M;
     // needs to be namespace-qualified because of global time definition
-    const boost::units::test::time  T;
-    const energy                    E;
+    BOOST_CONSTEXPR_OR_CONST boost::units::test::time   T;
+    BOOST_CONSTEXPR_OR_CONST energy                     E;
     //]
     
     std::cout << "L             = " << L << std::endl

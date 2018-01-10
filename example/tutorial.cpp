@@ -55,6 +55,7 @@ I*Z == V? true
 using namespace boost::units;
 using namespace boost::units::si;
 
+BOOST_CONSTEXPR
 quantity<energy> 
 work(const quantity<force>& F, const quantity<length>& dx)
 {
@@ -64,9 +65,9 @@ work(const quantity<force>& F, const quantity<length>& dx)
 int main()
 {   
     /// Test calculation of work.
-    quantity<force>     F(2.0 * newton); // Define a quantity of force.
-    quantity<length>    dx(2.0 * meter); // and a distance,
-    quantity<energy>    E(work(F,dx));  // and calculate the work done.
+    BOOST_CONSTEXPR_OR_CONST quantity<force>    F(2.0 * newton); // Define a quantity of force.
+    BOOST_CONSTEXPR_OR_CONST quantity<length>   dx(2.0 * meter); // and a distance,
+    BOOST_CONSTEXPR_OR_CONST quantity<energy>   E(work(F,dx));  // and calculate the work done.
     
     std::cout << "F  = " << F << std::endl
               << "dx = " << dx << std::endl
@@ -77,9 +78,9 @@ int main()
     typedef std::complex<double> complex_type; // double real and imaginary parts.
     
     // Define some complex electrical quantities.
-    quantity<electric_potential, complex_type> v = complex_type(12.5, 0.0) * volts;
-    quantity<current, complex_type>            i = complex_type(3.0, 4.0) * amperes;
-    quantity<resistance, complex_type>         z = complex_type(1.5, -2.0) * ohms;
+    BOOST_CONSTEXPR_OR_CONST quantity<electric_potential, complex_type> v = complex_type(12.5, 0.0) * volts;
+    BOOST_CONSTEXPR_OR_CONST quantity<current, complex_type>            i = complex_type(3.0, 4.0) * amperes;
+    BOOST_CONSTEXPR_OR_CONST quantity<resistance, complex_type>         z = complex_type(1.5, -2.0) * ohms;
     
     std::cout << "V   = " << v << std::endl
               << "I   = " << i << std::endl

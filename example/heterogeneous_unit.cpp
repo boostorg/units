@@ -57,8 +57,8 @@ using namespace boost::units;
 int main()
 {
     //[heterogeneous_unit_snippet_1
-    quantity<si::length>        L(1.5*si::meter);
-    quantity<cgs::mass>         M(1.0*cgs::gram);
+    BOOST_CONSTEXPR_OR_CONST quantity<si::length>   L(1.5*si::meter);
+    BOOST_CONSTEXPR_OR_CONST quantity<cgs::mass>    M(1.0*cgs::gram);
     
     std::cout << L << std::endl
               << M << std::endl
@@ -76,7 +76,7 @@ int main()
     //]
     
     //[heterogeneous_unit_snippet_2
-    quantity<si::area>      A(1.5*si::meter*cgs::centimeter);
+    BOOST_CONSTEXPR_OR_CONST quantity<si::area>     A(1.5*si::meter*cgs::centimeter);
     
     std::cout << 1.5*si::meter*cgs::centimeter << std::endl
               << A << std::endl

@@ -96,9 +96,9 @@ int main(int argc, char **argv) {
    ////////////////////////////////////////////////////////////////////////
 
    // Constants for the current amplitude, frequency, and offset current
-   const bu::quantity<si::current> iamp = 1.5 * si::ampere;
-   const bu::quantity<si::frequency> f = 1.0e3 * si::hertz;
-   const bu::quantity<si::current> i0 = 0.5 * si::ampere;
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<si::current> iamp = 1.5 * si::ampere;
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<si::frequency> f = 1.0e3 * si::hertz;
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<si::current> i0 = 0.5 * si::ampere;
 
    // The invocation of the sin function needs to be postponed using
    // bind to specify the oscillation function. A lengthy static_cast
@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
    ////////////////////////////////////////////////////////////////////////
 
    // Length constant
-   const bu::quantity<si::length> l = 1.5 * si::meter;
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<si::length> l = 1.5 * si::meter;
 
    // Again an ugly static_cast is needed to bind pow<2> to the first
    // function argument.
@@ -138,9 +138,9 @@ int main(int argc, char **argv) {
    ////////////////////////////////////////////////////////////////////////
 
    // Absolute temperature constants
-   const bu::quantity<bu::absolute<si::temperature> >
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<bu::absolute<si::temperature> >
        Tref = 273.15 * bu::absolute<si::temperature>();
-   const bu::quantity<bu::absolute<si::temperature> >
+   BOOST_CONSTEXPR_OR_CONST bu::quantity<bu::absolute<si::temperature> >
        Tamb = 300.00 * bu::absolute<si::temperature>();
 
    boost::function<bu::quantity<si::temperature> (bu::quantity<bu::absolute<si::temperature> >,
