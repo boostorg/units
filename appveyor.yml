@@ -30,7 +30,7 @@ environment:
     # see: http://www.boost.org/build/doc/html/bbv2/overview/invocation.html#bbv2.overview.invocation.properties
     # to use the default for a given environment, comment it out; recommend you build debug and release however..
     # on Windows it is important to exercise all the possibilities, especially shared vs static
-    # B2_ADDRESS_MODEL: address-model=64,32
+    B2_ADDRESS_MODEL: address-model=64,32
     # B2_LINK: link=shared,static
     # B2_THREADING: threading=multi,single
     B2_VARIANT: variant=release,debug
@@ -86,7 +86,7 @@ environment:
   #   TOOLSET: msvc-14.0
 
 install:
-  - set SELF=date_time
+  - set SELF=units
   - cd ..
   - git clone -b %APPVEYOR_REPO_BRANCH% --depth 1 https://github.com/boostorg/boost.git boost-root
   - cd boost-root
@@ -101,6 +101,6 @@ install:
 build: off
 
 test_script:
-  - set SELF=date_time
+  - set SELF=units
   - PATH=%ADDPATH%%PATH%
   - b2 libs/%SELF% toolset=%TOOLSET% %CXXFLAGS% %CXXSTD% %DEFINES% %B2_ADDRESS_MODEL% %B2_LINK% %B2_THREADING% %B2_VARIANT% -j3
