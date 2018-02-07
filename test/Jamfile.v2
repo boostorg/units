@@ -18,7 +18,7 @@ project boost/units/test :
     requirements
         <implicit-dependency>/boost//headers
         <toolset>msvc:<asynch-exceptions>on
-        $(warning-compilers):$(warning-options)
+        $(warning-compilers)\:$(warning-options)
         # This warning comes from the test library.
         <toolset>msvc:<cxxflags>"/wd4701"
         # The comes from the exception library
