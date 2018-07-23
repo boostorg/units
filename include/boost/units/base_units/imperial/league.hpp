@@ -15,6 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/base_units/imperial/yard.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 
@@ -35,5 +36,7 @@ struct base_unit_info<imperial::league_base_unit> {
 } // namespace units
 
 } // namespace boost
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial, league, length)
 
 #endif // BOOST_UNITS_IMPERIAL_LEAGUE_BASE_UNIT_HPP

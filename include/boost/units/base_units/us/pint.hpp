@@ -14,6 +14,7 @@
 #include <boost/units/config.hpp>
 #include <boost/units/systems/si/volume.hpp>
 #include <boost/units/conversion.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pint, "pint (U.S.)", "pt", 0.4731765e-3, si::volume, -503);    
 
@@ -24,5 +25,7 @@ BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pint, "pint (U.S.)", "pt", 0.4
 BOOST_TYPEOF_REGISTER_TYPE(boost::units::us::pint_base_unit)
 
 #endif
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us, pint, volume)
 
 #endif // BOOST_UNITS_BASE_UNITS_US_PINT_HPP_INCLUDED
