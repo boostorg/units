@@ -16,6 +16,7 @@
 #include <boost/mpl/divides.hpp>
 #include <boost/preprocessor/seq/enum.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/utility/enable_if.hpp>
 
 #include <boost/units/heterogeneous_system.hpp>
 #include <boost/units/homogeneous_system.hpp>
@@ -326,15 +327,30 @@ struct conversion_impl<0>
     };
 };
 
+template<typename Unit1, typename Unit2>
+class has_conversion_factor
+{
+  typedef char yes[1];
+  typedef char no[2];
+
+  template<typename T, typename U> static yes& test(char(*)[sizeof(conversion_factor(T(), U()))]);
+
+  template<typename, typename> static no& test(...);
+
+  public:
+  enum { value = (sizeof(test<Unit1, Unit2>(0)) == sizeof(yes)) };
+};
+
 } // namespace detail
 
 /// forward to conversion_factor (intentionally allowing ADL)
 /// INTERNAL ONLY
 template<class Unit1, class T1, class Unit2, class T2>
-struct conversion_helper<quantity<Unit1, T1>, quantity<Unit2, T2> >
+struct conversion_helper<quantity<Unit1, T1>, quantity<Unit2, T2>, typename boost::enable_if_c<detail::has_conversion_factor<Unit1, Unit2>::value>::type>
 {
     /// INTERNAL ONLY
     typedef quantity<Unit2, T2> destination_type;
+
     static BOOST_CONSTEXPR destination_type convert(const quantity<Unit1, T1>& source)
     {
         return(destination_type::from_value(static_cast<T2>(source.value() * conversion_factor(Unit1(), Unit2()))));

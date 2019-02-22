@@ -20,7 +20,7 @@ namespace boost {
 
 namespace units {
 
-template<class From, class To>
+template<class From, class To, typename>
 struct conversion_helper;
 
 #ifdef BOOST_UNITS_DOXYGEN

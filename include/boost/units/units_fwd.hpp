@@ -56,7 +56,7 @@ template<class T> struct is_quantity;
 template<class T,class Dim> struct is_quantity_of_dimension;
 template<class T,class System> struct is_quantity_of_system;
 
-template<class From,class To> struct conversion_helper;
+template<class From,class To, typename = void> struct conversion_helper;
 
 template<class T> std::string to_string(const T&);
 template<class T> std::string name_string(const T&);

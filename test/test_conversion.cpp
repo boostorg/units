@@ -24,6 +24,10 @@ Output:
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/cgs.hpp>
+#include <boost/units/base_units/metric/liter.hpp>
+#include <boost/units/base_units/metric/minute.hpp>
+#include <boost/units/base_units/si/second.hpp>
+#include <boost/type_traits/is_constructible.hpp>
 
 #include <iostream>
 
@@ -107,4 +111,12 @@ BOOST_AUTO_TEST_CASE(test_dimensionless_conversions) {
     BOOST_CONSTEXPR_OR_CONST bu::quantity<bu::divide_typeof_helper<bu::si::length, bu::cgs::length>::type> dimensionless_test4(2.0 * bu::si::meters / bu::cgs::centimeters);
     BOOST_CONSTEXPR_OR_CONST bu::quantity<bu::divide_typeof_helper<bu::cgs::mass, bu::si::mass>::type> dimensionless_test5(dimensionless_test4);
     BOOST_UNITS_CHECK_CLOSE(dimensionless_test5.value(), 2e5);
+}
+
+BOOST_AUTO_TEST_CASE(test_unrelated_constructible) {
+  typedef boost::units::quantity<boost::units::metric::liter_base_unit::unit_type> liter;
+  typedef boost::units::quantity<boost::units::metric::minute_base_unit::unit_type> minute;
+  typedef boost::units::quantity<boost::units::si::second_base_unit::unit_type> second;
+  BOOST_CHECK((!boost::is_constructible<liter, minute>::value));
+  BOOST_CHECK((boost::is_constructible<second, minute>::value));
 }

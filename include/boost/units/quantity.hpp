@@ -79,11 +79,22 @@ struct disable_if_is_same
     typedef void type;
 };
 
-template<class T>
-struct disable_if_is_same<T, T> {};
+template<typename Quantity1, typename Quantity2>
+struct has_conversion_helper
+{
+  typedef char yes[1];
+  typedef char no[2];
+
+  template<typename T, typename U> static yes& test(char(*)[sizeof(conversion_helper<T,U>)]);
+
+  template<typename, typename> static no& test(...);
+
+  public:
+  enum { value = (sizeof(test<Quantity1, Quantity2>(0)) == sizeof(yes)) };
+};
 
 }
- 
+
 /// class declaration
 template<class Unit,class Y>
 class quantity
@@ -178,9 +189,10 @@ class quantity
         #ifndef BOOST_NO_SFINAE
 
         /// explicit conversion between different unit systems is allowed if implicit conversion is disallowed
-        template<class Unit2,class YY> 
+        template<class Unit2,class YY>
         explicit
-        BOOST_CONSTEXPR quantity(const quantity<Unit2,YY>& source, 
+        BOOST_CONSTEXPR quantity(const quantity<Unit2,YY>& source,
+                 typename boost::enable_if_c<detail::has_conversion_helper<quantity<Unit2,YY>,this_type>::value>::type* = 0,
                  typename boost::disable_if<
                     mpl::and_<
                         //is_implicitly_convertible should be undefined when the
