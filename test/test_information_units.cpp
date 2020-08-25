@@ -105,17 +105,19 @@ BOOST_AUTO_TEST_CASE(test_transitive_byte_nat_hartley) {
 
 BOOST_AUTO_TEST_CASE(test_byte_quantity_is_default) {
     using namespace bu::information;
-    BOOST_CONSTEXPR_OR_CONST quantity<info, double> qd(2 * bu::information::byte);
+    using bu::information::byte;
+    BOOST_CONSTEXPR_OR_CONST quantity<info, double> qd(2 * byte);
     BOOST_CHECK_EQUAL(qd.value(), double(2));
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long> ql(2 * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long> ql(2 * byte);
     BOOST_CHECK_EQUAL(ql.value(), long(2));
 }
 
 BOOST_AUTO_TEST_CASE(test_byte_quantity_explicit) {
     using namespace bu::information;
-    BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, double> qd(2 * bu::information::byte);
+    using bu::information::byte;
+    BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, double> qd(2 * byte);
     BOOST_CHECK_EQUAL(qd.value(), double(2));
-    BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, long> ql(2 * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, long> ql(2 * byte);
     BOOST_CHECK_EQUAL(ql.value(), long(2));
 }
 
@@ -163,37 +165,38 @@ BOOST_AUTO_TEST_CASE(test_mixed_hu) {
 
 BOOST_AUTO_TEST_CASE(test_info_prefixes) {
     using namespace bu::information;
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q10(1LL * kibi * bu::information::byte);
+    using bu::information::byte;
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q10(1LL * kibi * byte);
     BOOST_CHECK_EQUAL(q10.value(), 1024LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q20(1LL * mebi * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q20(1LL * mebi * byte);
     BOOST_CHECK_EQUAL(q20.value(), 1048576LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q30(1LL * gibi * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q30(1LL * gibi * byte);
     BOOST_CHECK_EQUAL(q30.value(), 1073741824LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q40(1LL * tebi * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q40(1LL * tebi * byte);
     BOOST_CHECK_EQUAL(q40.value(), 1099511627776LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q50(1LL * pebi * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q50(1LL * pebi * byte);
     BOOST_CHECK_EQUAL(q50.value(), 1125899906842624LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q60(1LL * exbi * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q60(1LL * exbi * byte);
     BOOST_CHECK_EQUAL(q60.value(), 1152921504606846976LL);
 
     using boost::multiprecision::int128_t;
 
-    const quantity<info, int128_t> q70(1LL * zebi * bu::information::byte);
+    const quantity<info, int128_t> q70(1LL * zebi * byte);
     BOOST_CHECK_EQUAL(q70.value(), int128_t("1180591620717411303424"));
 
-    const quantity<info, int128_t> q80(1LL * yobi * bu::information::byte);
+    const quantity<info, int128_t> q80(1LL * yobi * byte);
     BOOST_CHECK_EQUAL(q80.value(), int128_t("1208925819614629174706176"));
 
     // sanity check: si prefixes should also operate
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q1e3(1LL * si::kilo * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q1e3(1LL * si::kilo * byte);
     BOOST_CHECK_EQUAL(q1e3.value(), 1000LL);
 
-    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q1e6(1LL * si::mega * bu::information::byte);
+    BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q1e6(1LL * si::mega * byte);
     BOOST_CHECK_EQUAL(q1e6.value(), 1000000LL);
 }
 
