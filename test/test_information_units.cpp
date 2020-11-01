@@ -105,6 +105,7 @@ BOOST_AUTO_TEST_CASE(test_transitive_byte_nat_hartley) {
 
 BOOST_AUTO_TEST_CASE(test_byte_quantity_is_default) {
     using namespace bu::information;
+    using bu::information::byte;
     BOOST_CONSTEXPR_OR_CONST quantity<info, double> qd(2 * byte);
     BOOST_CHECK_EQUAL(qd.value(), double(2));
     BOOST_CONSTEXPR_OR_CONST quantity<info, long> ql(2 * byte);
@@ -113,6 +114,7 @@ BOOST_AUTO_TEST_CASE(test_byte_quantity_is_default) {
 
 BOOST_AUTO_TEST_CASE(test_byte_quantity_explicit) {
     using namespace bu::information;
+    using bu::information::byte;
     BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, double> qd(2 * byte);
     BOOST_CHECK_EQUAL(qd.value(), double(2));
     BOOST_CONSTEXPR_OR_CONST quantity<hu::byte::info, long> ql(2 * byte);
@@ -163,6 +165,7 @@ BOOST_AUTO_TEST_CASE(test_mixed_hu) {
 
 BOOST_AUTO_TEST_CASE(test_info_prefixes) {
     using namespace bu::information;
+    using bu::information::byte;
     BOOST_CONSTEXPR_OR_CONST quantity<info, long long> q10(1LL * kibi * byte);
     BOOST_CHECK_EQUAL(q10.value(), 1024LL);
 
