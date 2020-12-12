@@ -11,10 +11,12 @@
 #ifndef BOOST_UNITS_ANGLE_GRADIAN_BASE_UNIT_HPP
 #define BOOST_UNITS_ANGLE_GRADIAN_BASE_UNIT_HPP
 
+#include <boost/math/constants/constants.hpp>
+
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/angle/radian.hpp>
 
-BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,gradian,"gradian","grad",6.28318530718/400.,boost::units::angle::radian_base_unit,-102);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,gradian,"gradian","grad",boost::math::constants::two_pi<double>()/400.0,boost::units::angle::radian_base_unit,-102);
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 

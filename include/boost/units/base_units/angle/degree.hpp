@@ -11,10 +11,12 @@
 #ifndef BOOST_UNITS_ANGLE_DEGREE_BASE_UNIT_HPP
 #define BOOST_UNITS_ANGLE_DEGREE_BASE_UNIT_HPP
 
+#include <boost/math/constants/constants.hpp>
+
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/angle/radian.hpp>
 
-BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,degree,"degree","deg",6.28318530718/360.,boost::units::angle::radian_base_unit,-101);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,degree,"degree","deg",boost::math::constants::degree<double>(),boost::units::angle::radian_base_unit,-101);
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
