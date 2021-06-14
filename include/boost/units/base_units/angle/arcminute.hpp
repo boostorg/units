@@ -15,6 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/base_units/angle/degree.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 namespace units {
@@ -32,5 +33,7 @@ struct base_unit_info<angle::arcminute_base_unit> {
 
 }
 }
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle, arcminute, plane_angle)
 
 #endif // BOOST_UNIT_BASE_UNITS_ANGLE_ARCMINUTE_HPP_INCLUDED

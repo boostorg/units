@@ -13,7 +13,9 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/systems/si/pressure.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(metric, atmosphere, "atmosphere", "atm", 1.01325e5, si::pressure, 33);
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, atmosphere, pressure)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_ATMOSPHERE_HPP_INCLUDED

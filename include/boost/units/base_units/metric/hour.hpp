@@ -16,6 +16,7 @@
 #include <boost/units/scale.hpp>
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/base_units/si/second.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 namespace units {
@@ -33,5 +34,7 @@ struct base_unit_info<metric::hour_base_unit> {
 
 }
 }
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, hour, time)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_HOUR_HPP_INCLUDED

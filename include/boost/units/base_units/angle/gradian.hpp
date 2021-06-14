@@ -13,6 +13,7 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/angle/radian.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,gradian,"gradian","grad",6.28318530718/400.,boost::units::angle::radian_base_unit,-102);
 
@@ -23,5 +24,6 @@ BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(angle,gradian,"gradian","grad",6.2
 BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::gradian_base_unit)
 
 #endif
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle, gradian, plane_angle)
 
 #endif // BOOST_UNITS_ANGLE_GRADIAN_BASE_UNIT_HPP

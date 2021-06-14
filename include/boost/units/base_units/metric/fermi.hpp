@@ -15,6 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/base_units/si/meter.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 namespace units {
@@ -32,5 +33,7 @@ struct base_unit_info<metric::fermi_base_unit> {
 
 }
 }
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, fermi, length)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_FERMI_HPP_INCLUDED

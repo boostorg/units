@@ -13,7 +13,9 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/systems/si/area.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(metric, barn, "barn", "b", 1.0e-28, si::area, 11);
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, barn, area)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_BARN_HPP_INCLUDED
