@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -29,39 +29,36 @@
 #include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental atomic and nuclear constants
-/// CODATA 2006 values as of 2007/03/30
+/// 2014 CODATA recommended values of fundamental atomic and nuclear constants as of 2018/07/21
 
 namespace boost {
 
-namespace units { 
+namespace units {
 
 namespace si {
-                            
+
 namespace constants {
 
 namespace codata {
 
-/// CODATA recommended values of the fundamental physical constants: NIST SP 961
-
 /// tau mass
-BOOST_UNITS_PHYSICAL_CONSTANT(m_tau,quantity<mass>,3.16777e-27*kilograms,5.2e-31*kilograms);
+BOOST_UNITS_PHYSICAL_CONSTANT(m_tau,quantity<mass>,3.16747e-27*kilograms,2.9e-31*kilograms);
 /// tau-electron mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_e,quantity<dimensionless>,3477.48*dimensionless(),5.7e-1*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_e,quantity<dimensionless>,3477.15*dimensionless(),3.1e-1*dimensionless());
 /// tau-muon mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_mu,quantity<dimensionless>,16.8183*dimensionless(),2.7e-3*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_mu,quantity<dimensionless>,16.8167*dimensionless(),1.5e-3*dimensionless());
 /// tau-proton mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_p,quantity<dimensionless>,1.89390*dimensionless(),3.1e-4*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_p,quantity<dimensionless>,1.89372*dimensionless(),1.7e-4*dimensionless());
 /// tau-neutron mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_n,quantity<dimensionless>,1.89129*dimensionless(),3.1e-4*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_tau_over_m_n,quantity<dimensionless>,1.89111*dimensionless(),1.7e-4*dimensionless());
 /// tau molar mass
-BOOST_UNITS_PHYSICAL_CONSTANT(M_tau,quantity<mass_over_amount>,1.90768e-3*kilograms/mole,3.1e-7*kilograms/mole);
+BOOST_UNITS_PHYSICAL_CONSTANT(M_tau,quantity<mass_over_amount>,1.90749e-3*kilograms/mole,1.7e-7*kilograms/mole);
 /// tau Compton wavelength
-BOOST_UNITS_PHYSICAL_CONSTANT(lambda_C_tau,quantity<length>,0.69772e-15*meters,1.1e-19*meters);
+BOOST_UNITS_PHYSICAL_CONSTANT(lambda_C_tau,quantity<length>,0.697787e-15*meters,6.3e-20*meters);
 
 } // namespace codata
 
-} // namespace constants    
+} // namespace constants
 
 } // namespace si
 
