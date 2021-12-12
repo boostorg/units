@@ -12,5 +12,6 @@
     "maintainers": [
         "Jürgen Hunold <jhunold -at- gmx.eu>",
         "Steven Watanabe <steven -at- providere-consulting.com>"
-    ]
+    ],
+    "cxxstd": "03"
 }
