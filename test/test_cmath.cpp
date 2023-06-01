@@ -107,9 +107,9 @@ int main()
     BOOST_CONSTEXPR_OR_CONST bu::quantity<bu::area>     A1(4.0*bu::square_meters),
                                                         A2(L1*L2+A1);
 
-#if 0
-    BOOST_TEST((bu::fma)(L1,L2,A1) == A2);
-#endif
+    BOOST_TEST(bu::fma(L1,L2,A1) == A2);
+    BOOST_TEST(bu::fma(2.0, L1, L2) == 2.0*L1 + L2);
+    BOOST_TEST(bu::fma(L1, 2.0, L2) == 2.0*L1 + L2);
        
     BOOST_TEST((bu::fmax)(E4,E5) == E5);
     BOOST_TEST((bu::fmin)(E4,E5) == E4);
