@@ -355,7 +355,7 @@ int main()
               << std::endl;
     
     //[kitchen_sink_snippet_4
-    /// test calcuation of work
+    /// test calculation of work
     quantity<force>       F(1.0*newton);
     quantity<length>      dx(1.0*meter);
     quantity<energy>      E(work(F,dx));
