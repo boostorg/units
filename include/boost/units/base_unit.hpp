@@ -75,7 +75,7 @@ class base_unit :
         /// The dimensions of this base unit.
         typedef Dim                 dimension_type;
 
-        /// Provided for mpl compatability.
+        /// Provided for mpl compatibility.
         typedef Derived type;
 
         /// The unit corresponding to this base unit.
