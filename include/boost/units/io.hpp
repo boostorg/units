@@ -97,7 +97,7 @@ struct base_unit_info
     {
         return(BaseUnit::name());
     }
-    /// The symbol for the base unit (Returns BaseUnit::symbol() by default)
+    /// The symbol for the base unit (returns BaseUnit::symbol() by default)
     static std::string symbol()
     {
         return(BaseUnit::symbol());  ///  \returns BaseUnit::symbol(), for example "m"
@@ -238,7 +238,7 @@ inline std::ios_base& engineering_prefix(std::ios_base& ios)
     return ios;
 }
 
-/// Set flag for binary prefix, so 1024 byte displays as "1 Kib".
+/// Set flag for binary prefix, so 1024 byte displays as "1 KiB".
 inline std::ios_base& binary_prefix(std::ios_base& ios)
 {
     (set_autoprefix)(ios, autoprefix_binary);
@@ -411,7 +411,7 @@ struct scale_name_string_impl<0>
 namespace detail {
 
 // These two overloads of symbol_string and name_string will
-// will pick up homogeneous_systems.  They simply call the
+// pick up homogeneous_systems.  They simply call the
 // appropriate function with a heterogeneous_system.
 template<class Dimension,class System, class SubFormatter>
 inline std::string
@@ -481,7 +481,7 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
 
 // This overload catches scaled units that have a single base unit
 // raised to the first power.  It causes si::nano * si::meters to not
-// put parentheses around the meters.  i.e. nm rather than n(m)
+// put parentheses around the meters, i.e. nm rather than n(m).
 /// INTERNAL ONLY
 template<class Dimension,class Unit,class Scale, class Subformatter>
 inline std::string
@@ -496,7 +496,7 @@ to_string_impl(const unit<Dimension, heterogeneous_system<heterogeneous_system_i
 }
 
 // This overload is necessary to disambiguate.
-// it catches units that are unscaled and have a single
+// It catches units that are unscaled and have a single
 // base unit raised to the first power.  It is treated the
 // same as any other unscaled unit.
 /// INTERNAL ONLY
@@ -547,7 +547,7 @@ to_string_impl(
         >()));
 }
 
-// this overload disambuguates between the overload for an unscaled unit
+// this overload disambiguates between the overload for an unscaled unit
 // and the overload for a scaled base unit raised to the first power.
 /// INTERNAL ONLY
 template<class Dimension,class Unit,class UnitScale,class Subformatter>
@@ -848,7 +848,7 @@ maybe_parenthesize(const unit<Dimension, heterogeneous_system<heterogeneous_syst
 
 // This overload catches scaled units that have a single base unit
 // raised to the first power.  It causes si::nano * si::meters to not
-// put parentheses around the meters.  i.e. nm rather than n(m)
+// put parentheses around the meters, i.e. nm rather than n(m)
 /// INTERNAL ONLY
 template<class Dimension,class Unit,class Scale, class Subformatter>
 inline std::string
