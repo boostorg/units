@@ -44,7 +44,7 @@ namespace units {
 ///    - @c mpl::negate will return its argument unchanged.
 ///    - @c mpl::times is defined for any dimensions and adds corresponding exponents.
 ///    - @c mpl::divides is defined for any dimensions and subtracts the exponents of the
-///         right had argument from the corresponding exponents of the left had argument.
+///         right hand argument from the corresponding exponents of the left hand argument.
 ///         Missing base dimension tags are assumed to have an exponent of zero.
 ///    - @c static_power takes a dimension and a static_rational and multiplies all
 ///         the exponents of the dimension by the static_rational.
