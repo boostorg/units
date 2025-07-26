@@ -50,7 +50,7 @@ class unit
         
         // sun will ignore errors resulting from templates
         // instantiated in the return type of a function.
-        // Make sure that we get an error anyway by putting.
+        // Make sure that we get an error anyway by putting
         // the check in the destructor.
         #ifdef __SUNPRO_CC
         ~unit() {
