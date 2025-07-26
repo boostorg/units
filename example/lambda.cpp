@@ -42,9 +42,9 @@
 // Include boost/units/lambda.hpp instead of boost/lambda/lambda.hpp
 // for a convenient usage of Boost.Units' quantity, unit, and absolute
 // types in lambda expressions. The header augments Boost.Lambda's
-// return type detuction system to recognize the new types so that not
+// return type deduction system to recognize the new types so that not
 // for each arithmetic operation the return type needs to be
-// explicitely specified.
+// explicitly specified.
 #include <boost/units/lambda.hpp>
 
 #include <boost/lambda/bind.hpp>
