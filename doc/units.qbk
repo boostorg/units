@@ -87,22 +87,22 @@ of adding new units and unit conversions are provided in the examples.
 In order to enable complex compile-time dimensional analysis calculations with no runtime overhead,
 Boost.Units relies heavily on the [___boost_mpl] (MPL) and on template metaprogramming techniques, and is, as a consequence, 
 fairly demanding of compiler compliance to ISO standards. At present, it has been successfully
-compiled and tested on the following compilers/platforms :
+compiled and tested on the following compilers/platforms:
 
-# g++ 4.0.1 on Mac OSX 10.4
-# Intel CC 9.1, 10.0, and 10.1 on Mac OSX 10.4
+# g++ 4.0.1 on Mac OS X 10.4
+# Intel CC 9.1, 10.0, and 10.1 on Mac OS X 10.4
 # g++ 3.4.4, 4.2.3, and 4.3.0 on Windows XP
 # Microsoft Visual C++ 7.1, 8.0, and 9.0 on Windows XP
 # Comeau 4.3.10.1 beta2 on Windows XP
-# Metrowerks CodeWarrior 9.2 on Windows XP.  
+# Metrowerks CodeWarrior 9.2 on Windows XP  
 # Sun CC 5.9 on Solaris and Linux
 
-The following compilers/platforms are known *not* to work :
+The following compilers/platforms are known *not* to work:
 
 # g++ 3.3.x
 # Microsoft Visual C++ 6.0 on Windows XP
 # Microsoft Visual C++ 7.0 on Windows XP
-# Metrowerks CodeWarrior 8.0 on Windows XP.
+# Metrowerks CodeWarrior 8.0 on Windows XP
 # All versions of Borland.
 
 [endsect]
@@ -110,27 +110,27 @@ The following compilers/platforms are known *not* to work :
 [section:Quick_Start Quick Start]
 
 Before discussing the basics of the library, we first define a few terms that will be used frequently
-in the following :
+in the following:
 
-*  *Base dimension* : A base dimension is loosely defined as a measurable entity of interest; in conventional 
-   dimensional analysis, base dimensions include length (\[L\]), mass (\[M\]), time (\[T\]), etc... but there is
+*  *Base dimension*: A base dimension is loosely defined as a measurable entity of interest; in conventional 
+   dimensional analysis, base dimensions include length (\[L\]), mass (\[M\]), time (\[T\]), etc. but there is
    no specific restriction on what base dimensions can be used. Base dimensions are essentially a tag type and 
    provide no dimensional analysis functionality themselves.
-*  *Dimension* : A collection of zero or more base dimensions, each
+*  *Dimension*: A collection of zero or more base dimensions, each
    potentially raised to a different rational power.
    For example, length = \[L\]^1, area = \[L\]^2, velocity = \[L\]^1/\[T\]^1, and
    energy = \[M\]^1 \[L\]^2/\[T\]^2 are all dimensions.
-*  *Base unit* : A base unit represents a specific measure of a dimension. For example, while length is an abstract measure of
+*  *Base unit*: A base unit represents a specific measure of a dimension. For example, while length is an abstract measure of
    distance, the meter is a concrete base unit of distance.  Conversions are defined using base units.
    Much like base dimensions, base units are a tag type used solely to define units and do not support dimensional
    analysis algebra.
-*  *Unit* : A set of base units raised to rational exponents, e.g. m^1, kg^1, m^1/s^2.
-*  *System* : A unit system is a collection of base units representing all the measurable entities of interest for a 
-   specific problem. For example, the SI unit system defines seven base units : length (\[L\]) in meters, 
+*  *Unit*: A set of base units raised to rational exponents, e.g. m^1, kg^1, m^1/s^2.
+*  *System*: A unit system is a collection of base units representing all the measurable entities of interest for a 
+   specific problem. For example, the SI unit system defines seven base units: length (\[L\]) in meters, 
    mass (\[M\]) in kilograms, time (\[T\]) in seconds, current (\[I\]) in amperes, temperature (\[theta\]) in kelvin, 
    amount (\[N\]) in moles, and luminous intensity (\[J\]) in candelas. All measurable entities within the SI system can 
    be represented as products of various integer or rational powers of these seven base units.
-*  *Quantity* : A quantity represents a concrete amount of a unit. Thus, while the meter is the base 
+*  *Quantity*: A quantity represents a concrete amount of a unit. Thus, while the meter is the base 
    unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
 To begin, we present two short tutorials. [@../../libs/units/tutorial/tutorial_1.cpp Tutorial1] demonstrates the use of 
@@ -142,13 +142,13 @@ and outputs the result to `std::cout`. The [___quantity] class accepts a second 
 this parameter defaults to
 `double` if not otherwise specified. To demonstrate the ease of using user-defined types in dimensional
 calculations, we also present code for computing the complex impedance using `std::complex<double>`
-as the value type :
+as the value type:
 
 [import ../example/tutorial.cpp]
 
 [tutorial_code]
 
-The intent and function of the above code should be obvious; the output produced is :
+The intent and function of the above code should be obvious; the output produced is:
 
 [tutorial_output]
 
@@ -183,7 +183,7 @@ collectively referred to as [@http://en.wikipedia.org/wiki/Natural_units natural
 quantities representing different measurables are combined, dimensional analysis provides the means of 
 assessing the consistency of the resulting calculation. For example, the sum of two lengths is also a length, 
 while the product of two lengths is an area, and the sum of a length and an area is undefined. The fact that the
-arguments to many functions (such as exp, log, etc...) must be dimensionless quantities can be easily demonstrated by 
+arguments to many functions (such as exp, log, etc.) must be dimensionless quantities can be easily demonstrated by 
 examining their series expansions in the context of dimensional analysis. This library facilitates the enforcement 
 of this type of restriction in code involving dimensioned quantities where appropriate.
 
@@ -213,7 +213,7 @@ In order to be able to perform computations on arbitrary sets of dimensions,
 all composite dimensions must be reducible to an unambiguous final composite dimension, which we will refer to as a 
 *reduced dimension*, for which
 
-# fundamental dimensions are consistently ordered
+# fundamental dimensions are consistently ordered,
 # dimensions with zero exponent are elided. Note that reduced dimensions never have more than 
   [$../../libs/units/images/form_0.png] base dimensions, one for each distinct fundamental dimension, but may have fewer.
 
@@ -269,21 +269,21 @@ reduced dimension in different systems (like feet and meters) cannot be inadvert
 
 There are two distinct types of systems that can be envisioned:
 
-* *Homogeneous systems* : Systems which hold a linearly independent set of base units which
+* *Homogeneous systems*: Systems which hold a linearly independent set of base units which
   can be used to represent many different dimensions. For example, the SI system has seven
   base dimensions and seven base units corresponding to them.  It can represent any unit which
   uses only those seven base dimensions.  Thus it is a homogeneous_system.
-* *Heterogeneous systems* : Systems which store the exponents of every base unit involved
+* *Heterogeneous systems*: Systems which store the exponents of every base unit involved
   are termed heterogeneous.  Some units can only be represented in this way.  For example,
   area in m ft is intrinsically heterogeneous, because the base units of meters and feet
   have identical dimensions.  As a result, simply storing a dimension and a set of base
   units does not yield a unique solution.   A practical example of the need for heterogeneous
-  units, is an empirical equation used in  aviation: H = (r/C)^2 where H is the radar beam
+  units is an empirical equation used in  aviation: H = (r/C)^2 where H is the radar beam
   height in feet and r is the radar range in nautical miles. In order to  enforce dimensional
   correctness of this equation, the constant, C, must be expressed in nautical miles per foot^(1/2),
   mixing two distinct base units of length.
 
-Units are implemented by the [___unit] template class defined in [headerref boost/units/unit.hpp] :
+Units are implemented by the [___unit] template class defined in [headerref boost/units/unit.hpp]:
 
     template<class Dim,class System> class unit;
 
@@ -375,7 +375,7 @@ value type, and the dimensional analysis algebra for the associated unit. In add
 between units and quantities to simplify the definition of quantities; it is effectively equivalent to algebra with
 a unit-valued quantity.
 
-Quantities are implemented by the [___quantity] template class defined in [headerref boost/units/quantity.hpp] :
+Quantities are implemented by the [___quantity] template class defined in [headerref boost/units/quantity.hpp]:
 
     template<class Unit,class Y = double> class quantity;
 
@@ -384,7 +384,7 @@ floating point if not otherwise specified.  The value type must have a normal co
 assignment operator.  Operators +, -, *, and / are provided for algebraic operations between 
 scalars and units, scalars and quantities, units and quantities, and between quantities. In addition, integral and
 rational powers and roots can be computed using the [___pow]<R> and [___root]<R> functions. Finally,  
-the standard set of boolean comparison operators ( `==, !=,  <, <=, >, and >=` ) are provided to allow 
+the standard set of boolean comparison operators (`==`, `!=`, `<`, `<=`, `>`, and `>=`) are provided to allow 
 comparison of quantities from the same unit system.  All operators simply delegate to the
 corresponding operator of the value type if the units permit.
 
@@ -416,7 +416,7 @@ this would amount to something like the following:
 [section:Conversions Conversions]
 
 Conversion is only meaningful for quantities as it implies the presence of at 
-least a multiplicative scale factor and, possibly, and affine linear offset.
+least a multiplicative scale factor and, possibly, an affine linear offset.
 Macros for simplifying the definition of conversions between units can be found in
 [headerref boost/units/conversion.hpp] and [headerref boost/units/absolute.hpp]
 (for affine conversions with offsets). 
@@ -451,7 +451,7 @@ with a single specialization:
     struct my_unit_tag : boost::units::base_unit<my_unit_tag, boost::units::force_type, 1> {};
     // define the conversion factor
     BOOST_UNITS_DEFINE_CONVERSION_FACTOR(my_unit_tag, SI::force, double, 3.14159265358979323846);
-    // make conversion to SI the default.
+    // make conversion to SI the default
     BOOST_UNITS_DEFAULT_CONVERSION(my_unit_tag, SI::force);
 
 [endsect]
@@ -461,7 +461,7 @@ with a single specialization:
 This library is designed to emphasize safety above convenience when performing operations with dimensioned quantities.
 Specifically, construction of quantities is required to fully specify both value and unit. Direct construction from a scalar value
 is prohibited (though the static member function [___from_value] is provided to enable 
-this functionality where it is necessary. In addition, a [___quantity_cast] to a reference allows direct access to the 
+this functionality where it is necessary). In addition, a [___quantity_cast] to a reference allows direct access to the 
 underlying value of a [___quantity] variable. An explicit constructor is provided to enable conversion between
 dimensionally compatible quantities in different unit systems.  Implicit conversions between unit systems are
 allowed only when the reduced units are identical, allowing, for example, trivial conversions between
@@ -473,15 +473,15 @@ to the underlying value type is allowed via class template specialization. Quant
 convertible only if the value types are themselves implicitly convertible. The [___quantity] class also defines
 a `value()` member for directly accessing the underlying value.
 
-To summarize, conversions are allowed under the following conditions :
+To summarize, conversions are allowed under the following conditions:
 
-* implicit conversion of `quantity<Unit,Y>` to `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
-* assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
-* explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
+* Implicit conversion of `quantity<Unit,Y>` to `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
+* Assignment between `quantity<Unit,Y>` and `quantity<Unit,Z>` is allowed if `Y` and `Z` are implicitly convertible.
+* Explicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` and `Unit2` have the same dimensions
     and if `Y` and `Z` are implicitly convertible.
-* implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
+* Implicit conversion between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed if `Unit1` 
     reduces to exactly the same combination of base units as `Unit2` and if `Y` and `Z` are convertible.
-* assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
+* Assignment between `quantity<Unit1,Y>` and `quantity<Unit2,Z>` is allowed under the same
   conditions as implicit conversion.
 * `quantity<Unit,Y>` can be directly constructed from a value of type `Y` using the static member function [___from_value]. Doing so, 
   naturally, bypasses any type-checking of the newly assigned value, so this method should be used only when absolutely necessary.
@@ -505,7 +505,7 @@ the underlying value type or types that are convertible to/from that value type.
 By using MPL metafunctions and the template specializations for operations on composite dimensions
 (defined in [headerref boost/units/dimension.hpp]) it is possible to perform compile time arithmetic
 according to the dimensional analysis rules described [link boost_units.Dimensional_Analysis above]
-to produce new composite dimensions :
+to produce new composite dimensions:
 
 [import ../example/dimension.cpp]
 
@@ -523,7 +523,7 @@ outputting (with symbol demangling, implemented in
 ([@../../libs/units/example/unit.cpp unit.cpp])
 
 This example demonstrates the use of the simple but functional unit system implemented in 
-[@boost:/libs/units/example/test_system.hpp test_system.hpp]
+[@boost:/libs/units/example/test_system.hpp test_system.hpp]:
 
 [import ../example/unit.cpp]
 
@@ -539,24 +539,24 @@ We can perform various algebraic operations on these units, resulting in the fol
 
 ([@../../libs/units/example/quantity.cpp quantity.cpp])
 
-This example demonstrates how to use quantities of our toy unit system :
+This example demonstrates how to use quantities of our toy unit system:
 
 [import ../example/quantity.cpp]
 
 [quantity_snippet_1]
 
-giving us the basic quantity functionality :
+giving us the basic quantity functionality:
 
 [quantity_output_double]
 
 As a further demonstration of the flexibility of the system, we replace the `double` value type 
 with a `std::complex<double>` value type (ignoring the question of the meaningfulness of
-complex lengths and energies) :
+complex lengths and energies):
 
 [quantity_snippet_2]
 
 and find that the code functions exactly as expected with no additional work, delegating operations 
-to `std::complex<double>` and performing the appropriate dimensional analysis :
+to `std::complex<double>` and performing the appropriate dimensional analysis:
 
 [quantity_output_complex]
 
@@ -579,27 +579,27 @@ the various algebraic operations between scalars, units, and quantities give
 
 [kitchen_sink_output_1]
 
-Scalar/unit operations :
+Scalar/unit operations:
 
 [kitchen_sink_output_2]
 
-Unit/unit operations and integral/rational powers of units :
+Unit/unit operations and integral/rational powers of units:
 
 [kitchen_sink_output_3]
 
-Scalar/quantity operations :
+Scalar/quantity operations:
 
 [kitchen_sink_output_4]
 
-Unit/quantity operations :
+Unit/quantity operations:
 
 [kitchen_sink_output_5]
 
-Quantity/quantity operations and integral/rational powers of quantities :
+Quantity/quantity operations and integral/rational powers of quantities:
 
 [kitchen_sink_output_6]
 
-Logical comparison operators are also defined between quantities :
+Logical comparison operators are also defined between quantities:
 
 [kitchen_sink_snippet_2]
 
@@ -607,7 +607,7 @@ giving
 
 [kitchen_sink_output_7]
 
-Implicit conversion is allowed between dimensionless quantities and their corresponding value types :
+Implicit conversion is allowed between dimensionless quantities and their corresponding value types:
 
 [kitchen_sink_snippet_3]
 
@@ -618,25 +618,25 @@ in an arbitrary unit system and returns energy in the same system:
 
 [kitchen_sink_snippet_4]
 
-which functions as expected for SI quantities :
+which functions as expected for SI quantities:
 
 [kitchen_sink_output_9]
 
-The ideal gas law can also be implemented in SI units :
+The ideal gas law can also be implemented in SI units:
 
 [kitchen_sink_function_snippet_4]
 
 [kitchen_sink_snippet_5]
 
-with the resulting output :
+with the resulting output:
 
 [kitchen_sink_output_10]
 
 Trigonometric and inverse trigonometric functions can be implemented for any unit system
 that provides an angular base dimension. For radians, these functions are found in 
-[headerref boost/units/cmath.hpp] These behave as one expects, with trigonometric functions
+[headerref boost/units/cmath.hpp]. These behave as one expects, with trigonometric functions
 taking an angular quantity and returning a dimensionless quantity, while the inverse trigonometric functions
-take a dimensionless quantity and return an angular quantity :
+take a dimensionless quantity and return an angular quantity:
 
 Defining a few angular quantities,
 
@@ -646,7 +646,7 @@ yields
 
 [kitchen_sink_output_11]
 
-Dealing with complex quantities is trivial. Here is the calculation of complex impedance :
+Dealing with complex quantities is trivial. Here is the calculation of complex impedance:
 
 [kitchen_sink_snippet_7]
 
@@ -673,7 +673,7 @@ gives
 [kitchen_sink_output_13]
 
 If we implement the overloaded helper classes for rational powers and roots
-then we can also compute rational powers of measurement quantities :
+then we can also compute rational powers of measurement quantities:
 
 [kitchen_sink_output_14]
 
@@ -697,19 +697,19 @@ of the value types themselves is allowed.  N.B. The conversion from double to in
 as an explicit conversion because there is no way to emulate the exact behavior of the built-in
 conversion.  Explicit constructors allow conversions for two cases:
 
-* explicit casting of a [___quantity] to a different `value_type` :
+* explicit casting of a [___quantity] to a different `value_type`:
 
 [conversion_snippet_3]
 
-* and explicit casting of a [___quantity] to a different unit :
+* and explicit casting of a [___quantity] to a different unit:
 
 [conversion_snippet_4]
 
-giving the following output :
+giving the following output:
 
 [conversion_output_1]
 
-A few more explicit unit system conversions :
+A few more explicit unit system conversions:
 
 [conversion_snippet_5]
 
@@ -733,7 +733,7 @@ powers and roots, respectively:
 
 [quaternion_class_snippet_1b]
 
-We can now declare a [___quantity] of a `quaternion` :
+We can now declare a [___quantity] of a `quaternion`:
 
 [quaternion_snippet_1]
 
@@ -743,7 +743,7 @@ no additional changes.
 
 [quaternion_output_1]
 
-Now, if for some reason we preferred the [___quantity] to be the value type of the `quaternion` class we would have :
+Now, if for some reason we preferred the [___quantity] to be the value type of the `quaternion` class we would have:
 
 [quaternion_snippet_2]
 
@@ -774,17 +774,17 @@ operations and rational powers and roots. Naturally, heterogeneous operations ar
 compilers that implement `typeof`. The primary differences are that binary operations are not implemented
 using the `op=` operators and use the utility classes [___add_typeof_helper], [___subtract_typeof_helper], 
 [___multiply_typeof_helper], and [___divide_typeof_helper]. In addition, [___power_typeof_helper] and
-[___root_typeof_helper] are defined for both cases :
+[___root_typeof_helper] are defined for both cases:
 
 [import ../example/complex.cpp]
 
 [complex_class_snippet_1]
 
-With this replacement `complex` class, we can declare a complex variable :
+With this replacement `complex` class, we can declare a complex variable:
 
 [complex_snippet_1]   
 
-to get the correct behavior for all cases supported by [___quantity] with a `complex` value type :
+to get the correct behavior for all cases supported by [___quantity] with a `complex` value type:
 
 [complex_output_1]
 
@@ -819,34 +819,34 @@ using msvc 8.0 on Windows XP.
 [import ../example/radar_beam_height.cpp]
 
 This example demonstrates the implementation of two non-SI units of length, the 
-nautical mile :
+nautical mile:
 
 [radar_beam_height_class_snippet_1]
 
-and the imperial foot :
+and the imperial foot:
 
 [radar_beam_height_class_snippet_2]
 
 These units include conversions between themselves and the meter. Three functions
 for computing radar beam height from radar range and the local earth radius are 
 defined. The first takes arguments in one system and returns a value in the same 
-system :
+system:
 
 [radar_beam_height_function_snippet_1]
 
 The second is similar, but is templated on return type, so that the arguments are
-converted to the return unit system internally :
+converted to the return unit system internally:
 
 [radar_beam_height_function_snippet_2]
 
 Finally, the third function is an empirical approximation that is only valid for
 radar ranges specified in nautical miles, returning beam height in feet. This 
 function uses the heterogeneous unit of nautical miles per square root of feet to
-ensure dimensional correctness :
+ensure dimensional correctness:
 
 [radar_beam_height_function_snippet_3]
 
-With these, we can compute radar beam height in various unit systems :
+With these, we can compute radar beam height in various unit systems:
 
 [radar_beam_height_snippet_1]
 
@@ -980,18 +980,18 @@ The iostream manipulators `engineering_prefixes` or `binary_prefixes` make this 
 [autoprefixes_snippet_1]
 
 (The complete set of [@http://physics.nist.gov/cuu/Units/prefixes.html engineering and scientific multiples]
-is not used (not centi or deci for example), but only powers of ten that are multiples of three, 10^3).
+is not used (not centi or deci for example), but only powers of one thousand.)
 
 Similarly, the equivalent [@http://en.wikipedia.org/wiki/Binary_prefixes binary prefixes]
 used for displaying computing kilobytes, megabytes, gigabytes...
 
 These are the 2^10 = 1024, 2^20 = 1 048 576, 2^30 ... multiples.
 
-(See also [@http://physics.nist.gov/cuu/Units/binary.html Prefixes for binary multiples]
+(See also [@http://physics.nist.gov/cuu/Units/binary.html Prefixes for binary multiples].
 
 This scale is specified in IEC 60027-2, Second edition, 2000-11,
 Letter symbols to be used in electrical technology -
-Part 2: Telecommunications and electronics).
+Part 2: Telecommunications and electronics.)
 
 [autoprefixes_snippet_2]
 
@@ -1041,7 +1041,7 @@ Produces
 [import ../example/runtime_unit.cpp]
 
 This example shows how to implement an interface that
-allow different units at runtime while still maintaining
+allows different units at runtime while still maintaining
 type safety for internal calculations.
 
 [runtime_unit_snippet_1]
@@ -1207,10 +1207,10 @@ Consider the following code:
     cout << asin(sin(90.0 * degrees));
 
 What should this print?  If only heterogeneous
-systems are available it would print 1.5708 rad
+systems are available it would print 1.5708 rad.
 Why?  Well, `sin` would return a `quantity<dimensionless>`
 effectively losing the information that degrees
-are being used.  In order to propogate this extra information
+are being used.  In order to propagate this extra information
 we need homogeneous systems.
 
 [endsect]
@@ -1226,7 +1226,7 @@ consider the search and replace problem allowing this poses:
 	
 Here, the intent is clear - we want a length of one in the SI system, which is one meter. However,
 imagine some well-intentioned coder attempting to reuse this code, but to have it perform the
-calculations in the CGS unit system instead. After searching for `si::` and replacing it with `cgs::` ,
+calculations in the CGS unit system instead. After searching for `si::` and replacing it with `cgs::`,
 we have:
 
 	quantity<cgs::length>	q(1.0);
