@@ -14,7 +14,7 @@
 \brief fail_add_temperature.cpp
 
 \details
-Verify that adding two absolute temeratures fails miserably.
+Verify that adding two absolute temperatures fails miserably.
 
 Output:
 @verbatim
