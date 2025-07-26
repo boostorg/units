@@ -95,7 +95,7 @@ int main()
   //] [/autoprefixes_snippet_1]
 
   //[autoprefixes_snippet_2
-  // Don't forget that the unit name or symbol format specification is persistent.
+  // Don't forget that the units name or symbol format specification is persistent.
   cout << symbol_format << endl; // Resets the format to the default symbol format.
 
   quantity<byte_base_unit::unit_type> b = 2048. * byte_base_unit::unit_type();
