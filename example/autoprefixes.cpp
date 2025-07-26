@@ -95,7 +95,7 @@ int main()
   //] [/autoprefixes_snippet_1]
 
   //[autoprefixes_snippet_2
-  // Don't forget that the units name or symbol format specification is persistent.
+  // Don't forget that the unit name or symbol format specification is persistent.
   cout << symbol_format << endl; // Resets the format to the default symbol format.
 
   quantity<byte_base_unit::unit_type> b = 2048. * byte_base_unit::unit_type();
@@ -118,7 +118,7 @@ int main()
   const length L; // A unit of length (but not a quantity of length).
   cout << L << endl; // Default length unit is meter,
   // but default is symbol format so output is just "m".
-  cout << name_format << L << endl; // default length name is "meter".
+  cout << name_format << L << endl; // Default length name is "meter".
   //] [/autoprefixes_snippet_4]
 
   //[autoprefixes_snippet_5
