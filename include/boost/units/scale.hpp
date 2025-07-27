@@ -94,6 +94,8 @@ struct scale<base_, exponent_ >                                              \
 #define BOOST_UNITS_SCALE_DEF(exponent_,value_,name_,symbol_)                 \
 BOOST_UNITS_SCALE_SPECIALIZATION(10,static_rational<exponent_>,value_, name_, symbol_)
 
+BOOST_UNITS_SCALE_DEF(-30, 1e-30, quecto, q);
+BOOST_UNITS_SCALE_DEF(-27, 1e-27, ronto, r);
 BOOST_UNITS_SCALE_DEF(-24, 1e-24, yocto, y);
 BOOST_UNITS_SCALE_DEF(-21, 1e-21, zepto, z);
 BOOST_UNITS_SCALE_DEF(-18, 1e-18, atto, a);
@@ -115,6 +117,8 @@ BOOST_UNITS_SCALE_DEF(15, 1e15, peta, P);
 BOOST_UNITS_SCALE_DEF(18, 1e18, exa, E);
 BOOST_UNITS_SCALE_DEF(21, 1e21, zetta, Z);
 BOOST_UNITS_SCALE_DEF(24, 1e24, yotta, Y);
+BOOST_UNITS_SCALE_DEF(27, 1e27, ronna, R);
+BOOST_UNITS_SCALE_DEF(30, 1e30, quetta, Q);
 
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<10>, 1024.0, kibi, Ki);
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<20>, 1048576.0, mebi, Mi);
@@ -124,6 +128,8 @@ BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<50>, 1125899906842624.0, peb
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<60>, 1152921504606846976.0, exbi, Ei);
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<70>, 1180591620717411303424.0, zebi, Zi);
 BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<80>, 1208925819614629174706176.0, yobi, Yi);
+BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<90>, 1237940039285380274899124224.0, robi, Ri);
+BOOST_UNITS_SCALE_SPECIALIZATION(2, static_rational<100>, 1267650600228229401496703205376.0, quebi, Qi);
 
 #undef BOOST_UNITS_SCALE_DEF
 #undef BOOST_UNITS_SCALE_SPECIALIZATION
