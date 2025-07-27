@@ -26,6 +26,8 @@ namespace si {
     typedef make_scaled_unit<dimensionless, scale<10, static_rational<exponent> > >::type name ## _type;\
     BOOST_UNITS_STATIC_CONSTANT(name, name ## _type)
 
+BOOST_UNITS_METRIC_PREFIX(-30, quecto);
+BOOST_UNITS_METRIC_PREFIX(-27, ronto);
 BOOST_UNITS_METRIC_PREFIX(-24, yocto);
 BOOST_UNITS_METRIC_PREFIX(-21, zepto);
 BOOST_UNITS_METRIC_PREFIX(-18, atto);
@@ -46,8 +48,12 @@ BOOST_UNITS_METRIC_PREFIX(15, peta);
 BOOST_UNITS_METRIC_PREFIX(18, exa);
 BOOST_UNITS_METRIC_PREFIX(21, zetta);
 BOOST_UNITS_METRIC_PREFIX(24, yotta);
+BOOST_UNITS_METRIC_PREFIX(27, ronna);
+BOOST_UNITS_METRIC_PREFIX(30, quetta);
 
-/*BOOST_UNITS_STATIC_CONSTANT(yocto,long double) = (1e-24);       ///< metric prefix for 1.0e-24
+/*BOOST_UNITS_STATIC_CONSTANT(quecto,long double) = (1e-30);       ///< metric prefix for 1.0e-30
+BOOST_UNITS_STATIC_CONSTANT(ronto,long double) = (1e-27);       ///< metric prefix for 1.0e-27
+BOOST_UNITS_STATIC_CONSTANT(yocto,long double) = (1e-24);       ///< metric prefix for 1.0e-24
 BOOST_UNITS_STATIC_CONSTANT(zepto,long double) = (1e-21);       ///< metric prefix for 1.0e-21
 BOOST_UNITS_STATIC_CONSTANT(atto,long double) = (1e-18);        ///< metric prefix for 1.0e-18
 BOOST_UNITS_STATIC_CONSTANT(femto,long double) = (1e-15);       ///< metric prefix for 1.0e-15
@@ -66,7 +72,9 @@ BOOST_UNITS_STATIC_CONSTANT(tera,long double) = (1e12);         ///< metric pref
 BOOST_UNITS_STATIC_CONSTANT(peta,long double) = (1e15);         ///< metric prefix for 1.0e+15
 BOOST_UNITS_STATIC_CONSTANT(exa,long double) = (1e18);          ///< metric prefix for 1.0e+18
 BOOST_UNITS_STATIC_CONSTANT(zetta,long double) = (1e21);        ///< metric prefix for 1.0e+21
-BOOST_UNITS_STATIC_CONSTANT(yotta,long double) = (1e24);        ///< metric prefix for 1.0e+24 */ 
+BOOST_UNITS_STATIC_CONSTANT(yotta,long double) = (1e24);        ///< metric prefix for 1.0e+24
+BOOST_UNITS_STATIC_CONSTANT(ronna,long double) = (1e27);        ///< metric prefix for 1.0e+27
+BOOST_UNITS_STATIC_CONSTANT(quetta,long double) = (1e30);        ///< metric prefix for 1.0e+30*/ 
 
 } // namespace si
 
