@@ -91,7 +91,7 @@ int main()
 
   quantity<energy> e = kilograms * pow<2>(l / seconds); // A quantity of energy.
   cout << engineering_prefix << e << endl; // 5.49902 MJ
-  cout << name_format << engineering_prefix << e << endl; // 5.49902 megaJoule
+  cout << name_format << engineering_prefix << e << endl; // 5.49902 megajoule
   //] [/autoprefixes_snippet_1]
 
   //[autoprefixes_snippet_2
