@@ -231,7 +231,6 @@ fdim BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit,Y>& q1,
     return quantity_type::from_value(fdim BOOST_PREVENT_MACRO_SUBSTITUTION (q1.value(),q2.value()));
 }
 
-#if 0
 
 template<class Unit1,class Unit2,class Unit3,class Y>
 inline 
@@ -240,10 +239,11 @@ typename add_typeof_helper<
     typename multiply_typeof_helper<quantity<Unit1,Y>,
                                     quantity<Unit2,Y> >::type,
     quantity<Unit3,Y> >::type 
-fma BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit1,Y>& q1,
-                                      const quantity<Unit2,Y>& q2,
-                                      const quantity<Unit3,Y>& q3)
+fma (const quantity<Unit1,Y>& q1,
+     const quantity<Unit2,Y>& q2,
+     const quantity<Unit3,Y>& q3)
 {
+    using std::fma;
     using namespace detail;
 
     typedef quantity<Unit1,Y>   type1;
@@ -253,10 +253,33 @@ fma BOOST_PREVENT_MACRO_SUBSTITUTION (const quantity<Unit1,Y>& q1,
     typedef typename multiply_typeof_helper<type1,type2>::type  prod_type;
     typedef typename add_typeof_helper<prod_type,type3>::type   quantity_type;
     
-    return quantity_type::from_value(fma BOOST_PREVENT_MACRO_SUBSTITUTION (q1.value(),q2.value(),q3.value()));
+    return quantity_type::from_value(fma(q1.value(),q2.value(),q3.value()));
 }
 
-#endif
+template<class Unit, class Y>
+inline 
+BOOST_CONSTEXPR
+quantity<Unit,Y>
+fma(const Y& q1,
+    const quantity<Unit,Y>& q2,
+    const quantity<Unit,Y>& q3)
+{
+    using std::fma;
+    return quantity<Unit,Y>::from_value(fma(q1,q2.value(),q3.value()));
+}
+
+template<class Unit, class Y>
+inline 
+BOOST_CONSTEXPR
+quantity<Unit,Y>
+fma(const quantity<Unit, Y>& q1,
+    const Y& q2,
+    const quantity<Unit,Y>& q3)
+{
+    using std::fma;
+    return quantity<Unit,Y>::from_value(fma(q1.value(),q2,q3.value()));
+}
+
 
 template<class Unit,class Y>
 inline 
