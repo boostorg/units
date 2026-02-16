@@ -70,14 +70,6 @@
 
 #endif
 
-#ifdef BOOST_UNITS_REQUIRE_LAYOUT_COMPATIBILITY
-    ///INTERNAL ONLY
-    #define BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(a, b) BOOST_STATIC_ASSERT((sizeof(a) == sizeof(b)))
-#else
-    ///INTERNAL ONLY
-    #define BOOST_UNITS_CHECK_LAYOUT_COMPATIBILITY(a, b)
-#endif
-
 #ifdef BOOST_UNITS_DOXYGEN
 
 /// If defined will trigger a static assertion if quantity<Unit, T>
