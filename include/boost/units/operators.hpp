@@ -128,7 +128,7 @@ template<typename X,typename Y> struct root_typeof_helper;
 /// conform to the interface shown here.
 /// @c Exponent will be either the exponent
 /// passed to @c pow or @c static_rational<N>
-/// for and integer argument, N.
+/// for an integer argument, N.
 template<typename BaseType, typename Exponent>
 struct power_typeof_helper
 {
@@ -145,7 +145,7 @@ struct power_typeof_helper
 /// conform to the interface shown here.
 /// @c Index will be either the type
 /// passed to @c pow or @c static_rational<N>
-/// for and integer argument, N.
+/// for an integer argument, N.
 template<typename Radicand, typename Index>
 struct root_typeof_helper
 {

@@ -443,7 +443,7 @@ void test_output_auto_binary_prefixed_quantity_name()
 }
 
 // Tests on using more than one format or prefix - only the last specified should be used.
-// (This may indicate a programming mistake, but it is ignored).
+// (This may indicate a programming mistake, but it is ignored.)
 void test_output_quantity_name_duplicate()
 { // Ensure that if more than one format specified, only the last is used.
 #define FORMATTERS << boost::units::symbol_format << boost::units::name_format

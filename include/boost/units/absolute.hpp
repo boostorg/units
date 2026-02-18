@@ -121,7 +121,7 @@ namespace boost {
 namespace units {
 
 /// Macro to define the offset between two absolute units.
-/// Requires the value to be in the destination units e.g
+/// Requires the value to be in the destination units, e.g.,
 /// @code
 /// BOOST_UNITS_DEFINE_CONVERSION_OFFSET(celsius_base_unit, fahrenheit_base_unit, double, 32.0);
 /// @endcode

@@ -73,7 +73,7 @@ class base_dimension :
 #else
         typedef detail::unspecified dimension_type;
 #endif
-        /// Provided for mpl compatability.
+        /// Provided for mpl compatibility.
         typedef Derived type;
 
     private:

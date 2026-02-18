@@ -28,7 +28,7 @@ struct conversion_helper;
 /// Template for defining conversions between
 /// quantities.  This template should be specialized
 /// for every quantity that allows conversions.
-/// For example, if you have a two units
+/// For example, if you have two units
 /// called pair and dozen you would write
 /// @code
 /// namespace boost {
@@ -87,7 +87,7 @@ struct conversion_helper
 
 /// Defines the conversion factor from a base unit to any other base
 /// unit with the same dimensions.  Params should be a Boost.Preprocessor
-/// Seq of template parameters, such as (class T1)(class T2)
+/// Seq of template parameters, such as (class T1)(class T2).
 /// All uses of must appear at global scope. The reverse conversion will
 /// be defined automatically.  This macro is a little dangerous, because,
 /// unlike the non-template form, it will silently fail if either base

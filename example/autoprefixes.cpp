@@ -91,7 +91,7 @@ int main()
 
   quantity<energy> e = kilograms * pow<2>(l / seconds); // A quantity of energy.
   cout << engineering_prefix << e << endl; // 5.49902 MJ
-  cout << name_format << engineering_prefix << e << endl; // 5.49902 megaJoule
+  cout << name_format << engineering_prefix << e << endl; // 5.49902 megajoule
   //] [/autoprefixes_snippet_1]
 
   //[autoprefixes_snippet_2
@@ -118,7 +118,7 @@ int main()
   const length L; // A unit of length (but not a quantity of length).
   cout << L << endl; // Default length unit is meter,
   // but default is symbol format so output is just "m".
-  cout << name_format << L << endl; // default length name is "meter".
+  cout << name_format << L << endl; // Default length name is "meter".
   //] [/autoprefixes_snippet_4]
 
   //[autoprefixes_snippet_5

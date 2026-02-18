@@ -63,7 +63,7 @@ struct normalize_units_impl;
 
 struct inconsistent {};
 
-// generally useful utilies.
+// generally useful utilities.
 
 template<int N>
 struct divide_equation {
@@ -371,7 +371,7 @@ struct invert_strip_leading_zeroes<false, false> {
 
         // results
         // Note that we don't add the pivot row to the
-        // results here, because it needs to propagated up
+        // results here, because it needs to propagate up
         // to the diagonal.
         typedef typename next::new_matrix new_matrix;
         typedef typename next::identity_result identity_result;
@@ -392,7 +392,7 @@ struct invert_strip_leading_zeroes<false, true> {
 
         // results
         // Note that we don't add the pivot row to the
-        // results here, because it needs to propagated up
+        // results here, because it needs to propagate up
         // to the diagonal.
         typedef dimensionless_type identity_result;
         typedef dimensionless_type new_matrix;
@@ -738,7 +738,7 @@ struct calculate_base_dimension_coefficients_impl<0> {
     };
 };
 
-// add_zeroes pushs N zeroes onto the
+// add_zeroes pushes N zeroes onto the
 // front of a list.
 //
 // list<rational> add_zeroes(list<rational> l, int N) {

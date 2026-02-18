@@ -65,7 +65,7 @@ work(const quantity<force>& F, const quantity<length>& dx)
 int main()
 {   
     /// Test calculation of work.
-    quantity<force>     F(2.0 * newton); // Define a quantity of force.
+    quantity<force>     F(2.0 * newton); // Define a quantity of force,
     quantity<length>    dx(2.0 * meter); // and a distance,
     quantity<energy>    E(work(F,dx));  // and calculate the work done.
     
@@ -75,7 +75,7 @@ int main()
               << std::endl;
 
     /// Test and check complex quantities.
-    typedef std::complex<double> complex_type; // double real and imaginary parts.
+    typedef std::complex<double> complex_type; // double real and imaginary parts
     
     // Define some complex electrical quantities.
     quantity<electric_potential, complex_type> v = complex_type(12.5, 0.0) * volts;
