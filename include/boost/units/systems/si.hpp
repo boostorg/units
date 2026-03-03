@@ -36,6 +36,7 @@
 #include <boost/units/systems/si/current.hpp>
 #include <boost/units/systems/si/dimensionless.hpp>
 #include <boost/units/systems/si/dose_equivalent.hpp>
+#include <boost/units/systems/si/drag_factor.hpp>
 #include <boost/units/systems/si/dynamic_viscosity.hpp>
 #include <boost/units/systems/si/electric_charge.hpp>
 #include <boost/units/systems/si/electric_potential.hpp>
@@ -54,6 +55,7 @@
 #include <boost/units/systems/si/magnetic_flux_density.hpp>
 #include <boost/units/systems/si/mass.hpp>
 #include <boost/units/systems/si/mass_density.hpp>
+#include <boost/units/systems/si/molar_mass.hpp>
 #include <boost/units/systems/si/moment_of_inertia.hpp>
 #include <boost/units/systems/si/momentum.hpp>
 #include <boost/units/systems/si/permeability.hpp>
@@ -65,6 +67,7 @@
 #include <boost/units/systems/si/resistance.hpp>
 #include <boost/units/systems/si/resistivity.hpp>
 #include <boost/units/systems/si/solid_angle.hpp>
+#include <boost/units/systems/si/specific_gas_constant.hpp>
 #include <boost/units/systems/si/surface_density.hpp>
 #include <boost/units/systems/si/surface_tension.hpp>
 #include <boost/units/systems/si/temperature.hpp>
