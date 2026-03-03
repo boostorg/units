@@ -14,7 +14,7 @@
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/si/meter.hpp>
 
-BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, parsec, "parsec", "psc", 3.0856775813e16, boost::units::si::meter_base_unit, -206);
+BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, parsec, "parsec", "pc", 3.0856775813e16, boost::units::si::meter_base_unit, -206);
 
 #if BOOST_UNITS_HAS_BOOST_TYPEOF
 
