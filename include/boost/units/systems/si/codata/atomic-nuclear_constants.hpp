@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -21,31 +21,31 @@
 #include <boost/units/systems/si/codata/tau_constants.hpp>
 #include <boost/units/systems/si/codata/triton_constants.hpp>
 
+/// \file
+/// 2018 CODATA recommended values of fundamental atomic and nuclear constants as of 2019/06/10
+
 namespace boost {
 
-namespace units { 
+namespace units {
 
 namespace si {
-                            
+
 namespace constants {
 
 namespace codata {
 
-/// CODATA recommended values of the fundamental physical constants: NIST SP 961
-
-// ATOMIC AND NUCLEAR
-/// fine structure constant
-BOOST_UNITS_PHYSICAL_CONSTANT(alpha,quantity<dimensionless>,7.2973525376e-3*dimensionless(),5.0e-12*dimensionless());
+/// fine-structure constant
+BOOST_UNITS_PHYSICAL_CONSTANT(alpha, quantity<dimensionless>, 7.2973525693e-3*dimensionless(), 1.1e-12*dimensionless());
 /// Rydberg constant
-BOOST_UNITS_PHYSICAL_CONSTANT(R_infinity,quantity<wavenumber>,10973731.568527/meter,7.3e-5/meter);
+BOOST_UNITS_PHYSICAL_CONSTANT(R_infinity, quantity<wavenumber>, 10973731.568160/meter, 2.1e-5/meter);
 /// Bohr radius
-BOOST_UNITS_PHYSICAL_CONSTANT(a_0,quantity<length>,0.52917720859e-10*meters,3.6e-20*meters);
+BOOST_UNITS_PHYSICAL_CONSTANT(a_0, quantity<length>, 0.529177210903e-10*meters, 8.0e-21*meters);
 /// Hartree energy
-BOOST_UNITS_PHYSICAL_CONSTANT(E_h,quantity<energy>,4.35974394e-18*joules,2.2e-25*joules);
+BOOST_UNITS_PHYSICAL_CONSTANT(E_h, quantity<energy>, 4.3597447222071e-18*joules, 8.5e-30*joules);
 
 } // namespace codata
 
-} // namespace constants    
+} // namespace constants
 
 } // namespace si
 

@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -29,33 +29,30 @@
 #include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental atomic and nuclear constants
-/// CODATA 2006 values as of 2007/03/30
+/// 2018 CODATA recommended values of fundamental atomic and nuclear constants as of 2019/06/10
 
 namespace boost {
 
-namespace units { 
+namespace units {
 
 namespace si {
-                            
+
 namespace constants {
 
 namespace codata {
 
-/// CODATA recommended values of the fundamental physical constants: NIST SP 961
-
 /// alpha particle mass
-BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha,quantity<mass>,6.64465620e-27*kilograms,3.3e-34*kilograms);
-/// alpha-electron mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha_over_m_e,quantity<dimensionless>,7294.2995365*dimensionless(),3.1e-6*dimensionless());
-/// alpha-proton mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha_over_m_p,quantity<dimensionless>,3.97259968951*dimensionless(),4.1e-10*dimensionless());
-/// alpha molar mass
-BOOST_UNITS_PHYSICAL_CONSTANT(M_alpha,quantity<mass_over_amount>,4.001506179127e-3*kilograms/mole,6.2e-14*kilograms/mole);
+BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha, quantity<mass>, 6.6446573357e-27*kilograms, 2.0e-36*kilograms);
+/// alpha particle-electron mass ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha_over_m_e, quantity<dimensionless>, 7294.29954142*dimensionless(), 2.0e-7*dimensionless());
+/// alpha particle-proton mass ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(m_alpha_over_m_p, quantity<dimensionless>, 3.97259969009*dimensionless(), 2.0e-10*dimensionless());
+/// alpha particle molar mass
+BOOST_UNITS_PHYSICAL_CONSTANT(M_alpha, quantity<mass_over_amount>, 4.0015061777e-3*kilograms/mole, 1.2e-12*kilograms/mole);
 
 } // namespace codata
 
-} // namespace constants    
+} // namespace constants
 
 } // namespace si
 

@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -29,45 +29,42 @@
 #include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental atomic and nuclear constants
-/// CODATA 2006 values as of 2007/03/30
+/// 2018 CODATA recommended values of fundamental atomic and nuclear constants as of 2019/06/10
 
 namespace boost {
 
-namespace units { 
+namespace units {
 
 namespace si {
-                            
+
 namespace constants {
 
 namespace codata {
 
-/// CODATA recommended values of the fundamental physical constants: NIST SP 961
-
 /// helion mass
-BOOST_UNITS_PHYSICAL_CONSTANT(m_h,quantity<mass>,5.00641192e-27*kilograms,2.5e-34*kilograms);
+BOOST_UNITS_PHYSICAL_CONSTANT(m_h, quantity<mass>, 5.0064127796e-27*kilograms, 1.5e-36*kilograms);
 /// helion-electron mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_h_over_m_e,quantity<dimensionless>,5495.8852765*dimensionless(),5.2e-6*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_h_over_m_e, quantity<dimensionless>, 5495.88528007*dimensionless(), 2.0e-7*dimensionless());
 /// helion-proton mass ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(m_h_over_m_p,quantity<dimensionless>,2.9931526713*dimensionless(),2.6e-9*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(m_h_over_m_p, quantity<dimensionless>, 2.99315267167*dimensionless(), 1.0e-10*dimensionless());
 /// helion molar mass
-BOOST_UNITS_PHYSICAL_CONSTANT(M_h,quantity<mass_over_amount>,3.0149322473e-3*kilograms/mole,2.6e-12*kilograms/mole);
-/// helion shielded magnetic moment
-BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime,quantity<energy_over_magnetic_flux_density>,-1.074552982e-26*joules/tesla,3.0e-34*joules/tesla);
-/// shielded helion-Bohr magneton ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_B,quantity<dimensionless>,-1.158671471e-3*dimensionless(),1.4e-11*dimensionless());
-/// shielded helion-nuclear magneton ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_N,quantity<dimensionless>,-2.127497718*dimensionless(),2.5e-8*dimensionless());
-/// shielded helion-proton magnetic moment ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_p,quantity<dimensionless>,-0.761766558*dimensionless(),1.1e-8*dimensionless());
-/// shielded helion-shielded proton magnetic moment ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_p_prime,quantity<dimensionless>,-0.7617861313*dimensionless(),3.3e-8*dimensionless());
+BOOST_UNITS_PHYSICAL_CONSTANT(M_h, quantity<mass_over_amount>, 3.01493224613e-3*kilograms/mole, 9.1e-13*kilograms/mole);
+/// shielded helion magnetic moment
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime, quantity<energy_over_magnetic_flux_density>, -1.074553090e-26*joules/tesla, 1.3e-34*joules/tesla);
+/// shielded helion magnetic moment to Bohr magneton ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_B, quantity<dimensionless>, -1.158671471e-3*dimensionless(), 1.4e-11*dimensionless());
+/// shielded helion magnetic moment to nuclear magneton ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_N, quantity<dimensionless>, -2.127497719*dimensionless(), 2.0e-8*dimensionless());
+/// shielded helion to proton magnetic moment ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_p, quantity<dimensionless>, -0.7617665618*dimensionless(), 8.0e-9*dimensionless());
+/// shielded helion to shielded proton magnetic moment ratio
+BOOST_UNITS_PHYSICAL_CONSTANT(mu_h_prime_over_mu_p_prime, quantity<dimensionless>, -0.7617861313*dimensionless(), 8.0e-9*dimensionless());
 /// shielded helion gyromagnetic ratio
-BOOST_UNITS_PHYSICAL_CONSTANT(gamma_h_prime,quantity<frequency_over_magnetic_flux_density>,2.037894730e8/second/tesla,5.6e-0/second/tesla);
+BOOST_UNITS_PHYSICAL_CONSTANT(gamma_h_prime, quantity<frequency_over_magnetic_flux_density>, 2.037894569e+8/second/tesla, 2.4e0/second/tesla);
 
 } // namespace codata
 
-} // namespace constants    
+} // namespace constants
 
 } // namespace si
 
