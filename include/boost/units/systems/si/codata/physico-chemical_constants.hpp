@@ -1,4 +1,4 @@
-// Boost.Units - A C++ library for zero-overhead dimensional analysis and 
+// Boost.Units - A C++ library for zero-overhead dimensional analysis and
 // unit/quantity manipulation and conversion
 //
 // Copyright (C) 2003-2008 Matthias Christian Schabel
@@ -29,15 +29,14 @@
 #include <boost/units/systems/si/codata/typedefs.hpp>
 
 /// \file
-/// CODATA recommended values of fundamental physico-chemical constants
-/// CODATA 2014 values as of 2016/04/26
+/// 2014 CODATA recommended values of fundamental physico-chemical constants as of 2018/07/21
 
 namespace boost {
 
-namespace units { 
+namespace units {
 
 namespace si {
-                            
+
 namespace constants {
 
 namespace codata {
@@ -68,7 +67,7 @@ BOOST_UNITS_PHYSICAL_CONSTANT(b_prime,quantity<frequency_over_temperature>,5.878
 
 } // namespace codata
 
-} // namespace constants    
+} // namespace constants
 
 } // namespace si
 
