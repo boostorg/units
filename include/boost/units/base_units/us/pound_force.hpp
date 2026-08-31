@@ -18,6 +18,7 @@
 //#include <boost/units/physical_dimensions/mass.hpp>
 #include <boost/units/systems/si/force.hpp>
 #include <boost/units/conversion.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pound_force, "pound-force", "lbf", 4.4482216152605, si::force, -600);    // exact conversion
 
@@ -28,5 +29,7 @@ BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(us, pound_force, "pound-force", "l
 BOOST_TYPEOF_REGISTER_TYPE(boost::units::us::pound_force_base_unit)
 
 #endif
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us, pound_force, force)
 
 #endif // BOOST_UNIT_SYSTEMS_US_POUND_FORCE_HPP_INCLUDED

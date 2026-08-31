@@ -22,17 +22,6 @@ Output:
 @endverbatim
 **/
 
-#define BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(namespace_,unit_name_,dimension_)              \
-namespace boost {                                                                            \
-namespace units {                                                                            \
-namespace namespace_ {                                                                       \
-typedef make_system<unit_name_ ## _base_unit>::type    unit_name_ ## system_;                \
-typedef unit<dimension_ ## _dimension,unit_name_ ## system_> unit_name_ ## _ ## dimension_;  \
-static constexpr unit_name_ ## _ ## dimension_    unit_name_ ## s;                           \
-}                                                                                            \
-}                                                                                            \
-}                                                                                            \
-
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -53,15 +42,6 @@ static constexpr unit_name_ ## _ ## dimension_    unit_name_ ## s;              
 #include <boost/units/base_units/angle/radian.hpp>
 #include <boost/units/base_units/angle/steradian.hpp>
 
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,arcminute,plane_angle)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,arcsecond,plane_angle)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,degree,plane_angle)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,gradian,plane_angle)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,radian,plane_angle)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,revolution,plane_angle)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,steradian,solid_angle)
-
 // astronomical base units
 #include <boost/units/base_units/astronomical/astronomical_unit.hpp>
 #include <boost/units/base_units/astronomical/light_second.hpp>
@@ -70,14 +50,6 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle,steradian,solid_angle)
 #include <boost/units/base_units/astronomical/light_day.hpp>
 #include <boost/units/base_units/astronomical/light_year.hpp>
 #include <boost/units/base_units/astronomical/parsec.hpp>
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,astronomical_unit,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_second,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_minute,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_hour,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_day,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,light_year,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,parsec,length)
 
 // imperial base units
 #include <boost/units/base_units/imperial/thou.hpp>
@@ -105,29 +77,6 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical,parsec,length)
 
 #include <boost/units/base_units/imperial/conversions.hpp>
 
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,thou,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,inch,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,foot,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,yard,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,furlong,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,mile,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,league,length)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,grain,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,drachm,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,ounce,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,pound,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,stone,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,quarter,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,hundredweight,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,ton,mass)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,fluid_ounce,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,gill,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,pint,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,quart,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,gallon,volume)
-
 // metric base units
 #include <boost/units/base_units/metric/angstrom.hpp>
 #include <boost/units/base_units/metric/fermi.hpp>
@@ -154,31 +103,6 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(imperial,gallon,volume)
 #include <boost/units/base_units/metric/mmHg.hpp>
 #include <boost/units/base_units/metric/torr.hpp>
 
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,angstrom,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,fermi,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,micron,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,nautical_mile,length)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,ton,mass)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,day,time)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,hour,time)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,minute,time)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,year,time)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,knot,velocity)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,are,area)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,barn,area)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,hectare,area)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,liter,volume)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,atmosphere,pressure)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,bar,pressure)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,mmHg,pressure)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,torr,pressure)
-
 // us base units
 
 #include <boost/units/base_units/us/mil.hpp>
@@ -204,30 +128,6 @@ BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric,torr,pressure)
 #include <boost/units/base_units/us/pint.hpp>
 #include <boost/units/base_units/us/quart.hpp>
 #include <boost/units/base_units/us/gallon.hpp>
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,mil,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,inch,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,foot,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,yard,length)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,mile,length)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,grain,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,dram,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,ounce,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,pound,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,hundredweight,mass)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,ton,mass)
-
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,minim,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,fluid_dram,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,teaspoon,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,tablespoon,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,fluid_ounce,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,gill,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,cup,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,pint,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,quart,volume)
-BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(us,gallon,volume)
 
 int main(void)
 {

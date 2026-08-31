@@ -17,6 +17,7 @@
 #include <boost/units/units_fwd.hpp>
 #include <boost/units/base_units/si/kilogram.hpp>
 //#include <boost/units/base_units/cgs/gram.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 namespace units {
@@ -35,5 +36,7 @@ struct base_unit_info<metric::ton_base_unit> {
 
 }
 }
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, ton, mass)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_TON_HPP_INCLUDED

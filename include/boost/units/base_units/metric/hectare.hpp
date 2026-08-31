@@ -13,7 +13,9 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/systems/si/area.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(metric, hectare, "hectare", "ha", 1.0e4, si::area, 12);
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, hectare, area)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_HECTARE_HPP_INCLUDED

@@ -13,7 +13,9 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/systems/si/volume.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(metric, liter, "liter", "L", 1.0e-3, si::volume, 13);
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, liter, volume)
 
 #endif // BOOST_UNIT_SYSTEMS_METRIC_LITER_HPP_INCLUDED

@@ -16,6 +16,7 @@
 #include <boost/units/config.hpp>
 #include <boost/units/base_unit.hpp>
 #include <boost/units/physical_dimensions/plane_angle.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 
@@ -44,5 +45,7 @@ BOOST_TYPEOF_REGISTER_TYPE(boost::units::angle::radian_base_unit)
 #endif
 
 //#include <boost/units/base_units/angle/conversions.hpp>
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(angle, radian, plane_angle)
 
 #endif // BOOST_UNITS_ANGLE_RADIAN_BASE_UNIT_HPP

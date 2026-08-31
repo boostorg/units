@@ -15,6 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/base_units/si/second.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 // Julian year = 365.25 days exactly = 8766 hours exactly
 
@@ -34,5 +35,7 @@ struct base_unit_info<metric::year_base_unit> {
 
 }
 }
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(metric, year, time)
 
 #endif

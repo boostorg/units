@@ -15,6 +15,7 @@
 #include <boost/units/static_rational.hpp>
 #include <boost/units/scale.hpp>
 #include <boost/units/base_units/astronomical/light_second.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 namespace boost {
 
@@ -35,5 +36,7 @@ struct base_unit_info<astronomical::light_day_base_unit> {
 } // namespace units
 
 } // namespace boost
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical, light_day, length)
 
 #endif // BOOST_UNIT_SYSTEMS_ASTRONOMICAL_LIGHT_DAY_HPP_INCLUDED

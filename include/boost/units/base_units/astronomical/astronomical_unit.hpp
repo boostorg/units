@@ -13,6 +13,7 @@
 
 #include <boost/units/conversion.hpp>
 #include <boost/units/base_units/si/meter.hpp>
+#include <boost/units/systems/single_unit_system.hpp>
 
 BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, astronomical_unit, "astronomical unit", "a.u.", 149597870691.0, boost::units::si::meter_base_unit, -207);
 
@@ -23,5 +24,7 @@ BOOST_UNITS_DEFINE_BASE_UNIT_WITH_CONVERSIONS(astronomical, astronomical_unit, "
 BOOST_TYPEOF_REGISTER_TYPE(boost::units::astronomical::astronomical_unit_base_unit)
 
 #endif
+
+BOOST_UNITS_DEFINE_SINGLE_UNIT_SYSTEM(astronomical, astronomical_unit, length)
 
 #endif // BOOST_UNIT_SYSTEMS_ASTRONOMICAL_ASTRONOMICAL_UNIT_HPP_INCLUDED
